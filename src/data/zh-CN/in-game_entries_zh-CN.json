@@ -28,6 +28,15 @@
         "superposability":"可叠加"
     },
     {
+        "entry_id":"8020100",
+        "entry_name":"减少精力消耗",
+        "entry_type":"能力值",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
         "entry_id":"8020200",
         "entry_name":"提升精力恢复速度",
         "entry_type":"能力值",
@@ -91,6 +100,15 @@
         "superposability":"不可叠加"
     },
     {
+        "entry_id":"8110300",
+        "entry_name":"附加异常状态死亡",
+        "entry_type":"附加异常状态",
+        "explanation":"附加骤死值18 \/ 23 \/ 30",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
         "entry_id":"8110400",
         "entry_name":"附加异常状态腐败",
         "entry_type":"附加异常状态",
@@ -103,6 +121,15 @@
         "entry_type":"附加异常状态",
         "explanation":"附加冻伤值18 \/ 23 \/ 30",
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"8110600",
+        "entry_name":"附加异常状态发狂",
+        "entry_type":"附加异常状态",
+        "explanation":"附加发狂值18 \/ 23 \/ 30",
+        "tags":[
+            "未实装"
+        ]
     },
     {
         "entry_id":"8110700",
@@ -152,6 +179,33 @@
         "entry_type":"攻击力",
         "explanation":"攻击举盾防御的敌人时，敌人消耗的精力值+30% \/ +45% \/ +60%",
         "superposability":"可叠加"
+    },
+    {
+        "entry_id":"8150000",
+        "entry_name":"特殊效果【从陨石诞生的生命】",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8150100",
+        "entry_name":"特殊效果【死诞者】",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8150300",
+        "entry_name":"特殊效果【龙】",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
     },
     {
         "entry_id":"8200000",
@@ -276,7 +330,7 @@
         "entry_id":"8300000",
         "entry_name":"提升双手共持时的攻击力",
         "entry_type":"攻击力",
-        "explanation":"双手共持武器时造成的伤害+7% \/ +10% \/ +13%",
+        "explanation":"双手共持武器时造成的伤害+12% \/ +15% \/ +18%",
         "superposability":"可叠加"
     },
     {
@@ -290,7 +344,7 @@
         "entry_id":"8310000",
         "entry_name":"提升双手各持时的攻击力",
         "entry_type":"攻击力",
-        "explanation":"双手各持武器时造成的伤害+7% \/ +10% \/ +13%",
+        "explanation":"双手各持武器时造成的伤害+12% \/ +15% \/ +18%",
         "superposability":"可叠加"
     },
     {
@@ -315,6 +369,15 @@
         "superposability":"可叠加"
     },
     {
+        "entry_id":"8320200",
+        "entry_name":"重攻击时，提升强韧度",
+        "entry_type":"减伤率",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
         "entry_id":"8320300",
         "entry_name":"强化跳跃攻击",
         "entry_type":"攻击力",
@@ -325,8 +388,29 @@
         "entry_id":"8320400",
         "entry_name":"蓄力攻击时，提升减伤率",
         "entry_type":"减伤率",
-        "explanation":"∘ 使用蓄力攻击时，产生一个10秒增益状态，受到的伤害-24% \/ -32% \/ -40%;\n∘ 持续时间内再次蓄力攻击命中，可刷新持续时间;\n∘ 三种级别叠加时，最高减伤率计算：\n      1. 总承受伤害比例 = (1-24%)×(1-32%)×(1-40%) = 31.008%\n      2. 最高减伤率 = 1 - 总承受伤害比例 = 68.992%",
+        "explanation":"∘ 使用蓄力攻击时，产生一个10秒增益状态，受到的伤害-24% \/ -32% \/ -40%;\n∘ 持续时间内再次蓄力攻击命中，可刷新持续时间;\n∘ 三种级别叠加时，最高减伤率计算：\n      1. 总承受伤害比例 = (1-24%)×(1-32%)×(1-40%) = 31.008%\n      2. 最高减伤率 = 1 - 总承受伤害比例 = 68.992%\n∘ 内置11秒冷却时间",
         "superposability":"不同级别可叠加"
+    },
+    {
+        "entry_id":"8320500",
+        "entry_name":"提升近战攻击力",
+        "entry_type":"攻击力",
+        "explanation":"近战攻击造成的伤害+9% \/ +12% \/ +15%",
+        "superposability":"可叠加"
+    },
+    {
+        "entry_id":"8320600",
+        "entry_name":"强化冲刺攻击",
+        "entry_type":"攻击力",
+        "explanation":"冲刺攻击造成的伤害+20% \/ +24% \/ +28%",
+        "superposability":"可叠加"
+    },
+    {
+        "entry_id":"8320700",
+        "entry_name":"强化翻滚攻击",
+        "entry_type":"攻击力",
+        "explanation":"翻滚攻击造成的伤害+20% \/ +24% \/ +28%",
+        "superposability":"可叠加"
     },
     {
         "entry_id":"8330000",
@@ -379,10 +463,10 @@
     },
     {
         "entry_id":"8330700",
-        "entry_name":"龙飨祷告对武器附加增伤【龙】",
+        "entry_name":"执行龙飨祷告后，武器附加对龙特效",
         "entry_type":"强化",
         "explanation":"使用龙飨祷告会对武器施加45秒\"龙特攻\"附魔，对古龙造成1.2倍伤害，对普通龙造成1.3倍伤害",
-        "superposability":"未知"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"8330900",
@@ -413,11 +497,29 @@
         "superposability":"可叠加"
     },
     {
+        "entry_id":"8350100",
+        "entry_name":"提升战技蓄力攻击力",
+        "entry_type":"攻击力",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
         "entry_id":"8350200",
         "entry_name":"减少战技专注值消耗",
         "entry_type":"强化",
         "explanation":"战技专注值消耗-12% \/ -18% \/ -24%",
         "superposability":"可叠加"
+    },
+    {
+        "entry_id":"8350300",
+        "entry_name":"发动战技时，提升强韧度",
+        "entry_type":"强化",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
     },
     {
         "entry_id":"8350400",
@@ -465,7 +567,7 @@
         "entry_id":"8410000",
         "entry_name":"强化闪避能力",
         "entry_type":"强化",
-        "explanation":"增加闪避动作无敌帧",
+        "explanation":"增强闪避动作无敌帧",
         "superposability":"不可叠加"
     },
     {
@@ -501,7 +603,7 @@
         "entry_name":"强化突刺反击",
         "entry_type":"强化",
         "explanation":"触发突刺反击时，额外造成物理伤害+10% \/ +15% \/ +20%",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"8440000",
@@ -509,6 +611,15 @@
         "entry_type":"恢复",
         "explanation":"红露滴圣杯瓶恢复量+20% \/ +30%",
         "superposability":"可叠加"
+    },
+    {
+        "entry_id":"8440100",
+        "entry_name":"使用圣杯瓶时，连同恢复周围我方人物",
+        "entry_type":"恢复",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
     },
     {
         "entry_id":"8440200",
@@ -620,21 +731,21 @@
         "entry_name":"持续恢复血量",
         "entry_type":"恢复",
         "explanation":"每秒恢复1点生命值",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"8600100",
         "entry_name":"攻击时，恢复血量",
         "entry_type":"恢复",
         "explanation":"每次攻击固定回复4点生命值",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"8600200",
         "entry_name":"攻击时，恢复专注值",
         "entry_type":"恢复",
         "explanation":"每次攻击固定回复1点专注值",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"8600300",
@@ -656,6 +767,15 @@
         "entry_type":"恢复",
         "explanation":"连续攻击回复专注值，回复最大专注值的10%，内置4秒冷却时间(累积32连击值，提升减伤率同品质词条不叠加)",
         "superposability":"可叠加"
+    },
+    {
+        "entry_id":"8610200",
+        "entry_name":"连续攻击时，提升攻击力",
+        "entry_type":"攻击力",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
     },
     {
         "entry_id":"8610300",
@@ -697,13 +817,13 @@
         "entry_name":"受到损伤时，恢复专注值",
         "entry_type":"恢复",
         "explanation":"每次受到伤害回复2点专注值",
-        "superposability":"未知"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"8620100",
         "entry_name":"受到损伤时，提升减伤率",
         "entry_type":"减伤率",
-        "explanation":"∘ 每次受到伤害，触发减伤效果，受到的伤害-21% \/ -28% \/ -36%，持续10秒;\n∘ 持续时间内再次受到损伤，可刷新持续时间；\n∘ 三种级别叠加时，最高减伤率计算：\n      1. 总承受伤害比例 = (1-21%)×(1-28%)×(1-36%) = 31.008%\n      2. 最高减伤率 = 1 - 总承受伤害比例 = 68.992%",
+        "explanation":"∘ 每次受到伤害，触发减伤效果，受到的伤害-21% \/ -28% \/ -36%，持续10秒;\n∘ 持续时间内再次受到损伤，可刷新持续时间；\n∘ 三种级别叠加时，最高减伤率计算：\n      1. 总承受伤害比例 = (1-21%)×(1-28%)×(1-36%) = 31.008%\n      2. 最高减伤率 = 1 - 总承受伤害比例 = 68.992%\n∘ 内置11秒冷却时间",
         "superposability":"不同级别可叠加"
     },
     {
@@ -711,14 +831,14 @@
         "entry_name":"打倒敌人时，恢复血量",
         "entry_type":"恢复",
         "explanation":"击杀一名敌人后，固定回复20点生命值",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"8630100",
         "entry_name":"打倒敌人时，恢复专注值",
         "entry_type":"恢复",
         "explanation":"击杀一名敌人后，固定回复最大专注值的4%",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"8630200",
@@ -774,48 +894,138 @@
         "entry_name":"致命一击时，恢复血量",
         "entry_type":"恢复",
         "explanation":"致命一击回复血量，回复最大生命值的18%",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"8640100",
         "entry_name":"致命一击时，恢复专注值",
         "entry_type":"恢复",
         "explanation":"致命一击回复专注值，回复最大专注值的10%",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"8640200",
         "entry_name":"致命一击时，增加对敌人的伤害",
         "entry_type":"攻击力",
         "explanation":"致命一击后使敌人受到伤害增加15%，持续30秒(致命一击的第—击吃不到加伤)",
-        "superposability":"未知"
+        "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"8640300",
+        "entry_name":"圣属性的致命一击，触发圣律",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8640400",
+        "entry_name":"火属性的致命一击，形成熔岩",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8640500",
+        "entry_name":"雷属性的致命一击，发动雷击斩",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8640600",
+        "entry_name":"魔力属性的致命一击，释放结晶碎片",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8640700",
+        "entry_name":"中毒效果的致命一击，形成毒性烟雾",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8640800",
+        "entry_name":"出血效果的致命一击，形成责罚荆棘",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8640900",
+        "entry_name":"腐败效果的致命一击，释放虫丝",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8641000",
+        "entry_name":"冻伤效果的致命一击，刮起冰风暴",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8641100",
+        "entry_name":"发狂效果的致命一击，释放癫火",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8641200",
+        "entry_name":"死亡效果的致命一击，降下死亡落雷",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
     },
     {
         "entry_id":"8650000",
         "entry_name":"防御成功时，恢复血量",
         "entry_type":"恢复",
         "explanation":"固定回复10点生命值",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"8650100",
         "entry_name":"防御成功时，恢复专注值",
         "entry_type":"恢复",
         "explanation":"固定回复2点专注值",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"8652000",
         "entry_name":"防御成功时，提升强韧度",
         "entry_type":"能力值",
-        "explanation":"受到的韧性伤害-12%，持续10秒",
-        "superposability":"未知"
+        "explanation":"10秒内，受到的韧性伤害-12%，内置11秒冷却时间",
+        "superposability":"可叠加"
     },
     {
         "entry_id":"8652100",
         "entry_name":"防御成功时，提升减伤率",
         "entry_type":"减伤率",
-        "explanation":"∘ 受到的伤害-14% \/ -19% \/ -24%，持续10秒；\n∘ 防御成功指的是非空精破防；\n∘ 持续时间内再次防御成功可刷新持续时间；\n∘ 三种级别叠加时，最高减伤率计算：\n      1. 总承受伤害比例 = (1-14%)×(1-19%)×(1-24%) = 52.9416%\n      2. 最高减伤率 = 1 - 总承受伤害比例 = 47.0584%",
+        "explanation":"∘ 受到的伤害-14% \/ -19% \/ -24%，持续10秒；\n∘ 防御成功指的是非空精破防；\n∘ 持续时间内再次防御成功可刷新持续时间；\n∘ 三种级别叠加时，最高减伤率计算：\n      1. 总承受伤害比例 = (1-14%)×(1-19%)×(1-24%) = 52.9416%\n      2. 最高减伤率 = 1 - 总承受伤害比例 = 47.0584%\n∘ 内置11秒冷却时间",
         "superposability":"不同级别可叠加"
     },
     {
@@ -826,25 +1036,34 @@
         "superposability":"可叠加"
     },
     {
-        "entry_id":"8660101",
+        "entry_id":"8660100",
         "entry_name":"血量偏低时，提升减伤率",
         "entry_type":"减伤率",
-        "explanation":"生命值小于40%时，受到的伤害-23% \/ -30% \/ -37%",
+        "explanation":"生命值小于40%时，受到的伤害-29% \/ -38% \/ -48%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8660200",
         "entry_name":"致命一击时，附加异常状态出血",
         "entry_type":"附加异常状态",
-        "explanation":"使用致命一击后右手武器附魔18物理攻击力及50点出血值，持续65秒",
+        "explanation":"致命一击时，为武器附魔，\n65秒内，增加30点物理攻击力，50点出血值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"8660300",
         "entry_name":"血量偏低时，展开圣域",
         "entry_type":"额外效果",
-        "explanation":"血量低于40%时使用圣域，法阵内減伤率提升20%，每秒恢复10生命值，法阵持续35秒",
+        "explanation":"生命值小于40%时，展开圣域\n圣域：附近的友方单位，受到的伤害-20%，\n每1.5秒回复10点生命值，持续35秒",
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"8660400",
+        "entry_name":"血量偏低时，致命一击全恢复血量",
+        "entry_type":"恢复",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
     },
     {
         "entry_id":"8670000",
@@ -894,6 +1113,101 @@
         "entry_type":"额外效果",
         "explanation":"陷入催眠时，释放睡眠值为29点的催眠烟雾",
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"8700000",
+        "entry_name":"陷入中毒时，提升攻击力",
+        "entry_type":"攻击力",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8700003",
+        "entry_name":"陷入中毒、腐败时，持续恢复血量",
+        "entry_type":"恢复",
+        "explanation":"20秒内，每秒回复7点生命值",
+        "superposability":"未知"
+    },
+    {
+        "entry_id":"8710000",
+        "entry_name":"陷入出血时，提升攻击力",
+        "entry_type":"攻击力",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8720000",
+        "entry_name":"陷入催眠时，提升攻击力",
+        "entry_type":"攻击力",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8740000",
+        "entry_name":"陷入冻伤时，提升攻击力",
+        "entry_type":"攻击力",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8750000",
+        "entry_name":"陷入发狂时，提升攻击力",
+        "entry_type":"攻击力",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8885000",
+        "entry_name":"使用圣杯瓶时，也恢复专注值",
+        "entry_type":"恢复",
+        "explanation":"使用圣杯瓶时，也会恢复专注值",
+        "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"8920100",
+        "entry_name":"提升物理以外的攻击力",
+        "entry_type":"攻击力",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8921400",
+        "entry_name":"致命一击时，提升攻击力",
+        "entry_type":"攻击力",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8960100",
+        "entry_name":"重攻击动作变化",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
+    },
+    {
+        "entry_id":"8960200",
+        "entry_name":"跳跃重攻击时，能形成冲击波",
+        "entry_type":"额外效果",
+        "explanation":"未实装？",
+        "tags":[
+            "未实装"
+        ]
     },
     {
         "entry_id":"9021400",

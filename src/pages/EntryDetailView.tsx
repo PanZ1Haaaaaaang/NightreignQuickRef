@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Table, Input, Select, message, Tabs, Tag, Spin, Button } from 'antd';
+import { Table, Input, Select, message, Tabs, Tag, Spin, Button, Checkbox, Space } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
@@ -276,7 +276,7 @@ const itemEffectTypeOptions = [
 
 // 添加局内词条类型选项
 const inGameTypeOptions = [
-  { value: '能力', label: '能力' },
+  { value: '能力值', label: '能力值' },
   { value: '攻击力', label: '攻击力' },
   { value: '强化', label: '强化' },
   { value: '恢复', label: '恢复' },
@@ -289,6 +289,11 @@ const inGameTypeOptions = [
   { value: '庇佑', label: '庇佑' },
   { value: '不甘', label: '不甘' },
 ];
+
+// 未实装标签：数据里 tags 含此值即视为「未实装」词条
+const NOT_IMPLEMENTED_TAG = '未实装';
+// 未实装标签配色（antd 预设色；放在「词条类型」列，需与普通类型标签明显区分）
+const NOT_IMPLEMENTED_COLOR = 'orange';
 
 // 深夜模式局内词条类型选项
 const inGameDeepNightTypeOptions = [
@@ -364,6 +369,8 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const [activeEntryTab, setActiveEntryTab] = useState(activeSubTab || '局外词条');
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [sortedInfo, setSortedInfo] = useState<Sorts>({});
+  // 是否展示未实装词条（默认不展示）
+  const [showNotImplemented, setShowNotImplemented] = useState(false);
   const [data, setData] = useState<DataState>({
     outsiderEntries: [],
     talismanEntries: [],
@@ -554,6 +561,34 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     return transformedData;
   };
 
+  // 词条名称 + 标签：「未实装」归到「词条类型」列，这里只渲染「XX专属遗物」等标签
+  const renderEntryName = (name: string | null | undefined, record: EntryData) => {
+    const tags = (record.tags || []).filter(tag => tag !== NOT_IMPLEMENTED_TAG);
+    if (tags.length === 0) return name || '-';
+    return (
+      <Space size={4} wrap>
+        <span>{name}</span>
+        {tags.map(tag => (
+          <Tag
+            key={tag}
+            color="gold"
+            style={{ marginInlineEnd: 0, fontSize: '11px', lineHeight: '18px' }}
+          >
+            {tag}
+          </Tag>
+        ))}
+      </Space>
+    );
+  };
+
+  // 词条类型列：未实装词条只显示「未实装」标签，不再显示词条类型
+  const renderEntryType = (type: string | null | undefined, record: EntryData) => {
+    if ((record.tags || []).includes(NOT_IMPLEMENTED_TAG)) {
+      return <Tag color={NOT_IMPLEMENTED_COLOR}>{NOT_IMPLEMENTED_TAG}</Tag>;
+    }
+    return type ? <Tag color={getTypeColor(type)}>{type}</Tag> : '-';
+  };
+
   // 局外词条表格列定义
   const outsiderColumns: TableColumnsType<EntryData> = [
     {
@@ -585,6 +620,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       },
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
+      render: (text: string, record: EntryData) => renderEntryName(text, record),
     },
     {
       title: '解释',
@@ -612,9 +648,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       key: 'entry_type',
       align: 'center',
       width: '12%',
-      render: (text) => text ? (
-        <Tag color={getTypeColor(text)}>{text}</Tag>
-      ) : '-',
+      render: (text: string, record: EntryData) => renderEntryType(text, record),
     },
     {
       title: '叠加性',
@@ -672,6 +706,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       },
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
+      render: (text: string, record: EntryData) => renderEntryName(text, record),
     },
     {
       title: '解释',
@@ -726,6 +761,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       },
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
+      render: (text: string, record: EntryData) => renderEntryName(text, record),
     },
     {
       title: '解释',
@@ -758,9 +794,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       key: 'entry_type',
       align: 'center',
       width: '12%',
-      render: (text) => text ? (
-        <Tag color={getTypeColor(text)}>{text}</Tag>
-      ) : '-',
+      render: (text: string, record: EntryData) => renderEntryType(text, record),
     },
     {
       title: '叠加性',
@@ -813,6 +847,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       },
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
+      render: (text: string, record: EntryData) => renderEntryName(text, record),
     },
     {
       title: '解释',
@@ -845,9 +880,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       key: 'entry_type',
       align: 'center',
       width: '12%',
-      render: (text) => text ? (
-        <Tag color={getTypeColor(text)}>{text}</Tag>
-      ) : '-',
+      render: (text: string, record: EntryData) => renderEntryType(text, record),
     },
     {
       title: '叠加性',
@@ -1053,6 +1086,10 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         tableData = data.inGameEntries;
         columns = inGameColumns;
         tableData = filterData(tableData, searchKeyword, selectedInGameTypes, undefined, undefined, filteredInfo.superposability as string[]);
+        // 默认隐藏未实装词条，勾选「显示未实装」后才展示
+        if (!showNotImplemented) {
+          tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+        }
         break;
       default:
         tableData = data.outsiderEntries;
@@ -1413,6 +1450,15 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
                 />
               )}
+              <Checkbox
+                checked={showNotImplemented}
+                onChange={(e) => {
+                  setShowNotImplemented(e.target.checked);
+                  setCurrentPage(1);
+                }}
+              >
+                显示未实装
+              </Checkbox>
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
               </Button>

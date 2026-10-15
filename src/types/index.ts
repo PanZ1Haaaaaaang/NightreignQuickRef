@@ -6,6 +6,8 @@ export interface EntryData {
   explanation: string | null;
   superposability?: string | null;
   talisman?: string;
+  /** 词条名称栏要展示的标签，如「未实装」「XX专属遗物」 */
+  tags?: string[];
 }
 
 // Boss数据接口
