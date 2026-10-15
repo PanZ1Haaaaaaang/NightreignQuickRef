@@ -37,3 +37,7 @@ coverage
 
 # TypeScript
 *.tsbuildinfo
+
+# 本地核验工具与报告（含本机绝对路径：参考资料 Excel、nginx 部署目录）
+/tools/
+/docs/verify/
