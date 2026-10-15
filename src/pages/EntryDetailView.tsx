@@ -207,7 +207,7 @@ interface DataState {
 }
 
 const outsiderTypeOptions = [
-  { value: '能力', label: '能力' },
+  { value: '能力值', label: '能力值' },
   { value: '攻击力', label: '攻击力' },
   { value: '技艺/绝招', label: '技艺/绝招' },
   { value: '魔法/祷告', label: '魔法/祷告' },
@@ -224,7 +224,8 @@ const outsiderTypeOptions = [
   { value: '出击时的武器（附加）', label: '出击时的武器（附加）' },
   { value: '出击时的道具', label: '出击时的道具' },
   { value: '场地环境', label: '场地环境' },
-  { value: '专属遗物', label: '专属遗物' }
+  { value: '专属遗物', label: '专属遗物' },
+  { value: '武器固有', label: '武器固有' }
 ];
 
 // 深夜模式局外词条类型选项
@@ -460,14 +461,18 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const filterData = (data: EntryData[], searchValue: string, types?: string[], character?: string, inGameTypes?: string[], superposabilityFilters?: string[]) => {
     let filtered = data;
 
-    // 类型筛选
+    // 类型筛选（「未实装」是标签而不是 entry_type，需要单独匹配）
+    const matchesType = (item: EntryData, list: string[]) =>
+      list.includes(item.entry_type || '') ||
+      (list.includes(NOT_IMPLEMENTED_TAG) && (item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+
     if (types && types.length > 0) {
-      filtered = filtered.filter(item => types.includes(item.entry_type || ''));
+      filtered = filtered.filter(item => matchesType(item, types));
     }
 
     // 局内词条类型筛选
     if (inGameTypes && inGameTypes.length > 0) {
-      filtered = filtered.filter(item => inGameTypes.includes(item.entry_type || ''));
+      filtered = filtered.filter(item => matchesType(item, inGameTypes));
     }
 
     // 角色筛选
@@ -588,6 +593,12 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     }
     return type ? <Tag color={getTypeColor(type)}>{type}</Tag> : '-';
   };
+
+  // 「未实装」条目默认隐藏，勾选「显示未实装」后才在类型筛选里提供该选项
+  const withNotImplemented = (opts: { value: string; label: string }[]) =>
+    showNotImplemented
+      ? [...opts, { value: NOT_IMPLEMENTED_TAG, label: NOT_IMPLEMENTED_TAG }]
+      : opts;
 
   // 局外词条表格列定义
   const outsiderColumns: TableColumnsType<EntryData> = [
@@ -1066,6 +1077,10 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         tableData = data.outsiderEntries;
         columns = outsiderColumns;
         tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
+        // 默认隐藏未实装词条，勾选「显示未实装」后才展示
+        if (!showNotImplemented) {
+          tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+        }
         break;
       case '深夜模式局外词条':
         tableData = data.deepNightEntries;
@@ -1303,7 +1318,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   setSelectedTypes(values);
                   setCurrentPage(1);
                 }}
-                options={outsiderTypeOptions}
+                options={withNotImplemented(outsiderTypeOptions)}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
               />
               <Select
@@ -1319,6 +1334,15 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 notFoundContent="暂无角色"
                 showSearch={false}
               />
+              <Checkbox
+                checked={showNotImplemented}
+                onChange={(e) => {
+                  setShowNotImplemented(e.target.checked);
+                  setCurrentPage(1);
+                }}
+              >
+                显示未实装
+              </Checkbox>
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
               </Button>
@@ -1446,19 +1470,21 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                     setSelectedInGameTypes(values);
                     setCurrentPage(1);
                   }}
-                  options={inGameTypeOptions}
+                  options={withNotImplemented(inGameTypeOptions)}
                   maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
                 />
               )}
-              <Checkbox
-                checked={showNotImplemented}
-                onChange={(e) => {
-                  setShowNotImplemented(e.target.checked);
-                  setCurrentPage(1);
-                }}
-              >
-                显示未实装
-              </Checkbox>
+              {tabKey === '局内词条' && (
+                <Checkbox
+                  checked={showNotImplemented}
+                  onChange={(e) => {
+                    setShowNotImplemented(e.target.checked);
+                    setCurrentPage(1);
+                  }}
+                >
+                  显示未实装
+                </Checkbox>
+              )}
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
               </Button>

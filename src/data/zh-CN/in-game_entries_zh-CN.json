@@ -30,7 +30,6 @@
     {
         "entry_id":"8020100",
         "entry_name":"减少精力消耗",
-        "entry_type":"能力值",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -102,7 +101,6 @@
     {
         "entry_id":"8110300",
         "entry_name":"附加异常状态死亡",
-        "entry_type":"附加异常状态",
         "explanation":"附加骤死值18 \/ 23 \/ 30",
         "tags":[
             "未实装"
@@ -125,7 +123,6 @@
     {
         "entry_id":"8110600",
         "entry_name":"附加异常状态发狂",
-        "entry_type":"附加异常状态",
         "explanation":"附加发狂值18 \/ 23 \/ 30",
         "tags":[
             "未实装"
@@ -183,7 +180,6 @@
     {
         "entry_id":"8150000",
         "entry_name":"特殊效果【从陨石诞生的生命】",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -192,7 +188,6 @@
     {
         "entry_id":"8150100",
         "entry_name":"特殊效果【死诞者】",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -201,7 +196,6 @@
     {
         "entry_id":"8150300",
         "entry_name":"特殊效果【龙】",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -371,7 +365,6 @@
     {
         "entry_id":"8320200",
         "entry_name":"重攻击时，提升强韧度",
-        "entry_type":"减伤率",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -499,7 +492,6 @@
     {
         "entry_id":"8350100",
         "entry_name":"提升战技蓄力攻击力",
-        "entry_type":"攻击力",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -515,7 +507,6 @@
     {
         "entry_id":"8350300",
         "entry_name":"发动战技时，提升强韧度",
-        "entry_type":"强化",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -615,7 +606,6 @@
     {
         "entry_id":"8440100",
         "entry_name":"使用圣杯瓶时，连同恢复周围我方人物",
-        "entry_type":"恢复",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -771,7 +761,6 @@
     {
         "entry_id":"8610200",
         "entry_name":"连续攻击时，提升攻击力",
-        "entry_type":"攻击力",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -913,7 +902,6 @@
     {
         "entry_id":"8640300",
         "entry_name":"圣属性的致命一击，触发圣律",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -922,7 +910,6 @@
     {
         "entry_id":"8640400",
         "entry_name":"火属性的致命一击，形成熔岩",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -931,7 +918,6 @@
     {
         "entry_id":"8640500",
         "entry_name":"雷属性的致命一击，发动雷击斩",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -940,7 +926,6 @@
     {
         "entry_id":"8640600",
         "entry_name":"魔力属性的致命一击，释放结晶碎片",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -949,7 +934,6 @@
     {
         "entry_id":"8640700",
         "entry_name":"中毒效果的致命一击，形成毒性烟雾",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -958,7 +942,6 @@
     {
         "entry_id":"8640800",
         "entry_name":"出血效果的致命一击，形成责罚荆棘",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -967,7 +950,6 @@
     {
         "entry_id":"8640900",
         "entry_name":"腐败效果的致命一击，释放虫丝",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -976,7 +958,6 @@
     {
         "entry_id":"8641000",
         "entry_name":"冻伤效果的致命一击，刮起冰风暴",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -985,7 +966,6 @@
     {
         "entry_id":"8641100",
         "entry_name":"发狂效果的致命一击，释放癫火",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -994,7 +974,6 @@
     {
         "entry_id":"8641200",
         "entry_name":"死亡效果的致命一击，降下死亡落雷",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -1059,7 +1038,6 @@
     {
         "entry_id":"8660400",
         "entry_name":"血量偏低时，致命一击全恢复血量",
-        "entry_type":"恢复",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -1117,7 +1095,6 @@
     {
         "entry_id":"8700000",
         "entry_name":"陷入中毒时，提升攻击力",
-        "entry_type":"攻击力",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -1133,7 +1110,6 @@
     {
         "entry_id":"8710000",
         "entry_name":"陷入出血时，提升攻击力",
-        "entry_type":"攻击力",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -1142,7 +1118,6 @@
     {
         "entry_id":"8720000",
         "entry_name":"陷入催眠时，提升攻击力",
-        "entry_type":"攻击力",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -1151,7 +1126,6 @@
     {
         "entry_id":"8740000",
         "entry_name":"陷入冻伤时，提升攻击力",
-        "entry_type":"攻击力",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -1160,7 +1134,6 @@
     {
         "entry_id":"8750000",
         "entry_name":"陷入发狂时，提升攻击力",
-        "entry_type":"攻击力",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -1176,7 +1149,6 @@
     {
         "entry_id":"8920100",
         "entry_name":"提升物理以外的攻击力",
-        "entry_type":"攻击力",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -1185,7 +1157,6 @@
     {
         "entry_id":"8921400",
         "entry_name":"致命一击时，提升攻击力",
-        "entry_type":"攻击力",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -1194,7 +1165,6 @@
     {
         "entry_id":"8960100",
         "entry_name":"重攻击动作变化",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"
@@ -1203,7 +1173,6 @@
     {
         "entry_id":"8960200",
         "entry_name":"跳跃重攻击时，能形成冲击波",
-        "entry_type":"额外效果",
         "explanation":"未实装？",
         "tags":[
             "未实装"

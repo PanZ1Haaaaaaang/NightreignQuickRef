@@ -95,6 +95,7 @@ export const typeColorMap: Record<string, string> = {
   '出击时的道具': 'orange',
   '场地环境': 'green',
   '专属遗物': 'magenta',
+  '武器固有': 'cyan',
   // 局内词条
   '庇佑': 'purple',
   '不甘': 'volcano',
