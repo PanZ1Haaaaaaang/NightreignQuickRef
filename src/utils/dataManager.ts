@@ -1,16 +1,10 @@
 // 数据管理器 - 用于预加载所有JSON文件
 import { message } from 'antd';
+import type { EntryData } from '../types';
 
-// 数据接口定义
-export interface EntryData {
-  entry_id: string;
-  entry_name: string;
-  entry_type?: string | null;
-  explanation: string | null;
-  superposability?: string | null;
-  talisman?: string;
-  notes?: string | null;
-}
+// 词条数据类型统一由 src/types 定义（此处 re-export，避免两份定义漂移：
+// 曾因这里的副本缺 tags，导致深夜模式词条的「未实装」标签与筛选失效）
+export type { EntryData };
 
 export interface EnhancementCategory {
   category: string;
@@ -322,7 +316,9 @@ class DataManager {
                 entry_type: (entryObj.entry_type as string) || null,
                 explanation: (entryObj.explanation as string) || null,
                 superposability: (entryObj.superposability as string) || null,
-                notes: (entryObj.notes as string) || null
+                notes: (entryObj.notes as string) || null,
+                // tags 必须原样带上，否则「未实装」标签与筛选都会失效
+                tags: (entryObj.tags as string[]) || undefined
               });
             }
           });
@@ -350,7 +346,9 @@ class DataManager {
                 entry_type: (entryObj.entry_type as string) || null,
                 explanation: (entryObj.explanation as string) || null,
                 superposability: (entryObj.superposability as string) || null,
-                notes: (entryObj.notes as string) || null
+                notes: (entryObj.notes as string) || null,
+                // tags 必须原样带上，否则「未实装」标签与筛选都会失效
+                tags: (entryObj.tags as string[]) || undefined
               });
             }
           });

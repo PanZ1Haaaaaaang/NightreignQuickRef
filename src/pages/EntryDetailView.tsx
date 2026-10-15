@@ -1086,6 +1086,10 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         tableData = data.deepNightEntries;
         columns = deepNightColumns;
         tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
+        // 默认隐藏未实装词条，勾选「显示未实装」后才展示
+        if (!showNotImplemented) {
+          tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+        }
         break;
       case '深夜模式局内词条':
         tableData = data.inGameDeepNightEntries;
@@ -1380,7 +1384,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   setSelectedTypes(values);
                   setCurrentPage(1);
                 }}
-                options={deepNightTypeOptions}
+                options={withNotImplemented(deepNightTypeOptions)}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
               />
               <Select
@@ -1396,6 +1400,15 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 notFoundContent="暂无角色"
                 showSearch={false}
               />
+              <Checkbox
+                checked={showNotImplemented}
+                onChange={(e) => {
+                  setShowNotImplemented(e.target.checked);
+                  setCurrentPage(1);
+                }}
+              >
+                显示未实装
+              </Checkbox>
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
               </Button>
