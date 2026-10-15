@@ -37,14 +37,14 @@
 		},
 		"6610801": {
 			"entry_id": 6610801,
-			"entry_name": "提升属性攻击力＋１",
+			"entry_name": "提升属性攻击力 +1",
 			"entry_type": "攻击力",
 			"explanation": "魔力/火/雷/圣属性伤害+8%",
 			"superposability": "相同词条可叠加"
 		},
 		"6610802": {
 			"entry_id": 6610802,
-			"entry_name": "提升属性攻击力＋２",
+			"entry_name": "提升属性攻击力 +2",
 			"entry_type": "攻击力",
 			"explanation": "魔力/火/雷/圣属性伤害+11%",
 			
@@ -52,14 +52,14 @@
 		},
 		"6611001": {
 			"entry_id": 6611001,
-			"entry_name": "提升物理减伤率＋１",
+			"entry_name": "提升物理减伤率 +1",
 			"entry_type": "减伤率",
 			"explanation": "受到的物理属性伤害-10.5%",
 			"superposability": "相同词条可叠加"
 		},
 		"6611002": {
 			"entry_id": 6611002,
-			"entry_name": "提升物理减伤率＋２",
+			"entry_name": "提升物理减伤率 +2",
 			"entry_type": "减伤率",
 			"explanation": "受到的物理属性伤害-12%",
 			"superposability": "相同词条可叠加"
@@ -73,14 +73,14 @@
 		},
 		"6611101": {
 			"entry_id": 6611101,
-			"entry_name": "提升属性减伤率＋１",
+			"entry_name": "提升属性减伤率 +1",
 			"entry_type": "减伤率",
 			"explanation": "受到的魔力/火/雷/圣属性伤害-10.5%",
 			"superposability": "相同词条可叠加"
 		},
 		"6611102": {
 			"entry_id": 6611102,
-			"entry_name": "提升属性减伤率＋２",
+			"entry_name": "提升属性减伤率 +2",
 			"entry_type": "减伤率",
 			"explanation": "受到的魔力/火/雷/圣属性伤害-12%",
 			"superposability": "相同词条可叠加"
@@ -94,14 +94,14 @@
 		},
 		"6611201": {
 			"entry_id": 6611201,
-			"entry_name": "强化魔法＋１",
+			"entry_name": "强化魔法 +1",
 			"entry_type": "攻击力",
 			"explanation": "魔法造成的伤害+8.5% (只要用魔法杖打出的都算）",
 			"superposability": "相同词条可叠加"
 		},
 		"6611202": {
 			"entry_id": 6611202,
-			"entry_name": "强化魔法＋２",
+			"entry_name": "强化魔法 +2",
 			"entry_type": "攻击力",
 			"explanation": "魔法造成的伤害+11% (只要用魔法杖打出的都算）",			
 			"superposability": "相同词条可叠加"
@@ -116,7 +116,7 @@
 		},
 		"6611301": {
 			"entry_id": 6611301,
-			"entry_name": "强化祷告＋１",
+			"entry_name": "强化祷告 +1",
 			"entry_type": "攻击力",
 			"explanation": "祷告造成的伤害+8.5%",
 			
@@ -124,7 +124,7 @@
 		},
 		"6611302": {
 			"entry_id": 6611302,
-			"entry_name": "强化祷告＋２",
+			"entry_name": "强化祷告 +2",
 			"entry_type": "攻击力",
 			"explanation": "祷告造成的伤害+11%",
 			

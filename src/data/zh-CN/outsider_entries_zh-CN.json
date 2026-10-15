@@ -372,13 +372,13 @@
     },
     {
         "entry_id":"7001901",
-        "entry_name":"附加异常状态中毒的效果＋１",
+        "entry_name":"附加异常状态中毒的效果 +1",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
     {
         "entry_id":"7001902",
-        "entry_name":"附加异常状态中毒的效果＋２",
+        "entry_name":"附加异常状态中毒的效果 +2",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
@@ -391,13 +391,13 @@
     },
     {
         "entry_id":"7002001",
-        "entry_name":"附加异常状态出血的效果＋１",
+        "entry_name":"附加异常状态出血的效果 +1",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
     {
         "entry_id":"7002002",
-        "entry_name":"附加异常状态出血的效果＋２",
+        "entry_name":"附加异常状态出血的效果 +2",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
@@ -410,19 +410,19 @@
     },
     {
         "entry_id":"7002101",
-        "entry_name":"附加异常状态催眠的效果＋１",
+        "entry_name":"附加异常状态催眠的效果 +1",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
     {
         "entry_id":"7002102",
-        "entry_name":"附加异常状态催眠的效果＋２",
+        "entry_name":"附加异常状态催眠的效果 +2",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
     {
         "entry_id":"7002103",
-        "entry_name":"附加异常状态催眠的效果＋３",
+        "entry_name":"附加异常状态催眠的效果 +3",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
@@ -441,13 +441,13 @@
     },
     {
         "entry_id":"7002301",
-        "entry_name":"附加异常状态猩红腐败的效果＋１",
+        "entry_name":"附加异常状态猩红腐败的效果 +1",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
     {
         "entry_id":"7002302",
-        "entry_name":"附加异常状态猩红腐败的效果＋２",
+        "entry_name":"附加异常状态猩红腐败的效果 +2",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
@@ -460,19 +460,19 @@
     },
     {
         "entry_id":"7002401",
-        "entry_name":"附加异常状态冻伤的效果＋１",
+        "entry_name":"附加异常状态冻伤的效果 +1",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
     {
         "entry_id":"7002402",
-        "entry_name":"附加异常状态冻伤的效果＋２",
+        "entry_name":"附加异常状态冻伤的效果 +2",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
     {
         "entry_id":"7002403",
-        "entry_name":"附加异常状态冻伤的效果＋３",
+        "entry_name":"附加异常状态冻伤的效果 +3",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
@@ -875,9 +875,8 @@
     {
         "entry_id":"7033300",
         "entry_name":"【守护者】在能力发动期间，会变得容易受敌人攻击",
-        "entry_type":"仅限特定角色",
         "explanation":"未实装?",
-        "superposability":"不可叠加"
+        "tags": ["未实装"]
     },
     {
         "entry_id":"7033400",
@@ -1085,7 +1084,7 @@
     },
     {
         "entry_id":"7040290",
-        "entry_name":"强化致命一击＋１",
+        "entry_name":"强化致命一击 +1",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
@@ -1176,9 +1175,8 @@
     {
         "entry_id":"7043900",
         "entry_name":"强化黑夜的魔法",
-        "entry_type":"魔法/祷告",
         "explanation":"未实装?",
-        "superposability":"可叠加"
+        "tags": ["未实装"]
     },
     {
         "entry_id":"7044000",
@@ -1517,7 +1515,7 @@
     },
     {
         "entry_id":"7100190",
-        "entry_name":"攻击命中时，能恢复精力＋１",
+        "entry_name":"攻击命中时，能恢复精力 +1",
         "explanation":"未实装?",
         "tags":["未实装"]
     },
@@ -1544,7 +1542,7 @@
     },
     {
         "entry_id":"7120101",
-        "entry_name":"出击时的武器，附加火属性攻击力＋１",
+        "entry_name":"出击时的武器，附加火属性攻击力 +1",
         "explanation":"未实装?",
         "tags":["未实装"]
     },

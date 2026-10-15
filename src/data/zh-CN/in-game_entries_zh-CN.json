@@ -301,14 +301,14 @@
     },
     {
         "entry_id":"8220001",
-        "entry_name":"提升防御强度＋１",
+        "entry_name":"提升防御强度 +1",
         "entry_type":"能力值",
         "explanation":"防御时，最终损失的精力值-15%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8220002",
-        "entry_name":"提升防御强度＋２",
+        "entry_name":"提升防御强度 +2",
         "entry_type":"能力值",
         "explanation":"防御时，最终损失的精力值-20%",
         "superposability":"可叠加"
@@ -629,7 +629,7 @@
         "entry_id":"8450100",
         "entry_name":"急速冲刺时，刮起冰风暴",
         "entry_type":"额外效果",
-        "explanation":"能在急速冲刺的起点刮起冰风暴(每次19.2魔＋5冰冻值，削韧每次2)",
+        "explanation":"能在急速冲刺的起点刮起冰风暴(每次19.2魔 +5冰冻值，削韧每次2)",
         "superposability":"不可叠加"
     },
     {
