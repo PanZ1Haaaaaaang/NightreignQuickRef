@@ -654,6 +654,11 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           </div>
         );
       },
+      onCell: () => ({
+        style: {
+          padding: '12px 8px'
+        }
+      }),
     },
     {
       title: '词条类型',
@@ -740,6 +745,11 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           </div>
         );
       },
+      onCell: () => ({
+        style: {
+          padding: '12px 8px'
+        }
+      }),
     },
   ];
 
