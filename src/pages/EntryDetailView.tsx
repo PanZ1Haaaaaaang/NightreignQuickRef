@@ -1095,6 +1095,10 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         tableData = data.inGameDeepNightEntries;
         columns = inGameColumns; // 复用局内词条的列定义
         tableData = filterData(tableData, searchKeyword, selectedInGameTypes, undefined, undefined, filteredInfo.superposability as string[]);
+        // 默认隐藏未实装词条，勾选「显示未实装」后才展示
+        if (!showNotImplemented) {
+          tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+        }
         break;
       case '护符词条':
         tableData = data.talismanEntries;
@@ -1444,9 +1448,18 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   setSelectedInGameTypes(values);
                   setCurrentPage(1);
                 }}
-                options={inGameDeepNightTypeOptions}
+                options={withNotImplemented(inGameDeepNightTypeOptions)}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
               />
+              <Checkbox
+                checked={showNotImplemented}
+                onChange={(e) => {
+                  setShowNotImplemented(e.target.checked);
+                  setCurrentPage(1);
+                }}
+              >
+                显示未实装
+              </Checkbox>
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
               </Button>
