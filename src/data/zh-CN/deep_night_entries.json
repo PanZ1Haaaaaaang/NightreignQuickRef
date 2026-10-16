@@ -1171,270 +1171,6 @@
 			"buff_type": "不附带负面词条",
 			"superposability": "可叠加"
 		},
-		"6630000": {
-			"entry_id": 6630000,
-			"entry_name": "通过潜在能力，能比较容易找到短剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630100": {
-			"entry_id": 6630100,
-			"entry_name": "通过潜在能力，能比较容易找到直剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630200": {
-			"entry_id": 6630200,
-			"entry_name": "通过潜在能力，能比较容易找到大剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630300": {
-			"entry_id": 6630300,
-			"entry_name": "通过潜在能力，能比较容易找到特大剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630400": {
-			"entry_id": 6630400,
-			"entry_name": "通过潜在能力，能比较容易找到曲剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630500": {
-			"entry_id": 6630500,
-			"entry_name": "通过潜在能力，能比较容易找到大曲剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630600": {
-			"entry_id": 6630600,
-			"entry_name": "通过潜在能力，能比较容易找到刀",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630700": {
-			"entry_id": 6630700,
-			"entry_name": "通过潜在能力，能比较容易找到双头剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630800": {
-			"entry_id": 6630800,
-			"entry_name": "通过潜在能力，能比较容易找到刺剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630900": {
-			"entry_id": 6630900,
-			"entry_name": "通过潜在能力，能比较容易找到重刺剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631000": {
-			"entry_id": 6631000,
-			"entry_name": "通过潜在能力，能比较容易找到斧",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631100": {
-			"entry_id": 6631100,
-			"entry_name": "通过潜在能力，能比较容易找到大斧",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631200": {
-			"entry_id": 6631200,
-			"entry_name": "通过潜在能力，能比较容易找到槌",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631300": {
-			"entry_id": 6631300,
-			"entry_name": "通过潜在能力，能比较容易找到大槌",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631400": {
-			"entry_id": 6631400,
-			"entry_name": "通过潜在能力，能比较容易找到连枷",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631500": {
-			"entry_id": 6631500,
-			"entry_name": "通过潜在能力，能比较容易找到矛",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631600": {
-			"entry_id": 6631600,
-			"entry_name": "通过潜在能力，能比较容易找到大矛",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631700": {
-			"entry_id": 6631700,
-			"entry_name": "通过潜在能力，能比较容易找到戟",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631800": {
-			"entry_id": 6631800,
-			"entry_name": "通过潜在能力，能比较容易找到镰刀",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631900": {
-			"entry_id": 6631900,
-			"entry_name": "通过潜在能力，能比较容易找到拳头",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632000": {
-			"entry_id": 6632000,
-			"entry_name": "通过潜在能力，能比较容易找到钩爪",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632100": {
-			"entry_id": 6632100,
-			"entry_name": "通过潜在能力，能比较容易找到软鞭",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632200": {
-			"entry_id": 6632200,
-			"entry_name": "通过潜在能力，能比较容易找到特大武器",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632300": {
-			"entry_id": 6632300,
-			"entry_name": "通过潜在能力，能比较容易找到弓",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632400": {
-			"entry_id": 6632400,
-			"entry_name": "通过潜在能力，能比较容易找到大弓",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632500": {
-			"entry_id": 6632500,
-			"entry_name": "通过潜在能力，能比较容易找到弩",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632600": {
-			"entry_id": 6632600,
-			"entry_name": "通过潜在能力，能比较容易找到弩炮",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632700": {
-			"entry_id": 6632700,
-			"entry_name": "通过潜在能力，能比较容易找到小盾",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632800": {
-			"entry_id": 6632800,
-			"entry_name": "通过潜在能力，能比较容易找到中盾",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632900": {
-			"entry_id": 6632900,
-			"entry_name": "通过潜在能力，能比较容易找到大盾",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6633000": {
-			"entry_id": 6633000,
-			"entry_name": "通过潜在能力，能比较容易找到手杖",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6633100": {
-			"entry_id": 6633100,
-			"entry_name": "通过潜在能力，能比较容易找到圣印记",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6633200": {
-			"entry_id": 6633200,
-			"entry_name": "通过潜在能力，能比较容易找到火把",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
 		"6640000": {
 			"entry_id": 6640000,
 			"entry_name": "【追踪者】提升集中力，但降低生命力",
@@ -1612,18 +1348,16 @@
 		"6800000": {
 			"entry_id": 6800000,
 			"entry_name": "降低生命力",
-			"entry_type": "减益(能力值)",
 			"explanation": "生命力-5",
 			"buff_type": "随机加入正面词条",
-			"superposability": "可叠加"
+			"tags": ["未实装"]
 		},
 		"6800200": {
 			"entry_id": 6800200,
 			"entry_name": "降低耐力",
-			"entry_type": "减益(能力值)",
 			"explanation": "耐力-5",
 			"buff_type": "随机加入正面词条",
-			"superposability": "可叠加"
+			"tags": ["未实装"]
 		},
 		"6810100": {
 			"entry_id": 6810100,
@@ -1755,18 +1489,16 @@
 		"6850000": {
 			"entry_id": 6850000,
 			"entry_name": "降低物理减伤率",
-			"entry_type": "减益(减伤率)",
 			"explanation": "受到的物理属性伤害+12%",
 			"buff_type": "随机加入正面词条",
-			"superposability": "可叠加"
+			"tags": ["未实装"]
 		},
 		"6850100": {
 			"entry_id": 6850100,
 			"entry_name": "降低属性减伤率",
-			"entry_type": "减益(减伤率)",
 			"explanation": "受到的魔力/火/雷/圣属性伤害+12%",
 			"buff_type": "随机加入正面词条",
-			"superposability": "可叠加"
+			"tags": ["未实装"]
 		},
 		"6850200": {
 			"entry_id": 6850200,

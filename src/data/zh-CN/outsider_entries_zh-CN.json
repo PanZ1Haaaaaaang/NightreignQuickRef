@@ -366,9 +366,8 @@
     {
         "entry_id":"7001900",
         "entry_name":"附加异常状态中毒的效果",
-        "entry_type":"武器固有",
         "explanation":"毒据点武器附带",
-        "superposability":"不可叠加"
+        "tags":["未实装"]
     },
     {
         "entry_id":"7001901",
@@ -404,9 +403,8 @@
     {
         "entry_id":"7002100",
         "entry_name":"附加异常状态催眠的效果",
-        "entry_type":"武器固有",
         "explanation":"睡眠据点武器附带",
-        "superposability":"不可叠加"
+        "tags":["未实装"]
     },
     {
         "entry_id":"7002101",
@@ -435,9 +433,8 @@
     {
         "entry_id":"7002300",
         "entry_name":"附加异常状态猩红腐败的效果",
-        "entry_type":"武器固有",
         "explanation":"腐败据点/腐败森林武器附带",
-        "superposability":"不可叠加"
+        "tags":["未实装"]
     },
     {
         "entry_id":"7002301",
@@ -454,9 +451,8 @@
     {
         "entry_id":"7002400",
         "entry_name":"附加异常状态冻伤的效果",
-        "entry_type":"武器固有",
         "explanation":"冻伤据点/山顶武器附带",
-        "superposability":"不可叠加"
+        "tags":["未实装"]
     },
     {
         "entry_id":"7002401",
@@ -2122,9 +2118,8 @@
     {
         "entry_id":"7331600",
         "entry_name":"提升长矛的攻击力",
-        "entry_type":"攻击力",
         "explanation":"造成的伤害 +9%",
-        "superposability":"可叠加"
+        "tags":["未实装"]
     },
     {
         "entry_id":"7331700",
@@ -2297,9 +2292,8 @@
     {
         "entry_id":"7341600",
         "entry_name":"以长矛攻击时，恢复血量",
-        "entry_type":"恢复",
         "explanation":"固定回复15点生命值",
-        "superposability":"不可叠加"
+        "tags":["未实装"]
     },
     {
         "entry_id":"7341700",
@@ -2472,9 +2466,8 @@
     {
         "entry_id":"7351600",
         "entry_name":"以长矛攻击时，恢复专注值",
-        "entry_type":"恢复",
         "explanation":"固定回复2点专注值",
-        "superposability":"不可叠加"
+        "tags":["未实装"]
     },
     {
         "entry_id":"7351700",
@@ -2965,9 +2958,8 @@
 	{
 		"entry_id": "7370500",
 		"entry_name": "出击时，武器祷告改为“雷击”",
-		"entry_type": "出击时的武器（祷告）",
 		"explanation": "仅复仇者有效",
-		"superposability": "不可叠加"
+        "tags":["未实装"]
 	},
 	{
 		"entry_id": "7370600",
