@@ -405,7 +405,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     '"深海黑夜"玛利斯': nightOfTheFathom,
     '征兆': nightOfTheFathom,
     '"黑夜雾霾"卡莉果': nightOfTheMiasma,
-    '黑夜化形者 布德奇冥': nightOfTheLord,
+    '"黑夜王"布德奇冥': nightOfTheLord,
     '"黑夜之魔"利普拉': nightOfTheDemon,
     '"黑夜光骑士"弗格尔': nightOfTheChampion,
     '黑夜轮廓': nightOfTheLord,
@@ -421,6 +421,8 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       <div>◦ 普通夜王血量 = 基础血量 × 玩家人数</div>
       <div>◦ 永夜王血量为倍率加成：永夜王血量 = 基础血量 × 永夜王血量加成倍率 × 玩家人数</div>
       <div>◦ 永夜王血量为独立数值：永夜王血量 = 永夜王血量 × 玩家人数</div>
+      <div>◦ DLC夜王有额外血量倍率1.25</div>
+      <div>◦ 冲动的史柴格斯抗性说明：基于反叛的史柴格斯 普通/切割/打击/突刺/魔力/雷 ×0.95、火 ×0.91、圣 ×0.92，出血 ×2.15、冻伤 ×2.15、睡眠 ×3.96</div>
     </div>
   );
 
@@ -495,11 +497,15 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'baseHealth',
           width: 80,
           align: 'center',
-          render: (value) => {
+          render: (value, record) => {
             if (typeof value === 'number') {
+              // baseHealthMultiplier：DLC 等模式对普通形态的额外缩放（例：史柴格斯 ×1.25）
+              const multiplier = record.baseHealthMultiplier;
+              const scale = typeof multiplier === 'number' ? multiplier : 1;
               return (
                 <span className="health-base">
-                  {Math.round(value * 3.54 * playerCount).toLocaleString()}
+                  {Math.round(value * 3.54 * playerCount * scale).toLocaleString()}
+                  {typeof multiplier === 'number' ? `(×${multiplier})` : ''}
                 </span>
               );
             }
@@ -522,7 +528,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               const nightreignHealth = Math.round(nightreignBaseHealth * value);
               return (
                 <span className="health-nightreign">
-                  {nightreignHealth.toLocaleString()}{value !== 1 ? `(×${value})` : ''}
+                  {nightreignHealth.toLocaleString()}(×{value})
                 </span>
               );
             }

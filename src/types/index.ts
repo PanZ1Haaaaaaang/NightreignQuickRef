@@ -16,6 +16,8 @@ export interface BossData {
   id: number;
   name: string;
   baseHealth: number | string;
+  /** 普通形态的额外缩放（如 DLC 夜王的 ×1.25），缺省视为 1 */
+  baseHealthMultiplier?: number | string;
   nightreignHealth: number | string;
   normalAbsorption: number;
   slashAbsorption: number;

@@ -265,7 +265,7 @@
   },
   {
     "id": 12,
-    "name": "黑夜化形者 布德奇冥",
+    "name": "\"黑夜王\"布德奇冥",
     "baseHealth": 2880,
     "nightreignHealth": "-",
     "nightreignHealthMultiplier": "-",
@@ -291,6 +291,7 @@
     "id": 13,
     "name": "反叛的史柴格斯",
     "baseHealth": 3264,
+    "baseHealthMultiplier": 1.25,
     "nightreignHealth": "-",
     "nightreignHealthMultiplier": "-",
     "normalAbsorption": 1,
@@ -314,7 +315,8 @@
   {
     "id": 14,
     "name": "冲动的史柴格斯",
-    "baseHealth": 3101,
+    "baseHealth": 3264,
+    "baseHealthMultiplier": 1.25,
     "nightreignHealth": "-",
     "nightreignHealthMultiplier": "-",
     "normalAbsorption": 0.95,
