@@ -402,15 +402,16 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     '"黑夜之智"格诺斯塔': nightOfTheWise,
     '"坚盾"弗堤士': nightOfTheWise,
     '"超越之光"亚尼姆斯': nightOfTheWise,
-    '"深海黑夜"玛丽斯': nightOfTheFathom,
+    '"深海黑夜"玛利斯': nightOfTheFathom,
+    '征兆': nightOfTheFathom,
     '"黑夜雾霾"卡莉果': nightOfTheMiasma,
-    '"黑夜王"布德奇冥': nightOfTheLord,
+    '黑夜化形者 布德奇冥': nightOfTheLord,
     '"黑夜之魔"利普拉': nightOfTheDemon,
     '"黑夜光骑士"弗格尔': nightOfTheChampion,
     '黑夜轮廓': nightOfTheLord,
-    '安定者们': nightOfTheBalancers,
-    '废弃物之王(一阶段)': nightOfTheDreglords,
-    '废弃物之王(二阶段)': nightOfTheDreglords,
+    '"继承英雄武器的众女孩"哈尔莫妮亚': nightOfTheBalancers,
+    '反叛的史柴格斯': nightOfTheDreglords,
+    '冲动的史柴格斯': nightOfTheDreglords,
   };
 
 
@@ -747,11 +748,20 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'basePoise',
           width: 70,
           align: 'center',
-          render: (value) => (
-            <span className="health-base">
-              {calculatePoise(value)}
-            </span>
-          ),
+          render: (value) => {
+            if (typeof value === 'number') {
+              return (
+                <span className="health-base">
+                  {calculatePoise(value)}
+                </span>
+              );
+            }
+            return (
+              <span className="health-base">
+                {value}
+              </span>
+            );
+          },
         },
         {
           title: '永夜王韧性',

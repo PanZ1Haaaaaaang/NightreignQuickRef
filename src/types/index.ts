@@ -32,7 +32,7 @@ export interface BossData {
   frostResistance: number | string;
   sleepResistance: number | string;
   madnessResistance: number | string;
-  basePoise: number;
+  basePoise: number | string;
   nightreignPoise: number | string;
   nightreignHealthMultiplier: number | string;
 }
