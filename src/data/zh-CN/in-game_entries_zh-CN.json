@@ -245,7 +245,7 @@
     },
     {
         "entry_id":"8200500",
-        "entry_name":"提升物理以外的减伤率（潜在能力）",
+        "entry_name":"提升属性减伤率（潜在能力）",
         "entry_type":"减伤率",
         "explanation":"减少受到的除物理外伤害-12% \/ -18%",
         "superposability":"可叠加"
@@ -301,7 +301,7 @@
     },
     {
         "entry_id":"8210700",
-        "entry_name":"提升所有异常状态的抵抗力（潜在能力）",
+        "entry_name":"提升对所有异常状态的抵抗力（潜在能力）",
         "entry_type":"对异常状态的抵抗力",
         "explanation":"所有异常状态耐受上限+57 \/ +75",
         "superposability":"可叠加"
@@ -393,7 +393,7 @@
     },
     {
         "entry_id":"8320400",
-        "entry_name":"蓄力攻击时，提升减伤率",
+        "entry_name":"蓄力攻击命中时，提升减伤率",
         "entry_type":"减伤率",
         "explanation":"∘ 使用蓄力攻击时，产生一个10秒增益状态，受到的伤害-24% \/ -32% \/ -40%;\n∘ 持续时间内再次蓄力攻击命中，可刷新持续时间;\n∘ 三种级别叠加时，最高减伤率计算：\n      1. 总承受伤害比例 = (1-24%)×(1-32%)×(1-40%) = 31.008%\n      2. 最高减伤率 = 1 - 总承受伤害比例 = 68.992%\n∘ 内置11秒冷却时间",
         "superposability":"不同级别可叠加"
@@ -435,14 +435,14 @@
     },
     {
         "entry_id":"8330103",
-        "entry_name":"强化魔法与祷告（潜在能力）",
+        "entry_name":"强化魔法、祷告（潜在能力）",
         "entry_type":"强化",
         "explanation":"魔法与祷告造成的伤害+7%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8330104",
-        "entry_name":"强化魔法与祷告 +1（潜在能力）",
+        "entry_name":"强化魔法、祷告 +1（潜在能力）",
         "entry_type":"强化",
         "explanation":"魔法与祷告造成的伤害+11%",
         "superposability":"可叠加"
@@ -671,7 +671,7 @@
     },
     {
         "entry_id":"8460100",
-        "entry_name":"慢步移动时，剧烈燃烧周围",
+        "entry_name":"慢步移动时，燃起接连形成的火焰柱",
         "entry_type":"额外效果",
         "explanation":"慢步移动时，能引发剧烈自燃，连同周围一起燃烧(每次86.4火，削韧每次9.25)",
         "superposability":"不可叠加"
@@ -755,21 +755,21 @@
     },
     {
         "entry_id":"8600100",
-        "entry_name":"攻击时，恢复血量",
+        "entry_name":"攻击命中时，恢复血量",
         "entry_type":"恢复",
         "explanation":"每次攻击固定回复4点生命值",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8600200",
-        "entry_name":"攻击时，恢复专注值",
+        "entry_name":"攻击命中时，恢复专注值",
         "entry_type":"恢复",
         "explanation":"每次攻击固定回复1点专注值",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8600300",
-        "entry_name":"攻击时，敌人偶尔会骤死（潜在能力）",
+        "entry_name":"攻击命中时，敌人偶尔会骤死（潜在能力）",
         "entry_type":"额外效果",
         "explanation":"攻击命中的敌人，偶尔会无关血量多寡立刻死亡",
         "superposability":"不可叠加"
@@ -798,28 +798,28 @@
     },
     {
         "entry_id":"8610300",
-        "entry_name":"蓄力攻击时，追加魔力属性攻击",
+        "entry_name":"蓄力攻击命中时，追加魔力属性攻击",
         "entry_type":"额外效果",
         "explanation":"蓄力攻击时，追加75点基础魔力属性伤害，1点削韧，3号冲击力",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"8610400",
-        "entry_name":"蓄力攻击时，追加火属性攻击",
+        "entry_name":"蓄力攻击命中时，追加火属性攻击",
         "entry_type":"额外效果",
         "explanation":"蓄力攻击时，追加75点基础火属性伤害，1点削韧，3号冲击力",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"8610500",
-        "entry_name":"蓄力攻击时，追加雷属性攻击",
+        "entry_name":"蓄力攻击命中时，追加雷属性攻击",
         "entry_type":"额外效果",
         "explanation":"蓄力攻击时，追加75点基础雷属性伤害，1点削韧，3号冲击力",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"8610600",
-        "entry_name":"蓄力攻击时，追加圣属性攻击",
+        "entry_name":"蓄力攻击命中时，追加圣属性攻击",
         "entry_type":"额外效果",
         "explanation":"蓄力攻击时，追加75点基础圣属性伤害，1点削韧，3号冲击力",
         "superposability":"不可叠加"
@@ -924,7 +924,7 @@
     },
     {
         "entry_id":"8642000",
-        "entry_name":"致命一击时，增加对敌人的伤害（潜在能力）",
+        "entry_name":"致命一击时，增加敌人受到的伤害（潜在能力）",
         "entry_type":"攻击力",
         "explanation":"致命一击后使敌人受到伤害增加15%，持续30秒(致命一击的第—击吃不到加伤)",
         "superposability":"不可叠加"
@@ -1096,7 +1096,7 @@
     },
     {
         "entry_id":"8690100",
-        "entry_name":"陷入发狂时，释放癫火",
+        "entry_name":"陷入发狂时，释放划空癫火",
         "entry_type":"额外效果",
         "explanation":"陷入发狂时，释放癫火，每束癫火附带90点发狂值，造成125点基础火属性伤害，5点削韧，2号冲击力",
         "superposability":"不可叠加"
@@ -1183,7 +1183,7 @@
     },
     {
         "entry_id":"8920100",
-        "entry_name":"提升物理以外的攻击力",
+        "entry_name":"提升属性攻击力",
         "explanation":"未实装？",
         "tags":[
             "未实装"

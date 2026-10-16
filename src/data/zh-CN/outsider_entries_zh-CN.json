@@ -529,7 +529,7 @@
     },
     {
         "entry_id":"7003300",
-        "entry_name":"提升对死亡的抵抗力",
+        "entry_name":"提升对骤死的抵抗力",
         "entry_type":"对异常状态的抵抗力",
         "explanation":"+75点死亡异常耐受上限",
         "superposability":"可叠加"
@@ -598,7 +598,7 @@
     },
     {
         "entry_id":"7010700",
-        "entry_name":"【女爵】以短剑使出连续攻击时，能对着周围的敌人，再次上演最近做过的行动",
+        "entry_name":"【女爵】短剑连击的最后攻击命中时，能对着周围的敌人，再次上演最近做过的行动",
         "entry_type":"仅限特定角色",
         "explanation":"女爵用短剑连续攻击，用出整套动作最后一下时触发重演，重演造成连续攻击过程中伤害的40%",
         "superposability":"不可叠加"
@@ -611,7 +611,7 @@
     },
     {
         "entry_id":"7010900",
-        "entry_name":"【复仇者】发动绝招时，能以自己的血量为代价完全恢复我方人物的血量",
+        "entry_name":"【复仇者】发动绝招时，能以自己的血量为代价，完全恢复周围我方人物的血量",
         "entry_type":"仅限特定角色",
         "explanation":"扣除自身最大生命值的 50%，恢复周围友军最大生命值的 100%",
         "superposability":"不可叠加"
@@ -756,7 +756,7 @@
     },
     {
         "entry_id":"7030800",
-        "entry_name":"使出致命一击时，加快累积绝招量表",
+        "entry_name":"使出致命一击时，能累积绝招量表",
         "entry_type":"技艺/绝招",
         "explanation":"绝招量表 +5",
         "superposability":"不同级别可叠加"
@@ -1239,14 +1239,14 @@
     },
     {
         "entry_id":"7060000",
-        "entry_name":"每次打倒封印监牢里的囚犯，能永久性提升攻击力",
+        "entry_name":"每次打倒封印监牢里的囚犯，能提升攻击力",
         "entry_type":"攻击力",
         "explanation":"造成的伤害每次 +5%，局内无限成长",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7060100",
-        "entry_name":"每次解开魔法师塔的机关，能永久性提升专注值上限",
+        "entry_name":"每次解开魔法师塔的机关，能提升专注值上限",
         "entry_type":"能力值",
         "explanation":"专注值上限每次 +18%，局内无限成长",
         "superposability":"不可叠加"
@@ -1470,7 +1470,7 @@
     },
     {
         "entry_id":"7090000",
-        "entry_name":"提升打倒敌人时，绝招量表的累积量表",
+        "entry_name":"打倒敌人时，能累积绝招量表",
         "entry_type":"技艺/绝招",
         "explanation":"绝招量表 +5",
         "superposability":"不同级别可叠加"
