@@ -569,10 +569,12 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   // 词条名称 + 标签：「未实装」归到「词条类型」列，这里只渲染「XX专属遗物」等标签
   const renderEntryName = (name: string | null | undefined, record: EntryData) => {
     const tags = (record.tags || []).filter(tag => tag !== NOT_IMPLEMENTED_TAG);
-    if (tags.length === 0) return name || '-';
+    // 少数词条名里带 \n（如 7030500「【追踪者】发动绝招后，\n能提升…」），要 pre-wrap 才会换行
+    const label = <span style={{ whiteSpace: 'pre-wrap' }}>{name || '-'}</span>;
+    if (tags.length === 0) return label;
     return (
       <Space size={4} wrap>
-        <span>{name}</span>
+        {label}
         {tags.map(tag => (
           <Tag
             key={tag}

@@ -1672,7 +1672,10 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       dataIndex: 'explanation',
       key: 'explanation',
       width: '55%',
-      render: (text) => text || '-',
+      // 数据里用 \n 分行（如「地底神殿的恩惠」），要 pre-wrap 才会真的换行
+      render: (text) => (
+        <span style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{text || '-'}</span>
+      ),
     },
   ];
 
@@ -1949,7 +1952,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                       <Table
                         columns={specialEventColumns}
                         dataSource={specialEventData}
-                        rowKey="entry_id"
+                        // 没有游戏 ID 的条目都用 "-" 占位（火山口、地底神殿…），
+                        // 单用 entry_id 会撞 key，所以拼上名称
+                        rowKey={(record) => `${record.entry_id}|${record.entry_name}`}
                         pagination={false}
                         size="small"
                         bordered
