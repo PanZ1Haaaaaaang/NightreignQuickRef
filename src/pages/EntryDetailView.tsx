@@ -199,6 +199,7 @@ interface DataState {
   outsiderEntries: EntryData[];
   talismanEntries: EntryData[];
   inGameEntries: EntryData[];
+  inGamePotentialEntries: EntryData[];
   enhancementCategories: EnhancementCategory[];
   itemEffects: ItemEffect[];
   deepNightEntries: EntryData[];
@@ -291,6 +292,22 @@ const inGameTypeOptions = [
   { value: '不甘', label: '不甘' },
 ];
 
+// 「潜在能力」是局内武器固有的一类词条（43 条），单独放在
+// src/data/zh-CN/in-game_potential_entries_zh-CN.json，页签「局内-潜在能力」
+
+// 局内-潜在能力词条类型选项（这 43 条里实际出现的类型）
+const potentialAbilityTypeOptions = [
+  { value: '能力值', label: '能力值' },
+  { value: '攻击力', label: '攻击力' },
+  { value: '强化', label: '强化' },
+  { value: '恢复', label: '恢复' },
+  { value: '减伤率', label: '减伤率' },
+  { value: '技艺/绝招', label: '技艺/绝招' },
+  { value: '额外效果', label: '额外效果' },
+  { value: '附加异常状态', label: '附加异常状态' },
+  { value: '对异常状态的抵抗力', label: '对异常状态的抵抗力' },
+];
+
 // 未实装标签：数据里 tags 含此值即视为「未实装」词条
 const NOT_IMPLEMENTED_TAG = '未实装';
 // 未实装标签配色（antd 预设色；放在「词条类型」列，需与普通类型标签明显区分）
@@ -376,6 +393,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     outsiderEntries: [],
     talismanEntries: [],
     inGameEntries: [],
+    inGamePotentialEntries: [],
     enhancementCategories: [],
     itemEffects: [],
     deepNightEntries: [],
@@ -403,6 +421,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           outsiderEntries: dataManager.getOutsiderEntries(),
           talismanEntries: dataManager.getTalismanEntries(),
           inGameEntries: dataManager.getInGameEntries(),
+          inGamePotentialEntries: dataManager.getInGamePotentialEntries(),
           enhancementCategories: dataManager.getEnhancementCategories(),
           itemEffects: dataManager.getItemEffects(),
           deepNightEntries: dataManager.getDeepNightEntries(),
@@ -1126,6 +1145,12 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
         }
         break;
+      case '潜在能力':
+        // 这 43 条都是已实装词条，没有「显示未实装」开关，也不需要隐藏逻辑
+        tableData = data.inGamePotentialEntries;
+        columns = inGameColumns;
+        tableData = filterData(tableData, searchKeyword, selectedInGameTypes, undefined, undefined, filteredInfo.superposability as string[]);
+        break;
       default:
         tableData = data.outsiderEntries;
         columns = outsiderColumns;
@@ -1258,6 +1283,9 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
 
   // 渲染搜索和筛选器的函数
   const renderSearchAndFilter = (tabKey: string) => {
+    // 「局内词条」和「潜在能力」共用同一套筛选控件，只有类型选项不同
+    const isInGameEntriesTab = tabKey === '局内词条' || tabKey === '潜在能力';
+
     if (data.loading) {
       return (
         <div className="loading-container">
@@ -1496,7 +1524,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 className="custom-search-input"
                 allowClear
               />
-              {tabKey === '局内词条' && (
+              {isInGameEntriesTab && (
                 <Select
                   className="in-game-type-select"
                   mode="multiple"
@@ -1508,10 +1536,11 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                     setSelectedInGameTypes(values);
                     setCurrentPage(1);
                   }}
-                  options={withNotImplemented(inGameTypeOptions)}
+                  options={tabKey === '潜在能力' ? potentialAbilityTypeOptions : withNotImplemented(inGameTypeOptions)}
                   maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
                 />
               )}
+              {/* 「潜在能力」这 43 条都是已实装词条，不提供「显示未实装」开关 */}
               {tabKey === '局内词条' && (
                 <Checkbox
                   checked={showNotImplemented}
@@ -1573,6 +1602,16 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
               <div id="in-game-entries">
                 {renderSearchAndFilter('局内词条')}
                 {renderTableContent('局内词条')}
+              </div>
+            ),
+          },
+          {
+            key: '潜在能力',
+            label: '🌖 局内-潜在能力',
+            children: (
+              <div id="in-game-potential-entries">
+                {renderSearchAndFilter('潜在能力')}
+                {renderTableContent('潜在能力')}
               </div>
             ),
           },

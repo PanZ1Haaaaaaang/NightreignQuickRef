@@ -62,6 +62,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
       children: [
         { key: '局外词条', label: '🌕 局外词条', anchorId: 'outsider-entries', tabKey: '局外词条' },
         { key: '局内词条', label: '🌖 局内词条', anchorId: 'in-game-entries', tabKey: '局内词条' },
+        { key: '潜在能力', label: '🌖 局内-潜在能力', anchorId: 'in-game-potential-entries', tabKey: '潜在能力' },
         { key: '护符词条', label: '🌗 护符词条', anchorId: 'talisman-entries', tabKey: '护符词条' },
         { key: '强化类别词条适用范围', label: '🌘 强化类别词条适用范围', anchorId: 'enhancement-categories', tabKey: '强化类别词条适用范围' },
         { key: '道具/采集效果', label: '🌒 道具/采集效果', anchorId: 'item-effects', tabKey: '道具效果' },

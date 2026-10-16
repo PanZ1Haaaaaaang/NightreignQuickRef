@@ -145,6 +145,7 @@ class DataManager {
         outsiderEntries,
         talismanEntries,
         inGameEntries,
+        inGamePotentialEntries,
         weaponCharacter,
         weaponEffect,
         characterStates,
@@ -160,6 +161,7 @@ class DataManager {
         import('../data/zh-CN/outsider_entries_zh-CN.json'),
         import('../data/zh-CN/talisman_entries_zh-CN.json'),
         import('../data/zh-CN/in-game_entries_zh-CN.json'),
+        import('../data/zh-CN/in-game_potential_entries_zh-CN.json'),
         import('../data/zh-CN/weapon_character.json'),
         import('../data/zh-CN/weapon_effect.json'),
         import('../data/zh-CN/character_states.json'),
@@ -224,6 +226,7 @@ class DataManager {
       this.dataCache.set('outsiderEntries', outsiderEntries.default);
       this.dataCache.set('talismanEntries', talismanEntries.default);
       this.dataCache.set('inGameEntries', inGameEntries.default);
+      this.dataCache.set('inGamePotentialEntries', inGamePotentialEntries.default);
       this.dataCache.set('weaponCharacter', weaponCharacter.default);
       this.dataCache.set('weaponEffect', weaponEffect.default);
       this.dataCache.set('characterStates', characterStates.default);
@@ -257,6 +260,10 @@ class DataManager {
 
   public getInGameEntries(): EntryData[] {
     return (this.dataCache.get('inGameEntries') as EntryData[]) || [];
+  }
+
+  public getInGamePotentialEntries(): EntryData[] {
+    return (this.dataCache.get('inGamePotentialEntries') as EntryData[]) || [];
   }
 
   public getWeaponCharacter(): WeaponCharacter[] {
