@@ -127,6 +127,8 @@ class DataManager {
         'executor.json', 
         'guardian.json',
         'avenger.json',
+        'scholar.json',
+        'undertaker.json',
       ];
 
       // 文件名到中文名称的映射
@@ -139,6 +141,8 @@ class DataManager {
         'executor.json': '执行者',
         'guardian.json': '守护者',
         'avenger.json': '复仇者',
+        'scholar.json': '学者',
+        'undertaker.json': '送葬者',
       };
 
       const [
@@ -207,6 +211,12 @@ class DataManager {
               break;
             case 'avenger.json':
               characterModule = await import('../data/character-info/avenger.json');
+              break;
+            case 'scholar.json':
+              characterModule = await import('../data/character-info/scholar.json');
+              break;
+            case 'undertaker.json':
+              characterModule = await import('../data/character-info/undertaker.json');
               break;
             default:
               console.warn(`未知的角色文件: ${fileName}`);
