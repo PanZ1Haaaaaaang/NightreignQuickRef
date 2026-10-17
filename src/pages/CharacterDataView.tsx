@@ -1,8 +1,8 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { Typography, Table, Alert, Tabs, Divider, Switch, Tooltip } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar, Column } from '@ant-design/plots';
-import { ThunderboltTwoTone, QuestionCircleOutlined } from '@ant-design/icons';
+import { ThunderboltTwoTone, QuestionCircleOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { throttle } from 'lodash';
 import { getCurrentTheme } from '../utils/themeUtils';
 import '../styles/characterDataView.css';
@@ -369,6 +369,84 @@ interface CharacterData {
   [characterName: string]: CharacterState;
 }
 
+// G2 默认分类色板（与 light/dark 主题的 category10 一致）
+const RADAR_COLORS = [
+  '#1783FF', '#00C9C9', '#F0884D', '#D580FF', '#7863FF',
+  '#60C42D', '#BD8F24', '#FF80CA', '#2491B3', '#17C76F',
+];
+
+// 雷达图自定义图例：固定单行，超出时用左右箭头滚动（类似 ECharts legend type=scroll）
+const RadarLegend: React.FC<{
+  names: string[];
+  getColor: (name: string) => string;
+}> = ({ names, getColor }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateArrows = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 1);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+  }, []);
+
+  useEffect(() => {
+    updateArrows();
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener('scroll', updateArrows, { passive: true });
+    const resizeObserver = new ResizeObserver(updateArrows);
+    resizeObserver.observe(el);
+    window.addEventListener('resize', updateArrows);
+    return () => {
+      el.removeEventListener('scroll', updateArrows);
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', updateArrows);
+    };
+  }, [updateArrows, names]);
+
+  const scroll = (direction: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollBy({ left: direction * Math.max(el.clientWidth * 0.6, 120), behavior: 'smooth' });
+  };
+
+  return (
+    <div className="radar-legend">
+      <button
+        type="button"
+        className="radar-legend-arrow"
+        aria-label="向左滚动图例"
+        style={{ visibility: canScrollLeft ? 'visible' : 'hidden' }}
+        onClick={() => scroll(-1)}
+      >
+        <LeftOutlined />
+      </button>
+      <div
+        className={`radar-legend-scroll${!canScrollLeft && !canScrollRight ? ' is-centered' : ''}`}
+        ref={scrollRef}
+      >
+        {names.map((name) => (
+          <span className="radar-legend-item" key={name}>
+            <span className="radar-legend-dot" style={{ backgroundColor: getColor(name) }} />
+            <span>{name}</span>
+          </span>
+        ))}
+      </div>
+      <button
+        type="button"
+        className="radar-legend-arrow"
+        aria-label="向右滚动图例"
+        style={{ visibility: canScrollRight ? 'visible' : 'hidden' }}
+        onClick={() => scroll(1)}
+      >
+        <RightOutlined />
+      </button>
+    </div>
+  );
+};
+
 const CharacterDataView: React.FC = () => {
   // 数据状态
   const [data, setData] = useState<DataState>({
@@ -531,6 +609,12 @@ const CharacterDataView: React.FC = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>(['追踪者', '女爵', '送葬者']);
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
   const [chartKey, setChartKey] = useState(0);
+
+  // 角色颜色按 characterNames 固定映射，图例与雷达图共用，避免选中顺序变化导致换色
+  const getRadarColor = (name: string) => {
+    const index = characterNames.indexOf(name);
+    return RADAR_COLORS[(index >= 0 ? index : 0) % RADAR_COLORS.length];
+  };
 
   useEffect(() => {
     const checkTheme = () => {
@@ -755,13 +839,23 @@ const CharacterDataView: React.FC = () => {
   const rowSelection: TableProps<{ key: string; character: string;[key: string]: string }>['rowSelection'] = {
     selectedRowKeys,
     onChange: (newSelectedRowKeys: React.Key[]) => {
-      // 限制最多选择8个角色
-      if (newSelectedRowKeys.length <= 8) {
+      // 至少保留一名角色，避免雷达图变成空图（不弹提示）
+      if (newSelectedRowKeys.length === 0) {
+        const fallback = selectedRowKeys[0] ?? characterNames[0];
+        if (fallback) {
+          setSelectedRowKeys([fallback]);
+        }
+        return;
+      }
+      // 最多选择全部角色（原先固定为 8，DLC 新增学者/送葬者后会导致全选失效）
+      if (newSelectedRowKeys.length <= characterNames.length) {
         setSelectedRowKeys(newSelectedRowKeys);
       }
     },
     getCheckboxProps: (record: { key: string; character: string;[key: string]: string }) => ({
       name: record.character,
+      // 只剩一名角色时锁住它，不能再取消
+      disabled: selectedRowKeys.length === 1 && selectedRowKeys.includes(record.key),
     }),
   };
 
@@ -799,87 +893,101 @@ const CharacterDataView: React.FC = () => {
               id="radar-chart-container"
             >
               {selectedRowKeys.length > 0 ? (
-                <Radar
-                  key={`radar-main-${chartKey}`}
-                  data={radarData}
-                  xField="item"       // 用于X轴（雷达图的各个顶点）的字段
-                  yField="score"      // 用于Y轴（数值）的字段
-                  colorField="type"   // 用于区分不同角色的字段
-                  height={380}        // 雷达图高度
-                  autoFit={true}      // 自适应容器大小
-                  theme={currentTheme}        // 根据当前主题动态设置
-
-                  // 坐标轴配置
-                  axis={{
-                    x: {
-                      grid: true,
-                      gridLineWidth: 1,
-                      tick: false,
-                      gridLineDash: [0, 0],
-                    },
-                    y: {
-                      zIndex: 1,
-                      title: false,
-                      gridLineWidth: 1,
-                      gridLineDash: [0, 0],
-                      gridAreaFill: (_: unknown, index: number) => {
-                        return index % 2 === 1 ? 'rgba(0, 0, 0, 0.04)' : '';
-                      },
-                      labelFormatter: (value: number) => {
-                        const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
-                        return levelMap[value] || '';
-                      },
-
-                    },
-                  }}
-
-                  // 数据点配置
-                  point={{
-                    size: 4,
-                  }}
-
-                  // 刻度配置 - 恢复辅助线
-                  scale={{
-                    x: { padding: 50, align: 0 },
-                    y: {
-                      tickCount: 5,
-                      domainMin: 0,
-                      domainMax: 5
-                    }
-                  }}
-
-                  // 线条样式
-                  style={{
-                    lineWidth: 2,
-                  }}
-
-                  // 提示框配置
-                  tooltip={{
-                    items: [
-                      {
-                        channel: 'y',
-                        valueFormatter: (value: number) => {
-                          const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
-                          return levelMap[value] || value.toString();
-                        }
-                      }
-                    ]
-                  }}
-
-                  // 填充区域样式
-                  area={{
-                    style: {
-                      fillOpacity: 0.1,      // 填充透明度
-                    },
-                  }}
-
-                  // 线样式
-                  line={{
-                    style: {
-                      lineWidth: 2,
-                    },
-                  }}
-                />
+                <>
+                  <div className="radar-chart-inner">
+                    <RadarLegend
+                      names={selectedRowKeys.map(key => key.toString())}
+                      getColor={getRadarColor}
+                    />
+                    <Radar
+                      key={`radar-main-${chartKey}-${selectedRowKeys.join('-')}`}
+                      data={radarData}
+                      xField="item"       // 用于X轴（雷达图的各个顶点）的字段
+                      yField="score"      // 用于Y轴（数值）的字段
+                      colorField="type"   // 用于区分不同角色的字段
+                      legend={false}      // 使用自定义单行图例
+                      height={380}        // 雷达图高度
+                      autoFit={true}      // 自适应容器大小
+                      animate={false}     // 关闭更新动画，避免切换角色超过 8 个时残留外圈
+                      theme={currentTheme}        // 根据当前主题动态设置
+    
+                      // 坐标轴配置
+                      axis={{
+                        x: {
+                          grid: true,
+                          gridLineWidth: 1,
+                          tick: false,
+                          gridLineDash: [0, 0],
+                        },
+                        y: {
+                          zIndex: 1,
+                          title: false,
+                          gridLineWidth: 1,
+                          gridLineDash: [0, 0],
+                          gridAreaFill: (_: unknown, index: number) => {
+                            return index % 2 === 1 ? 'rgba(0, 0, 0, 0.04)' : '';
+                          },
+                          labelFormatter: (value: number) => {
+                            const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
+                            return levelMap[value] || '';
+                          },
+    
+                        },
+                      }}
+    
+                      // 数据点配置
+                      point={{
+                        size: 4,
+                      }}
+    
+                      // 刻度配置 - 恢复辅助线
+                      scale={{
+                        x: { padding: 50, align: 0 },
+                        y: {
+                          tickCount: 5,
+                          domainMin: 0,
+                          domainMax: 5
+                        },
+                        color: {
+                          domain: characterNames,
+                          range: RADAR_COLORS,
+                        },
+                      }}
+    
+                      // 线条样式
+                      style={{
+                        lineWidth: 2,
+                      }}
+    
+                      // 提示框配置
+                      tooltip={{
+                        items: [
+                          {
+                            channel: 'y',
+                            valueFormatter: (value: number) => {
+                              const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
+                              return levelMap[value] || value.toString();
+                            }
+                          }
+                        ]
+                      }}
+    
+                      // 填充区域样式
+                      area={{
+                        style: {
+                          fillOpacity: 0.1,      // 填充透明度
+                        },
+                      }}
+    
+                      // 线样式
+                      line={{
+                        style: {
+                          lineWidth: 2,
+                        },
+                      }}
+                    />
+                  </div>
+                </>
               ) : (
                 // 空状态显示
                 <div
