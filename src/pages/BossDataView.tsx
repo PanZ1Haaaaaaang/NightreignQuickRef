@@ -1685,6 +1685,15 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     },
   ];
 
+  const lipulaFooter = () => (
+    <div className="footer-text">
+      <div>◦ 炼金碎片小：随羊头施法后掉落，捡起恢复20HP，减少发狂累积量表55，并且获得炼金碎片buff—物理攻击x1.05、受到的发狂累积量x0.7，持续10s</div>
+      <div>◦ 炼金碎片大：随罪人死亡后掉落，捡起恢复4%+120HP，减少发狂累积量表999(等于清除)，获得炼金碎片buff2—物理攻击x1.05、受到的发狂累积量x0.8，持续20s</div>
+      <div>◦ 恶魔的眼界：将随意累积发狂量表。具体效果为17s后睁眼，睁眼累积发狂值15/0.35s，持续7s。结束后闭眼17s，然后再次睁眼。睁眼累积发狂值15/0.7s，持续7s</div>
+      <div>◦ 罪人金身buff：第一层加20%攻击，后续每层加2%攻击</div>
+    </div>
+  );
+
   // 特殊事件及地形效果表格列定义
   const specialEventColumns: ColumnsType<EntryData> = [
     {
@@ -1992,6 +2001,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                     pagination={false}
                     size="small"
                     bordered
+                    footer={lipulaFooter}
                   />
                 </div>
               ),
