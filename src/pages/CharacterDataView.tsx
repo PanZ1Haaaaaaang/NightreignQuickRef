@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Typography, Table, Alert, Tabs, Divider } from 'antd';
+import { Typography, Table, Alert, Tabs, Divider, Switch, Tooltip } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar, Column } from '@ant-design/plots';
-import { ThunderboltTwoTone } from '@ant-design/icons';
+import { ThunderboltTwoTone, QuestionCircleOutlined } from '@ant-design/icons';
 import { throttle } from 'lodash';
 import { getCurrentTheme } from '../utils/themeUtils';
 import '../styles/characterDataView.css';
@@ -42,11 +42,19 @@ interface CharacterLevelData {
   [key: string]: string | number;
 }
 
+// 「强化闪避」加成（60fps）：默认 +6 帧，女爵·闪身 +2 帧
+const ENHANCED_DODGE_BONUS = 6;
+const ENHANCED_DODGE_BONUS_OVERRIDES: { [name: string]: number } = {
+  '女爵（闪身）': 2,
+};
+
 // 闪避无敌帧对比组件
 const DodgeFramesComparison = () => {
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
   const [chartKey, setChartKey] = useState(0);
   const [frameData, setFrameData] = useState<Array<{ name: string; type: string; value: number }>>([]);
+  // 是否叠加「强化闪避」：无敌帧 +6（女爵·闪身 +2），动作总帧长不变
+  const [enhancedDodge, setEnhancedDodge] = useState(false);
 
   useEffect(() => {
     const checkTheme = () => {
@@ -141,9 +149,32 @@ const DodgeFramesComparison = () => {
     loadFrameData();
   }, []);
 
+  // 「强化闪避」：把 6 帧非无敌帧转为无敌帧（女爵·闪身只转 2 帧），总帧长不变
+  const displayFrameData = useMemo(() => {
+    if (!enhancedDodge) {
+      return frameData;
+    }
+    return frameData.map((item) => {
+      const bonus = ENHANCED_DODGE_BONUS_OVERRIDES[item.name] ?? ENHANCED_DODGE_BONUS;
+      if (item.type === '无敌帧') {
+        return { ...item, value: item.value + bonus };
+      }
+      if (item.type === '非无敌帧') {
+        return { ...item, value: Math.max(0, item.value - bonus) };
+      }
+      return item;
+    });
+  }, [frameData, enhancedDodge]);
+
+  // 值为 0 的段不参与绘制，避免出现 0 标签
+  const chartFrameData = useMemo(
+    () => displayFrameData.filter((item) => item.value > 0),
+    [displayFrameData],
+  );
+
   // 计算每个角色的总帧数用于顶部注释
   const totalFrames: { [key: string]: number } = {};
-  frameData.forEach((item: { name: string; type: string; value: number }) => {
+  displayFrameData.forEach((item: { name: string; type: string; value: number }) => {
     if (!totalFrames[item.name]) {
       totalFrames[item.name] = 0;
     }
@@ -166,7 +197,7 @@ const DodgeFramesComparison = () => {
   }));
 
   const config = {
-    data: frameData,
+    data: chartFrameData,
     xField: 'name',
     yField: 'value',
     stack: true,
@@ -176,7 +207,7 @@ const DodgeFramesComparison = () => {
     autoFit: true,
     label: {
       text: 'value',
-      textBaseline: 'bottom',
+      textBaseline: 'middle',
       position: 'inside',
     },
     tooltip: false,
@@ -244,15 +275,42 @@ const DodgeFramesComparison = () => {
 
   return (
     <div className="content-wrapper card-item">
-      <div className="card-header">
-        <Title level={5} className="character-card-title">
+      <div
+        className="card-header"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '12px',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Title level={5} className="character-card-title" style={{ margin: 0 }}>
           翻滚/闪避 帧数对比
         </Title>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Text style={{ fontSize: '13px', color: 'var(--color-text-2)' }}>强化闪避</Text>
+          <Switch
+            size="small"
+            checked={enhancedDodge}
+            onChange={setEnhancedDodge}
+            checkedChildren="开"
+            unCheckedChildren="关"
+          />
+          <Tooltip title="开启后按「强化闪避」加成显示：无敌帧 +6 帧（女爵·闪身 +2 帧），动作总帧长不变。熔炉羽护符、风结晶露滴同理。">
+            <QuestionCircleOutlined style={{ color: 'var(--color-text-3)', cursor: 'help' }} />
+          </Tooltip>
+        </div>
       </div>
       <div className="card-body">
         <div style={{ marginBottom: '10px', color: 'var(--theme-text-secondary)', fontSize: '14px' }}>
           提示：图中为60帧情况下的数据（1帧即1/60秒）
         </div>
+        {enhancedDodge && (
+          <div style={{ marginBottom: '10px', color: 'var(--color-primary-500)', fontSize: '14px' }}>
+            已开启「强化闪避」：无敌帧 +6（女爵·闪身 +2），非无敌帧相应减少，总帧长不变
+          </div>
+        )}
         <div
           className="dodge-frames-chart-container"
           style={{
@@ -263,7 +321,7 @@ const DodgeFramesComparison = () => {
             position: 'relative'
           }}
         >
-          <Column key={`dodge-frames-${chartKey}`} {...config} />
+          <Column key={`dodge-frames-${chartKey}-${enhancedDodge ? 'enhanced' : 'base'}`} {...config} />
         </div>
 
         {/* 提示信息 */}
@@ -285,6 +343,10 @@ const DodgeFramesComparison = () => {
 
               <div className="tip-item">
                 4. 各数值对应的秒数计算：帧数数值× (1/60秒); 举例: 追踪者翻滚总时长为40帧，在60帧情况下，对应的时长为 40×(1/60)s = 2/3s ≈ 0.67s
+              </div>
+
+              <div className="tip-item">
+                5. 熔炉羽护符、风结晶露滴或局内强化闪避额外获得的无敌帧为6帧，女爵（闪身）为2帧
               </div>
             </div>
           }
