@@ -16,17 +16,25 @@ export interface BossData {
   id: number;
   name: string;
   baseHealth: number | string;
-  /** 普通形态的额外缩放（如 DLC 夜王的 ×1.25），缺省视为 1 */
-  baseHealthMultiplier?: number | string;
+  /** 普通形态的额外缩放（会显示在括号里，如头领的 ×3.75）；缺省视为 1 */
+  baseHealthMultiplier?: number | number[];
+  /** DLC 全局缩放（仅两支 DLC 夜王使用，参与计算但不显示） */
+  dlcMultiplier?: number;
+  /** 单人/双人/三人的人数倍率覆盖（默认 [1,2,3]，来自 MultiPlayCorrectionParam） */
+  basePlayerMultipliers?: number[];
   nightreignHealth: number | string;
-  normalAbsorption: number;
-  slashAbsorption: number;
-  strikeAbsorption: number;
-  pierceAbsorption: number;
-  magicAbsorption: number;
-  fireAbsorption: number;
-  lightningAbsorption: number;
-  holyAbsorption: number;
+  /** 永夜王倍率（[Everdark Sovereign Scaling] 等，永夜列照此显示；支持多个因子数组） */
+  nightreignHealthMultiplier: number | number[] | string;
+  /** 永夜王血量列的人数倍率覆盖（默认 [1,2,3]） */
+  nightreignPlayerMultipliers?: number[];
+  normalAbsorption: number | string;
+  slashAbsorption: number | string;
+  strikeAbsorption: number | string;
+  pierceAbsorption: number | string;
+  magicAbsorption: number | string;
+  fireAbsorption: number | string;
+  lightningAbsorption: number | string;
+  holyAbsorption: number | string;
   poisonResistance: number | string;
   scarletRotResistance: number | string;
   bleedResistance: number | string;
@@ -36,7 +44,6 @@ export interface BossData {
   madnessResistance: number | string;
   basePoise: number | string;
   nightreignPoise: number | string;
-  nightreignHealthMultiplier: number | string;
 }
 
 // 野生Boss数据接口

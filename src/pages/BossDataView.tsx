@@ -349,8 +349,8 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   };
 
   // 根据吸收数值返回CSS类名
-  const getAbsorptionClass = (value: number): string => {
-    if (value === null || value === undefined) {
+  const getAbsorptionClass = (value: number | string): string => {
+    if (value === null || value === undefined || typeof value !== 'number') {
       return '';
     }
 
@@ -410,6 +410,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     '"黑夜光骑士"弗格尔': nightOfTheChampion,
     '黑夜轮廓': nightOfTheLord,
     '"继承英雄武器的众女孩"哈尔莫妮亚': nightOfTheBalancers,
+    '个体': nightOfTheBalancers,
+    '头领': nightOfTheBalancers,
+    '合体': nightOfTheBalancers,
     '反叛的史柴格斯': nightOfTheDreglords,
     '冲动的史柴格斯': nightOfTheDreglords,
   };
@@ -421,7 +424,10 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       <div>◦ 普通夜王血量 = 基础血量 × 玩家人数</div>
       <div>◦ 永夜王血量为倍率加成：永夜王血量 = 基础血量 × 永夜王血量加成倍率 × 玩家人数</div>
       <div>◦ 永夜王血量为独立数值：永夜王血量 = 永夜王血量 × 玩家人数</div>
-      <div>◦ DLC夜王有额外血量倍率1.25</div>
+      <div>◦ DLC夜王有额外血量倍率1.25 （合体安定者除外）</div>
+      <div>◦ 安定者头领获得buff：攻击力+5%，韧性攻击+15%</div>
+      <div>◦ 安定者永夜个体血量倍率为 1 / 1.35 / 1.7，合体血量倍率为 1 / 1.75 / 2.5</div>
+      <div>◦ 安定者永夜个体每次被击杀都会永久为自身添加一层buff：属性攻击力+7%，韧性攻击+5%</div>
       <div>◦ 冲动的史柴格斯抗性说明：基于反叛的史柴格斯 普通/切割/打击/突刺/魔力/雷 ×0.95、火 ×0.91、圣 ×0.92，出血 ×2.15、冻伤 ×2.15、睡眠 ×3.96</div>
     </div>
   );
@@ -499,13 +505,22 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           align: 'center',
           render: (value, record) => {
             if (typeof value === 'number') {
-              // baseHealthMultiplier：DLC 等模式对普通形态的额外缩放（例：史柴格斯 ×1.25）
-              const multiplier = record.baseHealthMultiplier;
-              const scale = typeof multiplier === 'number' ? multiplier : 1;
+              // baseHealthMultiplier：会显示的额外缩放（如头领的 ×3.75）
+              const rawMultiplier = record.baseHealthMultiplier;
+              const factors = Array.isArray(rawMultiplier)
+                ? rawMultiplier.filter((f): f is number => typeof f === 'number')
+                : (typeof rawMultiplier === 'number' ? [rawMultiplier] : []);
+              // dlcMultiplier：DLC 全局缩放，只算不显示
+              const dlcScale = typeof record.dlcMultiplier === 'number' ? record.dlcMultiplier : 1;
+              const scale = factors.reduce((a, b) => a * b, 1) * dlcScale;
+              // basePlayerMultipliers：人数倍率覆盖（默认按人数 1/2/3）
+              const players = Array.isArray(record.basePlayerMultipliers) &&
+                typeof record.basePlayerMultipliers[playerCount - 1] === 'number'
+                ? record.basePlayerMultipliers[playerCount - 1] : playerCount;
               return (
                 <span className="health-base">
-                  {Math.round(value * 3.54 * playerCount * scale).toLocaleString()}
-                  {typeof multiplier === 'number' ? `(×${multiplier})` : ''}
+                  {Math.round(value * 3.54 * players * scale).toLocaleString()}
+                  {factors.length ? `(×${factors.join('×')})` : ''}
                 </span>
               );
             }
@@ -523,12 +538,31 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           width: 100,
           align: 'center',
           render: (value, record) => {
-            if (typeof value === 'number' && typeof record.nightreignHealth === 'number') {
-              const nightreignBaseHealth = Math.round(record.nightreignHealth * 3.54 * playerCount);
-              const nightreignHealth = Math.round(nightreignBaseHealth * value);
+            if (typeof record.nightreignHealth === 'number') {
+              // 倍率为 "-" 时按 1 处理（如只存在于永夜、但不吃额外倍率的形态）；支持多因子数组
+              // nightreignHealthMultiplier：永夜王倍率（为数字时一律显示，含 ×1）
+              const factors = Array.isArray(value)
+                ? value.filter((f): f is number => typeof f === 'number')
+                : (typeof value === 'number' ? [value] : []);
+              // dlcMultiplier：DLC 全局缩放，只算不显示
+              const dlcScale = typeof record.dlcMultiplier === 'number' ? record.dlcMultiplier : 1;
+              const scale = factors.reduce((a, b) => a * b, 1) * dlcScale;
+              // nightreignPlayerMultipliers：人数倍率覆盖（默认按人数 1/2/3）
+              const players = Array.isArray(record.nightreignPlayerMultipliers) &&
+                typeof record.nightreignPlayerMultipliers[playerCount - 1] === 'number'
+                ? record.nightreignPlayerMultipliers[playerCount - 1] : playerCount;
+              const nightreignHealth = Math.round(record.nightreignHealth * 3.54 * players * scale);
               return (
                 <span className="health-nightreign">
-                  {nightreignHealth.toLocaleString()}(×{value})
+                  {nightreignHealth.toLocaleString()}{factors.length ? `(×${factors.join('×')})` : ''}
+                </span>
+              );
+            }
+            // 复合写法（多 Boss 共享血条，如「4000(160, 237, 422)」）直接显示原文
+            if (typeof record.nightreignHealth === 'string' && record.nightreignHealth !== '-') {
+              return (
+                <span className="health-nightreign">
+                  {record.nightreignHealth}
                 </span>
               );
             }
