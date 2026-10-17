@@ -388,7 +388,7 @@
     "poison": 112,
     "scarletRot": 112,
     "frost": 154,
-    "location": "营地、监牢、主城"
+    "location": "营地、主城"
   },
   {
     "name": "失乡骑士（龙飨）",
@@ -405,7 +405,7 @@
     "poison": 112,
     "scarletRot": 112,
     "frost": 154,
-    "location": "营地、监牢、主城"
+    "location": "监牢"
   },
   {
     "name": "老狮子",
@@ -527,7 +527,7 @@
     "location": "监牢"
   },
   {
-    "name": "石肤古王",
+    "name": "石肤黑王/白王",
     "normal": 0.9,
     "strike": 0.9,
     "slash": 0.9,
