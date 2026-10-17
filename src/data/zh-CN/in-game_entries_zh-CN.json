@@ -837,10 +837,10 @@
     },
     {
         "entry_id":"8700003",
-        "entry_name":"陷入中毒、腐败时，持续恢复血量",
+        "entry_name":"周围陷入中毒、腐败时，持续恢复血量",
         "entry_type":"恢复",
         "explanation":"20秒内，每秒回复7点生命值",
-        "superposability":"未知"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"8720000",

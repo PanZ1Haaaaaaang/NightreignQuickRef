@@ -1228,7 +1228,7 @@
         "entry_name":"不包含自己，提升周围我方人物的精力恢复速度",
         "entry_type":"队伍成员",
         "explanation":"周围友方人物但不包括自己，精力恢复速度+4点\/秒",
-        "superposability":"未知"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"7050100",
@@ -1480,7 +1480,7 @@
         "entry_name":"打倒敌人时，除了自己恢复周围我方人物的血量",
         "entry_type":"队伍成员",
         "explanation":"固定回复20点生命值，有0.5秒内置冷却时间",
-        "superposability":"未知"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"7090300",

@@ -288,16 +288,16 @@
     },
     {
         "entry_id":"8700002",
-        "entry_name":"陷入中毒时，提升攻击力",
-        "entry_type":"攻击力",
-        "explanation":"攻击力+7",
-        "superposability":"未知"
+        "entry_name":"周围陷入中毒、腐败时，持续恢复血量",
+        "entry_type":"恢复",
+        "explanation":"周围人物陷入异常状态中毒、猩红腐败时，20秒内每秒回复7点生命值",
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"8710002",
-        "entry_name":"陷入出血时，提升攻击力",
+        "entry_name":"周围陷入出血时，提升攻击力",
         "entry_type":"攻击力",
-        "explanation":"攻击力+20%",
-        "superposability":"未知"
+        "explanation":"周围人物陷入异常状态出血时，攻击力+20%，持续20秒",
+        "superposability":"不可叠加"
     }
 ]
