@@ -65,7 +65,7 @@
     "poison": "免疫",
     "scarletRot": "免疫",
     "frost": "免疫",
-    "location": "要塞、教堂"
+    "location": "要塞、大教堂"
   },
   {
     "name": "大神谕使者",
@@ -82,7 +82,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 112,
-    "location": "教堂"
+    "location": "大教堂"
   },
   {
     "name": "火焰修士",
@@ -99,7 +99,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "教堂、火山口"
+    "location": "大教堂、火山口"
   },
   {
     "name": "灵庙骑士",
@@ -116,7 +116,7 @@
     "poison": "免疫",
     "scarletRot": "免疫",
     "frost": "免疫",
-    "location": "教堂、隐城"
+    "location": "大教堂、隐城"
   },
   {
     "name": "大白金之子",
@@ -1029,7 +1029,7 @@
     "fire": 0.6,
     "lightning": 0.6,
     "holy": 0.6,
-    "basePoise": 110,
+    "basePoise": 95,
     "bleed": "免疫",
     "poison": "免疫",
     "scarletRot": "免疫",
@@ -1064,7 +1064,7 @@
     "lightning": 0.8,
     "holy": 0.8,
     "basePoise": 100,
-    "bleed": "免疫",
+    "bleed": 252,
     "poison": 252,
     "scarletRot": 252,
     "frost": "免疫",
@@ -1141,11 +1141,11 @@
   {
     "name": "无头山妖",
     "normal": 1,
-    "strike": 0.9,
+    "strike": 1,
     "slash": 1.1,
     "pierce": 1,
     "magic": 1,
-    "fire": 1.2,
+    "fire": 1,
     "lightning": 1,
     "holy": 1,
     "basePoise": 65,

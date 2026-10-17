@@ -178,7 +178,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   const locationColorMap: Record<string, string> = {
     '要塞': 'cyan',
     '监牢': 'volcano',
-    '教堂': 'orange',
+    '大教堂': 'orange',
     '遗迹': 'magenta',
     '营地': 'green',
     '矿洞': 'magenta',
