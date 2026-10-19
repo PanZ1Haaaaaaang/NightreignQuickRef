@@ -1336,3 +1336,19 @@ body[tomato-theme="dark"] .custom-search-wrapper .ant-input {
     letter-spacing: 0;
   }
 }
+
+/* 武器战技与魔法祷告表格 */
+.weapon-skill-magic-table .ant-table-cell {
+  white-space: pre-line;
+  vertical-align: top;
+  word-break: break-word;
+}
+
+.weapon-skill-magic-table .ant-table-thead > tr > th {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.weapon-skill-magic-table .ant-table-tbody > tr > td {
+  font-size: 12px;
+}
