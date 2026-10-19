@@ -9,6 +9,14 @@ import weaponArts from '../data/zh-CN/weapon_arts.json';
 import uniqueWeaponArts from '../data/zh-CN/unique_weapon_arts.json';
 import supportSpells from '../data/zh-CN/support_spells.json';
 import weaponArtCategoryHints from '../data/zh-CN/weapon_art_category_hints.json';
+import standardDamageIcon from '../assets/Negations/standard-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
+import strikeDamageIcon from '../assets/Negations/strike-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
+import slashDamageIcon from '../assets/Negations/slash-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
+import pierceDamageIcon from '../assets/Negations/pierce-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
+import magicDamageIcon from '../assets/Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
+import fireDamageIcon from '../assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
+import lightningDamageIcon from '../assets/Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
+import holyDamageIcon from '../assets/Negations/holy-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 
 type Row = Record<string, string>;
 
@@ -51,6 +59,75 @@ const supportNotes = [
 ];
 
 const NOT_IMPLEMENTED = '未实装';
+
+const DAMAGE_TYPE_ALIASES: Record<string, string> = {
+  普通: '普通',
+  物: '普通',
+  物理: '普通',
+  挥击: '斩击',
+  打击: '打击',
+  斩击: '斩击',
+  突刺: '突刺',
+  戳击: '突刺',
+  魔: '魔力',
+  魔力: '魔力',
+  火: '火焰',
+  火焰: '火焰',
+  雷: '雷电',
+  雷电: '雷电',
+  圣: '神圣',
+  神圣: '神圣',
+};
+
+const damageTypeOption = (value: string, label: string, icon: string) => ({
+  value,
+  label: (
+    <span className="damage-type-option">
+      <img src={icon} alt="" className="damage-type-icon" />
+      <span>{label}</span>
+    </span>
+  ),
+});
+
+const damageFilterOptions = [
+  {
+    label: '攻击类别',
+    options: [
+      damageTypeOption('普通', '普通', standardDamageIcon),
+      damageTypeOption('打击', '打击', strikeDamageIcon),
+      damageTypeOption('斩击', '斩击', slashDamageIcon),
+      damageTypeOption('突刺', '突刺', pierceDamageIcon),
+    ],
+  },
+  {
+    label: '属性类别',
+    options: [
+      damageTypeOption('魔力', '魔力', magicDamageIcon),
+      damageTypeOption('火焰', '火焰', fireDamageIcon),
+      damageTypeOption('雷电', '雷电', lightningDamageIcon),
+      damageTypeOption('神圣', '神圣', holyDamageIcon),
+    ],
+  },
+];
+
+const formatDamageType = (value: string) =>
+  value.replace(/[^+＋/\n、,，]+/g, token => {
+    const trimmed = token.trim();
+    const canonical = DAMAGE_TYPE_ALIASES[trimmed];
+    return canonical ? token.replace(trimmed, canonical) : token;
+  });
+
+const damageTypesOf = (row: Row): string[] => {
+  const result = new Set<string>();
+  [row['伤害类型'], row['物理类型']].forEach(value => {
+    if (!value) return;
+    value.split(/[+＋/\n、,，]+/).forEach(token => {
+      const canonical = DAMAGE_TYPE_ALIASES[token.trim()];
+      if (canonical) result.add(canonical);
+    });
+  });
+  return [...result];
+};
 
 // 取行上的分类标签；战技/专用战技的 DLC 行都带「未实装」
 const categoryTagsOf = (row: Row, kind?: 'weaponArt' | 'unique'): string[] => {
@@ -109,6 +186,7 @@ interface DataTableProps {
   skillFilterKind?: 'weaponArt' | 'unique';
   mergeRules?: MergeRule[];
   detail?: DetailConfig;
+  damageFilter?: boolean;
 }
 
 const DataTable: React.FC<DataTableProps> = ({
@@ -122,11 +200,13 @@ const DataTable: React.FC<DataTableProps> = ({
   skillFilterKind,
   mergeRules,
   detail,
+  damageFilter,
 }) => {
   const [keyword, setKeyword] = useState('');
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedDamageTypes, setSelectedDamageTypes] = useState<string[]>([]);
   const [showNotImplemented, setShowNotImplemented] = useState(false);
   const [expandedRowKeys, setExpandedRowKeys] = useState<string[]>([]);
 
@@ -157,16 +237,24 @@ const DataTable: React.FC<DataTableProps> = ({
       });
     }
 
+    if (damageFilter && selectedDamageTypes.length > 0) {
+      rows = rows.filter(row => {
+        const types = damageTypesOf(row);
+        return types.some(type => selectedDamageTypes.includes(type));
+      });
+    }
+
     const k = keyword.trim().toLowerCase();
     if (!k) return rows;
     return rows.filter(row =>
       Object.values(row).some(value => String(value).toLowerCase().includes(k))
+      || damageTypesOf(row).some(type => type.toLowerCase().includes(k))
     );
-  }, [data, keyword, selectedCategories, showNotImplemented, skillFilterKind]);
+  }, [data, damageFilter, keyword, selectedCategories, selectedDamageTypes, showNotImplemented, skillFilterKind]);
 
   useEffect(() => {
     setPage(1);
-  }, [keyword, selectedCategories, showNotImplemented]);
+  }, [keyword, selectedCategories, selectedDamageTypes, showNotImplemented]);
 
   const totalPages = Math.max(1, Math.ceil(filteredData.length / pageSize));
 
@@ -301,17 +389,34 @@ const DataTable: React.FC<DataTableProps> = ({
           style={{ width: 280 }}
         />
         {skillFilterKind && (
+          <Select
+            mode="multiple"
+            allowClear
+            placeholder="按分类筛选"
+            options={categoryOptions}
+            value={selectedCategories}
+            onChange={setSelectedCategories}
+            maxTagCount="responsive"
+            style={{ minWidth: 220, maxWidth: 360 }}
+          />
+        )}
+        {damageFilter && (
+          <Select
+            mode="multiple"
+            allowClear
+            showSearch={false}
+            placeholder="按伤害类型筛选"
+            options={damageFilterOptions}
+            value={selectedDamageTypes}
+            onChange={setSelectedDamageTypes}
+            maxTagCount="responsive"
+            listHeight={360}
+            className="damage-type-select"
+            style={{ minWidth: 250, maxWidth: 400 }}
+          />
+        )}
+        {skillFilterKind && (
           <>
-            <Select
-              mode="multiple"
-              allowClear
-              placeholder="按分类筛选"
-              options={categoryOptions}
-              value={selectedCategories}
-              onChange={setSelectedCategories}
-              maxTagCount="responsive"
-              style={{ minWidth: 220, maxWidth: 360 }}
-            />
             <Checkbox
               checked={showNotImplemented}
               onChange={(e) => {
@@ -328,6 +433,7 @@ const DataTable: React.FC<DataTableProps> = ({
               onClick={() => {
                 setKeyword('');
                 setSelectedCategories([]);
+                setSelectedDamageTypes([]);
                 setShowNotImplemented(false);
                 setPage(1);
               }}
@@ -382,6 +488,14 @@ const textColumn = (title: string, key: string, width: number): ColumnsType<Row>
   width,
 });
 
+const damageTypeColumn = (width: number): ColumnsType<Row>[number] => ({
+  title: '伤害类型',
+  dataIndex: '伤害类型',
+  key: '伤害类型',
+  width,
+  render: (value: string) => formatDamageType(value || ''),
+});
+
 const spellDetailConfig: DetailConfig = {
   field: '详情',
   linkColumnKey: '基础威力',
@@ -393,7 +507,7 @@ const spellColumns: ColumnsType<Row> = [
   textColumn('基础威力', '基础威力', 190),
   textColumn('耗蓝', '耗蓝', 90),
   textColumn('霸体', '霸体', 90),
-  textColumn('伤害类型', '伤害类型', 90),
+  damageTypeColumn(90),
   textColumn('加成', '加成', 90),
   textColumn('削韧', '削韧', 160),
   textColumn('备注', '备注', 320),
@@ -479,7 +593,7 @@ const weaponArtColumns: ColumnsType<Row> = [
   textColumn('攻击倍率/基础攻击力', '攻击倍率/基础攻击力', 230),
   textColumn('削韧', '削韧', 170),
   textColumn('物理类型', '物理类型', 90),
-  textColumn('伤害类型', '伤害类型', 100),
+  damageTypeColumn(100),
   textColumn('特殊加成', '特殊加成', 100),
   textColumn('备注', '备注', 320),
 ];
@@ -502,7 +616,7 @@ const uniqueWeaponArtColumns: ColumnsType<Row> = [
   textColumn('攻击倍率/基础攻击力', '攻击倍率/基础攻击力', 220),
   textColumn('特殊加成', '特殊加成', 100),
   textColumn('削韧', '削韧', 180),
-  textColumn('伤害类型', '伤害类型', 110),
+  damageTypeColumn(110),
   textColumn('备注', '备注', 320),
 ];
 
@@ -574,6 +688,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   notes={weaponArtNotes}
                   skillFilterKind="weaponArt"
                   mergeRules={weaponArtMergeRules}
+                  damageFilter
                 />
               </div>
             ),
@@ -590,6 +705,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   notes={uniqueWeaponArtNotes}
                   skillFilterKind="unique"
                   mergeRules={uniqueWeaponArtMergeRules}
+                  damageFilter
                 />
               </div>
             ),
@@ -605,6 +721,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   searchPlaceholder="搜索魔法 / 伤害类型 / 备注"
                   notes={sorceryNotes}
                   detail={spellDetailConfig}
+                  damageFilter
                 />
               </div>
             ),
@@ -619,6 +736,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   data={incantationRows}
                   searchPlaceholder="搜索祷告 / 伤害类型 / 备注"
                   notes={incantationNotes}
+                  damageFilter
                 />
               </div>
             ),

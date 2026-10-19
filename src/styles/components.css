@@ -1432,3 +1432,33 @@ body[tomato-theme="dark"] .weapon-skill-magic-notes {
 body[tomato-theme="dark"] .weapon-skill-detail-panel {
   background: rgba(255, 255, 255, 0.05);
 }
+
+/* 伤害类型筛选 */
+.damage-type-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+}
+
+.damage-type-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex: none;
+}
+
+.damage-type-select .ant-select-selection-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.damage-type-select .ant-select-selection-item .damage-type-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.damage-type-select .ant-select-selection-item-content {
+  display: inline-flex;
+  align-items: center;
+}
