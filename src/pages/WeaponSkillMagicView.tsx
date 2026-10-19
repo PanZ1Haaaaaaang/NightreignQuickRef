@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Input, Table, Tabs, Tag } from 'antd';
+import { Button, Checkbox, Input, Select, Table, Tabs, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
 import CustomPagination from '../components/CustomPagination';
@@ -48,6 +48,30 @@ const supportNotes = [
   '本作治疗量或附魔攻击力=基础值*(1+智力或信仰*1.5/99），与触媒完全无关。',
 ];
 
+const NOT_IMPLEMENTED = '未实装';
+
+// 取行上的分类标签；战技/专用战技的 DLC 行都带「未实装」
+const categoryTagsOf = (row: Row, kind?: 'weaponArt' | 'unique'): string[] => {
+  const raw = row['分类'] || '';
+  if (kind === 'weaponArt') {
+    if (row['版本'] === 'DLC' || raw === 'DLC新增') {
+      return [NOT_IMPLEMENTED];
+    }
+    return raw
+      .split(/[、,，/]/)
+      .map(item => item.replace(/战灰$/, '').trim())
+      .filter(Boolean);
+  }
+  const tags = raw
+    .split(/[、,，/]/)
+    .map(item => item.replace(/类$/, '').trim())
+    .filter(Boolean);
+  if (row['版本'] === 'DLC') {
+    tags.push(NOT_IMPLEMENTED);
+  }
+  return tags;
+};
+
 interface DataTableProps {
   columns: ColumnsType<Row>;
   data: Row[];
@@ -56,6 +80,7 @@ interface DataTableProps {
   marginBottom?: number;
   pagination?: boolean;
   notes?: string[];
+  skillFilterKind?: 'weaponArt' | 'unique';
 }
 
 const DataTable: React.FC<DataTableProps> = ({
@@ -66,22 +91,51 @@ const DataTable: React.FC<DataTableProps> = ({
   marginBottom = 24,
   pagination = true,
   notes,
+  skillFilterKind,
 }) => {
   const [keyword, setKeyword] = useState('');
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [showNotImplemented, setShowNotImplemented] = useState(false);
+
+  const categoryOptions = useMemo(() => {
+    if (!skillFilterKind) return [];
+    const tags = new Set<string>();
+    data.forEach(row => {
+      categoryTagsOf(row, skillFilterKind).forEach(tag => tags.add(tag));
+    });
+    return [...tags]
+      .filter(tag => tag !== NOT_IMPLEMENTED || showNotImplemented)
+      .map(tag => ({ value: tag, label: tag }));
+  }, [data, skillFilterKind, showNotImplemented]);
 
   const filteredData = useMemo(() => {
+    let rows = data;
+
+    if (skillFilterKind) {
+      rows = rows.filter(row => {
+        const tags = categoryTagsOf(row, skillFilterKind);
+        if (!showNotImplemented && tags.includes(NOT_IMPLEMENTED)) {
+          return false;
+        }
+        if (selectedCategories.length > 0 && !tags.some(tag => selectedCategories.includes(tag))) {
+          return false;
+        }
+        return true;
+      });
+    }
+
     const k = keyword.trim().toLowerCase();
-    if (!k) return data;
-    return data.filter(row =>
+    if (!k) return rows;
+    return rows.filter(row =>
       Object.values(row).some(value => String(value).toLowerCase().includes(k))
     );
-  }, [data, keyword]);
+  }, [data, keyword, selectedCategories, showNotImplemented, skillFilterKind]);
 
   useEffect(() => {
     setPage(1);
-  }, [keyword]);
+  }, [keyword, selectedCategories, showNotImplemented]);
 
   const totalPages = Math.max(1, Math.ceil(filteredData.length / pageSize));
 
@@ -112,14 +166,52 @@ const DataTable: React.FC<DataTableProps> = ({
           {title}
         </div>
       )}
-      <Input
-        allowClear
-        prefix={<SearchOutlined />}
-        placeholder={searchPlaceholder}
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
-        style={{ width: 280, marginBottom: 12 }}
-      />
+      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+        <Input
+          allowClear
+          prefix={<SearchOutlined />}
+          placeholder={searchPlaceholder}
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          style={{ width: 280 }}
+        />
+        {skillFilterKind && (
+          <>
+            <Select
+              mode="multiple"
+              allowClear
+              placeholder="按分类筛选"
+              options={categoryOptions}
+              value={selectedCategories}
+              onChange={setSelectedCategories}
+              maxTagCount="responsive"
+              style={{ minWidth: 220, maxWidth: 360 }}
+            />
+            <Checkbox
+              checked={showNotImplemented}
+              onChange={(e) => {
+                const checked = e.target.checked;
+                setShowNotImplemented(checked);
+                if (!checked) {
+                  setSelectedCategories(prev => prev.filter(tag => tag !== NOT_IMPLEMENTED));
+                }
+              }}
+            >
+              显示未实装
+            </Checkbox>
+            <Button
+              onClick={() => {
+                setKeyword('');
+                setSelectedCategories([]);
+                setShowNotImplemented(false);
+                setPage(1);
+              }}
+            >
+              清除所有
+            </Button>
+          </>
+        )}
+      </div>
       <Table<Row>
         className="weapon-skill-magic-table"
         columns={columns}
@@ -182,8 +274,6 @@ const supportColumns: ColumnsType<Row> = [
   textColumn('持续时间', '持续时间', 100),
   textColumn('备注', '备注', 280),
 ];
-
-const NOT_IMPLEMENTED = '未实装';
 
 const categoryColorMap: Record<string, string> = {
   厚重: 'volcano', 锋利: 'cyan', 优质: 'green', 寒冷: 'blue', 无属性: 'default',
@@ -303,6 +393,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   data={weaponArtRows}
                   searchPlaceholder="搜索战技 / 动作 / 分类 / 备注"
                   notes={weaponArtNotes}
+                  skillFilterKind="weaponArt"
                 />
               </div>
             ),
@@ -317,6 +408,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   data={uniqueWeaponArtRows}
                   searchPlaceholder="搜索武器 / 战技 / 动作 / 备注"
                   notes={uniqueWeaponArtNotes}
+                  skillFilterKind="unique"
                 />
               </div>
             ),
