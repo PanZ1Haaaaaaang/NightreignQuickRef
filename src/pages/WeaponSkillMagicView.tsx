@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Input, Table, Tabs } from 'antd';
+import { Input, Table, Tabs, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
 import CustomPagination from '../components/CustomPagination';
@@ -137,9 +137,59 @@ const supportColumns: ColumnsType<Row> = [
   textColumn('备注', '备注', 280),
 ];
 
+const NOT_IMPLEMENTED = '未实装';
+
+const categoryColorMap: Record<string, string> = {
+  厚重: 'volcano', 锋利: 'cyan', 优质: 'green', 寒冷: 'blue', 无属性: 'default',
+  毒: 'green', 血: 'red', 火焰: 'volcano', 焰术: 'orange', 神圣: 'gold',
+  神秘: 'purple', 雷电: 'geekblue', 魔力: 'magenta',
+  短剑: 'blue', 刺剑: 'blue', 重刺剑: 'blue', 直剑: 'blue', 大剑: 'blue',
+  特大剑: 'blue', 轻大剑: 'blue', 刀: 'cyan', 大刀: 'cyan', 大曲剑: 'cyan',
+  曲剑: 'cyan', 双头剑: 'cyan', 反手剑: 'cyan', 斧: 'volcano', 大斧: 'volcano',
+  槌: 'volcano', 大槌: 'volcano', 特大武器: 'volcano', 矛: 'purple', 大矛: 'purple',
+  戟: 'purple', 镰刀: 'purple', 鞭: 'purple', 连枷: 'purple', 盾: 'gold',
+  火把: 'orange', 弓弩: 'geekblue', 拳头: 'green', 调香瓶: 'magenta',
+};
+
+const splitCategoryTags = (category: string, suffix: RegExp): string[] =>
+  category
+    .split(/[、,，/]/)
+    .map(item => item.replace(suffix, '').trim())
+    .filter(Boolean);
+
+const renderCategoryTags = (tags: string[]) => (
+  <div style={{ display: 'flex', flexWrap: 'nowrap', gap: 4, whiteSpace: 'nowrap' }}>
+    {tags.map(tag => (
+      <Tag key={tag} color={tag === NOT_IMPLEMENTED ? 'orange' : (categoryColorMap[tag] || 'blue')}>
+        {tag}
+      </Tag>
+    ))}
+  </div>
+);
+
+const renderWeaponArtCategory = (_: string, record: Row) => {
+  if (record['版本'] === 'DLC' || record['分类'] === 'DLC新增') {
+    return renderCategoryTags([NOT_IMPLEMENTED]);
+  }
+  return renderCategoryTags(splitCategoryTags(record['分类'] || '', /战灰$/));
+};
+
+const renderUniqueCategory = (_: string, record: Row) => {
+  const tags = splitCategoryTags(record['分类'] || '', /类$/);
+  if (record['版本'] === 'DLC') {
+    return renderCategoryTags([NOT_IMPLEMENTED, ...tags]);
+  }
+  return renderCategoryTags(tags);
+};
+
 const weaponArtColumns: ColumnsType<Row> = [
-  textColumn('版本', '版本', 64),
-  textColumn('分类', '分类', 130),
+  {
+    title: '分类',
+    dataIndex: '分类',
+    key: '分类',
+    width: 150,
+    render: renderWeaponArtCategory,
+  },
   textColumn('战技', '战技', 140),
   textColumn('动作', '动作', 120),
   textColumn('耗蓝', '耗蓝', 80),
@@ -154,8 +204,13 @@ const weaponArtColumns: ColumnsType<Row> = [
 ];
 
 const uniqueWeaponArtColumns: ColumnsType<Row> = [
-  textColumn('版本', '版本', 64),
-  textColumn('分类', '分类', 110),
+  {
+    title: '分类',
+    dataIndex: '分类',
+    key: '分类',
+    width: 140,
+    render: renderUniqueCategory,
+  },
   textColumn('武器', '武器', 130),
   textColumn('战技', '战技', 130),
   textColumn('补正', '补正', 140),
