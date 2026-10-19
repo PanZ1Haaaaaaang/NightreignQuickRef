@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Button, Checkbox, Input, Select, Table, Tabs, Tag } from 'antd';
+import { Button, Checkbox, Input, Select, Table, Tabs, Tag, Tooltip } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
 import CustomPagination from '../components/CustomPagination';
@@ -8,6 +8,7 @@ import incantations from '../data/zh-CN/incantations.json';
 import weaponArts from '../data/zh-CN/weapon_arts.json';
 import uniqueWeaponArts from '../data/zh-CN/unique_weapon_arts.json';
 import supportSpells from '../data/zh-CN/support_spells.json';
+import weaponArtCategoryHints from '../data/zh-CN/weapon_art_category_hints.json';
 
 type Row = Record<string, string>;
 
@@ -17,6 +18,7 @@ const weaponArtRows = weaponArts as unknown as Row[];
 const uniqueWeaponArtRows = uniqueWeaponArts as unknown as Row[];
 const supportMagicRows = supportSpells['辅助魔法'] as unknown as Row[];
 const supportIncantationRows = supportSpells['辅助祷告'] as unknown as Row[];
+const categoryHints = weaponArtCategoryHints as Record<string, string>;
 
 const TAB_KEYS = ['战技', '专用战技', '魔法', '祷告', '辅助类'];
 
@@ -72,6 +74,24 @@ const categoryTagsOf = (row: Row, kind?: 'weaponArt' | 'unique'): string[] => {
   return tags;
 };
 
+interface MergeRule {
+  columnKey: string;
+  groupKey: (row: Row) => string;
+}
+
+// 合并单元格时使用稳定行 key，避免翻页/筛选后 React 复用错误的行
+const rowKeyMap = new WeakMap<Row, string>();
+let rowKeySequence = 0;
+const getRowKey = (row: Row) => {
+  let key = rowKeyMap.get(row);
+  if (!key) {
+    rowKeySequence += 1;
+    key = `row-${rowKeySequence}`;
+    rowKeyMap.set(row, key);
+  }
+  return key;
+};
+
 interface DataTableProps {
   columns: ColumnsType<Row>;
   data: Row[];
@@ -81,6 +101,7 @@ interface DataTableProps {
   pagination?: boolean;
   notes?: string[];
   skillFilterKind?: 'weaponArt' | 'unique';
+  mergeRules?: MergeRule[];
 }
 
 const DataTable: React.FC<DataTableProps> = ({
@@ -92,6 +113,7 @@ const DataTable: React.FC<DataTableProps> = ({
   pagination = true,
   notes,
   skillFilterKind,
+  mergeRules,
 }) => {
   const [keyword, setKeyword] = useState('');
   const [page, setPage] = useState(1);
@@ -151,6 +173,46 @@ const DataTable: React.FC<DataTableProps> = ({
   );
 
   const visibleData = pagination ? pagedData : filteredData;
+
+  const mergedColumns = useMemo(() => {
+    if (!mergeRules || mergeRules.length === 0) return columns;
+
+    const spansByColumn = new Map<string, number[]>();
+    mergeRules.forEach((rule) => {
+      const spans = new Array<number>(visibleData.length).fill(1);
+      let start = 0;
+      while (start < visibleData.length) {
+        const key = rule.groupKey(visibleData[start]);
+        let end = start + 1;
+        while (end < visibleData.length && rule.groupKey(visibleData[end]) === key) {
+          end += 1;
+        }
+        spans[start] = end - start;
+        for (let index = start + 1; index < end; index += 1) {
+          spans[index] = 0;
+        }
+        start = end;
+      }
+      spansByColumn.set(rule.columnKey, spans);
+    });
+
+    return columns.map((column) => {
+      const columnKey = String(column.key);
+      if (!spansByColumn.has(columnKey)) return column;
+      return {
+        ...column,
+        onCell: (record: Row, index?: number) => {
+          const rowIndex = index ?? 0;
+          const previous = column.onCell?.(record, rowIndex) ?? {};
+          return {
+            ...previous,
+            rowSpan: spansByColumn.get(columnKey)?.[rowIndex] ?? 1,
+            style: { ...previous.style, verticalAlign: 'top' },
+          };
+        },
+      };
+    });
+  }, [columns, mergeRules, visibleData]);
 
   return (
     <div style={{ marginBottom }}>
@@ -214,9 +276,9 @@ const DataTable: React.FC<DataTableProps> = ({
       </div>
       <Table<Row>
         className="weapon-skill-magic-table"
-        columns={columns}
+        columns={mergedColumns}
         dataSource={visibleData}
-        rowKey={(_, index) => index ?? 0}
+        rowKey={getRowKey}
         size="small"
         bordered
         scroll={{ x: 'max-content' }}
@@ -293,13 +355,26 @@ const splitCategoryTags = (category: string, suffix: RegExp): string[] =>
     .map(item => item.replace(suffix, '').trim())
     .filter(Boolean);
 
-const renderCategoryTags = (tags: string[]) => (
+const renderCategoryTags = (tags: string[], hints?: Record<string, string>) => (
   <div className="weapon-skill-category-tags" style={{ display: 'flex', flexWrap: 'nowrap', gap: 4, whiteSpace: 'nowrap' }}>
-    {tags.map(tag => (
-      <Tag key={tag} color={tag === NOT_IMPLEMENTED ? 'orange' : (categoryColorMap[tag] || 'blue')}>
-        {tag}
-      </Tag>
-    ))}
+    {tags.map(tag => {
+      const hint = hints?.[tag];
+      const tagNode = (
+        <Tag
+          color={tag === NOT_IMPLEMENTED ? 'orange' : (categoryColorMap[tag] || 'blue')}
+          style={hint ? { cursor: 'help' } : undefined}
+        >
+          {tag}
+        </Tag>
+      );
+      return hint ? (
+        <Tooltip key={tag} title={hint} placement="top" mouseEnterDelay={0.15}>
+          {tagNode}
+        </Tooltip>
+      ) : (
+        <React.Fragment key={tag}>{tagNode}</React.Fragment>
+      );
+    })}
   </div>
 );
 
@@ -307,7 +382,7 @@ const renderWeaponArtCategory = (_: string, record: Row) => {
   if (record['版本'] === 'DLC' || record['分类'] === 'DLC新增') {
     return renderCategoryTags([NOT_IMPLEMENTED]);
   }
-  return renderCategoryTags(splitCategoryTags(record['分类'] || '', /战灰$/));
+  return renderCategoryTags(splitCategoryTags(record['分类'] || '', /战灰$/), categoryHints);
 };
 
 const renderUniqueCategory = (_: string, record: Row) => {
@@ -361,6 +436,40 @@ const uniqueWeaponArtColumns: ColumnsType<Row> = [
   textColumn('备注', '备注', 320),
 ];
 
+const mergeKey = (...parts: string[]) => parts.join('\u0000');
+
+// 战技：同一分类下的同一个战技，合并“分类”和“战技”列
+const weaponArtMergeRules: MergeRule[] = [
+  {
+    columnKey: '分类',
+    groupKey: (row) => mergeKey(row['版本'] || '', row['分类'] || '', row['战技'] || ''),
+  },
+  {
+    columnKey: '战技',
+    groupKey: (row) => mergeKey(row['版本'] || '', row['分类'] || '', row['战技'] || ''),
+  },
+];
+
+// 专用战技：同一个武器/战技组，合并“分类 / 武器 / 补正 / 战技”
+const uniqueWeaponArtMergeRules: MergeRule[] = [
+  {
+    columnKey: '分类',
+    groupKey: (row) => mergeKey(row['版本'] || '', row['分类'] || '', row['武器'] || ''),
+  },
+  {
+    columnKey: '武器',
+    groupKey: (row) => mergeKey(row['版本'] || '', row['分类'] || '', row['武器'] || ''),
+  },
+  {
+    columnKey: '补正',
+    groupKey: (row) => mergeKey(row['版本'] || '', row['分类'] || '', row['武器'] || ''),
+  },
+  {
+    columnKey: '战技',
+    groupKey: (row) => mergeKey(row['版本'] || '', row['分类'] || '', row['武器'] || '', row['战技'] || ''),
+  },
+];
+
 interface WeaponSkillMagicViewProps {
   activeSubTab?: string;
 }
@@ -394,6 +503,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   searchPlaceholder="搜索战技 / 动作 / 分类 / 备注"
                   notes={weaponArtNotes}
                   skillFilterKind="weaponArt"
+                  mergeRules={weaponArtMergeRules}
                 />
               </div>
             ),
@@ -409,6 +519,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   searchPlaceholder="搜索武器 / 战技 / 动作 / 备注"
                   notes={uniqueWeaponArtNotes}
                   skillFilterKind="unique"
+                  mergeRules={uniqueWeaponArtMergeRules}
                 />
               </div>
             ),
