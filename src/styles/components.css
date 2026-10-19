@@ -1313,3 +1313,26 @@ body[tomato-theme="dark"] .custom-search-wrapper .ant-input {
     padding: var(--spacing-sm) var(--spacing-md) !important;
   }
 }
+/* 长导航标签：避免悬停时 letter-spacing 把文字挤到换行 */
+.custom-tab-button.long-label {
+  width: 190px;
+}
+
+.custom-tab-button.long-label a {
+  white-space: nowrap;
+}
+
+@media (max-width: 999px) {
+  .custom-tab-button.long-label {
+    width: 150px;
+  }
+
+  .custom-tab-button.long-label a {
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  .custom-tab-button.long-label:hover a {
+    letter-spacing: 0;
+  }
+}
