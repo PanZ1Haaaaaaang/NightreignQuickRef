@@ -90,6 +90,17 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         { key: '武器庇佑效果', label: '🗡️ 传说武器的庇佑效果', anchorId: 'weapon-blessing-effects', stepIndex: 1 }
       ]
     },
+    {
+      key: '武器战技与魔法祷告',
+      label: '✨ 武器战技与魔法祷告',
+      children: [
+        { key: '武器战技', label: '⚔️ 战技', anchorId: 'weapon-skills', tabKey: '战技' },
+        { key: '专用战技', label: '🗡️ 专用战技', anchorId: 'unique-weapon-skills', tabKey: '专用战技' },
+        { key: '魔法', label: '🔮 魔法', anchorId: 'sorceries', tabKey: '魔法' },
+        { key: '祷告', label: '🙏 祷告', anchorId: 'incantations', tabKey: '祷告' },
+        { key: '辅助类', label: '✨ 辅助类', anchorId: 'support-skills', tabKey: '辅助类' },
+      ]
+    },
   ];
 
   // 创建映射对象存储每个菜单项的自定义属性
