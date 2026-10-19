@@ -79,6 +79,12 @@ interface MergeRule {
   groupKey: (row: Row) => string;
 }
 
+interface DetailConfig {
+  field: string;
+  linkColumnKey: string;
+  title: string;
+}
+
 // 合并单元格时使用稳定行 key，避免翻页/筛选后 React 复用错误的行
 const rowKeyMap = new WeakMap<Row, string>();
 let rowKeySequence = 0;
@@ -102,6 +108,7 @@ interface DataTableProps {
   notes?: string[];
   skillFilterKind?: 'weaponArt' | 'unique';
   mergeRules?: MergeRule[];
+  detail?: DetailConfig;
 }
 
 const DataTable: React.FC<DataTableProps> = ({
@@ -114,12 +121,14 @@ const DataTable: React.FC<DataTableProps> = ({
   notes,
   skillFilterKind,
   mergeRules,
+  detail,
 }) => {
   const [keyword, setKeyword] = useState('');
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [showNotImplemented, setShowNotImplemented] = useState(false);
+  const [expandedRowKeys, setExpandedRowKeys] = useState<string[]>([]);
 
   const categoryOptions = useMemo(() => {
     if (!skillFilterKind) return [];
@@ -214,6 +223,60 @@ const DataTable: React.FC<DataTableProps> = ({
     });
   }, [columns, mergeRules, visibleData]);
 
+  const displayColumns = useMemo(() => {
+    if (!detail) return mergedColumns;
+
+    return mergedColumns.map((column) => {
+      if (String(column.key) !== detail.linkColumnKey) return column;
+
+      const originalRender = column.render;
+      return {
+        ...column,
+        render: (value: unknown, record: Row, index?: number) => {
+          const content = (originalRender
+            ? originalRender(value, record, index ?? 0)
+            : value) as React.ReactNode;
+          if (!record[detail.field]) return content;
+
+          const expanded = expandedRowKeys.includes(getRowKey(record));
+          return (
+            <div className="weapon-skill-detail-trigger">
+              <span>{content}</span>
+              <Button
+                type="link"
+                size="small"
+                className="weapon-skill-detail-toggle"
+                onClick={() => {
+                  const key = getRowKey(record);
+                  setExpandedRowKeys(prev =>
+                    prev.includes(key) ? prev.filter(item => item !== key) : [...prev, key]
+                  );
+                }}
+              >
+                {expanded ? '收起说明' : '展开说明'}
+              </Button>
+            </div>
+          );
+        },
+      };
+    });
+  }, [detail, expandedRowKeys, mergedColumns]);
+
+  const expandable = detail
+    ? {
+        expandedRowRender: (record: Row) => (
+          <div className="weapon-skill-detail-panel">
+            <div className="weapon-skill-detail-title">{detail.title}</div>
+            <div className="weapon-skill-detail-text">{record[detail.field]}</div>
+          </div>
+        ),
+        rowExpandable: (record: Row) => Boolean(record[detail.field]),
+        expandedRowKeys,
+        showExpandColumn: false,
+        expandedRowClassName: () => 'weapon-skill-detail-row',
+      }
+    : undefined;
+
   return (
     <div style={{ marginBottom }}>
       {title && (
@@ -276,13 +339,14 @@ const DataTable: React.FC<DataTableProps> = ({
       </div>
       <Table<Row>
         className="weapon-skill-magic-table"
-        columns={mergedColumns}
+        columns={displayColumns}
         dataSource={visibleData}
         rowKey={getRowKey}
         size="small"
         bordered
         scroll={{ x: 'max-content' }}
         pagination={false}
+        expandable={expandable}
         locale={{ emptyText: '没有匹配的数据' }}
       />
       {pagination && (
@@ -317,6 +381,12 @@ const textColumn = (title: string, key: string, width: number): ColumnsType<Row>
   key,
   width,
 });
+
+const spellDetailConfig: DetailConfig = {
+  field: '详情',
+  linkColumnKey: '基础威力',
+  title: '弹道说明',
+};
 
 const spellColumns: ColumnsType<Row> = [
   textColumn('名称', '名称', 120),
@@ -534,6 +604,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   data={sorceryRows}
                   searchPlaceholder="搜索魔法 / 伤害类型 / 备注"
                   notes={sorceryNotes}
+                  detail={spellDetailConfig}
                 />
               </div>
             ),
