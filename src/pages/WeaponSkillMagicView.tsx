@@ -20,12 +20,42 @@ const supportIncantationRows = supportSpells['辅助祷告'] as unknown as Row[]
 
 const TAB_KEYS = ['战技', '专用战技', '魔法', '祷告', '辅助类'];
 
+const weaponArtNotes = [
+  '黑夜君临 v1.01 战灰战技倍率、基础攻击力表  by: 虚空蛋黄酱',
+  '部分战灰战技的模组、威力、性能与武器分类有关。武器分类及基础削韧值如下：\n轻：短剑3、长剑5、刺剑4、重刺剑5.5、曲剑5、反手剑5、刀5、槌6、连枷6、斧5、拳头5、钩爪4、鞭子4\n重：大剑5.5、大刀5.5、大曲剑5.5、大斧5.5、大槌6.5\n特大：特大剑6、特大武器7\n长柄：双头剑5、矛5、大矛5.5、戟5、镰刀5\n盾牌类：小盾5，中盾5.5，大盾6',
+  'A类：攻击力完全取决于武器面板，A类战技攻击力=武器面板×攻击倍率\nB类：基础攻击力取决于武器强化等级（强化系数：白/蓝/紫/金分别为0.6/0.738/0.9/1.08），B类战灰战技使用特殊补正，基础补正系数被替换为25%（单补正）或15%（双补正），B类战技攻击力=基础值×强化系数×(1+补正倍率1+补正倍率2+...)\nA&B类：A类与B类混合型（攻击力为A部分攻击力+B部分攻击力，其中B部分没有特殊补正，攻击力以武器本身对应属性补正计算）\n其他类：无伤害成分，辅助类战技\n战技为武器附魔的攻击力全部为固定值，表中除双吻毒蛾外全部异常值均受感应补正。',
+];
+
+const uniqueWeaponArtNotes = [
+  '黑夜君临 v1.01 专用战技倍率、基础攻击力表   by: 虚空蛋黄酱',
+  'A类：攻击力完全取决于武器面板，A类战技攻击力=武器面板×攻击倍率\nB类：基础攻击力取决于武器强化等级（强化系数：白/蓝/紫/金分别为0.6/0.738/0.9/1.08），B类专用战技补正系数与武器一致（但有部分例外），B类战技攻击力=基础值×强化系数×(1+补正倍率1+补正倍率2+...)\nA&B类：A类与B类混合型（攻击力为A部分攻击力+B部分攻击力）\n其他类：无伤害成分，辅助类战技\n战技为武器附魔的攻击力全部为固定值，表中所有异常值均吃感应补正。',
+];
+
+const sorceryNotes = [
+  '黑夜君临 v1.01 魔法基础攻击力表   by: 虚空蛋黄酱',
+  'A+B代表两段伤害，可以打在同一敌人身上；A/B代表两种伤害，不能对同一敌人生效；A×n即为A+A+A+……，代表多段同类伤害重复n次。（本作没有破防率了，可以放心的将攻击力直接相加）',
+  '本作法术攻击力大部分与本体不同，耗蓝与本体相同。法术的攻击力=基础威力*0.6*游戏内显示的法强%，所有异常值全部为固定值。',
+];
+
+const incantationNotes = [
+  '黑夜君临 v1.01 祷告基础攻击力表   by: 虚空蛋黄酱',
+  'A+B代表两段伤害，可以打在同一敌人身上；A/B代表两种伤害，不能对同一敌人生效；A×n即为A+A+A+……，代表多段同类伤害重复n次。（本作没有破防率了，可以放心的将攻击相加比较）',
+  '本作祷告数值有一半左右与本体不同，耗蓝与本体相同。祷告的攻击力=基础威力*0.6*游戏内显示的法强%，所有异常值全部为固定值。',
+];
+
+const supportNotes = [
+  '黑夜君临 v1.01 辅助类法术   by: 虚空蛋黄酱',
+  '本作治疗量或附魔攻击力=基础值*(1+智力或信仰*1.5/99），与触媒完全无关。',
+];
+
 interface DataTableProps {
   columns: ColumnsType<Row>;
   data: Row[];
   title?: string;
   searchPlaceholder: string;
   marginBottom?: number;
+  pagination?: boolean;
+  notes?: string[];
 }
 
 const DataTable: React.FC<DataTableProps> = ({
@@ -34,6 +64,8 @@ const DataTable: React.FC<DataTableProps> = ({
   title,
   searchPlaceholder,
   marginBottom = 24,
+  pagination = true,
+  notes,
 }) => {
   const [keyword, setKeyword] = useState('');
   const [page, setPage] = useState(1);
@@ -64,6 +96,8 @@ const DataTable: React.FC<DataTableProps> = ({
     [filteredData, page, pageSize]
   );
 
+  const visibleData = pagination ? pagedData : filteredData;
+
   return (
     <div style={{ marginBottom }}>
       {title && (
@@ -89,7 +123,7 @@ const DataTable: React.FC<DataTableProps> = ({
       <Table<Row>
         className="weapon-skill-magic-table"
         columns={columns}
-        dataSource={pagedData}
+        dataSource={visibleData}
         rowKey={(_, index) => index ?? 0}
         size="small"
         bordered
@@ -97,16 +131,28 @@ const DataTable: React.FC<DataTableProps> = ({
         pagination={false}
         locale={{ emptyText: '没有匹配的数据' }}
       />
-      <CustomPagination
-        currentPage={page}
-        pageSize={pageSize}
-        totalItems={filteredData.length}
-        onPageChange={setPage}
-        onPageSizeChange={(size) => {
-          setPageSize(size);
-          setPage(1);
-        }}
-      />
+      {pagination && (
+        <CustomPagination
+          currentPage={page}
+          pageSize={pageSize}
+          totalItems={filteredData.length}
+          onPageChange={setPage}
+          onPageSizeChange={(size) => {
+            setPageSize(size);
+            setPage(1);
+          }}
+        />
+      )}
+      {notes && notes.length > 0 && (
+        <div className="weapon-skill-magic-notes">
+          <div className="weapon-skill-magic-notes-title">说明</div>
+          {notes.map((note, index) => (
+            <div key={index} className="weapon-skill-magic-note">
+              {note}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
@@ -158,7 +204,7 @@ const splitCategoryTags = (category: string, suffix: RegExp): string[] =>
     .filter(Boolean);
 
 const renderCategoryTags = (tags: string[]) => (
-  <div style={{ display: 'flex', flexWrap: 'nowrap', gap: 4, whiteSpace: 'nowrap' }}>
+  <div className="weapon-skill-category-tags" style={{ display: 'flex', flexWrap: 'nowrap', gap: 4, whiteSpace: 'nowrap' }}>
     {tags.map(tag => (
       <Tag key={tag} color={tag === NOT_IMPLEMENTED ? 'orange' : (categoryColorMap[tag] || 'blue')}>
         {tag}
@@ -187,7 +233,7 @@ const weaponArtColumns: ColumnsType<Row> = [
     title: '分类',
     dataIndex: '分类',
     key: '分类',
-    width: 150,
+    width: 80,
     render: renderWeaponArtCategory,
   },
   textColumn('战技', '战技', 140),
@@ -208,7 +254,7 @@ const uniqueWeaponArtColumns: ColumnsType<Row> = [
     title: '分类',
     dataIndex: '分类',
     key: '分类',
-    width: 140,
+    width: 70,
     render: renderUniqueCategory,
   },
   textColumn('武器', '武器', 130),
@@ -256,6 +302,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   columns={weaponArtColumns}
                   data={weaponArtRows}
                   searchPlaceholder="搜索战技 / 动作 / 分类 / 备注"
+                  notes={weaponArtNotes}
                 />
               </div>
             ),
@@ -269,6 +316,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   columns={uniqueWeaponArtColumns}
                   data={uniqueWeaponArtRows}
                   searchPlaceholder="搜索武器 / 战技 / 动作 / 备注"
+                  notes={uniqueWeaponArtNotes}
                 />
               </div>
             ),
@@ -282,6 +330,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   columns={spellColumns}
                   data={sorceryRows}
                   searchPlaceholder="搜索魔法 / 伤害类型 / 备注"
+                  notes={sorceryNotes}
                 />
               </div>
             ),
@@ -295,6 +344,7 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   columns={spellColumns}
                   data={incantationRows}
                   searchPlaceholder="搜索祷告 / 伤害类型 / 备注"
+                  notes={incantationNotes}
                 />
               </div>
             ),
@@ -310,6 +360,8 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   data={supportMagicRows}
                   searchPlaceholder="搜索辅助魔法 / 效果 / 备注"
                   marginBottom={24}
+                  pagination={false}
+                  notes={supportNotes}
                 />
                 <DataTable
                   title="辅助祷告"
@@ -317,6 +369,8 @@ const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTa
                   data={supportIncantationRows}
                   searchPlaceholder="搜索辅助祷告 / 效果 / 备注"
                   marginBottom={0}
+                  pagination={false}
+                  notes={supportNotes}
                 />
               </div>
             ),

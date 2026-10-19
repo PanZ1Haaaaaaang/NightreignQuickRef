@@ -1352,3 +1352,38 @@ body[tomato-theme="dark"] .custom-search-wrapper .ant-input {
 .weapon-skill-magic-table .ant-table-tbody > tr > td {
   font-size: 12px;
 }
+
+/* 战技/专用战技分类标签缩小 */
+.weapon-skill-category-tags .ant-tag {
+  margin-inline-end: 0;
+  padding: 0 6px;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+/* 表格末尾的 Excel 表头说明 */
+.weapon-skill-magic-notes {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--color-text-2);
+  font-size: 12px;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+[data-theme="dark"] .weapon-skill-magic-notes,
+body[tomato-theme="dark"] .weapon-skill-magic-notes {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.weapon-skill-magic-notes-title {
+  margin-bottom: 6px;
+  color: var(--color-text-1);
+  font-weight: 600;
+}
+
+.weapon-skill-magic-note + .weapon-skill-magic-note {
+  margin-top: 6px;
+}
