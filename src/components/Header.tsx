@@ -162,7 +162,8 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             • 修正了部分词条与夜王数据，同步{getVersionNumber()}版本；<br />
                             • 添加了DLC角色详细数据；<br />
                             • 添加了武器战技与魔法祷告数据（数据来源 by: 虚空蛋黄酱）；<br />
-                            • 添加了大空洞野生Boss与特殊事件效果；
+                            • 添加了大空洞野生Boss与特殊事件效果；<br />
+                            • 添加了夜王深夜模式的倍率；
                           </div>
                         </div>
 
