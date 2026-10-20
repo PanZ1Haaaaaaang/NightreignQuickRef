@@ -27,6 +27,21 @@ export interface BossData {
   nightreignHealthMultiplier: number | number[] | string;
   /** 永夜王血量列的人数倍率覆盖（默认 [1,2,3]） */
   nightreignPlayerMultipliers?: number[];
+  /**
+   * 深夜模式基础额外血量倍率（深度 1~5，相对当前普通血量）。
+   * DLC 夜王还要再乘 deepNightDlcMultiplier（0.8）。
+   */
+  deepNightHealthMultipliers?: number[];
+  /** 深夜 DLC 归一化系数（0.8），与 deepNightHealthMultipliers 相乘；无 DLC 的行不填 */
+  deepNightDlcMultiplier?: number;
+  /** 深夜原始削韧承受倍率（深度 1~5，0.88~0.84） */
+  deepNightPoiseDamageRate?: number[];
+  /** 深夜 DLC 原始削韧承受倍率（1.136），与 deepNightPoiseDamageRate 相乘 */
+  deepNightDlcPoiseMultiplier?: number;
+  /** 深夜档位说明，如 "4a" */
+  deepNightTier?: string;
+  /** 深夜倍率的额外说明（机制特例、数据来源等） */
+  deepNightNote?: string;
   normalAbsorption: number | string;
   slashAbsorption: number | string;
   strikeAbsorption: number | string;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio, message, Spin } from 'antd';
+import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio, Segmented, message, Spin } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import type { BossData, WildBossData, CharacterData, EntryData } from '../types';
@@ -56,6 +56,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   const [characterSearchKeyword, setCharacterSearchKeyword] = useState('');
   const [selectedCharacterLocations, setSelectedCharacterLocations] = useState<string[]>([]);
   const [playerCount, setPlayerCount] = useState<number>(1); // 添加人数选择状态
+  const [deepNightDepth, setDeepNightDepth] = useState<number>(0); // 0=普通，1~5=深夜深度
   const [activeBossTab, setActiveBossTab] = useState<string>(activeSubTab || 'boss-data');
 
   // 特殊事件相关状态
@@ -380,13 +381,17 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   };
 
   // 计算韧性函数
-  const calculatePoise = (basePoise: number): number => {
+  const calculatePoise = (basePoise: number, record: BossData): number | string => {
     const poiseMultipliers = {
       1: 1,      // 单人
       2: 1.82,   // 双人
       3: 3.33    // 三人
     };
-    return Math.round(basePoise * poiseMultipliers[playerCount as keyof typeof poiseMultipliers]);
+    const scaledPoise = basePoise * poiseMultipliers[playerCount as keyof typeof poiseMultipliers];
+    if (deepNightDepth === 0) return Math.round(scaledPoise);
+    const damageRate = record.deepNightPoiseDamageRate?.[deepNightDepth - 1] ?? 1;
+    const dlcMultiplier = record.deepNightDlcPoiseMultiplier ?? 1;
+    return (scaledPoise / damageRate / dlcMultiplier).toFixed(2);
   };
 
   // 计算抗性函数
@@ -427,8 +432,18 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
 
 
 
+  const getDeepNightHpMultiplier = (record: BossData) => {
+    if (deepNightDepth === 0) return 1;
+    const depthMultiplier = record.deepNightHealthMultipliers?.[deepNightDepth - 1] ?? 1;
+    const dlcMultiplier = record.deepNightDlcMultiplier ?? 1;
+    return depthMultiplier * dlcMultiplier;
+  };
+
   const defaultFooter = () => (
     <div className="footer-text">
+      {deepNightDepth > 0 && (
+        <div>◦ 当前显示深度{deepNightDepth}深夜血量：DLC 夜王已乘深夜 0.8（合体安定者除外）</div>
+      )}
       <div>◦ 普通夜王血量 = 基础血量 × 玩家人数</div>
       <div>◦ 永夜王血量为倍率加成：永夜王血量 = 基础血量 × 永夜王血量加成倍率 × 玩家人数</div>
       <div>◦ 永夜王血量为独立数值：永夜王血量 = 永夜王血量 × 玩家人数</div>
@@ -443,6 +458,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   const resistanceFooter = () => (
     <div className="footer-text">
       <div>◦ 韧性倍率：单人100%，双人182%，三人333%｜ 普通韧性 = 基础韧性 × 韧性倍率 ｜ 永夜王韧性 = 永夜王韧性 × 韧性倍率</div>
+      {deepNightDepth > 0 && (
+        <div>◦ 深夜韧性 = 韧性 × 人数倍率 ÷ 削韧承受倍率（0.88~0.84）；DLC 夜王再 ÷1.136（合体安定者除外）</div>
+      )}
       <div>◦ 抗性(异常耐受上限)倍率：单人100%，双人267%，三人400%｜ 抗性 = 基础抗性 × 抗性倍率</div>
     </div>
   );
@@ -503,7 +521,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       render: (text) => <strong>{text}</strong>,
     },
     {
-      title: `Boss血量(${playerCount}人)`,
+      title: `Boss血量(${playerCount}人${deepNightDepth > 0 ? `·深度${deepNightDepth}` : ''})`,
       children: [
         {
           title: '基础血量',
@@ -525,9 +543,10 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               const players = Array.isArray(record.basePlayerMultipliers) &&
                 typeof record.basePlayerMultipliers[playerCount - 1] === 'number'
                 ? record.basePlayerMultipliers[playerCount - 1] : playerCount;
+              const deepNightScale = getDeepNightHpMultiplier(record);
               return (
                 <span className="health-base">
-                  {Math.round(value * 3.54 * players * scale).toLocaleString()}
+                  {Math.round(value * 3.54 * players * scale * deepNightScale).toLocaleString()}
                   {factors.length ? `(×${factors.join('×')})` : ''}
                 </span>
               );
@@ -559,7 +578,8 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               const players = Array.isArray(record.nightreignPlayerMultipliers) &&
                 typeof record.nightreignPlayerMultipliers[playerCount - 1] === 'number'
                 ? record.nightreignPlayerMultipliers[playerCount - 1] : playerCount;
-              const nightreignHealth = Math.round(record.nightreignHealth * 3.54 * players * scale);
+              const deepNightScale = getDeepNightHpMultiplier(record);
+              const nightreignHealth = Math.round(record.nightreignHealth * 3.54 * players * scale * deepNightScale);
               return (
                 <span className="health-nightreign">
                   {nightreignHealth.toLocaleString()}{factors.length ? `(×${factors.join('×')})` : ''}
@@ -788,7 +808,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       render: (text) => <strong>{text}</strong>,
     },
     {
-      title: `韧性(${playerCount}人)`,
+      title: `韧性(${playerCount}人${deepNightDepth > 0 ? `·深度${deepNightDepth}` : ''})`,
       children: [
         {
           title: '基础韧性',
@@ -796,11 +816,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'basePoise',
           width: 70,
           align: 'center',
-          render: (value) => {
+          render: (value, record) => {
             if (typeof value === 'number') {
               return (
                 <span className="health-base">
-                  {calculatePoise(value)}
+                  {calculatePoise(value, record)}
                 </span>
               );
             }
@@ -817,11 +837,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'nightreignPoise',
           width: 80,
           align: 'center',
-          render: (value) => {
+          render: (value, record) => {
             if (typeof value === 'number') {
               return (
                 <span className="health-nightreign">
-                  {calculatePoise(value)}
+                  {calculatePoise(value, record)}
                 </span>
               );
             }
@@ -1860,7 +1880,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               label: '🌙 夜王基础数据',
               children: (
                 <div id="night-king-basic">
-                  <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
                     <Radio.Group
                       value={playerCount}
                       onChange={(e) => setPlayerCount(e.target.value)}
@@ -1870,6 +1890,22 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                       <Radio.Button value={2}>双人模式</Radio.Button>
                       <Radio.Button value={3}>三人模式</Radio.Button>
                     </Radio.Group>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ color: 'var(--theme-text-secondary, #999)', fontSize: '13px' }}>深夜深度</span>
+                      <Segmented
+                        value={deepNightDepth}
+                        onChange={(value) => setDeepNightDepth(Number(value))}
+                        size="middle"
+                        options={[
+                          { label: '普通', value: 0 },
+                          { label: '深度1', value: 1 },
+                          { label: '深度2', value: 2 },
+                          { label: '深度3', value: 3 },
+                          { label: '深度4', value: 4 },
+                          { label: '深度5', value: 5 },
+                        ]}
+                      />
+                    </div>
                   </div>
                   <Table
                     columns={leftColumns}

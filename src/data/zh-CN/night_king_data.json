@@ -5,6 +5,21 @@
     "baseHealth": 3200,
     "nightreignHealth": 3200,
     "nightreignHealthMultiplier": 1.55,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "normalAbsorption": 1,
     "slashAbsorption": 1,
     "strikeAbsorption": 1,
@@ -29,6 +44,21 @@
     "baseHealth": 3712,
     "nightreignHealth": 3712,
     "nightreignHealthMultiplier": 1.25,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "normalAbsorption": 1,
     "slashAbsorption": 1,
     "strikeAbsorption": 1,
@@ -53,6 +83,21 @@
     "baseHealth": 3680,
     "nightreignHealth": 1840,
     "nightreignHealthMultiplier": 1.2,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "normalAbsorption": 1.15,
     "slashAbsorption": 1.25,
     "strikeAbsorption": 1.15,
@@ -77,6 +122,21 @@
     "baseHealth": 3456,
     "nightreignHealth": 2016,
     "nightreignHealthMultiplier": 1.2,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "normalAbsorption": 0.9,
     "slashAbsorption": 0.8,
     "strikeAbsorption": 1.2,
@@ -101,6 +161,21 @@
     "baseHealth": "-",
     "nightreignHealth": 1498,
     "nightreignHealthMultiplier": 1.2,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "normalAbsorption": 1,
     "slashAbsorption": 1,
     "strikeAbsorption": 1,
@@ -125,6 +200,21 @@
     "baseHealth": 3584,
     "nightreignHealth": 8320,
     "nightreignHealthMultiplier": 1,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "normalAbsorption": 1,
     "slashAbsorption": 1.15,
     "strikeAbsorption": 0.8,
@@ -149,6 +239,21 @@
     "baseHealth": "-",
     "nightreignHealth": 896,
     "nightreignHealthMultiplier": 1,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "normalAbsorption": 1,
     "slashAbsorption": 1.15,
     "strikeAbsorption": 0.8,
@@ -173,6 +278,21 @@
     "baseHealth": 3686,
     "nightreignHealth": 3686,
     "nightreignHealthMultiplier": 1.4,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "normalAbsorption": 1,
     "slashAbsorption": 1.1,
     "strikeAbsorption": 1,
@@ -197,6 +317,21 @@
     "baseHealth": 3360,
     "nightreignHealth": 3360,
     "nightreignHealthMultiplier": 1.4,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "normalAbsorption": 1,
     "slashAbsorption": 1,
     "strikeAbsorption": 1,
@@ -221,6 +356,21 @@
     "baseHealth": 3392,
     "nightreignHealth": 3392,
     "nightreignHealthMultiplier": 1.4,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "normalAbsorption": 1,
     "slashAbsorption": 0.85,
     "strikeAbsorption": 1.15,
@@ -245,6 +395,22 @@
     "baseHealth": 1408,
     "nightreignHealth": "-",
     "nightreignHealthMultiplier": "-",
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a（7760 按同档推定）",
+    "deepNightNote": "75800000 使用 7760；与 7767 同为 Final Boss Threat 3.54×，但映射图未单列 7760",
     "normalAbsorption": 1,
     "slashAbsorption": 1.15,
     "strikeAbsorption": 0.9,
@@ -267,8 +433,25 @@
     "id": 12,
     "name": "\"黑夜王\"布德奇冥",
     "baseHealth": 2880,
+    "baseHealthMultiplier": 1.1,
     "nightreignHealth": "-",
     "nightreignHealthMultiplier": "-",
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
+    "deepNightNote": "75802010 另挂 7352 的 ×1.1；基础血量已按该倍率显示",
     "normalAbsorption": 1,
     "slashAbsorption": 0.9,
     "strikeAbsorption": 1.1,
@@ -294,6 +477,24 @@
     "nightreignHealth": 4000,
     "nightreignHealthMultiplier": 1,
     "dlcMultiplier": 1.25,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightDlcMultiplier": 0.8,
+    "deepNightDlcPoiseMultiplier": 1.136,
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
+    "deepNightNote": "7392 的 ×1.25 与 7397 的 ×0.8 在深夜抵消；4000 = 25 × 160",
     "normalAbsorption": "-",
     "slashAbsorption": "-",
     "strikeAbsorption": "-",
@@ -319,6 +520,23 @@
     "nightreignHealth": 237,
     "nightreignHealthMultiplier": 1,
     "dlcMultiplier": 1.25,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightDlcMultiplier": 0.8,
+    "deepNightDlcPoiseMultiplier": 1.136,
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "nightreignPlayerMultipliers": [
       1,
       1.35,
@@ -350,6 +568,23 @@
     "nightreignHealth": "-",
     "nightreignHealthMultiplier": "-",
     "dlcMultiplier": 1.25,
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightDlcMultiplier": 0.8,
+    "deepNightDlcPoiseMultiplier": 1.136,
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "normalAbsorption": 1,
     "slashAbsorption": 0.92,
     "strikeAbsorption": 1.1,
@@ -379,6 +614,22 @@
       1.75,
       2.5
     ],
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
+    "deepNightNote": "合体形态没有 DLC 倍率（地图工具实测）；普通合体 76209000 为 416 HP / 75 韧性，Everdark 合体 46410010 为 422 HP / 120 韧性",
     "normalAbsorption": 1,
     "slashAbsorption": 1.1,
     "strikeAbsorption": 1,
@@ -404,6 +655,23 @@
     "dlcMultiplier": 1.25,
     "nightreignHealth": "-",
     "nightreignHealthMultiplier": "-",
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightDlcMultiplier": 0.8,
+    "deepNightDlcPoiseMultiplier": 1.136,
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
     "normalAbsorption": 1,
     "slashAbsorption": 1.1,
     "strikeAbsorption": 1,
@@ -429,6 +697,24 @@
     "dlcMultiplier": 1.25,
     "nightreignHealth": "-",
     "nightreignHealthMultiplier": "-",
+    "deepNightHealthMultipliers": [
+      1.25,
+      1.4,
+      1.57,
+      1.95,
+      2.16
+    ],
+    "deepNightDlcMultiplier": 0.8,
+    "deepNightDlcPoiseMultiplier": 1.136,
+    "deepNightPoiseDamageRate": [
+      0.88,
+      0.87,
+      0.86,
+      0.85,
+      0.84
+    ],
+    "deepNightTier": "4a",
+    "deepNightNote": "转阶段只换抗性；HP/韧性与缩放沿用 76100010，76109000 的 3101 HP 是弃用值",
     "normalAbsorption": 0.95,
     "slashAbsorption": 1.05,
     "strikeAbsorption": 0.95,
