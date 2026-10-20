@@ -1,5 +1,6 @@
 import React from 'react';
 import Giscus from '@giscus/react';
+import { SITE_CONFIG } from '../config/siteConfig';
 
 const GiscusComments: React.FC = () => {
     // 检测当前主题
@@ -13,10 +14,10 @@ const GiscusComments: React.FC = () => {
         }}>
             <Giscus
                 id="comments"
-                repo="xxiixi/NightreignQuickRef"
-                repoId="R_kgDOPXY8wA"
-                category="Announcements"
-                categoryId="DIC_kwDOPXY8wM4Cv62K"
+                repo={SITE_CONFIG.giscus.repo}
+                repoId={SITE_CONFIG.giscus.repoId}
+                category={SITE_CONFIG.giscus.category}
+                categoryId={SITE_CONFIG.giscus.categoryId}
                 mapping="pathname"
                 strict="0"
                 reactionsEnabled="1"

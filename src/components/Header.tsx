@@ -5,6 +5,7 @@ import { MoonOutlined, SunOutlined, FireOutlined, ReadOutlined, ArrowRightOutlin
 import { getVersionDisplayText, getVersionNumber } from '../config/versionConfig';
 import { DATA_SOURCE_CONFIG } from '../config/dataSourceConfig';
 import type { DataSourceIcon } from '../config/dataSourceConfig';
+import { SITE_CONFIG } from '../config/siteConfig';
 
 const { Title, Text } = Typography;
 
@@ -89,7 +90,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                   icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-map" viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103M10 1.91l-4-.8v12.98l4 .8zm1 12.98 4-.8V1.11l-4 .8zm-6-.8V1.11l-4 .8v12.98z" />
                   </svg>}
-                  onClick={() => window.open('https://xxiixi.github.io/NightreignMapFilter/', '_blank')}
+                  onClick={() => window.open(SITE_CONFIG.fork.mapFilterUrl, '_blank')}
                   className="theme-toggle-btn"
                 />
               </Tooltip>
@@ -191,19 +192,31 @@ const Header: React.FC<HeaderProps> = React.memo(({
               <Tooltip title="查看本项目" placement="bottom" className="theme-toggle-btn">
                 <Popover
                   content={
-                    <div style={{ padding: '8px', maxWidth: '200px' }}>
+                    <div style={{ padding: '8px', maxWidth: '240px' }}>
                       <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold' }}>
                         <GithubOutlined style={{ marginRight: '4px' }} /> GitHub仓库
                       </div>
-                      <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
-                        <a
-                          href="https://github.com/xxiixi/NightreignQuickRef"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="header-link"
-                        >
-                          NightreignQuickRef
-                        </a>
+                      <div style={{ fontSize: '11px', lineHeight: '1.6' }}>
+                        <div>
+                          <a
+                            href={SITE_CONFIG.fork.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="header-link"
+                          >
+                            本站仓库（{SITE_CONFIG.fork.owner}）
+                          </a>
+                        </div>
+                        <div>
+                          <a
+                            href={SITE_CONFIG.original.repoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="header-link"
+                          >
+                            原项目（{SITE_CONFIG.original.author}）
+                          </a>
+                        </div>
                       </div>
                       <div style={{
                         marginTop: '8px',
@@ -212,7 +225,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                         fontSize: '10px',
                         color: '#999'
                       }}>
-                        🙏 求个Star ⭐️ 感谢支持 🙏
+                        🙏 本站基于原项目修改，欢迎 Star 原项目 ⭐️
                       </div>
                     </div>
                   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Space } from 'antd';
 import { HeartOutlined, GithubOutlined } from '@ant-design/icons';
+import { SITE_CONFIG } from '../config/siteConfig';
 
 const { Text } = Typography;
 
@@ -31,24 +32,43 @@ const Footer: React.FC = React.memo(() => {
           <HeartOutlined style={{ marginRight: '4px', color: '#ff4d4f' }} />
           Created by{' '}
           <a
-            href="https://github.com/xxiixi"
+            href={SITE_CONFIG.original.authorUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="footer-link"
           >
-            Cecilia
+            {SITE_CONFIG.original.author}
           </a>
-          {/* </a> */}
           {' '}｜{' '}
-          <GithubOutlined style={{ marginRight: '4px' }} />
-          Report an issue on{' '}
+          Modified by{' '}
           <a
-            href="https://github.com/xxiixi/NightreignQuickRef/issues"
+            href={SITE_CONFIG.fork.url}
             target="_blank"
             rel="noopener noreferrer"
             className="footer-link"
           >
-            NightreignQuickRef
+            {SITE_CONFIG.fork.owner}
+          </a>
+        </Text>
+        <Text type="secondary" className="footer-text">
+          <GithubOutlined style={{ marginRight: '4px' }} />
+          Based on{' '}
+          <a
+            href={SITE_CONFIG.original.repoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+          >
+            {SITE_CONFIG.original.repoName}
+          </a>
+          {' '}·{' '}
+          <a
+            href={SITE_CONFIG.fork.issuesUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+          >
+            Report an issue
           </a>
         </Text>
         <Text type="secondary" className="footer-text">
