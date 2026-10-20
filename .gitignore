@@ -1,0 +1,46 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build
+dist
+dist-ssr
+*.local
+.vite
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs
+*.njsproj
+*.sln
+*.sw?
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Testing
+coverage
+
+# TypeScript
+*.tsbuildinfo
+
+# 本地核验工具与报告（含本机绝对路径：参考资料 Excel、nginx 部署目录）
+/tools/
+/docs/verify/
+
+# IDE 插件（DirectoryV3）的本地目录/文件标注文件
+/DirectoryV3.xml
