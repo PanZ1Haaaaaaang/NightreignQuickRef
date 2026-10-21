@@ -173,7 +173,15 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             🔧 TODO
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                            • 暂无<br />
+                            • 商人(包括大空洞传说商人）<br />
+                            • 大盾数值<br />
+                            • 异常值说明<br />
+                            • 黑焰烧血效果<br />
+                            • 冲击力说明<br />
+                            • 泪滴转职<br />
+                            • 夜王弱点硬直<br />
+                            • 敌人种族说明<br />
+                            • 仇恨机制
                           </div>
                         </div>
                       </div>
