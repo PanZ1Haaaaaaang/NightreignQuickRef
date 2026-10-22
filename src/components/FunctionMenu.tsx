@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Tooltip, Menu } from 'antd';
 import type { MenuProps } from 'antd';
-import logoImage from '../assets/logo-circle.png';
+import logoImage from '../assets/logo-circle.svg';
 import { getMainNavigationOrder } from '../config/navigationConfig';
 
 interface FunctionMenuProps {
