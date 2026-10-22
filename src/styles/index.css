@@ -1,7 +1,12 @@
 /* 主样式文件 - 导入所有样式模块 */
 
-/* 导入设计系统 */
+/* 导入设计系统（token + 基础样式） */
 @import './design-system.css';
+
+/* antd 覆盖层（纯 .ant-* 选择器）。必须排在组件样式之前：
+   项目里针对具体页面的 .ant-* 定制写在 components.css / 页面样式里，
+   需要靠顺序覆盖这里的基线值。 */
+@import './antd-overrides.css';
 
 /* 导入组件样式 */
 @import './components.css';
@@ -29,54 +34,6 @@ body {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-normal);
   transition: all var(--transition-normal);
-}
-
-/* 特殊元素排除全局动画，使用自定义动画 */
-.ant-table,
-.ant-table *,
-.ant-btn,
-.ant-btn *,
-.ant-input,
-.ant-input *,
-.ant-select,
-.ant-select *,
-.ant-modal,
-.ant-modal *,
-.ant-drawer,
-.ant-drawer *,
-.ant-message,
-.ant-message *,
-.ant-notification,
-.ant-notification * {
-  transition: none;
-}
-
-/* 表格特殊动画 */
-.ant-table {
-  transition:
-    background-color var(--transition-normal),
-    border-color var(--transition-normal);
-}
-
-/* .ant-table-thead > tr > th {
-  transition: background-color var(--transition-normal), 
-              color var(--transition-normal);
-}
-
-.ant-table-tbody > tr > td {
-  transition: background-color var(--transition-normal), 
-              color var(--transition-normal);
-} */
-
-/* 按钮动画 */
-.ant-btn {
-  transition: all var(--transition-normal) !important;
-}
-
-/* 输入框动画 */
-.ant-input,
-.ant-select-selector {
-  transition: all var(--transition-normal) !important;
 }
 
 #root {

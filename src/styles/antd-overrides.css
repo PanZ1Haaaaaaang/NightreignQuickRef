@@ -1,0 +1,185 @@
+/* antd 覆盖层：所有针对 antd 内部类名（.ant-*）的定制规则集中在此。
+   这些规则必须保持全局作用域，不能放进 CSS Modules。
+   来源文件见每组上方的注释。 */
+
+/* ===== from components.css ===== */
+
+/* ===== 表格组件 ===== */
+.ant-table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== from components.css ===== */
+
+.ant-table-thead > tr > th {
+  background: var(--table-header-bg);
+  font-weight: normal !important;
+  border-bottom: 2px solid var(--color-text-2);
+}
+
+/* ===== from components.css ===== */
+
+.ant-table-tbody > tr:hover > td {
+  background-color: var(--table-hover-bg);
+}
+
+/* ===== from components.css ===== */
+
+[data-theme='dark'] .ant-table-tbody > tr:hover > td,
+body[tomato-theme='dark'] .ant-table-tbody > tr:hover > td {
+  background-color: var(--table-hover-bg);
+}
+
+/* ===== from components.css ===== */
+
+.ant-table .ant-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 6px;
+  min-width: 60px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* ===== from components.css ===== */
+
+.ant-table .ant-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== from components.css ===== */
+
+.ant-steps .ant-steps-item-process .ant-steps-item-icon {
+  background-color: var(--color-primary-400) !important;
+  border-color: var(--color-primary-400) !important;
+}
+
+/* ===== from components.css ===== */
+
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon {
+  background-color: var(--color-primary-400) !important;
+  border-color: var(--color-primary-400) !important;
+}
+
+/* ===== from components.css ===== */
+
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon .ant-steps-icon,
+.ant-steps .ant-steps-item-process .ant-steps-item-icon .ant-steps-icon {
+  color: #fff !important;
+}
+
+/* ===== from index.css ===== */
+
+/* 特殊元素排除全局动画，使用自定义动画 */
+.ant-table,
+.ant-table *,
+.ant-btn,
+.ant-btn *,
+.ant-input,
+.ant-input *,
+.ant-select,
+.ant-select *,
+.ant-modal,
+.ant-modal *,
+.ant-drawer,
+.ant-drawer *,
+.ant-message,
+.ant-message *,
+.ant-notification,
+.ant-notification * {
+  transition: none;
+}
+
+/* ===== from index.css ===== */
+
+/* 表格特殊动画 */
+.ant-table {
+  transition:
+    background-color var(--transition-normal),
+    border-color var(--transition-normal);
+}
+
+/* ===== from index.css ===== */
+
+/* .ant-table-thead > tr > th {
+  transition: background-color var(--transition-normal), 
+              color var(--transition-normal);
+}
+
+.ant-table-tbody > tr > td {
+  transition: background-color var(--transition-normal), 
+              color var(--transition-normal);
+} */
+
+/* 按钮动画 */
+.ant-btn {
+  transition: all var(--transition-normal) !important;
+}
+
+/* ===== from index.css ===== */
+
+/* 输入框动画 */
+.ant-input,
+.ant-select-selector {
+  transition: all var(--transition-normal) !important;
+}
+
+/* ===== from bossDataView.css ===== */
+
+/* 表头固定样式 */
+.ant-table-sticky-header {
+  background-color: var(--content-bg);
+  border-bottom: 1px solid var(--theme-border);
+}
+
+/* ===== from bossDataView.css ===== */
+
+.ant-table-sticky-header .ant-table-thead > tr > th {
+  background-color: var(--content-bg);
+  border-bottom: 1px solid var(--theme-border);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* ===== from bossDataView.css ===== */
+
+/* 确保表头在滚动时保持可见 */
+.ant-table-wrapper .ant-table-sticky-header {
+  overflow: visible;
+}
+
+/* ===== from bossDataView.css ===== */
+
+/* 深色模式下的表头样式 */
+body[tomato-theme='dark'] .ant-table-sticky-header {
+  background-color: var(--content-bg);
+}
+
+/* ===== from bossDataView.css ===== */
+
+body[tomato-theme='dark'] .ant-table-sticky-header .ant-table-thead > tr > th {
+  background-color: var(--content-bg);
+  border-bottom-color: var(--theme-border);
+}
+
+/* ===== from gameMechanicsView.css ===== */
+
+/* 数据来源链接样式 - 统一设置Popover中的所有链接 */
+.ant-popover a {
+  color: #1890ff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  margin-left: 4px;
+}
+
+/* ===== from gameMechanicsView.css ===== */
+
+.ant-popover a:hover {
+  color: #40a9ff;
+  text-decoration: underline;
+}
