@@ -2,7 +2,7 @@ import { Typography, Card, Select, Button, Divider, Tag, Empty } from 'antd';
 import { HeartOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import recoverCalculateData from '../data/zh-CN/recover_calculate.json';
-import '../styles/recoveryCalculator.css';
+import styles from '../styles/recoveryCalculator.module.css';
 
 const { Text } = Typography;
 const { Option } = Select;
@@ -264,16 +264,16 @@ const RecoveryCalculator: React.FC = () => {
   };
 
   return (
-    <div className="recovery-calculator">
+    <div className={styles.recoveryCalculator}>
       {/* 左侧：选择区域 */}
-      <div className="selection-area">
+      <div className={styles.selectionArea}>
         {/* 角色选择 */}
-        <div className="character-selection">
-          <div className="character-row">
+        <div className={styles.characterSelection}>
+          <div className={styles.characterRow}>
             <Text strong>选择我的角色:</Text>
             <Select
               placeholder="请选择你的角色"
-              className="character-select"
+              className={styles.characterSelect}
               value={selectedCharacter}
               onChange={setSelectedCharacter}
             >
@@ -285,11 +285,11 @@ const RecoveryCalculator: React.FC = () => {
             </Select>
           </div>
 
-          <div className="character-row">
+          <div className={styles.characterRow}>
             <Text strong>选择队友的角色:</Text>
             <Select
               placeholder="请选择队友的角色"
-              className="character-select"
+              className={styles.characterSelect}
               value={selectedAllyCharacter}
               onChange={setSelectedAllyCharacter}
             >
@@ -303,12 +303,12 @@ const RecoveryCalculator: React.FC = () => {
         </div>
 
         {/* 回血效果选择 - 网格布局，每行两个 */}
-        <div className="effects-selection">
-          <div className="effects-grid">
+        <div className={styles.effectsSelection}>
+          <div className={styles.effectsGrid}>
             {recoverEffects.map((item) => (
               <div
                 key={item.id}
-                className={`effect-card ${selectedEffects.includes(item.id.toString()) ? 'selected' : ''}`}
+                className={`${styles.effectCard} ${selectedEffects.includes(item.id.toString()) ? styles.selected : ''}`}
                 onClick={() => {
                   const newSelected = selectedEffects.includes(item.id.toString())
                     ? selectedEffects.filter((id) => id !== item.id.toString())
@@ -316,11 +316,13 @@ const RecoveryCalculator: React.FC = () => {
                   setSelectedEffects(newSelected);
                 }}
               >
-                <div className={`effect-card-title ${selectedEffects.includes(item.id.toString()) ? 'selected' : ''}`}>
+                <div
+                  className={`${styles.effectCardTitle} ${selectedEffects.includes(item.id.toString()) ? styles.selected : ''}`}
+                >
                   {item.name}
                 </div>
-                <div className="effect-card-description">{item.description}</div>
-                <div className="effect-card-footer">
+                <div className={styles.effectCardDescription}>{item.description}</div>
+                <div className={styles.effectCardFooter}>
                   <Tag
                     color={getCategoryColor(item.category || '')}
                     style={{
@@ -338,9 +340,9 @@ const RecoveryCalculator: React.FC = () => {
         </div>
 
         {/* 备注信息 */}
-        <div className="notes-section">
-          <div className="notes-container">
-            <ol className="notes-list">
+        <div className={styles.notesSection}>
+          <div className={styles.notesContainer}>
+            <ol className={styles.notesList}>
               <li> 角色血量和蓝量均为「15 级」时的数据；初始「红露滴圣杯瓶」回血量为60%。</li>
               <li>
                 「缓慢恢复」情况下「队友」恢复量的计算说明：立即回血(5%) +
@@ -358,25 +360,30 @@ const RecoveryCalculator: React.FC = () => {
 
         {/* 计算按钮 */}
         <div>
-          <Button type="primary" onClick={calculateRecovery} icon={<HeartOutlined />} className="calculate-button">
+          <Button
+            type="primary"
+            onClick={calculateRecovery}
+            icon={<HeartOutlined />}
+            className={styles.calculateButton}
+          >
             计算回血量（喝一口）
           </Button>
         </div>
       </div>
 
       {/* 右侧：数据展示区域 */}
-      <div className="results-area">
+      <div className={styles.resultsArea}>
         {/* 计算步骤 */}
-        <Card size="small" title="计算步骤" className="steps-card">
-          <div className="steps-content">
+        <Card size="small" title="计算步骤" className={styles.stepsCard}>
+          <div className={styles.stepsContent}>
             {calculationResult?.steps ? (
               calculationResult.steps.map((step, index) => (
-                <div key={index} className="step-item">
+                <div key={index} className={styles.stepItem}>
                   {step}
                 </div>
               ))
             ) : (
-              <div className="placeholder">
+              <div className={styles.placeholder}>
                 <Empty description="请点击计算按钮" />
               </div>
             )}
@@ -384,57 +391,57 @@ const RecoveryCalculator: React.FC = () => {
         </Card>
 
         {/* 计算结果 */}
-        <Card size="small" title="计算结果" className="results-card">
-          <div className="results-content">
+        <Card size="small" title="计算结果" className={styles.resultsCard}>
+          <div className={styles.resultsContent}>
             {/* 自身恢复 */}
-            <div className="recovery-section">
-              <Text strong className="recovery-title self">
+            <div className={styles.recoverySection}>
+              <Text strong className={`${styles.recoveryTitle} ${styles.self}`}>
                 自身恢复
               </Text>
               <div>
                 {calculationResult ? (
                   <>
-                    <div className="recovery-item">
+                    <div className={styles.recoveryItem}>
                       <Text>回血量: {calculationResult.selfHealth} 点</Text>
-                      <Text className="recovery-percentage"> ({calculationResult.selfHealthPercent}%)</Text>
+                      <Text className={styles.recoveryPercentage}> ({calculationResult.selfHealthPercent}%)</Text>
                     </div>
                     {calculationResult.selfFocus > 0 && (
-                      <div className="recovery-item">
+                      <div className={styles.recoveryItem}>
                         <Text>回蓝量: {calculationResult.selfFocus} 点</Text>
-                        <Text className="recovery-percentage"> ({calculationResult.selfFocusPercent}%)</Text>
+                        <Text className={styles.recoveryPercentage}> ({calculationResult.selfFocusPercent}%)</Text>
                       </div>
                     )}
                   </>
                 ) : (
-                  <div className="recovery-placeholder">待计算</div>
+                  <div className={styles.recoveryPlaceholder}>待计算</div>
                 )}
               </div>
             </div>
 
             {/* 分隔线 */}
-            <Divider orientation="vertical" className="divider" />
+            <Divider orientation="vertical" className={styles.divider} />
 
             {/* 队友恢复 */}
-            <div className="recovery-section">
-              <Text strong className="recovery-title ally">
+            <div className={styles.recoverySection}>
+              <Text strong className={`${styles.recoveryTitle} ${styles.ally}`}>
                 队友恢复
               </Text>
               <div>
                 {calculationResult ? (
                   <>
-                    <div className="recovery-item">
+                    <div className={styles.recoveryItem}>
                       <Text>回血量: {calculationResult.allyHealth} 点</Text>
-                      <Text className="recovery-percentage"> ({calculationResult.allyHealthPercent}%)</Text>
+                      <Text className={styles.recoveryPercentage}> ({calculationResult.allyHealthPercent}%)</Text>
                     </div>
                     {calculationResult.allyFocus > 0 && (
-                      <div className="recovery-item">
+                      <div className={styles.recoveryItem}>
                         <Text>回蓝量: {calculationResult.allyFocus} 点</Text>
-                        <Text className="recovery-percentage"> ({calculationResult.allyFocusPercent}%)</Text>
+                        <Text className={styles.recoveryPercentage}> ({calculationResult.allyFocusPercent}%)</Text>
                       </div>
                     )}
                   </>
                 ) : (
-                  <div className="recovery-placeholder">待计算</div>
+                  <div className={styles.recoveryPlaceholder}>待计算</div>
                 )}
               </div>
             </div>
