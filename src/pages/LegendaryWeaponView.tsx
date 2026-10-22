@@ -53,7 +53,7 @@ const transformData = (rawData: WeaponCharacter[]) => {
   return Object.entries(weapons).map(([weaponName, characterData], index) => ({
     weapon_id: `LW${String(index + 1).padStart(3, '0')}`,
     weapon_name: weaponName,
-    ...characterData
+    ...characterData,
   }));
 };
 
@@ -62,7 +62,7 @@ const transformEffectData = (rawData: WeaponEffect[]) => {
   return Object.entries(weapons).map(([weaponName, effectData], index) => ({
     weapon_id: `LW${String(index + 1).padStart(3, '0')}`,
     weapon_name: weaponName,
-    ...effectData
+    ...effectData,
   }));
 };
 
@@ -98,23 +98,28 @@ const ColorLegend = () => {
     { range: '低', threshold: 0.25, valueRange: '0 ~ 25%' },
     { range: '较低', threshold: 0.5, valueRange: '25% ~ 50%' },
     { range: '较高', threshold: 0.8, valueRange: '50% ~ 80%' },
-    { range: '高', threshold: 1.0, valueRange: '80% ~ 100%' }
+    { range: '高', threshold: 1.0, valueRange: '80% ~ 100%' },
   ];
 
   return (
-    <div className="color-legend-container" style={{
-      marginBottom: '12px',
-      padding: '12px 16px',
-      backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)',
-      borderRadius: '6px'
-    }}>
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '16px',
-        marginBottom: '8px',
-        flexWrap: 'wrap'
-      }}>
+    <div
+      className="color-legend-container"
+      style={{
+        marginBottom: '12px',
+        padding: '12px 16px',
+        backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)',
+        borderRadius: '6px',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '16px',
+          marginBottom: '8px',
+          flexWrap: 'wrap',
+        }}
+      >
         <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>颜色映射：</span>
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
           {legendItems.map((item, index) => (
@@ -126,8 +131,8 @@ const ColorLegend = () => {
                   borderRadius: '3px',
                   backgroundColor: getBackgroundColor(
                     item.threshold,
-                    [0, 1] // 用0和1模拟范围以便获取对应颜色
-                  )
+                    [0, 1], // 用0和1模拟范围以便获取对应颜色
+                  ),
                 }}
               />
               <span style={{ fontSize: '12px', display: 'flex', gap: '4px' }}>
@@ -139,12 +144,14 @@ const ColorLegend = () => {
         </div>
       </div>
 
-      <div style={{
-        paddingTop: '8px',
-        borderTop: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'}`,
-        fontSize: '12px',
-        color: 'var(--text-secondary)'
-      }}>
+      <div
+        style={{
+          paddingTop: '8px',
+          borderTop: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'}`,
+          fontSize: '12px',
+          color: 'var(--text-secondary)',
+        }}
+      >
         映射原理：按行计算（当前值 - 最小值）/（最大值 - 最小值)，将结果归一化为0-100%范围，数值越高颜色越深。
       </div>
     </div>
@@ -212,14 +219,14 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
       fixed: 'left',
       render: (text) => <span className="legendary-weapon-text-center">{text}</span>,
     },
-    ...characterNames.map(characterName => ({
+    ...characterNames.map((characterName) => ({
       title: characterName,
       dataIndex: characterName,
       key: characterName,
       width: 70,
       align: 'center' as const,
       render: (value: number, record: TransformedWeaponCharacter) => {
-        const rowValues = characterNames.map(name => record[name] as number);
+        const rowValues = characterNames.map((name) => record[name] as number);
         return (
           <div
             className="heatmap-cell legendary-weapon-heatmap-cell"
@@ -232,14 +239,14 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '13px'
+              fontSize: '13px',
             }}
           >
             {value}
           </div>
         );
       },
-    }))
+    })),
   ];
 
   // 武器特效表格列定义
@@ -299,7 +306,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
       key: '削韧',
       width: 150,
       align: 'center' as const,
-    }
+    },
   ];
 
   // 第一个表格内容（包含颜色图例）
@@ -328,9 +335,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
         pagination={false}
         size="small"
         bordered
-        rowClassName={(_record, index) =>
-          index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
-        }
+        rowClassName={(_record, index) => (index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd')}
       />
     </div>
   );
@@ -346,10 +351,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
             setCurrentStep(current);
           }
         }}
-        items={[
-          { title: '全角色传说武器面板' },
-          { title: '传说武器庇佑效果' }
-        ]}
+        items={[{ title: '全角色传说武器面板' }, { title: '传说武器庇佑效果' }]}
       />
     </div>
   );

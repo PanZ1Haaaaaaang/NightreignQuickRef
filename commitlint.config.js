@@ -8,25 +8,9 @@ export default {
     },
   },
   rules: {
-    'type-enum': [
-      2,
-      'always',
-      [
-        'feat',
-        'fix',
-        'docs',
-        'style',
-        'css',
-        'refactor',
-        'perf',
-        'test',
-        'ui',
-        'chore',
-      ],
-    ],
+    'type-enum': [2, 'always', ['feat', 'fix', 'docs', 'style', 'css', 'refactor', 'perf', 'test', 'ui', 'chore']],
     'subject-case': [0], // 允许中文
     'subject-empty': [2, 'never'],
     'type-empty': [2, 'never'],
   },
 };
-

@@ -111,7 +111,7 @@ const damageFilterOptions = [
 ];
 
 const formatDamageType = (value: string) =>
-  value.replace(/[^+＋/\n、,，]+/g, token => {
+  value.replace(/[^+＋/\n、,，]+/g, (token) => {
     const trimmed = token.trim();
     const canonical = DAMAGE_TYPE_ALIASES[trimmed];
     return canonical ? token.replace(trimmed, canonical) : token;
@@ -119,9 +119,9 @@ const formatDamageType = (value: string) =>
 
 const damageTypesOf = (row: Row): string[] => {
   const result = new Set<string>();
-  [row['伤害类型'], row['物理类型']].forEach(value => {
+  [row['伤害类型'], row['物理类型']].forEach((value) => {
     if (!value) return;
-    value.split(/[+＋/\n、,，]+/).forEach(token => {
+    value.split(/[+＋/\n、,，]+/).forEach((token) => {
       const canonical = DAMAGE_TYPE_ALIASES[token.trim()];
       if (canonical) result.add(canonical);
     });
@@ -138,12 +138,12 @@ const categoryTagsOf = (row: Row, kind?: 'weaponArt' | 'unique'): string[] => {
     }
     return raw
       .split(/[、,，/]/)
-      .map(item => item.replace(/战灰$/, '').trim())
+      .map((item) => item.replace(/战灰$/, '').trim())
       .filter(Boolean);
   }
   const tags = raw
     .split(/[、,，/]/)
-    .map(item => item.replace(/类$/, '').trim())
+    .map((item) => item.replace(/类$/, '').trim())
     .filter(Boolean);
   if (row['版本'] === 'DLC') {
     tags.push(NOT_IMPLEMENTED);
@@ -213,24 +213,24 @@ const DataTable: React.FC<DataTableProps> = ({
   const categoryOptions = useMemo(() => {
     if (!skillFilterKind) return [];
     const tags = new Set<string>();
-    data.forEach(row => {
-      categoryTagsOf(row, skillFilterKind).forEach(tag => tags.add(tag));
+    data.forEach((row) => {
+      categoryTagsOf(row, skillFilterKind).forEach((tag) => tags.add(tag));
     });
     return [...tags]
-      .filter(tag => tag !== NOT_IMPLEMENTED || showNotImplemented)
-      .map(tag => ({ value: tag, label: tag }));
+      .filter((tag) => tag !== NOT_IMPLEMENTED || showNotImplemented)
+      .map((tag) => ({ value: tag, label: tag }));
   }, [data, skillFilterKind, showNotImplemented]);
 
   const filteredData = useMemo(() => {
     let rows = data;
 
     if (skillFilterKind) {
-      rows = rows.filter(row => {
+      rows = rows.filter((row) => {
         const tags = categoryTagsOf(row, skillFilterKind);
         if (!showNotImplemented && tags.includes(NOT_IMPLEMENTED)) {
           return false;
         }
-        if (selectedCategories.length > 0 && !tags.some(tag => selectedCategories.includes(tag))) {
+        if (selectedCategories.length > 0 && !tags.some((tag) => selectedCategories.includes(tag))) {
           return false;
         }
         return true;
@@ -238,17 +238,18 @@ const DataTable: React.FC<DataTableProps> = ({
     }
 
     if (damageFilter && selectedDamageTypes.length > 0) {
-      rows = rows.filter(row => {
+      rows = rows.filter((row) => {
         const types = damageTypesOf(row);
-        return types.some(type => selectedDamageTypes.includes(type));
+        return types.some((type) => selectedDamageTypes.includes(type));
       });
     }
 
     const k = keyword.trim().toLowerCase();
     if (!k) return rows;
-    return rows.filter(row =>
-      Object.values(row).some(value => String(value).toLowerCase().includes(k))
-      || damageTypesOf(row).some(type => type.toLowerCase().includes(k))
+    return rows.filter(
+      (row) =>
+        Object.values(row).some((value) => String(value).toLowerCase().includes(k)) ||
+        damageTypesOf(row).some((type) => type.toLowerCase().includes(k)),
     );
   }, [data, damageFilter, keyword, selectedCategories, selectedDamageTypes, showNotImplemented, skillFilterKind]);
 
@@ -266,7 +267,7 @@ const DataTable: React.FC<DataTableProps> = ({
 
   const pagedData = useMemo(
     () => filteredData.slice((page - 1) * pageSize, page * pageSize),
-    [filteredData, page, pageSize]
+    [filteredData, page, pageSize],
   );
 
   const visibleData = pagination ? pagedData : filteredData;
@@ -321,9 +322,7 @@ const DataTable: React.FC<DataTableProps> = ({
       return {
         ...column,
         render: (value: unknown, record: Row, index?: number) => {
-          const content = (originalRender
-            ? originalRender(value, record, index ?? 0)
-            : value) as React.ReactNode;
+          const content = (originalRender ? originalRender(value, record, index ?? 0) : value) as React.ReactNode;
           if (!record[detail.field]) return content;
 
           const expanded = expandedRowKeys.includes(getRowKey(record));
@@ -336,8 +335,8 @@ const DataTable: React.FC<DataTableProps> = ({
                 className="weapon-skill-detail-toggle"
                 onClick={() => {
                   const key = getRowKey(record);
-                  setExpandedRowKeys(prev =>
-                    prev.includes(key) ? prev.filter(item => item !== key) : [...prev, key]
+                  setExpandedRowKeys((prev) =>
+                    prev.includes(key) ? prev.filter((item) => item !== key) : [...prev, key],
                   );
                 }}
               >
@@ -423,7 +422,7 @@ const DataTable: React.FC<DataTableProps> = ({
                 const checked = e.target.checked;
                 setShowNotImplemented(checked);
                 if (!checked) {
-                  setSelectedCategories(prev => prev.filter(tag => tag !== NOT_IMPLEMENTED));
+                  setSelectedCategories((prev) => prev.filter((tag) => tag !== NOT_IMPLEMENTED));
                 }
               }}
             >
@@ -522,30 +521,66 @@ const supportColumns: ColumnsType<Row> = [
 ];
 
 const categoryColorMap: Record<string, string> = {
-  厚重: 'volcano', 锋利: 'cyan', 优质: 'green', 寒冷: 'blue', 无属性: 'default',
-  毒: 'green', 血: 'red', 火焰: 'volcano', 焰术: 'orange', 神圣: 'gold',
-  神秘: 'purple', 雷电: 'geekblue', 魔力: 'magenta',
-  短剑: 'blue', 刺剑: 'blue', 重刺剑: 'blue', 直剑: 'blue', 大剑: 'blue',
-  特大剑: 'blue', 轻大剑: 'blue', 刀: 'cyan', 大刀: 'cyan', 大曲剑: 'cyan',
-  曲剑: 'cyan', 双头剑: 'cyan', 反手剑: 'cyan', 斧: 'volcano', 大斧: 'volcano',
-  槌: 'volcano', 大槌: 'volcano', 特大武器: 'volcano', 矛: 'purple', 大矛: 'purple',
-  戟: 'purple', 镰刀: 'purple', 鞭: 'purple', 连枷: 'purple', 盾: 'gold',
-  火把: 'orange', 弓弩: 'geekblue', 拳头: 'green', 调香瓶: 'magenta',
+  厚重: 'volcano',
+  锋利: 'cyan',
+  优质: 'green',
+  寒冷: 'blue',
+  无属性: 'default',
+  毒: 'green',
+  血: 'red',
+  火焰: 'volcano',
+  焰术: 'orange',
+  神圣: 'gold',
+  神秘: 'purple',
+  雷电: 'geekblue',
+  魔力: 'magenta',
+  短剑: 'blue',
+  刺剑: 'blue',
+  重刺剑: 'blue',
+  直剑: 'blue',
+  大剑: 'blue',
+  特大剑: 'blue',
+  轻大剑: 'blue',
+  刀: 'cyan',
+  大刀: 'cyan',
+  大曲剑: 'cyan',
+  曲剑: 'cyan',
+  双头剑: 'cyan',
+  反手剑: 'cyan',
+  斧: 'volcano',
+  大斧: 'volcano',
+  槌: 'volcano',
+  大槌: 'volcano',
+  特大武器: 'volcano',
+  矛: 'purple',
+  大矛: 'purple',
+  戟: 'purple',
+  镰刀: 'purple',
+  鞭: 'purple',
+  连枷: 'purple',
+  盾: 'gold',
+  火把: 'orange',
+  弓弩: 'geekblue',
+  拳头: 'green',
+  调香瓶: 'magenta',
 };
 
 const splitCategoryTags = (category: string, suffix: RegExp): string[] =>
   category
     .split(/[、,，/]/)
-    .map(item => item.replace(suffix, '').trim())
+    .map((item) => item.replace(suffix, '').trim())
     .filter(Boolean);
 
 const renderCategoryTags = (tags: string[], hints?: Record<string, string>) => (
-  <div className="weapon-skill-category-tags" style={{ display: 'flex', flexWrap: 'nowrap', gap: 4, whiteSpace: 'nowrap' }}>
-    {tags.map(tag => {
+  <div
+    className="weapon-skill-category-tags"
+    style={{ display: 'flex', flexWrap: 'nowrap', gap: 4, whiteSpace: 'nowrap' }}
+  >
+    {tags.map((tag) => {
       const hint = hints?.[tag];
       const tagNode = (
         <Tag
-          color={tag === NOT_IMPLEMENTED ? 'orange' : (categoryColorMap[tag] || 'blue')}
+          color={tag === NOT_IMPLEMENTED ? 'orange' : categoryColorMap[tag] || 'blue'}
           style={hint ? { cursor: 'help' } : undefined}
         >
           {tag}

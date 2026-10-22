@@ -26,17 +26,18 @@ const CustomSearch: React.FC<CustomSearchProps> = ({
   onChange,
   onSearch,
   className = '',
-  allowClear = true
+  allowClear = true,
 }) => {
   const [inputValue, setInputValue] = useState(value);
 
   // 防抖处理搜索
   const debouncedSearch = useMemo(
-    () => debounce((searchValue: string) => {
-      onChange(searchValue);
-      onSearch?.(searchValue);
-    }, 300),
-    [onChange, onSearch]
+    () =>
+      debounce((searchValue: string) => {
+        onChange(searchValue);
+        onSearch?.(searchValue);
+      }, 300),
+    [onChange, onSearch],
   );
 
   // 处理输入变化
@@ -123,7 +124,7 @@ const outsiderTypeOptions = [
   { value: '出击时的道具', label: '出击时的道具' },
   { value: '场地环境', label: '场地环境' },
   { value: '专属遗物', label: '专属遗物' },
-  { value: '武器固有', label: '武器固有' }
+  { value: '武器固有', label: '武器固有' },
 ];
 
 // 深夜模式局外词条类型选项
@@ -154,7 +155,7 @@ const characterOptions = [
   { value: '隐士', label: '隐士' },
   { value: '无赖', label: '无赖' },
   { value: '学者', label: '学者' },
-  { value: '送葬者', label: '送葬者' }
+  { value: '送葬者', label: '送葬者' },
 ];
 
 // 道具效果分类选项
@@ -170,8 +171,6 @@ const itemEffectTypeOptions = [
   { text: '香', value: '香' },
   { text: '油脂', value: '油脂' },
 ];
-
-
 
 // 添加局内词条类型选项
 const inGameTypeOptions = [
@@ -295,10 +294,8 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     itemEffects: [],
     deepNightEntries: [],
     inGameDeepNightEntries: [],
-    loading: true
+    loading: true,
   });
-
-
 
   // 监听外部Tab切换
   useEffect(() => {
@@ -323,12 +320,12 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           itemEffects: dataManager.getItemEffects(),
           deepNightEntries: dataManager.getDeepNightEntries(),
           inGameDeepNightEntries: dataManager.getInGameDeepNightEntries(),
-          loading: false
+          loading: false,
         });
       } catch (error) {
         console.error('Failed to load data:', error);
         message.error('数据加载失败');
-        setData(prev => ({ ...prev, loading: false }));
+        setData((prev) => ({ ...prev, loading: false }));
       }
     };
 
@@ -374,7 +371,14 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   };
 
   // 搜索过滤函数
-  const filterData = (data: EntryData[], searchValue: string, types?: string[], character?: string, inGameTypes?: string[], superposabilityFilters?: string[]) => {
+  const filterData = (
+    data: EntryData[],
+    searchValue: string,
+    types?: string[],
+    character?: string,
+    inGameTypes?: string[],
+    superposabilityFilters?: string[],
+  ) => {
     let filtered = data;
 
     // 类型筛选（「未实装」是标签而不是 entry_type，需要单独匹配）
@@ -383,19 +387,18 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       (list.includes(NOT_IMPLEMENTED_TAG) && (item.tags || []).includes(NOT_IMPLEMENTED_TAG));
 
     if (types && types.length > 0) {
-      filtered = filtered.filter(item => matchesType(item, types));
+      filtered = filtered.filter((item) => matchesType(item, types));
     }
 
     // 局内词条类型筛选
     if (inGameTypes && inGameTypes.length > 0) {
-      filtered = filtered.filter(item => matchesType(item, inGameTypes));
+      filtered = filtered.filter((item) => matchesType(item, inGameTypes));
     }
 
     // 角色筛选
     if (character && character.trim()) {
-      filtered = filtered.filter(item =>
-        item.entry_name?.includes(character) ||
-        item.explanation?.includes(character)
+      filtered = filtered.filter(
+        (item) => item.entry_name?.includes(character) || item.explanation?.includes(character),
       );
     }
 
@@ -403,7 +406,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     if (superposabilityFilters && superposabilityFilters.length > 0) {
       // console.log('Applying superposability filter:', superposabilityFilters);
       // const beforeCount = filtered.length;
-      filtered = filtered.filter(item => {
+      filtered = filtered.filter((item) => {
         const itemSuperposability = item.superposability || '';
         const isIncluded = superposabilityFilters.includes(itemSuperposability);
         if (!isIncluded) {
@@ -417,9 +420,12 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     // 关键词搜索
     if (!searchValue.trim()) return filtered;
 
-    const searchTerms = searchValue.toLowerCase().split(/\s+/).filter(term => term.length > 0);
+    const searchTerms = searchValue
+      .toLowerCase()
+      .split(/\s+/)
+      .filter((term) => term.length > 0);
 
-    return filtered.filter(item => {
+    return filtered.filter((item) => {
       // 搜索字段
       const searchableFields = [
         item.entry_name || '',
@@ -427,13 +433,11 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         item.entry_type || '',
         item.superposability || '',
         item.talisman || '',
-        item.entry_id || ''
-      ].map(field => String(field).toLowerCase());
+        item.entry_id || '',
+      ].map((field) => String(field).toLowerCase());
 
       // 检查所有搜索词是否都在至少一个字段中出现
-      return searchTerms.every(term =>
-        searchableFields.some(field => field.includes(term))
-      );
+      return searchTerms.every((term) => searchableFields.some((field) => field.includes(term)));
     });
   };
 
@@ -443,25 +447,26 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
 
     // 分类筛选
     if (types && types.length > 0) {
-      filtered = filtered.filter(item => types.includes(item.type));
+      filtered = filtered.filter((item) => types.includes(item.type));
     }
 
     // 关键词搜索
     if (!searchValue.trim()) return filtered;
 
-    const searchTerms = searchValue.toLowerCase().split(/\s+/).filter(term => term.length > 0);
+    const searchTerms = searchValue
+      .toLowerCase()
+      .split(/\s+/)
+      .filter((term) => term.length > 0);
 
-    return filtered.filter(item => {
+    return filtered.filter((item) => {
       const searchableFields = [
         item.name || '',
         item.effect || '',
         item.type || '',
-        item.singleGridQty?.toString() || ''
-      ].map(field => String(field).toLowerCase());
+        item.singleGridQty?.toString() || '',
+      ].map((field) => String(field).toLowerCase());
 
-      return searchTerms.every(term =>
-        searchableFields.some(field => field.includes(term))
-      );
+      return searchTerms.every((term) => searchableFields.some((field) => field.includes(term)));
     });
   };
 
@@ -469,7 +474,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const transformEnhancementData = (data: EnhancementCategory[]): EnhancedEnhancementCategory[] => {
     const transformedData: EnhancedEnhancementCategory[] = [];
 
-    data.forEach(item => {
+    data.forEach((item) => {
       Object.entries(item.applicable_scope).forEach(([skillType, skills]) => {
         transformedData.push({
           ...item,
@@ -484,19 +489,15 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
 
   // 词条名称 + 标签：「未实装」归到「词条类型」列，这里只渲染「XX专属遗物」等标签
   const renderEntryName = (name: string | null | undefined, record: EntryData) => {
-    const tags = (record.tags || []).filter(tag => tag !== NOT_IMPLEMENTED_TAG);
+    const tags = (record.tags || []).filter((tag) => tag !== NOT_IMPLEMENTED_TAG);
     // 少数词条名里带 \n（如 7030500「【追踪者】发动绝招后，\n能提升…」），要 pre-wrap 才会换行
     const label = <span style={{ whiteSpace: 'pre-wrap' }}>{name || '-'}</span>;
     if (tags.length === 0) return label;
     return (
       <Space size={4} wrap>
         {label}
-        {tags.map(tag => (
-          <Tag
-            key={tag}
-            color="gold"
-            style={{ marginInlineEnd: 0, fontSize: '11px', lineHeight: '18px' }}
-          >
+        {tags.map((tag) => (
+          <Tag key={tag} color="gold" style={{ marginInlineEnd: 0, fontSize: '11px', lineHeight: '18px' }}>
             {tag}
           </Tag>
         ))}
@@ -514,9 +515,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
 
   // 「未实装」条目默认隐藏，勾选「显示未实装」后才在类型筛选里提供该选项
   const withNotImplemented = (opts: { value: string; label: string }[]) =>
-    showNotImplemented
-      ? [...opts, { value: NOT_IMPLEMENTED_TAG, label: NOT_IMPLEMENTED_TAG }]
-      : opts;
+    showNotImplemented ? [...opts, { value: NOT_IMPLEMENTED_TAG, label: NOT_IMPLEMENTED_TAG }] : opts;
 
   // 局外词条表格列定义
   const outsiderColumns: TableColumnsType<EntryData> = [
@@ -527,7 +526,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       width: '8%',
       align: 'center',
       onCell: () => ({
-        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' }
+        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' },
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -560,20 +559,22 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         if (!text) return '-';
 
         return (
-          <div style={{
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-            lineHeight: '1.6',
-            fontSize: '13px'
-          }}>
+          <div
+            style={{
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+              lineHeight: '1.6',
+              fontSize: '13px',
+            }}
+          >
             {text}
           </div>
         );
       },
       onCell: () => ({
         style: {
-          padding: '12px 8px'
-        }
+          padding: '12px 8px',
+        },
       }),
     },
     {
@@ -590,9 +591,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       key: 'superposability',
       width: '12%',
       align: 'center',
-      render: (text) => text ? (
-        <Tag color={getSuperposabilityColor(text)}>{text}</Tag>
-      ) : '-',
+      render: (text) => (text ? <Tag color={getSuperposabilityColor(text)}>{text}</Tag> : '-'),
       filters: [
         { text: '可叠加', value: '可叠加' },
         { text: '不可叠加', value: '不可叠加' },
@@ -611,7 +610,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       width: '8%',
       align: 'center',
       onCell: () => ({
-        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' }
+        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' },
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -651,20 +650,22 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         if (!text) return '-';
 
         return (
-          <div style={{
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-            lineHeight: '1.6',
-            fontSize: '13px'
-          }}>
+          <div
+            style={{
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+              lineHeight: '1.6',
+              fontSize: '13px',
+            }}
+          >
             {text}
           </div>
         );
       },
       onCell: () => ({
         style: {
-          padding: '12px 8px'
-        }
+          padding: '12px 8px',
+        },
       }),
     },
   ];
@@ -678,7 +679,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       width: '8%',
       align: 'center',
       onCell: () => ({
-        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' }
+        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' },
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -711,20 +712,22 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         if (!text) return '-';
 
         return (
-          <div style={{
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-            lineHeight: '1.6',
-            fontSize: '13px'
-          }}>
+          <div
+            style={{
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+              lineHeight: '1.6',
+              fontSize: '13px',
+            }}
+          >
             {text}
           </div>
         );
       },
       onCell: () => ({
         style: {
-          padding: '12px 8px'
-        }
+          padding: '12px 8px',
+        },
       }),
     },
     {
@@ -741,9 +744,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       key: 'superposability',
       width: '12%',
       align: 'center',
-      render: (text) => text ? (
-        <Tag color={getSuperposabilityColor(text)}>{text}</Tag>
-      ) : '-',
+      render: (text) => (text ? <Tag color={getSuperposabilityColor(text)}>{text}</Tag> : '-'),
       filters: [
         { text: '可叠加', value: '可叠加' },
         { text: '不可叠加', value: '不可叠加' },
@@ -764,7 +765,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       width: '8%',
       align: 'center',
       onCell: () => ({
-        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' }
+        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' },
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -797,20 +798,22 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         if (!text) return '-';
 
         return (
-          <div style={{
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-            lineHeight: '1.6',
-            fontSize: '13px'
-          }}>
+          <div
+            style={{
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+              lineHeight: '1.6',
+              fontSize: '13px',
+            }}
+          >
             {text}
           </div>
         );
       },
       onCell: () => ({
         style: {
-          padding: '12px 8px'
-        }
+          padding: '12px 8px',
+        },
       }),
     },
     {
@@ -827,9 +830,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       key: 'superposability',
       width: '12%',
       align: 'center',
-      render: (text) => text ? (
-        <Tag color={getSuperposabilityColor(text)}>{text}</Tag>
-      ) : '-',
+      render: (text) => (text ? <Tag color={getSuperposabilityColor(text)}>{text}</Tag> : '-'),
       filters: [
         { text: '可叠加', value: '可叠加' },
         { text: '不可叠加', value: '不可叠加' },
@@ -838,7 +839,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       filteredValue: filteredInfo.superposability || null,
     },
   ];
-
 
   // 道具效果表格列定义
   const itemEffectColumns: TableColumnsType<ItemEffect> = [
@@ -862,9 +862,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       key: 'type',
       width: '10%',
       align: 'center',
-      render: (text) => text ? (
-        <Tag color={getTypeColor(text)}>{text}</Tag>
-      ) : '-',
+      render: (text) => (text ? <Tag color={getTypeColor(text)}>{text}</Tag> : '-'),
       sorter: (a, b) => {
         const typeA = a.type || '';
         const typeB = b.type || '';
@@ -890,19 +888,19 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     },
   ];
 
-
-
   // 创建强化类别表格列定义
-  const createEnhancementColumns = (paginatedData: EnhancedEnhancementCategory[]): TableColumnsType<EnhancedEnhancementCategory> => {
+  const createEnhancementColumns = (
+    paginatedData: EnhancedEnhancementCategory[],
+  ): TableColumnsType<EnhancedEnhancementCategory> => {
     // 计算rowSpan信息
     const rowSpanInfo = new Map<string, { firstIndex: number; count: number }>();
 
     paginatedData.forEach((item, index) => {
       if (!rowSpanInfo.has(item.category)) {
-        const categoryRows = paginatedData.filter(row => row.category === item.category);
+        const categoryRows = paginatedData.filter((row) => row.category === item.category);
         rowSpanInfo.set(item.category, {
           firstIndex: index,
-          count: categoryRows.length
+          count: categoryRows.length,
         });
       }
     });
@@ -952,11 +950,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
             }
           };
 
-          return (
-            <Tag color={getSkillTypeColor(record.skillType)}>
-              {record.skillType}
-            </Tag>
-          );
+          return <Tag color={getSkillTypeColor(record.skillType)}>{record.skillType}</Tag>;
         },
       },
       {
@@ -1004,28 +998,49 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       case '局外词条':
         tableData = data.outsiderEntries;
         columns = outsiderColumns;
-        tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
+        tableData = filterData(
+          tableData,
+          searchKeyword,
+          selectedTypes,
+          selectedCharacter,
+          undefined,
+          filteredInfo.superposability as string[],
+        );
         // 默认隐藏未实装词条，勾选「显示未实装」后才展示
         if (!showNotImplemented) {
-          tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+          tableData = tableData.filter((item) => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
         }
         break;
       case '深夜模式局外词条':
         tableData = data.deepNightEntries;
         columns = deepNightColumns;
-        tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
+        tableData = filterData(
+          tableData,
+          searchKeyword,
+          selectedTypes,
+          selectedCharacter,
+          undefined,
+          filteredInfo.superposability as string[],
+        );
         // 默认隐藏未实装词条，勾选「显示未实装」后才展示
         if (!showNotImplemented) {
-          tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+          tableData = tableData.filter((item) => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
         }
         break;
       case '深夜模式局内词条':
         tableData = data.inGameDeepNightEntries;
         columns = inGameColumns; // 复用局内词条的列定义
-        tableData = filterData(tableData, searchKeyword, selectedInGameTypes, undefined, undefined, filteredInfo.superposability as string[]);
+        tableData = filterData(
+          tableData,
+          searchKeyword,
+          selectedInGameTypes,
+          undefined,
+          undefined,
+          filteredInfo.superposability as string[],
+        );
         // 默认隐藏未实装词条，勾选「显示未实装」后才展示
         if (!showNotImplemented) {
-          tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+          tableData = tableData.filter((item) => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
         }
         break;
       case '护符词条':
@@ -1036,22 +1051,43 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       case '局内词条':
         tableData = data.inGameEntries;
         columns = inGameColumns;
-        tableData = filterData(tableData, searchKeyword, selectedInGameTypes, undefined, undefined, filteredInfo.superposability as string[]);
+        tableData = filterData(
+          tableData,
+          searchKeyword,
+          selectedInGameTypes,
+          undefined,
+          undefined,
+          filteredInfo.superposability as string[],
+        );
         // 默认隐藏未实装词条，勾选「显示未实装」后才展示
         if (!showNotImplemented) {
-          tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+          tableData = tableData.filter((item) => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
         }
         break;
       case '潜在能力':
         // 这 43 条都是已实装词条，没有「显示未实装」开关，也不需要隐藏逻辑
         tableData = data.inGamePotentialEntries;
         columns = inGameColumns;
-        tableData = filterData(tableData, searchKeyword, selectedInGameTypes, undefined, undefined, filteredInfo.superposability as string[]);
+        tableData = filterData(
+          tableData,
+          searchKeyword,
+          selectedInGameTypes,
+          undefined,
+          undefined,
+          filteredInfo.superposability as string[],
+        );
         break;
       default:
         tableData = data.outsiderEntries;
         columns = outsiderColumns;
-        tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
+        tableData = filterData(
+          tableData,
+          searchKeyword,
+          selectedTypes,
+          selectedCharacter,
+          undefined,
+          filteredInfo.superposability as string[],
+        );
     }
 
     // 分页处理
@@ -1084,7 +1120,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
             loading={data.loading}
           />
         )}
-
       </div>
     );
   };
@@ -1144,9 +1179,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
 
     // 道具效果表格 footer
     const itemEffectFooter = () => (
-      <div className="footer-text">
-        表内所有攻击力、异常值全部为固定值，不随等级成长，不吃任何补正。
-      </div>
+      <div className="footer-text">表内所有攻击力、异常值全部为固定值，不随等级成长，不吃任何补正。</div>
     );
 
     return (
@@ -1224,7 +1257,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   setCurrentPage(1);
                 }}
                 options={itemEffectTypeOptions}
-                maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+                maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
               />
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
@@ -1264,7 +1297,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   setCurrentPage(1);
                 }}
                 options={withNotImplemented(outsiderTypeOptions)}
-                maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+                maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
               />
               <Select
                 className="character-select"
@@ -1292,8 +1325,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 清除所有
               </Button>
             </div>
-
-
           </div>
         </div>
       );
@@ -1326,7 +1357,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   setCurrentPage(1);
                 }}
                 options={withNotImplemented(deepNightTypeOptions)}
-                maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+                maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
               />
               <Select
                 className="character-select"
@@ -1386,7 +1417,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   setCurrentPage(1);
                 }}
                 options={withNotImplemented(inGameDeepNightTypeOptions)}
-                maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+                maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
               />
               <Checkbox
                 checked={showNotImplemented}
@@ -1434,7 +1465,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                     setCurrentPage(1);
                   }}
                   options={tabKey === '潜在能力' ? potentialAbilityTypeOptions : withNotImplemented(inGameTypeOptions)}
-                  maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+                  maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
                 />
               )}
               {/* 「潜在能力」这 43 条都是已实装词条，不提供「显示未实装」开关 */}
@@ -1453,8 +1484,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 清除所有
               </Button>
             </div>
-
-
           </div>
         </div>
       );
@@ -1569,4 +1598,4 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   );
 };
 
-export default EntryDetailView; 
+export default EntryDetailView;

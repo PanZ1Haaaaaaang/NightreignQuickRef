@@ -43,8 +43,8 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         { key: '游戏时间机制: 监牢/夜雨', label: '🌧️ 游戏时间机制: 监牢/夜雨', anchorId: 'prison-rain-mechanism' },
         { key: '深夜模式评分规则', label: '🌌 深夜模式评分规则', anchorId: 'deep-night-rating-rules' },
         { key: '血量恢复计算器', label: '❤️ 血量恢复计算器', anchorId: 'recovery-calculator' },
-        { key: '评论与讨论', label: '💬 评论与讨论', anchorId: 'comments-discussion' }
-      ]
+        { key: '评论与讨论', label: '💬 评论与讨论', anchorId: 'comments-discussion' },
+      ],
     },
     {
       key: '角色数据',
@@ -53,8 +53,8 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         { key: '角色属性数据', label: '📊 角色基础属性对比', anchorId: 'character-attributes' },
         { key: '角色详细数据', label: '📈 角色等级成长数据', anchorId: 'character-detail-data' },
         { key: '无敌帧长度对比', label: '⚡ 翻滚/闪避无敌帧对比', anchorId: 'dodge-frames' },
-        { key: '隐士出招表', label: '🔮 隐士混合魔法出招表', anchorId: 'hermit-magic-list' }
-      ]
+        { key: '隐士出招表', label: '🔮 隐士混合魔法出招表', anchorId: 'hermit-magic-list' },
+      ],
     },
     {
       key: '词条详细数据',
@@ -64,11 +64,26 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         { key: '局内词条', label: '🌖 局内词条', anchorId: 'in-game-entries', tabKey: '局内词条' },
         { key: '潜在能力', label: '🌖 局内-潜在能力', anchorId: 'in-game-potential-entries', tabKey: '潜在能力' },
         { key: '护符词条', label: '🌗 护符词条', anchorId: 'talisman-entries', tabKey: '护符词条' },
-        { key: '强化类别词条适用范围', label: '🌘 强化类别词条适用范围', anchorId: 'enhancement-categories', tabKey: '强化类别词条适用范围' },
+        {
+          key: '强化类别词条适用范围',
+          label: '🌘 强化类别词条适用范围',
+          anchorId: 'enhancement-categories',
+          tabKey: '强化类别词条适用范围',
+        },
         { key: '道具/采集效果', label: '🌒 道具/采集效果', anchorId: 'item-effects', tabKey: '道具效果' },
-        { key: '深夜模式-局外词条', label: '🌌 深夜模式-局外词条', anchorId: 'deep-night-entries', tabKey: '深夜模式局外词条' },
-        { key: '深夜模式-局内词条', label: '🌌 深夜模式-局内词条', anchorId: 'deep-night-in-game-entries', tabKey: '深夜模式局内词条' },
-      ]
+        {
+          key: '深夜模式-局外词条',
+          label: '🌌 深夜模式-局外词条',
+          anchorId: 'deep-night-entries',
+          tabKey: '深夜模式局外词条',
+        },
+        {
+          key: '深夜模式-局内词条',
+          label: '🌌 深夜模式-局内词条',
+          anchorId: 'deep-night-in-game-entries',
+          tabKey: '深夜模式局内词条',
+        },
+      ],
     },
     {
       key: '夜王Boss数据',
@@ -76,19 +91,44 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
       children: [
         { key: '夜王基础数据', label: '🌙 夜王基础数据', anchorId: 'night-king-basic', tabKey: 'boss-data' },
         { key: '野生Boss数据', label: '☠️ 野生Boss数据', anchorId: 'wild-boss-data', tabKey: 'wild-boss-data' },
-        { key: '圆桌厅堂人物数据', label: '🏛️ 圆桌厅堂人物数据', anchorId: 'roundtable-characters', tabKey: 'character-data' },
-        { key: '永夜山羊召唤罪人详情', label: '🐐 永夜山羊召唤罪人详情', anchorId: 'sinner-details', tabKey: 'sinner-data' },
-        { key: '利普拉的交易选项', label: '⚖️ 利普拉的交易(Boss战)', anchorId: 'lipula-trades', tabKey: 'lipula-trades' },
-        { key: '特殊事件及地形效果', label: '🌋 特殊事件及地形效果', anchorId: 'special-events', tabKey: 'special-events' }
-      ]
+        {
+          key: '圆桌厅堂人物数据',
+          label: '🏛️ 圆桌厅堂人物数据',
+          anchorId: 'roundtable-characters',
+          tabKey: 'character-data',
+        },
+        {
+          key: '永夜山羊召唤罪人详情',
+          label: '🐐 永夜山羊召唤罪人详情',
+          anchorId: 'sinner-details',
+          tabKey: 'sinner-data',
+        },
+        {
+          key: '利普拉的交易选项',
+          label: '⚖️ 利普拉的交易(Boss战)',
+          anchorId: 'lipula-trades',
+          tabKey: 'lipula-trades',
+        },
+        {
+          key: '特殊事件及地形效果',
+          label: '🌋 特殊事件及地形效果',
+          anchorId: 'special-events',
+          tabKey: 'special-events',
+        },
+      ],
     },
     {
       key: '传说武器详情',
       label: '⚔️ 传说武器详情',
       children: [
-        { key: '传说武器强度面板', label: '🛡️ 不同角色使用传说武器的强度面板', anchorId: 'weapon-strength-panel', stepIndex: 0 },
-        { key: '武器庇佑效果', label: '🗡️ 传说武器的庇佑效果', anchorId: 'weapon-blessing-effects', stepIndex: 1 }
-      ]
+        {
+          key: '传说武器强度面板',
+          label: '🛡️ 不同角色使用传说武器的强度面板',
+          anchorId: 'weapon-strength-panel',
+          stepIndex: 0,
+        },
+        { key: '武器庇佑效果', label: '🗡️ 传说武器的庇佑效果', anchorId: 'weapon-blessing-effects', stepIndex: 1 },
+      ],
     },
     {
       key: '武器战技与魔法祷告',
@@ -99,21 +139,21 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         { key: '魔法', label: '🔮 魔法', anchorId: 'sorceries', tabKey: '魔法' },
         { key: '祷告', label: '🙏 祷告', anchorId: 'incantations', tabKey: '祷告' },
         { key: '辅助类', label: '✨ 辅助类', anchorId: 'support-skills', tabKey: '辅助类' },
-      ]
+      ],
     },
   ];
 
   // 创建映射对象存储每个菜单项的自定义属性
   const menuItemMetadata = new Map<string, MenuItemMetadata>();
-  
-  menuItems.forEach(item => {
+
+  menuItems.forEach((item) => {
     if (item.children) {
-      item.children.forEach(child => {
+      item.children.forEach((child) => {
         menuItemMetadata.set(child.key, {
           anchorId: child.anchorId,
           tabKey: child.tabKey,
           stepIndex: child.stepIndex,
-          parentKey: item.key
+          parentKey: item.key,
         });
       });
     }
@@ -127,8 +167,8 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
       key: cleanedItem.key,
       label: cleanedItem.label,
       ...(cleanedItem.children && {
-        children: cleanedItem.children.map(cleanMenuItem)
-      })
+        children: cleanedItem.children.map(cleanMenuItem),
+      }),
     };
     return result;
   };
@@ -136,15 +176,17 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
   // 根据配置文件中的顺序重新排列菜单项
   const getOrderedMenuItems = (): MenuItemType[] => {
     const order = getMainNavigationOrder();
-    return order.map(key => {
-      const item = menuItems.find(item => item.key === key);
-      return item ? cleanMenuItem(item) : null;
-    }).filter((item): item is MenuItemType => item !== null);
+    return order
+      .map((key) => {
+        const item = menuItems.find((item) => item.key === key);
+        return item ? cleanMenuItem(item) : null;
+      })
+      .filter((item): item is MenuItemType => item !== null);
   };
 
   const handleMenuClick = ({ key }: { key: string }) => {
     // 检查是否是主菜单项
-    const mainMenuItem = menuItems.find(item => item.key === key);
+    const mainMenuItem = menuItems.find((item) => item.key === key);
     if (mainMenuItem) {
       // 切换到对应的功能页面
       onTabChange(key);
@@ -175,7 +217,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
             if (element) {
               element.scrollIntoView({
                 behavior: 'smooth',
-                block: 'start'
+                block: 'start',
               });
             }
           }
@@ -187,8 +229,6 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
   const handleOpenChange = (keys: string[]) => {
     setOpenKeys(keys);
   };
-
-
 
   return (
     <div className="fixed-logo">
@@ -203,7 +243,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
             height: 'clamp(30px, 5vw, 50px)',
             borderRadius: '50%',
             objectFit: 'cover',
-            transition: 'transform 0.3s ease'
+            transition: 'transform 0.3s ease',
           }}
         />
       </Tooltip>
@@ -225,7 +265,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
             maxWidth: 'clamp(250px, 30vw, 350px)',
             maxHeight: 'calc(100vh - clamp(120px, 15vh, 180px))',
             overflowY: 'auto',
-            overflowX: 'hidden'
+            overflowX: 'hidden',
           }}
         >
           <Menu
@@ -236,7 +276,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
             onOpenChange={handleOpenChange}
             style={{
               border: 'none',
-              backgroundColor: 'transparent'
+              backgroundColor: 'transparent',
             }}
             className="function-menu"
           />
@@ -252,15 +292,13 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
             left: 0,
             right: 0,
             bottom: 0,
-            zIndex: 1030
+            zIndex: 1030,
           }}
           onClick={() => setMenuVisible(false)}
         />
       )}
-
-
     </div>
   );
 };
 
-export default FunctionMenu; 
+export default FunctionMenu;

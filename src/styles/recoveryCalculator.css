@@ -273,108 +273,108 @@
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .recovery-calculator .effects-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .recovery-calculator .character-select {
     width: 100%;
   }
-  
+
   .recovery-calculator .divider {
     display: none;
   }
 }
 
 /* 黑暗模式适配 */
-[data-theme="dark"] .recovery-calculator .effect-card,
-body[tomato-theme="dark"] .recovery-calculator .effect-card {
+[data-theme='dark'] .recovery-calculator .effect-card,
+body[tomato-theme='dark'] .recovery-calculator .effect-card {
   background-color: var(--theme-bg-primary);
   border-color: var(--theme-border);
 }
 
-[data-theme="dark"] .recovery-calculator .effect-card:hover,
-body[tomato-theme="dark"] .recovery-calculator .effect-card:hover {
+[data-theme='dark'] .recovery-calculator .effect-card:hover,
+body[tomato-theme='dark'] .recovery-calculator .effect-card:hover {
   border-color: var(--color-primary-400);
   box-shadow: var(--shadow-md);
 }
 
-[data-theme="dark"] .recovery-calculator .effect-card.selected,
-body[tomato-theme="dark"] .recovery-calculator .effect-card.selected {
+[data-theme='dark'] .recovery-calculator .effect-card.selected,
+body[tomato-theme='dark'] .recovery-calculator .effect-card.selected {
   background-color: rgba(24, 144, 255, 0.2);
   border-color: var(--color-primary-500);
   box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3);
 }
 
-[data-theme="dark"] .recovery-calculator .effect-card-title,
-body[tomato-theme="dark"] .recovery-calculator .effect-card-title {
+[data-theme='dark'] .recovery-calculator .effect-card-title,
+body[tomato-theme='dark'] .recovery-calculator .effect-card-title {
   color: var(--theme-text-primary);
 }
 
-[data-theme="dark"] .recovery-calculator .effect-card-title.selected,
-body[tomato-theme="dark"] .recovery-calculator .effect-card-title.selected {
+[data-theme='dark'] .recovery-calculator .effect-card-title.selected,
+body[tomato-theme='dark'] .recovery-calculator .effect-card-title.selected {
   color: #85a5ff !important;
   font-weight: bold !important;
 }
 
-[data-theme="dark"] .recovery-calculator .effect-card-description,
-body[tomato-theme="dark"] .recovery-calculator .effect-card-description {
+[data-theme='dark'] .recovery-calculator .effect-card-description,
+body[tomato-theme='dark'] .recovery-calculator .effect-card-description {
   color: var(--theme-text-secondary);
 }
 
-[data-theme="dark"] .recovery-calculator .notes-container,
-body[tomato-theme="dark"] .recovery-calculator .notes-container {
+[data-theme='dark'] .recovery-calculator .notes-container,
+body[tomato-theme='dark'] .recovery-calculator .notes-container {
   background-color: var(--theme-bg-secondary);
   border-color: var(--theme-border);
 }
 
-[data-theme="dark"] .recovery-calculator .notes-list,
-body[tomato-theme="dark"] .recovery-calculator .notes-list {
+[data-theme='dark'] .recovery-calculator .notes-list,
+body[tomato-theme='dark'] .recovery-calculator .notes-list {
   color: var(--theme-text-secondary);
 }
 
-[data-theme="dark"] .recovery-calculator .steps-content,
-body[tomato-theme="dark"] .recovery-calculator .steps-content {
+[data-theme='dark'] .recovery-calculator .steps-content,
+body[tomato-theme='dark'] .recovery-calculator .steps-content {
   background-color: var(--theme-bg-tertiary);
 }
 
-[data-theme="dark"] .recovery-calculator .steps-content .step-item,
-body[tomato-theme="dark"] .recovery-calculator .steps-content .step-item {
+[data-theme='dark'] .recovery-calculator .steps-content .step-item,
+body[tomato-theme='dark'] .recovery-calculator .steps-content .step-item {
   color: var(--theme-text-primary);
 }
 
-[data-theme="dark"] .recovery-calculator .steps-content .placeholder,
-body[tomato-theme="dark"] .recovery-calculator .steps-content .placeholder {
+[data-theme='dark'] .recovery-calculator .steps-content .placeholder,
+body[tomato-theme='dark'] .recovery-calculator .steps-content .placeholder {
   color: var(--theme-text-tertiary);
 }
 
-[data-theme="dark"] .recovery-calculator .recovery-placeholder,
-body[tomato-theme="dark"] .recovery-calculator .recovery-placeholder {
+[data-theme='dark'] .recovery-calculator .recovery-placeholder,
+body[tomato-theme='dark'] .recovery-calculator .recovery-placeholder {
   color: var(--theme-text-tertiary);
 }
 
-[data-theme="dark"] .recovery-calculator .recovery-percentage,
-body[tomato-theme="dark"] .recovery-calculator .recovery-percentage {
+[data-theme='dark'] .recovery-calculator .recovery-percentage,
+body[tomato-theme='dark'] .recovery-calculator .recovery-percentage {
   color: var(--theme-text-secondary);
 }
 
 /* 黑暗模式下的计算按钮样式 */
-[data-theme="dark"] .recovery-calculator .calculate-button,
-body[tomato-theme="dark"] .recovery-calculator .calculate-button {
+[data-theme='dark'] .recovery-calculator .calculate-button,
+body[tomato-theme='dark'] .recovery-calculator .calculate-button {
   background-color: var(--color-primary-500);
   border-color: var(--color-primary-500);
   color: white;
 }
 
-[data-theme="dark"] .recovery-calculator .calculate-button:hover,
-body[tomato-theme="dark"] .recovery-calculator .calculate-button:hover {
+[data-theme='dark'] .recovery-calculator .calculate-button:hover,
+body[tomato-theme='dark'] .recovery-calculator .calculate-button:hover {
   background-color: var(--color-primary-600);
   border-color: var(--color-primary-600);
 }
 
-[data-theme="dark"] .recovery-calculator .calculate-button:active,
-body[tomato-theme="dark"] .recovery-calculator .calculate-button:active {
+[data-theme='dark'] .recovery-calculator .calculate-button:active,
+body[tomato-theme='dark'] .recovery-calculator .calculate-button:active {
   background-color: var(--color-primary-500);
   border-color: var(--color-primary-500);
 }

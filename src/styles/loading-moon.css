@@ -5,7 +5,8 @@
   height: 100px;
 }
 
-.loader:before , .loader:after{
+.loader:before,
+.loader:after {
   content: '';
   border-radius: 50%;
   position: absolute;
@@ -18,8 +19,12 @@
 }
 
 @keyframes rotate {
-  0% {  transform: rotate(0)}
-  100% { transform: rotate(360deg)}
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* 移动端基础适配 - 简化版 */
@@ -28,4 +33,4 @@
     width: 80px;
     height: 80px;
   }
-} 
+}

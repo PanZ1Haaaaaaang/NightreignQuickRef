@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { Typography, Timeline, Table, Alert, Steps, Progress, Statistic } from 'antd';
-import { CheckCircleTwoTone, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, LockOutlined, MoneyCollectTwoTone, PauseCircleTwoTone, ThunderboltTwoTone, CloudOutlined, PlayCircleTwoTone, MessageOutlined, TrophyTwoTone } from '@ant-design/icons';
+import {
+  CheckCircleTwoTone,
+  ClockCircleTwoTone,
+  FireTwoTone,
+  HeartTwoTone,
+  LockOutlined,
+  MoneyCollectTwoTone,
+  PauseCircleTwoTone,
+  ThunderboltTwoTone,
+  CloudOutlined,
+  PlayCircleTwoTone,
+  MessageOutlined,
+  TrophyTwoTone,
+} from '@ant-design/icons';
 import RecoveryCalculator from '../components/RecoveryCalculator';
 import DataSourceTooltip from '../components/DataSourceTooltip';
 import GiscusComments from '../components/GiscusComments';
@@ -16,13 +29,20 @@ const CircleShrinkEffect: React.FC<{ currentStep: number }> = ({ currentStep }) 
   // 根据时间点计算圈的大小
   const getCircleSize = (step: number) => {
     switch (step) {
-      case 0: return 100;
-      case 1: return 60;
-      case 2: return 60;  // 第一次缩圈结束
-      case 3: return 20;  // 第二次缩圈开始
-      case 4: return 20;  // 第二次缩圈结束
-      case 5: return 20;
-      default: return 100;
+      case 0:
+        return 100;
+      case 1:
+        return 60;
+      case 2:
+        return 60; // 第一次缩圈结束
+      case 3:
+        return 20; // 第二次缩圈开始
+      case 4:
+        return 20; // 第二次缩圈结束
+      case 5:
+        return 20;
+      default:
+        return 100;
     }
   };
 
@@ -60,9 +80,12 @@ const CircleShrinkEffect: React.FC<{ currentStep: number }> = ({ currentStep }) 
 
   const getPreviousSize = (step: number) => {
     switch (step) {
-      case 1: return 100;
-      case 3: return 60;
-      default: return currentSize;
+      case 1:
+        return 100;
+      case 3:
+        return 60;
+      default:
+        return currentSize;
     }
   };
 
@@ -79,7 +102,9 @@ const CircleShrinkEffect: React.FC<{ currentStep: number }> = ({ currentStep }) 
     <div className="circle-shrink-container">
       <div className="circle-shrink-wrapper">
         {/* 外圈 - 固定大小 */}
-        <div className={`circle-outer ${isFirstShrinkCompletedPhase ? 'circle-outer-faded' : ''} ${isSecondShrinkStartPhase ? 'circle-outer-second-shrink' : ''}`} />
+        <div
+          className={`circle-outer ${isFirstShrinkCompletedPhase ? 'circle-outer-faded' : ''} ${isSecondShrinkStartPhase ? 'circle-outer-second-shrink' : ''}`}
+        />
 
         {/* 内圈 - 根据时间点动态变化 */}
         <div
@@ -87,7 +112,7 @@ const CircleShrinkEffect: React.FC<{ currentStep: number }> = ({ currentStep }) 
           style={{
             width: `${currentSize}%`,
             height: `${currentSize}%`,
-            transition: 'all 0.8s ease-in-out'
+            transition: 'all 0.8s ease-in-out',
           }}
         />
 
@@ -104,9 +129,7 @@ const CircleShrinkEffect: React.FC<{ currentStep: number }> = ({ currentStep }) 
 
         {/* 中心点 */}
         <div className="circle-center" />
-
       </div>
-
     </div>
   );
 };
@@ -131,16 +154,19 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
     return { time: '0:00', description: 'Day 1/ Day 2 开始' };
   };
 
-
-
   if (functionName === '游戏机制') {
     return (
       <>
-        <div className="game-mechanics-container" style={{ '--mechanics-container-width': '1400px' } as React.CSSProperties}>
+        <div
+          className="game-mechanics-container"
+          style={{ '--mechanics-container-width': '1400px' } as React.CSSProperties}
+        >
           <div className="mechanics-layout">
-
             {/* 游戏时间机制 - 自定义宽度比例 2:1 */}
-            <div className="mechanics-grid custom-columns" style={{ '--mechanics-grid-columns': '1.2fr 2fr' } as React.CSSProperties}>
+            <div
+              className="mechanics-grid custom-columns"
+              style={{ '--mechanics-grid-columns': '1.2fr 2fr' } as React.CSSProperties}
+            >
               <div className="mechanic-card" id="game-time-mechanism">
                 <div className="card-content">
                   <div className="card-title-section">
@@ -249,18 +275,14 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               dataIndex: 'runes',
                               key: 'runes',
                               width: '33%',
-                              render: (text) => (
-                                <span style={{ color: '#1890ff' }}>
-                                  {text}
-                                </span>
-                              )
+                              render: (text) => <span style={{ color: '#1890ff' }}>{text}</span>,
                             },
                             {
                               title: '总成本',
                               dataIndex: 'totalCost',
                               key: 'totalCost',
                               width: '34%',
-                            }
+                            },
                           ]}
                           pagination={false}
                           size="small"
@@ -295,20 +317,21 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               key: 'runes',
                               width: '33%',
                               render: (text) => (
-                                <span style={{
-                                  color: '#1890ff'
-                                }}>
+                                <span
+                                  style={{
+                                    color: '#1890ff',
+                                  }}
+                                >
                                   {text}
                                 </span>
-                              )
+                              ),
                             },
                             {
                               title: '总成本',
                               dataIndex: 'totalCost',
                               key: 'totalCost',
                               width: '34%',
-
-                            }
+                            },
                           ]}
                           pagination={false}
                           size="small"
@@ -324,9 +347,9 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                       description={
                         <div className="dodge-frames-tips">
                           <div className="tip-item">
-                            1. 角色 3 级可使用<strong style={{ color: '#0360b8' }}>蓝色武器</strong>，
-                            7 级可使用<strong style={{ color: '#722ed1' }}>紫色武器</strong>，
-                            10 级可使用<strong style={{ color: '#faad14' }}>金色武器</strong>。
+                            1. 角色 3 级可使用<strong style={{ color: '#0360b8' }}>蓝色武器</strong>， 7 级可使用
+                            <strong style={{ color: '#722ed1' }}>紫色武器</strong>， 10 级可使用
+                            <strong style={{ color: '#faad14' }}>金色武器</strong>。
                           </div>
                           <div className="tip-item">
                             2. 如果当前卢恩足够升级，左上角显示等级的数字左边会出现一个白色箭头(局内)。
@@ -386,14 +409,17 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               <div className="timeline-column">
                                 <div className="timeline-column-content">
                                   <CircleShrinkEffect currentStep={day1TimelineStep} />
-                                  <div style={{
-                                    textAlign: 'center',
-                                    marginTop: '12px',
-                                    fontSize: '12px',
-                                    color: '#666',
-                                    fontWeight: 'normal'
-                                  }}>
-                                    {getCurrentTimeInfo(day1TimelineStep).time} - {getCurrentTimeInfo(day1TimelineStep + 1).time} <br />
+                                  <div
+                                    style={{
+                                      textAlign: 'center',
+                                      marginTop: '12px',
+                                      fontSize: '12px',
+                                      color: '#666',
+                                      fontWeight: 'normal',
+                                    }}
+                                  >
+                                    {getCurrentTimeInfo(day1TimelineStep).time} -{' '}
+                                    {getCurrentTimeInfo(day1TimelineStep + 1).time} <br />
                                     {getCurrentTimeInfo(day1TimelineStep).description}
                                   </div>
                                 </div>
@@ -434,8 +460,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                       <div className="boss-progress-item">
                                         <div className="progress-label">Boss血量：</div>
                                         <Progress
-                                          percent={day1TimelineStep <= 1 ? 75 :
-                                            day1TimelineStep <= 4 ? 100 : 0}
+                                          percent={day1TimelineStep <= 1 ? 75 : day1TimelineStep <= 4 ? 100 : 0}
                                           strokeColor="#cf1322"
                                           format={(percent) => `${percent}%`}
                                         />
@@ -443,8 +468,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                       <div className="boss-progress-item">
                                         <div className="progress-label">Boss攻击力：</div>
                                         <Progress
-                                          percent={day1TimelineStep <= 1 ? 80 :
-                                            day1TimelineStep <= 3 ? 100 : 100}
+                                          percent={day1TimelineStep <= 1 ? 80 : day1TimelineStep <= 3 ? 100 : 100}
                                           strokeColor="#3f8600"
                                           format={(percent) => `${percent}%`}
                                         />
@@ -461,11 +485,19 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                       <div className="damage-stat">
                                         <Statistic
                                           title="每秒受到的伤害"
-                                          value={day1TimelineStep === 0 ? '夜雨尚未出现' :
-                                            day1TimelineStep === 1 ? '当前角色血量 × 2% + 15' :
-                                              day1TimelineStep === 2 ? '当前角色血量 × 2% + 15' :
-                                                day1TimelineStep === 3 ? '当前角色血量 × 2% + 30' :
-                                                  day1TimelineStep === 4 ? '当前角色血量 × 2% + 30' : '当前角色血量 × 2% + 30'}
+                                          value={
+                                            day1TimelineStep === 0
+                                              ? '夜雨尚未出现'
+                                              : day1TimelineStep === 1
+                                                ? '当前角色血量 × 2% + 15'
+                                                : day1TimelineStep === 2
+                                                  ? '当前角色血量 × 2% + 15'
+                                                  : day1TimelineStep === 3
+                                                    ? '当前角色血量 × 2% + 30'
+                                                    : day1TimelineStep === 4
+                                                      ? '当前角色血量 × 2% + 30'
+                                                      : '当前角色血量 × 2% + 30'
+                                          }
                                           valueStyle={{
                                             color: day1TimelineStep === 0 ? '#666' : '#1890ff',
                                             fontSize: '20px',
@@ -484,7 +516,6 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                             </div>
                           </div>
                         </div>
-
                       </div>
                     </div>
                   </div>
@@ -505,14 +536,51 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                   <div className="card-body">
                     <div className="rating-system-content">
                       <div className="rating-table-section">
-                        <Title level={5} style={{ marginBottom: '16px', fontSize: '16px' }}>评分规则</Title>
+                        <Title level={5} style={{ marginBottom: '16px', fontSize: '16px' }}>
+                          评分规则
+                        </Title>
                         <Table
                           dataSource={[
-                            { key: '1', depthLevel: '深度一 (0-999)', firstDayLoss: '-0', secondDayLoss: '-0', finalDayLoss: '-0', victory: '+200' },
-                            { key: '2', depthLevel: '深度二 (1000-1999)', firstDayLoss: '-200', secondDayLoss: '-100', finalDayLoss: '-0', victory: '+200' },
-                            { key: '3', depthLevel: '深度三 (2000-3999)', firstDayLoss: '-400', secondDayLoss: '-300', finalDayLoss: '-200', victory: '+200' },
-                            { key: '4', depthLevel: '深度四 (4000-5999)', firstDayLoss: '-600', secondDayLoss: '-500', finalDayLoss: '-400', victory: '+200' },
-                            { key: '5', depthLevel: '深度五 (6000+)', firstDayLoss: '-800', secondDayLoss: '-700', finalDayLoss: '-600', victory: '+200' },
+                            {
+                              key: '1',
+                              depthLevel: '深度一 (0-999)',
+                              firstDayLoss: '-0',
+                              secondDayLoss: '-0',
+                              finalDayLoss: '-0',
+                              victory: '+200',
+                            },
+                            {
+                              key: '2',
+                              depthLevel: '深度二 (1000-1999)',
+                              firstDayLoss: '-200',
+                              secondDayLoss: '-100',
+                              finalDayLoss: '-0',
+                              victory: '+200',
+                            },
+                            {
+                              key: '3',
+                              depthLevel: '深度三 (2000-3999)',
+                              firstDayLoss: '-400',
+                              secondDayLoss: '-300',
+                              finalDayLoss: '-200',
+                              victory: '+200',
+                            },
+                            {
+                              key: '4',
+                              depthLevel: '深度四 (4000-5999)',
+                              firstDayLoss: '-600',
+                              secondDayLoss: '-500',
+                              finalDayLoss: '-400',
+                              victory: '+200',
+                            },
+                            {
+                              key: '5',
+                              depthLevel: '深度五 (6000+)',
+                              firstDayLoss: '-800',
+                              secondDayLoss: '-700',
+                              finalDayLoss: '-600',
+                              victory: '+200',
+                            },
                           ]}
                           columns={[
                             {
@@ -529,10 +597,8 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               width: '20%',
                               align: 'center',
                               render: (text) => (
-                                <span style={{ color: text.startsWith('+') ? '#52c41a'  : '#1890ff' }}>
-                                  {text}
-                                </span>
-                              )
+                                <span style={{ color: text.startsWith('+') ? '#52c41a' : '#1890ff' }}>{text}</span>
+                              ),
                             },
                             {
                               title: 'Day 2 失败',
@@ -541,10 +607,8 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               width: '20%',
                               align: 'center',
                               render: (text) => (
-                                <span style={{ color: text.startsWith('+') ? '#52c41a'  : '#1890ff' }}>
-                                  {text}
-                                </span>
-                              )
+                                <span style={{ color: text.startsWith('+') ? '#52c41a' : '#1890ff' }}>{text}</span>
+                              ),
                             },
                             {
                               title: 'Day 3 失败',
@@ -553,10 +617,8 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               width: '20%',
                               align: 'center',
                               render: (text) => (
-                                <span style={{ color: text.startsWith('+') ? '#52c41a'  : '#1890ff' }}>
-                                  {text}
-                                </span>
-                              )
+                                <span style={{ color: text.startsWith('+') ? '#52c41a' : '#1890ff' }}>{text}</span>
+                              ),
                             },
                             {
                               title: '胜利',
@@ -565,10 +627,8 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               width: '20%',
                               align: 'center',
                               render: (text) => (
-                                <span style={{ color: text.startsWith('+') ? '#52c41a' : '#1890ff' }}>
-                                  {text}
-                                </span>
-                              )
+                                <span style={{ color: text.startsWith('+') ? '#52c41a' : '#1890ff' }}>{text}</span>
+                              ),
                             },
                           ]}
                           pagination={false}
@@ -579,7 +639,9 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
 
                       {/* 条件修正表 */}
                       <div className="rating-table-section" style={{ marginTop: '24px' }}>
-                        <Title level={5} style={{ marginBottom: '16px', fontSize: '16px' }}>评分修正</Title>
+                        <Title level={5} style={{ marginBottom: '16px', fontSize: '16px' }}>
+                          评分修正
+                        </Title>
                         <Table
                           dataSource={[
                             {
@@ -587,42 +649,42 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               condition: '隐藏地图',
                               lossModifier: '+200',
                               winModifier: '+100',
-                              description: '随机位置在地图上不可见【仅限等级3+】'
+                              description: '随机位置在地图上不可见【仅限等级3+】',
                             },
                             {
                               key: '2',
                               condition: '隐藏夜王',
                               lossModifier: '+200',
                               winModifier: '+100',
-                              description: '夜王身份在进Boss房前隐藏【仅限等级3+】'
+                              description: '夜王身份在进Boss房前隐藏【仅限等级3+】',
                             },
                             {
                               key: '3',
                               condition: '其他玩家提前退出',
                               lossModifier: '50%',
                               winModifier: '无',
-                              description: '其他玩家提前退出时，惩罚减半'
+                              description: '其他玩家提前退出时，惩罚减半',
                             },
                             {
                               key: '4',
                               condition: '自己提前退出',
                               lossModifier: '无',
                               winModifier: '无',
-                              description: '无论输赢，都会在未来的游戏中结算惩罚（按照退出时间点判负）'
+                              description: '无论输赢，都会在未来的游戏中结算惩罚（按照退出时间点判负）',
                             },
                             {
                               key: '5',
                               condition: '高1级匹配',
                               lossModifier: '+50',
                               winModifier: '+50',
-                              description: '对局深度比自己深度多1级时，结算时额外+50'
+                              description: '对局深度比自己深度多1级时，结算时额外+50',
                             },
                             {
                               key: '6',
                               condition: '低1级匹配',
                               lossModifier: '-50',
                               winModifier: '-50',
-                              description: '对局深度比自己深度少1级时，结算时额外-50'
+                              description: '对局深度比自己深度少1级时，结算时额外-50',
                             },
                           ]}
                           columns={[
@@ -640,12 +702,14 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               width: '15%',
                               align: 'center',
                               render: (text) => (
-                                <span style={{ 
-                                  color: text.startsWith('+') ? '#52c41a' : '#1890ff'
-                                }}>
+                                <span
+                                  style={{
+                                    color: text.startsWith('+') ? '#52c41a' : '#1890ff',
+                                  }}
+                                >
                                   {text}
                                 </span>
-                              )
+                              ),
                             },
                             {
                               title: '胜利时修正',
@@ -654,12 +718,14 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               width: '15%',
                               align: 'center',
                               render: (text) => (
-                                <span style={{ 
-                                  color: text.startsWith('+') ? '#52c41a' : '#1890ff'
-                                }}>
+                                <span
+                                  style={{
+                                    color: text.startsWith('+') ? '#52c41a' : '#1890ff',
+                                  }}
+                                >
                                   {text}
                                 </span>
-                              )
+                              ),
                             },
                             {
                               title: '描述',
@@ -688,10 +754,12 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                       <HeartTwoTone twoToneColor="#eb2f96" />
                       回血量计算器
                       <DataSourceTooltip
-                        links={[{
-                          text: "【黑夜君临】圣杯瓶恢复、缓回、群回机制解析及常见误区",
-                          url: "https://www.bilibili.com/video/BV1M18jzQE9X"
-                        }]}
+                        links={[
+                          {
+                            text: '【黑夜君临】圣杯瓶恢复、缓回、群回机制解析及常见误区',
+                            url: 'https://www.bilibili.com/video/BV1M18jzQE9X',
+                          },
+                        ]}
                       />
                     </Title>
                   </div>
@@ -718,7 +786,6 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </>
@@ -728,10 +795,12 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
   // 其他功能保持原有的简单显示
   return (
     <div className="mechanics-development-placeholder">
-      <Title level={3} className="mechanics-development-title">{functionName}</Title>
+      <Title level={3} className="mechanics-development-title">
+        {functionName}
+      </Title>
       <Text className="mechanics-development-text">此功能正在开发中...</Text>
     </div>
   );
 };
 
-export default GameMechanicsView; 
+export default GameMechanicsView;

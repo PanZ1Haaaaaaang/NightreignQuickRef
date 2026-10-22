@@ -14,7 +14,13 @@ const Navigation: React.FC<NavigationProps> = React.memo(({ activeTab, onTabChan
           key={item.key}
           className={`custom-tab-button ${item.label.length > 8 ? 'long-label' : ''} ${activeTab === item.key ? 'active' : ''}`}
         >
-          <a href="#" onClick={(e) => { e.preventDefault(); onTabChange(item.key); }}>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              onTabChange(item.key);
+            }}
+          >
             {item.label}
           </a>
         </div>
@@ -23,4 +29,4 @@ const Navigation: React.FC<NavigationProps> = React.memo(({ activeTab, onTabChan
   );
 });
 
-export default Navigation; 
+export default Navigation;

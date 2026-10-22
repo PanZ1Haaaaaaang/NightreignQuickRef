@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "react"],
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "categories": {
+    "correctness": "error"
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn",
+    "react/only-export-components": "warn",
+    "react/set-state-in-effect": "off",
+    "react/purity": "off"
+  },
+  "ignorePatterns": ["dist/**", "node_modules/**", "src/data/**"]
+}

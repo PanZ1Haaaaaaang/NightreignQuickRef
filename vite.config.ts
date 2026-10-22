@@ -1,21 +1,19 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 // GitHub Pages 部署在子路径，Vercel 部署在根路径
-const isVercel = process.env.VERCEL === '1' || process.env.VERCEL === 'true'
+const isVercel = process.env.VERCEL === '1' || process.env.VERCEL === 'true';
 
 // 第三方依赖分包规则（Vite 8 基于 Rolldown，manualChunks 只接受函数形式）
 const vendorGroups: Array<{ name: string; test: RegExp }> = [
   { name: 'react-vendor', test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/ },
   { name: 'antd-vendor', test: /node_modules[\\/](antd|@ant-design|@antv|rc-[^\\/]+)[\\/]/ },
   { name: 'utils-vendor', test: /node_modules[\\/]lodash[\\/]/ },
-]
+];
 
 export default defineConfig({
   base: isVercel ? '/' : '/NightreignQuickRef/',
-  plugins: [
-    react()
-  ],
+  plugins: [react()],
   // 构建时注入部署时间
   define: {
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
@@ -25,7 +23,7 @@ export default defineConfig({
       output: {
         manualChunks(id: string) {
           for (const group of vendorGroups) {
-            if (group.test.test(id)) return group.name
+            if (group.test.test(id)) return group.name;
           }
         },
         // 产物文件名带 hash，便于缓存
@@ -47,4 +45,4 @@ export default defineConfig({
   server: {
     hmr: true,
   },
-})
+});

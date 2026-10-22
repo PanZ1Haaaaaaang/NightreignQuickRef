@@ -77,7 +77,7 @@ export interface CharacterDetailData {
 }
 
 // 缓存数据类型
-type CacheData = 
+type CacheData =
   | EntryData[]
   | WeaponCharacter
   | WeaponEffect
@@ -124,7 +124,7 @@ class DataManager {
         'hermit.json',
         'iron-eye.json',
         'rogue.json',
-        'executor.json', 
+        'executor.json',
         'guardian.json',
         'avenger.json',
         'scholar.json',
@@ -160,7 +160,7 @@ class DataManager {
         characterData,
         itemEffects,
         deepNightEntries,
-        inGameDeepNightEntries
+        inGameDeepNightEntries,
       ] = await Promise.all([
         import('../data/zh-CN/outsider_entries_zh-CN.json'),
         import('../data/zh-CN/talisman_entries_zh-CN.json'),
@@ -176,7 +176,7 @@ class DataManager {
         import('../data/character-info/character_data.json'),
         import('../data/zh-CN/item_effect.json'),
         import('../data/zh-CN/deep_night_entries.json'),
-        import('../data/zh-CN/in-game_deep_night_entries.json')
+        import('../data/zh-CN/in-game_deep_night_entries.json'),
       ]);
 
       // 加载角色详细数据
@@ -186,7 +186,7 @@ class DataManager {
           // 使用具体的文件路径来避免动态导入警告
           const chineseName = fileNameToChineseName[fileName];
           let characterModule;
-          
+
           switch (fileName) {
             case 'tracker.json':
               characterModule = await import('../data/character-info/tracker.json');
@@ -222,7 +222,7 @@ class DataManager {
               console.warn(`未知的角色文件: ${fileName}`);
               continue;
           }
-          
+
           const moduleData = characterModule.default as { [key: string]: unknown };
           if (moduleData[chineseName]) {
             characterDetailData[chineseName] = moduleData[chineseName] as CharacterLevelData[];
@@ -320,9 +320,9 @@ class DataManager {
     const rawData = this.dataCache.get('deepNightEntries') || [];
     // 处理深夜模式局外词条的数据格式
     const processedData: EntryData[] = [];
-    
+
     if (Array.isArray(rawData)) {
-      rawData.forEach(group => {
+      rawData.forEach((group) => {
         if (typeof group === 'object' && group !== null) {
           Object.values(group).forEach((entry: unknown) => {
             if (entry && typeof entry === 'object' && entry !== null) {
@@ -335,14 +335,14 @@ class DataManager {
                 superposability: (entryObj.superposability as string) || null,
                 notes: (entryObj.notes as string) || null,
                 // tags 必须原样带上，否则「未实装」标签与筛选都会失效
-                tags: (entryObj.tags as string[]) || undefined
+                tags: (entryObj.tags as string[]) || undefined,
               });
             }
           });
         }
       });
     }
-    
+
     return processedData;
   }
 
@@ -350,9 +350,9 @@ class DataManager {
     const rawData = this.dataCache.get('inGameDeepNightEntries') || [];
     // 处理深夜模式局内词条的数据格式
     const processedData: EntryData[] = [];
-    
+
     if (Array.isArray(rawData)) {
-      rawData.forEach(group => {
+      rawData.forEach((group) => {
         if (typeof group === 'object' && group !== null) {
           Object.values(group).forEach((entry: unknown) => {
             if (entry && typeof entry === 'object' && entry !== null) {
@@ -365,14 +365,14 @@ class DataManager {
                 superposability: (entryObj.superposability as string) || null,
                 notes: (entryObj.notes as string) || null,
                 // tags 必须原样带上，否则「未实装」标签与筛选都会失效
-                tags: (entryObj.tags as string[]) || undefined
+                tags: (entryObj.tags as string[]) || undefined,
               });
             }
           });
         }
       });
     }
-    
+
     return processedData;
   }
 
@@ -390,4 +390,4 @@ class DataManager {
   }
 }
 
-export default DataManager; 
+export default DataManager;

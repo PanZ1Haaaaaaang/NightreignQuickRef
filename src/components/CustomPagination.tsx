@@ -36,13 +36,8 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
         padding: '0 16px',
       }}
     >
-      <div
-        className="page-size-controls"
-        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-      >
-        <span style={{ color: 'var(--theme-text-secondary)', fontSize: '14px' }}>
-          每页显示
-        </span>
+      <div className="page-size-controls" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <span style={{ color: 'var(--theme-text-secondary)', fontSize: '14px' }}>每页显示</span>
         <Select
           value={pageSize.toString()}
           onChange={(value) => {
@@ -60,20 +55,11 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
           size="small"
           style={{ width: '100px' }}
         />
-        <span style={{ color: 'var(--theme-text-secondary)', fontSize: '14px' }}>
-          共 {totalItems} 条记录
-        </span>
+        <span style={{ color: 'var(--theme-text-secondary)', fontSize: '14px' }}>共 {totalItems} 条记录</span>
       </div>
 
-      <div
-        className="page-nav-controls"
-        style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
-      >
-        <Button
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage <= 1}
-          size="middle"
-        >
+      <div className="page-nav-controls" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <Button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage <= 1} size="middle">
           上一页
         </Button>
 
@@ -87,11 +73,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
           第 {currentPage} 页，共 {totalPages} 页
         </span>
 
-        <Button
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage >= totalPages}
-          size="middle"
-        >
+        <Button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage >= totalPages} size="middle">
           下一页
         </Button>
       </div>

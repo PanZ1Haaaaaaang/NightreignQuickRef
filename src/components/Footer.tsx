@@ -12,7 +12,7 @@ const formatBuildTime = (buildTime: string): string => {
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
   } catch {
     // 如果解析失败，返回原始字符串
@@ -31,43 +31,22 @@ const Footer: React.FC = React.memo(() => {
         <Text type="secondary" className="footer-text">
           <HeartOutlined style={{ marginRight: '4px', color: '#ff4d4f' }} />
           Created by{' '}
-          <a
-            href={SITE_CONFIG.original.authorUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="footer-link"
-          >
+          <a href={SITE_CONFIG.original.authorUrl} target="_blank" rel="noopener noreferrer" className="footer-link">
             {SITE_CONFIG.original.author}
-          </a>
-          {' '}｜{' '}
-          Modified by{' '}
-          <a
-            href={SITE_CONFIG.fork.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="footer-link"
-          >
+          </a>{' '}
+          ｜ Modified by{' '}
+          <a href={SITE_CONFIG.fork.url} target="_blank" rel="noopener noreferrer" className="footer-link">
             {SITE_CONFIG.fork.owner}
           </a>
         </Text>
         <Text type="secondary" className="footer-text">
           <GithubOutlined style={{ marginRight: '4px' }} />
           Based on{' '}
-          <a
-            href={SITE_CONFIG.original.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="footer-link"
-          >
+          <a href={SITE_CONFIG.original.repoUrl} target="_blank" rel="noopener noreferrer" className="footer-link">
             {SITE_CONFIG.original.repoName}
-          </a>
-          {' '}·{' '}
-          <a
-            href={SITE_CONFIG.fork.issuesUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="footer-link"
-          >
+          </a>{' '}
+          ·{' '}
+          <a href={SITE_CONFIG.fork.issuesUrl} target="_blank" rel="noopener noreferrer" className="footer-link">
             Report an issue
           </a>
         </Text>
@@ -79,4 +58,4 @@ const Footer: React.FC = React.memo(() => {
   );
 });
 
-export default Footer; 
+export default Footer;

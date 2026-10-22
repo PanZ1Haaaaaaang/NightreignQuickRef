@@ -49,7 +49,7 @@
     padding: 10px 20px 20px 20px;
     box-sizing: border-box;
   }
-  
+
   /* 提升特异性，覆盖全局 .ant-card { width: 100% !important; } */
   .boss-card.ant-card {
     width: 95% !important;
@@ -103,15 +103,15 @@
 }
 
 /* 深色模式下的颜色覆盖 */
-body[tomato-theme="dark"] .resistance-low {
+body[tomato-theme='dark'] .resistance-low {
   color: #52c41a !important; /* 浅绿色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .resistance-medium {
+body[tomato-theme='dark'] .resistance-medium {
   color: #faad14 !important; /* 浅橙色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .resistance-high {
+body[tomato-theme='dark'] .resistance-high {
   color: #ff4d4f !important; /* 浅红色 - 深色模式下更清晰 */
 }
 
@@ -195,7 +195,7 @@ body[tomato-theme="dark"] .resistance-high {
 }
 
 /* 深色模式下的筛选器样式 */
-body[tomato-theme="dark"] .filter-inputs {
+body[tomato-theme='dark'] .filter-inputs {
   background-color: var(--theme-bg-secondary);
   border-color: var(--theme-border);
 }
@@ -206,62 +206,61 @@ body[tomato-theme="dark"] .filter-inputs {
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .filter-inputs .ant-input,
   .filter-inputs .ant-select {
     width: 100% !important;
   }
-  
+
   /* 夜王boss数据表格移动端优化 */
   .boss-card .ant-table-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  
+
   .boss-card .ant-table {
     min-width: 800px; /* 确保表格内容完整显示 */
   }
-  
+
   /* 野生Boss表格移动端优化 */
   .wild-boss-filter-container .ant-table-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  
+
   .wild-boss-filter-container .ant-table {
     min-width: 1000px; /* 确保表格内容完整显示 */
   }
-  
+
   /* 圆桌厅堂人物表格移动端优化 */
   .wild-boss-filter-container#roundtable-characters .ant-table-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  
+
   .wild-boss-filter-container#roundtable-characters .ant-table {
     min-width: 800px; /* 确保表格内容完整显示 */
   }
 
-  
   /* 移动端触摸优化 */
   .boss-card .ant-table,
   .wild-boss-filter-container .ant-table {
     touch-action: pan-x;
   }
-  
+
   /* 移动端表格内容优化 */
   .boss-card .ant-table-cell,
   .wild-boss-filter-container .ant-table-cell {
     padding: 8px 6px !important;
     font-size: 13px;
   }
-  
+
   .boss-card .boss-image,
   .wild-boss-filter-container .boss-image {
     width: 35px !important;
     height: 35px !important;
   }
-  
+
   /* 移动端表格标题优化 */
   .boss-card .ant-table-thead > tr > th,
   .wild-boss-filter-container .ant-table-thead > tr > th {
@@ -271,19 +270,19 @@ body[tomato-theme="dark"] .filter-inputs {
   }
 }
 
-body[tomato-theme="dark"] .absorption-1 {
+body[tomato-theme='dark'] .absorption-1 {
   color: #52c41a !important; /* 浅绿色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .absorption-2 {
+body[tomato-theme='dark'] .absorption-2 {
   color: #faad14 !important; /* 浅橙色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .absorption-3 {
+body[tomato-theme='dark'] .absorption-3 {
   color: #ff292c !important; /* 浅红色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .absorption-4 {
+body[tomato-theme='dark'] .absorption-4 {
   color: #cd29f6 !important; /* 亮紫色 - 深色模式下更清晰 */
 }
 
@@ -302,7 +301,7 @@ body[tomato-theme="dark"] .absorption-4 {
   font-weight: 500;
 }
 
-body[tomato-theme="dark"] .health-nightreign {
+body[tomato-theme='dark'] .health-nightreign {
   color: #b240ff !important; /* 浅紫色 - 深色模式下更清晰 */
 }
 
@@ -326,11 +325,11 @@ body[tomato-theme="dark"] .health-nightreign {
 }
 
 /* 深色模式下的表头样式 */
-body[tomato-theme="dark"] .ant-table-sticky-header {
+body[tomato-theme='dark'] .ant-table-sticky-header {
   background-color: var(--content-bg);
 }
 
-body[tomato-theme="dark"] .ant-table-sticky-header .ant-table-thead > tr > th {
+body[tomato-theme='dark'] .ant-table-sticky-header .ant-table-thead > tr > th {
   background-color: var(--content-bg);
   border-bottom-color: var(--theme-border);
 }

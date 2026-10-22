@@ -23,7 +23,7 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   // const [isEnglish, setIsEnglish] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-  
+
   // 子Tab和Step状态管理
   const [activeSubTab, setActiveSubTab] = useState<string>('');
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -32,7 +32,7 @@ function App() {
   const handleToggleTheme = () => {
     const newTheme = !isDarkMode;
     setIsDarkMode(newTheme);
-    
+
     // 更新body属性
     if (newTheme) {
       document.body.setAttribute('tomato-theme', 'dark');
@@ -40,7 +40,7 @@ function App() {
       document.body.removeAttribute('tomato-theme');
     }
     localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-    
+
     // 触发自定义主题变化事件
     window.dispatchEvent(new Event('themeChange'));
   };
@@ -63,11 +63,14 @@ function App() {
   // 预加载所有数据
   useEffect(() => {
     const dataManager = DataManager.getInstance();
-    dataManager.preloadAllData().then(() => {
-      setIsDataLoaded(true);
-    }).catch((error) => {
-      console.error('数据预加载失败:', error);
-    });
+    dataManager
+      .preloadAllData()
+      .then(() => {
+        setIsDataLoaded(true);
+      })
+      .catch((error) => {
+        console.error('数据预加载失败:', error);
+      });
   }, []);
 
   // 初始化主题
@@ -126,7 +129,7 @@ function App() {
   };
 
   return (
-    <ConfigProvider 
+    <ConfigProvider
       theme={themeConfig}
       // locale={isEnglish ? enUS : zhCN}
     >
@@ -134,22 +137,19 @@ function App() {
         <LoadingSpinner message="正在加载数据，请稍候..." />
       ) : (
         <div className="app-container">
-          <FunctionMenu 
-            onTabChange={setActiveTab} 
+          <FunctionMenu
+            onTabChange={setActiveTab}
             onSubTabChange={handleSubTabChange}
             onStepChange={handleStepChange}
           />
-          
+
           <Header
             isDarkMode={isDarkMode}
             onToggleTheme={handleToggleTheme}
             // onToggleLanguage={handleToggleLanguage}
           />
 
-          <Navigation
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-          />
+          <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
 
           {renderContent()}
 
