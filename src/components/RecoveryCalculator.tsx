@@ -412,7 +412,7 @@ const RecoveryCalculator: React.FC = () => {
             </div>
 
             {/* 分隔线 */}
-            <Divider type="vertical" className="divider" />
+            <Divider orientation="vertical" className="divider" />
 
             {/* 队友恢复 */}
             <div className="recovery-section">

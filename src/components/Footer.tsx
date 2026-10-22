@@ -27,7 +27,7 @@ const Footer: React.FC = React.memo(() => {
 
   return (
     <div className="footer">
-      <Space direction="vertical" size="small" align="center">
+      <Space orientation="vertical" size="small" align="center">
         <Text type="secondary" className="footer-text">
           <HeartOutlined style={{ marginRight: '4px', color: '#ff4d4f' }} />
           Created by{' '}

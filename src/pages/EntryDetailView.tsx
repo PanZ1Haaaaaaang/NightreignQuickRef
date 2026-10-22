@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Table, Input, Select, message, Tabs, Tag, Spin, Button, Checkbox, Space } from 'antd';
+import { Table, Input, Select, Tabs, Tag, Spin, Button, Checkbox, Space } from 'antd';
+import { message } from '../utils/feedback';
 import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
@@ -1259,7 +1260,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 options={itemEffectTypeOptions}
                 maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
               />
-              <Button onClick={clearAll} type="default" size="middle">
+              <Button onClick={clearAll} type="default" size="medium">
                 清除所有
               </Button>
             </div>
@@ -1321,7 +1322,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
               >
                 显示未实装
               </Checkbox>
-              <Button onClick={clearAll} type="default" size="middle">
+              <Button onClick={clearAll} type="default" size="medium">
                 清除所有
               </Button>
             </div>
@@ -1381,7 +1382,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
               >
                 显示未实装
               </Checkbox>
-              <Button onClick={clearAll} type="default" size="middle">
+              <Button onClick={clearAll} type="default" size="medium">
                 清除所有
               </Button>
             </div>
@@ -1428,7 +1429,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
               >
                 显示未实装
               </Checkbox>
-              <Button onClick={clearAll} type="default" size="middle">
+              <Button onClick={clearAll} type="default" size="medium">
                 清除所有
               </Button>
             </div>
@@ -1480,7 +1481,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   显示未实装
                 </Checkbox>
               )}
-              <Button onClick={clearAll} type="default" size="middle">
+              <Button onClick={clearAll} type="default" size="medium">
                 清除所有
               </Button>
             </div>

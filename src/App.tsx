@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ConfigProvider, theme } from 'antd';
+import { App as AntdApp, ConfigProvider, theme } from 'antd';
 import { geekblue } from '@ant-design/colors';
 // import zhCN from 'antd/locale/zh_CN';
 // import enUS from 'antd/locale/en_US';
@@ -16,7 +16,19 @@ import BossDataView from './pages/BossDataView';
 import WeaponSkillMagicView from './pages/WeaponSkillMagicView';
 import { initializeTheme, setupThemeListener } from './utils/themeUtils';
 import DataManager from './utils/dataManager';
+import { setMessageApi } from './utils/feedback';
 import { getDefaultPage } from './config/navigationConfig';
+
+// 把 antd v6 的 message 实例注入到纯 TS 模块可访问的位置
+const MessageBridge = () => {
+  const { message } = AntdApp.useApp();
+
+  useEffect(() => {
+    setMessageApi(message);
+  }, [message]);
+
+  return null;
+};
 
 function App() {
   const [activeTab, setActiveTab] = useState(getDefaultPage());
@@ -133,29 +145,32 @@ function App() {
       theme={themeConfig}
       // locale={isEnglish ? enUS : zhCN}
     >
-      {!isDataLoaded ? (
-        <LoadingSpinner message="正在加载数据，请稍候..." />
-      ) : (
-        <div className="app-container">
-          <FunctionMenu
-            onTabChange={setActiveTab}
-            onSubTabChange={handleSubTabChange}
-            onStepChange={handleStepChange}
-          />
+      <AntdApp component={false}>
+        <MessageBridge />
+        {!isDataLoaded ? (
+          <LoadingSpinner message="正在加载数据，请稍候..." />
+        ) : (
+          <div className="app-container">
+            <FunctionMenu
+              onTabChange={setActiveTab}
+              onSubTabChange={handleSubTabChange}
+              onStepChange={handleStepChange}
+            />
 
-          <Header
-            isDarkMode={isDarkMode}
-            onToggleTheme={handleToggleTheme}
-            // onToggleLanguage={handleToggleLanguage}
-          />
+            <Header
+              isDarkMode={isDarkMode}
+              onToggleTheme={handleToggleTheme}
+              // onToggleLanguage={handleToggleLanguage}
+            />
 
-          <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+            <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
 
-          {renderContent()}
+            {renderContent()}
 
-          <Footer />
-        </div>
-      )}
+            <Footer />
+          </div>
+        )}
+      </AntdApp>
     </ConfigProvider>
   );
 }

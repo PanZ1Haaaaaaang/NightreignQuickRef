@@ -296,7 +296,7 @@ const Header: React.FC<HeaderProps> = React.memo(
           <Title level={1} className="main-title">
             黑夜君临速查手册
           </Title>
-          <Space direction="vertical" size="small" className="subtitle">
+          <Space orientation="vertical" size="small" className="subtitle">
             <Text type="secondary" className="subtitle-text version-info">
               {getVersionDisplayText()}
             </Text>

@@ -1,5 +1,5 @@
 // 数据管理器 - 用于预加载所有JSON文件
-import { message } from 'antd';
+import { message } from './feedback';
 import type { EntryData } from '../types';
 
 // 词条数据类型统一由 src/types 定义（此处 re-export，避免两份定义漂移：

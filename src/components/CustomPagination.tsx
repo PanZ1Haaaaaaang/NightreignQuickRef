@@ -59,7 +59,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
       </div>
 
       <div className="page-nav-controls" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <Button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage <= 1} size="middle">
+        <Button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage <= 1} size="medium">
           上一页
         </Button>
 
@@ -73,7 +73,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
           第 {currentPage} 页，共 {totalPages} 页
         </span>
 
-        <Button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage >= totalPages} size="middle">
+        <Button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage >= totalPages} size="medium">
           下一页
         </Button>
       </div>

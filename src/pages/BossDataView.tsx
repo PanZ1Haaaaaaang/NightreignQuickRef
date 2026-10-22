@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio, Segmented, message, Spin } from 'antd';
+import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio, Segmented, Space, Spin } from 'antd';
+import { message } from '../utils/feedback';
 import { SearchOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import type { BossData, WildBossData, CharacterData, EntryData } from '../types';
@@ -1749,7 +1750,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                       flexWrap: 'wrap',
                     }}
                   >
-                    <Radio.Group value={playerCount} onChange={(e) => setPlayerCount(e.target.value)} size="middle">
+                    <Radio.Group value={playerCount} onChange={(e) => setPlayerCount(e.target.value)} size="medium">
                       <Radio.Button value={1}>单人模式</Radio.Button>
                       <Radio.Button value={2}>双人模式</Radio.Button>
                       <Radio.Button value={3}>三人模式</Radio.Button>
@@ -1759,7 +1760,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                       <Segmented
                         value={deepNightDepth}
                         onChange={(value) => setDeepNightDepth(Number(value))}
-                        size="middle"
+                        size="medium"
                         options={[
                           { label: '普通', value: 0 },
                           { label: '深度1', value: 1 },
@@ -1955,14 +1956,22 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                           >
                             🪬 恶魔的添翼:卢恩-增伤关系图
                           </h3>
-                          <Button.Group size="small">
-                            <Button type={isLinearMode ? 'default' : 'primary'} onClick={() => setIsLinearMode(false)}>
+                          <Space.Compact size="small">
+                            <Button
+                              color={isLinearMode ? 'default' : 'primary'}
+                              variant={isLinearMode ? 'outlined' : 'solid'}
+                              onClick={() => setIsLinearMode(false)}
+                            >
                               非线性模式
                             </Button>
-                            <Button type={isLinearMode ? 'primary' : 'default'} onClick={() => setIsLinearMode(true)}>
+                            <Button
+                              color={isLinearMode ? 'primary' : 'default'}
+                              variant={isLinearMode ? 'solid' : 'outlined'}
+                              onClick={() => setIsLinearMode(true)}
+                            >
                               线性模式
                             </Button>
-                          </Button.Group>
+                          </Space.Compact>
                         </div>
                         <div id="line-chart-container" style={{ height: '400px' }}>
                           <Line key={`line-chart-${chartKey}-${activeBossTab}`} {...lineConfig} />

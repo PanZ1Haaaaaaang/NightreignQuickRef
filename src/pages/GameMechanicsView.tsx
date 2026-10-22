@@ -178,59 +178,59 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                   <div className="card-body">
                     <div className="mechanic-timeline">
                       <Timeline
-                        mode="left"
+                        mode="start"
                         items={[
                           {
-                            dot: <PauseCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: '16px' }} />,
-                            children: 'Day 1 / Day 2 开始',
+                            icon: <PauseCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: '16px' }} />,
+                            content: 'Day 1 / Day 2 开始',
                             color: 'green',
-                            label: '0:00',
+                            title: '0:00',
                           },
                           {
-                            dot: <ThunderboltTwoTone />,
-                            children: '4.5 min',
+                            icon: <ThunderboltTwoTone />,
+                            content: '4.5 min',
                           },
                           {
-                            dot: <ClockCircleTwoTone />,
-                            children: '第一次缩圈开始',
-                            label: '4:30',
+                            icon: <ClockCircleTwoTone />,
+                            content: '第一次缩圈开始',
+                            title: '4:30',
                           },
                           {
-                            dot: <ThunderboltTwoTone />,
-                            children: '3 min',
+                            icon: <ThunderboltTwoTone />,
+                            content: '3 min',
                           },
                           {
-                            dot: <CheckCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: '16px' }} />,
-                            children: '第一次缩圈结束',
-                            label: '7:30',
+                            icon: <CheckCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: '16px' }} />,
+                            content: '第一次缩圈结束',
+                            title: '7:30',
                           },
                           {
-                            dot: <ThunderboltTwoTone />,
-                            children: '3.5 min',
+                            icon: <ThunderboltTwoTone />,
+                            content: '3.5 min',
                           },
                           {
-                            dot: <ClockCircleTwoTone />,
-                            children: '第二次缩圈开始',
-                            label: '11:00',
+                            icon: <ClockCircleTwoTone />,
+                            content: '第二次缩圈开始',
+                            title: '11:00',
                           },
                           {
-                            dot: <ThunderboltTwoTone />,
-                            children: '3 min',
+                            icon: <ThunderboltTwoTone />,
+                            content: '3 min',
                           },
                           {
-                            dot: <CheckCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: '16px' }} />,
-                            children: '第二次缩圈结束',
-                            label: '14:00',
+                            icon: <CheckCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: '16px' }} />,
+                            content: '第二次缩圈结束',
+                            title: '14:00',
                           },
                           {
-                            dot: <FireTwoTone twoToneColor="red" />,
-                            children: '战斗!',
+                            icon: <FireTwoTone twoToneColor="red" />,
+                            content: '战斗!',
                           },
                           {
-                            dot: <HeartTwoTone twoToneColor="#eb2f96" />,
-                            children: 'Day 2 开始 / 最终Boss战',
+                            icon: <HeartTwoTone twoToneColor="#eb2f96" />,
+                            content: 'Day 2 开始 / 最终Boss战',
                             color: 'green',
-                            label: '0:00',
+                            title: '0:00',
                           },
                         ]}
                       />
@@ -389,15 +389,15 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                             <div className="timeline-steps-container">
                               <Steps
                                 size="small"
-                                direction="vertical"
+                                orientation="vertical"
                                 current={day1TimelineStep}
                                 onChange={setDay1TimelineStep}
                                 items={[
-                                  { title: '0:00', description: 'Day 1/ Day 2 开始' },
-                                  { title: '4:30', description: '第一次缩圈开始' },
-                                  { title: '7:30', description: '第一次缩圈结束' },
-                                  { title: '11:00', description: '第二次缩圈开始' },
-                                  { title: '14:30', description: '第二次缩圈结束' },
+                                  { title: '0:00', content: 'Day 1/ Day 2 开始' },
+                                  { title: '4:30', content: '第一次缩圈开始' },
+                                  { title: '7:30', content: '第一次缩圈结束' },
+                                  { title: '11:00', content: '第二次缩圈开始' },
+                                  { title: '14:30', content: '第二次缩圈结束' },
                                 ]}
                               />
                             </div>
@@ -498,9 +498,11 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                                       ? '当前角色血量 × 2% + 30'
                                                       : '当前角色血量 × 2% + 30'
                                           }
-                                          valueStyle={{
-                                            color: day1TimelineStep === 0 ? '#666' : '#1890ff',
-                                            fontSize: '20px',
+                                          styles={{
+                                            content: {
+                                              color: day1TimelineStep === 0 ? '#666' : '#1890ff',
+                                              fontSize: '20px',
+                                            },
                                           }}
                                         />
                                       </div>

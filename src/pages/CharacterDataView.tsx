@@ -323,7 +323,7 @@ const DodgeFramesComparison = () => {
 
         {/* 提示信息 */}
         <Alert
-          message="机制说明"
+          title="机制说明"
           description={
             <div className="dodge-frames-tips">
               <div className="tip-item">
