@@ -5,7 +5,7 @@ import { Radar, Column } from '@ant-design/plots';
 import { ThunderboltTwoTone, QuestionCircleOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { throttle } from 'lodash';
 import { getCurrentTheme } from '../utils/themeUtils';
-import '../styles/characterDataView.css';
+import styles from '../styles/characterDataView.module.css';
 import DataManager from '../utils/dataManager';
 import DataSourceTooltip from '../components/DataSourceTooltip';
 
@@ -271,9 +271,9 @@ const DodgeFramesComparison = () => {
   };
 
   return (
-    <div className="content-wrapper card-item">
+    <div className={`content-wrapper ${styles.cardItem}`}>
       <div
-        className="card-header"
+        className={styles.cardHeader}
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -299,7 +299,7 @@ const DodgeFramesComparison = () => {
           </Tooltip>
         </div>
       </div>
-      <div className="card-body">
+      <div className={styles.cardBody}>
         <div style={{ marginBottom: '10px', color: 'var(--theme-text-secondary)', fontSize: '14px' }}>
           提示：图中为60帧情况下的数据（1帧即1/60秒）
         </div>
@@ -309,7 +309,7 @@ const DodgeFramesComparison = () => {
           </div>
         )}
         <div
-          className="dodge-frames-chart-container"
+          className={styles.dodgeFramesChartContainer}
           style={{
             height: 400,
             width: '100%',
@@ -325,27 +325,27 @@ const DodgeFramesComparison = () => {
         <Alert
           title="机制说明"
           description={
-            <div className="dodge-frames-tips">
-              <div className="tip-item">
+            <div className={styles.dodgeFramesTips}>
+              <div className={styles.tipItem}>
                 1. 黑夜君临中没有负重影响人物翻滚 / 闪避的机制，角色直接决定回避性能，人物体型 / 身高与回避性能无关。
               </div>
 
-              <div className="tip-item">
+              <div className={styles.tipItem}>
                 2. 蓝色部分表示 "无敌帧"，绿色部分表示非无敌帧。从0帧开始，非无敌帧结束后即可自由移动。（无敌帧 +
                 非无敌帧 = 翻滚/闪避动画总帧长）
               </div>
 
-              <div className="tip-item">
+              <div className={styles.tipItem}>
                 3.
                 如果角色在动作的无敌帧结束前执行了其他动作（如进行轻攻击），那无敌帧会在执行其他动作的瞬间中断，同时这也会减少整个闪避动作的位移距离。
               </div>
 
-              <div className="tip-item">
+              <div className={styles.tipItem}>
                 4. 各数值对应的秒数计算：帧数数值× (1/60秒); 举例: 追踪者翻滚总时长为40帧，在60帧情况下，对应的时长为
                 40×(1/60)s = 2/3s ≈ 0.67s
               </div>
 
-              <div className="tip-item">
+              <div className={styles.tipItem}>
                 5. 熔炉羽护符、风结晶露滴或局内强化闪避额外获得的无敌帧为6帧，女爵（闪身）为2帧
               </div>
             </div>
@@ -421,27 +421,30 @@ const RadarLegend: React.FC<{
   };
 
   return (
-    <div className="radar-legend">
+    <div className={styles.radarLegend}>
       <button
         type="button"
-        className="radar-legend-arrow"
+        className={styles.radarLegendArrow}
         aria-label="向左滚动图例"
         style={{ visibility: canScrollLeft ? 'visible' : 'hidden' }}
         onClick={() => scroll(-1)}
       >
         <LeftOutlined />
       </button>
-      <div className={`radar-legend-scroll${!canScrollLeft && !canScrollRight ? ' is-centered' : ''}`} ref={scrollRef}>
+      <div
+        className={`${styles.radarLegendScroll}${!canScrollLeft && !canScrollRight ? ' ' + styles.isCentered : ''}`}
+        ref={scrollRef}
+      >
         {names.map((name) => (
-          <span className="radar-legend-item" key={name}>
-            <span className="radar-legend-dot" style={{ backgroundColor: getColor(name) }} />
+          <span className={styles.radarLegendItem} key={name}>
+            <span className={styles.radarLegendDot} style={{ backgroundColor: getColor(name) }} />
             <span>{name}</span>
           </span>
         ))}
       </div>
       <button
         type="button"
-        className="radar-legend-arrow"
+        className={styles.radarLegendArrow}
         aria-label="向右滚动图例"
         style={{ visibility: canScrollRight ? 'visible' : 'hidden' }}
         onClick={() => scroll(1)}
@@ -734,17 +737,17 @@ const CharacterDataView: React.FC = () => {
           const getValueClass = (value: string) => {
             switch (value) {
               case 'S':
-                return 'character-attribute-value s-rank';
+                return `${styles.characterAttributeValue} ${styles.sRank}`;
               case 'A':
-                return 'character-attribute-value a-rank';
+                return `${styles.characterAttributeValue} ${styles.aRank}`;
               case 'B':
-                return 'character-attribute-value b-rank';
+                return `${styles.characterAttributeValue} ${styles.bRank}`;
               case 'C':
-                return 'character-attribute-value c-rank';
+                return `${styles.characterAttributeValue} ${styles.cRank}`;
               case 'D':
-                return 'character-attribute-value d-rank';
+                return `${styles.characterAttributeValue} ${styles.dRank}`;
               default:
-                return 'character-attribute-value default';
+                return `${styles.characterAttributeValue} ${styles.default}`;
             }
           };
 
@@ -878,17 +881,17 @@ const CharacterDataView: React.FC = () => {
   };
 
   return (
-    <div className="character-data-container">
-      <div className="content-wrapper card-item" id="character-attributes">
-        <div className="card-header">
+    <div className={styles.characterDataContainer}>
+      <div className={`content-wrapper ${styles.cardItem}`} id="character-attributes">
+        <div className={styles.cardHeader}>
           <Title level={5} className="character-card-title">
             基础属性
           </Title>
         </div>
-        <div className="card-body">
-          <div className="attributes-and-radar" style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+        <div className={styles.cardBody}>
+          <div className={styles.attributesAndRadar} style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
             {/* 角色属性表格 */}
-            <div className="character-attributes-table-container">
+            <div className={styles.characterAttributesTableContainer}>
               <Table
                 rowSelection={rowSelection}
                 columns={columns}
@@ -898,7 +901,7 @@ const CharacterDataView: React.FC = () => {
                 size="small"
                 bordered
                 scroll={{ x: 'max-content' }}
-                className="character-attributes-table"
+                className={styles.characterAttributesTable}
                 // style={{ height: '350px' }}
                 style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
                 footer={characterAttributesFooter}
@@ -906,10 +909,10 @@ const CharacterDataView: React.FC = () => {
             </div>
 
             {/* 雷达图容器 - 动态高度响应拖拽和窗口变化 */}
-            <div className="radar-chart-container" id="radar-chart-container">
+            <div className={styles.radarChartContainer} id="radar-chart-container">
               {selectedRowKeys.length > 0 ? (
                 <>
-                  <div className="radar-chart-inner">
+                  <div className={styles.radarChartInner}>
                     <RadarLegend names={selectedRowKeys.map((key) => key.toString())} getColor={getRadarColor} />
                     <Radar
                       key={`radar-main-${chartKey}-${selectedRowKeys.join('-')}`}
@@ -1002,7 +1005,7 @@ const CharacterDataView: React.FC = () => {
               ) : (
                 // 空状态显示
                 <div
-                  className="radar-wrapper"
+                  className={styles.radarWrapper}
                   style={{
                     height: '400px',
                     display: 'flex',
@@ -1065,13 +1068,13 @@ const CharacterDataView: React.FC = () => {
       </div>
 
       {/* 角色详细数据 */}
-      <div className="content-wrapper card-item" id="character-detail-data">
-        <div className="card-header">
+      <div className={`content-wrapper ${styles.cardItem}`} id="character-detail-data">
+        <div className={styles.cardHeader}>
           <Title level={5} className="character-card-title">
             角色详细数据
           </Title>
         </div>
-        <div className="card-body">
+        <div className={styles.cardBody}>
           <Title level={5} style={{ margin: '12px 0 8px', color: 'var(--color-text-1)' }}>
             同等级角色属性对比
           </Title>
@@ -1309,8 +1312,8 @@ const CharacterDataView: React.FC = () => {
       </div>
 
       {/* 隐士出招表 */}
-      <div className="content-wrapper card-item" id="hermit-magic-list">
-        <div className="card-header">
+      <div className={`content-wrapper ${styles.cardItem}`} id="hermit-magic-list">
+        <div className={styles.cardHeader}>
           <Title level={5} className="character-card-title">
             <ThunderboltTwoTone />
             隐士出招表
@@ -1328,7 +1331,7 @@ const CharacterDataView: React.FC = () => {
             />
           </Title>
         </div>
-        <div className="card-body">
+        <div className={styles.cardBody}>
           <Table
             dataSource={magicMoves}
             columns={magicMoveColumns}

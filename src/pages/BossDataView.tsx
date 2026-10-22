@@ -13,7 +13,7 @@ import DataManager from '../utils/dataManager';
 import { Line } from '@ant-design/plots';
 import { getCurrentTheme } from '../utils/themeUtils';
 import { throttle } from 'lodash';
-import '../styles/bossDataView.css';
+import styles from '../styles/bossDataView.module.css';
 
 // 导入boss图片
 import nightOfTheBeast from '../assets/BossRelics/night-of-the-beast.avif';
@@ -355,11 +355,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     const numValue = typeof value === 'string' ? parseInt(value) : value;
 
     if (numValue <= 154) {
-      return 'resistance-low'; // 低抗性 - 绿色
+      return styles.resistanceLow; // 低抗性 - 绿色
     } else if (numValue <= 252) {
-      return 'resistance-medium'; // 中等抗性 - 橙色
+      return styles.resistanceMedium; // 中等抗性 - 橙色
     } else if (numValue <= 542) {
-      return 'resistance-high'; // 高抗性 - 红色
+      return styles.resistanceHigh; // 高抗性 - 红色
     } else {
       return '';
     }
@@ -372,15 +372,15 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     }
 
     if (value > 1) {
-      return 'absorption-1';
+      return styles.absorption1;
     } else if (value < 1) {
       // 对小于1的值进行进一步分类
       if (value <= 0.3) {
-        return 'absorption-4';
+        return styles.absorption4;
       } else if (value <= 0.7) {
-        return 'absorption-3';
+        return styles.absorption3;
       } else {
-        return 'absorption-2';
+        return styles.absorption2;
       }
     } else {
       return '';
@@ -483,7 +483,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       render: (_, record) => {
         const imageSrc = bossImageMap[record.name];
         return imageSrc ? (
-          <Image src={imageSrc} alt={record.name} width={40} height={40} className="boss-image" preview={false} />
+          <Image src={imageSrc} alt={record.name} width={40} height={40} className={styles.bossImage} preview={false} />
         ) : null;
       },
       onCell: (record) => {
@@ -550,13 +550,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                   : playerCount;
               const deepNightScale = getDeepNightHpMultiplier(record);
               return (
-                <span className="health-base">
+                <span className={styles.healthBase}>
                   {Math.round(value * 3.54 * players * scale * deepNightScale).toLocaleString()}
                   {factors.length ? `(×${factors.join('×')})` : ''}
                 </span>
               );
             }
-            return <span className="health-base">{value}</span>;
+            return <span className={styles.healthBase}>{value}</span>;
           },
         },
         {
@@ -586,7 +586,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               const deepNightScale = getDeepNightHpMultiplier(record);
               const nightreignHealth = Math.round(record.nightreignHealth * 3.54 * players * scale * deepNightScale);
               return (
-                <span className="health-nightreign">
+                <span className={styles.healthNightreign}>
                   {nightreignHealth.toLocaleString()}
                   {factors.length ? `(×${factors.join('×')})` : ''}
                 </span>
@@ -594,9 +594,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
             }
             // 复合写法（多 Boss 共享血条，如「4000(160, 237, 422)」）直接显示原文
             if (typeof record.nightreignHealth === 'string' && record.nightreignHealth !== '-') {
-              return <span className="health-nightreign">{record.nightreignHealth}</span>;
+              return <span className={styles.healthNightreign}>{record.nightreignHealth}</span>;
             }
-            return <span className="health-nightreign">{value}</span>;
+            return <span className={styles.healthNightreign}>{value}</span>;
           },
         },
       ],
@@ -606,7 +606,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       children: [
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
               <span>普通</span>
             </div>
@@ -615,11 +615,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'normalAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
               <span>打击</span>
             </div>
@@ -628,11 +628,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'strikeAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
               <span>斩击</span>
             </div>
@@ -641,11 +641,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'slashAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
               <span>突刺</span>
             </div>
@@ -654,7 +654,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'pierceAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
       ],
     },
@@ -663,7 +663,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       children: [
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
               <span>魔力</span>
             </div>
@@ -672,11 +672,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'magicAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
               <span>火焰</span>
             </div>
@@ -685,11 +685,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'fireAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
               <span>雷电</span>
             </div>
@@ -698,11 +698,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'lightningAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
               <span>神圣</span>
             </div>
@@ -711,7 +711,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'holyAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
       ],
     },
@@ -727,7 +727,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       render: (_, record) => {
         const imageSrc = bossImageMap[record.name];
         return imageSrc ? (
-          <Image src={imageSrc} alt={record.name} width={40} height={40} className="boss-image" preview={false} />
+          <Image src={imageSrc} alt={record.name} width={40} height={40} className={styles.bossImage} preview={false} />
         ) : null;
       },
       onCell: (record) => {
@@ -777,9 +777,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           align: 'center',
           render: (value, record) => {
             if (typeof value === 'number') {
-              return <span className="health-base">{calculatePoise(value, record)}</span>;
+              return <span className={styles.healthBase}>{calculatePoise(value, record)}</span>;
             }
-            return <span className="health-base">{value}</span>;
+            return <span className={styles.healthBase}>{value}</span>;
           },
         },
         {
@@ -790,9 +790,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           align: 'center',
           render: (value, record) => {
             if (typeof value === 'number') {
-              return <span className="health-nightreign">{calculatePoise(value, record)}</span>;
+              return <span className={styles.healthNightreign}>{calculatePoise(value, record)}</span>;
             }
-            return <span className="health-nightreign">{value}</span>;
+            return <span className={styles.healthNightreign}>{value}</span>;
           },
         },
       ],
@@ -802,7 +802,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       children: [
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={poisonResistance} alt="中毒" width={18} height={18} preview={false} />
               <span>中毒</span>
             </div>
@@ -814,12 +814,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`resistance-value ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={scarletRotResistance} alt="腐败" width={18} height={18} preview={false} />
               <span>腐败</span>
             </div>
@@ -831,12 +831,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`resistance-value ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={bleedResistance} alt="出血" width={18} height={18} preview={false} />
               <span>出血</span>
             </div>
@@ -848,12 +848,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`resistance-value ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={frostResistance} alt="冻伤" width={18} height={18} preview={false} />
               <span>冻伤</span>
             </div>
@@ -865,12 +865,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`resistance-value ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={sleepResistance} alt="睡眠" width={18} height={18} preview={false} />
               <span>睡眠</span>
             </div>
@@ -882,12 +882,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`resistance-value ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={madnessResistance} alt="发狂" width={18} height={18} preview={false} />
               <span>发狂</span>
             </div>
@@ -899,12 +899,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`resistance-value ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={deathBlightResistance} alt="咒死" width={18} height={18} preview={false} />
               <span>咒死</span>
             </div>
@@ -916,7 +916,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`resistance-value ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
       ],
@@ -1041,7 +1041,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       width: 90,
       align: 'center',
       render: (text) => (
-        <span className="location-tag">
+        <span className={styles.locationTag}>
           {text
             ? text.split('、').map((loc: string) => (
                 <Tag
@@ -1061,7 +1061,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       children: [
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
               <span>普通</span>
             </div>
@@ -1070,11 +1070,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'normal',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
               <span>打击</span>
             </div>
@@ -1083,11 +1083,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'strike',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
               <span>斩击</span>
             </div>
@@ -1096,11 +1096,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'slash',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
               <span>突刺</span>
             </div>
@@ -1109,7 +1109,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'pierce',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
       ],
     },
@@ -1119,7 +1119,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       children: [
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
               <span>魔力</span>
             </div>
@@ -1128,11 +1128,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'magic',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
               <span>火焰</span>
             </div>
@@ -1141,11 +1141,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'fire',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
               <span>雷电</span>
             </div>
@@ -1154,11 +1154,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'lightning',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
               <span>神圣</span>
             </div>
@@ -1167,7 +1167,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'holy',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
       ],
     },
@@ -1176,7 +1176,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       children: [
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={bleedResistance} alt="出血" width={18} height={18} preview={false} />
               <span>出血</span>
             </div>
@@ -1185,11 +1185,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'bleed',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getResistanceClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getResistanceClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={poisonResistance} alt="中毒" width={18} height={18} preview={false} />
               <span>中毒</span>
             </div>
@@ -1198,11 +1198,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'poison',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getResistanceClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getResistanceClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={scarletRotResistance} alt="腐败" width={18} height={18} preview={false} />
               <span>腐败</span>
             </div>
@@ -1211,11 +1211,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'scarletRot',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getResistanceClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getResistanceClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={frostResistance} alt="冻伤" width={18} height={18} preview={false} />
               <span>冻伤</span>
             </div>
@@ -1224,7 +1224,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'frost',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getResistanceClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getResistanceClass(value)}`}>{value}</span>,
         },
       ],
     },
@@ -1259,7 +1259,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       width: 90,
       align: 'center',
       render: (text) => (
-        <span className="location-tag">
+        <span className={styles.locationTag}>
           {text ? (
             <Tag color={getLocationColor(text)} style={{ marginInlineEnd: 2 }}>
               {text}
@@ -1273,7 +1273,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       children: [
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
               <span>普通</span>
             </div>
@@ -1282,11 +1282,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'normal',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
               <span>打击</span>
             </div>
@@ -1295,11 +1295,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'strike',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
               <span>斩击</span>
             </div>
@@ -1308,11 +1308,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'slash',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
               <span>突刺</span>
             </div>
@@ -1321,7 +1321,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'pierce',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
       ],
     },
@@ -1331,7 +1331,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       children: [
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
               <span>魔力</span>
             </div>
@@ -1340,11 +1340,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'magic',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
               <span>火焰</span>
             </div>
@@ -1353,11 +1353,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'fire',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
               <span>雷电</span>
             </div>
@@ -1366,11 +1366,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'lightning',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
               <span>神圣</span>
             </div>
@@ -1379,7 +1379,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'holy',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
       ],
     },
@@ -1388,7 +1388,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       children: [
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={bleedResistance} alt="出血" width={18} height={18} preview={false} />
               <span>出血</span>
             </div>
@@ -1397,11 +1397,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'bleed',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getResistanceClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getResistanceClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={poisonResistance} alt="中毒" width={18} height={18} preview={false} />
               <span>中毒</span>
             </div>
@@ -1410,11 +1410,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'poison',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getResistanceClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getResistanceClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={scarletRotResistance} alt="腐败" width={18} height={18} preview={false} />
               <span>腐败</span>
             </div>
@@ -1423,11 +1423,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'scarletRot',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getResistanceClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getResistanceClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={frostResistance} alt="冻伤" width={18} height={18} preview={false} />
               <span>冻伤</span>
             </div>
@@ -1436,7 +1436,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'frost',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`resistance-value ${getResistanceClass(value)}`}>{value}</span>,
+          render: (value) => <span className={`${styles.resistanceValue} ${getResistanceClass(value)}`}>{value}</span>,
         },
       ],
     },
@@ -1728,8 +1728,8 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   }, [activeSubTab, activeBossTab]);
 
   return (
-    <div className="boss-data-view-container">
-      <Card className="boss-card">
+    <div className={styles.bossDataViewContainer}>
+      <Card className={styles.bossCard}>
         <Tabs
           style={{ marginTop: '5px' }}
           type="card"
@@ -1800,8 +1800,8 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               key: 'wild-boss-data',
               label: '☠️ 野生Boss数据',
               children: (
-                <div className="wild-boss-filter-container" id="wild-boss-data">
-                  <div className="filter-inputs">
+                <div className={styles.wildBossFilterContainer} id="wild-boss-data">
+                  <div className={styles.filterInputs}>
                     <Input
                       placeholder="搜索Boss名称"
                       prefix={<SearchOutlined />}
@@ -1838,8 +1838,8 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               key: 'character-data',
               label: '🏛️ 圆桌厅堂人物数据',
               children: (
-                <div className="wild-boss-filter-container" id="roundtable-characters">
-                  <div className="filter-inputs">
+                <div className={styles.wildBossFilterContainer} id="roundtable-characters">
+                  <div className={styles.filterInputs}>
                     <Input
                       placeholder="搜索人物名称"
                       prefix={<SearchOutlined />}

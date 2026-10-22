@@ -1,6 +1,6 @@
 /* CharacterDataView 组件专用样式 */
 
-.character-data-container {
+.characterDataContainer {
   /* padding: 20px 0; */
   padding-bottom: 25px;
   max-width: 100%;
@@ -9,7 +9,7 @@
   flex-direction: column;
 }
 
-.content-wrapper.card-item {
+:global(.content-wrapper).cardItem {
   max-width: 1280px;
   width: 70%;
   margin: 0 auto 20px auto;
@@ -18,20 +18,20 @@
 }
 
 /* ===== 卡片列表组件 ===== */
-.card-item {
+.cardItem {
   margin-bottom: 20px !important;
   transition: all var(--transition-normal);
   cursor: pointer;
   animation: fadeInUp 0.3s ease-out;
 }
 
-.card-item:hover {
+.cardItem:hover {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* 卡片内容动画 */
-.card-item .card-header,
-.card-item .card-body {
+.cardItem .cardHeader,
+.cardItem .cardBody {
   transition: all var(--transition-normal);
 }
 
@@ -47,41 +47,41 @@
   }
 }
 
-.card-item .card-header {
+.cardItem .cardHeader {
   padding: 20px 40px 10px 40px;
   background: var(--table-header-bg);
   border-radius: 15px 15px 0 0;
 }
 
-.card-item .card-body {
+.cardItem .cardBody {
   padding: 20px 40px 30px 40px;
   background: var(--content-bg);
   border-radius: 0 0 15px 15px;
 }
 
-[data-theme='dark'] .card-item,
-body[tomato-theme='dark'] .card-item {
+[data-theme='dark'] .cardItem,
+body[tomato-theme='dark'] .cardItem {
   border-color: transparent;
 }
 
-[data-theme='dark'] .card-item:hover,
-body[tomato-theme='dark'] .card-item:hover {
+[data-theme='dark'] .cardItem:hover,
+body[tomato-theme='dark'] .cardItem:hover {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
 }
 
-[data-theme='dark'] .card-item .card-header,
-body[tomato-theme='dark'] .card-item .card-header {
+[data-theme='dark'] .cardItem .cardHeader,
+body[tomato-theme='dark'] .cardItem .cardHeader {
   background: var(--table-header-bg);
   border-bottom-color: var(--color-text-2);
 }
 
-[data-theme='dark'] .card-item .card-body,
-body[tomato-theme='dark'] .card-item .card-body {
+[data-theme='dark'] .cardItem .cardBody,
+body[tomato-theme='dark'] .cardItem .cardBody {
   background: var(--content-bg);
 }
 
 /* 角色属性表格样式 */
-.character-attributes-table {
+.characterAttributesTable {
   background: var(--content-bg);
   border-radius: 8px;
   overflow: x;
@@ -89,66 +89,66 @@ body[tomato-theme='dark'] .card-item .card-body {
 }
 
 /* 表格行选择动画 */
-.character-attributes-table .ant-table-tbody > tr {
+.characterAttributesTable :global(.ant-table-tbody) > tr {
   transition: background-color var(--transition-normal);
 }
 
-.character-attributes-table .ant-table-tbody > tr:hover {
+.characterAttributesTable :global(.ant-table-tbody) > tr:hover {
   transition: background-color var(--transition-normal);
 }
 
 /* 不同等级的颜色定义 */
-.character-attribute-value.s-rank {
+.characterAttributeValue.sRank {
   color: #ffc118;
 }
 
-.character-attribute-value.a-rank {
+.characterAttributeValue.aRank {
   color: #00dcb0;
 }
 
-.character-attribute-value.b-rank {
+.characterAttributeValue.bRank {
   color: #1890ff;
 }
 
-.character-attribute-value.c-rank {
+.characterAttributeValue.cRank {
   color: #393fef;
 }
 
-.character-attribute-value.d-rank {
+.characterAttributeValue.dRank {
   color: #494ee1;
 }
 
-.character-attribute-value.default {
+.characterAttributeValue.default {
   color: var(--color-text-1);
 }
 
 /* 开发中功能样式 */
-.character-development-placeholder {
+.characterDevelopmentPlaceholder {
   text-align: center;
   padding: 40px;
 }
 
-.character-development-text {
+.characterDevelopmentText {
   font-size: 16px;
   color: var(--color-text-2);
 }
 
 /* 雷达图过渡动画 - 与全局动画同步 */
-.radar-chart-container {
+.radarChartContainer {
   transition: all var(--transition-normal);
   opacity: 1;
   transform: scale(1);
   filter: brightness(1);
 }
 
-.radar-chart-container.theme-transitioning {
+.radarChartContainer.themeTransitioning {
   opacity: 0.6;
   transform: scale(0.95);
   filter: brightness(0.7);
 }
 
 /* 雷达图容器动画 */
-.radar-wrapper {
+.radarWrapper {
   position: relative;
   transition: all var(--transition-normal);
   opacity: 1;
@@ -161,7 +161,7 @@ body[tomato-theme='dark'] .card-item .card-body {
 }
 
 /* 确保radar-wrapper内部的Radar组件容器居中 */
-.radar-wrapper > div {
+.radarWrapper > div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -170,47 +170,47 @@ body[tomato-theme='dark'] .card-item .card-body {
 }
 
 /* 确保radar-wrapper中的canvas居中 */
-.radar-wrapper canvas {
+.radarWrapper canvas {
   display: block;
   margin: 0 auto;
 }
 
-.radar-wrapper.theme-transitioning {
+.radarWrapper.themeTransitioning {
   opacity: 0.6;
   transform: scale(0.95);
   filter: brightness(0.7);
 }
 
 /* 雷达图内部元素动画 */
-.radar-chart-container.theme-transitioning canvas,
-.radar-wrapper.theme-transitioning canvas {
+.radarChartContainer.themeTransitioning canvas,
+.radarWrapper.themeTransitioning canvas {
   transition: all var(--transition-normal);
 }
 
 /* 闪避无敌帧对比图表过渡动画 */
-.dodge-frames-chart-container {
+.dodgeFramesChartContainer {
   transition: all var(--transition-normal);
   opacity: 1;
   transform: scale(1);
   filter: brightness(1);
 }
 
-.dodge-frames-chart-container.theme-transitioning {
+.dodgeFramesChartContainer.themeTransitioning {
   opacity: 0.6;
   transform: scale(0.95);
   filter: brightness(0.7);
 }
 
-.dodge-frames-chart-container.theme-transitioning canvas {
+.dodgeFramesChartContainer.themeTransitioning canvas {
   transition: all var(--transition-normal);
 }
 
 /* 闪避无敌帧提示信息样式 */
-.dodge-frames-tips {
+.dodgeFramesTips {
   color: var(--color-text-1);
 }
 
-.dodge-frames-tips .tip-item {
+.dodgeFramesTips .tipItem {
   /* margin-bottom: 6px; */
   font-size: 13px;
   line-height: 1.5;
@@ -219,19 +219,17 @@ body[tomato-theme='dark'] .card-item .card-body {
 
 /* Alert 组件样式优化 */
 
-.character-data-container .ant-alert-message {
+.characterDataContainer :global(.ant-alert-message) {
   color: var(--color-text-1);
   font-weight: 600;
   font-size: 12px;
 }
 
-.character-data-container .ant-alert-description {
+.characterDataContainer :global(.ant-alert-description) {
   color: var(--color-text-2);
-}
-
-/* 移动端基础适配 - 简化版 */
+} /* 移动端基础适配 - 简化版 */
 @media (max-width: 999px) {
-  .content-wrapper.card-item {
+  :global(.content-wrapper).cardItem {
     width: 95%;
     min-width: auto;
   }
@@ -240,24 +238,24 @@ body[tomato-theme='dark'] .card-item .card-body {
 /* ===== 表格与雷达图宽度比例控制 ===== */
 
 /* 默认比例：表格60%，雷达图40% */
-.character-attributes-table-container {
+.characterAttributesTableContainer {
   flex: 0.6 !important;
   min-width: 0;
   display: flex;
   flex-direction: column;
 }
 
-.character-attributes-table-container .ant-table-wrapper {
+.characterAttributesTableContainer :global(.ant-table-wrapper) {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.character-attributes-table-container .ant-table {
+.characterAttributesTableContainer :global(.ant-table) {
   flex: 1;
 }
 
-.radar-chart-container {
+.radarChartContainer {
   flex: 0.4 !important;
   min-width: 250px;
   min-height: 250px;
@@ -268,7 +266,7 @@ body[tomato-theme='dark'] .card-item .card-body {
 }
 
 /* 确保Radar组件生成的内部容器居中 */
-.radar-chart-container > div {
+.radarChartContainer > div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -277,30 +275,32 @@ body[tomato-theme='dark'] .card-item .card-body {
 }
 
 /* 确保canvas在内部容器中居中 */
-.radar-chart-container canvas {
+.radarChartContainer canvas {
   display: block;
   margin: 0 auto;
 }
 
 /* 黑暗模式下选中行样式 */
-[data-theme='dark'] .character-attributes-table .ant-table-tbody > tr.ant-table-row-selected > td,
-body[tomato-theme='dark'] .character-attributes-table .ant-table-tbody > tr.ant-table-row-selected > td {
+[data-theme='dark'] .characterAttributesTable :global(.ant-table-tbody) > tr:global(.ant-table-row-selected) > td,
+body[tomato-theme='dark']
+  .characterAttributesTable
+  :global(.ant-table-tbody)
+  > tr:global(.ant-table-row-selected)
+  > td {
   background-color: #000000 !important;
-}
-
-/* 移动端响应式调整 - 简化版 */
+} /* 移动端响应式调整 - 简化版 */
 @media (max-width: 999px) {
-  .attributes-and-radar {
+  .attributesAndRadar {
     flex-direction: column !important;
   }
 
-  .character-attributes-table-container {
+  .characterAttributesTableContainer {
     flex: 1 !important;
     min-width: 100% !important;
   }
 
   /* 移动端雷达图，表格下方 */
-  .radar-chart-container {
+  .radarChartContainer {
     display: block !important;
     flex: unset !important;
     width: 100% !important;
@@ -309,7 +309,7 @@ body[tomato-theme='dark'] .character-attributes-table .ant-table-tbody > tr.ant-
   }
 }
 /* ===== 雷达图自定义图例（固定单行 + 左右滚动箭头） ===== */
-.radar-legend {
+.radarLegend {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -319,7 +319,7 @@ body[tomato-theme='dark'] .character-attributes-table .ant-table-tbody > tr.ant-
   margin-bottom: 4px;
 }
 
-.radar-legend-scroll {
+.radarLegendScroll {
   flex: 1 1 auto;
   min-width: 0;
   display: flex;
@@ -333,11 +333,11 @@ body[tomato-theme='dark'] .character-attributes-table .ant-table-tbody > tr.ant-
   scroll-behavior: smooth;
 }
 
-.radar-legend-scroll::-webkit-scrollbar {
+.radarLegendScroll::-webkit-scrollbar {
   display: none;
 }
 
-.radar-legend-item {
+.radarLegendItem {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -347,14 +347,14 @@ body[tomato-theme='dark'] .character-attributes-table .ant-table-tbody > tr.ant-
   white-space: nowrap;
 }
 
-.radar-legend-dot {
+.radarLegendDot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   flex: 0 0 auto;
 }
 
-.radar-legend-arrow {
+.radarLegendArrow {
   flex: 0 0 auto;
   width: 18px;
   height: 18px;
@@ -372,13 +372,13 @@ body[tomato-theme='dark'] .character-attributes-table .ant-table-tbody > tr.ant-
     color var(--transition-fast);
 }
 
-.radar-legend-arrow:hover {
+.radarLegendArrow:hover {
   background: var(--color-primary-100);
   color: var(--color-primary-500);
 }
 
 /* 雷达图内容列：自定义图例在上，图表在下 */
-.radar-chart-inner {
+.radarChartInner {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -386,11 +386,11 @@ body[tomato-theme='dark'] .character-attributes-table .ant-table-tbody > tr.ant-
   min-height: 0;
 }
 
-.radar-chart-inner > .radar-legend {
+.radarChartInner > .radarLegend {
   flex: 0 0 auto;
 }
 
-.radar-chart-inner > div:last-child {
+.radarChartInner > div:last-child {
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
@@ -399,11 +399,11 @@ body[tomato-theme='dark'] .character-attributes-table .ant-table-tbody > tr.ant-
   width: 100%;
 }
 
-.radar-chart-inner canvas {
+.radarChartInner canvas {
   display: block;
   margin: 0 auto;
 }
 
-.radar-legend-scroll.is-centered {
+.radarLegendScroll.isCentered {
   justify-content: center;
 }
