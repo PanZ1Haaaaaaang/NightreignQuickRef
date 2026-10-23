@@ -194,7 +194,8 @@ const Header: React.FC<HeaderProps> = React.memo(
                           <div style={{ marginBottom: '8px' }}>
                             <div style={{ fontWeight: 'bold', color: '#1890ff', marginBottom: '4px' }}>✅ 最新更新</div>
                             <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                              • 修正了部分词条与夜王数据，同步{getVersionNumber()}版本；
+                              • 升级代码依赖、优化架构；
+                              <br />• 修正了部分词条与夜王数据，同步{getVersionNumber()}版本；
                               <br />• 添加了DLC角色详细数据；
                               <br />• 添加了武器战技与魔法祷告数据（数据来源 by: 虚空蛋黄酱）；
                               <br />• 添加了大空洞野生Boss与特殊事件效果；
