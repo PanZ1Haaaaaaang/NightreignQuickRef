@@ -3,8 +3,8 @@
 /* 导入设计系统（token + 基础样式） */
 @import './design-system.css';
 
-/* antd 覆盖层（纯 .ant-* 选择器）。必须排在组件样式之前：
-   项目里针对具体页面的 .ant-* 定制写在 components.css / 页面样式里，
+/* antd 覆盖层（所有针对 antd 内部类名的定制规则都在这里）。
+   必须排在组件样式之前：页面/组件级定制写在各自文件里，
    需要靠顺序覆盖这里的基线值。 */
 @import './antd-overrides.css';
 
