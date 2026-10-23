@@ -1,21 +1,21 @@
 /* RecoveryCalculator 组件专用样式 */
 
 /* 主容器 */
-.recovery-calculator {
+.recoveryCalculator {
   display: flex;
   gap: 24px;
   min-height: 500px;
 }
 
 /* 左侧选择区域 */
-.recovery-calculator .selection-area {
+.recoveryCalculator .selectionArea {
   flex: 1.2;
   display: flex;
   flex-direction: column;
 }
 
 /* 角色选择区域 */
-.recovery-calculator .character-selection {
+.recoveryCalculator .characterSelection {
   margin-bottom: 8px;
   display: flex;
   flex-direction: column;
@@ -23,24 +23,24 @@
   align-items: flex-start;
 }
 
-.recovery-calculator .character-select {
+.recoveryCalculator .characterSelect {
   width: 100%;
   margin-top: 8px;
 }
 
 /* 角色选择行 */
-.recovery-calculator .character-row {
+.recoveryCalculator .characterRow {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.recovery-calculator .character-row .ant-typography {
+.recoveryCalculator .characterRow :global(.ant-typography) {
   white-space: nowrap;
   min-width: fit-content;
 }
 
-.recovery-calculator .character-row .character-select {
+.recoveryCalculator .characterRow .characterSelect {
   flex: 1;
   margin-top: 0;
   min-width: 200px;
@@ -48,11 +48,11 @@
 }
 
 /* 回血效果选择区域 */
-.recovery-calculator .effects-selection {
+.recoveryCalculator .effectsSelection {
   flex: 1;
 }
 
-.recovery-calculator .effects-grid {
+.recoveryCalculator .effectsGrid {
   margin-top: 8px;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -62,7 +62,7 @@
 }
 
 /* 效果卡片 */
-.recovery-calculator .effect-card {
+.recoveryCalculator .effectCard {
   padding: 12px;
   border: 1px solid var(--theme-border);
   border-radius: 6px;
@@ -75,19 +75,19 @@
   justify-content: space-between;
 }
 
-.recovery-calculator .effect-card:hover {
+.recoveryCalculator .effectCard:hover {
   border-color: var(--color-primary-400);
   box-shadow: var(--shadow-md);
 }
 
-.recovery-calculator .effect-card.selected {
+.recoveryCalculator .effectCard.selected {
   background-color: rgba(24, 144, 255, 0.1);
   border-color: var(--color-primary-500);
   box-shadow: 0 2px 8px rgba(24, 144, 255, 0.15);
 }
 
 /* 效果卡片标题 */
-.recovery-calculator .effect-card-title {
+.recoveryCalculator .effectCardTitle {
   font-weight: bold;
   font-size: 13px;
   margin-bottom: 4px;
@@ -95,13 +95,13 @@
   color: var(--theme-text-primary);
 }
 
-.recovery-calculator .effect-card-title.selected {
+.recoveryCalculator .effectCardTitle.selected {
   color: var(--color-primary-600);
   font-weight: bold;
 }
 
 /* 效果卡片描述 */
-.recovery-calculator .effect-card-description {
+.recoveryCalculator .effectCardDescription {
   font-size: 11px;
   color: var(--theme-text-secondary);
   margin-bottom: 4px;
@@ -109,26 +109,26 @@
 }
 
 /* 效果卡片底部 */
-.recovery-calculator .effect-card-footer {
+.recoveryCalculator .effectCardFooter {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 /* 备注信息区域 */
-.recovery-calculator .notes-section {
+.recoveryCalculator .notesSection {
   margin-top: 16px;
   margin-bottom: 12px;
 }
 
-.recovery-calculator .notes-container {
+.recoveryCalculator .notesContainer {
   background-color: var(--theme-bg-secondary);
   padding: 12px;
   border-radius: 6px;
   border: 1px solid var(--theme-border);
 }
 
-.recovery-calculator .notes-list {
+.recoveryCalculator .notesList {
   font-size: 12px;
   color: var(--theme-text-secondary);
   line-height: 1.6;
@@ -136,12 +136,12 @@
   padding-left: 20px;
 }
 
-.recovery-calculator .notes-list li {
+.recoveryCalculator .notesList li {
   margin-bottom: 4px;
 }
 
 /* 计算按钮 */
-.recovery-calculator .calculate-button {
+.recoveryCalculator .calculateButton {
   width: 100%;
   height: 50px;
   background-color: var(--color-primary-400);
@@ -149,39 +149,39 @@
   color: white;
 }
 
-.recovery-calculator .calculate-button:hover {
+.recoveryCalculator .calculateButton:hover {
   background-color: var(--color-primary-300);
   border-color: var(--color-primary-300);
 }
 
-.recovery-calculator .calculate-button:active {
+.recoveryCalculator .calculateButton:active {
   background-color: var(--color-primary-400);
   border-color: var(--color-primary-400);
 }
 
 /* 右侧数据展示区域 */
-.recovery-calculator .results-area {
+.recoveryCalculator .resultsArea {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 /* 计算步骤卡片 */
-.recovery-calculator .steps-card {
+.recoveryCalculator .stepsCard {
   flex: 1;
   margin-bottom: 8px;
   display: flex;
   flex-direction: column;
 }
 
-.recovery-calculator .steps-card .ant-card-body {
+.recoveryCalculator .stepsCard :global(.ant-card-body) {
   flex: 1;
   display: flex;
   flex-direction: column;
   padding: 12px;
 }
 
-.recovery-calculator .steps-content {
+.recoveryCalculator .stepsContent {
   background-color: var(--theme-bg-tertiary);
   padding: 12px;
   border-radius: 6px;
@@ -193,12 +193,12 @@
   min-height: 200px;
 }
 
-.recovery-calculator .steps-content .step-item {
+.recoveryCalculator .stepsContent .stepItem {
   margin-bottom: 4px;
   color: var(--theme-text-primary);
 }
 
-.recovery-calculator .steps-content .placeholder {
+.recoveryCalculator .stepsContent .placeholder {
   color: var(--theme-text-tertiary);
   font-style: italic;
   flex: 1;
@@ -208,7 +208,7 @@
   min-height: 200px;
 }
 
-.recovery-calculator .steps-content .placeholder .ant-empty {
+.recoveryCalculator .stepsContent .placeholder :global(.ant-empty) {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -217,52 +217,52 @@
 }
 
 /* 计算结果卡片 */
-.recovery-calculator .results-card {
+.recoveryCalculator .resultsCard {
   flex: 0 0 auto;
 }
 
-.recovery-calculator .results-content {
+.recoveryCalculator .resultsContent {
   display: flex;
   align-items: flex-start;
   gap: 16px;
 }
 
 /* 计算结果区域 */
-.recovery-calculator .recovery-section {
+.recoveryCalculator .recoverySection {
   flex: 1;
 }
 
-.recovery-calculator .recovery-title {
+.recoveryCalculator .recoveryTitle {
   font-weight: bold;
   font-size: 14px;
   margin-bottom: 1px;
 }
 
-.recovery-calculator .recovery-title.self {
+.recoveryCalculator .recoveryTitle.self {
   color: var(--color-success);
 }
 
-.recovery-calculator .recovery-title.ally {
+.recoveryCalculator .recoveryTitle.ally {
   color: var(--color-info);
 }
 
-.recovery-calculator .recovery-item {
+.recoveryCalculator .recoveryItem {
   margin-bottom: 4px;
 }
 
-.recovery-calculator .recovery-percentage {
+.recoveryCalculator .recoveryPercentage {
   color: var(--theme-text-secondary);
   font-size: 12px;
 }
 
-.recovery-calculator .recovery-placeholder {
+.recoveryCalculator .recoveryPlaceholder {
   color: var(--theme-text-tertiary);
   font-style: italic;
   height: 100%;
 }
 
 /* 分隔线 */
-.recovery-calculator .divider {
+.recoveryCalculator .divider {
   height: 60px;
   margin: 0 8px;
 }
@@ -273,108 +273,108 @@
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .recovery-calculator .effects-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .recovery-calculator .character-select {
     width: 100%;
   }
-  
+
   .recovery-calculator .divider {
     display: none;
   }
 }
 
 /* 黑暗模式适配 */
-[data-theme="dark"] .recovery-calculator .effect-card,
-body[tomato-theme="dark"] .recovery-calculator .effect-card {
+[data-theme='dark'] .recoveryCalculator .effectCard,
+body[tomato-theme='dark'] .recoveryCalculator .effectCard {
   background-color: var(--theme-bg-primary);
   border-color: var(--theme-border);
 }
 
-[data-theme="dark"] .recovery-calculator .effect-card:hover,
-body[tomato-theme="dark"] .recovery-calculator .effect-card:hover {
+[data-theme='dark'] .recoveryCalculator .effectCard:hover,
+body[tomato-theme='dark'] .recoveryCalculator .effectCard:hover {
   border-color: var(--color-primary-400);
   box-shadow: var(--shadow-md);
 }
 
-[data-theme="dark"] .recovery-calculator .effect-card.selected,
-body[tomato-theme="dark"] .recovery-calculator .effect-card.selected {
+[data-theme='dark'] .recoveryCalculator .effectCard.selected,
+body[tomato-theme='dark'] .recoveryCalculator .effectCard.selected {
   background-color: rgba(24, 144, 255, 0.2);
   border-color: var(--color-primary-500);
   box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3);
 }
 
-[data-theme="dark"] .recovery-calculator .effect-card-title,
-body[tomato-theme="dark"] .recovery-calculator .effect-card-title {
+[data-theme='dark'] .recoveryCalculator .effectCardTitle,
+body[tomato-theme='dark'] .recoveryCalculator .effectCardTitle {
   color: var(--theme-text-primary);
 }
 
-[data-theme="dark"] .recovery-calculator .effect-card-title.selected,
-body[tomato-theme="dark"] .recovery-calculator .effect-card-title.selected {
+[data-theme='dark'] .recoveryCalculator .effectCardTitle.selected,
+body[tomato-theme='dark'] .recoveryCalculator .effectCardTitle.selected {
   color: #85a5ff !important;
   font-weight: bold !important;
 }
 
-[data-theme="dark"] .recovery-calculator .effect-card-description,
-body[tomato-theme="dark"] .recovery-calculator .effect-card-description {
+[data-theme='dark'] .recoveryCalculator .effectCardDescription,
+body[tomato-theme='dark'] .recoveryCalculator .effectCardDescription {
   color: var(--theme-text-secondary);
 }
 
-[data-theme="dark"] .recovery-calculator .notes-container,
-body[tomato-theme="dark"] .recovery-calculator .notes-container {
+[data-theme='dark'] .recoveryCalculator .notesContainer,
+body[tomato-theme='dark'] .recoveryCalculator .notesContainer {
   background-color: var(--theme-bg-secondary);
   border-color: var(--theme-border);
 }
 
-[data-theme="dark"] .recovery-calculator .notes-list,
-body[tomato-theme="dark"] .recovery-calculator .notes-list {
+[data-theme='dark'] .recoveryCalculator .notesList,
+body[tomato-theme='dark'] .recoveryCalculator .notesList {
   color: var(--theme-text-secondary);
 }
 
-[data-theme="dark"] .recovery-calculator .steps-content,
-body[tomato-theme="dark"] .recovery-calculator .steps-content {
+[data-theme='dark'] .recoveryCalculator .stepsContent,
+body[tomato-theme='dark'] .recoveryCalculator .stepsContent {
   background-color: var(--theme-bg-tertiary);
 }
 
-[data-theme="dark"] .recovery-calculator .steps-content .step-item,
-body[tomato-theme="dark"] .recovery-calculator .steps-content .step-item {
+[data-theme='dark'] .recoveryCalculator .stepsContent .stepItem,
+body[tomato-theme='dark'] .recoveryCalculator .stepsContent .stepItem {
   color: var(--theme-text-primary);
 }
 
-[data-theme="dark"] .recovery-calculator .steps-content .placeholder,
-body[tomato-theme="dark"] .recovery-calculator .steps-content .placeholder {
+[data-theme='dark'] .recoveryCalculator .stepsContent .placeholder,
+body[tomato-theme='dark'] .recoveryCalculator .stepsContent .placeholder {
   color: var(--theme-text-tertiary);
 }
 
-[data-theme="dark"] .recovery-calculator .recovery-placeholder,
-body[tomato-theme="dark"] .recovery-calculator .recovery-placeholder {
+[data-theme='dark'] .recoveryCalculator .recoveryPlaceholder,
+body[tomato-theme='dark'] .recoveryCalculator .recoveryPlaceholder {
   color: var(--theme-text-tertiary);
 }
 
-[data-theme="dark"] .recovery-calculator .recovery-percentage,
-body[tomato-theme="dark"] .recovery-calculator .recovery-percentage {
+[data-theme='dark'] .recoveryCalculator .recoveryPercentage,
+body[tomato-theme='dark'] .recoveryCalculator .recoveryPercentage {
   color: var(--theme-text-secondary);
 }
 
 /* 黑暗模式下的计算按钮样式 */
-[data-theme="dark"] .recovery-calculator .calculate-button,
-body[tomato-theme="dark"] .recovery-calculator .calculate-button {
+[data-theme='dark'] .recoveryCalculator .calculateButton,
+body[tomato-theme='dark'] .recoveryCalculator .calculateButton {
   background-color: var(--color-primary-500);
   border-color: var(--color-primary-500);
   color: white;
 }
 
-[data-theme="dark"] .recovery-calculator .calculate-button:hover,
-body[tomato-theme="dark"] .recovery-calculator .calculate-button:hover {
+[data-theme='dark'] .recoveryCalculator .calculateButton:hover,
+body[tomato-theme='dark'] .recoveryCalculator .calculateButton:hover {
   background-color: var(--color-primary-600);
   border-color: var(--color-primary-600);
 }
 
-[data-theme="dark"] .recovery-calculator .calculate-button:active,
-body[tomato-theme="dark"] .recovery-calculator .calculate-button:active {
+[data-theme='dark'] .recoveryCalculator .calculateButton:active,
+body[tomato-theme='dark'] .recoveryCalculator .calculateButton:active {
   background-color: var(--color-primary-500);
   border-color: var(--color-primary-500);
 }

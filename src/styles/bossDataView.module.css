@@ -1,8 +1,8 @@
 /* BossDataView 图片样式 */
 
 /* 图片容器通用样式 */
-.damage-type-container,
-.resistance-type-container {
+.damageTypeContainer,
+.resistanceTypeContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,26 +11,26 @@
 }
 
 /* 表格标题中的图片样式 */
-.damage-type-header img {
+.damageTypeHeader img {
   width: 18px;
   height: 18px;
 }
 
 /* Boss图片样式 */
-.boss-image {
+.bossImage {
   width: 40px;
   height: 40px;
   object-fit: cover;
 }
 
 /* 表格标题样式 */
-.table-title {
+.tableTitle {
   text-align: center;
   font-size: 14px;
 }
 
 /* 卡片样式 - 使用百分比宽度，与传说武器详情页面保持一致 */
-.boss-card {
+.bossCard {
   max-width: 1300px;
   min-width: 1000px;
   width: 70%;
@@ -40,119 +40,118 @@
   box-shadow: 0 4px 20px var(--content-shadow);
   padding: 0px 10px;
 }
-
 @media (max-width: 999px) {
-  .boss-card {
+  .bossCard {
     min-width: auto;
     width: 95% !important;
     margin: 0 auto;
     padding: 10px 20px 20px 20px;
     box-sizing: border-box;
   }
-  
-  /* 提升特异性，覆盖全局 .ant-card { width: 100% !important; } */
-  .boss-card.ant-card {
+
+  /* 提升特异性，覆盖全局 :global(.ant-card) { width: 100% !important; } */
+  .bossCard:global(.ant-card) {
     width: 95% !important;
   }
 }
 
-.boss-data-view-container {
+.bossDataViewContainer {
   padding-bottom: 40px;
   width: 100%;
 }
 
 /* 抗性数值颜色样式 - 确保在浅色和深色模式下都清晰可见 */
-.resistance-value {
+.resistanceValue {
   font-weight: 500;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 /* 抗性数值颜色类 - 浅色模式 */
-.resistance-low {
+.resistanceLow {
   color: #237804 !important;
 }
 
-.resistance-medium {
+.resistanceMedium {
   color: #d48806 !important;
 }
 
-.resistance-high {
+.resistanceHigh {
   color: #cf1322 !important;
 }
 
 /* 吸收数值颜色类 - 浅色模式 */
 
-.absorption-1 {
+.absorption1 {
   color: #237804 !important;
 }
 
-.absorption-2 {
+.absorption2 {
   color: #d48806 !important;
 }
 
-.absorption-3 {
+.absorption3 {
   color: #cf1322 !important;
 }
 
-.absorption-4 {
+.absorption4 {
   color: #9f00c7 !important;
 }
 
-.absorption-default {
+.absorptionDefault {
   color: #5e9400 !important;
 }
 
 /* 深色模式下的颜色覆盖 */
-body[tomato-theme="dark"] .resistance-low {
+body[tomato-theme='dark'] .resistanceLow {
   color: #52c41a !important; /* 浅绿色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .resistance-medium {
+body[tomato-theme='dark'] .resistanceMedium {
   color: #faad14 !important; /* 浅橙色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .resistance-high {
+body[tomato-theme='dark'] .resistanceHigh {
   color: #ff4d4f !important; /* 浅红色 - 深色模式下更清晰 */
 }
 
 /* 野生Boss筛选器样式 */
-.wild-boss-filter-container {
+.wildBossFilterContainer {
   margin-bottom: 16px;
 }
 
 /* 夜王boss数据表格样式优化 */
-.boss-card .ant-table {
+.bossCard :global(.ant-table) {
   border-radius: 8px;
   overflow: hidden;
 }
 
-.boss-card .ant-table-thead > tr > th {
+.bossCard :global(.ant-table-thead) > tr > th {
   background: var(--table-header-bg, #fafafa);
   font-weight: 500;
   border-bottom: 2px solid var(--color-text-2, #637fbb);
 }
 
-.boss-card .ant-table-tbody > tr:hover > td {
+.bossCard :global(.ant-table-tbody) > tr:hover > td {
   background-color: var(--table-hover-bg, #f0f5ff);
 }
 
 /* 野生Boss表格样式优化 */
-.wild-boss-filter-container .ant-table {
+.wildBossFilterContainer :global(.ant-table) {
   border-radius: 8px;
   overflow: hidden;
 }
 
-.wild-boss-filter-container .ant-table-thead > tr > th {
+.wildBossFilterContainer :global(.ant-table-thead) > tr > th {
   background: var(--table-header-bg, #fafafa);
   font-weight: 500;
   border-bottom: 2px solid var(--color-text-2, #637fbb);
 }
 
-.wild-boss-filter-container .ant-table-tbody > tr:hover > td {
+.wildBossFilterContainer :global(.ant-table-tbody) > tr:hover > td {
   background-color: var(--table-hover-bg, #f0f5ff);
 }
 
-.filter-inputs {
+.filterInputs {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -163,22 +162,22 @@ body[tomato-theme="dark"] .resistance-high {
   /* border: 1px solid var(--theme-border); */
 }
 
-.filter-inputs .ant-input {
+.filterInputs :global(.ant-input) {
   border-radius: 6px;
 }
 
-.filter-inputs .ant-select {
+.filterInputs :global(.ant-select) {
   border-radius: 6px;
 }
 
-.filter-inputs .ant-btn {
+.filterInputs :global(.ant-btn) {
   border-radius: 6px;
   height: 32px;
   padding: 4px 16px;
 }
 
 /* 位置标签样式 */
-.location-tag {
+.locationTag {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
@@ -186,7 +185,7 @@ body[tomato-theme="dark"] .resistance-high {
   align-items: center;
 }
 
-.location-tag .ant-tag {
+.locationTag :global(.ant-tag) {
   margin: 0;
   border-radius: 4px;
   font-size: 12px;
@@ -195,142 +194,110 @@ body[tomato-theme="dark"] .resistance-high {
 }
 
 /* 深色模式下的筛选器样式 */
-body[tomato-theme="dark"] .filter-inputs {
+body[tomato-theme='dark'] .filterInputs {
   background-color: var(--theme-bg-secondary);
   border-color: var(--theme-border);
-}
-
-/* 移动端基础适配 - 简化版 */
+} /* 移动端基础适配 - 简化版 */
 @media (max-width: 999px) {
-  .filter-inputs {
+  .filterInputs {
     flex-direction: column;
     align-items: stretch;
   }
-  
-  .filter-inputs .ant-input,
-  .filter-inputs .ant-select {
+
+  .filterInputs :global(.ant-input),
+  .filterInputs :global(.ant-select) {
     width: 100% !important;
   }
-  
+
   /* 夜王boss数据表格移动端优化 */
-  .boss-card .ant-table-wrapper {
+  .bossCard :global(.ant-table-wrapper) {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
-  
-  .boss-card .ant-table {
-    min-width: 800px; /* 确保表格内容完整显示 */
-  }
-  
-  /* 野生Boss表格移动端优化 */
-  .wild-boss-filter-container .ant-table-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .wild-boss-filter-container .ant-table {
-    min-width: 1000px; /* 确保表格内容完整显示 */
-  }
-  
-  /* 圆桌厅堂人物表格移动端优化 */
-  .wild-boss-filter-container#roundtable-characters .ant-table-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .wild-boss-filter-container#roundtable-characters .ant-table {
+
+  .bossCard :global(.ant-table) {
     min-width: 800px; /* 确保表格内容完整显示 */
   }
 
-  
+  /* 野生Boss表格移动端优化 */
+  .wildBossFilterContainer :global(.ant-table-wrapper) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .wildBossFilterContainer :global(.ant-table) {
+    min-width: 1000px; /* 确保表格内容完整显示 */
+  }
+
+  /* 圆桌厅堂人物表格移动端优化 */
+  .wildBossFilterContainer#roundtable-characters :global(.ant-table-wrapper) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .wildBossFilterContainer#roundtable-characters :global(.ant-table) {
+    min-width: 800px; /* 确保表格内容完整显示 */
+  }
+
   /* 移动端触摸优化 */
-  .boss-card .ant-table,
-  .wild-boss-filter-container .ant-table {
+  .bossCard :global(.ant-table),
+  .wildBossFilterContainer :global(.ant-table) {
     touch-action: pan-x;
   }
-  
+
   /* 移动端表格内容优化 */
-  .boss-card .ant-table-cell,
-  .wild-boss-filter-container .ant-table-cell {
+  .bossCard :global(.ant-table-cell),
+  .wildBossFilterContainer :global(.ant-table-cell) {
     padding: 8px 6px !important;
     font-size: 13px;
   }
-  
-  .boss-card .boss-image,
-  .wild-boss-filter-container .boss-image {
+
+  .bossCard .bossImage,
+  .wildBossFilterContainer .bossImage {
     width: 35px !important;
     height: 35px !important;
   }
-  
+
   /* 移动端表格标题优化 */
-  .boss-card .ant-table-thead > tr > th,
-  .wild-boss-filter-container .ant-table-thead > tr > th {
+  .bossCard :global(.ant-table-thead) > tr > th,
+  .wildBossFilterContainer :global(.ant-table-thead) > tr > th {
     padding: 10px 6px !important;
     font-size: 12px;
     white-space: nowrap;
   }
 }
 
-body[tomato-theme="dark"] .absorption-1 {
+body[tomato-theme='dark'] .absorption1 {
   color: #52c41a !important; /* 浅绿色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .absorption-2 {
+body[tomato-theme='dark'] .absorption2 {
   color: #faad14 !important; /* 浅橙色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .absorption-3 {
+body[tomato-theme='dark'] .absorption3 {
   color: #ff292c !important; /* 浅红色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .absorption-4 {
+body[tomato-theme='dark'] .absorption4 {
   color: #cd29f6 !important; /* 亮紫色 - 深色模式下更清晰 */
 }
 
 /* body[tomato-theme="dark"] .absorption-default {
-  color: rgb(67, 67, 67) !important; 
+  color: rgb(67, 67, 67) !important;
 } */
 
 /* 血量/韧性数值颜色样式 */
-.health-base {
+.healthBase {
   /* color: #0009b9 !important;  */
   font-weight: 500;
 }
 
-.health-nightreign {
+.healthNightreign {
   color: #7100c2 !important; /* 紫色 - 永夜王血量/韧性 */
   font-weight: 500;
 }
 
-body[tomato-theme="dark"] .health-nightreign {
+body[tomato-theme='dark'] .healthNightreign {
   color: #b240ff !important; /* 浅紫色 - 深色模式下更清晰 */
-}
-
-/* 表头固定样式 */
-.ant-table-sticky-header {
-  background-color: var(--content-bg);
-  border-bottom: 1px solid var(--theme-border);
-}
-
-.ant-table-sticky-header .ant-table-thead > tr > th {
-  background-color: var(--content-bg);
-  border-bottom: 1px solid var(--theme-border);
-  position: sticky;
-  top: 0;
-  z-index: 2;
-}
-
-/* 确保表头在滚动时保持可见 */
-.ant-table-wrapper .ant-table-sticky-header {
-  overflow: visible;
-}
-
-/* 深色模式下的表头样式 */
-body[tomato-theme="dark"] .ant-table-sticky-header {
-  background-color: var(--content-bg);
-}
-
-body[tomato-theme="dark"] .ant-table-sticky-header .ant-table-thead > tr > th {
-  background-color: var(--content-bg);
-  border-bottom-color: var(--theme-border);
 }

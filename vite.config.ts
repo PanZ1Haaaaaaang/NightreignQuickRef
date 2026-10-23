@@ -1,53 +1,51 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
+// GitHub Pages 部署在子路径，Vercel 部署在根路径
+const isVercel = process.env.VERCEL === '1' || process.env.VERCEL === 'true';
+
+// 第三方依赖分包规则（Vite 8 基于 Rolldown，manualChunks 只接受函数形式）
+const vendorGroups: Array<{ name: string; test: RegExp }> = [
+  // 图表库单独成 chunk：只有「角色数据 / 夜王Boss数据」两个懒加载页面会 import，
+  // 单独成块后首屏不再无条件下载整套 G2。
+  { name: 'charts-vendor', test: /node_modules[\\/]@antv[\\/]|node_modules[\\/]@ant-design[\\/](plots|charts)[\\/]/ },
+  { name: 'react-vendor', test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/ },
+  { name: 'antd-vendor', test: /node_modules[\\/](antd|@ant-design|rc-[^\\/]+)[\\/]/ },
+  { name: 'utils-vendor', test: /node_modules[\\/]lodash[\\/]/ },
+];
+
 export default defineConfig({
-  base: (process.env.VERCEL === '1' || process.env.VERCEL === 'true') ? '/' : '/NightreignQuickRef/',
-  plugins: [
-    react()
-  ],
-  // GitHub Pages部署路径
+  base: isVercel ? '/' : '/NightreignQuickRef/',
+  plugins: [react()],
+  // 构建时注入部署时间
   define: {
-    // 在构建时注入部署时间
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
   },
   build: {
-    // 启用 Tree Shaking
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        manualChunks: {
-          // 将 React 相关库分离
-          'react-vendor': ['react', 'react-dom'],
-          // 将 Ant Design 相关库分离
-          'antd-vendor': ['antd', '@ant-design/colors', '@ant-design/plots'],
-          // 将工具库分离
-          'utils-vendor': ['lodash']
+        manualChunks(id: string) {
+          for (const group of vendorGroups) {
+            if (group.test.test(id)) return group.name;
+          }
         },
-        // 优化 chunk 文件名，便于缓存
+        // 产物文件名带 hash，便于缓存
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
-        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]'
-      }
+        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
+      },
     },
-    // 增加警告阈值，避免误报
     chunkSizeWarningLimit: 2300,
-    // 启用压缩
     minify: 'terser',
-    // 启用源码映射（开发时）
     sourcemap: false,
-    // 设置目标环境
-    target: 'es2015'
+    // 目标环境：现代浏览器（antd 6 起不再支持 IE）
+    target: 'es2020',
   },
-  // 优化依赖预构建
+  // 依赖预构建
   optimizeDeps: {
     include: ['react', 'react-dom', 'antd', 'lodash'],
-    // 强制预构建
-    force: false
   },
-  // 开发服务器优化
   server: {
-    // 启用热更新
-    hmr: true
-  }
-})
+    hmr: true,
+  },
+});

@@ -1,18 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio, Segmented, message, Spin } from 'antd';
+import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio, Segmented, Space, Spin } from 'antd';
+import { message } from '../utils/feedback';
 import { SearchOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
-import type { BossData, WildBossData, CharacterData, EntryData } from '../types';
-import { typeColorMap } from '../types';
+import type { BossData, EntryData } from '../types';
 import bossData from '../data/zh-CN/night_king_data.json';
-import sinnerList from '../data/zh-CN/sinner_list.json';
 import wildBossData from '../data/zh-CN/wild_boss_data.json';
 import characterData from '../data/character-info/character_data.json';
 import DataManager from '../utils/dataManager';
 import { Line } from '@ant-design/plots';
 import { getCurrentTheme } from '../utils/themeUtils';
 import { throttle } from 'lodash';
-import '../styles/bossDataView.css';
+import styles from '../styles/bossDataView.module.css';
+import {
+  curseData,
+  getAbsorptionClass,
+  getResistanceClass,
+  getLocationColor,
+  lipulaTradesData,
+  processSinnerData,
+} from './bossDataView/data';
+import {
+  characterColumns,
+  lipulaColumns,
+  sinnerColumns,
+  specialEventColumns,
+  wildBossColumns,
+} from './bossDataView/columns';
 
 // 导入boss图片
 import nightOfTheBeast from '../assets/BossRelics/night-of-the-beast.avif';
@@ -67,32 +81,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   const [loading, setLoading] = useState(true);
 
   // 羊头诅咒事件数据
-  const curseData = [
-    { rune: '0', damageIncrease: 0 },
-    { rune: '1000', damageIncrease: 0.4 },
-    { rune: '2000', damageIncrease: 0.8 },
-    { rune: '5000', damageIncrease: 2 },
-    { rune: '10000', damageIncrease: 4 },
-    { rune: '20000', damageIncrease: 8 },
-    { rune: '30000', damageIncrease: 12 },
-    { rune: '50000', damageIncrease: 20 },
-    { rune: '60000', damageIncrease: 22 },
-    { rune: '80000', damageIncrease: 26 },
-    { rune: '100000', damageIncrease: 30 },
-    { rune: '150000', damageIncrease: 33.75 },
-    { rune: '200000', damageIncrease: 37.5 },
-    { rune: '300000', damageIncrease: 45 },
-    { rune: '500000', damageIncrease: 60 },
-    { rune: '700000', damageIncrease: 75 },
-    { rune: '900000', damageIncrease: 90 },
-    { rune: '1000000', damageIncrease: 91.2 },
-    { rune: '1100000', damageIncrease: 92.42 },
-    { rune: '1500000', damageIncrease: 97.26 },
-  ];
-
   // 折线图配置
   const lineConfig = {
-    data: isLinearMode ? curseData.map(item => ({ ...item, rune: parseInt(item.rune) })) : curseData,
+    data: isLinearMode ? curseData.map((item) => ({ ...item, rune: parseInt(item.rune) })) : curseData,
     xField: 'rune',
     yField: 'damageIncrease',
     theme: currentTheme,
@@ -109,23 +100,30 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     },
     axis: {
       x: {
+        // G2 v5 真正读取的是 axis 层级的 labelAutoRotate / labelAutoHide
+        // （见 @antv/g2 esm/component/axis.js 的 inferLabelOverlap），
+        // label 子对象里的 autoRotate 不生效。
+        labelAutoRotate: false,
+        labelAutoHide: true,
         label: {
-          autoRotate: true,
+          autoRotate: false,
           autoHide: true,
           autoEllipsis: true,
           style: {
             fill: currentTheme === 'dark' ? '#ffffff' : '#000000',
             fontSize: 12,
           },
-          formatter: isLinearMode ? (value: string) => {
-            const num = parseInt(value);
-            if (num >= 1000000) {
-              return (num / 1000000).toFixed(1) + 'M';
-            } else if (num >= 1000) {
-              return (num / 1000).toFixed(0) + 'K';
-            }
-            return value;
-          } : undefined,
+          formatter: isLinearMode
+            ? (value: string) => {
+                const num = parseInt(value);
+                if (num >= 1000000) {
+                  return (num / 1000000).toFixed(1) + 'M';
+                } else if (num >= 1000) {
+                  return (num / 1000).toFixed(0) + 'K';
+                }
+                return value;
+              }
+            : undefined,
         },
         line: {
           style: {
@@ -175,55 +173,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     },
   };
 
-  // 位置颜色映射
-  const locationColorMap: Record<string, string> = {
-    '要塞': 'cyan',
-    '监牢': 'volcano',
-    '大教堂': 'orange',
-    // DLC 新增据点
-    '湖沼': 'cyan',
-    '锻造村': 'volcano',
-    '大空洞主城': 'purple',
-    '神殿塔': 'geekblue',
-    '大空洞大教堂': 'orange',
-    '大空洞遗迹': 'magenta',
-    '大空洞异变': 'red',
-    '遗迹': 'magenta',
-    '营地': 'green',
-    '矿洞': 'magenta',
-    '主城': 'gold',
-    '主城地下': 'gold',
-    '主城楼顶': 'gold',
-    '野外蓝名': 'blue',
-    '野外红名': 'red',
-    '火山口': 'purple',
-    '山顶': 'purple',
-    '隐城': 'purple',
-    '腐败森林': 'purple',
-    '第一夜': 'geekblue',
-    '第二夜': 'cyan',
-    '突发事件': 'yellow',
-    // 圆桌厅堂人物位置颜色
-    '训练场': 'green',
-    '可选角色': 'blue',
-    '执行者绝招': 'magenta',
-    '复仇者家人': 'cyan',
-  };
-
-  // 获取位置颜色
-  const getLocationColor = (location: string | null | undefined): string => {
-    if (!location) return 'default';
-    return locationColorMap[location] || 'default';
-  };
-
-  // 获取类型颜色
-  const getTypeColor = (type: string | null | undefined): string => {
-    if (!type) return 'default';
-    return typeColorMap[type] || 'default';
-  };
-
   // 标签渲染函数
-  const locationTagRender = (props: { label: React.ReactNode; value: string; closable?: boolean; onClose?: () => void }) => {
+  const locationTagRender = (props: {
+    label: React.ReactNode;
+    value: string;
+    closable?: boolean;
+    onClose?: () => void;
+  }) => {
     const { label, value, closable, onClose } = props;
     const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
       event.preventDefault();
@@ -248,20 +204,22 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   // 获取所有唯一的位置选项
   const getLocationOptions = () => {
     const locations = new Set<string>();
-    wildBossData.forEach(boss => {
+    wildBossData.forEach((boss) => {
       if (boss.location) {
         // 处理多个位置用、分隔的情况
         const locationList = boss.location.split('、');
-        locationList.forEach(loc => {
+        locationList.forEach((loc) => {
           locations.add(loc.trim());
         });
       }
     });
 
-    return Array.from(locations).sort().map(location => ({
-      value: location,
-      label: location
-    }));
+    return Array.from(locations)
+      .sort()
+      .map((location) => ({
+        value: location,
+        label: location,
+      }));
   };
 
   // 过滤野生Boss数据
@@ -270,19 +228,17 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
 
     // 按位置筛选
     if (selectedLocations.length > 0) {
-      filtered = filtered.filter(boss => {
+      filtered = filtered.filter((boss) => {
         if (!boss.location) return false;
-        const bossLocations = boss.location.split('、').map(loc => loc.trim());
-        return selectedLocations.some(selectedLoc => bossLocations.includes(selectedLoc));
+        const bossLocations = boss.location.split('、').map((loc) => loc.trim());
+        return selectedLocations.some((selectedLoc) => bossLocations.includes(selectedLoc));
       });
     }
 
     // 按搜索关键词筛选（仅搜索Boss名称）
     if (wildBossSearchKeyword.trim()) {
       const searchLower = wildBossSearchKeyword.toLowerCase();
-      filtered = filtered.filter(boss =>
-        boss.name.toLowerCase().includes(searchLower)
-      );
+      filtered = filtered.filter((boss) => boss.name.toLowerCase().includes(searchLower));
     }
 
     return filtered;
@@ -297,16 +253,18 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   // 获取所有唯一的圆桌厅堂人物位置选项
   const getCharacterLocationOptions = () => {
     const locations = new Set<string>();
-    characterData.forEach(character => {
+    characterData.forEach((character) => {
       if (character.location) {
         locations.add(character.location.trim());
       }
     });
 
-    return Array.from(locations).sort().map(location => ({
-      value: location,
-      label: location
-    }));
+    return Array.from(locations)
+      .sort()
+      .map((location) => ({
+        value: location,
+        label: location,
+      }));
   };
 
   // 过滤圆桌厅堂人物数据
@@ -315,7 +273,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
 
     // 按位置筛选
     if (selectedCharacterLocations.length > 0) {
-      filtered = filtered.filter(character => {
+      filtered = filtered.filter((character) => {
         if (!character.location) return false;
         return selectedCharacterLocations.includes(character.location.trim());
       });
@@ -324,9 +282,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     // 按搜索关键词筛选（仅搜索人物名称）
     if (characterSearchKeyword.trim()) {
       const searchLower = characterSearchKeyword.toLowerCase();
-      filtered = filtered.filter(character =>
-        character.name.toLowerCase().includes(searchLower)
-      );
+      filtered = filtered.filter((character) => character.name.toLowerCase().includes(searchLower));
     }
 
     return filtered;
@@ -338,54 +294,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     setSelectedCharacterLocations([]);
   };
 
-  // 根据抗性数值返回CSS类名
-  const getResistanceClass = (value: number | string): string => {
-    if (value === '-' || value === null || value === undefined) {
-      return '';
-    }
-
-    const numValue = typeof value === 'string' ? parseInt(value) : value;
-
-    if (numValue <= 154) {
-      return 'resistance-low'; // 低抗性 - 绿色
-    } else if (numValue <= 252) {
-      return 'resistance-medium'; // 中等抗性 - 橙色
-    } else if (numValue <= 542) {
-      return 'resistance-high'; // 高抗性 - 红色
-    } else {
-      return '';
-    }
-  };
-
   // 根据吸收数值返回CSS类名
-  const getAbsorptionClass = (value: number | string): string => {
-    if (value === null || value === undefined || typeof value !== 'number') {
-      return '';
-    }
-
-    if (value > 1) {
-      return 'absorption-1';
-    }
-    else if (value < 1) {
-      // 对小于1的值进行进一步分类
-      if (value <= 0.3) {
-        return 'absorption-4';
-      } else if (value <= 0.7) {
-        return 'absorption-3';
-      } else {
-        return 'absorption-2';
-      }
-    } else {
-      return '';
-    }
-  };
-
   // 计算韧性函数
   const calculatePoise = (basePoise: number, record: BossData): number | string => {
     const poiseMultipliers = {
-      1: 1,      // 单人
-      2: 1.82,   // 双人
-      3: 3.33    // 三人
+      1: 1, // 单人
+      2: 1.82, // 双人
+      3: 3.33, // 三人
     };
     const scaledPoise = basePoise * poiseMultipliers[playerCount as keyof typeof poiseMultipliers];
     if (deepNightDepth === 0) return Math.round(scaledPoise);
@@ -401,9 +316,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     }
 
     const resistanceMultipliers = {
-      1: 1,      // 单人
-      2: 2.67,   // 双人
-      3: 4       // 三人
+      1: 1, // 单人
+      2: 2.67, // 双人
+      3: 4, // 三人
     };
     return Math.round(baseResistance * resistanceMultipliers[playerCount as keyof typeof resistanceMultipliers]);
   };
@@ -416,21 +331,19 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     '"坚盾"弗堤士': nightOfTheWise,
     '"超越之光"亚尼姆斯': nightOfTheWise,
     '"深海黑夜"玛利斯': nightOfTheFathom,
-    '征兆': nightOfTheFathom,
+    征兆: nightOfTheFathom,
     '"黑夜雾霾"卡莉果': nightOfTheMiasma,
     '"黑夜王"布德奇冥': nightOfTheLord,
     '"黑夜之魔"利普拉': nightOfTheDemon,
     '"黑夜光骑士"弗格尔': nightOfTheChampion,
-    '黑夜轮廓': nightOfTheLord,
+    黑夜轮廓: nightOfTheLord,
     '"继承英雄武器的众女孩"哈尔莫妮亚': nightOfTheBalancers,
-    '个体': nightOfTheBalancers,
-    '头领': nightOfTheBalancers,
-    '合体': nightOfTheBalancers,
-    '反叛的史柴格斯': nightOfTheDreglords,
-    '冲动的史柴格斯': nightOfTheDreglords,
+    个体: nightOfTheBalancers,
+    头领: nightOfTheBalancers,
+    合体: nightOfTheBalancers,
+    反叛的史柴格斯: nightOfTheDreglords,
+    冲动的史柴格斯: nightOfTheDreglords,
   };
-
-
 
   const getDeepNightHpMultiplier = (record: BossData) => {
     if (deepNightDepth === 0) return 1;
@@ -441,9 +354,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
 
   const defaultFooter = () => (
     <div className="footer-text">
-      {deepNightDepth > 0 && (
-        <div>◦ 当前显示深度{deepNightDepth}深夜血量：DLC 夜王已乘深夜 0.8（合体安定者除外）</div>
-      )}
+      {deepNightDepth > 0 && <div>◦ 当前显示深度{deepNightDepth}深夜血量：DLC 夜王已乘深夜 0.8（合体安定者除外）</div>}
       <div>◦ 普通夜王血量 = 基础血量 × 玩家人数</div>
       <div>◦ 永夜王血量为倍率加成：永夜王血量 = 基础血量 × 永夜王血量加成倍率 × 玩家人数</div>
       <div>◦ 永夜王血量为独立数值：永夜王血量 = 永夜王血量 × 玩家人数</div>
@@ -451,13 +362,18 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       <div>◦ 安定者头领获得buff：攻击力+5%，韧性攻击+15%</div>
       <div>◦ 安定者永夜个体血量倍率为 1 / 1.35 / 1.7，合体血量倍率为 1 / 1.75 / 2.5</div>
       <div>◦ 安定者永夜个体每次被击杀都会永久为自身添加一层buff：属性攻击力+7%，韧性攻击+5%</div>
-      <div>◦ 冲动的史柴格斯抗性说明：基于反叛的史柴格斯 普通/切割/打击/突刺/魔力/雷 ×0.95、火 ×0.91、圣 ×0.92，出血 ×2.15、冻伤 ×2.15、睡眠 ×3.96</div>
+      <div>
+        ◦ 冲动的史柴格斯抗性说明：基于反叛的史柴格斯 普通/切割/打击/突刺/魔力/雷 ×0.95、火 ×0.91、圣 ×0.92，出血
+        ×2.15、冻伤 ×2.15、睡眠 ×3.96
+      </div>
     </div>
   );
 
   const resistanceFooter = () => (
     <div className="footer-text">
-      <div>◦ 韧性倍率：单人100%，双人182%，三人333%｜ 普通韧性 = 基础韧性 × 韧性倍率 ｜ 永夜王韧性 = 永夜王韧性 × 韧性倍率</div>
+      <div>
+        ◦ 韧性倍率：单人100%，双人182%，三人333%｜ 普通韧性 = 基础韧性 × 韧性倍率 ｜ 永夜王韧性 = 永夜王韧性 × 韧性倍率
+      </div>
       {deepNightDepth > 0 && (
         <div>◦ 深夜韧性 = 韧性 × 人数倍率 ÷ 削韧承受倍率（0.88~0.84）；DLC 夜王再 ÷1.136（合体安定者除外）</div>
       )}
@@ -475,19 +391,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       render: (_, record) => {
         const imageSrc = bossImageMap[record.name];
         return imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt={record.name}
-            width={40}
-            height={40}
-            className="boss-image"
-            preview={false}
-          />
+          <Image src={imageSrc} alt={record.name} width={40} height={40} className={styles.bossImage} preview={false} />
         ) : null;
       },
       onCell: (record) => {
         // 找到相同图片的下一个boss的索引
-        const currentIndex = filteredData.findIndex(item => item.name === record.name);
+        const currentIndex = filteredData.findIndex((item) => item.name === record.name);
         const currentImage = bossImageMap[record.name];
 
         if (!currentImage) return {};
@@ -535,27 +444,27 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               const rawMultiplier = record.baseHealthMultiplier;
               const factors = Array.isArray(rawMultiplier)
                 ? rawMultiplier.filter((f): f is number => typeof f === 'number')
-                : (typeof rawMultiplier === 'number' ? [rawMultiplier] : []);
+                : typeof rawMultiplier === 'number'
+                  ? [rawMultiplier]
+                  : [];
               // dlcMultiplier：DLC 全局缩放，只算不显示
               const dlcScale = typeof record.dlcMultiplier === 'number' ? record.dlcMultiplier : 1;
               const scale = factors.reduce((a, b) => a * b, 1) * dlcScale;
               // basePlayerMultipliers：人数倍率覆盖（默认按人数 1/2/3）
-              const players = Array.isArray(record.basePlayerMultipliers) &&
+              const players =
+                Array.isArray(record.basePlayerMultipliers) &&
                 typeof record.basePlayerMultipliers[playerCount - 1] === 'number'
-                ? record.basePlayerMultipliers[playerCount - 1] : playerCount;
+                  ? record.basePlayerMultipliers[playerCount - 1]
+                  : playerCount;
               const deepNightScale = getDeepNightHpMultiplier(record);
               return (
-                <span className="health-base">
+                <span className={styles.healthBase}>
                   {Math.round(value * 3.54 * players * scale * deepNightScale).toLocaleString()}
                   {factors.length ? `(×${factors.join('×')})` : ''}
                 </span>
               );
             }
-            return (
-              <span className="health-base">
-                {value}
-              </span>
-            );
+            return <span className={styles.healthBase}>{value}</span>;
           },
         },
         {
@@ -570,35 +479,32 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               // nightreignHealthMultiplier：永夜王倍率（为数字时一律显示，含 ×1）
               const factors = Array.isArray(value)
                 ? value.filter((f): f is number => typeof f === 'number')
-                : (typeof value === 'number' ? [value] : []);
+                : typeof value === 'number'
+                  ? [value]
+                  : [];
               // dlcMultiplier：DLC 全局缩放，只算不显示
               const dlcScale = typeof record.dlcMultiplier === 'number' ? record.dlcMultiplier : 1;
               const scale = factors.reduce((a, b) => a * b, 1) * dlcScale;
               // nightreignPlayerMultipliers：人数倍率覆盖（默认按人数 1/2/3）
-              const players = Array.isArray(record.nightreignPlayerMultipliers) &&
+              const players =
+                Array.isArray(record.nightreignPlayerMultipliers) &&
                 typeof record.nightreignPlayerMultipliers[playerCount - 1] === 'number'
-                ? record.nightreignPlayerMultipliers[playerCount - 1] : playerCount;
+                  ? record.nightreignPlayerMultipliers[playerCount - 1]
+                  : playerCount;
               const deepNightScale = getDeepNightHpMultiplier(record);
               const nightreignHealth = Math.round(record.nightreignHealth * 3.54 * players * scale * deepNightScale);
               return (
-                <span className="health-nightreign">
-                  {nightreignHealth.toLocaleString()}{factors.length ? `(×${factors.join('×')})` : ''}
+                <span className={styles.healthNightreign}>
+                  {nightreignHealth.toLocaleString()}
+                  {factors.length ? `(×${factors.join('×')})` : ''}
                 </span>
               );
             }
             // 复合写法（多 Boss 共享血条，如「4000(160, 237, 422)」）直接显示原文
             if (typeof record.nightreignHealth === 'string' && record.nightreignHealth !== '-') {
-              return (
-                <span className="health-nightreign">
-                  {record.nightreignHealth}
-                </span>
-              );
+              return <span className={styles.healthNightreign}>{record.nightreignHealth}</span>;
             }
-            return (
-              <span className="health-nightreign">
-                {value}
-              </span>
-            );
+            return <span className={styles.healthNightreign}>{value}</span>;
           },
         },
       ],
@@ -608,7 +514,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       children: [
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
               <span>普通</span>
             </div>
@@ -617,15 +523,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'normalAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
               <span>打击</span>
             </div>
@@ -634,15 +536,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'strikeAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
               <span>斩击</span>
             </div>
@@ -651,15 +549,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'slashAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
               <span>突刺</span>
             </div>
@@ -668,11 +562,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'pierceAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
       ],
     },
@@ -681,7 +571,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       children: [
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
               <span>魔力</span>
             </div>
@@ -690,15 +580,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'magicAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
               <span>火焰</span>
             </div>
@@ -707,15 +593,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'fireAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
               <span>雷电</span>
             </div>
@@ -724,15 +606,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'lightningAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
         {
           title: (
-            <div className="damage-type-container">
+            <div className={styles.damageTypeContainer}>
               <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
               <span>神圣</span>
             </div>
@@ -741,11 +619,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'holyAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
         },
       ],
     },
@@ -761,19 +635,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       render: (_, record) => {
         const imageSrc = bossImageMap[record.name];
         return imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt={record.name}
-            width={40}
-            height={40}
-            className="boss-image"
-            preview={false}
-          />
+          <Image src={imageSrc} alt={record.name} width={40} height={40} className={styles.bossImage} preview={false} />
         ) : null;
       },
       onCell: (record) => {
         // 找到相同图片的下一个boss的索引
-        const currentIndex = filteredData.findIndex(item => item.name === record.name);
+        const currentIndex = filteredData.findIndex((item) => item.name === record.name);
         const currentImage = bossImageMap[record.name];
 
         if (!currentImage) return {};
@@ -818,17 +685,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           align: 'center',
           render: (value, record) => {
             if (typeof value === 'number') {
-              return (
-                <span className="health-base">
-                  {calculatePoise(value, record)}
-                </span>
-              );
+              return <span className={styles.healthBase}>{calculatePoise(value, record)}</span>;
             }
-            return (
-              <span className="health-base">
-                {value}
-              </span>
-            );
+            return <span className={styles.healthBase}>{value}</span>;
           },
         },
         {
@@ -839,17 +698,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           align: 'center',
           render: (value, record) => {
             if (typeof value === 'number') {
-              return (
-                <span className="health-nightreign">
-                  {calculatePoise(value, record)}
-                </span>
-              );
+              return <span className={styles.healthNightreign}>{calculatePoise(value, record)}</span>;
             }
-            return (
-              <span className="health-nightreign">
-                {value}
-              </span>
-            );
+            return <span className={styles.healthNightreign}>{value}</span>;
           },
         },
       ],
@@ -859,7 +710,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       children: [
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={poisonResistance} alt="中毒" width={18} height={18} preview={false} />
               <span>中毒</span>
             </div>
@@ -871,16 +722,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return (
-              <span className={`resistance-value ${originalClass}`}>
-                {calculatedValue}
-              </span>
-            );
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={scarletRotResistance} alt="腐败" width={18} height={18} preview={false} />
               <span>腐败</span>
             </div>
@@ -892,16 +739,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return (
-              <span className={`resistance-value ${originalClass}`}>
-                {calculatedValue}
-              </span>
-            );
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={bleedResistance} alt="出血" width={18} height={18} preview={false} />
               <span>出血</span>
             </div>
@@ -913,16 +756,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return (
-              <span className={`resistance-value ${originalClass}`}>
-                {calculatedValue}
-              </span>
-            );
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={frostResistance} alt="冻伤" width={18} height={18} preview={false} />
               <span>冻伤</span>
             </div>
@@ -934,16 +773,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return (
-              <span className={`resistance-value ${originalClass}`}>
-                {calculatedValue}
-              </span>
-            );
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={sleepResistance} alt="睡眠" width={18} height={18} preview={false} />
               <span>睡眠</span>
             </div>
@@ -955,16 +790,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return (
-              <span className={`resistance-value ${originalClass}`}>
-                {calculatedValue}
-              </span>
-            );
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={madnessResistance} alt="发狂" width={18} height={18} preview={false} />
               <span>发狂</span>
             </div>
@@ -976,16 +807,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return (
-              <span className={`resistance-value ${originalClass}`}>
-                {calculatedValue}
-              </span>
-            );
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className="resistance-type-container">
+            <div className={styles.resistanceTypeContainer}>
               <Image src={deathBlightResistance} alt="咒死" width={18} height={18} preview={false} />
               <span>咒死</span>
             </div>
@@ -997,781 +824,54 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return (
-              <span className={`resistance-value ${originalClass}`}>
-                {calculatedValue}
-              </span>
-            );
+            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
       ],
     },
   ];
 
-  // 定义罪人数据类型
-  interface SinnerData {
-    key: string;
-    characterName: string;
-    buildIndex: number;
-    leftHand: string;
-    rightHand: string;
-    consumable: string;
-  }
-
-  // 处理罪人数据，转换为表格格式
-  const processSinnerData = (): SinnerData[] => {
-    const sinnerTableData: SinnerData[] = [];
-
-    Object.entries(sinnerList).forEach(([characterName, builds]) => {
-      builds.forEach((build: { 左手: string | string[]; 右手: string | string[]; 消耗品: string }, index: number) => {
-        sinnerTableData.push({
-          key: `${characterName}-${index}`,
-          characterName,
-          buildIndex: index + 1,
-          leftHand: Array.isArray(build.左手) ? build.左手.join(' + ') : build.左手,
-          rightHand: Array.isArray(build.右手) ? build.右手.join(' + ') : build.右手,
-          consumable: build.消耗品
-        });
-      });
-    });
-
-    return sinnerTableData;
-  };
-
   // 罪人装备配置表格列定义
-  const sinnerColumns: ColumnsType<SinnerData> = [
-    {
-      title: '角色名称',
-      dataIndex: 'characterName',
-      key: 'characterName',
-      width: 100,
-      align: 'center',
-      fixed: 'left',
-      render: (text) => <strong>{text}</strong>,
-      onCell: (record) => {
-        const currentIndex = processSinnerData().findIndex(item =>
-          item.characterName === record.characterName && item.buildIndex === record.buildIndex
-        );
-
-        // 计算相同角色的行数
-        let rowSpan = 1;
-        const allData = processSinnerData();
-        for (let i = currentIndex + 1; i < allData.length; i++) {
-          if (allData[i].characterName === record.characterName) {
-            rowSpan++;
-          } else {
-            break;
-          }
-        }
-
-        // 如果是相同角色的第一行，设置rowSpan
-        if (currentIndex === 0 || allData[currentIndex - 1]?.characterName !== record.characterName) {
-          return { rowSpan };
-        }
-
-        // 否则隐藏单元格
-        return { rowSpan: 0 };
-      },
-    },
-    {
-      title: '配置',
-      dataIndex: 'buildIndex',
-      key: 'buildIndex',
-      width: 60,
-      align: 'center',
-      render: (text) => `配置${text}`,
-    },
-    {
-      title: '左手装备',
-      dataIndex: 'leftHand',
-      key: 'leftHand',
-      width: 200,
-      align: 'center',
-    },
-    {
-      title: '右手装备',
-      dataIndex: 'rightHand',
-      key: 'rightHand',
-      width: 200,
-      align: 'center',
-    },
-    {
-      title: '消耗品',
-      dataIndex: 'consumable',
-      key: 'consumable',
-      width: 120,
-      align: 'center',
-    },
-  ];
-
   const sinnerFooter = () => (
-    <div className="footer-text">
-      *双人1.1倍血量/三人1.2倍血量 *每个NPC基础数据均为满级 *每个NPC自带仇恨-6的BUFF
-    </div>
+    <div className="footer-text">*双人1.1倍血量/三人1.2倍血量 *每个NPC基础数据均为满级 *每个NPC自带仇恨-6的BUFF</div>
   );
 
   // 野生Boss数据表格列定义
-  const wildBossColumns: ColumnsType<WildBossData> = [
-    {
-      title: 'Boss名称',
-      dataIndex: 'name',
-      key: 'name',
-      width: 130,
-      align: 'center',
-      fixed: 'left',
-      render: (text) => <strong>{text}</strong>,
-    },
-    {
-      title: '位置',
-      dataIndex: 'location',
-      key: 'location',
-      width: 90,
-      align: 'center',
-      render: (text) => (
-        <span className="location-tag">
-          {text ? text.split('、').map((loc: string) => (
-            <Tag
-              key={loc}
-              color={getLocationColor(loc)}
-            // style={{ marginInlineEnd: 1}}
-            >
-              {loc}
-            </Tag>
-          )) : null}
-        </span>
-      ),
-    },
-    {
-      title: '攻击类别',
-      children: [
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
-              <span>普通</span>
-            </div>
-          ),
-          dataIndex: 'normal',
-          key: 'normal',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
-              <span>打击</span>
-            </div>
-          ),
-          dataIndex: 'strike',
-          key: 'strike',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
-              <span>斩击</span>
-            </div>
-          ),
-          dataIndex: 'slash',
-          key: 'slash',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
-              <span>突刺</span>
-            </div>
-          ),
-          dataIndex: 'pierce',
-          key: 'pierce',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-      ],
-    },
-    {
-      title: '属性类别',
-      width: 240,
-      children: [
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
-              <span>魔力</span>
-            </div>
-          ),
-          dataIndex: 'magic',
-          key: 'magic',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
-              <span>火焰</span>
-            </div>
-          ),
-          dataIndex: 'fire',
-          key: 'fire',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
-              <span>雷电</span>
-            </div>
-          ),
-          dataIndex: 'lightning',
-          key: 'lightning',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
-              <span>神圣</span>
-            </div>
-          ),
-          dataIndex: 'holy',
-          key: 'holy',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-      ],
-    },
-    {
-      title: '抗性',
-      children: [
-        {
-          title: (
-            <div className="resistance-type-container">
-              <Image src={bleedResistance} alt="出血" width={18} height={18} preview={false} />
-              <span>出血</span>
-            </div>
-          ),
-          dataIndex: 'bleed',
-          key: 'bleed',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="resistance-type-container">
-              <Image src={poisonResistance} alt="中毒" width={18} height={18} preview={false} />
-              <span>中毒</span>
-            </div>
-          ),
-          dataIndex: 'poison',
-          key: 'poison',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="resistance-type-container">
-              <Image src={scarletRotResistance} alt="腐败" width={18} height={18} preview={false} />
-              <span>腐败</span>
-            </div>
-          ),
-          dataIndex: 'scarletRot',
-          key: 'scarletRot',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="resistance-type-container">
-              <Image src={frostResistance} alt="冻伤" width={18} height={18} preview={false} />
-              <span>冻伤</span>
-            </div>
-          ),
-          dataIndex: 'frost',
-          key: 'frost',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-      ],
-    },
-    {
-      title: '韧性',
-      dataIndex: 'basePoise',
-      key: 'basePoise',
-      width: 60,
-      align: 'center',
-    },
-  ];
-
   const wildBossFooter = () => (
-    <div className="footer-text">
-      野生Boss数据：包含各种敌人和Boss的吸收值和抗性（异常耐受上限）数据
-    </div>
+    <div className="footer-text">野生Boss数据：包含各种敌人和Boss的吸收值和抗性（异常耐受上限）数据</div>
   );
 
   // 圆桌厅堂人物数据表格列定义
-  const characterColumns: ColumnsType<CharacterData> = [
-    {
-      title: '人物名称',
-      dataIndex: 'name',
-      key: 'name',
-      width: 120,
-      align: 'center',
-      fixed: 'left',
-      render: (text) => <strong>{text}</strong>,
-    },
-    {
-      title: '位置',
-      dataIndex: 'location',
-      key: 'location',
-      width: 90,
-      align: 'center',
-      render: (text) => (
-        <span className="location-tag">
-          {text ? (
-            <Tag
-              color={getLocationColor(text)}
-              style={{ marginInlineEnd: 2 }}
-            >
-              {text}
-            </Tag>
-          ) : null}
-        </span>
-      ),
-    },
-    {
-      title: '攻击类别',
-      children: [
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
-              <span>普通</span>
-            </div>
-          ),
-          dataIndex: 'normal',
-          key: 'normal',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
-              <span>打击</span>
-            </div>
-          ),
-          dataIndex: 'strike',
-          key: 'strike',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
-              <span>斩击</span>
-            </div>
-          ),
-          dataIndex: 'slash',
-          key: 'slash',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
-              <span>突刺</span>
-            </div>
-          ),
-          dataIndex: 'pierce',
-          key: 'pierce',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-      ],
-    },
-    {
-      title: '属性类别',
-      width: 240,
-      children: [
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
-              <span>魔力</span>
-            </div>
-          ),
-          dataIndex: 'magic',
-          key: 'magic',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
-              <span>火焰</span>
-            </div>
-          ),
-          dataIndex: 'fire',
-          key: 'fire',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
-              <span>雷电</span>
-            </div>
-          ),
-          dataIndex: 'lightning',
-          key: 'lightning',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="damage-type-container">
-              <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
-              <span>神圣</span>
-            </div>
-          ),
-          dataIndex: 'holy',
-          key: 'holy',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-      ],
-    },
-    {
-      title: '抗性',
-      children: [
-        {
-          title: (
-            <div className="resistance-type-container">
-              <Image src={bleedResistance} alt="出血" width={18} height={18} preview={false} />
-              <span>出血</span>
-            </div>
-          ),
-          dataIndex: 'bleed',
-          key: 'bleed',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="resistance-type-container">
-              <Image src={poisonResistance} alt="中毒" width={18} height={18} preview={false} />
-              <span>中毒</span>
-            </div>
-          ),
-          dataIndex: 'poison',
-          key: 'poison',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="resistance-type-container">
-              <Image src={scarletRotResistance} alt="腐败" width={18} height={18} preview={false} />
-              <span>腐败</span>
-            </div>
-          ),
-          dataIndex: 'scarletRot',
-          key: 'scarletRot',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-        {
-          title: (
-            <div className="resistance-type-container">
-              <Image src={frostResistance} alt="冻伤" width={18} height={18} preview={false} />
-              <span>冻伤</span>
-            </div>
-          ),
-          dataIndex: 'frost',
-          key: 'frost',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
-        },
-      ],
-    },
-    {
-      title: '韧性',
-      dataIndex: 'basePoise',
-      key: 'basePoise',
-      width: 60,
-      align: 'center',
-    },
-  ];
-
   const characterFooter = () => (
-    <div className="footer-text">
-      圆桌厅堂人物数据：包含各种NPC和角色的吸收值和抗性（异常耐受上限）数据
-    </div>
+    <div className="footer-text">圆桌厅堂人物数据：包含各种NPC和角色的吸收值和抗性（异常耐受上限）数据</div>
   );
 
   // 利普拉的交易选项
-  interface LipulaTrade {
-    key: string;
-    desire: string;
-    effect: string;
-    stats?: LipulaStats;
-  }
-
-  interface LipulaStats {
-    level: number; // 等级
-    hp: number; // 血
-    fp: number; // 蓝
-    stamina: number; // 绿
-    str: number; // 力
-    dex: number; // 敏
-    intl: number; // 智
-    fth: number; // 信
-    arc: number; // 感
-  }
-
-  const lipulaTradesData: LipulaTrade[] = [
-    { key: '1', desire: '我想要力气变的更大', effect: '改变角色属性加点', stats: { level: 15, hp: 47, fp: 6, stamina: 23, str: 73, dex: 9, intl: 3, fth: 3, arc: 3 } },
-    { key: '2', desire: '我想要灵巧变的更高', effect: '改变角色属性加点', stats: { level: 15, hp: 43, fp: 10, stamina: 23, str: 9, dex: 72, intl: 3, fth: 3, arc: 3 } },
-    { key: '3', desire: '我想要智力变的更高', effect: '改变角色属性加点', stats: { level: 15, hp: 33, fp: 28, stamina: 17, str: 9, dex: 9, intl: 55, fth: 24, arc: 3 } },
-    { key: '4', desire: '我想要信仰变的更高', effect: '改变角色属性加点', stats: { level: 15, hp: 33, fp: 28, stamina: 17, str: 9, dex: 9, intl: 24, fth: 55, arc: 3 } },
-    { key: '5', desire: '我想要感应变的更高', effect: '改变角色属性加点', stats: { level: 15, hp: 41, fp: 26, stamina: 26, str: 39, dex: 39, intl: 30, fth: 30, arc: 35 } },
-    { key: '6', desire: '我想要能抵抗异常状态', effect: '提升全异常抗性，减少10%精力上限' },
-    { key: '7', desire: '我想要死亡远离我', effect: '第一次收到致命攻击时免死并回满血，但是血量上限永久减少20%' },
-    { key: '8', desire: '我想要厉害的武器', effect: '在维克的战矛、颠火圣印记、指纹石盾、黑刀、米凯拉骑士剑、黄金树弓中抽取一把武器' },
-    { key: '9', desire: '我想要大幅度地升级', effect: '升三级，但是此后每次喝药将会降低一级' },
-    { key: '10', desire: '我想要圣杯瓶', effect: '圣杯瓶使用次数增加一次，但是减少血量上限' },
-    { key: '11', desire: '我想要体验大器晚成', effect: '立即减少血量、专注值、精力上限30%，如果在boss战开始后两分钟不倒地，血量、专注值、精力恢复正常并增加上限20%' },
-    { key: '12', desire: '我想要全力战斗', effect: '利普拉开始战斗后立即进入金身强化状态，场上的玩家和boss都获得持续一分钟的buff' },
-    { key: '13', desire: '我想要恶魔的力量', effect: '获得一个会随机攻击敌人的恶魔眼球，但是眼球每次攻击敌人会为角色累计发狂值' },
-  ];
-
-  const lipulaColumns: ColumnsType<LipulaTrade> = [
-    {
-      title: '利普拉的交易',
-      dataIndex: 'desire',
-      key: 'desire',
-      width: 220,
-      align: 'center',
-      render: (text) => <strong>{text}</strong>,
-      fixed: 'left',
-    },
-    {
-      title: '效果',
-      dataIndex: 'effect',
-      key: 'effect',
-      align: 'left',
-      render: (text, record) => (
-        <div>
-          <div>{text}</div>
-          {record.stats && (
-            <div style={{ marginTop: 4 }}>
-              角色15级时加点示例：血量 {record.stats.hp}｜专注  {record.stats.fp}｜耐力 {record.stats.stamina}｜力气 {record.stats.str}｜敏捷 {record.stats.dex}｜智力 {record.stats.intl}｜信仰 {record.stats.fth}｜感应 {record.stats.arc}
-            </div>
-          )}
-        </div>
-      ),
-    },
-  ];
-
   const lipulaFooter = () => (
     <div className="footer-text">
-      <div>◦ 炼金碎片小：随羊头施法后掉落，捡起恢复20HP，减少发狂累积量表55，并且获得炼金碎片buff—物理攻击x1.05、受到的发狂累积量x0.7，持续10s</div>
-      <div>◦ 炼金碎片大：随罪人死亡后掉落，捡起恢复4%+120HP，减少发狂累积量表999(等于清除)，获得炼金碎片buff2—物理攻击x1.05、受到的发狂累积量x0.8，持续20s</div>
-      <div>◦ 恶魔的眼界：将随意累积发狂量表。具体效果为17s后睁眼，睁眼累积发狂值15/0.35s，持续7s。结束后闭眼17s，然后再次睁眼。睁眼累积发狂值15/0.7s，持续7s</div>
+      <div>
+        ◦
+        炼金碎片小：随羊头施法后掉落，捡起恢复20HP，减少发狂累积量表55，并且获得炼金碎片buff—物理攻击x1.05、受到的发狂累积量x0.7，持续10s
+      </div>
+      <div>
+        ◦
+        炼金碎片大：随罪人死亡后掉落，捡起恢复4%+120HP，减少发狂累积量表999(等于清除)，获得炼金碎片buff2—物理攻击x1.05、受到的发狂累积量x0.8，持续20s
+      </div>
+      <div>
+        ◦
+        恶魔的眼界：将随意累积发狂量表。具体效果为17s后睁眼，睁眼累积发狂值15/0.35s，持续7s。结束后闭眼17s，然后再次睁眼。睁眼累积发狂值15/0.7s，持续7s
+      </div>
       <div>◦ 罪人金身buff：第一层加20%攻击，后续每层加2%攻击</div>
     </div>
   );
 
   // 特殊事件及地形效果表格列定义
-  const specialEventColumns: ColumnsType<EntryData> = [
-    {
-      title: 'ID',
-      dataIndex: 'entry_id',
-      key: 'entry_id',
-      width: '8%',
-      align: 'center',
-      onCell: () => ({
-        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' }
-      }),
-      sorter: (a, b) => {
-        const idA = a.entry_id || '';
-        const idB = b.entry_id || '';
-        return idA.localeCompare(idB);
-      },
-      sortDirections: ['ascend', 'descend'],
-    },
-    {
-      title: '类型',
-      dataIndex: 'entry_type',
-      key: 'entry_type',
-      align: 'center',
-      width: '15%',
-      render: (text) => text ? (
-        <Tag color={getTypeColor(text)}>{text}</Tag>
-      ) : '-',
-      sorter: (a, b) => {
-        const typeA = a.entry_type || '';
-        const typeB = b.entry_type || '';
-        return typeA.localeCompare(typeB, 'zh-CN');
-      },
-      sortDirections: ['ascend', 'descend'],
-    },
-    {
-      title: '效果名称',
-      dataIndex: 'entry_name',
-      key: 'entry_name',
-      width: '20%',
-    },
-    {
-      title: '效果描述',
-      dataIndex: 'explanation',
-      key: 'explanation',
-      width: '55%',
-      // 数据里用 \n 分行（如「地底神殿的恩惠」），要 pre-wrap 才会真的换行
-      render: (text) => (
-        <span style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{text || '-'}</span>
-      ),
-    },
-  ];
-
   // 加载特殊事件数据
   useEffect(() => {
     const loadSpecialEventData = async () => {
       try {
         const dataManager = DataManager.getInstance();
-        await dataManager.waitForData();
+        await dataManager.loadGroup('boss');
         setSpecialEventData(dataManager.getInGameSpecialBuff());
         setLoading(false);
       } catch (error) {
@@ -1781,7 +881,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       }
     };
 
-    loadSpecialEventData();
+    void loadSpecialEventData();
   }, []);
 
   // 监听主题变化
@@ -1790,7 +890,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       const newTheme = getCurrentTheme();
       if (newTheme !== currentTheme) {
         setCurrentTheme(newTheme);
-        setChartKey(prev => prev + 1);
+        setChartKey((prev) => prev + 1);
       }
     };
 
@@ -1827,7 +927,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   // 处理窗口大小变化和拖拽导致的图表刷新问题
   useEffect(() => {
     const throttledChartRefresh = throttle(() => {
-      setChartKey(prev => prev + 1);
+      setChartKey((prev) => prev + 1);
     }, 300);
 
     const handleResize = () => {
@@ -1851,7 +951,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   useEffect(() => {
     if (activeBossTab === 'special-events') {
       const timer = setTimeout(() => {
-        setChartKey(prev => prev + 1);
+        setChartKey((prev) => prev + 1);
         window.dispatchEvent(new Event('resize'));
       }, 200);
 
@@ -1867,8 +967,8 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   }, [activeSubTab, activeBossTab]);
 
   return (
-    <div className="boss-data-view-container">
-      <Card className="boss-card">
+    <div className={styles.bossDataViewContainer}>
+      <Card className={styles.bossCard}>
         <Tabs
           style={{ marginTop: '5px' }}
           type="card"
@@ -1880,12 +980,16 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               label: '🌙 夜王基础数据',
               children: (
                 <div id="night-king-basic">
-                  <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-                    <Radio.Group
-                      value={playerCount}
-                      onChange={(e) => setPlayerCount(e.target.value)}
-                      size="middle"
-                    >
+                  <div
+                    style={{
+                      marginBottom: '16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '12px',
+                      flexWrap: 'wrap',
+                    }}
+                  >
+                    <Radio.Group value={playerCount} onChange={(e) => setPlayerCount(e.target.value)} size="medium">
                       <Radio.Button value={1}>单人模式</Radio.Button>
                       <Radio.Button value={2}>双人模式</Radio.Button>
                       <Radio.Button value={3}>三人模式</Radio.Button>
@@ -1895,7 +999,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                       <Segmented
                         value={deepNightDepth}
                         onChange={(value) => setDeepNightDepth(Number(value))}
-                        size="middle"
+                        size="medium"
                         options={[
                           { label: '普通', value: 0 },
                           { label: '深度1', value: 1 },
@@ -1935,8 +1039,8 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               key: 'wild-boss-data',
               label: '☠️ 野生Boss数据',
               children: (
-                <div className="wild-boss-filter-container" id="wild-boss-data">
-                  <div className="filter-inputs">
+                <div className={styles.wildBossFilterContainer} id="wild-boss-data">
+                  <div className={styles.filterInputs}>
                     <Input
                       placeholder="搜索Boss名称"
                       prefix={<SearchOutlined />}
@@ -1973,8 +1077,8 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               key: 'character-data',
               label: '🏛️ 圆桌厅堂人物数据',
               children: (
-                <div className="wild-boss-filter-container" id="roundtable-characters">
-                  <div className="filter-inputs">
+                <div className={styles.wildBossFilterContainer} id="roundtable-characters">
+                  <div className={styles.filterInputs}>
                     <Input
                       placeholder="搜索人物名称"
                       prefix={<SearchOutlined />}
@@ -2064,46 +1168,51 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                         bordered
                         style={{ marginBottom: '30px' }}
                       />
-                      <div style={{
-                        marginTop: '30px',
-                        padding: '20px',
-                        backgroundColor: 'var(--theme-bg-primary)',
-                        borderRadius: '8px',
-                        border: '1px solid var(--theme-border)'
-                      }}>
-                        <div style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          marginBottom: '20px',
-                        }}>
-                          <h3 style={{
-                            color: 'var(--theme-text-primary)',
-                            fontSize: '16px',
-                            fontWeight: 'bold',
-                            margin: 0
-                          }}>
+                      <div
+                        style={{
+                          marginTop: '30px',
+                          padding: '20px',
+                          backgroundColor: 'var(--theme-bg-primary)',
+                          borderRadius: '8px',
+                          border: '1px solid var(--theme-border)',
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            marginBottom: '20px',
+                          }}
+                        >
+                          <h3
+                            style={{
+                              color: 'var(--theme-text-primary)',
+                              fontSize: '16px',
+                              fontWeight: 'bold',
+                              margin: 0,
+                            }}
+                          >
                             🪬 恶魔的添翼:卢恩-增伤关系图
                           </h3>
-                          <Button.Group size="small">
+                          <Space.Compact size="small">
                             <Button
-                              type={isLinearMode ? 'default' : 'primary'}
+                              color={isLinearMode ? 'default' : 'primary'}
+                              variant={isLinearMode ? 'outlined' : 'solid'}
                               onClick={() => setIsLinearMode(false)}
                             >
                               非线性模式
                             </Button>
                             <Button
-                              type={isLinearMode ? 'primary' : 'default'}
+                              color={isLinearMode ? 'primary' : 'default'}
+                              variant={isLinearMode ? 'solid' : 'outlined'}
                               onClick={() => setIsLinearMode(true)}
                             >
                               线性模式
                             </Button>
-                          </Button.Group>
+                          </Space.Compact>
                         </div>
-                        <div
-                          id="line-chart-container"
-                          style={{ height: '400px' }}
-                        >
+                        <div id="line-chart-container" style={{ height: '400px' }}>
                           <Line key={`line-chart-${chartKey}-${activeBossTab}`} {...lineConfig} />
                         </div>
                       </div>

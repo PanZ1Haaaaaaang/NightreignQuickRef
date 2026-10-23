@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { ConfigProvider, theme } from 'antd';
+import { lazy, Suspense, use, useState, useEffect } from 'react';
+import { App as AntdApp, ConfigProvider, Spin, theme } from 'antd';
 import { geekblue } from '@ant-design/colors';
 // import zhCN from 'antd/locale/zh_CN';
 // import enUS from 'antd/locale/en_US';
@@ -7,42 +7,90 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Navigation from './components/Navigation';
 import FunctionMenu from './components/FunctionMenu';
-import LoadingSpinner from './components/LoadingSpinner';
-import EntryDetailView from './pages/EntryDetailView';
-import GameMechanicsView from './pages/GameMechanicsView';
-import LegendaryWeaponView from './pages/LegendaryWeaponView';
-import CharacterDataView from './pages/CharacterDataView';
-import BossDataView from './pages/BossDataView';
-import WeaponSkillMagicView from './pages/WeaponSkillMagicView';
-import { initializeTheme, setupThemeListener } from './utils/themeUtils';
-import DataManager from './utils/dataManager';
+import { initializeTheme, setupThemeListener, toggleTheme } from './utils/themeUtils';
+import DataManager, { type DataGroup } from './utils/dataManager';
+import { setMessageApi } from './utils/feedback';
 import { getDefaultPage } from './config/navigationConfig';
+
+// 视图级懒加载：每个页面独立成 chunk，首屏只下载当前 tab
+const EntryDetailView = lazy(() => import('./pages/EntryDetailView'));
+const GameMechanicsView = lazy(() => import('./pages/GameMechanicsView'));
+const LegendaryWeaponView = lazy(() => import('./pages/LegendaryWeaponView'));
+const CharacterDataView = lazy(() => import('./pages/CharacterDataView'));
+const BossDataView = lazy(() => import('./pages/BossDataView'));
+const WeaponSkillMagicView = lazy(() => import('./pages/WeaponSkillMagicView'));
+
+// 懒加载占位：只占内容区，不遮挡顶部导航，避免布局跳动
+const viewLoadingStyle: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  minHeight: '40vh',
+  width: '100%',
+};
+
+const ViewLoading = () => (
+  <div style={viewLoadingStyle}>
+    <Spin />
+  </div>
+);
+
+// 各 tab 依赖的数据组。游戏机制 / 武器战技与魔法祷告 用的是随页面 chunk 打包的静态 JSON，
+// 不在此表内，因此这两个页面切换时不需要任何额外请求。
+const TAB_DATA_GROUPS: Record<string, DataGroup | undefined> = {
+  词条详细数据: 'entries',
+  角色数据: 'character',
+  夜王Boss数据: 'boss',
+  传说武器详情: 'weapon',
+};
+
+// 数据组 Promise 缓存：Suspense 需要跨渲染拿到同一个 Promise
+const groupGatePromises = new Map<DataGroup, Promise<void>>();
+
+const getGroupPromise = (group: DataGroup): Promise<void> => {
+  const cached = groupGatePromises.get(group);
+  if (cached) return cached;
+
+  const task = DataManager.getInstance()
+    .loadGroup(group)
+    .catch((error) => {
+      // 失败时不让 Suspense 抛错崩溃，由 DataManager 内部提示，页面按空数据降级
+      console.error(`数据组 ${group} 加载失败:`, error);
+    });
+
+  groupGatePromises.set(group, task);
+  return task;
+};
+
+// 在 Suspense 内挂起，直到该页所需数据就绪，避免首帧渲染空表格
+const DataGate = ({ group, children }: { group: DataGroup; children: React.ReactNode }) => {
+  use(getGroupPromise(group));
+  return <>{children}</>;
+};
+
+// 把 antd v6 的 message 实例注入到纯 TS 模块可访问的位置
+const MessageBridge = () => {
+  const { message } = AntdApp.useApp();
+
+  useEffect(() => {
+    setMessageApi(message);
+  }, [message]);
+
+  return null;
+};
 
 function App() {
   const [activeTab, setActiveTab] = useState(getDefaultPage());
   const [isDarkMode, setIsDarkMode] = useState(false);
   // const [isEnglish, setIsEnglish] = useState(false);
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
-  
+
   // 子Tab和Step状态管理
   const [activeSubTab, setActiveSubTab] = useState<string>('');
   const [activeStep, setActiveStep] = useState<number>(0);
 
   // 主题切换函数
   const handleToggleTheme = () => {
-    const newTheme = !isDarkMode;
-    setIsDarkMode(newTheme);
-    
-    // 更新body属性
-    if (newTheme) {
-      document.body.setAttribute('tomato-theme', 'dark');
-    } else {
-      document.body.removeAttribute('tomato-theme');
-    }
-    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-    
-    // 触发自定义主题变化事件
-    window.dispatchEvent(new Event('themeChange'));
+    toggleTheme(isDarkMode, setIsDarkMode);
   };
 
   // 语言切换
@@ -60,16 +108,6 @@ function App() {
     setActiveStep(stepIndex);
   };
 
-  // 预加载所有数据
-  useEffect(() => {
-    const dataManager = DataManager.getInstance();
-    dataManager.preloadAllData().then(() => {
-      setIsDataLoaded(true);
-    }).catch((error) => {
-      console.error('数据预加载失败:', error);
-    });
-  }, []);
-
   // 初始化主题
   useEffect(() => {
     initializeTheme(setIsDarkMode);
@@ -77,8 +115,7 @@ function App() {
 
   // 监听系统主题变化
   useEffect(() => {
-    const cleanup = setupThemeListener(setIsDarkMode);
-    return cleanup;
+    return setupThemeListener(setIsDarkMode);
   }, []);
 
   // 主Tab切换时重置子Tab和Step状态
@@ -95,8 +132,8 @@ function App() {
     }
   }, [activeSubTab]);
 
-  // 渲染内容
-  const renderContent = () => {
+  // 渲染内容（视图组件已懒加载，需由 Suspense 包裹）
+  const renderView = () => {
     switch (activeTab) {
       case '词条详细数据':
         return <EntryDetailView activeSubTab={activeSubTab} />;
@@ -115,6 +152,13 @@ function App() {
     }
   };
 
+  const renderContent = () => {
+    const group = TAB_DATA_GROUPS[activeTab];
+    const view = renderView();
+
+    return <Suspense fallback={<ViewLoading />}>{group ? <DataGate group={group}>{view}</DataGate> : view}</Suspense>;
+  };
+
   // 统一的主题配置
   const themeConfig = {
     algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
@@ -126,36 +170,32 @@ function App() {
   };
 
   return (
-    <ConfigProvider 
+    <ConfigProvider
       theme={themeConfig}
       // locale={isEnglish ? enUS : zhCN}
     >
-      {!isDataLoaded ? (
-        <LoadingSpinner message="正在加载数据，请稍候..." />
-      ) : (
+      <AntdApp component={false}>
+        <MessageBridge />
         <div className="app-container">
-          <FunctionMenu 
-            onTabChange={setActiveTab} 
+          <FunctionMenu
+            onTabChange={setActiveTab}
             onSubTabChange={handleSubTabChange}
             onStepChange={handleStepChange}
           />
-          
+
           <Header
             isDarkMode={isDarkMode}
             onToggleTheme={handleToggleTheme}
             // onToggleLanguage={handleToggleLanguage}
           />
 
-          <Navigation
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-          />
+          <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
 
           {renderContent()}
 
           <Footer />
         </div>
-      )}
+      </AntdApp>
     </ConfigProvider>
   );
 }

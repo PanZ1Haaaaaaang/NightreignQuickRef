@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="t d">
+  <title id="t">Circular three-segment mark</title>
+  <desc id="d">Three purple annular segments, 120 degrees apart, inside a dark ring.</desc>
+  <g fill="none" stroke="#231815" stroke-width="6.12">
+    <circle cx="120" cy="120" r="112.94"/>
+    <path fill="#6649FC" d="M 110.31 33.61 A 86.93 86.93 0 0 0 40.34 154.80 L 76.50 133.93 A 45.67 45.67 0 0 1 110.31 75.37 Z"/>
+    <path fill="#6649FC" d="M 199.66 154.80 A 86.93 86.93 0 0 0 129.69 33.61 L 129.69 75.37 A 45.67 45.67 0 0 1 163.50 133.93 Z"/>
+    <path fill="#6649FC" d="M 50.03 171.59 A 86.93 86.93 0 0 0 189.97 171.59 L 153.81 150.71 A 45.67 45.67 0 0 1 86.19 150.71 Z"/>
+  </g>
+</svg>

@@ -1,6 +1,6 @@
 /* GameMechanicsView 组件专用样式 */
 
-.game-mechanics-container {
+.gameMechanicsContainer {
   /* padding: 20px 0; */
   padding-bottom: 40px;
   max-width: 100%;
@@ -10,57 +10,55 @@
 }
 
 /* 主布局容器 - 可配置最大宽度 */
-.mechanics-layout {
+.mechanicsLayout {
   width: 70%;
-  max-width: var(--mechanics-container-width, 1200px);
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
 /* 板块网格布局 */
-.mechanics-grid {
+.mechanicsGrid {
   display: grid;
   gap: 15px;
   margin-bottom: 15px;
 }
 
 /* 单列布局 */
-.mechanics-grid.single-column {
+.mechanicsGrid.singleColumn {
   grid-template-columns: 1fr;
 }
 
 /* 双列布局 */
-.mechanics-grid.two-columns {
+.mechanicsGrid.twoColumns {
   grid-template-columns: 1fr 1fr;
 }
 
 /* 三列布局 */
-.mechanics-grid.three-columns {
+.mechanicsGrid.threeColumns {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
 /* 自定义列宽布局 */
-.mechanics-grid.custom-columns {
+.mechanicsGrid.customColumns {
   grid-template-columns: var(--mechanics-grid-columns, 1fr 1fr);
   align-items: stretch; /* 确保所有子元素高度相等 */
 }
-
-
 @media (max-width: 999px) {
-  .mechanics-layout {
+  .mechanicsLayout {
     width: 95%;
     min-width: auto;
     margin: 0 auto;
     padding: 0;
   }
-  
-  .mechanic-card {
+
+  .mechanicCard {
     width: 100%;
   }
 }
 
 /* 新卡片样式 - 融合设计 */
-.mechanic-card {
+.mechanicCard {
   background: var(--content-bg);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
@@ -73,12 +71,12 @@
   flex-direction: column;
 }
 
-.mechanic-card:hover {
+.mechanicCard:hover {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* 新卡片内容布局 */
-.mechanic-card .card-content {
+.mechanicCard .cardContent {
   padding: 24px;
   position: relative;
   display: flex;
@@ -86,67 +84,66 @@
   height: 100%;
 }
 
-
 /* 时间轴容器过渡效果 */
-.timeline-container {
+.timelineContainer {
   position: relative;
   overflow: hidden;
 }
 
-.timeline-content {
+.timelineContent {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.timeline-content.active {
+.timelineContent:global(.active) {
   transform: translateY(0) !important;
   opacity: 1 !important;
   pointer-events: auto !important;
 }
 
-.timeline-content.inactive {
+.timelineContent.inactive {
   pointer-events: none !important;
 }
 
 /* Segmented 控制器样式增强 */
-.mechanic-card .ant-segmented {
+.mechanicCard :global(.ant-segmented) {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   /* border: 1px solid #d9d9d9; */
 }
 
-.mechanic-card .ant-segmented-item {
+.mechanicCard :global(.ant-segmented-item) {
   transition: all 0.3s ease;
 }
 
-.mechanic-card .ant-segmented-item-selected {
+.mechanicCard :global(.ant-segmented-item-selected) {
   background: linear-gradient(135deg, #1890ff, #40a9ff);
   color: white;
   box-shadow: 0 2px 4px rgba(24, 144, 255, 0.3);
 }
 
 /* 垂直分段控制器特殊样式 */
-.mechanic-card .ant-segmented[data-vertical="true"] {
+.mechanicCard :global(.ant-segmented)[data-vertical='true'] {
   min-height: 120px;
 }
 
-.mechanic-card .ant-segmented[data-vertical="true"] .ant-segmented-item {
+.mechanicCard :global(.ant-segmented)[data-vertical='true'] :global(.ant-segmented-item) {
   padding: 12px 16px;
   min-width: 80px;
   text-align: center;
 }
 
 /* 时间轴布局样式 */
-.timeline-layout-container {
+.timelineLayoutContainer {
   display: flex;
   flex-direction: column;
 }
 
-.timeline-content-wrapper {
+.timelineContentWrapper {
   /* border: 1px solid #d9d9d9; */
   overflow-y: auto;
   /* margin-top: 15px; */
 }
 
-.timeline-content {
+.timelineContent {
   position: relative;
   width: 100%;
   /* padding: 16px; */
@@ -155,70 +152,69 @@
   min-height: 100%;
 }
 
-.timeline-content.active {
+.timelineContent:global(.active) {
   opacity: 1;
   pointer-events: auto;
 }
 
-.timeline-header {
+.timelineHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 12px;
 }
 
-.timeline-title-day1 {
+.timelineTitleDay1 {
   font-size: 16px;
   color: #faad14;
 }
 
-.timeline-title-day2 {
+.timelineTitleDay2 {
   font-size: 16px;
   color: #52c41a;
 }
 
-.timeline-time {
+.timelineTime {
   font-size: 14px;
 }
 
-.timeline-boss-card {
+.timelineBossCard {
   text-align: right;
 }
 
-.timeline-boss-card-day1 {
+.timelineBossCardDay1 {
   padding: 8px 12px;
   background-color: #e6f7ff;
   border-radius: 6px;
   border: 1px solid #91d5ff;
 }
 
-.timeline-boss-card-day2 {
+.timelineBossCardDay2 {
   padding: 8px 12px;
   background-color: #f6ffed;
   border-radius: 6px;
   border: 1px solid #b7eb8f;
 }
 
-.timeline-boss-title-day1 {
+.timelineBossTitleDay1 {
   color: #1890ff;
 }
 
-.timeline-boss-title-day2 {
+.timelineBossTitleDay2 {
   color: #52c41a;
 }
 
-.timeline-boss-stats {
+.timelineBossStats {
   font-size: 12px;
   color: #666;
 }
 
-
-.mechanic-card .card-title-section {
+.mechanicCard .cardTitleSection {
   padding-bottom: 16px;
   border-bottom: 2px solid var(--color-primary-100);
 }
 
-.mechanic-card .card-title-section::after {
+.mechanicCard .cardTitleSection::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -230,7 +226,7 @@
 }
 
 /* 卡片标题样式 */
-.mechanic-card-title {
+.mechanicCardTitle {
   margin: 0 !important;
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-md);
@@ -239,26 +235,26 @@
   gap: 8px;
 }
 
-.mechanic-card-title .anticon {
+.mechanicCardTitle .anticon {
   font-size: 16px;
   color: var(--color-primary-500);
 }
 
 /* 武器等级注释样式 */
-.weapon-level-note {
+.weaponLevelNote {
   font-size: var(--font-size-sm);
   color: var(--color-text-2);
   line-height: 1.4;
 }
 
 /* 深色模式武器等级注释适配 */
-[data-theme="dark"] .weapon-level-note,
-body[tomato-theme="dark"] .weapon-level-note {
+[data-theme='dark'] .weaponLevelNote,
+body[tomato-theme='dark'] .weaponLevelNote {
   color: var(--color-text-2);
 }
 
 /* 卡片内容区域 */
-.mechanic-card .card-body {
+.mechanicCard .cardBody {
   padding: 5px;
   margin-top: 10px;
   flex: 1; /* 让内容区域占据剩余空间 */
@@ -267,41 +263,41 @@ body[tomato-theme="dark"] .weapon-level-note {
 }
 
 /* 时间轴样式优化 */
-.mechanic-timeline {
+.mechanicTimeline {
   margin-top: 16px;
 }
 
-.mechanic-timeline .ant-timeline {
+.mechanicTimeline :global(.ant-timeline) {
   width: 100%;
   margin-left: -35px;
   margin-bottom: -40px;
 }
-.mechanic-timeline .ant-timeline-item-label {
+.mechanicTimeline :global(.ant-timeline-item-label) {
   color: var(--color-text-2);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
 }
 
-.mechanic-timeline .ant-timeline-item-content {
+.mechanicTimeline :global(.ant-timeline-item-content) {
   color: var(--color-text-1);
   font-size: var(--font-size-sm);
 }
 
 /* 开发中占位符样式 */
-.mechanics-development-placeholder {
+.mechanicsDevelopmentPlaceholder {
   text-align: center;
   padding: 60px 20px;
   color: var(--color-text-2);
 }
 
-.mechanics-development-title {
+.mechanicsDevelopmentTitle {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
   margin-bottom: 12px;
   color: var(--color-text-1);
 }
 
-.mechanics-development-text {
+.mechanicsDevelopmentText {
   font-size: var(--font-size-md);
   color: var(--color-text-2);
 }
@@ -318,51 +314,51 @@ body[tomato-theme="dark"] .weapon-level-note {
   }
 }
 
-.mechanic-card {
+.mechanicCard {
   animation: fadeInUp 0.4s ease-out;
 }
 
-.mechanic-card:nth-child(2) {
+.mechanicCard:nth-child(2) {
   animation-delay: 0.1s;
 }
 
-.mechanic-card:nth-child(3) {
+.mechanicCard:nth-child(3) {
   animation-delay: 0.2s;
 }
 
 /* 深色模式适配 */
-[data-theme="dark"] .mechanic-card,
-body[tomato-theme="dark"] .mechanic-card {
+[data-theme='dark'] .mechanicCard,
+body[tomato-theme='dark'] .mechanicCard {
   background: var(--content-bg);
   border-color: var(--theme-border);
 }
 
-[data-theme="dark"] .mechanic-card:hover,
-body[tomato-theme="dark"] .mechanic-card:hover {
+[data-theme='dark'] .mechanicCard:hover,
+body[tomato-theme='dark'] .mechanicCard:hover {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
-[data-theme="dark"] .mechanic-card .card-title-section,
-body[tomato-theme="dark"] .mechanic-card .card-title-section {
+[data-theme='dark'] .mechanicCard .cardTitleSection,
+body[tomato-theme='dark'] .mechanicCard .cardTitleSection {
   border-bottom-color: var(--color-primary-700);
 }
 
 /* 升级所需卢恩表格样式 */
 
-.rune-grid {
+.runeGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
 }
 
-.rune-column {
-  background: var(--color-primary-25);
+.runeColumn {
+  background: var(--color-primary-50);
   border-radius: var(--radius-md);
   padding: 10px 16px;
   border: 1px solid var(--color-primary-200);
 }
 
-.rune-column-header {
+.runeColumnHeader {
   text-align: center;
   font-weight: var(--font-weight-semibold);
   color: var(--color-title-primary);
@@ -370,19 +366,17 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   border-bottom: 2px solid var(--color-primary-300);
   font-size: var(--font-size-md);
   margin-bottom: 8px;
-}
-
-/* 已合并到999px的媒体查询中 */
+} /* 已合并到999px的媒体查询中 */
 
 /* 移动端卢恩表格 - 简化版 */
 @media (max-width: 999px) {
-  .rune-grid {
+  .runeGrid {
     overflow-x: auto;
   }
 }
 
 /* 卢恩表格2栏布局样式 */
-.runes-table-container {
+.runesTableContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
@@ -390,89 +384,74 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   width: 100%;
 }
 
-.runes-column {
+.runesColumn {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.runes-column .ant-table {
+.runesColumn :global(.ant-table) {
   width: 100%;
 }
 
-.runes-column .ant-table-thead > tr > th {
+.runesColumn :global(.ant-table-thead) > tr > th {
   padding: 6px 4px;
   text-align: center;
 }
 
-.runes-column .ant-table-tbody > tr > td {
+.runesColumn :global(.ant-table-tbody) > tr > td {
   padding: 4px 4px;
   text-align: center;
-}
-
-/* 已合并到999px的媒体查询中 */
+} /* 已合并到999px的媒体查询中 */
 
 /* 移动端卢恩表格2栏布局 - 简化版 */
 @media (max-width: 999px) {
-  .runes-table-container {
+  .runesTableContainer {
     grid-template-columns: 1fr;
   }
-  
-  .runes-column {
+
+  .runesColumn {
     overflow-x: auto;
   }
 }
 
-.game-mechanics-container .ant-alert {
+.gameMechanicsContainer :global(.ant-alert) {
   border-radius: 8px !important;
   transition: all var(--transition-normal) !important;
 }
 
-.game-mechanics-container .ant-alert-description {
+.gameMechanicsContainer :global(.ant-alert-description) {
   color: var(--color-text-2);
 }
 
 /* 数据来源图标样式 */
-.data-source-icon {
+.dataSourceIcon {
   transition: all 0.2s ease;
 }
 
-.data-source-icon:hover {
-  color: var(--color-primary) !important;
+.dataSourceIcon:hover {
+  color: var(--color-primary-500) !important;
   transform: scale(1.1);
-}
-
-/* 数据来源链接样式 - 统一设置Popover中的所有链接 */
-.ant-popover a {
-  color: #1890ff;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  margin-left: 4px;
-}
-
-.ant-popover a:hover {
-  color: #40a9ff;
-  text-decoration: underline;
 }
 
 /* ========================================
    缩圈效果图 CSS 逻辑说明
    ========================================
-   
+
    缩圈效果图由以下层级组成（从外到内）：
    1. 外圈 (circle-outer) - 固定大小的参考边界
    2. 上一个圈 (circle-pulse-ring) - 显示缩圈前的大小
    3. 当前圈 (circle-inner) - 显示缩圈后的大小
    4. 脉冲边框 (::before) - 缩圈开始时的动画效果
    5. 中心点 (circle-center) - 最中心的点
-   
+
    动画触发条件：
    - 第一次缩圈开始 (step 1) - 使用 innerPulse + borderPulse
    - 第二次缩圈开始 (step 3) - 使用 innerPulseSecond + borderPulseSecond
    ======================================== */
 
 /* 缩圈效果容器 */
-.circle-shrink-section {
+.circleShrinkSection {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -483,14 +462,14 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   background: transparent;
 }
 
-.circle-shrink-container {
+.circleShrinkContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
 }
 
-.circle-shrink-wrapper {
+.circleShrinkWrapper {
   position: relative;
   width: 180px;
   height: 180px;
@@ -500,7 +479,7 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 }
 
 /* 外圈 - 固定大小的参考边界，不参与动画 */
-.circle-outer {
+.circleOuter {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -510,17 +489,17 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 }
 
 /* 第一次缩圈结束后的外圈 - 浅蓝色 */
-.circle-outer.circle-outer-faded {
+.circleOuter.circleOuterFaded {
   border: 2px solid rgba(24, 144, 255, 0.4);
 }
 
 /* 第二次缩圈开始时的外圈 - 浅蓝色 */
-.circle-outer.circle-outer-second-shrink {
+.circleOuter.circleOuterSecondShrink {
   border: 2px solid rgba(24, 144, 255, 0.4);
 }
 
 /* 当前圈 - 根据时间点动态变化大小，无背景色 */
-.circle-inner {
+.circleInner {
   position: absolute;
   border: 3px solid rgba(24, 144, 255, 0.3);
   border-radius: 50%;
@@ -532,36 +511,36 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 }
 
 /* 第一次缩圈阶段（60%圈） - 保持透明背景 */
-.circle-inner.first-shrink-no-bg {
+.circleInner.firstShrinkNoBg {
   background: transparent;
 }
 
 /* 第一次缩圈结束阶段 - 深蓝色背景 */
-.circle-inner.first-shrink-end-dark {
+.circleInner.firstShrinkEndDark {
   background: radial-gradient(circle, rgba(24, 144, 255, 0.3) 0%, rgba(24, 144, 255, 0.1) 70%);
   border: 2px solid #1890ff;
 }
 
 /* 第二次缩圈开始阶段 - 内圈保持浅蓝色 */
-.circle-inner.second-shrink-start-dark {
+.circleInner.secondShrinkStartDark {
   background: radial-gradient(circle, rgba(24, 144, 255, 0.1) 0%, transparent 70%);
   border: 3px solid rgba(24, 144, 255, 0.3);
 }
 
 /* 第二次缩圈结束阶段 - 内圈变为深蓝色 */
-.circle-inner.second-shrink-end-dark {
+.circleInner.secondShrinkEndDark {
   background: radial-gradient(circle, rgba(24, 144, 255, 0.3) 0%, rgba(24, 144, 255, 0.1) 70%);
   border: 2px solid #1890ff;
 }
 
 /* 第一次缩圈脉冲效果 - 当前圈保持固定大小，只有阴影脉冲 */
-.circle-inner.circle-pulse {
+.circleInner.circlePulse {
   animation: innerPulse 2s ease-in-out infinite;
   transform: scale(1); /* 确保当前圈保持固定大小，不缩放 */
 }
 
 /* 脉冲边框 - 围绕当前圈进行缩放动画 */
-.circle-inner.circle-pulse::before {
+.circleInner.circlePulse::before {
   content: '';
   position: absolute;
   top: 0px;
@@ -574,16 +553,16 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 }
 
 /* 第二次缩圈脉冲效果 - 使用不同的动画，scale值更大 */
-.circle-inner.shrink-second.circle-pulse {
+.circleInner.shrinkSecond.circlePulse {
   animation: innerPulseSecond 4s ease-in-out infinite;
 }
 
-.circle-inner.shrink-second.circle-pulse::before {
+.circleInner.shrinkSecond.circlePulse::before {
   animation: borderPulseSecond 4s ease-in-out infinite;
 }
 
 /* 上一个圈 - 显示缩圈前的大小，静态显示，无动画 */
-.circle-pulse-ring {
+.circlePulseRing {
   position: absolute;
   border: 2px solid rgba(24, 144, 255, 0.2);
   border-radius: 50%;
@@ -592,13 +571,13 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 }
 
 /* 第二次缩圈开始时的脉冲圈 - 深蓝色 */
-.circle-pulse-ring.second-shrink-pulse {
+.circlePulseRing.secondShrinkPulse {
   border: 2px solid #1890ff;
 }
 
-
 @keyframes borderPulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.5;
     transform: scale(1);
   }
@@ -608,9 +587,9 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   }
 }
 
-
 @keyframes borderPulseSecond {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.6;
     transform: scale(1);
   }
@@ -620,7 +599,7 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   }
 }
 
-.circle-center {
+.circleCenter {
   position: absolute;
   width: 8px;
   height: 8px;
@@ -630,7 +609,7 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   z-index: 2;
 }
 
-.circle-time-indicator {
+.circleTimeIndicator {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -642,26 +621,22 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   backdrop-filter: blur(4px);
 }
 
-.circle-status {
+.circleStatus {
   text-align: center;
   padding: 8px 16px;
   background: rgba(24, 144, 255, 0.1);
   border-radius: 6px;
   border: 1px solid rgba(24, 144, 255, 0.2);
-}
-
-
-
-/* 移动端基础适配 - 简化版 */
+} /* 移动端基础适配 - 简化版 */
 @media (max-width: 999px) {
-  .circle-shrink-wrapper {
+  .circleShrinkWrapper {
     width: 150px;
     height: 150px;
   }
 }
 
 /* Day切换按钮样式 */
-.timeline-day-switcher {
+.timelineDaySwitcher {
   text-align: center;
   max-width: 500px;
   min-width: 200px;
@@ -670,7 +645,7 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 }
 
 /* 时间轴 + 两栏布局样式 */
-.timeline-with-steps {
+.timelineWithSteps {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 10px;
@@ -679,7 +654,7 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   height: 100%;
 }
 
-.timeline-steps-container {
+.timelineStepsContainer {
   min-width: 200px;
   padding-left: 20px;
   padding-top: 10px;
@@ -687,7 +662,7 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 }
 
 /* 两栏布局样式 */
-.timeline-two-columns {
+.timelineTwoColumns {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
@@ -696,7 +671,7 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   height: 100%;
 }
 /* Boss信息样式 */
-.boss-info {
+.bossInfo {
   width: 100%;
   flex: 1;
   display: flex;
@@ -705,7 +680,7 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 }
 
 /* 进度条样式 */
-.boss-progress-container {
+.bossProgressContainer {
   /* margin-top: 12px; */
   display: flex;
   flex-direction: column;
@@ -717,45 +692,45 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 }
 
 /* 深色模式下的进度条容器样式 */
-[data-theme="dark"] .boss-progress-container,
-body[tomato-theme="dark"] .boss-progress-container {
+[data-theme='dark'] .bossProgressContainer,
+body[tomato-theme='dark'] .bossProgressContainer {
   background-color: var(--theme-bg-tertiary);
   border: 1px solid var(--theme-border);
 }
 
-.boss-progress-item {
+.bossProgressItem {
   margin-bottom: 8px;
   /* width: 100%; */
 }
 
-.boss-progress-item:last-child {
+.bossProgressItem:last-child {
   margin-bottom: 0;
 }
 
 /* 进度条标签样式 */
-.progress-label {
+.progressLabel {
   font-size: 12px;
   /* margin-bottom: 4px; */
   font-weight: 500;
   /* white-space: nowrap; */
 }
 
-[data-theme="dark"] .progress-label {
+[data-theme='dark'] .progressLabel {
   color: rgba(255, 255, 255, 0.65);
 }
 
 /* 进度条数字样式 */
-.boss-progress-item .ant-progress-text {
+.bossProgressItem :global(.ant-progress-text) {
   font-size: 12px;
   font-weight: 600;
 }
 
-[data-theme="dark"] .boss-progress-item .ant-progress-text {
+[data-theme='dark'] .bossProgressItem :global(.ant-progress-text) {
   color: rgba(255, 255, 255, 0.85);
 }
 
 /* 伤害信息样式 */
-.damage-info {
+.damageInfo {
   width: 100%;
   flex: 1;
   display: flex;
@@ -766,7 +741,7 @@ body[tomato-theme="dark"] .boss-progress-container {
   margin-top: 10px;
 }
 
-.damage-stat {
+.damageStat {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -774,18 +749,18 @@ body[tomato-theme="dark"] .boss-progress-container {
   padding: 2px 0;
 }
 
-.damage-stat:last-child {
+.damageStat:last-child {
   margin-bottom: 0;
 }
 
 /* 深色模式下的伤害统计样式 */
-[data-theme="dark"] .damage-stat,
-body[tomato-theme="dark"] .damage-stat {
+[data-theme='dark'] .damageStat,
+body[tomato-theme='dark'] .damageStat {
   color: var(--theme-text-primary);
 }
 
 /* 时间轴列样式 */
-.timeline-column {
+.timelineColumn {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -796,29 +771,29 @@ body[tomato-theme="dark"] .damage-stat {
 }
 
 /* 缩圈效果图列样式 - 宽度自适应内容 */
-.timeline-column:first-child {
+.timelineColumn:first-child {
   width: fit-content;
   min-width: 200px;
   max-width: 300px;
 }
 
-[data-theme="dark"] .timeline-column {
+[data-theme='dark'] .timelineColumn {
   background: #1f1f1f;
   border-color: #434343;
 }
 
-.timeline-column-header {
+.timelineColumnHeader {
   margin-bottom: 12px;
   padding-bottom: 8px;
   border-bottom: 1px solid #d9d9d9;
   flex-shrink: 0;
 }
 
-[data-theme="dark"] .timeline-column-header {
+[data-theme='dark'] .timelineColumnHeader {
   border-bottom-color: #434343;
 }
 
-.timeline-column-content {
+.timelineColumnContent {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -829,13 +804,13 @@ body[tomato-theme="dark"] .damage-stat {
 }
 
 /* 深色模式下的时间轴列内容样式 */
-[data-theme="dark"] .timeline-column-content,
-body[tomato-theme="dark"] .timeline-column-content {
+[data-theme='dark'] .timelineColumnContent,
+body[tomato-theme='dark'] .timelineColumnContent {
   color: var(--theme-text-primary);
 }
 
 /* 时间轴控制样式 */
-.timeline-controls {
+.timelineControls {
   text-align: center;
   padding: 16px;
   background: rgba(24, 144, 255, 0.05);
@@ -844,7 +819,7 @@ body[tomato-theme="dark"] .timeline-column-content {
 }
 
 /* Boss标题样式 */
-.boss-section-title {
+.bossSectionTitle {
   font-size: 15px;
   font-weight: 600;
   color: #1890ff;
@@ -857,80 +832,77 @@ body[tomato-theme="dark"] .timeline-column-content {
   gap: 8px;
 }
 
-.boss-section-title .anticon {
+.bossSectionTitle .anticon {
   color: #1890ff;
   font-size: 14px;
 }
 
 /* 深色模式下的Boss标题样式 */
-[data-theme="dark"] .boss-section-title,
-body[tomato-theme="dark"] .boss-section-title {
+[data-theme='dark'] .bossSectionTitle,
+body[tomato-theme='dark'] .bossSectionTitle {
   color: #40a9ff;
   border-bottom-color: rgba(64, 169, 255, 0.3);
 }
 
-[data-theme="dark"] .boss-section-title .anticon,
-body[tomato-theme="dark"] .boss-section-title .anticon {
+[data-theme='dark'] .bossSectionTitle .anticon,
+body[tomato-theme='dark'] .bossSectionTitle .anticon {
   color: #40a9ff;
-}
-
-
-/* 移动端适配强化：时间机制与卢恩布局自动换行 */
+} /* 移动端适配强化：时间机制与卢恩布局自动换行 */
 @media (max-width: 999px) {
   /* 主网格在小屏下单列 */
-  .mechanics-grid.two-columns,
-  .mechanics-grid.three-columns,
-  .mechanics-grid.custom-columns {
+  .mechanicsGrid.twoColumns,
+  .mechanicsGrid.threeColumns,
+  .mechanicsGrid.customColumns {
     grid-template-columns: 1fr;
   }
 
   /* 时间机制：两栏改为单栏 */
-  .timeline-with-steps,
-  .timeline-two-columns {
+  .timelineWithSteps,
+  .timelineTwoColumns {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .timeline-steps-container {
+  .timelineStepsContainer {
     min-width: 0;
     padding-left: 0;
     padding-top: 0;
   }
 
-  .timeline-column:first-child {
+  .timelineColumn:first-child {
     width: 100%;
     min-width: 0;
     max-width: 100%;
   }
 
-  .timeline-day-switcher {
+  .timelineDaySwitcher {
     width: 100%;
     max-width: none;
   }
 
-  .mechanic-timeline .ant-timeline {
+  .mechanicTimeline :global(.ant-timeline) {
     margin-left: 0;
     margin-bottom: 0;
   }
 
   /* 升级所需卢恩：网格自动换行 */
-  .rune-grid {
+  .runeGrid {
     overflow-x: visible;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 
-  .runes-column {
+  .runesColumn {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .runes-column .ant-table {
+  .runesColumn :global(.ant-table) {
     table-layout: fixed;
     min-width: 520px;
   }
 
-  .runes-column .ant-table-thead > tr > th,
-  .runes-column .ant-table-tbody > tr > td {
+  .runesColumn :global(.ant-table-thead) > tr > th,
+  .runesColumn :global(.ant-table-tbody) > tr > td {
     white-space: normal;
     word-break: break-word;
   }

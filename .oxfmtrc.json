@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 120,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "trailingComma": "all",
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "endOfLine": "lf",
+  "sortImports": false,
+  "ignorePatterns": [
+    "dist/**",
+    "node_modules/**",
+    "src/data/**",
+    "docs/**",
+    "README.md",
+    "package-lock.json",
+    ".oxlintrc.json",
+    ".oxfmtrc.json"
+  ]
+}

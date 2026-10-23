@@ -1,7 +1,12 @@
 /* 主样式文件 - 导入所有样式模块 */
 
-/* 导入设计系统 */
+/* 导入设计系统（token + 基础样式） */
 @import './design-system.css';
+
+/* antd 覆盖层（所有针对 antd 内部类名的定制规则都在这里）。
+   必须排在组件样式之前：页面/组件级定制写在各自文件里，
+   需要靠顺序覆盖这里的基线值。 */
+@import './antd-overrides.css';
 
 /* 导入组件样式 */
 @import './components.css';
@@ -31,53 +36,6 @@ body {
   transition: all var(--transition-normal);
 }
 
-/* 特殊元素排除全局动画，使用自定义动画 */
-.ant-table,
-.ant-table *,
-.ant-btn,
-.ant-btn *,
-.ant-input,
-.ant-input *,
-.ant-select,
-.ant-select *,
-.ant-modal,
-.ant-modal *,
-.ant-drawer,
-.ant-drawer *,
-.ant-message,
-.ant-message *,
-.ant-notification,
-.ant-notification * {
-  transition: none;
-}
-
-/* 表格特殊动画 */
-.ant-table {
-  transition: background-color var(--transition-normal), 
-              border-color var(--transition-normal);
-}
-
-/* .ant-table-thead > tr > th {
-  transition: background-color var(--transition-normal), 
-              color var(--transition-normal);
-}
-
-.ant-table-tbody > tr > td {
-  transition: background-color var(--transition-normal), 
-              color var(--transition-normal);
-} */
-
-/* 按钮动画 */
-.ant-btn {
-  transition: all var(--transition-normal) !important;
-}
-
-/* 输入框动画 */
-.ant-input,
-.ant-select-selector {
-  transition: all var(--transition-normal) !important;
-}
-
 #root {
   width: 100%;
   min-height: 100vh;
@@ -94,8 +52,6 @@ a {
 a:hover {
   color: var(--color-primary-600);
 }
-
-
 
 /* 标题样式 */
 h1 {
@@ -128,8 +84,8 @@ h1 {
   color: var(--color-primary-900);
 }
 
-[data-theme="dark"] ::selection,
-body[tomato-theme="dark"] ::selection {
+[data-theme='dark'] ::selection,
+body[tomato-theme='dark'] ::selection {
   background-color: var(--color-primary-700);
   color: var(--color-primary-100);
-} 
+}
