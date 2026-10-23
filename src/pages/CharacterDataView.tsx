@@ -139,7 +139,7 @@ const DodgeFramesComparison = () => {
     const loadFrameData = async () => {
       try {
         const dataManager = DataManager.getInstance();
-        await dataManager.waitForData();
+        await dataManager.loadGroup('character');
         setFrameData(dataManager.getInvincibleFrames());
       } catch (error) {
         console.error('Failed to load frame data:', error);
@@ -481,7 +481,7 @@ const CharacterDataView: React.FC = () => {
     const loadData = async () => {
       try {
         const dataManager = DataManager.getInstance();
-        await dataManager.waitForData();
+        await dataManager.loadGroup('character');
 
         setData({
           characterStatesData: dataManager.getCharacterStates(),

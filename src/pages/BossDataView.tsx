@@ -1632,7 +1632,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     const loadSpecialEventData = async () => {
       try {
         const dataManager = DataManager.getInstance();
-        await dataManager.waitForData();
+        await dataManager.loadGroup('boss');
         setSpecialEventData(dataManager.getInGameSpecialBuff());
         setLoading(false);
       } catch (error) {

@@ -6,8 +6,11 @@ const isVercel = process.env.VERCEL === '1' || process.env.VERCEL === 'true';
 
 // 第三方依赖分包规则（Vite 8 基于 Rolldown，manualChunks 只接受函数形式）
 const vendorGroups: Array<{ name: string; test: RegExp }> = [
+  // 图表库单独成 chunk：只有「角色数据 / 夜王Boss数据」两个懒加载页面会 import，
+  // 单独成块后首屏不再无条件下载整套 G2。
+  { name: 'charts-vendor', test: /node_modules[\\/]@antv[\\/]|node_modules[\\/]@ant-design[\\/](plots|charts)[\\/]/ },
   { name: 'react-vendor', test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/ },
-  { name: 'antd-vendor', test: /node_modules[\\/](antd|@ant-design|@antv|rc-[^\\/]+)[\\/]/ },
+  { name: 'antd-vendor', test: /node_modules[\\/](antd|@ant-design|rc-[^\\/]+)[\\/]/ },
   { name: 'utils-vendor', test: /node_modules[\\/]lodash[\\/]/ },
 ];
 

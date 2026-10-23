@@ -310,7 +310,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     const loadData = async () => {
       try {
         const dataManager = DataManager.getInstance();
-        await dataManager.waitForData();
+        await dataManager.loadGroup('entries');
 
         setData({
           outsiderEntries: dataManager.getOutsiderEntries(),

@@ -175,7 +175,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
     const loadData = async () => {
       try {
         const dataManager = DataManager.getInstance();
-        await dataManager.waitForData();
+        await dataManager.loadGroup('weapon');
 
         setDataState({
           weaponCharacterData: transformData(dataManager.getWeaponCharacter()),
