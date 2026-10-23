@@ -100,8 +100,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     },
     axis: {
       x: {
+        // G2 v5 真正读取的是 axis 层级的 labelAutoRotate / labelAutoHide
+        // （见 @antv/g2 esm/component/axis.js 的 inferLabelOverlap），
+        // label 子对象里的 autoRotate 不生效。
+        labelAutoRotate: false,
+        labelAutoHide: true,
         label: {
-          autoRotate: true,
+          autoRotate: false,
           autoHide: true,
           autoEllipsis: true,
           style: {
