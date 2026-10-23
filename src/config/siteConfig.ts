@@ -28,18 +28,19 @@ export const SITE_CONFIG = {
   },
 
   /**
-   * giscus 评论配置。
+   * giscus 评论配置（指向本站 fork）。
    *
-   * 目前仍指向原作者仓库：该仓库已安装 giscus 并开启 Discussions。
-   * 如需改为本站仓库，需要：
-   * 1. 在 fork 中开启 Discussions；
-   * 2. 给 fork 安装 giscus App；
-   * 3. 在 giscus.app 重新生成 repoId / categoryId。
+   * 已确认：
+   * 1. fork 已开启 Discussions；
+   * 2. 已安装 giscus App；
+   * 3. repoId / categoryId 来自 giscus.app 当前仓库配置。
+   *
+   * 若以后改名或转移仓库，需要在 giscus.app 重新生成这两个 ID。
    */
   giscus: {
-    repo: 'xxiixi/NightreignQuickRef',
-    repoId: 'R_kgDOPXY8wA',
+    repo: 'PanZ1Haaaaaaang/NightreignQuickRef',
+    repoId: 'R_kgDOVKTT0g',
     category: 'Announcements',
-    categoryId: 'DIC_kwDOPXY8wM4Cv62K',
+    categoryId: 'DIC_kwDOVKTT0s4DJZqb',
   },
 } as const;
