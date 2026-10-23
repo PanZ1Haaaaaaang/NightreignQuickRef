@@ -330,7 +330,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       }
     };
 
-    loadData();
+    void loadData();
   }, []);
 
   // 监听筛选状态变化，用于调试

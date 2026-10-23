@@ -161,11 +161,6 @@ class DataManager {
     return DataManager.instance;
   }
 
-  // 该组是否已加载完成
-  public isGroupLoaded(group: DataGroup): boolean {
-    return this.loadedGroups.has(group);
-  }
-
   /**
    * 按组加载数据。同一组重复调用会复用同一个 Promise，不会重复请求。
    * 失败时清空 Promise，允许重试。
@@ -286,7 +281,7 @@ class DataManager {
       rawData.forEach((group) => {
         if (typeof group === 'object' && group !== null) {
           Object.values(group).forEach((entry: unknown) => {
-            if (entry && typeof entry === 'object' && entry !== null) {
+            if (entry && typeof entry === 'object') {
               const entryObj = entry as Record<string, unknown>;
               processedData.push({
                 entry_id: (entryObj.entry_id as string) || (entryObj.entry_entry_id as string) || '',
@@ -316,7 +311,7 @@ class DataManager {
       rawData.forEach((group) => {
         if (typeof group === 'object' && group !== null) {
           Object.values(group).forEach((entry: unknown) => {
-            if (entry && typeof entry === 'object' && entry !== null) {
+            if (entry && typeof entry === 'object') {
               const entryObj = entry as Record<string, unknown>;
               processedData.push({
                 entry_id: (entryObj.entry_id as string) || (entryObj.entry_entry_id as string) || '',

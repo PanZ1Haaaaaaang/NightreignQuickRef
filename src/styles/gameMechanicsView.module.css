@@ -12,7 +12,7 @@
 /* 主布局容器 - 可配置最大宽度 */
 .mechanicsLayout {
   width: 70%;
-  max-width: var(--mechanics-container-width, 1200px);
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -352,7 +352,7 @@ body[tomato-theme='dark'] .mechanicCard .cardTitleSection {
 }
 
 .runeColumn {
-  background: var(--color-primary-25);
+  background: var(--color-primary-50);
   border-radius: var(--radius-md);
   padding: 10px 16px;
   border: 1px solid var(--color-primary-200);
@@ -430,7 +430,7 @@ body[tomato-theme='dark'] .mechanicCard .cardTitleSection {
 }
 
 .dataSourceIcon:hover {
-  color: var(--color-primary) !important;
+  color: var(--color-primary-500) !important;
   transform: scale(1.1);
 }
 

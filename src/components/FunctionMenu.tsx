@@ -163,14 +163,13 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
   const cleanMenuItem = (item: MenuItemWithMetadata): MenuItemType => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { anchorId, tabKey, stepIndex, ...cleanedItem } = item;
-    const result: MenuItemType = {
+    return {
       key: cleanedItem.key,
       label: cleanedItem.label,
       ...(cleanedItem.children && {
         children: cleanedItem.children.map(cleanMenuItem),
       }),
     };
-    return result;
   };
 
   // 根据配置文件中的顺序重新排列菜单项

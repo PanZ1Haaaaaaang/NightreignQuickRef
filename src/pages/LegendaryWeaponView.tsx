@@ -192,7 +192,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
       }
     };
 
-    loadData();
+    void loadData();
   }, []);
 
   // 监听外部Step切换

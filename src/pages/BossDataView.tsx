@@ -876,7 +876,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       }
     };
 
-    loadSpecialEventData();
+    void loadSpecialEventData();
   }, []);
 
   // 监听主题变化

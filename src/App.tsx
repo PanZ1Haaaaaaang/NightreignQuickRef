@@ -7,7 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Navigation from './components/Navigation';
 import FunctionMenu from './components/FunctionMenu';
-import { initializeTheme, setupThemeListener } from './utils/themeUtils';
+import { initializeTheme, setupThemeListener, toggleTheme } from './utils/themeUtils';
 import DataManager, { type DataGroup } from './utils/dataManager';
 import { setMessageApi } from './utils/feedback';
 import { getDefaultPage } from './config/navigationConfig';
@@ -90,19 +90,7 @@ function App() {
 
   // 主题切换函数
   const handleToggleTheme = () => {
-    const newTheme = !isDarkMode;
-    setIsDarkMode(newTheme);
-
-    // 更新body属性
-    if (newTheme) {
-      document.body.setAttribute('tomato-theme', 'dark');
-    } else {
-      document.body.removeAttribute('tomato-theme');
-    }
-    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-
-    // 触发自定义主题变化事件
-    window.dispatchEvent(new Event('themeChange'));
+    toggleTheme(isDarkMode, setIsDarkMode);
   };
 
   // 语言切换
@@ -127,8 +115,7 @@ function App() {
 
   // 监听系统主题变化
   useEffect(() => {
-    const cleanup = setupThemeListener(setIsDarkMode);
-    return cleanup;
+    return setupThemeListener(setIsDarkMode);
   }, []);
 
   // 主Tab切换时重置子Tab和Step状态

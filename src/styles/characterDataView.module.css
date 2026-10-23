@@ -84,7 +84,7 @@ body[tomato-theme='dark'] .cardItem .cardBody {
 .characterAttributesTable {
   background: var(--content-bg);
   border-radius: 8px;
-  overflow: x;
+  overflow: hidden;
   transition: all var(--transition-normal);
 }
 

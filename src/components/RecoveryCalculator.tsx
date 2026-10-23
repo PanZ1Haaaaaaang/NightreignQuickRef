@@ -5,7 +5,6 @@ import recoverCalculateData from '../data/zh-CN/recover_calculate.json';
 import styles from '../styles/recoveryCalculator.module.css';
 
 const { Text } = Typography;
-const { Option } = Select;
 
 const RecoveryCalculator: React.FC = () => {
   // 获取category对应的颜色
@@ -276,13 +275,11 @@ const RecoveryCalculator: React.FC = () => {
               className={styles.characterSelect}
               value={selectedCharacter}
               onChange={setSelectedCharacter}
-            >
-              {characterOptions.map((option) => (
-                <Option key={option.value} value={option.value.toString()}>
-                  {option.label} ( 血量: {option.value}, 蓝量: {option.focus} )
-                </Option>
-              ))}
-            </Select>
+              options={characterOptions.map((option) => ({
+                value: option.value.toString(),
+                label: `${option.label} ( 血量: ${option.value}, 蓝量: ${option.focus} )`,
+              }))}
+            />
           </div>
 
           <div className={styles.characterRow}>
@@ -292,13 +289,11 @@ const RecoveryCalculator: React.FC = () => {
               className={styles.characterSelect}
               value={selectedAllyCharacter}
               onChange={setSelectedAllyCharacter}
-            >
-              {characterOptions.map((option) => (
-                <Option key={option.value} value={option.value.toString()}>
-                  {option.label} ( 血量: {option.value}, 蓝量: {option.focus} )
-                </Option>
-              ))}
-            </Select>
+              options={characterOptions.map((option) => ({
+                value: option.value.toString(),
+                label: `${option.label} ( 血量: ${option.value}, 蓝量: ${option.focus} )`,
+              }))}
+            />
           </div>
         </div>
 

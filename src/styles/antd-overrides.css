@@ -195,7 +195,7 @@ body[tomato-theme='dark'] .ant-table-sticky-header .ant-table-thead > tr > th {
 }
 
 .giscus-comments-modal .ant-modal-header {
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--theme-border);
   padding: 16px 24px;
 }
 

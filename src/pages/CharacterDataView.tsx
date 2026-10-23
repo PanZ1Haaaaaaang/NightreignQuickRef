@@ -146,7 +146,7 @@ const DodgeFramesComparison = () => {
       }
     };
 
-    loadFrameData();
+    void loadFrameData();
   }, []);
 
   // 「强化闪避」：把 6 帧非无敌帧转为无敌帧（女爵·闪身只转 2 帧），总帧长不变
@@ -610,7 +610,7 @@ const CharacterDataView: React.FC = () => {
       }
     };
 
-    loadData();
+    void loadData();
   }, []);
 
   const characterData: CharacterData = useMemo(() => data.characterStatesData[0] || {}, [data.characterStatesData]);

@@ -22,12 +22,7 @@ export const initializeTheme = (setIsDarkMode: (value: boolean) => void) => {
   const savedTheme = localStorage.getItem('theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  let shouldUseDark = false;
-  if (savedTheme) {
-    shouldUseDark = savedTheme === 'dark';
-  } else {
-    shouldUseDark = prefersDark;
-  }
+  const shouldUseDark = savedTheme ? savedTheme === 'dark' : prefersDark;
 
   setIsDarkMode(shouldUseDark);
 
