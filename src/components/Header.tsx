@@ -201,6 +201,7 @@ const Header: React.FC<HeaderProps> = React.memo(
                               <br />• 添加了大空洞野生Boss与特殊事件效果；
                               <br />• 添加了夜王深夜模式的倍率；
                               <br />• 添加了商人货物数据与大空洞传说商人对应表（数据来源 by: 小辛、小黑盒社区）；
+                              <br />• 添加了敌人种族说明（种族表、特攻武器与特攻效果）（数据来源 by: 小辛）；
                             </div>
                           </div>
 
@@ -220,7 +221,6 @@ const Header: React.FC<HeaderProps> = React.memo(
                               <br />• 冲击力说明 + 救人值
                               <br />• 泪滴转职
                               <br />• 夜王弱点硬直
-                              <br />• 敌人种族说明
                               <br />• 仇恨机制
                             </div>
                           </div>

@@ -12,6 +12,7 @@ import { Line } from '@ant-design/plots';
 import { getCurrentTheme } from '../utils/themeUtils';
 import { throttle } from 'lodash';
 import styles from '../styles/bossDataView.module.css';
+import EnemyRaceSection from './bossDataView/EnemyRaceSection';
 import {
   curseData,
   getAbsorptionClass,
@@ -1070,6 +1071,15 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                     sticky={{ offsetHeader: 0 }}
                     scroll={{ x: 1000, y: 700 }}
                   />
+                </div>
+              ),
+            },
+            {
+              key: 'enemy-race-data',
+              label: '🧬 敌人种族说明',
+              children: (
+                <div id="enemy-race-data">
+                  <EnemyRaceSection />
                 </div>
               ),
             },

@@ -112,6 +112,16 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
         url: 'https://www.bilibili.com/opus/1158092104127217697',
         icon: 'bilibili',
       },
+      {
+        title: '黑夜君临商人表 v1.02.4 修正版v2（by 小辛）',
+        url: 'https://www.bilibili.com/video/BV1weyMBMEN3',
+        icon: 'link',
+      },
+      {
+        title: '【艾尔登法环：黑夜君临】种族特攻？武器隐藏属性！夜王特殊机制分析！-哔哩哔哩',
+        url: 'https://www.bilibili.com/video/BV17HWCzhEYz',
+        icon: 'bilibili',
+      },
     ],
   },
   {
@@ -136,17 +146,6 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
       {
         title: 'Smithbox 2.2.6',
         url: 'https://github.com/vawser/Smithbox/releases#release-2.2.6',
-        icon: 'link',
-      },
-    ],
-  },
-  {
-    name: '商人数据资料',
-    showDivider: true,
-    items: [
-      {
-        title: '黑夜君临商人表 v1.02.4 修正版v2（by 小辛）',
-        url: 'https://b23.tv/U5HkMeG',
         icon: 'link',
       },
       {

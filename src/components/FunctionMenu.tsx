@@ -92,6 +92,12 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         { key: '夜王基础数据', label: '🌙 夜王基础数据', anchorId: 'night-king-basic', tabKey: 'boss-data' },
         { key: '野生Boss数据', label: '☠️ 野生Boss数据', anchorId: 'wild-boss-data', tabKey: 'wild-boss-data' },
         {
+          key: '敌人种族说明',
+          label: '🧬 敌人种族说明',
+          anchorId: 'enemy-race-data',
+          tabKey: 'enemy-race-data',
+        },
+        {
           key: '圆桌厅堂人物数据',
           label: '🏛️ 圆桌厅堂人物数据',
           anchorId: 'roundtable-characters',
