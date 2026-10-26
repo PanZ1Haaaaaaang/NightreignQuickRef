@@ -609,7 +609,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 154,
-    "location": "监牢、第二夜、大空洞主城"
+    "location": "监牢、第二夜、大空洞主城、神殿塔"
   },
   {
     "name": "神皮贵族",
@@ -626,7 +626,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 154,
-    "location": "监牢、第二夜、大空洞主城"
+    "location": "监牢、第二夜、大空洞主城、神殿塔"
   },
   {
     "name": "古龙",
@@ -898,7 +898,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "野外红名、主城楼顶、第一夜、神殿塔"
+    "location": "野外红名、主城楼顶、腐败森林、第一夜、神殿塔"
   },
   {
     "name": "龙装大树守卫",
@@ -1000,7 +1000,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": 252,
-    "location": "野外红名、隐城"
+    "location": "野外红名、腐败森林、隐城"
   },
   {
     "name": "火焰主教",
@@ -1204,7 +1204,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 154,
-    "location": "第一夜、大空洞异变"
+    "location": "第一夜、神殿塔、大空洞异变"
   },
   {
     "name": "贪食魔龙",
@@ -1530,7 +1530,7 @@
     "location": "湖沼、大空洞主城"
   },
   {
-    "name": "霜冻龙虾",
+    "name": "霜冻螯虾",
     "normal": 0.9,
     "strike": 1,
     "slash": 0.65,
@@ -1544,7 +1544,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": "免疫",
-    "location": "湖沼、大空洞大教堂"
+    "location": "湖沼"
   },
   {
     "name": "死骑士",

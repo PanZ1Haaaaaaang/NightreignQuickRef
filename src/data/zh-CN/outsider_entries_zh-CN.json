@@ -384,9 +384,8 @@
     {
         "entry_id":"7002000",
         "entry_name":"附加异常状态出血的效果",
-        "entry_type":"武器固有",
         "explanation":"出血据点武器附带",
-        "superposability":"不可叠加"
+        "tags":["未实装"]
     },
     {
         "entry_id":"7002001",

@@ -134,6 +134,7 @@ export const typeColorMap: Record<string, string> = {
   '特殊地形：腐败森林': 'red',
   '特殊地形：山顶': 'cyan',
   '特殊地形：火山口': 'volcano',
+  '特殊地形：大空洞': 'magenta',
   // 道具效果分类
   圣杯瓶: 'red',
   采集: 'green',
