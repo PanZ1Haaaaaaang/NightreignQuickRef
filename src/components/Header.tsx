@@ -200,6 +200,7 @@ const Header: React.FC<HeaderProps> = React.memo(
                               <br />• 添加了武器战技与魔法祷告数据（数据来源 by: 虚空蛋黄酱）；
                               <br />• 添加了大空洞野生Boss与特殊事件效果；
                               <br />• 添加了夜王深夜模式的倍率；
+                              <br />• 添加了商人货物数据与大空洞传说商人对应表（数据来源 by: 小辛、小黑盒社区）；
                             </div>
                           </div>
 
@@ -212,8 +213,7 @@ const Header: React.FC<HeaderProps> = React.memo(
                           >
                             <div style={{ fontWeight: 'bold', color: '#52c41a', marginBottom: '4px' }}>🔧 TODO</div>
                             <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                              • 商人(包括大空洞传说商人）
-                              <br />• 大盾数值
+                              • 大盾数值
                               <br />• 异常值说明
                               <br />• 黑焰烧血效果
                               <br />• 冲击力说明

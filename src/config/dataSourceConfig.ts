@@ -140,4 +140,20 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
       },
     ],
   },
+  {
+    name: '商人数据资料',
+    showDivider: true,
+    items: [
+      {
+        title: '黑夜君临商人表 v1.02.4 修正版v2（by 小辛）',
+        url: 'https://b23.tv/U5HkMeG',
+        icon: 'link',
+      },
+      {
+        title: '大空洞金武商店对应武器',
+        url: 'https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?h_camp=link&h_session_id=WnAl0U54uSJoMc6y&h_src=YXBwX3NoYXJl&link_id=aa6371e96491&new_post_share_style_v2=0',
+        icon: 'link',
+      },
+    ],
+  },
 ];

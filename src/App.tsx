@@ -19,6 +19,7 @@ const LegendaryWeaponView = lazy(() => import('./pages/LegendaryWeaponView'));
 const CharacterDataView = lazy(() => import('./pages/CharacterDataView'));
 const BossDataView = lazy(() => import('./pages/BossDataView'));
 const WeaponSkillMagicView = lazy(() => import('./pages/WeaponSkillMagicView'));
+const MerchantView = lazy(() => import('./pages/MerchantView'));
 
 // 懒加载占位：只占内容区，不遮挡顶部导航，避免布局跳动
 const viewLoadingStyle: React.CSSProperties = {
@@ -147,6 +148,8 @@ function App() {
         return <BossDataView activeSubTab={activeSubTab} />;
       case '武器战技与魔法祷告':
         return <WeaponSkillMagicView activeSubTab={activeSubTab} />;
+      case '商人数据':
+        return <MerchantView activeSubTab={activeSubTab} />;
       default:
         return <EntryDetailView activeSubTab={activeSubTab} />;
     }

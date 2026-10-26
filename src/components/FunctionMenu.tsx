@@ -141,6 +141,27 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         { key: '辅助类', label: '✨ 辅助类', anchorId: 'support-skills', tabKey: '辅助类' },
       ],
     },
+    {
+      key: '商人数据',
+      label: '🏪 商人数据',
+      children: [
+        { key: '普通商人', label: '🧾 普通商人', anchorId: 'merchant-normal', tabKey: '普通商人' },
+        { key: '村落商人', label: '🏘️ 村落商人', anchorId: 'merchant-village', tabKey: '村落商人' },
+        { key: '黄金树商人', label: '🌳 黄金树商人', anchorId: 'merchant-golden-tree', tabKey: '黄金树商人' },
+        {
+          key: '大空洞传说商人',
+          label: '🕳️ 大空洞传说商人',
+          anchorId: 'merchant-hollow-legendary',
+          tabKey: '大空洞传说商人',
+        },
+        {
+          key: '不可购买露滴',
+          label: '💧 不可购买的灵药露滴',
+          anchorId: 'merchant-unpurchasable-tears',
+          tabKey: '不可购买露滴',
+        },
+      ],
+    },
   ];
 
   // 创建映射对象存储每个菜单项的自定义属性
