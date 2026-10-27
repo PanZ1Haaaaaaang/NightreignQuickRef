@@ -216,12 +216,15 @@ const Header: React.FC<HeaderProps> = React.memo(
                             <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
                               • 大盾数值 + 防御强度说明
                               <br />• 渡夜者绝招、技艺效果，送葬者开启技艺后无敌帧变化
+                              <br />• 学者能力
                               <br />• 异常值说明
                               <br />• 黑焰烧血效果
                               <br />• 冲击力说明 + 救人值
                               <br />• 泪滴转职
                               <br />• 夜王弱点硬直
                               <br />• 仇恨机制
+                              <br />• 野外Boss的tag修正
+                              <br />• 补充官网更新公告
                             </div>
                           </div>
                         </div>

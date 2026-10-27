@@ -38,10 +38,18 @@ coverage
 # TypeScript
 *.tsbuildinfo
 
-# 本地核验工具与报告（含本机绝对路径：参考资料 Excel、nginx 部署目录）
+# 本地工具与报告（agent 工具、一次性脚本，含本机绝对路径：参考资料 Excel、nginx 部署目录）
 /tools/
-/docs/verify/
-/docs/stack-upgrade/
+
+# 开发文档：仅原作者的三篇文档入库，docs/ 下新增文件/文件夹默认忽略
+/docs/*
+!/docs/commit_convention.md
+!/docs/deploy_record.md
+!/docs/project_notes.md
 
 # IDE 插件（DirectoryV3）的本地目录/文件标注文件
 /DirectoryV3.xml
+
+# AI
+AGENTS.md
+/.dsh/

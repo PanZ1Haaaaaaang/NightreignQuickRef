@@ -115,7 +115,7 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
       {
         title: '黑夜君临商人表 v1.02.4 修正版v2（by 小辛）',
         url: 'https://www.bilibili.com/video/BV1weyMBMEN3',
-        icon: 'link',
+        icon: 'bilibili',
       },
       {
         title: '【艾尔登法环：黑夜君临】种族特攻？武器隐藏属性！夜王特殊机制分析！-哔哩哔哩',
@@ -128,6 +128,11 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
     name: '其他资源',
     showDivider: true,
     items: [
+      {
+        title: '黑夜君临官方网站（新闻 / 维护公告）',
+        url: 'https://nightreign.eldenring.jp/news.html',
+        icon: 'link',
+      },
       {
         title: '每日缩圈时间',
         url: 'https://mobalytics.gg/elden-ring-nightreign/guides/day-length',
