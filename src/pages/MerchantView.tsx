@@ -74,15 +74,32 @@ merchantData.hollowLegendary.forEach((row, index) => {
 const DASH = '—';
 
 const HIGHLIGHT_COLORS: Record<string, string> = {
+  // 旧版标注（保留兼容）
   核心: 'gold',
   重要被动: 'orange',
   弹反: 'blue',
   双异常: 'purple',
+  // v1.03.4 DLC版标注体系
+  buff: 'cyan',
+  增伤词条: 'volcano',
+  发射器: 'purple',
+  蓝泪: 'geekblue',
+  雷武器: 'gold',
+  祷告: 'green',
+  魔法: 'blue',
+  圣律: 'lime',
+  减仇恨: 'magenta',
+  增减仇恨: 'magenta',
+  损减: 'default',
+  满减: 'default',
+  蓄减: 'default',
+  连减: 'default',
+  防减: 'default',
 };
 
-// 重点标注可能是组合值（如「重要被动 核心」），拆分为多个 Tag
+// 重点标注可能是组合值（如「雷武器/增伤词条」），按 / 空格 、 等分隔为多个 Tag
 const highlightTagsOf = (highlight: string | null): string[] =>
-  highlight ? highlight.split(/[\s、,，]+/).filter(Boolean) : [];
+  highlight ? highlight.split(/[\s、,，/]+/).filter(Boolean) : [];
 
 const RULE_COLORS: Record<string, string> = {
   固定出现: 'green',
@@ -526,7 +543,7 @@ const HollowLegendarySection: React.FC<{
         type="info"
         showIcon
         style={{ marginBottom: 16 }}
-        message="大空洞金武商店对应规则"
+        title="大空洞金武商店对应规则"
         description="普通商人出售对应小商店武器时，大空洞的金武商店会必定刷出该行对应的金色传说武器（括号内为对应效果）。红色标签为资料图中红框标注的重点对应。数据来自黑环资料图（旧版本），v1.03.5 未对其改动。"
       />
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, marginBottom: 16 }}>
@@ -546,7 +563,7 @@ const HollowLegendarySection: React.FC<{
           type="success"
           showIcon
           style={{ marginBottom: 16 }}
-          message="联动结果"
+          title="联动结果"
           description={
             <div style={{ whiteSpace: 'pre-line' }}>
               {focusRows
@@ -593,7 +610,7 @@ const TearsSection: React.FC = () => {
         type="warning"
         showIcon
         style={{ marginBottom: 16 }}
-        message="以下灵药露滴无法通过商人购买"
+        title="以下灵药露滴无法通过商人购买"
         description="摘自小辛的商人表，供查询对照。"
       />
       <Table<TearRow>

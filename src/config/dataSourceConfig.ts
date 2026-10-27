@@ -118,6 +118,11 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
         icon: 'bilibili',
       },
       {
+        title: '最新版艾尔登法环黑夜君临全商人货物列表',
+        url: 'https://www.bilibili.com/opus/1175087938239725592',
+        icon: 'bilibili',
+      },
+      {
         title: '【艾尔登法环：黑夜君临】种族特攻？武器隐藏属性！夜王特殊机制分析！-哔哩哔哩',
         url: 'https://www.bilibili.com/video/BV17HWCzhEYz',
         icon: 'bilibili',

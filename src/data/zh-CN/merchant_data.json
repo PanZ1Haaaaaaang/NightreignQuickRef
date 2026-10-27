@@ -1,15 +1,12 @@
 {
   "meta": {
-    "sourceNote": "数据来源：小辛的商人表（v1.02.4 修正版v2）；大空洞金武商店对应武器表（黑环资料图）。资料基于旧版本，v1.03.5 未对其改动。",
+    "sourceNote": "商人货物数据来源：最新版全商人货物列表（v1.03.4 更新dlc版，by 小辛）；大空洞金武商店对应武器表（黑环资料图，v1.03.5 未对其改动）。",
     "weaponTypeNotes": {
       "普通商人": [
-        "可以获得：直剑、大剑、特大剑、刺剑、重刺剑、曲剑、大曲剑、双头剑、斧、槌、连枷、大槌、大矛、镰刀、软鞭、拳头、小盾、中盾、大盾、手杖、圣印记",
-        "无法获得：短剑、刀、大斧、大槌、特大武器、矛、戟、钩爪、弓、大弓、弩、弩炮、火把"
+        "原表：Cinderella小辛\n【艾尔登法环：黑夜君临】千小时玩家都不知道的商人机制！全货物列表！ https://www.bilibili.com/video/BV1weyMBMEN3/?share_source=copy_web&vd_source=286c7e0b593204fbe733ef5071784da2",
+        "优化：银狼の全息幻影五号机"
       ],
-      "村落商人": [
-        "可以获得：短剑、大剑、刀、大斧、大槌、特大武器、戟、弓、大弓、弩、弩炮、大盾、手杖、圣印记",
-        "无法获得：直剑、特大剑、刺剑、重刺剑、曲剑、大曲剑、双头剑、斧、槌、连枷、矛、大矛、镰刀、软鞭、拳头、钩爪、火把、小盾、中盾"
-      ]
+      "村落商人": []
     }
   },
   "consumables": {
@@ -790,15 +787,15 @@
     "普通商人": [
       {
         "merchantNo": "0号",
-        "name": "棍棒",
+        "name": "双手巨剑",
         "affinity": null,
-        "type": "槌",
+        "type": "特大剑",
         "price": 4000,
         "deepNightPrice": null,
         "skill": "野蛮咆哮",
-        "affix": "血量偏低时，提升减伤率+29%",
+        "affix": "血量偏低时，提升减伤率+23%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "蓝泪"
       },
       {
         "merchantNo": "0号",
@@ -810,7 +807,7 @@
         "skill": "雷击斩",
         "affix": "打倒敌人时，恢复专注值+4%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器"
       },
       {
         "merchantNo": "0号",
@@ -821,8 +818,8 @@
         "deepNightPrice": 15000,
         "skill": "熔岩火浆",
         "affix": "减少战技专注值消耗-18%",
-        "deepNightAffix": "提升精力上限+8%\n慢步移动时，释放咒魂\n攻击时，攻击偶尔会掠过目标",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升精力上限+8%\n慢步移动时，释放咒魂\n攻击时，攻击偶尔会掠过目标-1",
+        "highlight": null
       },
       {
         "merchantNo": "0号",
@@ -832,9 +829,9 @@
         "price": 10000,
         "deepNightPrice": null,
         "skill": "毒雾",
-        "affix": "提升双手共持时的攻击力+10%",
+        "affix": "提升双手各持时的攻击力+15%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "0号",
@@ -846,7 +843,7 @@
         "skill": "魔法辉剑/辉剑圆阵",
         "affix": "受到损伤时，恢复专注值+4",
         "deepNightAffix": "减少专注值消耗-9%\n缩短魔法、祷告的咏唱时间+1\n闪避后的当下，受伤时损伤加剧+15%",
-        "highlight": "核心"
+        "highlight": "魔法"
       },
       {
         "merchantNo": "0号",
@@ -862,15 +859,15 @@
       },
       {
         "merchantNo": "0号",
-        "name": "众使者的笛子",
+        "name": "志留亚的树矛",
         "affinity": null,
-        "type": "槌",
+        "type": "大矛",
         "price": 42000,
         "deepNightPrice": null,
-        "skill": "神谕泡泡",
+        "skill": "志留亚的漩涡",
         "affix": "一定时间间隔内，形成多支辉剑",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "发射器"
       },
       {
         "merchantNo": "1号",
@@ -882,7 +879,7 @@
         "skill": "箭步（上砍）",
         "affix": "血量全满时，提升减伤率+24%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "满减"
       },
       {
         "merchantNo": "1号",
@@ -894,7 +891,7 @@
         "skill": "寒气冻雾",
         "affix": "提升瓦解防御的能力+45%",
         "deepNightAffix": null,
-        "highlight": "双异常"
+        "highlight": null
       },
       {
         "merchantNo": "1号",
@@ -906,7 +903,7 @@
         "skill": "炎击",
         "affix": "攻击时，恢复血量+6",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器"
       },
       {
         "merchantNo": "1号",
@@ -917,8 +914,8 @@
         "deepNightPrice": 13000,
         "skill": "雷电羊球",
         "affix": "血量偏低时，提升减伤率+38%",
-        "deepNightAffix": "强化跳跃攻击+9%\n攻击时，恢复血量+6\n血量没有全满时，累积中毒量表+1",
-        "highlight": "核心"
+        "deepNightAffix": "强化跳跃攻击+17%\n攻击时，恢复血量+6\n血量没有全满时，累积中毒量表-1",
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "1号",
@@ -930,7 +927,7 @@
         "skill": "罪恶荆棘/责罚荆棘",
         "affix": "提升圣属性减伤率+16%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "魔法"
       },
       {
         "merchantNo": "1号",
@@ -942,7 +939,7 @@
         "skill": "托普斯的力场",
         "affix": "强化魔法+8%",
         "deepNightAffix": null,
-        "highlight": "重要被动 弹反"
+        "highlight": "弹反"
       },
       {
         "merchantNo": "1号",
@@ -953,8 +950,8 @@
         "deepNightPrice": 45000,
         "skill": "志留亚的漩涡",
         "affix": "打倒敌人时，恢复血量+20",
-        "deepNightAffix": "提升圣杯瓶恢复量+13%\n强化防御反击+20%\n濒死时，降低血量上限-15%",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升圣杯瓶恢复量+13%\n强化防御反击+23%\n濒死时，降低血量上限-15%",
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "2号",
@@ -964,9 +961,9 @@
         "price": 4000,
         "deepNightPrice": null,
         "skill": "突击",
-        "affix": "提升双手共持时的攻击力+7%",
+        "affix": "提升双手共持时的攻击力+12%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "2号",
@@ -977,8 +974,8 @@
         "deepNightPrice": 16000,
         "skill": "黄金坠落震击",
         "affix": "提升瓦解防御的能力+45%",
-        "deepNightAffix": "提升血量上限+8%\n提升双手共持时的攻击力+19%\n增加因异常状态受到的损伤+25%",
-        "highlight": null
+        "deepNightAffix": "提升血量上限+8%\n提升双手共持时的攻击力+15%\n增加因异常状态受到的损伤+25%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "2号",
@@ -988,9 +985,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "落雷",
-        "affix": "提升双手共持时的攻击力+10%",
+        "affix": "提升双手共持时的攻击力+15%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "2号",
@@ -1000,9 +997,9 @@
         "price": 9000,
         "deepNightPrice": null,
         "skill": "双吻毒蛾",
-        "affix": "强化跳跃攻击+9%",
+        "affix": "强化跳跃攻击+17%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "2号",
@@ -1014,7 +1011,7 @@
         "skill": "黑夜彗星/奇袭魔砾",
         "affix": "提升观察力+30",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "魔法"
       },
       {
         "merchantNo": "2号",
@@ -1025,7 +1022,7 @@
         "deepNightPrice": 8000,
         "skill": "格挡",
         "affix": "血量偏低时，提升攻击力+17%",
-        "deepNightAffix": "强化致命一击+18%\n提升圣属性减伤率+16%\n时间越接近夜晚，受到的损伤加剧",
+        "deepNightAffix": "强化致命一击+18%\n提升圣属性减伤率+16%\n时间越接近夜晚，受到的损伤加剧-1",
         "highlight": "弹反"
       },
       {
@@ -1038,7 +1035,7 @@
         "skill": "泼洒熔岩",
         "affix": "提升雷属性减伤率+20%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "发射器"
       },
       {
         "merchantNo": "3号",
@@ -1050,11 +1047,11 @@
         "skill": "准备架势",
         "affix": "提升圣属性减伤率+12%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "3号",
-        "name": "铁块连棚",
+        "name": "铁块连枷",
         "affinity": "寒冷",
         "type": "连枷",
         "price": 12000,
@@ -1062,7 +1059,7 @@
         "skill": "冻霜踏地",
         "affix": "提升瓦解防御的能力+30%",
         "deepNightAffix": null,
-        "highlight": "双异常"
+        "highlight": null
       },
       {
         "merchantNo": "3号",
@@ -1072,9 +1069,9 @@
         "price": 10000,
         "deepNightPrice": null,
         "skill": "圣律",
-        "affix": "提升战技攻击力+10%",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "圣律/增伤词条"
       },
       {
         "merchantNo": "3号",
@@ -1085,12 +1082,12 @@
         "deepNightPrice": 14000,
         "skill": "雷电羊球",
         "affix": "血量偏低时，提升攻击力+17%",
-        "deepNightAffix": "强化跳跃攻击+9%\n连续攻击时，仅限一次提升减伤率+48%\n降低物理减伤率-6%",
-        "highlight": "重要被动"
+        "deepNightAffix": "强化跳跃攻击+17%\n连续攻击时，仅限一次提升减伤率+48%\n降低物理减伤率-6%",
+        "highlight": "连减/增伤词条"
       },
       {
         "merchantNo": "3号",
-        "name": "狩猎神低圣印记",
+        "name": "狩猎神祇圣印记",
         "affinity": null,
         "type": "圣印记",
         "price": 11000,
@@ -1098,7 +1095,7 @@
         "skill": "黑焰/黑焰刀刃",
         "affix": "缩短魔法、祷告的咏唱时间+1",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "祷告/buff"
       },
       {
         "merchantNo": "3号",
@@ -1110,19 +1107,19 @@
         "skill": "风暴障壁",
         "affix": "防御成功时，提升减伤率+19%",
         "deepNightAffix": null,
-        "highlight": "重要被动 弹反"
+        "highlight": "弹反/防减"
       },
       {
         "merchantNo": "3号",
-        "name": "百智权杖",
+        "name": "王室巨剑",
         "affinity": null,
-        "type": "槌",
+        "type": "特大剑",
         "price": 42000,
         "deepNightPrice": 45000,
-        "skill": "百智的世界",
+        "skill": "狼袭",
         "affix": "提升双手共持时的攻击力+13%",
         "deepNightAffix": "提升属性攻击力+6%\n攻击命中时，恢复专注值+3\n精力偏少时，降低减伤率-10%",
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "4号",
@@ -1132,7 +1129,7 @@
         "price": 4000,
         "deepNightPrice": null,
         "skill": "回旋斩",
-        "affix": "提升雷属性减伤率+20%",
+        "affix": "提升雷属性减伤率+12%",
         "deepNightAffix": null,
         "highlight": null
       },
@@ -1146,7 +1143,7 @@
         "skill": "野兽咆哮",
         "affix": "提升魔力属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "4号",
@@ -1168,9 +1165,9 @@
         "price": 12000,
         "deepNightPrice": 15000,
         "skill": "神圣光环",
-        "affix": "提升双手共持时的攻击力+10%",
+        "affix": "提升双手共持时的攻击力+15%",
         "deepNightAffix": "提升物理减伤率+9%\n血量全满时，提升攻击力+7%\n降低精力上限-5%",
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "4号",
@@ -1182,7 +1179,7 @@
         "skill": "雷电枪/雷武器",
         "affix": "咏唱魔法、祷告时，提升减伤率+24%",
         "deepNightAffix": "延长魔法、祷告的有效时间+45%\n咏唱魔法、祷告时，提升减伤率+24%\n连续闪避时，降低减伤率-23%",
-        "highlight": "核心"
+        "highlight": "祷告/雷武器"
       },
       {
         "merchantNo": "4号",
@@ -1222,15 +1219,15 @@
       },
       {
         "merchantNo": "5号",
-        "name": "锤矛",
+        "name": "搏击手套",
         "affinity": null,
         "type": "槌",
         "price": 4000,
         "deepNightPrice": null,
         "skill": "忍耐",
-        "affix": "血量偏低时，提升减伤率+29%",
+        "affix": "血量偏低时，提升减伤率+23%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "蓝泪"
       },
       {
         "merchantNo": "5号",
@@ -1240,9 +1237,9 @@
         "price": 11000,
         "deepNightPrice": null,
         "skill": "雷击斩",
-        "affix": "强化蓄力攻击+9%",
+        "affix": "强化蓄力攻击+19%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "5号",
@@ -1254,7 +1251,7 @@
         "skill": "炎击",
         "affix": "提升火属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "5号",
@@ -1265,7 +1262,7 @@
         "deepNightPrice": 13000,
         "skill": "碎步",
         "affix": "防御成功时，提升减伤率+19%",
-        "deepNightAffix": "强化致命一击+18%\n提升对中毒的抵抗力+75\n血量没有全满时，累积中毒量表+1",
+        "deepNightAffix": "强化致命一击+18%\n提升对中毒的抵抗力+75\n血量没有全满时，累积中毒量表-1",
         "highlight": null
       },
       {
@@ -1290,7 +1287,7 @@
         "skill": "黄金剑技",
         "affix": "提升瓦解防御的能力+60%",
         "deepNightAffix": "强化突刺反击+10%\n连续攻击时，仅限一次提升减伤率+60%\n闪避后的当下，受伤时损伤加剧+15%",
-        "highlight": "重要被动 核心"
+        "highlight": "连减"
       },
       {
         "merchantNo": "6号",
@@ -1314,7 +1311,7 @@
         "skill": "寒气冻雾",
         "affix": "提升圣属性减伤率+16%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "6号",
@@ -1337,8 +1334,8 @@
         "deepNightPrice": 15000,
         "skill": "雷击斩",
         "affix": "提升雷属性攻击力+9%",
-        "deepNightAffix": "提升血量上限+8%\n强化蓄力攻击+9%\n攻击时，攻击偶尔会掠过目标-1",
-        "highlight": null
+        "deepNightAffix": "提升血量上限+8%\n强化蓄力攻击+19%\n攻击时，攻击偶尔会掠过目标-1",
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "6号",
@@ -1350,7 +1347,7 @@
         "skill": "圣律",
         "affix": "提升魔力属性减伤率+16%",
         "deepNightAffix": "打倒敌人时，增加获得的卢恩+6%\n提升圣属性攻击力+9%\n被黑夜雨淋到的损伤加剧+100%",
-        "highlight": "重要被动"
+        "highlight": "圣律/增伤词条"
       },
       {
         "merchantNo": "6号",
@@ -1362,7 +1359,7 @@
         "skill": "黄金格挡",
         "affix": "一定时间间隔内，形成多支辉剑",
         "deepNightAffix": null,
-        "highlight": "重要被动 弹反"
+        "highlight": "弹反"
       },
       {
         "merchantNo": "6号",
@@ -1374,7 +1371,7 @@
         "skill": "王朝剑技",
         "affix": "蓄力攻击命中时，追加雷属性攻击",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "7号",
@@ -1410,7 +1407,7 @@
         "skill": "黄金树立誓",
         "affix": "打倒敌人时，恢复专注值+4%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "buff"
       },
       {
         "merchantNo": "7号",
@@ -1422,7 +1419,7 @@
         "skill": "雷电羊球",
         "affix": "提升瓦解防御的能力+45%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器"
       },
       {
         "merchantNo": "7号",
@@ -1434,7 +1431,7 @@
         "skill": "卡利亚迅剑/卡利亚贯刺",
         "affix": "提升魔力属性减伤率+16%",
         "deepNightAffix": "提升属性攻击力+6%\n血量全满时，提升攻击力+10%\n降低物理减伤率-6%",
-        "highlight": "核心"
+        "highlight": "魔法/增伤词条"
       },
       {
         "merchantNo": "7号",
@@ -1446,19 +1443,19 @@
         "skill": "卡利亚式奉还",
         "affix": "提升防御强度+15%",
         "deepNightAffix": null,
-        "highlight": "重要被动 弹反"
+        "highlight": "弹反"
       },
       {
         "merchantNo": "7号",
         "name": "冻壳斧",
-        "affinity": null,
+        "affinity": "寒冷",
         "type": "斧",
         "price": 42000,
         "deepNightPrice": 45000,
         "skill": "冻霜踏地",
         "affix": "提升魔力属性攻击力+12%",
-        "deepNightAffix": "提升战技攻击力+11%\n打倒多名敌人时，形成寒气冻雾\n增加因异常状态受到的损伤+25%",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升战技攻击力+21%\n打倒多名敌人时，形成寒气冻雾\n增加因异常状态受到的损伤+25%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "8号",
@@ -1482,19 +1479,19 @@
         "skill": "寒气冻雾",
         "affix": "陷入猩红腐败时，形成腐败烟雾",
         "deepNightAffix": null,
-        "highlight": "双异常"
+        "highlight": null
       },
       {
         "merchantNo": "8号",
-        "name": "石槌",
+        "name": "铁球拳套",
         "affinity": "雷电",
-        "type": "槌",
-        "price": 10000,
+        "type": "拳头",
+        "price": 11000,
         "deepNightPrice": null,
         "skill": "落雷",
         "affix": "强化致命一击+18%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器"
       },
       {
         "merchantNo": "8号",
@@ -1504,9 +1501,9 @@
         "price": 12000,
         "deepNightPrice": 15000,
         "skill": "炎击",
-        "affix": "强化跳跃攻击+9%",
+        "affix": "强化跳跃攻击+17%",
         "deepNightAffix": "提升火属性攻击力+9%\n提升对冻伤的抵抗力+75\n精力偏少时，降低减伤率-10%",
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "8号",
@@ -1518,7 +1515,7 @@
         "skill": "辉石魔砾/辉石弯弧",
         "affix": "提升魔力属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "魔法/增伤词条"
       },
       {
         "merchantNo": "8号",
@@ -1530,7 +1527,7 @@
         "skill": "格挡",
         "affix": "血量全满时，提升减伤率+32%",
         "deepNightAffix": null,
-        "highlight": "重要被动 弹反"
+        "highlight": "弹反/满减"
       },
       {
         "merchantNo": "8号",
@@ -1540,7 +1537,7 @@
         "price": 42000,
         "deepNightPrice": 45000,
         "skill": "天使羽翼",
-        "affix": "提升圣属性减伤率+12%",
+        "affix": "提升圣属性攻击力+12%",
         "deepNightAffix": "持续恢复血量+1\n打倒多名敌人时，形成黄金冲击波\n使用圣杯瓶时，降低减伤率-33%",
         "highlight": null
       },
@@ -1564,9 +1561,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "熔岩火浆",
-        "affix": "强化蓄力攻击+6%",
+        "affix": "强化蓄力攻击+16%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "9号",
@@ -1578,7 +1575,7 @@
         "skill": "雷击斩",
         "affix": "蓄力攻击命中时，提升减伤率+24%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "雷武器/蓄减"
       },
       {
         "merchantNo": "9号",
@@ -1587,7 +1584,7 @@
         "type": "软鞭",
         "price": 11000,
         "deepNightPrice": 14000,
-        "skill": "寒气冻雾",
+        "skill": "冻霜踏地",
         "affix": "强化连续攻击的最后攻击+15%",
         "deepNightAffix": "强化突刺反击+10%\n攻击命中时，恢复专注值+2\n降低血量上限-4%",
         "highlight": null
@@ -1600,9 +1597,9 @@
         "price": 9000,
         "deepNightPrice": null,
         "skill": "兽石/兽爪",
-        "affix": "提升战技攻击力+10%",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": "祷告/增伤词条"
       },
       {
         "merchantNo": "9号",
@@ -1614,7 +1611,7 @@
         "skill": "格挡",
         "affix": "持续恢复血量+1",
         "deepNightAffix": "防御成功时，提升减伤率+19%\n陷人中毒时，形成毒性烟雾\n降低专注值上限-6%",
-        "highlight": "重要被动 弹反"
+        "highlight": "弹反/防减"
       },
       {
         "merchantNo": "9号",
@@ -1624,9 +1621,9 @@
         "price": 42000,
         "deepNightPrice": null,
         "skill": "米凯拉的光环",
-        "affix": "提升双手共持时的攻击力+13%",
+        "affix": "提升双手共持时的攻击力+18%",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "10号",
@@ -1662,19 +1659,19 @@
         "skill": "落雷",
         "affix": "减少战技专注值消耗-18%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器"
       },
       {
         "merchantNo": "10号",
-        "name": "晨星锤",
-        "affinity": "神圣",
-        "type": "槌",
+        "name": "晨星拳套",
+        "affinity": null,
+        "type": "拳头",
         "price": 12000,
         "deepNightPrice": null,
-        "skill": "祈祷一击",
+        "skill": "野蛮咆哮",
         "affix": "受到损伤时，提升减伤率+28%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "损减"
       },
       {
         "merchantNo": "10号",
@@ -1683,10 +1680,10 @@
         "type": "圣印记",
         "price": 10000,
         "deepNightPrice": 13000,
-        "skill": "投火/火焰啊！",
+        "skill": "感受巨人火焰/火焰啊！",
         "affix": "提升火属性攻击力+9%",
-        "deepNightAffix": "提升血量上限+9%\n提升火属性攻击力+9%\n降低圣杯瓶恢复量-6%",
-        "highlight": "核心"
+        "deepNightAffix": "提升专注值上限+9%\n提升火属性攻击力+9%\n降低圣杯瓶恢复量-6%",
+        "highlight": "祷告/增伤词条"
       },
       {
         "merchantNo": "10号",
@@ -1698,7 +1695,7 @@
         "skill": "无战技",
         "affix": "提升圣属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "10号",
@@ -1709,7 +1706,7 @@
         "deepNightPrice": 45000,
         "skill": "狼袭",
         "affix": "打倒敌人时，恢复专注值+4%",
-        "deepNightAffix": "提升强韧度+20%\n打倒多名敌人时，形成寒气冻雾\n时间越接近夜晚，受到的损伤加剧",
+        "deepNightAffix": "提升强韧度+20%\n打倒多名敌人时，形成寒气冻雾\n时间越接近夜晚，受到的损伤加剧+1",
         "highlight": null
       },
       {
@@ -1733,8 +1730,8 @@
         "deepNightPrice": 17000,
         "skill": "山妖咆哮",
         "affix": "陷入催眠时，形成催眠烟雾",
-        "deepNightAffix": "提升血量上限+8%\n提升战技攻击力+10%\n血量没有全满时，累积猩红腐败量表+1",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升血量上限+8%\n提升战技攻击力+18%\n血量没有全满时，累积猩红腐败量表-1",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "11号",
@@ -1758,7 +1755,7 @@
         "skill": "炎击",
         "affix": "提升火属性减伤率+16%",
         "deepNightAffix": "连续攻击时，仅限一次提升减伤率+48%\n打倒多名敌人时，形成熔岩\n降低属性减伤率-6%",
-        "highlight": "重要被动 核心"
+        "highlight": "发射器/连减"
       },
       {
         "merchantNo": "11号",
@@ -1770,7 +1767,7 @@
         "skill": "雷电枪/冰雷枪",
         "affix": "提升观察力+30",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "祷告"
       },
       {
         "merchantNo": "11号",
@@ -1780,9 +1777,9 @@
         "price": 7000,
         "deepNightPrice": null,
         "skill": "圣域",
-        "affix": "提升战技攻击力+10%",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "11号",
@@ -1803,10 +1800,10 @@
         "type": "特大剑",
         "price": 4000,
         "deepNightPrice": null,
-        "skill": "炎击",
+        "skill": "红狮子火焰",
         "affix": "提升对骤死的抵抗力+57",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "12号",
@@ -1816,7 +1813,7 @@
         "price": 4000,
         "deepNightPrice": null,
         "skill": "风暴足",
-        "affix": "陷入发狂时，释放癫火",
+        "affix": "陷入发狂时，释放划空癫火",
         "deepNightAffix": null,
         "highlight": null
       },
@@ -1852,9 +1849,9 @@
         "price": 11000,
         "deepNightPrice": 14000,
         "skill": "落雷",
-        "affix": "强化蓄力攻击+9%",
-        "deepNightAffix": "提升双手各持时的攻击力+10%\n慢步移动时，召唤红落雷\n降低对所有异常状态的抵抗力-30",
-        "highlight": "重要被动 核心"
+        "affix": "强化蓄力攻击+19%",
+        "deepNightAffix": "提升双手各持时的攻击力+15%\n慢步移动时，召唤红落雷\n降低对所有异常状态的抵抗力-30",
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "12号",
@@ -1866,19 +1863,19 @@
         "skill": "格挡",
         "affix": "血量全满时，提升攻击力+10%",
         "deepNightAffix": null,
-        "highlight": "重要被动 弹反"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "12号",
-        "name": "众使者的笛子",
+        "name": "志留亚的树矛",
         "affinity": null,
-        "type": "槌",
+        "type": "大矛",
         "price": 42000,
         "deepNightPrice": 45000,
-        "skill": "神谕泡泡",
+        "skill": "志留亚的漩涡",
         "affix": "打倒敌人时，恢复血量+20",
         "deepNightAffix": "提升属性攻击力+6%\n蓄力攻击时，追加圣属性攻击\n血量全满时，降低绝招量表累积-10%",
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "13号",
@@ -1890,7 +1887,7 @@
         "skill": "准备架势",
         "affix": "提升对冻伤的抵抗力+57",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "13号",
@@ -1900,21 +1897,21 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "雷电羊球",
-        "affix": "中毒效果的致命一击，形成毒性烟雾",
+        "affix": "陷入中毒时，形成毒性烟雾",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器"
       },
       {
         "merchantNo": "13号",
-        "name": "兽牙棒",
+        "name": "晨星拳套",
         "affinity": "火焰",
-        "type": "槌",
+        "type": "拳头",
         "price": 11000,
-        "deepNightPrice": 14000,
+        "deepNightPrice": 13000,
         "skill": "红狮子火焰",
-        "affix": "强化连续攻击的最后攻击+15%",
-        "deepNightAffix": "提升火属性攻击力+9%\n提升火属性减伤率+12%\n增加因异常状态受到的损伤+25%",
-        "highlight": null
+        "affix": "强化连续攻击的最后攻击+21%",
+        "deepNightAffix": "提升火属性攻击力+9%\n提升火属性减伤率+16%\n增加因异常状态受到的损伤+25%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "13号",
@@ -1926,7 +1923,7 @@
         "skill": "狩猎大蛇",
         "affix": "陷入冻伤时，形成寒气冻雾",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器（笑）"
       },
       {
         "merchantNo": "13号",
@@ -1938,7 +1935,7 @@
         "skill": "毒雾",
         "affix": "强化致命一击+18%",
         "deepNightAffix": null,
-        "highlight": "双异常"
+        "highlight": null
       },
       {
         "merchantNo": "13号",
@@ -1948,9 +1945,9 @@
         "price": 5000,
         "deepNightPrice": null,
         "skill": "铁壁盾防",
-        "affix": "提升战技攻击力+8%",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "13号",
@@ -1961,8 +1958,8 @@
         "deepNightPrice": 45000,
         "skill": "回旋斩",
         "affix": "蓄力攻击命中时，提升减伤率+24%",
-        "deepNightAffix": "提升强韧度+20%\n强化连续攻击的最后攻击+20%\n濒死时，降低血量上限-15%",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升强韧度+20%\n强化连续攻击的最后攻击+31%\n濒死时，降低血量上限-15%",
+        "highlight": null
       },
       {
         "merchantNo": "14号",
@@ -1972,7 +1969,7 @@
         "price": 4000,
         "deepNightPrice": null,
         "skill": "碎步",
-        "affix": "强化连续攻击的最后攻击+10%",
+        "affix": "强化连续攻击的最后攻击+21%",
         "deepNightAffix": null,
         "highlight": null
       },
@@ -1984,21 +1981,21 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "风暴刃",
-        "affix": "强化防御反击+15%",
+        "affix": "强化防御反击+20%",
         "deepNightAffix": null,
-        "highlight": "核心 重要被动"
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "14号",
-        "name": "战镐",
+        "name": "大树矛",
         "affinity": "神圣",
-        "type": "槌",
-        "price": 9000,
+        "type": "大矛",
+        "price": 12000,
         "deepNightPrice": null,
-        "skill": "祈祷一击",
+        "skill": "黄金树立誓",
         "affix": "强化致命一击+18%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "buff"
       },
       {
         "merchantNo": "14号",
@@ -2008,9 +2005,9 @@
         "price": 12000,
         "deepNightPrice": 15000,
         "skill": "落雷",
-        "affix": "一定时间间隔内，形成大量辉剑",
-        "deepNightAffix": "提升精力恢复速度+3\n提升双手共持时的攻击力+13%\n降低血量上限-4%",
-        "highlight": "重要被动"
+        "affix": "一定时间间隔内，形成多支辉剑",
+        "deepNightAffix": "提升精力恢复速度+3\n提升双手各持时的攻击力+18%\n降低血量上限-4%",
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "14号",
@@ -2022,31 +2019,31 @@
         "skill": "熔岩球/滚烫熔岩",
         "affix": "提升对中毒的抵抗力+75",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "魔法"
       },
       {
         "merchantNo": "14号",
         "name": "名门大盾",
-        "affinity": null,
+        "affinity": "神圣",
         "type": "大盾",
         "price": 7000,
         "deepNightPrice": null,
         "skill": "无敌",
         "affix": "提升雷属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "14号",
-        "name": "结冰针",
-        "affinity": null,
-        "type": "刺剑",
+        "name": "猛禽钩爪",
+        "affinity": "寒冷",
+        "type": "钩爪",
         "price": 42000,
         "deepNightPrice": 45000,
-        "skill": "连击",
-        "affix": "提升魔力属性减伤率+20%",
-        "deepNightAffix": "强化突刺反击+10%\n强化蓄力攻击+12%\n降低专注值上限-6%",
-        "highlight": "核心"
+        "skill": "冻霜踏地",
+        "affix": "减少战技专注值消耗-24%",
+        "deepNightAffix": "强化突刺反击+10%\n强化蓄力攻击+22%\n降低专注值上限-6%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "15号",
@@ -2058,7 +2055,7 @@
         "skill": "雷击斩",
         "affix": "攻击时，恢复血量+4",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "15号",
@@ -2070,7 +2067,7 @@
         "skill": "双吻毒蛾",
         "affix": "受到损伤时，恢复专注值+4",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "15号",
@@ -2080,9 +2077,9 @@
         "price": 10000,
         "deepNightPrice": 13000,
         "skill": "共享圣律",
-        "affix": "强化跳跃攻击+9%",
-        "deepNightAffix": "提升属性攻击力+6%\n强化蓄力攻击+9%\n降低物理减伤率-6%",
-        "highlight": "重要被动"
+        "affix": "强化跳跃攻击+17%",
+        "deepNightAffix": "提升属性攻击力+6%\n强化蓄力攻击+19%\n降低物理减伤率-6%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "15号",
@@ -2094,7 +2091,7 @@
         "skill": "炎击",
         "affix": "提升火属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "15号",
@@ -2106,7 +2103,7 @@
         "skill": "爆散结晶/飞散结晶",
         "affix": "提升对骤死的抵抗力+75",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "魔法"
       },
       {
         "merchantNo": "15号",
@@ -2118,7 +2115,7 @@
         "skill": "无战技",
         "affix": "提升火属性减伤率+9%",
         "deepNightAffix": "提升圣属性减伤率+16%\n持续恢复血量+1\n濒死时，减少绝招量表-30%",
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "15号",
@@ -2154,7 +2151,7 @@
         "skill": "雷电羊球",
         "affix": "提升雷属性攻击力+6%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "16号",
@@ -2166,19 +2163,19 @@
         "skill": "毒雾",
         "affix": "蓄力攻击命中时，提升减伤率+24%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "蓄减"
       },
       {
         "merchantNo": "16号",
-        "name": "结晶枪",
+        "name": "结晶矛",
         "affinity": null,
         "type": "矛",
         "price": 11000,
         "deepNightPrice": 14000,
         "skill": "回旋斩",
-        "affix": "强化跳跃攻击+9%",
-        "deepNightAffix": "提升魔力属性减伤率+16%\n强化跳跃攻击+9%\n降低圣杯瓶恢复量-6%",
-        "highlight": "重要被动"
+        "affix": "强化跳跃攻击+17%",
+        "deepNightAffix": "提升魔力属性减伤率+16%\n强化跳跃攻击+17%\n降低圣杯瓶恢复量-6%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "16号",
@@ -2190,7 +2187,7 @@
         "skill": "黑焰/黑焰仪式",
         "affix": "缩短魔法、祷告的咏唱时间+1",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": "祷告"
       },
       {
         "merchantNo": "16号",
@@ -2200,7 +2197,7 @@
         "price": 9000,
         "deepNightPrice": null,
         "skill": "盾牌冲击",
-        "affix": "防御成功时，提升强韧度+15%",
+        "affix": "提升防御强度+15%",
         "deepNightAffix": null,
         "highlight": null
       },
@@ -2212,9 +2209,9 @@
         "price": 42000,
         "deepNightPrice": 45000,
         "skill": "不可挡之刃",
-        "affix": "强化连续攻击的最后攻击+20%",
+        "affix": "强化连续攻击的最后攻击+31%",
         "deepNightAffix": "提升圣属性攻击力+12%\n咏唱魔法、祷告时，提升减伤率+30%\n闪避后的当下，受伤时损伤加剧-15%",
-        "highlight": "核心"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "17号",
@@ -2226,7 +2223,7 @@
         "skill": "箭步（回旋斩）",
         "affix": "提升圣属性攻击力+6%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "17号",
@@ -2238,7 +2235,7 @@
         "skill": "黄金树立誓",
         "affix": "强化致命一击+18%",
         "deepNightAffix": "提升物理减伤率+9%\n强化祷告+8%\n降低对所有异常状态的抵抗力-30",
-        "highlight": "重要被动"
+        "highlight": "buff/增伤词条"
       },
       {
         "merchantNo": "17号",
@@ -2248,9 +2245,9 @@
         "price": 10000,
         "deepNightPrice": null,
         "skill": "雷击斩",
-        "affix": "提升战技攻击力+10%",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "17号",
@@ -2262,7 +2259,7 @@
         "skill": "冻霜踏地",
         "affix": "血量全满时，提升攻击力+10%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "17号",
@@ -2273,8 +2270,8 @@
         "deepNightPrice": 12000,
         "skill": "兽石/野兽活力",
         "affix": "持续恢复血量+1",
-        "deepNightAffix": "提升物理攻击力+6%\n提升对出血的抵抗力+75\n精力偏少时，降低减伤率-10%",
-        "highlight": "核心"
+        "deepNightAffix": "提升物理攻击力+8%\n提升对出血的抵抗力+75\n精力偏少时，降低减伤率-10%",
+        "highlight": null
       },
       {
         "merchantNo": "17号",
@@ -2286,7 +2283,7 @@
         "skill": "盾牌冲击",
         "affix": "血量全满时，提升减伤率+32%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "满减"
       },
       {
         "merchantNo": "17号",
@@ -2296,21 +2293,21 @@
         "price": 42000,
         "deepNightPrice": null,
         "skill": "癫火突击",
-        "affix": "提升战技攻击力+14%",
+        "affix": "提升战技攻击力+21%",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "18号",
-        "name": "细剑",
+        "name": "钩爪",
         "affinity": null,
-        "type": "刺剑",
+        "type": "钩爪",
         "price": 4000,
         "deepNightPrice": null,
         "skill": "贯穿",
         "affix": "连续攻击时，仅限一次提升减伤率+38%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "连减"
       },
       {
         "merchantNo": "18号",
@@ -2321,8 +2318,8 @@
         "deepNightPrice": 13000,
         "skill": "炎击",
         "affix": "蓄力攻击命中时，追加圣属性攻击",
-        "deepNightAffix": "提升火属性攻击力+9%\n强化防御反击+15%\n降低圣杯瓶恢复量-6%",
-        "highlight": null
+        "deepNightAffix": "提升火属性攻击力+9%\n强化防御反击+20%\n降低圣杯瓶恢复量-6%",
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "18号",
@@ -2332,9 +2329,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "雷击斩",
-        "affix": "强化蓄力攻击+9%",
+        "affix": "强化蓄力攻击+19%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "18号",
@@ -2344,9 +2341,9 @@
         "price": 10000,
         "deepNightPrice": null,
         "skill": "冻霜踏地",
-        "affix": "提升双手共持时的攻击力+10%",
+        "affix": "提升双手共持时的攻击力+15%",
         "deepNightAffix": null,
-        "highlight": "双异常"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "18号",
@@ -2358,7 +2355,7 @@
         "skill": "夸耀咆哮",
         "affix": "提升魔力属性减伤率+16%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "18号",
@@ -2370,7 +2367,7 @@
         "skill": "铁壁盾防",
         "affix": "提升雷属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "18号",
@@ -2381,8 +2378,8 @@
         "deepNightPrice": 45000,
         "skill": "黑王推力波",
         "affix": "蓄力攻击命中时，追加火属性攻击",
-        "deepNightAffix": "强化跳跃攻击+9%\n提升双手共持时的攻击力+13%\n增加因异常状态受到的损伤+25%",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升物理减伤率+9%\n提升双手共持时的攻击力+18%\n增加因异常状态受到的损伤+25%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "19号",
@@ -2394,7 +2391,7 @@
         "skill": "落雷",
         "affix": "打倒敌人时，恢复血量+20",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器"
       },
       {
         "merchantNo": "19号",
@@ -2406,7 +2403,7 @@
         "skill": "辉石魔砾",
         "affix": "提升魔力属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "19号",
@@ -2417,8 +2414,8 @@
         "deepNightPrice": 16000,
         "skill": "猎犬剑技",
         "affix": "提升对腐败的抵抗力+75",
-        "deepNightAffix": "提升物理攻击力+6%\n强化跳跃攻击+9%\n闪避后的当下，受伤时损伤加剧+15%",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升物理攻击力+8%\n强化跳跃攻击+17%\n闪避后的当下，受伤时损伤加剧+15%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "19号",
@@ -2442,7 +2439,7 @@
         "skill": "黄金坠落震击",
         "affix": "提升火属性减伤率+16%",
         "deepNightAffix": "打倒多名敌人时，释放咒魂\n血量全满时，提升减伤率+32%\n降低圣杯瓶恢复量-6%",
-        "highlight": "重要被动"
+        "highlight": "满减"
       },
       {
         "merchantNo": "19号",
@@ -2454,7 +2451,7 @@
         "skill": "无战技",
         "affix": "减少魔法、祷告专注值消耗-15%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "19号",
@@ -2466,11 +2463,11 @@
         "skill": "熔岩海",
         "affix": "提升火属性攻击力+12%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "20号",
-        "name": "棍棒",
+        "name": "巨剑",
         "affinity": null,
         "type": "槌",
         "price": 4000,
@@ -2488,9 +2485,9 @@
         "price": 10000,
         "deepNightPrice": null,
         "skill": "雷击斩",
-        "affix": "强化蓄力攻击+9%",
+        "affix": "强化蓄力攻击+19%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "20号",
@@ -2502,7 +2499,7 @@
         "skill": "双吻毒蛾",
         "affix": "蓄力攻击命中时，提升减伤率+24%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "蓄减"
       },
       {
         "merchantNo": "20号",
@@ -2526,7 +2523,7 @@
         "skill": "圣律",
         "affix": "提升观察力+30",
         "deepNightAffix": "提升圣属性攻击力+9%\n减少战技专注值消耗-18%\n降低物理减伤率-6%",
-        "highlight": null
+        "highlight": "圣律/增伤词条"
       },
       {
         "merchantNo": "20号",
@@ -2538,7 +2535,7 @@
         "skill": "无战技",
         "affix": "血量全满时，提升减伤率+32%",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": "满减"
       },
       {
         "merchantNo": "20号",
@@ -2550,7 +2547,7 @@
         "skill": "不可挡之刃",
         "affix": "减少战技专注值消耗-24%",
         "deepNightAffix": "提升圣属性攻击力+12%\n咏唱魔法、祷告时，提升减伤率+30%\n濒死时，降低血量上限-15%",
-        "highlight": "核心"
+        "highlight": "增伤词条"
       }
     ],
     "村落商人": [
@@ -2574,9 +2571,9 @@
         "price": 11000,
         "deepNightPrice": null,
         "skill": "二连斩",
-        "affix": "提升战技攻击力+8%",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "0号",
@@ -2586,9 +2583,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "红狮子火",
-        "affix": "提升双手共持时的攻击力+10%",
+        "affix": "提升双手共持时的攻击力+15%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "0号",
@@ -2599,8 +2596,8 @@
         "deepNightPrice": 15000,
         "skill": "落雷",
         "affix": "提升防御强度+15%",
-        "deepNightAffix": "提升属性减伤率+9%\n强化防御反击+15%\n降低对所有异常状态的抵抗力-30",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升属性减伤率+9%\n强化防御反击+20%\n降低对所有异常状态的抵抗力-30",
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "0号",
@@ -2616,7 +2613,7 @@
       },
       {
         "merchantNo": "0号",
-        "name": "狩猎神低圣印记",
+        "name": "狩猎神祇圣印记",
         "affinity": null,
         "type": "圣印记",
         "price": 11000,
@@ -2624,7 +2621,7 @@
         "skill": "黑焰/黑焰仪式",
         "affix": "提升火属性减伤率+16%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "祷告"
       },
       {
         "merchantNo": "0号",
@@ -2640,15 +2637,51 @@
       },
       {
         "merchantNo": "0号",
+        "name": "大剑",
+        "affinity": null,
+        "type": null,
+        "price": 12000,
+        "deepNightPrice": null,
+        "skill": "狩猎巨人",
+        "affix": "提升双手共持时的攻击力+15%",
+        "deepNightAffix": null,
+        "highlight": "发射器/增伤词条"
+      },
+      {
+        "merchantNo": "0号",
+        "name": "尊腐骑士剑",
+        "affinity": null,
+        "type": "刺剑",
+        "price": 11000,
+        "deepNightPrice": 13000,
+        "skill": "突刺",
+        "affix": null,
+        "deepNightAffix": "强化突刺反击+10%\n打倒多名敌人时，形成魅惑烟雾\n闪避后的当下，降低减伤率-15%",
+        "highlight": null
+      },
+      {
+        "merchantNo": "0号",
+        "name": "众使者的笛子",
+        "affinity": null,
+        "type": "槌",
+        "price": 42000,
+        "deepNightPrice": null,
+        "skill": "神谕泡泡",
+        "affix": "提升双手共持时的攻击力+18%",
+        "deepNightAffix": null,
+        "highlight": "增伤词条"
+      },
+      {
+        "merchantNo": "0号",
         "name": "石像鬼黑剑",
         "affinity": null,
         "type": "大剑",
         "price": 42000,
         "deepNightPrice": 45000,
         "skill": "尸蜡斩击",
-        "affix": "提升双手各持时的攻击力+13%",
-        "deepNightAffix": "提升双手共持时的攻击力+13%\n血量偏低时，提升攻击力+17%\n连续闪避时，降低减伤率-23%",
-        "highlight": null
+        "affix": "提升双手各持时的攻击力+18%",
+        "deepNightAffix": "提升双手共持时的攻击力+18%\n血量偏低时，提升攻击力+17%\n连续闪避时，降低减伤率-23%",
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "0号",
@@ -2670,9 +2703,9 @@
         "price": 42000,
         "deepNightPrice": 50000,
         "skill": "踢击",
-        "affix": "提升双手共持时的攻击力+13%",
+        "affix": "提升双手共持时的攻击力+18%",
         "deepNightAffix": "精密射击时，在命中点招来血蝇\n血量全满时，提升攻击力+14%\n血量没有全满时，降低攻击力-7%",
-        "highlight": "重要被动 核心"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "0号",
@@ -2684,7 +2717,7 @@
         "skill": "召唤怨魂/进发灵火",
         "affix": "咏唱魔法、祷告时，提升减伤率+30%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "魔法"
       },
       {
         "merchantNo": "1号",
@@ -2707,8 +2740,8 @@
         "deepNightPrice": 14000,
         "skill": "真空斩",
         "affix": "血量偏低时，提升攻击力+17%",
-        "deepNightAffix": "提升精力恢复速度+3\n提升双手各持时的攻击力+10%\n时间越接近夜晚，受到的损伤加剧",
-        "highlight": "重要被动 核心"
+        "deepNightAffix": "提升精力恢复速度+3\n提升双手各持时的攻击力+15%\n时间越接近夜晚，受到的损伤加剧+1",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "1号",
@@ -2717,7 +2750,7 @@
         "type": "大斧",
         "price": 12000,
         "deepNightPrice": null,
-        "skill": "红狮子火",
+        "skill": "红狮子火焰",
         "affix": "打倒多名敌人时，释放咒魂",
         "deepNightAffix": null,
         "highlight": null
@@ -2732,7 +2765,7 @@
         "skill": "连续射击",
         "affix": "防御成功时，提升减伤率+19%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "防减"
       },
       {
         "merchantNo": "1号",
@@ -2742,7 +2775,7 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "贯穿射击",
-        "affix": "强化连续攻击的最后攻击+15%",
+        "affix": "强化连续攻击的最后攻击+26%",
         "deepNightAffix": null,
         "highlight": null
       },
@@ -2765,10 +2798,10 @@
         "type": "圣印记",
         "price": 10000,
         "deepNightPrice": null,
-        "skill": "投火/恶神火焰",
+        "skill": "感受巨人火焰吧/恶神火焰",
         "affix": "敌人比较不会攻击自己-9",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "祷告/减仇恨"
       },
       {
         "merchantNo": "1号",
@@ -2780,58 +2813,10 @@
         "skill": "突进冲击",
         "affix": "提升雷属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "1号",
-        "name": "尸山血海",
-        "affinity": null,
-        "type": "刀",
-        "price": 42000,
-        "deepNightPrice": 50000,
-        "skill": "尸横遍野",
-        "affix": "攻击时，恢复血量+8",
-        "deepNightAffix": "使用圣杯瓶时，也恢复专注值+20%\n提升战技攻击力+11%\n降低物理减伤率-8%",
-        "highlight": "重要被动 核心"
-      },
-      {
-        "merchantNo": "1号",
-        "name": "黄金戟",
-        "affinity": null,
-        "type": "戟",
-        "price": 42000,
-        "deepNightPrice": null,
-        "skill": "黄金树立誓",
-        "affix": "提升瓦解防御的能力+60%",
-        "deepNightAffix": null,
-        "highlight": "核心"
-      },
-      {
-        "merchantNo": "1号",
-        "name": "亚兹勒的辉石杖",
-        "affinity": null,
-        "type": "手杖",
-        "price": 42000,
-        "deepNightPrice": 45000,
-        "skill": "彗星亚兹勒/帚星",
-        "affix": "缩短魔法、祷告的咏唱时间+2",
-        "deepNightAffix": "减少专注值消耗-9%\n缩短魔法、祷告的咏唱时间+2\n闪避后的当下，受伤时损伤加剧-15%",
-        "highlight": "重要被动"
-      },
-      {
-        "merchantNo": "2号",
-        "name": "大剑",
-        "affinity": null,
-        "type": "大剑",
-        "price": 12000,
-        "deepNightPrice": null,
-        "skill": "狩猎巨人",
-        "affix": "提升双手共持时的攻击力+10%",
-        "deepNightAffix": null,
-        "highlight": null
-      },
-      {
-        "merchantNo": "2号",
         "name": "铁陨石刀",
         "affinity": "魔力",
         "type": "刀",
@@ -2843,6 +2828,78 @@
         "highlight": null
       },
       {
+        "merchantNo": "1号",
+        "name": "战镐",
+        "affinity": "火焰",
+        "type": "槌",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "红狮子火焰",
+        "affix": "受到损伤时，提升减伤率+28%",
+        "deepNightAffix": null,
+        "highlight": "损减"
+      },
+      {
+        "merchantNo": "1号",
+        "name": "蚁刺细剑",
+        "affinity": "血",
+        "type": "刺剑",
+        "price": 42000,
+        "deepNightPrice": 50000,
+        "skill": "鲜血征收",
+        "affix": null,
+        "deepNightAffix": "提升血量上限12%\n攻击命中时，恢复血量+8\n降低对所有异常的抵抗力-45",
+        "highlight": null
+      },
+      {
+        "merchantNo": "1号",
+        "name": "尸山血海",
+        "affinity": null,
+        "type": "刀",
+        "price": 42000,
+        "deepNightPrice": 50000,
+        "skill": "尸横遍野",
+        "affix": "攻击时，恢复血量+8",
+        "deepNightAffix": "使用圣杯瓶时，也恢复专注值+20%\n提升战技攻击力+21%\n降低物理减伤率-8%",
+        "highlight": "发射器/增伤词条"
+      },
+      {
+        "merchantNo": "1号",
+        "name": "黄金戟",
+        "affinity": null,
+        "type": "戟",
+        "price": 42000,
+        "deepNightPrice": null,
+        "skill": "黄金树立誓",
+        "affix": "提升瓦解防御的能力+60%",
+        "deepNightAffix": null,
+        "highlight": "buff"
+      },
+      {
+        "merchantNo": "1号",
+        "name": "亚兹勒的辉石杖",
+        "affinity": null,
+        "type": "手杖",
+        "price": 42000,
+        "deepNightPrice": 45000,
+        "skill": "彗星亚兹勒/帚星",
+        "affix": "缩短魔法、祷告的咏唱时间+2",
+        "deepNightAffix": "减少专注值消耗-9%\n缩短魔法、祷告的咏唱时间+2\n闪避后的当下，受伤时损伤加剧-15%",
+        "highlight": null
+      },
+      {
+        "merchantNo": "2号",
+        "name": "大剑",
+        "affinity": null,
+        "type": "大剑",
+        "price": 12000,
+        "deepNightPrice": null,
+        "skill": "狩猎巨人",
+        "affix": "提升双手共持时的攻击力+15%",
+        "deepNightAffix": null,
+        "highlight": "发射器/增伤词条"
+      },
+      {
         "merchantNo": "2号",
         "name": "黑夜骑兵剑刃戟",
         "affinity": null,
@@ -2850,9 +2907,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "幻影共击",
-        "affix": "提升双手各持时的攻击力+10%",
+        "affix": "提升双手各持时的攻击力+15%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "2号",
@@ -2864,7 +2921,7 @@
         "skill": "拉满弓",
         "affix": "提升防御强度+15%",
         "deepNightAffix": "打倒敌人时，增加获得的卢恩+6%\n强化射击+10%\n降低血量上限-5%",
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "2号",
@@ -2900,7 +2957,7 @@
         "skill": "雷电枪/兰斯桑克斯的刀",
         "affix": "提升雷属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "祷告/雷武器/增伤词条"
       },
       {
         "merchantNo": "2号",
@@ -2912,7 +2969,55 @@
         "skill": "无战技",
         "affix": "提升圣属性减伤率+16%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
+      },
+      {
+        "merchantNo": "2号",
+        "name": "铁陨石刀",
+        "affinity": "魔力",
+        "type": "刀",
+        "price": 12000,
+        "deepNightPrice": null,
+        "skill": "重力",
+        "affix": "打倒多名敌人时，形成熔岩",
+        "deepNightAffix": null,
+        "highlight": null
+      },
+      {
+        "merchantNo": "2号",
+        "name": "习武修士火纹锤",
+        "affinity": "火焰",
+        "type": "槌",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "炎击",
+        "affix": "提升双手各持时的攻击力+15%",
+        "deepNightAffix": null,
+        "highlight": "发射器/增伤词条"
+      },
+      {
+        "merchantNo": "2号",
+        "name": "尊腐骑士剑",
+        "affinity": "神圣",
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "圣律",
+        "affix": "强化跳跃攻击+17%",
+        "deepNightAffix": null,
+        "highlight": "圣律/增伤词条"
+      },
+      {
+        "merchantNo": "2号",
+        "name": "百智权杖",
+        "affinity": null,
+        "type": "槌",
+        "price": 42000,
+        "deepNightPrice": 45000,
+        "skill": "百智的世界",
+        "affix": null,
+        "deepNightAffix": "提升属性攻击力6%\n蓄力攻击命中时，追加魔力属性玫击\n被黑夜雨淋到的损伤加剧+100%",
+        "highlight": "buff/增伤词条"
       },
       {
         "merchantNo": "2号",
@@ -2924,7 +3029,7 @@
         "skill": "连击",
         "affix": "攻击时，恢复专注值+3",
         "deepNightAffix": "提升精力恢复速度+3\n强化致命一击+24%\n濒死时，降低血量上限-15%",
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "2号",
@@ -2934,9 +3039,9 @@
         "price": 42000,
         "deepNightPrice": null,
         "skill": "主教冲锋",
-        "affix": "提升战技攻击力+11%",
+        "affix": "提升战技攻击力+21%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "2号",
@@ -2947,8 +3052,8 @@
         "deepNightPrice": 50000,
         "skill": "毁灭流星/海摩大槌",
         "affix": "强化魔法+11%",
-        "deepNightAffix": "维持防御时，强化魔法、祷告\n强化魔法+11%\n降低专注值上限-9%",
-        "highlight": "重要被动 核心"
+        "deepNightAffix": "维持防御时，强化魔法、祷告与缩短咏唱时间\n强化魔法+11%\n降低专注值上限-9%",
+        "highlight": "魔法/增伤词条"
       },
       {
         "merchantNo": "3号",
@@ -2960,7 +3065,7 @@
         "skill": "格挡",
         "affix": "提升瓦解防御的能力+45%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "弹反"
       },
       {
         "merchantNo": "3号",
@@ -2972,7 +3077,7 @@
         "skill": "红狮子火",
         "affix": "强化致命一击+18%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "3号",
@@ -2996,7 +3101,7 @@
         "skill": "转啊转",
         "affix": "防御成功时，提升减伤率+19%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "防减"
       },
       {
         "merchantNo": "3号",
@@ -3006,9 +3111,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "贯穿射击",
-        "affix": "强化跳跃攻击+12%",
+        "affix": "强化跳跃攻击+17%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "3号",
@@ -3019,8 +3124,8 @@
         "deepNightPrice": 12000,
         "skill": "兽石/古兰格的岩石",
         "affix": "咏唱魔法、祷告时，提升减伤率+24%",
-        "deepNightAffix": "提升物理攻击力+6%\n提升对冻伤的抵抗力+75\n濒死时，减少绝招量表-30%",
-        "highlight": "核心"
+        "deepNightAffix": "提升物理攻击力+8%\n提升对冻伤的抵抗力+75\n濒死时，减少绝招量表-30%",
+        "highlight": "祷告/增伤词条"
       },
       {
         "merchantNo": "3号",
@@ -3036,6 +3141,30 @@
       },
       {
         "merchantNo": "3号",
+        "name": "兽牙棒",
+        "affinity": null,
+        "type": "槌",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "唤起风暴",
+        "affix": "强化蓄力攻击+19%",
+        "deepNightAffix": null,
+        "highlight": "增伤词条"
+      },
+      {
+        "merchantNo": "3号",
+        "name": "尊腐骑士剑",
+        "affinity": null,
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "侍王骑士的决心",
+        "affix": "提升双手各持时的攻击力15%",
+        "deepNightAffix": null,
+        "highlight": "增伤词条"
+      },
+      {
+        "merchantNo": "3号",
         "name": "肢解菜刀",
         "affinity": null,
         "type": "大斧",
@@ -3044,7 +3173,7 @@
         "skill": "祈祷一击",
         "affix": "强化防御反击+20%",
         "deepNightAffix": "蓄力攻击时，释放圣属性冲击波\n攻击时，恢复血量+8\n血量没有全满时，降低绝招量表累积-15%",
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "3号",
@@ -3056,19 +3185,31 @@
         "skill": "拉满弓",
         "affix": "强化射击+10%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "3号",
-        "name": "滑轮弓",
+        "name": "滑轮弩",
         "affinity": null,
-        "type": "弓",
+        "type": "弩",
         "price": 42000,
         "deepNightPrice": null,
         "skill": "踢击",
-        "affix": "强化蓄力攻击+12%",
+        "affix": "强化蓄力攻击+22%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
+      },
+      {
+        "merchantNo": "3号",
+        "name": "结冰针",
+        "affinity": null,
+        "type": "刺剑",
+        "price": null,
+        "deepNightPrice": 50000,
+        "skill": "侍王骑士的决心",
+        "affix": null,
+        "deepNightAffix": "蓄力攻击时，刮起冰风暴\n提升双手各持时的攻击力18%\n被黑夜雨淋到的损伤加剧+150%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "3号",
@@ -3079,8 +3220,8 @@
         "deepNightPrice": 45000,
         "skill": "重力球/碎星",
         "affix": "减少魔法、祷告专注值消耗-20%",
-        "deepNightAffix": "强化魔法、祷告+8%\n减少魔法、祷告专注值消耗-20%\n精力偏少时，降低减伤率-10%",
-        "highlight": "重要被动 核心"
+        "deepNightAffix": "强化魔法、祷告+6%\n减少魔法、祷告专注值消耗-20%\n精力偏少时，降低减伤率-10%",
+        "highlight": "魔法/增伤词条"
       },
       {
         "merchantNo": "4号",
@@ -3092,7 +3233,7 @@
         "skill": "血刃",
         "affix": "慢步移动时，释放咒魂",
         "deepNightAffix": "提升圣属性减伤率+16%\n连续攻击时，仅限一次提升减伤率+48%\n闪避后的当下，受伤时损伤加剧-15%",
-        "highlight": "重要被动 核心"
+        "highlight": "发射器/连减"
       },
       {
         "merchantNo": "4号",
@@ -3104,7 +3245,7 @@
         "skill": "雷击斩",
         "affix": "提升雷属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "4号",
@@ -3116,7 +3257,7 @@
         "skill": "忍耐",
         "affix": "提升火属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "4号",
@@ -3138,9 +3279,9 @@
         "price": 10000,
         "deepNightPrice": null,
         "skill": "踢击",
-        "affix": "提升战技攻击力+8%",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "4号",
@@ -3161,10 +3302,10 @@
         "type": "圣印记",
         "price": 9000,
         "deepNightPrice": null,
-        "skill": "兽石/古兰格的岩石",
-        "affix": "血量偏低时，提升减伤率+38%",
+        "skill": "兽石/古兰格的兽爪",
+        "affix": "血量偏低时，提升减伤率+30%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "蓝泪"
       },
       {
         "merchantNo": "4号",
@@ -3176,7 +3317,43 @@
         "skill": "无战技",
         "affix": "提升对发狂的抵抗力+75",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
+      },
+      {
+        "merchantNo": "4号",
+        "name": "黑夜骑兵剑刃戟",
+        "affinity": null,
+        "type": null,
+        "price": 12000,
+        "deepNightPrice": null,
+        "skill": "风暴袭击",
+        "affix": "打倒多名敌人时，形成寒气冻雾",
+        "deepNightAffix": null,
+        "highlight": null
+      },
+      {
+        "merchantNo": "4号",
+        "name": "罗杰尔的刺剑",
+        "affinity": "魔力",
+        "type": "刺剑",
+        "price": 11000,
+        "deepNightPrice": 13000,
+        "skill": "辉剑圆阵",
+        "affix": null,
+        "deepNightAffix": "减少专注值消耗-9%\n提升魔力属性攻击力+9%\n降低对所有异常的抵抗力-30",
+        "highlight": "增伤词条"
+      },
+      {
+        "merchantNo": "4号",
+        "name": "戒指指头",
+        "affinity": null,
+        "type": "槌",
+        "price": 42000,
+        "deepNightPrice": null,
+        "skill": "弹指",
+        "affix": "受到损伤时，提升减伤率+36%",
+        "deepNightAffix": null,
+        "highlight": "损减"
       },
       {
         "merchantNo": "4号",
@@ -3187,8 +3364,8 @@
         "deepNightPrice": 45000,
         "skill": "点燃灵火",
         "affix": "减少战技专注值消耗-24%",
-        "deepNightAffix": "强化跳跃攻击+12%\n血量偏低时，提升减伤率+21%\n降低血量上限-4%",
-        "highlight": "重要被动 核心"
+        "deepNightAffix": "强化跳跃攻击+20%\n血量偏低时，提升攻击力+21%\n降低血量上限-4%",
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "4号",
@@ -3198,9 +3375,9 @@
         "price": 42000,
         "deepNightPrice": null,
         "skill": "回旋斩",
-        "affix": "强化跳跃攻击+12%",
+        "affix": "强化跳跃攻击+20%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "4号",
@@ -3212,7 +3389,7 @@
         "skill": "毁灭流星/海摩炮弹",
         "affix": "敌人比较不会攻击自己-12",
         "deepNightAffix": "强化魔法、祷告+8%\n缩短魔法、祷告的咏唱时间+2\n降低专注值上限-9%",
-        "highlight": "重要被动 核心"
+        "highlight": "魔法/增伤词条"
       },
       {
         "merchantNo": "5号",
@@ -3224,7 +3401,7 @@
         "skill": "野兽咆哮",
         "affix": "蓄力攻击命中时，提升减伤率+24%",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": "蓄减"
       },
       {
         "merchantNo": "5号",
@@ -3234,9 +3411,9 @@
         "price": 11000,
         "deepNightPrice": null,
         "skill": "炎击",
-        "affix": "强化蓄力攻击+9%",
+        "affix": "强化蓄力攻击+19%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "5号",
@@ -3260,7 +3437,7 @@
         "skill": "拉满弓",
         "affix": "防御成功时，提升减伤率+19%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "防减"
       },
       {
         "merchantNo": "5号",
@@ -3272,7 +3449,7 @@
         "skill": "贯穿射击",
         "affix": "血量全满时，提升攻击力+10%",
         "deepNightAffix": "提升物理减伤率+9%\n强化射击+10%\n降低对所有异常状态的抵抗力-30",
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "5号",
@@ -3284,7 +3461,7 @@
         "skill": "踢击",
         "affix": "受到损伤时，提升减伤率+28%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "损减"
       },
       {
         "merchantNo": "5号",
@@ -3293,10 +3470,10 @@
         "type": "圣印记",
         "price": 10000,
         "deepNightPrice": null,
-        "skill": "投火/感受巨人火焰吧",
+        "skill": "感受巨人火焰吧/投火",
         "affix": "提升火属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "祷告/增伤词条"
       },
       {
         "merchantNo": "5号",
@@ -3308,7 +3485,43 @@
         "skill": "无战技",
         "affix": "提升火属性减伤率+16%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
+      },
+      {
+        "merchantNo": "5号",
+        "name": "黄铜短刀",
+        "affinity": null,
+        "type": "短剑",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "碎步",
+        "affix": "蓄力攻击命中时，追加火属性玫击",
+        "deepNightAffix": null,
+        "highlight": null
+      },
+      {
+        "merchantNo": "5号",
+        "name": "习武修士火纹锤",
+        "affinity": "火焰",
+        "type": "槌",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "炎击",
+        "affix": "提升双手共持时的攻击力+15%",
+        "deepNightAffix": null,
+        "highlight": "增伤词条"
+      },
+      {
+        "merchantNo": "5号",
+        "name": "蚁刺细剑",
+        "affinity": "雷电",
+        "type": "刺剑",
+        "price": 42000,
+        "deepNightPrice": 45000,
+        "skill": "雷击斩",
+        "affix": null,
+        "deepNightAffix": "提升血量上限+8%\n提升战技攻击力+21%\n濒死时，减少绝招量表-30%",
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "5号",
@@ -3320,7 +3533,7 @@
         "skill": "辉石彗砾",
         "affix": "提升双手各持时的攻击力+13%",
         "deepNightAffix": "提升专注值上限+13%\n强化魔法+11%\n闪避后的当下，受伤时损伤加剧-20%",
-        "highlight": "重要被动 核心"
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "5号",
@@ -3331,8 +3544,8 @@
         "deepNightPrice": 45000,
         "skill": "兽王爪",
         "affix": "蓄力攻击命中时，追加火属性玫击",
-        "deepNightAffix": "提升让敌人失去平衡的能力+8%\n提升战技攻击力+11%\n时间越接近夜晚，受到的损伤加剧+1",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升让敌人失去平衡的能力+8%\n提升战技攻击力+21%\n时间越接近夜晚，受到的损伤加剧+1",
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "5号",
@@ -3344,7 +3557,7 @@
         "skill": "召唤怨魂/古老死亡怨魂",
         "affix": "持续恢复血量+1",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "魔法"
       },
       {
         "merchantNo": "6号",
@@ -3356,7 +3569,7 @@
         "skill": "碎步",
         "affix": "蓄力攻击命中时，追加火属性玫击",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "6号",
@@ -3390,9 +3603,9 @@
         "price": 11000,
         "deepNightPrice": 14000,
         "skill": "落雷",
-        "affix": "提升战技攻击力+8%",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": "提升对所有异常状态的抵抗力+52\n提升观察力+30\n降低圣杯瓶恢复-6%",
-        "highlight": "重要被动"
+        "highlight": "雷武器"
       },
       {
         "merchantNo": "6号",
@@ -3404,7 +3617,7 @@
         "skill": "踢击",
         "affix": "血量全满时，提升攻击力+10%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "6号",
@@ -3420,7 +3633,7 @@
       },
       {
         "merchantNo": "6号",
-        "name": "狩猎神低圣印记",
+        "name": "狩猎神祇圣印记",
         "affinity": null,
         "type": "圣印记",
         "price": 11000,
@@ -3428,7 +3641,7 @@
         "skill": "黑焰/黑焰庇佑",
         "affix": "打倒敌人时，恢复血量+20",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "祷告/buff"
       },
       {
         "merchantNo": "6号",
@@ -3440,7 +3653,43 @@
         "skill": "无战技",
         "affix": "急速冲刺时，喷出熔岩",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
+      },
+      {
+        "merchantNo": "6号",
+        "name": "尊腐骑士剑",
+        "affinity": null,
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "侍王骑士的决心",
+        "affix": "提升双手各持时的攻击力15%",
+        "deepNightAffix": null,
+        "highlight": "增伤词条"
+      },
+      {
+        "merchantNo": "6号",
+        "name": "铁陨石刀",
+        "affinity": null,
+        "type": "刀",
+        "price": 12000,
+        "deepNightPrice": null,
+        "skill": "二连斩",
+        "affix": "血量全满时，提升攻击力+10%",
+        "deepNightAffix": null,
+        "highlight": "发射器/增伤词条"
+      },
+      {
+        "merchantNo": "6号",
+        "name": "众使者的笛子",
+        "affinity": null,
+        "type": "槌",
+        "price": 42000,
+        "deepNightPrice": 50000,
+        "skill": "神谕泡泡",
+        "affix": null,
+        "deepNightAffix": "减少专注值消耗-13%\n蓄力攻击命中时，追加圣属性玫击\n闪避后的当下，降低减伤率-20%",
+        "highlight": null
       },
       {
         "merchantNo": "6号",
@@ -3452,7 +3701,7 @@
         "skill": "隙间月影",
         "affix": "提升魔力属性减伤率+20%",
         "deepNightAffix": "提升属性攻击力+8%\n减少战技专注值消耗-24%\n精力偏少时，降低减伤率-15%",
-        "highlight": "核心"
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "6号",
@@ -3464,7 +3713,7 @@
         "skill": "连续射击",
         "affix": "受到损伤时，提升减伤率+36%",
         "deepNightAffix": "强化突刺反击+10%\n敌人比较不会攻击自己-12\n时间越接近夜晚，受到的损伤加剧+1",
-        "highlight": "核心"
+        "highlight": "减仇恨"
       },
       {
         "merchantNo": "6号",
@@ -3476,7 +3725,7 @@
         "skill": "彗星亚兹勒/魔法之境",
         "affix": "提升魔力属性攻击力+12%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "魔法/增伤词条"
       },
       {
         "merchantNo": "7号",
@@ -3498,9 +3747,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "箭步（上砍）",
-        "affix": "血量偏低时，提升减伤率+38%",
+        "affix": "血量偏低时，提升减伤率+30%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "蓝泪"
       },
       {
         "merchantNo": "7号",
@@ -3512,7 +3761,7 @@
         "skill": "二连斩",
         "affix": "血量全满时，提升攻击力+10%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "7号",
@@ -3524,7 +3773,7 @@
         "skill": "幻影共击",
         "affix": "持续恢复血量+1",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器"
       },
       {
         "merchantNo": "7号",
@@ -3546,7 +3795,7 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "踢击",
-        "affix": "一定时间间隔内，形成大量辉剑",
+        "affix": "一定时间间隔内，形成多支辉剑",
         "deepNightAffix": null,
         "highlight": null
       },
@@ -3559,8 +3808,8 @@
         "deepNightPrice": 13000,
         "skill": "爆散结晶/飞散结晶",
         "affix": "强化魔法的蓄力施展+13%",
-        "deepNightAffix": "提升属性攻击力+5%\n强化魔法的蓄力施展+13%\n降低物理减伤率-6%",
-        "highlight": "重要被动 核心"
+        "deepNightAffix": "提升属性攻击力+6%\n强化魔法的蓄力施展+13%\n降低物理减伤率-6%",
+        "highlight": "魔法/增伤词条"
       },
       {
         "merchantNo": "7号",
@@ -3572,7 +3821,43 @@
         "skill": "突进冲击",
         "affix": "慢步移动时，燃起接连形成的火焰柱",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "发射器"
+      },
+      {
+        "merchantNo": "7号",
+        "name": "山妖大槌",
+        "affinity": null,
+        "type": "特大武器",
+        "price": 12000,
+        "deepNightPrice": null,
+        "skill": "山妖咆哮",
+        "affix": "提升火属性减伤率+16%",
+        "deepNightAffix": null,
+        "highlight": null
+      },
+      {
+        "merchantNo": "7号",
+        "name": "石槌",
+        "affinity": "雷电",
+        "type": "槌",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "雷击斩",
+        "affix": "血量偏低时，提升攻击力+17%",
+        "deepNightAffix": null,
+        "highlight": "雷武器"
+      },
+      {
+        "merchantNo": "7号",
+        "name": "结冰针",
+        "affinity": "寒冷",
+        "type": "刺剑",
+        "price": 42000,
+        "deepNightPrice": 45000,
+        "skill": "寒气冻雾",
+        "affix": null,
+        "deepNightAffix": "提升让敌人失去平衡的能力+8%\n强化蓄力攻击+22%\n使用圣杯瓶时，降低减伤率+33%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "7号",
@@ -3583,8 +3868,8 @@
         "deepNightPrice": 45000,
         "skill": "战吼",
         "affix": "蓄力攻击命中时，追加圣属性玫击",
-        "deepNightAffix": "提升物理攻击力+6%\n强化蓄力攻击+12%\n持续减少血量-1",
-        "highlight": null
+        "deepNightAffix": "提升物理攻击力+8%\n强化蓄力攻击+22%\n持续减少血量-1",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "7号",
@@ -3608,7 +3893,7 @@
         "skill": "光环/拉达冈的光环",
         "affix": "强化射击+14%",
         "deepNightAffix": "提升属性攻击力+8%\n咏唱魔法、祷告时，提升减伤率+30%\n时间越接近夜晚，受到的损伤加剧+2",
-        "highlight": "重要被动 核心"
+        "highlight": "祷告/增伤词条"
       },
       {
         "merchantNo": "8号",
@@ -3620,7 +3905,7 @@
         "skill": "红狮子火",
         "affix": "敌人比较不会攻击自己-9",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "减仇恨"
       },
       {
         "merchantNo": "8号",
@@ -3630,9 +3915,9 @@
         "price": 11000,
         "deepNightPrice": null,
         "skill": "猎犬步法",
-        "affix": "提升双手各持时的攻击力+10%",
+        "affix": "提升双手各持时的攻击力+15%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "8号",
@@ -3641,10 +3926,10 @@
         "type": "戟",
         "price": 11000,
         "deepNightPrice": null,
-        "skill": "雷击斩",
+        "skill": "落雷",
         "affix": "受到损伤时，恢复专注值+4",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器"
       },
       {
         "merchantNo": "8号",
@@ -3655,8 +3940,8 @@
         "deepNightPrice": 13000,
         "skill": "连续射击",
         "affix": "减少战技专注值消耗-18%",
-        "deepNightAffix": "提升战技攻击力+8%\n打倒敌人时，恢复专注值+4%\n降低精力上限-5%",
-        "highlight": null
+        "deepNightAffix": "提升战技攻击力+18%\n打倒敌人时，恢复专注值+6%\n降低精力上限5%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "8号",
@@ -3666,9 +3951,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "贯穿射击",
-        "affix": "提升战技攻击力+8%",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "8号",
@@ -3680,7 +3965,7 @@
         "skill": "踢击",
         "affix": "强化射击+10%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "8号",
@@ -3696,6 +3981,30 @@
       },
       {
         "merchantNo": "8号",
+        "name": "习武修士火纹锤",
+        "affinity": "火焰",
+        "type": "槌",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "炎击",
+        "affix": "提升双手各持时的攻击力+15%",
+        "deepNightAffix": null,
+        "highlight": "发射器/增伤词条"
+      },
+      {
+        "merchantNo": "8号",
+        "name": "罗杰尔的刺剑",
+        "affinity": null,
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "风暴刃",
+        "affix": "减少战技专注值消耗-18%",
+        "deepNightAffix": null,
+        "highlight": "发射器"
+      },
+      {
+        "merchantNo": "8号",
         "name": "金黄大盾",
         "affinity": null,
         "type": "大盾",
@@ -3704,7 +4013,7 @@
         "skill": "铁壁盾防",
         "affix": "提升对出血的抵抗力+75",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "8号",
@@ -3715,8 +4024,8 @@
         "deepNightPrice": 45000,
         "skill": "冰雷剑",
         "affix": "提升战技攻击力+11%",
-        "deepNightAffix": "减少专注值消耗-9%\n提升战技攻击力+11%\n增加因异常状态受到的损伤+25%",
-        "highlight": "重要被动"
+        "deepNightAffix": "减少专注值消耗-9%\n提升战技攻击力+21%\n增加因异常状态受到的损伤+25%",
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "8号",
@@ -3740,7 +4049,19 @@
         "skill": "癫火/划空癫火",
         "affix": "血量全满时，提升攻击力+14%",
         "deepNightAffix": "强化魔法、祷告+8%\n受到损伤时，恢复专注值+6\n降低对所有异常状态的抵抗力-45",
-        "highlight": "重要被动 核心"
+        "highlight": "祷告/增伤词条"
+      },
+      {
+        "merchantNo": "8号",
+        "name": "戒指指头",
+        "affinity": null,
+        "type": "槌",
+        "price": 42000,
+        "deepNightPrice": 50000,
+        "skill": "弹指",
+        "affix": null,
+        "deepNightAffix": "蓄力攻击时，形成熔岩\n急速冲刺时，喷出熔岩\n濒死时，减少绝招量表-30%",
+        "highlight": null
       },
       {
         "merchantNo": "9号",
@@ -3762,9 +4083,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "突刺",
-        "affix": "提升战技攻击力+10%",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "9号",
@@ -3788,7 +4109,7 @@
         "skill": "幻影共击",
         "affix": "血量全满时，提升攻击力+10%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "9号",
@@ -3798,9 +4119,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "贯穿射击",
-        "affix": "血量偏低时，提升减伤率+38%",
+        "affix": "血量偏低时，提升减伤率+30%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "蓝泪"
       },
       {
         "merchantNo": "9号",
@@ -3812,7 +4133,7 @@
         "skill": "踢击",
         "affix": "敌人比较不会攻击自己-9",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "减仇恨"
       },
       {
         "merchantNo": "9号",
@@ -3824,7 +4145,7 @@
         "skill": "魔法辉剑/罗蕾塔的大弓",
         "affix": "提升魔力属性攻击力+9%",
         "deepNightAffix": "强化魔法+8%\n打倒敌人时，恢复专注值+6%\n濒死时，减少绝招量表-30%",
-        "highlight": "核心"
+        "highlight": "魔法/增伤词条"
       },
       {
         "merchantNo": "9号",
@@ -3836,7 +4157,43 @@
         "skill": "无战技",
         "affix": "慢步移动时，召唤红落雷",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": null
+      },
+      {
+        "merchantNo": "9号",
+        "name": "罗杰尔的刺剑",
+        "affinity": null,
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "风暴刃",
+        "affix": "减少战技专注值消耗-18%",
+        "deepNightAffix": null,
+        "highlight": "发射器"
+      },
+      {
+        "merchantNo": "9号",
+        "name": "梵雷的花束",
+        "affinity": null,
+        "type": "槌",
+        "price": 11000,
+        "deepNightPrice": 14000,
+        "skill": "鲜血征收",
+        "affix": null,
+        "deepNightAffix": "强化突刺反击+10%\n持续恢复血量+1\n血量没有全满时，降低攻击力-5%",
+        "highlight": null
+      },
+      {
+        "merchantNo": "9号",
+        "name": "蚁刺细剑",
+        "affinity": "血",
+        "type": "刺剑",
+        "price": 42000,
+        "deepNightPrice": null,
+        "skill": "血刃",
+        "affix": "提升战技攻击力+21%",
+        "deepNightAffix": null,
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "9号",
@@ -3847,8 +4204,8 @@
         "deepNightPrice": 45000,
         "skill": "碎步",
         "affix": "蓄力攻击命中时，追加魔力属性玫击",
-        "deepNightAffix": "提升物理攻击力+6%\n强化祷告+11%\n降低属性减伤率-6%",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升物理攻击力+8%\n强化祷告+11%\n降低属性减伤率-6%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "9号",
@@ -3860,7 +4217,7 @@
         "skill": "拉满弓",
         "affix": "提升火属性攻击力+12%",
         "deepNightAffix": "精密射击时，在命中点形成毒性烟雾\n提升观察力+40\n血量没有全满时，累积中毒量表-2",
-        "highlight": "核心"
+        "highlight": null
       },
       {
         "merchantNo": "9号",
@@ -3872,7 +4229,7 @@
         "skill": "龙焰/龙咬",
         "affix": "血量全满时，提升攻击力+14%",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "10号",
@@ -3884,7 +4241,7 @@
         "skill": "二连斩",
         "affix": "提升魔力属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "10号",
@@ -3895,8 +4252,8 @@
         "deepNightPrice": 17000,
         "skill": "岩石剑",
         "affix": "提升瓦解防御的能力+45%",
-        "deepNightAffix": "提升让敌人失去平衡的能力+8%\n受到损伤时，提升减伤率+28%\n血量没有全满时，累积猩红腐败量表+1",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升让敌人失去平衡的能力+8%\n受到损伤时，提升减伤率+28%\n血量没有全满时，累积猩红腐败量表-1",
+        "highlight": "损减"
       },
       {
         "merchantNo": "10号",
@@ -3908,7 +4265,7 @@
         "skill": "黑焰漩涡",
         "affix": "打倒多名敌人时，降下落雷",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器"
       },
       {
         "merchantNo": "10号",
@@ -3918,9 +4275,9 @@
         "price": 10000,
         "deepNightPrice": null,
         "skill": "连续射击",
-        "affix": "提升双手共持时的攻击力+10%",
+        "affix": "提升双手共持时的攻击力+15%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "10号",
@@ -3932,7 +4289,7 @@
         "skill": "贯穿射击",
         "affix": "强化射击+10%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "10号",
@@ -3944,7 +4301,7 @@
         "skill": "辉石魔砾/天降魔力",
         "affix": "打倒敌人时，恢复血量+20",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "魔法"
       },
       {
         "merchantNo": "10号",
@@ -3956,7 +4313,43 @@
         "skill": "盾牌冲击",
         "affix": "强化魔法+8%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
+      },
+      {
+        "merchantNo": "10号",
+        "name": "大剑",
+        "affinity": null,
+        "type": null,
+        "price": 12000,
+        "deepNightPrice": null,
+        "skill": "狮子斩",
+        "affix": "提升双手共持时的攻击力+15%",
+        "deepNightAffix": null,
+        "highlight": "发射器/增伤词条"
+      },
+      {
+        "merchantNo": "10号",
+        "name": "罗杰尔的刺剑",
+        "affinity": "魔力",
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": 13000,
+        "skill": "伟哉卡利亚",
+        "affix": null,
+        "deepNightAffix": "提升属性攻击力+6%\n提升战技攻击力+18%\n血量没有全满时，绝招量表累积-10%",
+        "highlight": "增伤词条"
+      },
+      {
+        "merchantNo": "10号",
+        "name": "戒指指头",
+        "affinity": null,
+        "type": "槌",
+        "price": 42000,
+        "deepNightPrice": null,
+        "skill": "弹指",
+        "affix": "打倒敌人时，恢复血量+40",
+        "deepNightAffix": null,
+        "highlight": null
       },
       {
         "merchantNo": "10号",
@@ -3966,9 +4359,9 @@
         "price": 42000,
         "deepNightPrice": null,
         "skill": "死亡刀刃",
-        "affix": "强化蓄力攻击+12%",
+        "affix": "强化蓄力攻击+22%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "10号",
@@ -3979,8 +4372,8 @@
         "deepNightPrice": 50000,
         "skill": "白王引力波",
         "affix": "提升对发狂的抵抗力+112",
-        "deepNightAffix": "蓄力攻击时，将敌人拉近自己\n一定时间间隔内，形成多支辉剑\n濒死时，减少绝招量表-45%",
-        "highlight": "重要被动 核心"
+        "deepNightAffix": "蓄力攻击时，将敌人拉近自己\n一定时间间隔内，形成大量辉剑\n濒死时，减少绝招量表-45%",
+        "highlight": null
       },
       {
         "merchantNo": "10号",
@@ -3992,7 +4385,7 @@
         "skill": "踢击",
         "affix": "强化射击+14%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "10号",
@@ -4004,7 +4397,7 @@
         "skill": "光环/化三光环",
         "affix": "敌人比较不会攻击自己-12",
         "deepNightAffix": "强化魔法、祷告+6%\n打倒多名敌人时，形成黄金冲击波\n降低属性减伤率-6%",
-        "highlight": "重要被动 核心"
+        "highlight": "祷告/增伤词条"
       },
       {
         "merchantNo": "11号",
@@ -4016,7 +4409,7 @@
         "skill": "碎步",
         "affix": "提升圣属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "11号",
@@ -4028,7 +4421,7 @@
         "skill": "落雷",
         "affix": "提升对腐败的抵抗力+75",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器"
       },
       {
         "merchantNo": "11号",
@@ -4050,9 +4443,9 @@
         "price": 9000,
         "deepNightPrice": null,
         "skill": "连续射击",
-        "affix": "提升战技攻击力+8%",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "11号",
@@ -4064,7 +4457,7 @@
         "skill": "贯穿射击",
         "affix": "血量全满时，提升攻击力+10%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "11号",
@@ -4076,7 +4469,7 @@
         "skill": "踢击",
         "affix": "强化射击+10%",
         "deepNightAffix": "慢步移动时，释放咒魂\n提升观察力+30\n闪避后的当下，受伤时损伤加剧-15%",
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "11号",
@@ -4086,9 +4479,9 @@
         "price": 10000,
         "deepNightPrice": null,
         "skill": "卡利亚迅剑/亚杜拉的月光剑",
-        "affix": "一定时间间隔内，形成多支辉剑",
+        "affix": "一定时间间隔内，形成大量辉剑",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": "魔法"
       },
       {
         "merchantNo": "11号",
@@ -4100,7 +4493,31 @@
         "skill": "铁壁盾防",
         "affix": "持续恢复血量+1",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": null
+      },
+      {
+        "merchantNo": "11号",
+        "name": "昆虫剑刃戟",
+        "affinity": null,
+        "type": "戟",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "幻影共击",
+        "affix": "血量全满时，提升攻击力+10%",
+        "deepNightAffix": null,
+        "highlight": "发射器/增伤词条"
+      },
+      {
+        "merchantNo": "11号",
+        "name": "晨星锤",
+        "affinity": "神圣",
+        "type": "槌",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "祈祷一击",
+        "affix": "血量全满时，提升减伤率+32%",
+        "deepNightAffix": null,
+        "highlight": "满减"
       },
       {
         "merchantNo": "11号",
@@ -4112,7 +4529,19 @@
         "skill": "尸横遍野",
         "affix": "提升火属性攻击力+12%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "发射器/增伤词条"
+      },
+      {
+        "merchantNo": "11号",
+        "name": "蚁刺细剑",
+        "affinity": null,
+        "type": "刺剑",
+        "price": 42000,
+        "deepNightPrice": 50000,
+        "skill": "格挡",
+        "affix": null,
+        "deepNightAffix": "蓄力攻击时，形成幻影进行攻击\n强化致命一击+24%\n时间越接近夜晚，受到的损伤加剧+2",
+        "highlight": "弹反（5w弹反...）"
       },
       {
         "merchantNo": "11号",
@@ -4124,7 +4553,7 @@
         "skill": "归于麾下",
         "affix": "提升防御强度+20%",
         "deepNightAffix": "蓄力攻击时，形成幻影进行攻击\n连续攻击时，仅限一次提升减伤率+60%\n濒死时，降低血量上限-20%",
-        "highlight": "重要被动"
+        "highlight": "buff/连减"
       },
       {
         "merchantNo": "11号",
@@ -4136,7 +4565,7 @@
         "skill": "黄金之怒/黄金树恢复",
         "affix": "提升观察力+40",
         "deepNightAffix": "减少专注值消耗-9%\n咏唱魔法、祷告时，提升减伤率+30%\n濒死时，减少绝招量表-30%",
-        "highlight": null
+        "highlight": "祷告"
       },
       {
         "merchantNo": "12号",
@@ -4160,7 +4589,7 @@
         "skill": "神圣刀刃",
         "affix": "蓄力攻击命中时，追加圣属性玫击",
         "deepNightAffix": "提升圣性攻击力+9%\n减少战技专注值消耗-18%\n连续闪避时，降低减伤率-23%",
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "12号",
@@ -4172,7 +4601,7 @@
         "skill": "盲击",
         "affix": "提升火属性减伤率+16%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器"
       },
       {
         "merchantNo": "12号",
@@ -4182,9 +4611,9 @@
         "price": 11000,
         "deepNightPrice": null,
         "skill": "拉满弓",
-        "affix": "提升战技攻击力+8%",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "12号",
@@ -4196,7 +4625,7 @@
         "skill": "贯穿射击",
         "affix": "血量全满时，提升攻击力+10%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "12号",
@@ -4208,7 +4637,7 @@
         "skill": "踢击",
         "affix": "慢步移动时，燃起接连形成的火焰柱",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "12号",
@@ -4220,7 +4649,7 @@
         "skill": "责罚荆棘/罪恶荆棘",
         "affix": "持续恢复血量+1",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "魔法"
       },
       {
         "merchantNo": "12号",
@@ -4231,8 +4660,44 @@
         "deepNightPrice": 12000,
         "skill": "突进冲击",
         "affix": "提升火属性攻击力+9%",
-        "deepNightAffix": "提升精力恢复速度+3\n强化防御反击+15%\n使用圣杯瓶时，降低减伤率-30%",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升精力恢复速度+3\n强化防御反击+20%\n使用圣杯瓶时，降低减伤率-33%",
+        "highlight": "发射器/增伤词条"
+      },
+      {
+        "merchantNo": "12号",
+        "name": "晨星锤",
+        "affinity": null,
+        "type": "槌",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "祈祷一击",
+        "affix": "血量全满时，提升减伤率+32%",
+        "deepNightAffix": null,
+        "highlight": "满减"
+      },
+      {
+        "merchantNo": "12号",
+        "name": "罗杰尔的刺剑",
+        "affinity": "魔力",
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "重力",
+        "affix": "打倒敌人时，恢复血量+30",
+        "deepNightAffix": null,
+        "highlight": null
+      },
+      {
+        "merchantNo": "12号",
+        "name": "诺克斯流体锤",
+        "affinity": null,
+        "type": "槌",
+        "price": 42000,
+        "deepNightPrice": 45000,
+        "skill": "流体化",
+        "affix": null,
+        "deepNightAffix": "提升属性减伤率+9%\n提升战技攻击力+21% \n降低专注值上限-6%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "12号",
@@ -4244,7 +4709,7 @@
         "skill": "冰雷剑",
         "affix": "提升雷属性减伤率+20%",
         "deepNightAffix": "蓄力攻击时，刮起冰风暴\n提升对冻伤的抵抗力+112\n连续闪避时，降低减伤率-30%",
-        "highlight": "重要被动 核心"
+        "highlight": "发射器"
       },
       {
         "merchantNo": "12号",
@@ -4266,9 +4731,9 @@
         "price": 42000,
         "deepNightPrice": null,
         "skill": "龙焰/ 桂奥尔的咆哮",
-        "affix": "强化连续攻击的最后攻击+20%",
+        "affix": "强化连续攻击的最后攻击+31%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "祷告"
       },
       {
         "merchantNo": "13号",
@@ -4278,9 +4743,9 @@
         "price": 9000,
         "deepNightPrice": 12000,
         "skill": "贯穿",
-        "affix": "血量偏低时，提升减伤率+38%",
+        "affix": "血量偏低时，提升减伤率+30%",
         "deepNightAffix": "强化致命一击+18%\n打倒敌人时，恢复专注值+6%\n濒死时，降低血量上限-15%",
-        "highlight": null
+        "highlight": "发射器"
       },
       {
         "merchantNo": "13号",
@@ -4292,7 +4757,7 @@
         "skill": "切腹",
         "affix": "蓄力攻击命中时，追加魔力属性玫击",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": "buff"
       },
       {
         "merchantNo": "13号",
@@ -4328,7 +4793,7 @@
         "skill": "踢击",
         "affix": "敌人比较不会攻击自己-9",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "减仇恨"
       },
       {
         "merchantNo": "13号",
@@ -4338,9 +4803,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "踢击",
-        "affix": "一定时间间隔内，形成大量辉剑",
+        "affix": "一定时间间隔内，形成多支辉剑",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "13号",
@@ -4352,7 +4817,7 @@
         "skill": "黑夜彗星/奇袭魔砾",
         "affix": "提升魔力属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "魔法/增伤词条"
       },
       {
         "merchantNo": "13号",
@@ -4364,6 +4829,42 @@
         "skill": "无敌",
         "affix": "提升雷属性攻击力+9%",
         "deepNightAffix": null,
+        "highlight": "增伤词条"
+      },
+      {
+        "merchantNo": "13号",
+        "name": "白金弓",
+        "affinity": null,
+        "type": "弓",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "拉满弓",
+        "affix": "提升战技攻击力+18%",
+        "deepNightAffix": null,
+        "highlight": "增伤词条"
+      },
+      {
+        "merchantNo": "13号",
+        "name": "兽牙棒",
+        "affinity": "毒",
+        "type": "槌",
+        "price": 12000,
+        "deepNightPrice": null,
+        "skill": "毒雾",
+        "affix": "蓄力攻击命中时，提升减伤率+24%",
+        "deepNightAffix": null,
+        "highlight": "蓄减"
+      },
+      {
+        "merchantNo": "13号",
+        "name": "蚁刺细剑",
+        "affinity": null,
+        "type": "刺剑",
+        "price": 42000,
+        "deepNightPrice": 45000,
+        "skill": "暗杀办法",
+        "affix": null,
+        "deepNightAffix": "强化致命一击+24%\n打倒敌人时，恢复专注值+8%\n时间越接近夜晚，受到的损伤加剧+1",
         "highlight": null
       },
       {
@@ -4375,8 +4876,8 @@
         "deepNightPrice": 45000,
         "skill": "灭洛斯的狂嚎",
         "affix": "蓄力攻击命中时，追加魔力属性玫击",
-        "deepNightAffix": "提升物理攻击力+6%\n慢步移动时，释放咒魂\n血量没有全满时，降低绝招量表累积-10%",
-        "highlight": "重要被动 核心"
+        "deepNightAffix": "提升物理攻击力+8%\n慢步移动时，释放咒魂\n血量没有全满时，降低绝招量表累积-10%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "13号",
@@ -4388,7 +4889,7 @@
         "skill": "箭雨",
         "affix": "强化射击+14%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "13号",
@@ -4400,7 +4901,7 @@
         "skill": "黄金之怒/黑剑",
         "affix": "缩短魔法、祷告的咏唱时间+2",
         "deepNightAffix": "专注值不够时，施展魔法、祈祷恢复专注值+13%\n提升圣属性攻击力+12%\n降低专注值上限-9%",
-        "highlight": "重要被动 核心"
+        "highlight": "祷告/增伤词条"
       },
       {
         "merchantNo": "14号",
@@ -4412,7 +4913,7 @@
         "skill": "血刃",
         "affix": "强化致命一击+18%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "发射器"
       },
       {
         "merchantNo": "14号",
@@ -4422,9 +4923,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "狮子斩",
-        "affix": "提升双手共持时的攻击力+10%",
+        "affix": "提升双手共持时的攻击力+15%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "14号",
@@ -4434,9 +4935,9 @@
         "price": 13000,
         "deepNightPrice": null,
         "skill": "战吼",
-        "affix": "强化蓄力攻击+9%",
+        "affix": "强化蓄力攻击+19%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "14号",
@@ -4448,7 +4949,7 @@
         "skill": "剑舞",
         "affix": "减少战技专注值消耗-18%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器"
       },
       {
         "merchantNo": "14号",
@@ -4472,7 +4973,7 @@
         "skill": "卡利亚迅剑/卡利亚大剑",
         "affix": "敌人比较不会攻击自己-9",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "魔法/减仇恨"
       },
       {
         "merchantNo": "14号",
@@ -4481,10 +4982,34 @@
         "type": "圣印记",
         "price": 10000,
         "deepNightPrice": 13000,
-        "skill": "投火/火焰啊，吞噬一切！",
+        "skill": "感受巨人火焰/火焰啊，吞噬一切！",
         "affix": "持续恢复血量+1",
-        "deepNightAffix": "提升专注值上限+9%\n强化祷告的蓄力执行+13%\n时间越接近夜晚，受到的损伤加剧",
-        "highlight": "重要被动 核心"
+        "deepNightAffix": "提升专注值上限+9%\n强化祷告的蓄力执行+13%\n时间越接近夜晚，受到的损伤加剧+1",
+        "highlight": "祷告/增伤词条"
+      },
+      {
+        "merchantNo": "14号",
+        "name": "尊腐骑士剑",
+        "affinity": "血",
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "鲜血征收",
+        "affix": "提升对骤死的抵抗力+75",
+        "deepNightAffix": null,
+        "highlight": null
+      },
+      {
+        "merchantNo": "14号",
+        "name": "铁陨石刀",
+        "affinity": "血",
+        "type": "刀",
+        "price": 12000,
+        "deepNightPrice": null,
+        "skill": "切腹",
+        "affix": "蓄力攻击命中时，追加魔力属性玫击",
+        "deepNightAffix": null,
+        "highlight": "buff"
       },
       {
         "merchantNo": "14号",
@@ -4495,8 +5020,20 @@
         "deepNightPrice": 45000,
         "skill": "隙间月影",
         "affix": "攻击时，恢复血量+8",
-        "deepNightAffix": "提升战技攻击力+11%\n一定时间间隔内，形成大量辉剑\n精力偏少时，降低减伤率-10%",
-        "highlight": "重要被动 核心"
+        "deepNightAffix": "提升战技攻击力+21%\n一定时间间隔内，形成大量辉剑\n精力偏少时，降低减伤率-10%",
+        "highlight": "发射器/增伤词条"
+      },
+      {
+        "merchantNo": "14号",
+        "name": "诺克斯流体锤",
+        "affinity": null,
+        "type": "槌",
+        "price": 42000,
+        "deepNightPrice": 50000,
+        "skill": "流体化",
+        "affix": null,
+        "deepNightAffix": "提升物理攻击力+10%\n攻击命中时，回复专注值+3 \n连续闪避时，降低减伤率-30%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "14号",
@@ -4508,7 +5045,7 @@
         "skill": "拉满弓",
         "affix": "一定时间间隔内，形成大量辉剑",
         "deepNightAffix": "蓄力攻击时，形成追击魔力球\n强化射击+14%\n血量全满时，降低攻击力-7%",
-        "highlight": "重要被动 核心"
+        "highlight": null
       },
       {
         "merchantNo": "14号",
@@ -4520,7 +5057,7 @@
         "skill": "贯穿射击",
         "affix": "提升圣属性攻击力+12%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "14号",
@@ -4532,7 +5069,7 @@
         "skill": "共鸣愤怒",
         "affix": "强化祷告+11%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "buff/增伤词条"
       },
       {
         "merchantNo": "15号",
@@ -4542,9 +5079,9 @@
         "price": 11000,
         "deepNightPrice": null,
         "skill": "鲜血征收",
-        "affix": "提升双手各持时的攻击力+10%",
+        "affix": "提升双手各持时的攻击力+15%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "15号",
@@ -4554,9 +5091,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "狮子斩",
-        "affix": "强化连续攻击的最后攻击+15%",
+        "affix": "强化连续攻击的最后攻击+26%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器"
       },
       {
         "merchantNo": "15号",
@@ -4566,9 +5103,9 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "突刺",
-        "affix": "强化蓄力攻击+9%",
+        "affix": "强化蓄力攻击+19%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "15号",
@@ -4580,7 +5117,7 @@
         "skill": "拉满弓",
         "affix": "血量全满时，提升攻击力+10%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "15号",
@@ -4592,7 +5129,7 @@
         "skill": "踢击",
         "affix": "敌人比较不会攻击自己-9",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "减仇恨"
       },
       {
         "merchantNo": "15号",
@@ -4604,11 +5141,11 @@
         "skill": "责罚荆棘/罪恶荆棘",
         "affix": "打倒敌人时，恢复血量+20",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "魔法"
       },
       {
         "merchantNo": "15号",
-        "name": "狩猎神低圣印记",
+        "name": "狩猎神祇圣印记",
         "affinity": null,
         "type": "圣印记",
         "price": 11000,
@@ -4616,7 +5153,43 @@
         "skill": "黑焰/黑焰刀刃",
         "affix": "血量全满时，提升减伤率+32%",
         "deepNightAffix": "提升物理减伤率+9%\n缩短魔法、祷告的咏唱时间+2\n降低专注值上限-6%",
-        "highlight": "重要被动 核心"
+        "highlight": "祷告/buff"
+      },
+      {
+        "merchantNo": "15号",
+        "name": "庆典大头盖骨",
+        "affinity": "火焰",
+        "type": "大槌",
+        "price": 12000,
+        "deepNightPrice": null,
+        "skill": "红狮子火焰",
+        "affix": "提升战技攻击力+18%",
+        "deepNightAffix": null,
+        "highlight": "增伤词条"
+      },
+      {
+        "merchantNo": "15号",
+        "name": "罗杰尔的刺剑",
+        "affinity": "魔力",
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "辉石魔砾",
+        "affix": "一定时间间隔内，形成多支辉剑",
+        "deepNightAffix": null,
+        "highlight": null
+      },
+      {
+        "merchantNo": "15号",
+        "name": "众使者的笛子",
+        "affinity": null,
+        "type": "槌",
+        "price": 42000,
+        "deepNightPrice": 45000,
+        "skill": "神谕泡泡",
+        "affix": null,
+        "deepNightAffix": "提升战技攻击力+21%\n持续恢复血量+1\n血量没有全满时，累积中毒量表-1",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "15号",
@@ -4628,7 +5201,7 @@
         "skill": "冰雷剑",
         "affix": "慢步移动时，释放咒魂",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "发射器"
       },
       {
         "merchantNo": "15号",
@@ -4638,9 +5211,9 @@
         "price": 42000,
         "deepNightPrice": 45000,
         "skill": "侍王骑士的决心",
-        "affix": "提升双手各持时的攻击力+13%",
-        "deepNightAffix": "提升血量上限+8%\n强化蓄力攻击+12%\n血量没有全满时，降低绝招量表累积-10%",
-        "highlight": null
+        "affix": "提升双手各持时的攻击力+18%",
+        "deepNightAffix": "提升血量上限+8%\n强化蓄力攻击+22%\n血量没有全满时，降低绝招量表累积-10%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "15号",
@@ -4664,7 +5237,7 @@
         "skill": "火焰唾球",
         "affix": "提升火属性减伤率+20%",
         "deepNightAffix": "失去平衡时，发动忍耐\n提升防御强度+20%\n降低对所有异常状态的抵抗力-45",
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "16号",
@@ -4686,9 +5259,9 @@
         "price": 11000,
         "deepNightPrice": 14000,
         "skill": "剑舞",
-        "affix": "提升双手共持时的攻击力+10%",
-        "deepNightAffix": "提升物理攻击力+6%\n连续攻击时，仅限一次提升减伤率+45%\n降低精力上限-5%",
-        "highlight": null
+        "affix": "提升双手共持时的攻击力+15%",
+        "deepNightAffix": "提升物理攻击力+8%\n连续攻击时，仅限一次提升减伤率+48%\n降低精力上限-5%",
+        "highlight": "发射器/增伤词条/连减"
       },
       {
         "merchantNo": "16号",
@@ -4697,10 +5270,10 @@
         "type": "大槌",
         "price": 12000,
         "deepNightPrice": null,
-        "skill": "红狮子火",
-        "affix": "提升战技攻击力+10%",
+        "skill": "红狮子火焰",
+        "affix": "提升战技攻击力+18%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "16号",
@@ -4712,7 +5285,7 @@
         "skill": "冰枪",
         "affix": "防御成功时，提升减伤率+19%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器/防减"
       },
       {
         "merchantNo": "16号",
@@ -4724,7 +5297,7 @@
         "skill": "贯穿射击",
         "affix": "强化射击+10%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": null
       },
       {
         "merchantNo": "16号",
@@ -4736,7 +5309,7 @@
         "skill": "踢击",
         "affix": "血量全满时，提升攻击力+10%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "16号",
@@ -4748,7 +5321,7 @@
         "skill": "黑夜彗星/黑夜女巫烟雾",
         "affix": "提升魔力属性减伤率+16%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "魔法"
       },
       {
         "merchantNo": "16号",
@@ -4757,10 +5330,46 @@
         "type": "圣印记",
         "price": 10000,
         "deepNightPrice": null,
-        "skill": "投火/火焰啊，赐予我力量！",
+        "skill": "感受巨人火焰/火焰啊，赐予我力量！",
         "affix": "血量全满时，提升减伤率+32%",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": "满减"
+      },
+      {
+        "merchantNo": "16号",
+        "name": "大剑",
+        "affinity": "血",
+        "type": "大剑",
+        "price": 12000,
+        "deepNightPrice": null,
+        "skill": "鲜血斩击",
+        "affix": "打倒敌人时，恢复专注值+6%",
+        "deepNightAffix": null,
+        "highlight": "发射器"
+      },
+      {
+        "merchantNo": "16号",
+        "name": "尊腐骑士剑",
+        "affinity": "神圣",
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "神圣刀刃",
+        "affix": "血量全满时，提升攻击力+10%",
+        "deepNightAffix": null,
+        "highlight": "发射器/增伤词条"
+      },
+      {
+        "merchantNo": "16号",
+        "name": "百智权杖",
+        "affinity": null,
+        "type": "槌",
+        "price": 42000,
+        "deepNightPrice": 50000,
+        "skill": "百智的世界",
+        "affix": null,
+        "deepNightAffix": "使用圣杯瓶时，也恢复专注值+20%\n提升圣属性减伤率+20%\n使用圣杯瓶时，降低减伤率-46%",
+        "highlight": "buff"
       },
       {
         "merchantNo": "16号",
@@ -4771,8 +5380,8 @@
         "deepNightPrice": 50000,
         "skill": "毁灭灵火",
         "affix": "提升瓦解防御的能力+60%",
-        "deepNightAffix": "提升属性攻击力+8%\n提升双手共持时的攻击力+13%\n使用圣杯瓶时，降低减伤率-46%",
-        "highlight": "重要被动 核心"
+        "deepNightAffix": "提升属性攻击力+8%\n提升双手共持时的攻击力+18%\n使用圣杯瓶时，降低减伤率-46%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "16号",
@@ -4782,7 +5391,7 @@
         "price": 42000,
         "deepNightPrice": null,
         "skill": "箭雨",
-        "affix": "强化连续攻击的最后攻击+20%",
+        "affix": "强化连续攻击的最后攻击+31%",
         "deepNightAffix": null,
         "highlight": null
       },
@@ -4796,7 +5405,7 @@
         "skill": "火焰舌柱",
         "affix": "防御成功时，提升强韧度+24%",
         "deepNightAffix": "提升火属性攻击力+12%\n减少战技专注值消耗-24%\n增加因异常状态受到的损伤+25%",
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "17号",
@@ -4808,7 +5417,7 @@
         "skill": "雷电羊球",
         "affix": "连续攻击时，仅限一次提升减伤率+48%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "雷武器/连减"
       },
       {
         "merchantNo": "17号",
@@ -4820,7 +5429,7 @@
         "skill": "炎击",
         "affix": "提升圣属性减伤率+16%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器"
       },
       {
         "merchantNo": "17号",
@@ -4831,8 +5440,8 @@
         "deepNightPrice": 13000,
         "skill": "二连斩",
         "affix": "蓄力攻击命中时，追加火属性玫击",
-        "deepNightAffix": "提升物理攻击力+6%\n强化致命一击+18%\n降低物理减伤率-6%",
-        "highlight": "重要被动"
+        "deepNightAffix": "提升物理攻击力+8%\n强化致命一击+18%\n降低物理减伤率-6%",
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "17号",
@@ -4844,7 +5453,7 @@
         "skill": "落雷",
         "affix": "持续恢复血量+1",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器"
       },
       {
         "merchantNo": "17号",
@@ -4854,7 +5463,7 @@
         "price": 12000,
         "deepNightPrice": null,
         "skill": "贯穿射击",
-        "affix": "强化连续攻击的最后攻击+15%",
+        "affix": "强化连续攻击的最后攻击+26%",
         "deepNightAffix": null,
         "highlight": null
       },
@@ -4868,7 +5477,7 @@
         "skill": "踢击",
         "affix": "敌人比较不会攻击自己-9",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "增减仇恨"
       },
       {
         "merchantNo": "17号",
@@ -4880,7 +5489,19 @@
         "skill": "爆散结晶/奔放结晶",
         "affix": "打倒敌人时，恢复血量+20",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "魔法"
+      },
+      {
+        "merchantNo": "17号",
+        "name": "梵雷的花束",
+        "affinity": null,
+        "type": "槌",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "猎犬步伐",
+        "affix": "提升圣属性减伤率+16%",
+        "deepNightAffix": null,
+        "highlight": null
       },
       {
         "merchantNo": "17号",
@@ -4892,7 +5513,19 @@
         "skill": "雷电枪/弗尔桑克斯的雷枪",
         "affix": "打倒敌人时，恢复专注值+4%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "雷武器/祷告"
+      },
+      {
+        "merchantNo": "17号",
+        "name": "罗杰尔的刺剑",
+        "affinity": null,
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "连击",
+        "affix": "强化致命一击+18%",
+        "deepNightAffix": null,
+        "highlight": null
       },
       {
         "merchantNo": "17号",
@@ -4902,9 +5535,21 @@
         "price": 42000,
         "deepNightPrice": 50000,
         "skill": "信仰喷发",
-        "affix": "提升战技攻击力+11%",
-        "deepNightAffix": "提升强韧度+33%\n受到损伤时，提升减伤率+33%\n攻击时，攻击偶尔会掠过目标",
-        "highlight": "核心"
+        "affix": "提升战技攻击力+21%",
+        "deepNightAffix": "提升强韧度+33%\n受到损伤时，提升减伤率+36%\n攻击时，攻击偶尔会掠过目标-2",
+        "highlight": "发射器/损减"
+      },
+      {
+        "merchantNo": "17号",
+        "name": "结冰针",
+        "affinity": null,
+        "type": "刺剑",
+        "price": 42000,
+        "deepNightPrice": 45000,
+        "skill": "冻霜踏地",
+        "affix": null,
+        "deepNightAffix": "强化蓄力攻击+22%\n一定时间间隔内，形成多支辉剑\n连续闪避时，降低减伤率-23%",
+        "highlight": "增伤词条"
       },
       {
         "merchantNo": "17号",
@@ -4916,7 +5561,7 @@
         "skill": "拉满弓",
         "affix": "提升圣属性攻击力+12%",
         "deepNightAffix": "提升属性减伤率+9%\n强化射击+14%\n连续闪避时，降低减伤率-23%",
-        "highlight": "重要被动 核心"
+        "highlight": null
       },
       {
         "merchantNo": "17号",
@@ -4926,7 +5571,7 @@
         "price": 42000,
         "deepNightPrice": null,
         "skill": "盾牌冲击",
-        "affix": "受到损伤时，恢复专注值+6%",
+        "affix": "受到损伤时，恢复专注值+6",
         "deepNightAffix": null,
         "highlight": null
       },
@@ -4940,7 +5585,7 @@
         "skill": "鲜血斩击",
         "affix": "打倒敌人时，恢复专注值+4%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "发射器"
       },
       {
         "merchantNo": "18号",
@@ -4951,8 +5596,8 @@
         "deepNightPrice": 15000,
         "skill": "剑舞",
         "affix": "攻击时，恢复血量+6",
-        "deepNightAffix": "提升让敌人失去平衡的能力+8%\n强化蓄力攻击+9%\n血量没有全满时，降低攻击力-5%",
-        "highlight": null
+        "deepNightAffix": "提升让敌人失去平衡的能力+8%\n强化蓄力攻击+19%\n血量没有全满时，降低攻击力-5%",
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "18号",
@@ -4962,9 +5607,9 @@
         "price": 16000,
         "deepNightPrice": null,
         "skill": "黄金大地",
-        "affix": "血量偏低时，提升减伤率+38%",
+        "affix": "血量偏低时，提升减伤率+30%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "蓝泪"
       },
       {
         "merchantNo": "18号",
@@ -5012,7 +5657,7 @@
         "skill": "熔岩球/格密尔之怒",
         "affix": "强化魔法+8%",
         "deepNightAffix": "强化魔法、祷告+6%\n急速冲刺时，喷出熔岩\n濒死时，降低血量上限-15%",
-        "highlight": "重要被动"
+        "highlight": "魔法/增伤词条"
       },
       {
         "merchantNo": "18号",
@@ -5022,9 +5667,45 @@
         "price": 9000,
         "deepNightPrice": null,
         "skill": "兽石/野兽活力",
-        "affix": "一定时间间隔内，形成多支辉剑",
+        "affix": "一定时间间隔内，形成大量辉剑",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": "祷告"
+      },
+      {
+        "merchantNo": "18号",
+        "name": "结晶小刀",
+        "affinity": null,
+        "type": "短剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "伟哉卡利亚",
+        "affix": "持续恢复血量+1",
+        "deepNightAffix": null,
+        "highlight": null
+      },
+      {
+        "merchantNo": "18号",
+        "name": "罗杰尔的刺剑",
+        "affinity": null,
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "连击",
+        "affix": "强化致命一击+18%",
+        "deepNightAffix": null,
+        "highlight": null
+      },
+      {
+        "merchantNo": "18号",
+        "name": "诺克斯流体锤",
+        "affinity": null,
+        "type": "槌",
+        "price": 42000,
+        "deepNightPrice": 45000,
+        "skill": "流体化",
+        "affix": null,
+        "deepNightAffix": "强化防御反击+23%\n防御成功时提升减伤率+24%\n连续闪避时，降低减伤率-23%",
+        "highlight": "防减/增伤词条"
       },
       {
         "merchantNo": "18号",
@@ -5048,7 +5729,7 @@
         "skill": "黄金树立誓",
         "affix": "提升圣属性攻击力+12%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "buff/增伤词条"
       },
       {
         "merchantNo": "18号",
@@ -5060,7 +5741,7 @@
         "skill": "突进冲击",
         "affix": "连续攻击时，仅限一次提升减伤率+60%",
         "deepNightAffix": "提升物理减伤率+13%\n提升防御强度+20%\n增加因异常状态受到的损伤+35%",
-        "highlight": "重要被动"
+        "highlight": "发射器"
       },
       {
         "merchantNo": "19号",
@@ -5082,9 +5763,9 @@
         "price": 11000,
         "deepNightPrice": null,
         "skill": "突刺",
-        "affix": "提升双手共持时的攻击力+10%",
+        "affix": "提升双手共持时的攻击力+15%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "19号",
@@ -5094,9 +5775,9 @@
         "price": 15000,
         "deepNightPrice": 18000,
         "skill": "坠落震击",
-        "affix": "强化蓄力攻击+9%",
-        "deepNightAffix": "提升物理攻击力+6%\n蓄力攻击命中时，提升减伤率+40%\n血量没有全满时，累积猩红腐败量表+1",
-        "highlight": "重要被动 核心"
+        "affix": "强化蓄力攻击+19%",
+        "deepNightAffix": "提升物理攻击力+8%\n蓄力攻击命中时，提升减伤率+40%\n血量没有全满时，累积猩红腐败量表-1",
+        "highlight": "蓄减/增伤词条"
       },
       {
         "merchantNo": "19号",
@@ -5124,15 +5805,39 @@
       },
       {
         "merchantNo": "19号",
+        "name": "尊腐骑士剑",
+        "affinity": null,
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "猎犬步伐",
+        "affix": "提升火属性减伤率+16%",
+        "deepNightAffix": null,
+        "highlight": null
+      },
+      {
+        "merchantNo": "19号",
+        "name": "晨星锤",
+        "affinity": "寒冷",
+        "type": "槌",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "寒气冻雾",
+        "affix": "血量偏低时，提升减伤率+23%",
+        "deepNightAffix": null,
+        "highlight": "蓝泪"
+      },
+      {
+        "merchantNo": "19号",
         "name": "克雷普的黑键",
         "affinity": null,
         "type": "弩",
         "price": 10000,
         "deepNightPrice": null,
         "skill": "踢击",
-        "affix": "血量偏低时，提升减伤率+38%",
+        "affix": "血量偏低时，提升减伤率+30%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "蓝泪"
       },
       {
         "merchantNo": "19号",
@@ -5144,7 +5849,7 @@
         "skill": "魔法辉剑/巨剑阵",
         "affix": "血量偏低时，提升攻击力+17%",
         "deepNightAffix": null,
-        "highlight": "重要被动 核心"
+        "highlight": null
       },
       {
         "merchantNo": "19号",
@@ -5156,7 +5861,19 @@
         "skill": "兽石/兽爪",
         "affix": "咏唱魔法、祷告时，提升减伤率+24%",
         "deepNightAffix": null,
-        "highlight": "核心"
+        "highlight": "祷告"
+      },
+      {
+        "merchantNo": "19号",
+        "name": "结冰针",
+        "affinity": "寒冷",
+        "type": "刺剑",
+        "price": 42000,
+        "deepNightPrice": 50000,
+        "skill": "冻霜踏地",
+        "affix": null,
+        "deepNightAffix": "强化突刺反击+15%\n血量全满时，提升减伤率+40%\n增加因异常受到的损伤+35%",
+        "highlight": "满减"
       },
       {
         "merchantNo": "19号",
@@ -5168,7 +5885,7 @@
         "skill": "黄金刀刃",
         "affix": "血量全满时，提升减伤率+40%",
         "deepNightAffix": "蓄力攻击时，喷洒黑焰\n攻击时，恢复专注值+3\n降低血量上限-6%",
-        "highlight": "重要被动 核心"
+        "highlight": "发射器"
       },
       {
         "merchantNo": "19号",
@@ -5180,7 +5897,7 @@
         "skill": "归于麾下",
         "affix": "攻击时，恢复血量+8",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "buff"
       },
       {
         "merchantNo": "19号",
@@ -5191,8 +5908,8 @@
         "deepNightPrice": 45000,
         "skill": "盾牌冲击",
         "affix": "提升圣属性减伤率+20%",
-        "deepNightAffix": "提升属性攻击力+8%\n提升雷属性攻击力+12%\n闪避后的当下，受伤时损伤加剧-15%",
-        "highlight": null
+        "deepNightAffix": "提升属性减伤率+9%\n提升雷属性攻击力+12%\n闪避后的当下，受伤时损伤加剧-15%",
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "20号",
@@ -5204,7 +5921,7 @@
         "skill": "雷击斩",
         "affix": "提升魔力属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "雷武器/增伤词条"
       },
       {
         "merchantNo": "20号",
@@ -5228,7 +5945,7 @@
         "skill": "炎击",
         "affix": "提升火属性攻击力+9%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "20号",
@@ -5248,11 +5965,11 @@
         "affinity": null,
         "type": "弩",
         "price": 10000,
-        "deepNightPrice": 13000,
+        "deepNightPrice": null,
         "skill": "踢击",
         "affix": "急速冲刺时，喷出熔岩",
-        "deepNightAffix": "强化射击+10%\n打倒多名敌人时，召唤怨魂\n降低精力上限-5%",
-        "highlight": "重要被动"
+        "deepNightAffix": null,
+        "highlight": null
       },
       {
         "merchantNo": "20号",
@@ -5260,10 +5977,10 @@
         "affinity": null,
         "type": "弩炮",
         "price": 12000,
-        "deepNightPrice": null,
+        "deepNightPrice": 15000,
         "skill": "踢击",
         "affix": "提升观察力+30",
-        "deepNightAffix": null,
+        "deepNightAffix": "强化射击+10%\n打倒多名敌人时，召唤怨魂\n降低精力上限-5%",
         "highlight": null
       },
       {
@@ -5276,7 +5993,7 @@
         "skill": "辉石魔砾/旋飞魔砾",
         "affix": "血量全满时，提升攻击力+10%",
         "deepNightAffix": null,
-        "highlight": "重要被动"
+        "highlight": "魔法/增伤词条"
       },
       {
         "merchantNo": "20号",
@@ -5288,7 +6005,43 @@
         "skill": "雷电枪/古龙雷击",
         "affix": "缩短魔法、祷告的咏唱时间+1",
         "deepNightAffix": null,
+        "highlight": "雷武器/祷告"
+      },
+      {
+        "merchantNo": "20号",
+        "name": "石槌",
+        "affinity": "雷电",
+        "type": "槌",
+        "price": 11000,
+        "deepNightPrice": null,
+        "skill": "雷击斩",
+        "affix": "血量偏低时，提升攻击力+17%",
+        "deepNightAffix": null,
+        "highlight": "雷武器"
+      },
+      {
+        "merchantNo": "20号",
+        "name": "尊腐骑士剑",
+        "affinity": null,
+        "type": "刺剑",
+        "price": 10000,
+        "deepNightPrice": null,
+        "skill": "猎犬步伐",
+        "affix": "提升火属性减伤率+16%",
+        "deepNightAffix": null,
         "highlight": null
+      },
+      {
+        "merchantNo": "20号",
+        "name": "百智权杖",
+        "affinity": null,
+        "type": "槌",
+        "price": 42000,
+        "deepNightPrice": 45000,
+        "skill": "百智的世界",
+        "affix": null,
+        "deepNightAffix": "提升专注值上限9%\n一定时间间隔内，形成大量辉剑\n濒死时，降低血量上限15%",
+        "highlight": "buff"
       },
       {
         "merchantNo": "20号",
@@ -5299,12 +6052,12 @@
         "deepNightPrice": 45000,
         "skill": "逆刺血刃",
         "affix": "受到损伤时，提升减伤率+36%",
-        "deepNightAffix": "打倒敌人时，增加获得的卢恩+6%\n提升战技攻击力+11%\n精力偏少时，降低减伤率-10%",
-        "highlight": "重要被动 核心"
+        "deepNightAffix": "打倒敌人时，增加获得的卢恩+6%\n提升战技攻击力+21%\n精力偏少时，降低减伤率-10%",
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "20号",
-        "name": "奥陶琵斯大剑",
+        "name": "奥陶琵斯的大剑",
         "affinity": null,
         "type": "大剑",
         "price": 42000,
@@ -5312,7 +6065,7 @@
         "skill": "奥陶琵斯的漩涡",
         "affix": "一定时间间隔内，形成多支辉剑",
         "deepNightAffix": "蓄力攻击时，释放圣属性冲击波\n血量全满时，提升攻击力+14%\n被黑夜雨淋到的损伤加剧+150%",
-        "highlight": "重要被动 核心"
+        "highlight": "发射器/增伤词条"
       },
       {
         "merchantNo": "20号",
@@ -5322,9 +6075,9 @@
         "price": 42000,
         "deepNightPrice": null,
         "skill": "黄金式奉还",
-        "affix": "血量偏低时，提升减伤率+48%",
+        "affix": "血量偏低时，提升减伤率+37%",
         "deepNightAffix": null,
-        "highlight": null
+        "highlight": "蓝泪"
       }
     ]
   },
