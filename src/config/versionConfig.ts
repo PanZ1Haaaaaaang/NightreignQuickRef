@@ -14,12 +14,15 @@ export interface VersionInfo {
   regulationVersion: string;
   /** 更新公告日期 */
   releaseDate: string;
+  /** 本次版本对应的官方公告 id（src/data/news/<id>.json），用于首页「更新公告」定位 */
+  newsId: string;
 }
 
 export const NIGHTREIGN_VERSION: VersionInfo = {
   appVersion: '1.03.4',
   regulationVersion: '1.03.5',
   releaseDate: '2026.09.18',
+  newsId: '260918_1',
 };
 
 export const getVersionDisplayText = (): string => {

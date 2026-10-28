@@ -1,0 +1,79 @@
+{
+  "id": "260331_1",
+  "date": "2026.03.31",
+  "category": "regulation",
+  "title": "レギュレーションファイル配信のお知らせ",
+  "sourceUrl": "https://nightreign.eldenring.jp/article/260331_1.html",
+  "lang": "ja",
+  "blocks": [
+    {
+      "type": "p",
+      "text": "ゲームの不具合修正のためのレギュレーションファイルを配信しました。"
+    },
+    {
+      "type": "p",
+      "text": "お手数ですが、最新のレギュレーションを適用したうえでお楽しみください。"
+    },
+    {
+      "type": "subsection",
+      "text": "本レギュレーションを適用した際のバージョン表記"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "バージョン表記はタイトル画面で確認できます"
+      ]
+    },
+    {
+      "type": "kv",
+      "items": [
+        {
+          "label": "App Ver.",
+          "value": "1.03.2"
+        },
+        {
+          "label": "Regulation Ver.",
+          "value": "1.03.5"
+        }
+      ]
+    },
+    {
+      "type": "subsection",
+      "text": "対象プラットフォーム"
+    },
+    {
+      "type": "label",
+      "text": "PlayStation 5 / PlayStation 4 / Xbox Series X|S / Xbox One / Steam"
+    },
+    {
+      "type": "section",
+      "text": "本アップデートに含まれる項目"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "マルチプレイ中において、特定のアクションを連続で使用し続けると、ゲームの動作が重くなる場合がある不具合を修正"
+      ]
+    },
+    {
+      "type": "p",
+      "text": "オンラインプレイには、本レギュレーションの適用が必要となります。"
+    },
+    {
+      "type": "p",
+      "text": "PS5、PS4、XSX|S、XboxOneにおいては、最新のレギュレーションを取得するためにタイトル画面でゲームサーバーへの接続が必要です。"
+    },
+    {
+      "type": "p",
+      "text": "タイトル画面の右下に「OFFLINE」と表記されている場合は、タイトルメニューから「LOGIN」を選択してください。"
+    },
+    {
+      "type": "p",
+      "text": "Steamにおいては、アップデートファイルのダウンロード完了後に再度ゲームを起動して、アップデートを適用してください。"
+    },
+    {
+      "type": "p",
+      "text": "より快適に『ELDEN RING NIGHTREIGN』のゲームプレイを楽しんでいただけるよう、今後も改善を進めて参りますので、引き続きどうぞよろしくお願いいたします。"
+    }
+  ]
+}

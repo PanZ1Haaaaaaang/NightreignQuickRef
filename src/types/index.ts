@@ -99,6 +99,60 @@ export interface CharacterData {
   location: string;
 }
 
+// ===== 官方更新公告（src/data/news/） =====
+
+/** 公告分类：更新文件 / 规则文件 / DLC / 其他通知 */
+export type NewsCategory = 'update' | 'regulation' | 'dlc' | 'notice';
+
+/**
+ * 公告正文块：按官网原文的段落结构逐块录入（保留原文，不做二次改写），
+ * 后续加翻译时按块对应即可。
+ * - section：原文 h1 级大标题
+ * - subsection：原文 h2/h3/h4 级小标题
+ * - label：原文里加粗的独立行（角色名、対象プラットフォーム等）
+ * - p：正文段落
+ * - ul：列表（items 里的对象形式表示带缩进子项）
+ * - kv：键值行（如 App Ver. 1.03.4）
+ * - image：原文配图（直接引用官网图床，懒加载）
+ */
+export type NewsListItem = string | { text: string; sub: string[]; tail?: string };
+
+export type NewsBlock =
+  | { type: 'section'; text: string }
+  | { type: 'subsection'; text: string }
+  | { type: 'label'; text: string }
+  | { type: 'p'; text: string }
+  | { type: 'ul'; items: NewsListItem[] }
+  | { type: 'kv'; items: Array<{ label: string; value: string }> }
+  | { type: 'image'; src: string; alt?: string };
+
+/** 公告索引项（列表页只要这些字段，正文按需单独加载） */
+export interface NewsAnnouncementMeta {
+  /** 文件名，对应 src/data/news/<id>.json，如 "260918_1" */
+  id: string;
+  /** 发布日期，格式 YYYY.MM.DD */
+  date: string;
+  category: NewsCategory;
+  /** 原文标题 */
+  title: string;
+}
+
+/** src/data/news/index.json */
+export interface NewsIndexData {
+  /** 官方公告列表页 */
+  source: string;
+  announcements: NewsAnnouncementMeta[];
+}
+
+/** 单篇公告正文 */
+export interface NewsArticle extends NewsAnnouncementMeta {
+  /** 官网原文链接 */
+  sourceUrl: string;
+  /** 原文语言，如 "ja" */
+  lang?: string;
+  blocks: NewsBlock[];
+}
+
 // 词条类型颜色映射
 export const typeColorMap: Record<string, string> = {
   // 局外词条

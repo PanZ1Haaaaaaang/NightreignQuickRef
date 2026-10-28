@@ -13,10 +13,11 @@ import {
   BilibiliOutlined,
   LinkOutlined,
 } from '@ant-design/icons';
-import { getVersionDisplayText, getVersionNumber } from '../config/versionConfig';
+import { getVersionDisplayText /*getVersionNumber*/ } from '../config/versionConfig';
 import { DATA_SOURCE_CONFIG } from '../config/dataSourceConfig';
 import type { DataSourceIcon } from '../config/dataSourceConfig';
 import { SITE_CONFIG } from '../config/siteConfig';
+import NewsEntry from './NewsEntry';
 
 const { Title, Text } = Typography;
 
@@ -193,17 +194,7 @@ const Header: React.FC<HeaderProps> = React.memo(
                           {/* 最新更新 */}
                           <div style={{ marginBottom: '8px' }}>
                             <div style={{ fontWeight: 'bold', color: '#1890ff', marginBottom: '4px' }}>✅ 最新更新</div>
-                            <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                              • 升级代码依赖、优化架构；
-                              <br />• 修正了部分词条与夜王数据，同步{getVersionNumber()}版本；
-                              <br />• 添加了DLC角色详细数据；
-                              <br />• 添加了武器战技与魔法祷告数据（数据来源 by: 虚空蛋黄酱）；
-                              <br />• 添加了大空洞野生Boss与特殊事件效果；
-                              <br />• 添加了夜王深夜模式的倍率；
-                              <br />• 添加了商人货物数据与大空洞传说商人对应表（数据来源 by: 小辛、小黑盒社区）；
-                              <br />• 商人货物数据更新至 v1.03.4 DLC版（by 小辛）；
-                              <br />• 添加了敌人种族说明（种族表、特攻武器与特攻效果）（数据来源 by: 小辛）；
-                            </div>
+                            <div style={{ marginLeft: '12px', marginBottom: '2px' }}>• 新增官方更新公告；</div>
                           </div>
 
                           <div
@@ -226,7 +217,7 @@ const Header: React.FC<HeaderProps> = React.memo(
                               <br />• 仇恨机制
                               <br />• 潜在能力池概率
                               <br />• 野外Boss的tag修正
-                              <br />• 补充官网更新公告
+                              <br />• 翻译官网更新公告
                             </div>
                           </div>
                         </div>
@@ -304,9 +295,12 @@ const Header: React.FC<HeaderProps> = React.memo(
             黑夜君临速查手册
           </Title>
           <Space orientation="vertical" size="small" className="subtitle">
-            <Text type="secondary" className="subtitle-text version-info">
-              {getVersionDisplayText()}
-            </Text>
+            <span className="version-line">
+              <Text type="secondary" className="subtitle-text version-info">
+                {getVersionDisplayText()}
+              </Text>
+              <NewsEntry />
+            </span>
             <Text type="secondary" className="subtitle-text">
               个人收集/整理的黑夜君临数据、机制速查网页，可快速检索条目信息，后续会添加更多内容
             </Text>

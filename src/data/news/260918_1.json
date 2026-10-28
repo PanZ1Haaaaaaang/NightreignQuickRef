@@ -1,0 +1,79 @@
+{
+  "id": "260918_1",
+  "date": "2026.09.18",
+  "category": "update",
+  "title": "アップデートファイル配信のお知らせ",
+  "sourceUrl": "https://nightreign.eldenring.jp/article/260918_1.html",
+  "lang": "ja",
+  "blocks": [
+    {
+      "type": "p",
+      "text": "PlayStation 4およびPlayStation 5版において、アップデートファイルを配信しました。"
+    },
+    {
+      "type": "p",
+      "text": "お手数ですが、最新のアップデートファイルを適用したうえでお楽しみください。"
+    },
+    {
+      "type": "subsection",
+      "text": "本アップデートを適用した際のバージョン表記"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "バージョン表記はタイトル画面で確認できます"
+      ]
+    },
+    {
+      "type": "kv",
+      "items": [
+        {
+          "label": "App Ver.",
+          "value": "1.03.4"
+        },
+        {
+          "label": "Regulation Ver.",
+          "value": "1.03.5"
+        }
+      ]
+    },
+    {
+      "type": "subsection",
+      "text": "対象プラットフォーム"
+    },
+    {
+      "type": "label",
+      "text": "PlayStation 4 / PlayStation 5"
+    },
+    {
+      "type": "section",
+      "text": "本アップデートに含まれる項目"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "ネットワーク機能におけるセキュリティを強化"
+      ]
+    },
+    {
+      "type": "p",
+      "text": "オンラインプレイには、本アップデートの適用が必要となります。"
+    },
+    {
+      "type": "p",
+      "text": "アップデートファイルのダウンロード完了後に再度ゲームを起動して、アップデートを適用した上でお楽しみください。"
+    },
+    {
+      "type": "p",
+      "text": "また、最新のレギュレーションを取得するにはタイトル画面でゲームサーバーへの接続を行う必要があります。"
+    },
+    {
+      "type": "p",
+      "text": "タイトル画面の右下に「OFFLINE」と表記されている場合は、タイトルメニューから「LOGIN」を選択してください。"
+    },
+    {
+      "type": "p",
+      "text": "より快適に『ELDEN RING NIGHTREIGN』のゲームプレイを楽しんでいただけるよう、今後も改善を進めて参りますので、引き続きどうぞよろしくお願いいたします。"
+    }
+  ]
+}

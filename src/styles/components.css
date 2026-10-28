@@ -287,6 +287,214 @@ body[tomato-theme='dark'] #giscus-comments {
   color: var(--color-primary-600);
 }
 
+/* ===== 官方更新公告（首页入口 + 抽屉） ===== */
+.version-line {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
+
+.news-entry-btn.ant-btn {
+  height: auto;
+  padding: 0 2px;
+  color: var(--geekblue-6) !important;
+  font-size: calc(var(--font-size-sm) - 1px);
+  line-height: 1.4;
+}
+
+.news-entry-btn.ant-btn:hover {
+  color: var(--color-primary-400) !important;
+  background: transparent !important;
+}
+
+[data-theme='dark'] .news-entry-btn.ant-btn {
+  color: var(--color-primary-300) !important;
+}
+
+[data-theme='dark'] .news-entry-btn.ant-btn:hover {
+  color: var(--color-primary-200) !important;
+}
+
+.news-loading {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-2xl) 0;
+}
+
+.news-article-head {
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.news-article-date {
+  color: var(--geekblue-6) !important;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.news-article-title.ant-typography {
+  margin: var(--spacing-sm) 0 0;
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+.news-article-body {
+  padding-top: var(--spacing-md);
+}
+
+.news-block-section.ant-typography {
+  margin: var(--spacing-lg) 0 var(--spacing-sm);
+  padding-left: 10px;
+  border-left: 3px solid var(--color-primary-400);
+  font-size: var(--font-size-md);
+}
+
+.news-block-section.ant-typography:first-child {
+  margin-top: 0;
+}
+
+.news-block-subsection.ant-typography {
+  margin: var(--spacing-md) 0 var(--spacing-xs);
+  color: var(--color-title-secondary);
+  font-size: 15px;
+}
+
+.news-block-paragraph.ant-typography {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  line-height: 1.9;
+}
+
+.news-block-label {
+  margin: 12px 0 4px;
+  color: var(--theme-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.7;
+}
+
+.news-block-list {
+  margin: 0 0 var(--spacing-md);
+  padding-left: 20px;
+  font-size: var(--font-size-sm);
+  line-height: 1.9;
+}
+
+.news-block-list > li {
+  white-space: pre-line;
+}
+
+.news-block-sublist {
+  margin: 2px 0 6px;
+  padding-left: 18px;
+  color: var(--theme-text-secondary);
+  font-size: var(--font-size-xs);
+  line-height: 1.8;
+  list-style: circle;
+}
+
+.news-block-sublist > li {
+  white-space: pre-line;
+}
+
+.news-block-list-tail {
+  margin-top: 4px;
+  white-space: pre-line;
+}
+
+.news-block-image {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  margin: var(--spacing-sm) 0 var(--spacing-md);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-md);
+}
+
+.news-block-kv {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 0 var(--spacing-md);
+  padding-left: var(--spacing-md);
+  font-size: var(--font-size-sm);
+}
+
+.news-kv-label {
+  margin-right: 6px;
+  color: var(--theme-text-secondary);
+}
+
+.news-kv-value {
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.news-article-footer {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-sm);
+  border-top: 1px dashed var(--theme-border);
+  font-size: var(--font-size-xs);
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.news-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 10px 12px;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.news-list-item:hover {
+  border-color: var(--color-primary-300);
+  background: rgba(47, 84, 235, 0.04);
+}
+
+.news-list-item.is-active {
+  border-color: var(--color-primary-400);
+  background: rgba(47, 84, 235, 0.08);
+}
+
+[data-theme='dark'] .news-list-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme='dark'] .news-list-item.is-active {
+  background: rgba(89, 126, 247, 0.16);
+}
+
+.news-list-date {
+  flex: none;
+  color: var(--geekblue-6);
+  font-size: var(--font-size-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.news-list-title {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.news-list-tag {
+  flex: none;
+  margin-inline-end: 0;
+}
+
 /* ===== 标签页组件 ===== */
 .steps-container {
   max-width: 1300px;
