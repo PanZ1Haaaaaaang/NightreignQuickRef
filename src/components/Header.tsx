@@ -224,6 +224,7 @@ const Header: React.FC<HeaderProps> = React.memo(
                               <br />• 泪滴转职
                               <br />• 夜王弱点硬直
                               <br />• 仇恨机制
+                              <br />• 潜在能力池概率
                               <br />• 野外Boss的tag修正
                               <br />• 补充官网更新公告
                             </div>

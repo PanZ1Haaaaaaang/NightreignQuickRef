@@ -18,6 +18,18 @@
         "explanation": "可自选复制一把武器（不甘武器无法复制）"
     },
     {
+        "entry_id": "-",
+        "entry_name": "癫火现踪",
+        "entry_type":"特殊事件",
+        "explanation": "一定范围内，持续累积发狂量表；\n击杀所有癫火之民后，事件结束，获得两个潜在能力：\n  · 癫火圣印记；维克的战矛；紫色武器；\n  · 3个蓝色局内buff选1"
+    },
+    {
+        "entry_id": "-",
+        "entry_name": "出现新的黑夜威胁",
+        "entry_type":"特殊事件",
+        "explanation": "击败第二夜夜晚Boss后，额外追加一位第二夜夜晚Boss"
+    },
+    {
         "entry_id": "8970010",
         "entry_name": "智慧的汇集",
         "entry_type":"特殊事件",
@@ -112,6 +124,12 @@
         "entry_name": "大卢恩的虚像",
         "entry_type":"特殊地形：大空洞",
         "explanation": "【BUFF】加快绝招量表的自然累积速度；此外，战斗结束后，会额外获得暗痕（每次自然累积多获得总量表的1%，额外获得2000暗痕）"
+    },
+    {
+        "entry_id": "-",
+        "entry_name": "大教堂武器复制",
+        "entry_type":"特殊地形：大空洞",
+        "explanation": "可自选复制一把武器（不甘武器无法复制）"
     },
     {
         "entry_id": "-",
