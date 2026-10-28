@@ -6108,7 +6108,13 @@
           "effect": "打倒多名敌人时，形成黄金冲击波",
           "highlighted": false
         }
-      ]
+      ],
+      "merchantNos": [
+        3,
+        10,
+        17
+      ],
+      "tag": "剑骸"
     },
     {
       "smallWeapons": [
@@ -6132,7 +6138,13 @@
           "effect": "强化致命一击+24%",
           "highlighted": false
         }
-      ]
+      ],
+      "merchantNos": [
+        6,
+        13,
+        20
+      ],
+      "tag": "玛雷"
     },
     {
       "smallWeapons": [
@@ -6161,6 +6173,11 @@
           "effect": "强化魔法+11%",
           "highlighted": false
         }
+      ],
+      "merchantNos": [
+        4,
+        11,
+        18
       ]
     },
     {
@@ -6190,6 +6207,11 @@
           "effect": "减少魔法、祷告专注值消耗-20%",
           "highlighted": false
         }
+      ],
+      "merchantNos": [
+        5,
+        12,
+        19
       ]
     },
     {
@@ -6219,6 +6241,11 @@
           "effect": "提升战技攻击力+21%",
           "highlighted": false
         }
+      ],
+      "merchantNos": [
+        1,
+        8,
+        15
       ]
     },
     {
@@ -6248,6 +6275,11 @@
           "effect": "减少战技专注值消耗-24%",
           "highlighted": false
         }
+      ],
+      "merchantNos": [
+        0,
+        7,
+        14
       ]
     },
     {
@@ -6277,6 +6309,11 @@
           "effect": "攻击命中时，恢复专注值",
           "highlighted": false
         }
+      ],
+      "merchantNos": [
+        2,
+        9,
+        16
       ]
     }
   ]
