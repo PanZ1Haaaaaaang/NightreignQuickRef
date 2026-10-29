@@ -194,7 +194,9 @@ const Header: React.FC<HeaderProps> = React.memo(
                           {/* 最新更新 */}
                           <div style={{ marginBottom: '8px' }}>
                             <div style={{ fontWeight: 'bold', color: '#1890ff', marginBottom: '4px' }}>✅ 最新更新</div>
-                            <div style={{ marginLeft: '12px', marginBottom: '2px' }}>• 新增官方更新公告；</div>
+                            <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
+                              • 新增官方更新公告以及翻译内容；
+                            </div>
                           </div>
 
                           <div
@@ -217,7 +219,6 @@ const Header: React.FC<HeaderProps> = React.memo(
                               <br />• 仇恨机制
                               <br />• 潜在能力池概率
                               <br />• 野外Boss的tag修正
-                              <br />• 翻译官网更新公告
                             </div>
                           </div>
                         </div>

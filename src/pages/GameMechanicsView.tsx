@@ -593,7 +593,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               align: 'left',
                             },
                             {
-                              title: 'Day 1 失败',
+                              title: 'Day 1 落败',
                               dataIndex: 'firstDayLoss',
                               key: 'firstDayLoss',
                               width: '20%',
@@ -603,7 +603,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               ),
                             },
                             {
-                              title: 'Day 2 失败',
+                              title: 'Day 2 落败',
                               dataIndex: 'secondDayLoss',
                               key: 'secondDayLoss',
                               width: '20%',
@@ -613,7 +613,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               ),
                             },
                             {
-                              title: 'Day 3 失败',
+                              title: 'Day 3 落败',
                               dataIndex: 'finalDayLoss',
                               key: 'finalDayLoss',
                               width: '20%',
@@ -698,7 +698,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                               align: 'left',
                             },
                             {
-                              title: '失败时修正',
+                              title: '落败时修正',
                               dataIndex: 'lossModifier',
                               key: 'lossModifier',
                               width: '15%',

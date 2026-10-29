@@ -153,6 +153,26 @@ export interface NewsArticle extends NewsAnnouncementMeta {
   blocks: NewsBlock[];
 }
 
+/**
+ * 公告译文正文（src/data/news/zh-CN/<id>.json）。
+ * 结构与原文 blocks 完全一致（同顺序、同类型），只把文案换成中文；
+ * 渲染器不区分原文/译文，直接按 blocks 渲染。标题不放在这里，见 NewsTitleMap。
+ */
+export interface NewsTranslation {
+  /** 译者/校对署名（可选，会显示在文章头部） */
+  translator?: string;
+  blocks: NewsBlock[];
+}
+
+/**
+ * src/data/news/zh-CN/index.json：
+ * 公告 id → 中文标题。列表页只加载这一份小文件就能显示中文标题，
+ * 不用为了标题把 20 篇正文都拉下来；没有条目的公告回退显示原文标题。
+ */
+export interface NewsTitleMap {
+  titles: Record<string, string>;
+}
+
 // 词条类型颜色映射
 export const typeColorMap: Record<string, string> = {
   // 局外词条

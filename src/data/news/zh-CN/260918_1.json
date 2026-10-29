@@ -1,0 +1,73 @@
+{
+  "blocks": [
+    {
+      "type": "p",
+      "text": "已于 PlayStation 4 及 PlayStation 5 版发布游戏更新档。"
+    },
+    {
+      "type": "p",
+      "text": "请将游戏更新至最新版本后再行游玩。"
+    },
+    {
+      "type": "subsection",
+      "text": "更新此版本后的版本标示"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "※可以在首页画面确认版本标示"
+      ]
+    },
+    {
+      "type": "kv",
+      "items": [
+        {
+          "label": "App Ver.",
+          "value": "1.03.4"
+        },
+        {
+          "label": "Regulation Ver.",
+          "value": "1.03.5"
+        }
+      ]
+    },
+    {
+      "type": "subsection",
+      "text": "适用平台"
+    },
+    {
+      "type": "label",
+      "text": "PlayStation 4 / PlayStation 5"
+    },
+    {
+      "type": "section",
+      "text": "更新档主要更新内容"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "强化网络功能的安全性"
+      ]
+    },
+    {
+      "type": "p",
+      "text": "若要使用联机游玩功能，需将游戏更新至最新版本。"
+    },
+    {
+      "type": "p",
+      "text": "更新版本完毕后，请重新启动游戏再行游玩。"
+    },
+    {
+      "type": "p",
+      "text": "此外，若要获取最新的规则数据，需在首页画面连接游戏服务器。"
+    },
+    {
+      "type": "p",
+      "text": "当首页画面右下方显示“脱机模式”时，请从首页菜单选择“登录”。"
+    },
+    {
+      "type": "p",
+      "text": "为使玩家能拥有更加良好的游戏体验，我们将持续改善。请继续支持《艾尔登法环 黑夜君临》。"
+    }
+  ]
+}

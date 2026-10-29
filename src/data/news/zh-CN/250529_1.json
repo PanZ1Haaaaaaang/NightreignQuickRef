@@ -1,0 +1,75 @@
+{
+  "blocks": [
+    {
+      "type": "p",
+      "text": "为改善游戏游玩的稳定性，我们将发布更新档。"
+    },
+    {
+      "type": "p",
+      "text": "请将游戏更新至最新版本后再行游玩。"
+    },
+    {
+      "type": "p",
+      "text": "套用本更新档后，首页画面右下角的版本标示如下。"
+    },
+    {
+      "type": "kv",
+      "items": [
+        {
+          "label": "App Ver.",
+          "value": "1.01"
+        },
+        {
+          "label": "Regulation Ver.",
+          "value": "1.01.1"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "src": "https://media.fromsoftware.jp/nightreign/resources/images/article/250529_1/pc/01.jpg",
+      "alt": ""
+    },
+    {
+      "type": "ul",
+      "items": [
+        "适用平台\nPlayStation 4 / PlayStation 5 / Xbox One / Xbox Series X|S / Steam"
+      ]
+    },
+    {
+      "type": "section",
+      "text": "最新更新档包含的主要项目"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "提升操作角色的操作性",
+        "追加与调整 BGM",
+        "调整文本",
+        "调整平衡",
+        "追加角色剧情",
+        "修正异常状况"
+      ]
+    },
+    {
+      "type": "section",
+      "text": "PC 版的问题排查"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "在 PC 版若发生游戏无法启动等异常状况，可尝试在 Steam 的“库”中右键点击《ELDEN RING NIGHTREIGN》＞选择“属性”＞选择“已安装文件”＞执行“验证游戏文件的完整性”，有时可借此解决。"
+      ]
+    },
+    {
+      "type": "ul",
+      "items": [
+        "已确认在使用部分最新显卡的 PC 配置上，会出现帧率显著下降的现象，目前正在调查原因。若帧率显著下降，可将画质设置从默认的“高”调为“中”或“低”，并降低画面分辨率，有时可借此解决。另外，请将显卡驱动保持在最新状态游玩。给符合上述情况的玩家带来困扰，敬请谅解。"
+      ]
+    },
+    {
+      "type": "p",
+      "text": "感谢您的理解与支持。"
+    }
+  ]
+}

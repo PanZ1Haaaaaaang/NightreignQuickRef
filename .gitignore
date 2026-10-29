@@ -53,3 +53,4 @@ coverage
 # AI
 AGENTS.md
 /.dsh/
+/.workbuddy/

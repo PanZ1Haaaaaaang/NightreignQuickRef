@@ -328,6 +328,14 @@ body[tomato-theme='dark'] #giscus-comments {
   border-bottom: 1px solid var(--theme-border);
 }
 
+.news-article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
 .news-article-date {
   color: var(--geekblue-6) !important;
   font-size: var(--font-size-xs);

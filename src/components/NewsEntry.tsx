@@ -1,9 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { Badge, Button, Drawer, Empty, Space, Spin, Tag, Typography } from 'antd';
+import { Badge, Button, Drawer, Empty, Segmented, Space, Spin, Tag, Typography } from 'antd';
 import { ArrowLeftOutlined, LinkOutlined, NotificationOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { NIGHTREIGN_VERSION } from '../config/versionConfig';
-import { loadNewsArticle, loadNewsIndex } from '../utils/newsLoader';
-import type { NewsAnnouncementMeta, NewsArticle, NewsBlock, NewsCategory } from '../types';
+import {
+  hasNewsTranslation,
+  loadNewsArticle,
+  loadNewsIndex,
+  loadNewsTitleMap,
+  loadNewsTranslation,
+} from '../utils/newsLoader';
+import type { NewsAnnouncementMeta, NewsArticle, NewsBlock, NewsCategory, NewsTranslation } from '../types';
 
 const { Paragraph, Text, Title } = Typography;
 
@@ -89,9 +95,20 @@ const renderBlock = (block: NewsBlock, index: number) => {
   }
 };
 
+/** 正文渲染所需的展示数据：原文/译文共用同一套渲染，只换 title + blocks */
+interface NewsDisplay {
+  title: string;
+  blocks: NewsBlock[];
+  /** 当前展示的语言 */
+  lang: 'ja' | 'zh-CN';
+  /** 译文署名（可选） */
+  translator?: string;
+}
+
 /**
  * 首页「更新公告」入口：版本号旁的小链接 + 抽屉。
- * 公告索引与正文都是按需加载（见 utils/newsLoader.ts），首屏不请求公告数据。
+ * 索引、正文、译文都按需加载（见 utils/newsLoader.ts），首屏不请求公告数据。
+ * 译文规则：有中文标题就默认显示译文，可切换回原文；没译文时显示原文。
  */
 const NewsEntry: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -108,6 +125,17 @@ const NewsEntry: React.FC = () => {
   const articleRequestRef = useRef(0);
   // 正文容器：切换公告/视图时把抽屉内容滚回顶部，否则会停在上一页的滚动位置
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // 中文标题表（zh-CN/index.json）：列表页只加载这一份，不拉整篇译文
+  const [titleMap, setTitleMap] = useState<Record<string, string>>({});
+  const [titleMapLoaded, setTitleMapLoaded] = useState(false);
+  // 译文正文：null 表示还没加载
+  const [translation, setTranslation] = useState<(NewsTranslation & { id: string }) | null>(null);
+  // 标题有、正文文件缺失时回退原文，并隐藏切换
+  const [translationMissingId, setTranslationMissingId] = useState<string | null>(null);
+  // 默认显示译文（有译文时），用户可切回原文
+  const [showOriginal, setShowOriginal] = useState(false);
+  const translationRequestRef = useRef(0);
 
   useEffect(() => {
     contentRef.current?.closest('.ant-drawer-body')?.scrollTo({ top: 0 });
@@ -127,6 +155,27 @@ const NewsEntry: React.FC = () => {
       .catch(() => setIndexError('公告索引加载失败，请稍后重试'));
   }, [open, announcements]);
 
+  // 中文标题表同样按需加载（文件很小，和索引一起拿）
+  useEffect(() => {
+    if (!open || titleMapLoaded) return;
+
+    let alive = true;
+    loadNewsTitleMap()
+      .then((map) => {
+        if (alive) setTitleMap(map);
+      })
+      .catch(() => {
+        // 标题表读不到就回退原文标题，不影响正文
+      })
+      .finally(() => {
+        if (alive) setTitleMapLoaded(true);
+      });
+
+    return () => {
+      alive = false;
+    };
+  }, [open, titleMapLoaded]);
+
   // 默认定位到当前版本对应的公告（无匹配则取最新一篇）
   useEffect(() => {
     if (activeId || !announcements || announcements.length === 0) return;
@@ -134,7 +183,7 @@ const NewsEntry: React.FC = () => {
     setActiveId(preferred ? preferred.id : announcements[0].id);
   }, [announcements, activeId]);
 
-  // 正文同样按需加载。
+  // 原文正文按需加载。
   // 注意：令牌每次渲染前都要 +1（包括已经命中缓存、直接 return 的分支），
   // 否则「加载 A → 切回已缓存的 B」时，A 的迟到结果会把正文写成 A，导致一直转圈。
   useEffect(() => {
@@ -153,16 +202,53 @@ const NewsEntry: React.FC = () => {
       });
   }, [activeId, article?.id]);
 
+  // 是否算“有译文”：标题表里有这条（标题是唯一入口），且正文文件没缺失
+  // 是否算“有译文”：中文标题和译文正文文件都在才启用（缺任一都显示原文，避免标题和正文对不上）
+  const translationAvailable =
+    activeId !== null &&
+    Boolean(titleMap[activeId]) &&
+    hasNewsTranslation(activeId) &&
+    translationMissingId !== activeId;
+
+  // 译文正文按需加载（开关默认就看译文，所以一进来就会加载）
+  useEffect(() => {
+    const token = ++translationRequestRef.current;
+    if (!activeId || !translationAvailable || translation?.id === activeId) return;
+
+    loadNewsTranslation(activeId)
+      .then((data) => {
+        if (token !== translationRequestRef.current) return;
+        if (!data) {
+          // 只填了中文标题、还没写正文：回退原文
+          setTranslationMissingId(activeId);
+          return;
+        }
+        setTranslation({ ...data, id: activeId });
+      })
+      .catch(() => {
+        if (token === translationRequestRef.current) setTranslationMissingId(activeId);
+      });
+  }, [activeId, translationAvailable, translation?.id]);
+
   const handleOpen = () => {
     setOpen(true);
     setUnread(false);
     // 每次从入口进来都先看正文，列表是次级入口
     setView('article');
+    // 每次进来都按“默认看译文”处理
+    setShowOriginal(false);
     try {
       localStorage.setItem(NEWS_SEEN_KEY, NIGHTREIGN_VERSION.releaseDate);
     } catch {
       // 忽略存储失败
     }
+  };
+
+  const selectArticle = (id: string) => {
+    setActiveId(id);
+    setView('article');
+    // 换一篇就回到默认（有译文看译文）
+    setShowOriginal(false);
   };
 
   const renderList = () => (
@@ -173,20 +259,16 @@ const NewsEntry: React.FC = () => {
           role="button"
           tabIndex={0}
           className={`news-list-item${item.id === activeId ? ' is-active' : ''}`}
-          onClick={() => {
-            setActiveId(item.id);
-            setView('article');
-          }}
+          onClick={() => selectArticle(item.id)}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
-              setActiveId(item.id);
-              setView('article');
+              selectArticle(item.id);
             }
           }}
         >
           <span className="news-list-date">{item.date}</span>
-          <span className="news-list-title">{item.title}</span>
+          <span className="news-list-title">{(hasNewsTranslation(item.id) && titleMap[item.id]) || item.title}</span>
           <Tag color={CATEGORY_META[item.category].color} className="news-list-tag">
             {CATEGORY_META[item.category].label}
           </Tag>
@@ -195,21 +277,40 @@ const NewsEntry: React.FC = () => {
     </div>
   );
 
-  const renderArticle = (data: NewsArticle) => (
+  const renderArticle = (meta: NewsArticle, display: NewsDisplay) => (
     <article className="news-article">
       <div className="news-article-head">
-        <Space size={8} wrap>
-          <Text className="news-article-date">{data.date}</Text>
-          <Tag color={CATEGORY_META[data.category].color}>{CATEGORY_META[data.category].label}</Tag>
-          {data.lang && <Tag variant="outlined">{data.lang === 'ja' ? '原文・日本語' : data.lang}</Tag>}
-        </Space>
+        <div className="news-article-meta">
+          <Space size={8} wrap>
+            <Text className="news-article-date">{meta.date}</Text>
+            <Tag color={CATEGORY_META[meta.category].color}>{CATEGORY_META[meta.category].label}</Tag>
+            {display.lang === 'ja' ? (
+              <Tag variant="outlined">原文・日本語</Tag>
+            ) : (
+              <Tag variant="outlined" color="blue">
+                中文译文{display.translator ? ` · ${display.translator}` : ''}
+              </Tag>
+            )}
+          </Space>
+          {translationAvailable && (
+            <Segmented
+              size="small"
+              value={display.lang === 'zh-CN' ? 'zh' : 'ja'}
+              options={[
+                { label: '中文', value: 'zh' },
+                { label: '原文', value: 'ja' },
+              ]}
+              onChange={(value) => setShowOriginal(value === 'ja')}
+            />
+          )}
+        </div>
         <Title level={3} className="news-article-title">
-          {data.title}
+          {display.title}
         </Title>
       </div>
-      <div className="news-article-body">{data.blocks.map(renderBlock)}</div>
+      <div className="news-article-body">{display.blocks.map(renderBlock)}</div>
       <div className="news-article-footer">
-        <a href={data.sourceUrl} target="_blank" rel="noopener noreferrer">
+        <a href={meta.sourceUrl} target="_blank" rel="noopener noreferrer">
           <LinkOutlined /> 前往官网查看原文
         </a>
       </div>
@@ -236,8 +337,23 @@ const NewsEntry: React.FC = () => {
     }
 
     if (articleError?.id === activeId) return <Empty description={articleError.message} />;
-    if (article && article.id === activeId) return renderArticle(article);
-    return renderSpinner();
+    if (!article || article.id !== activeId) return renderSpinner();
+
+    // 有译文且没手动切回原文：先确保译文已就绪，未就绪时转圈（加载失败会回退原文）
+    const useTranslation = translationAvailable && !showOriginal;
+    const translationReady = translation !== null && translation.id === activeId;
+    if (useTranslation && !translationReady) return renderSpinner();
+
+    if (useTranslation && translationReady) {
+      return renderArticle(article, {
+        title: titleMap[activeId],
+        blocks: translation.blocks,
+        lang: 'zh-CN',
+        translator: translation.translator,
+      });
+    }
+
+    return renderArticle(article, { title: article.title, blocks: article.blocks, lang: 'ja' });
   };
 
   return (

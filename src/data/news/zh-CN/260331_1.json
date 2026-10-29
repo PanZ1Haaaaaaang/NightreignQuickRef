@@ -1,0 +1,73 @@
+{
+  "blocks": [
+    {
+      "type": "p",
+      "text": "已发布用于修正游戏异常状况的规则文件。"
+    },
+    {
+      "type": "p",
+      "text": "请套用最新的规则后再行游玩。"
+    },
+    {
+      "type": "subsection",
+      "text": "套用此规则后的版本标示"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "※可以在首页画面确认版本标示"
+      ]
+    },
+    {
+      "type": "kv",
+      "items": [
+        {
+          "label": "App Ver.",
+          "value": "1.03.2"
+        },
+        {
+          "label": "Regulation Ver.",
+          "value": "1.03.5"
+        }
+      ]
+    },
+    {
+      "type": "subsection",
+      "text": "适用平台"
+    },
+    {
+      "type": "label",
+      "text": "PlayStation 5 / PlayStation 4 / Xbox Series X|S / Xbox One / Steam"
+    },
+    {
+      "type": "section",
+      "text": "更新档主要更新内容"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "修正多人联机游玩中连续使用特定动作时，游戏运行会变卡顿的异常状况"
+      ]
+    },
+    {
+      "type": "p",
+      "text": "若要使用联机游玩功能，需套用最新的规则。"
+    },
+    {
+      "type": "p",
+      "text": "在 PS5、PS4、XSX|S、XboxOne 上，为获取最新的规则，需在首页画面连接游戏服务器。"
+    },
+    {
+      "type": "p",
+      "text": "当首页画面右下方显示“脱机模式”时，请从首页菜单选择“登录”。"
+    },
+    {
+      "type": "p",
+      "text": "在 Steam 上，请在更新档下载完毕后重新启动游戏，并套用更新。"
+    },
+    {
+      "type": "p",
+      "text": "为使玩家能拥有更加良好的游戏体验，我们将持续改善。请继续支持《艾尔登法环 黑夜君临》。"
+    }
+  ]
+}
