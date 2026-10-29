@@ -196,6 +196,7 @@ const Header: React.FC<HeaderProps> = React.memo(
                             <div style={{ fontWeight: 'bold', color: '#1890ff', marginBottom: '4px' }}>✅ 最新更新</div>
                             <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
                               • 新增官方更新公告以及翻译内容；
+                              <br />• 泪滴转职
                             </div>
                           </div>
 
@@ -214,7 +215,6 @@ const Header: React.FC<HeaderProps> = React.memo(
                               <br />• 异常值说明
                               <br />• 黑焰烧血效果
                               <br />• 冲击力说明 + 救人值
-                              <br />• 泪滴转职
                               <br />• 夜王弱点硬直
                               <br />• 仇恨机制
                               <br />• 潜在能力池概率

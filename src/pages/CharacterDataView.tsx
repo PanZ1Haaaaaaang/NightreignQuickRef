@@ -8,6 +8,7 @@ import { getCurrentTheme } from '../utils/themeUtils';
 import styles from '../styles/characterDataView.module.css';
 import DataManager from '../utils/dataManager';
 import DataSourceTooltip from '../components/DataSourceTooltip';
+import TeardropConversion from './characterDataView/TeardropConversion';
 
 const { Title, Text } = Typography;
 
@@ -1305,6 +1306,9 @@ const CharacterDataView: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* 泪滴转职（属性修正） */}
+      <TeardropConversion />
 
       {/* 闪避无敌帧对比 */}
       <div id="dodge-frames">

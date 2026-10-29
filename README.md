@@ -71,6 +71,7 @@
 - [1.03.4 更新内容（Reg版本）](https://www.bilibili.com/opus/1158092104127217697)
 - [种族特攻？武器隐藏属性！夜王特殊机制分析](https://www.bilibili.com/video/BV17HWCzhEYz)
 - [黑夜君临商人表 v1.02.4 修正版v2（by 小辛）](https://www.bilibili.com/video/BV1weyMBMEN3)
+- [黑夜君临 泪滴转职属性修正一览（by 模组工艺）](https://www.bilibili.com/video/BV1EB2rBhERC)
 
 #### 其他资源
 - [黑夜君临官方网站（新闻 / 维护公告）](https://nightreign.eldenring.jp/news.html)

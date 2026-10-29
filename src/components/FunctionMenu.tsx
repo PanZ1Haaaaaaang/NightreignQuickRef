@@ -52,6 +52,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
       children: [
         { key: '角色属性数据', label: '📊 角色基础属性对比', anchorId: 'character-attributes' },
         { key: '角色详细数据', label: '📈 角色等级成长数据', anchorId: 'character-detail-data' },
+        { key: '泪滴转职', label: '💧 泪滴转职（属性修正）', anchorId: 'teardrop-conversion' },
         { key: '无敌帧长度对比', label: '⚡ 翻滚/闪避无敌帧对比', anchorId: 'dodge-frames' },
         { key: '隐士出招表', label: '🔮 隐士混合魔法出招表', anchorId: 'hermit-magic-list' },
       ],

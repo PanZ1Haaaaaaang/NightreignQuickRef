@@ -232,3 +232,55 @@ export const typeColorMap: Record<string, string> = {
   盾牌专属: 'magenta',
   弓弩专属: 'volcano',
 };
+
+// ===== 泪滴转职（src/data/zh-CN/teardrop_conversion.json） =====
+
+/** 泪滴转职词条（局外词条 6640000~6647500）：boost/reduce 为 Lv12 满值的属性增减 */
+export interface TeardropAffix {
+  /** 局外词条 id */
+  entryId: string;
+  /** 原文词条名，如「【追踪者】提升智力、信仰，但降低力气、灵巧」 */
+  name: string;
+  /** 提升的属性 → 数值 */
+  boost: Record<string, number>;
+  /** 降低的属性 → 数值（正数） */
+  reduce: Record<string, number>;
+  /** 词条原文说明（等级 1 → 12 的变化） */
+  explanation: string;
+}
+
+/** 单个渡夜者的泪滴转职数据 */
+export interface TeardropCharacter {
+  name: string;
+  /** Lv15 基础属性，key 为属性名（生命/集中/耐力/力气/灵巧/智力/信仰/感应） */
+  base: Record<string, number>;
+  /** 该角色的两条泪滴转职词条 */
+  affixes: TeardropAffix[];
+}
+
+/** 利普拉的交易（平衡律法）：强制替换的属性分配 */
+export interface TeardropLipulaOption {
+  key: string;
+  /** 如「力气变强」 */
+  name: string;
+  /** 游戏内交易选项文字 */
+  desire: string;
+  stats: Record<string, number>;
+}
+
+export interface TeardropConversionData {
+  /** 属性展示顺序 */
+  attributes: string[];
+  meta: {
+    /** 基础属性所在等级 */
+    baseLevel: number;
+    /** 词条达到满值的等级 */
+    affixMaxLevel: number;
+    sourceNote: string;
+  };
+  characters: TeardropCharacter[];
+  lipula: {
+    name: string;
+    options: TeardropLipulaOption[];
+  };
+}

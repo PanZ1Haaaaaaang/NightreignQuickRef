@@ -127,6 +127,11 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
         url: 'https://www.bilibili.com/video/BV17HWCzhEYz',
         icon: 'bilibili',
       },
+      {
+        title: '黑夜君临 泪滴转职属性修正一览（by 模组工艺）',
+        url: 'https://www.bilibili.com/video/BV1EB2rBhERC',
+        icon: 'bilibili',
+      },
     ],
   },
   {
