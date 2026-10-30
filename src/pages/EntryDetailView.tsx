@@ -10,6 +10,7 @@ import { debounce } from 'lodash';
 import { SearchOutlined } from '@ant-design/icons';
 import CustomPagination from '../components/CustomPagination';
 import { POTENTIAL_POOL_TAGS } from '../config/potentialPoolConfig';
+import { renderHintOption } from '../components/HintOption';
 
 // 自定义搜索组件接口
 interface CustomSearchProps {
@@ -1523,7 +1524,9 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   options={Object.entries(POTENTIAL_POOL_TAGS).map(([value, meta]) => ({
                     value,
                     label: meta.label,
+                    hint: meta.tip,
                   }))}
+                  optionRender={renderHintOption}
                   maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
                 />
               )}

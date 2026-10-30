@@ -9,6 +9,7 @@ import weaponArts from '../data/zh-CN/weapon_arts.json';
 import uniqueWeaponArts from '../data/zh-CN/unique_weapon_arts.json';
 import supportSpells from '../data/zh-CN/support_spells.json';
 import weaponArtCategoryHints from '../data/zh-CN/weapon_art_category_hints.json';
+import { renderHintOption } from '../components/HintOption';
 import standardDamageIcon from '../assets/Negations/standard-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
 import strikeDamageIcon from '../assets/Negations/strike-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
 import slashDamageIcon from '../assets/Negations/slash-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
@@ -218,7 +219,12 @@ const DataTable: React.FC<DataTableProps> = ({
     });
     return [...tags]
       .filter((tag) => tag !== NOT_IMPLEMENTED || showNotImplemented)
-      .map((tag) => ({ value: tag, label: tag }));
+      .map((tag) => ({
+        value: tag,
+        label: tag,
+        // 只有「战技」分类有对应的悬停说明；专用战技不需要右侧内容
+        hint: skillFilterKind === 'weaponArt' ? categoryHints[tag] : undefined,
+      }));
   }, [data, skillFilterKind, showNotImplemented]);
 
   const filteredData = useMemo(() => {
@@ -393,6 +399,7 @@ const DataTable: React.FC<DataTableProps> = ({
             allowClear
             placeholder="按分类筛选"
             options={categoryOptions}
+            optionRender={skillFilterKind === 'weaponArt' ? renderHintOption : undefined}
             value={selectedCategories}
             onChange={setSelectedCategories}
             maxTagCount="responsive"

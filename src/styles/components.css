@@ -1282,3 +1282,26 @@ body[tomato-theme='dark'] .weapon-skill-detail-panel {
   object-fit: contain;
   flex: none;
 }
+
+/* ===== 下拉选项：左文案 + 右侧灰色说明（HintOption 组件） ===== */
+.hint-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.hint-option-label {
+  min-width: 0;
+}
+
+.hint-option-hint {
+  flex: none;
+  max-width: 62%;
+  overflow: hidden;
+  color: var(--theme-text-tertiary);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
