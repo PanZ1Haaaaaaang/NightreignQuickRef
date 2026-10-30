@@ -20,6 +20,7 @@ const CharacterDataView = lazy(() => import('./pages/CharacterDataView'));
 const BossDataView = lazy(() => import('./pages/BossDataView'));
 const WeaponSkillMagicView = lazy(() => import('./pages/WeaponSkillMagicView'));
 const MerchantView = lazy(() => import('./pages/MerchantView'));
+const DropPoolView = lazy(() => import('./pages/DropPoolView'));
 
 // 懒加载占位：只占内容区，不遮挡顶部导航，避免布局跳动
 const viewLoadingStyle: React.CSSProperties = {
@@ -150,6 +151,8 @@ function App() {
         return <WeaponSkillMagicView activeSubTab={activeSubTab} />;
       case '商人数据':
         return <MerchantView activeSubTab={activeSubTab} />;
+      case '掉落池':
+        return <DropPoolView />;
       default:
         return <EntryDetailView activeSubTab={activeSubTab} />;
     }

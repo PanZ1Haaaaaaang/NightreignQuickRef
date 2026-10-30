@@ -1,0 +1,297 @@
+.title {
+  margin-bottom: 12px !important;
+}
+
+.intro {
+  margin-bottom: 16px;
+}
+
+.introDesc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+}
+
+.filterBar {
+  padding: 12px;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-lg);
+  background: var(--theme-bg-secondary);
+  margin-bottom: 8px;
+}
+
+.filterLabel {
+  color: var(--color-text-2);
+  font-size: 13px;
+}
+
+.kindDot {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.resultInfo {
+  margin-bottom: 12px;
+  color: var(--color-text-3);
+  font-size: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  padding: 12px 14px;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-lg);
+  background: var(--theme-bg-primary);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.cardHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.primary {
+  color: var(--color-text-1);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.id {
+  color: var(--color-text-3);
+  font-family: 'Consolas', 'SFMono-Regular', monospace;
+  font-size: 12px;
+}
+
+.tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.sourceTag {
+  margin: 0;
+}
+
+.names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.nameTag {
+  margin: 0;
+  padding: 0 6px;
+  font-size: 11px;
+  color: var(--color-text-2);
+  background: var(--theme-bg-tertiary);
+  border-color: transparent;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--theme-border);
+}
+
+.option:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.optionLabel {
+  flex: none;
+  min-width: 44px;
+  padding-top: 2px;
+  color: var(--color-text-3);
+  font-size: 12px;
+}
+
+.segments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.segment {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border: 1px solid var(--theme-border);
+  border-radius: 999px;
+  background: var(--theme-bg-secondary);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.percent {
+  font-variant-numeric: tabular-nums;
+}
+
+.detail {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px 6px;
+  color: var(--color-text-2);
+  font-size: 11px;
+}
+
+.detailItem::after {
+  content: '·';
+  margin-left: 6px;
+  color: var(--color-text-3);
+}
+
+.detailItem:last-child::after {
+  content: '';
+  margin-left: 0;
+}
+
+.nightBadge {
+  padding: 0 6px;
+  border-radius: 8px;
+  background: rgba(207, 19, 34, 0.12);
+  color: #cf1322;
+  font-size: 11px;
+}
+
+/* ===== 掉落类型配色（按解包物品表判定） ===== */
+.kindWeapon {
+  border-color: #91caff;
+  background: #e6f4ff;
+  color: #0958d9;
+}
+
+.kindCursed {
+  border-color: #ffa39e;
+  background: #fff1f0;
+  color: #cf1322;
+}
+
+.kindBuff {
+  border-color: #91caff;
+  background: #e6f4ff;
+  color: #0958d9;
+}
+
+.kindBuffPurple {
+  border-color: #d3adf7;
+  background: #f9f0ff;
+  color: #722ed1;
+}
+
+.kindWending {
+  border-color: #ffe58f;
+  background: #fffbe6;
+  color: #ad6800;
+}
+
+.kindAntique {
+  border-color: #ffe58f;
+  background: #fffbe6;
+  color: #ad6800;
+}
+
+.kindAccessory {
+  border-color: #87e8de;
+  background: #e6fffb;
+  color: #08979c;
+}
+
+.kindGoods,
+.kindOther {
+  border-color: var(--theme-border);
+  color: var(--color-text-2);
+}
+
+[data-theme='dark'] .kindWeapon {
+  border-color: rgba(105, 177, 255, 0.45);
+  background: rgba(22, 119, 255, 0.18);
+  color: #69b1ff;
+}
+
+[data-theme='dark'] .kindCursed {
+  border-color: rgba(255, 120, 117, 0.5);
+  background: rgba(255, 77, 79, 0.18);
+  color: #ff7875;
+}
+
+[data-theme='dark'] .kindBuff {
+  border-color: rgba(105, 177, 255, 0.45);
+  background: rgba(22, 119, 255, 0.18);
+  color: #69b1ff;
+}
+
+[data-theme='dark'] .kindBuffPurple {
+  border-color: rgba(179, 127, 235, 0.45);
+  background: rgba(114, 46, 209, 0.22);
+  color: #b37feb;
+}
+
+[data-theme='dark'] .kindWending {
+  border-color: rgba(255, 197, 61, 0.45);
+  background: rgba(250, 173, 20, 0.18);
+  color: #ffc53d;
+}
+
+[data-theme='dark'] .kindAntique {
+  border-color: rgba(255, 197, 61, 0.45);
+  background: rgba(250, 173, 20, 0.18);
+  color: #ffc53d;
+}
+
+[data-theme='dark'] .kindAccessory {
+  border-color: rgba(94, 219, 199, 0.45);
+  background: rgba(19, 194, 194, 0.18);
+  color: #5cdbd3;
+}
+
+[data-theme='dark'] .nightBadge {
+  background: rgba(255, 77, 79, 0.2);
+  color: #ff7875;
+}
+
+.pager {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.footnote {
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

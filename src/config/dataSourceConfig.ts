@@ -132,6 +132,16 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
         url: 'https://www.bilibili.com/video/BV1EB2rBhERC',
         icon: 'bilibili',
       },
+      {
+        title: '黑夜君临 BOSS精英掉落解包数据 by：Supuritto',
+        url: 'https://www.bilibili.com/opus/1088631358950998023',
+        icon: 'bilibili',
+      },
+      {
+        title: '黑夜君临DLC BOSS精英掉落数据 by：Supuritto',
+        url: 'https://www.bilibili.com/opus/1145131756809093159',
+        icon: 'bilibili',
+      },
     ],
   },
   {

@@ -1,0 +1,5306 @@
+{
+  "meta": {
+    "sourceNote": "数据来自 Smithbox 2.2.6 解包（ItemLotParam_enemy → ItemTableParam → 武器 / 潜在能力 / 遗物）；百分比为球选项内各槽位的权重占比。",
+    "states": {
+      "normal": "普通",
+      "mutation": "变异",
+      "invasion": "入侵"
+    },
+    "kinds": {
+      "weapon": "武器池",
+      "cursed": "诅咒武器池",
+      "buff": "潜在能力池",
+      "antique": "遗物池",
+      "goods": "道具池",
+      "accessory": "护符池",
+      "other": "其他池",
+      "wending": "徘徊赐福"
+    }
+  },
+  "groups": [
+    {
+      "id": "6000000",
+      "names": [
+        "小型要塞",
+        "铁处女",
+        "葛瑞克骑士"
+      ],
+      "options": [
+        {
+          "id": 6000000,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6000001,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6000010,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6000011,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6000050,
+          "segments": [
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              15,
+              "weapon"
+            ],
+            [
+              2.5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6000051,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6000052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6000100",
+      "names": [
+        "小型要塞",
+        "魔像守卫（弓）"
+      ],
+      "options": [
+        {
+          "id": 6000100,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6000101,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6000110,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6000111,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6000150,
+          "segments": [
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              15,
+              "weapon"
+            ],
+            [
+              2.5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6000151,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6000152,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6000800",
+      "names": [
+        "（魔力）小型要塞",
+        "结晶人"
+      ],
+      "options": [
+        {
+          "id": 6000800,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6000801,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6000810,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6000811,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6000850,
+          "segments": [
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              15,
+              "weapon"
+            ],
+            [
+              2.5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6000851,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6000852,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6002000",
+      "names": [
+        "大教堂",
+        "灵庙骑士",
+        "魔像守卫（斧）"
+      ],
+      "options": [
+        {
+          "id": 6002000,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6002001,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6002010,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6002011,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6002050,
+          "segments": [
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              15,
+              "weapon"
+            ],
+            [
+              2.5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6002051,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6002052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6002500",
+      "names": [
+        "（火焰）大教堂",
+        "火焰习武修士"
+      ],
+      "options": [
+        {
+          "id": 6002500,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6002501,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6002510,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6002511,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6002550,
+          "segments": [
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              15,
+              "weapon"
+            ],
+            [
+              2.5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6002551,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6002552,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6002700",
+      "names": [
+        "（神圣）大教堂",
+        "神谕众使者们"
+      ],
+      "options": [
+        {
+          "id": 6002700,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6002701,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6002710,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6002711,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6002750,
+          "segments": [
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              15,
+              "weapon"
+            ],
+            [
+              2.5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6002751,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6002752,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6010000",
+      "names": [
+        "大型营地",
+        "狮子混种",
+        "老狮子",
+        "失乡骑士们"
+      ],
+      "options": [
+        {
+          "id": 6010000,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6010001,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6010002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6010010,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6010011,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6010012,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6010050,
+          "segments": [
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              27.5,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6010051,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6010052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6010500",
+      "names": [
+        "（火焰）大型营地",
+        "红狮子骑士们",
+        "火焰战车"
+      ],
+      "options": [
+        {
+          "id": 6010500,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6010501,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6010502,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6010510,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6010511,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6010512,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6010550,
+          "segments": [
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              27.5,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6010551,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6010552,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6010600",
+      "names": [
+        "（雷电）大型营地",
+        "王城军骑士们"
+      ],
+      "options": [
+        {
+          "id": 6010600,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6010601,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6010602,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6010610,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6010611,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6010612,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6010650,
+          "segments": [
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              27.5,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6010651,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6010652,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6011500",
+      "names": [
+        "（癫火）大型营地",
+        "癫火山妖"
+      ],
+      "options": [
+        {
+          "id": 6011500,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6011501,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6011502,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6011510,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6011511,
+          "segments": [
+            [
+              95,
+              "cursed"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6011512,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6011550,
+          "segments": [
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              30,
+              "weapon"
+            ],
+            [
+              2.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              25,
+              "weapon"
+            ],
+            [
+              2.5,
+              "weapon"
+            ],
+            [
+              2.5,
+              "cursed"
+            ],
+            [
+              2.5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6011551,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6011552,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6012000",
+      "names": [
+        "遗迹、（骤死）遗迹",
+        "归树看门犬群",
+        "蚯蚓脸"
+      ],
+      "options": [
+        {
+          "id": 6012000,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012001,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6012010,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012011,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6012012,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6012050,
+          "segments": [
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              27.5,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6012051,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6012052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6012600",
+      "names": [
+        "（雷电）遗迹",
+        "法姆·亚兹拉的兽人"
+      ],
+      "options": [
+        {
+          "id": 6012600,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012601,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012602,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6012610,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012611,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6012612,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6012650,
+          "segments": [
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              27.5,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6012651,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6012652,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6012700",
+      "names": [
+        "（神圣）遗迹",
+        "白金之子"
+      ],
+      "options": [
+        {
+          "id": 6012700,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012701,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012702,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6012710,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012711,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6012712,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6012750,
+          "segments": [
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              27.5,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6012751,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6012752,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6012800",
+      "names": [
+        "（魔力）遗迹",
+        "战场魔法师们"
+      ],
+      "options": [
+        {
+          "id": 6012800,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012801,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012802,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6012810,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012811,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6012812,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6012850,
+          "segments": [
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              27.5,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6012851,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6012852,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6012900",
+      "names": [
+        "（寒冷）遗迹",
+        "萨米尔的古英雄们",
+        "白金之子射手们"
+      ],
+      "options": [
+        {
+          "id": 6012900,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012901,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012902,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6012910,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6012911,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6012912,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6012950,
+          "segments": [
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              27.5,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6012951,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6012952,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6013000",
+      "names": [
+        "（毒）遗迹",
+        "调香师",
+        "堕落调香师"
+      ],
+      "options": [
+        {
+          "id": 6013000,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6013001,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6013002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6013010,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6013011,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6013012,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6013050,
+          "segments": [
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              27.5,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6013051,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6013052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6013100",
+      "names": [
+        "（出血）遗迹",
+        "鲜血贵族（隐士约50%出罪人杖）"
+      ],
+      "options": [
+        {
+          "id": 6013100,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6013101,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6013102,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6013110,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6013111,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6013112,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6013150,
+          "segments": [
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              27.5,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6013151,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6013152,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6013400",
+      "names": [
+        "（睡眠）遗迹",
+        "卢恩熊"
+      ],
+      "options": [
+        {
+          "id": 6013400,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6013401,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6013402,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6013410,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6013411,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6013450,
+          "segments": [
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              32.5,
+              "weapon"
+            ],
+            [
+              17.5,
+              "weapon"
+            ],
+            [
+              27.5,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6013451,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6013452,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6100000",
+      "names": [
+        "野外蓝名Boss",
+        "黑刀刺客",
+        "亚人女王",
+        "黑夜骑兵",
+        "接肢贵族",
+        "王夫的红狼",
+        "老狮子",
+        "狮子混种",
+        "黄金河马",
+        "王室幽魂",
+        "米兰达之花",
+        "萨米尔的古英雄"
+      ],
+      "options": [
+        {
+          "id": 6100000,
+          "segments": [
+            [
+              30,
+              "weapon"
+            ],
+            [
+              60,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6100001,
+          "segments": [
+            [
+              95,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6100002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6100010,
+          "segments": [
+            [
+              30,
+              "weapon"
+            ],
+            [
+              60,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6100011,
+          "segments": [
+            [
+              15,
+              "cursed"
+            ],
+            [
+              85,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6100012,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6110000",
+      "names": [
+        "主城Boss，野外红名",
+        "黑刀刺客",
+        "狮子混种",
+        "王夫的红狼",
+        "王室幽魂",
+        "接肢贵族",
+        "萨米尔的古英雄",
+        "祖灵",
+        "熔岩土龙",
+        "铃珠猎人",
+        "神皮使徒",
+        "神皮贵族",
+        "腐烂树灵",
+        "大树守卫",
+        "丘陵飞龙",
+        "黄金树化身"
+      ],
+      "options": [
+        {
+          "id": 6110000,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6110001,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6110002,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6110010,
+          "segments": [
+            [
+              35,
+              "cursed"
+            ],
+            [
+              65,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6110011,
+          "segments": [
+            [
+              30,
+              "weapon"
+            ],
+            [
+              55,
+              "cursed"
+            ],
+            [
+              15,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6110012,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6110200",
+      "names": [
+        "野外红名Boss",
+        "龙装大树守卫",
+        "英雄石像鬼",
+        "罗蕾塔",
+        "死亡仪式鸟",
+        "黑剑眷属"
+      ],
+      "options": [
+        {
+          "id": 6110200,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6110201,
+          "segments": [
+            [
+              85,
+              "weapon"
+            ],
+            [
+              15,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6110202,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6110210,
+          "segments": [
+            [
+              35,
+              "cursed"
+            ],
+            [
+              65,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6110211,
+          "segments": [
+            [
+              75,
+              "cursed"
+            ],
+            [
+              25,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6110212,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6120000",
+      "names": [
+        "主城",
+        "老狮子"
+      ],
+      "options": [
+        {
+          "id": 6120000,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              55,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6120001,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6120010,
+          "segments": [
+            [
+              25,
+              "cursed"
+            ],
+            [
+              75,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6120011,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6120100",
+      "names": [
+        "主城",
+        "失乡骑士"
+      ],
+      "options": [
+        {
+          "id": 6120100,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              55,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6120101,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6120110,
+          "segments": [
+            [
+              25,
+              "cursed"
+            ],
+            [
+              75,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6120111,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6120200",
+      "names": [
+        "主城",
+        "山妖"
+      ],
+      "options": [
+        {
+          "id": 6120200,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              55,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6120201,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6120210,
+          "segments": [
+            [
+              25,
+              "cursed"
+            ],
+            [
+              75,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6120211,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6120300",
+      "names": [
+        "主城",
+        "熔炉骑士"
+      ],
+      "options": [
+        {
+          "id": 6120300,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              55,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6120301,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6120310,
+          "segments": [
+            [
+              25,
+              "cursed"
+            ],
+            [
+              75,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6120311,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6121000",
+      "names": [
+        "山顶",
+        "山顶冰龙",
+        "雪山所有冰紫武池额外加入",
+        "无冰紫武角色的所有对应紫武和弩"
+      ],
+      "options": [
+        {
+          "id": 6121000,
+          "segments": [
+            [
+              15,
+              "weapon"
+            ],
+            [
+              85,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121001,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              60,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121002,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6121100",
+      "names": [
+        "山顶",
+        "白金之子射手"
+      ],
+      "options": [
+        {
+          "id": 6121100,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121101,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121102,
+          "segments": [
+            [
+              100,
+              "goods"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6121110,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121111,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6121112,
+          "segments": [
+            [
+              100,
+              "goods"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6121200",
+      "names": [
+        "山顶",
+        "飞龙"
+      ],
+      "options": [
+        {
+          "id": 6121200,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              45,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121201,
+          "segments": [
+            [
+              95,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121202,
+          "segments": [
+            [
+              100,
+              "goods"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6121210,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              43,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              12,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121211,
+          "segments": [
+            [
+              15,
+              "cursed"
+            ],
+            [
+              85,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6121212,
+          "segments": [
+            [
+              100,
+              "goods"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6121300",
+      "names": [
+        "山顶",
+        "雪原山妖群"
+      ],
+      "options": [
+        {
+          "id": 6121300,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              45,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121301,
+          "segments": [
+            [
+              95,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121302,
+          "segments": [
+            [
+              100,
+              "goods"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6121310,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              43,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              12,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121311,
+          "segments": [
+            [
+              15,
+              "cursed"
+            ],
+            [
+              85,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6121312,
+          "segments": [
+            [
+              100,
+              "goods"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6121400",
+      "names": [
+        "山顶",
+        "巨鸦群"
+      ],
+      "options": [
+        {
+          "id": 6121400,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              45,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121401,
+          "segments": [
+            [
+              95,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121402,
+          "segments": [
+            [
+              100,
+              "goods"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6121410,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              43,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              12,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121411,
+          "segments": [
+            [
+              15,
+              "cursed"
+            ],
+            [
+              85,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6121412,
+          "segments": [
+            [
+              100,
+              "goods"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6121500",
+      "names": [
+        "山顶",
+        "亚人剑圣"
+      ],
+      "options": [
+        {
+          "id": 6121500,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              45,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121501,
+          "segments": [
+            [
+              95,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121502,
+          "segments": [
+            [
+              100,
+              "goods"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6121510,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              43,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              12,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121511,
+          "segments": [
+            [
+              15,
+              "cursed"
+            ],
+            [
+              85,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6121512,
+          "segments": [
+            [
+              100,
+              "goods"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6121600",
+      "names": [
+        "山顶",
+        "葛瑞克骑士"
+      ],
+      "options": [
+        {
+          "id": 6121600,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121601,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6121610,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121611,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6121700",
+      "names": [
+        "山顶",
+        "雪原山妖"
+      ],
+      "options": [
+        {
+          "id": 6121700,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              45,
+              "weapon"
+            ],
+            [
+              22,
+              "weapon"
+            ],
+            [
+              8,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121701,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6121710,
+          "segments": [
+            [
+              25,
+              "cursed"
+            ],
+            [
+              67,
+              "cursed"
+            ],
+            [
+              8,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6121711,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6122000",
+      "names": [
+        "火山口",
+        "坠星成兽",
+        "火山所有火紫武池额外加入",
+        "无火紫武角色的所有对应紫武和弩"
+      ],
+      "options": [
+        {
+          "id": 6122000,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122001,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122002,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6122010,
+          "segments": [
+            [
+              35,
+              "cursed"
+            ],
+            [
+              65,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6122011,
+          "segments": [
+            [
+              30,
+              "weapon"
+            ],
+            [
+              55,
+              "cursed"
+            ],
+            [
+              15,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122012,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6122100",
+      "names": [
+        "火山口",
+        "熔岩土龙"
+      ],
+      "options": [
+        {
+          "id": 6122100,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122101,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122102,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6122110,
+          "segments": [
+            [
+              35,
+              "cursed"
+            ],
+            [
+              65,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6122111,
+          "segments": [
+            [
+              45,
+              "weapon"
+            ],
+            [
+              55,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6122112,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6122200",
+      "names": [
+        "火山口",
+        "火焰主教群"
+      ],
+      "options": [
+        {
+          "id": 6122200,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              45,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122201,
+          "segments": [
+            [
+              95,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122202,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6122210,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              43,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              12,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122211,
+          "segments": [
+            [
+              15,
+              "cursed"
+            ],
+            [
+              85,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6122212,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6122300",
+      "names": [
+        "火山口",
+        "火焰主教"
+      ],
+      "options": [
+        {
+          "id": 6122300,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              45,
+              "weapon"
+            ],
+            [
+              22,
+              "weapon"
+            ],
+            [
+              8,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122301,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6122310,
+          "segments": [
+            [
+              25,
+              "cursed"
+            ],
+            [
+              67,
+              "cursed"
+            ],
+            [
+              8,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122311,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6122400",
+      "names": [
+        "火山口",
+        "亚人女王"
+      ],
+      "options": [
+        {
+          "id": 6122400,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              45,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122401,
+          "segments": [
+            [
+              95,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122402,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6122410,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              43,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              12,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122411,
+          "segments": [
+            [
+              15,
+              "cursed"
+            ],
+            [
+              85,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6122412,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6122500",
+      "names": [
+        "火山口",
+        "英雄石像鬼"
+      ],
+      "options": [
+        {
+          "id": 6122500,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122501,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122502,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6122510,
+          "segments": [
+            [
+              35,
+              "cursed"
+            ],
+            [
+              65,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6122511,
+          "segments": [
+            [
+              30,
+              "weapon"
+            ],
+            [
+              55,
+              "cursed"
+            ],
+            [
+              15,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6122512,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6123100",
+      "names": [
+        "腐败森林",
+        "葛瑞克骑士（隐士约50%出腐败结晶杖）"
+      ],
+      "options": [
+        {
+          "id": 6123100,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6123101,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6123110,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6123111,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6124000",
+      "names": [
+        "隐城",
+        "“黑暗弃子”艾丝缇",
+        "隐城所有魔力池额外加入",
+        "无魔紫武角色的所有对应紫武和弩"
+      ],
+      "options": [
+        {
+          "id": 6124000,
+          "segments": [
+            [
+              15,
+              "weapon"
+            ],
+            [
+              85,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124001,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              60,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124002,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6124100",
+      "names": [
+        "隐城",
+        "龙人士兵"
+      ],
+      "options": [
+        {
+          "id": 6124100,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124101,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124102,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6124110,
+          "segments": [
+            [
+              35,
+              "cursed"
+            ],
+            [
+              65,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6124111,
+          "segments": [
+            [
+              30,
+              "weapon"
+            ],
+            [
+              55,
+              "cursed"
+            ],
+            [
+              15,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124112,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6124200",
+      "names": [
+        "隐城",
+        "无头山妖"
+      ],
+      "options": [
+        {
+          "id": 6124200,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              45,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124201,
+          "segments": [
+            [
+              95,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124202,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6124210,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              43,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              12,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124211,
+          "segments": [
+            [
+              15,
+              "cursed"
+            ],
+            [
+              85,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6124212,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6124300",
+      "names": [
+        "隐城",
+        "王室幽魂"
+      ],
+      "options": [
+        {
+          "id": 6124300,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              45,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124301,
+          "segments": [
+            [
+              95,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124302,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6124310,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              43,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              12,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124311,
+          "segments": [
+            [
+              15,
+              "cursed"
+            ],
+            [
+              85,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6124312,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6124400",
+      "names": [
+        "隐城",
+        "灵庙骑士"
+      ],
+      "options": [
+        {
+          "id": 6124400,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              45,
+              "weapon"
+            ],
+            [
+              22,
+              "weapon"
+            ],
+            [
+              8,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124401,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6124410,
+          "segments": [
+            [
+              25,
+              "cursed"
+            ],
+            [
+              67,
+              "cursed"
+            ],
+            [
+              8,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124411,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6124500",
+      "names": [
+        "隐城",
+        "黑刀刺客"
+      ],
+      "options": [
+        {
+          "id": 6124500,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              45,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124501,
+          "segments": [
+            [
+              95,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124502,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6124510,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              43,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ],
+            [
+              12,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6124511,
+          "segments": [
+            [
+              15,
+              "cursed"
+            ],
+            [
+              85,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6124512,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6130000",
+      "names": [
+        "矿洞",
+        "山妖"
+      ],
+      "options": [
+        {
+          "id": 6130000,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6130001,
+          "segments": [
+            [
+              100,
+              "锻造石【2】"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6130010,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6130011,
+          "segments": [
+            [
+              100,
+              "锻造石【2】"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6130100",
+      "names": [
+        "矿洞",
+        "发狂南瓜头"
+      ],
+      "options": [
+        {
+          "id": 6130100,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6130101,
+          "segments": [
+            [
+              100,
+              "锻造石【2】"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6130110,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6130111,
+          "segments": [
+            [
+              100,
+              "锻造石【2】"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6130200",
+      "names": [
+        "矿洞",
+        "葛瑞克骑士"
+      ],
+      "options": [
+        {
+          "id": 6130200,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6130201,
+          "segments": [
+            [
+              100,
+              "锻造石【2】"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6130210,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6130211,
+          "segments": [
+            [
+              100,
+              "锻造石【2】"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6200000",
+      "names": [
+        "第一夜BOSS"
+      ],
+      "options": [
+        {
+          "id": 6200000,
+          "segments": [
+            [
+              100,
+              "buff",
+              "night1"
+            ]
+          ]
+        },
+        {
+          "id": 6200001,
+          "segments": [
+            [
+              100,
+              "buff",
+              "night1"
+            ]
+          ]
+        },
+        {
+          "id": 6200002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "night1b"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6210000",
+      "names": [
+        "第二夜BOSS"
+      ],
+      "options": [
+        {
+          "id": 6210000,
+          "segments": [
+            [
+              100,
+              "buff",
+              "night2"
+            ]
+          ]
+        },
+        {
+          "id": 6210001,
+          "segments": [
+            [
+              100,
+              "buff",
+              "night2"
+            ]
+          ]
+        },
+        {
+          "id": 6210002,
+          "segments": [
+            [
+              95,
+              "buff",
+              "night2"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6300000",
+      "names": [
+        "癫火现踪"
+      ],
+      "options": [
+        {
+          "id": 6300000,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6300001,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6300002,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6300100",
+      "names": [
+        "癫火现踪"
+      ],
+      "options": [
+        {
+          "id": 6300100,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6300101,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6300102,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6310000",
+      "names": [
+        "陨石坠落",
+        "坠星成兽"
+      ],
+      "options": [
+        {
+          "id": 6310000,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6310001,
+          "segments": [
+            [
+              85,
+              "weapon"
+            ],
+            [
+              15,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6310002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "purple"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6310010,
+          "segments": [
+            [
+              35,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6310011,
+          "segments": [
+            [
+              80,
+              "weapon"
+            ],
+            [
+              20,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6310012,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6320000",
+      "names": [
+        "恶魔商人",
+        "利普拉"
+      ],
+      "options": [
+        {
+          "id": 6320000,
+          "segments": [
+            [
+              100,
+              "accessory"
+            ]
+          ]
+        },
+        {
+          "id": 6320001,
+          "segments": [
+            [
+              100,
+              "accessory"
+            ]
+          ]
+        },
+        {
+          "id": 6320002,
+          "segments": [
+            [
+              50,
+              "accessory"
+            ],
+            [
+              50,
+              "goods"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6400000",
+      "names": [
+        "监牢",
+        "恶兆之子",
+        "守墓斗士"
+      ],
+      "options": [
+        {
+          "id": 6400000,
+          "segments": [
+            [
+              100,
+              "1w卢恩"
+            ]
+          ]
+        },
+        {
+          "id": 6400001,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6400010,
+          "segments": [
+            [
+              100,
+              "1w卢恩"
+            ]
+          ]
+        },
+        {
+          "id": 6400011,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6400012,
+          "segments": [
+            [
+              95,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6410000",
+      "names": [
+        "监牢",
+        "猎犬骑士",
+        "结晶人们",
+        "失乡骑士们",
+        "混种集团",
+        "诺克斯战士们",
+        "石肤众王",
+        "法姆·亚兹拉的兽人们"
+      ],
+      "options": [
+        {
+          "id": 6410000,
+          "segments": [
+            [
+              100,
+              "1w卢恩"
+            ]
+          ]
+        },
+        {
+          "id": 6410001,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6410010,
+          "segments": [
+            [
+              100,
+              "1w卢恩"
+            ]
+          ]
+        },
+        {
+          "id": 6410011,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6410012,
+          "segments": [
+            [
+              80,
+              "weapon"
+            ],
+            [
+              20,
+              "cursed"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6420000",
+      "names": [
+        "监牢",
+        "熔炉骑士",
+        "龙人士兵",
+        "神皮贵族",
+        "神皮使徒"
+      ],
+      "options": [
+        {
+          "id": 6420000,
+          "segments": [
+            [
+              100,
+              "2w卢恩"
+            ]
+          ]
+        },
+        {
+          "id": 6420001,
+          "segments": [
+            [
+              100,
+              "buff",
+              "night1b"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6420010,
+          "segments": [
+            [
+              100,
+              "2w卢恩"
+            ]
+          ]
+        },
+        {
+          "id": 6420011,
+          "segments": [
+            [
+              100,
+              "buff",
+              "night1b"
+            ]
+          ]
+        },
+        {
+          "id": 6420012,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "cursed"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6430000",
+      "names": [
+        "监牢",
+        "古龙",
+        "神皮双人组",
+        "死亡仪式鸟"
+      ],
+      "options": [
+        {
+          "id": 6430000,
+          "segments": [
+            [
+              100,
+              "3w卢恩"
+            ]
+          ]
+        },
+        {
+          "id": 6430001,
+          "segments": [
+            [
+              100,
+              "buff",
+              "night1b"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6430010,
+          "segments": [
+            [
+              100,
+              "3w卢恩"
+            ]
+          ]
+        },
+        {
+          "id": 6430011,
+          "segments": [
+            [
+              100,
+              "buff",
+              "night1b"
+            ]
+          ]
+        },
+        {
+          "id": 6430012,
+          "segments": [
+            [
+              100,
+              "cursed"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

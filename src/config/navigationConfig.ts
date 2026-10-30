@@ -38,6 +38,10 @@ export const mainNavigationItems: NavigationItem[] = [
     key: '商人数据',
     label: '商人数据',
   },
+  {
+    key: '掉落池',
+    label: '掉落池',
+  },
 ];
 
 // 获取主导航项的顺序

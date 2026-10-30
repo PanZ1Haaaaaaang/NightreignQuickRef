@@ -169,6 +169,11 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         },
       ],
     },
+    {
+      key: '掉落池',
+      label: '🎁 掉落池',
+      children: [{ key: '掉球总览', label: '🎁 掉落池总览', anchorId: 'drop-pool-top' }],
+    },
   ];
 
   // 创建映射对象存储每个菜单项的自定义属性

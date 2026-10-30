@@ -9,6 +9,8 @@ export interface EntryData {
   notes?: string | null;
   /** 词条名称/词条类型栏要展示的标签，如「未实装」 */
   tags?: string[];
+  /** 「局内-潜在能力」的潜在能力池：normal / purple / night1 / night1b / night2 */
+  pools?: string[];
 }
 
 // Boss数据接口
@@ -283,4 +285,89 @@ export interface TeardropConversionData {
     name: string;
     options: TeardropLipulaOption[];
   };
+}
+
+// ===== 掉落池（src/data/zh-CN/drop_pools.json） =====
+
+/** 球选项里一个槽位的掉落类型（解包按物品表判定） */
+export type DropKind = 'weapon' | 'cursed' | 'buff' | 'wending' | 'antique' | 'accessory' | 'goods' | 'other';
+
+/**
+ * 掉落段（紧凑数组，控制 JSON 体积）：[百分比, 掉落类型, 潜在能力池?]
+ * - kind 除标准类型外，数据里也有「锻造石【2】」「1w卢恩」这类具体物品标签
+ * - 第三项仅 buff 段有：normal / purple / night1 / night1b / night2（见 config/potentialPoolConfig.ts）
+ */
+export type DropSegment = [percent: number, kind: string, pool?: string];
+
+export interface DropOption {
+  id: number;
+  /** 该选项的槽位分布（权重占比，合计 100） */
+  segments: DropSegment[];
+}
+
+export interface DropGroup {
+  /** 球 ID（选项位抹掉后的整数，如 6000000） */
+  id: string;
+  /** 地形 / 敌人 / 备注，按表格原始顺序 */
+  names: string[];
+  /** 普通掉落 */
+  options: DropOption[];
+  /** 深夜 · 变异（红皮怪）：选项数不变，池子升级 */
+  mutationOptions?: DropOption[];
+  /** 深夜 · 入侵（灾域）：要塞 / 教堂变成 3 选项，boss 只用这套池 */
+  invasionOptions?: DropOption[];
+}
+
+export interface DropPoolsData {
+  meta: {
+    sourceNote: string;
+    states: Record<'normal' | 'mutation' | 'invasion', string>;
+    kinds: Record<DropKind, string>;
+  };
+  groups: DropGroup[];
+}
+
+// ===== 潜在能力池（src/data/zh-CN/potential_pools.json） =====
+
+export interface PotentialPoolEntry {
+  /** 解包物品 ID（强化版为同名高级版 ID） */
+  id: number;
+  /** 对应的 43 条词条 ID */
+  entryId: string;
+  name: string;
+  desc: string;
+  /** 是否为同名高级版（稀有度 2） */
+  upgraded: boolean;
+}
+
+export interface PotentialPool {
+  /** normal / purple / night1 / night1b / night2 */
+  key: string;
+  name: string;
+  tableId: number;
+  note: string;
+  entries: PotentialPoolEntry[];
+}
+
+/** 掉落 ID（= ItemLotParam_enemy ID）下的一个槽位 */
+export interface LotSlot {
+  percent: number;
+  kind: 'buff' | 'wending' | 'other';
+  tableId?: number;
+  /** buff 槽所属池：normal / purple / night1 / night1b / night2 */
+  pool?: string;
+  itemId?: number;
+}
+
+export interface PotentialPoolsData {
+  meta: {
+    sourceNote: string;
+    upgradedLabel: string;
+    wendingNote: string;
+  };
+  pools: PotentialPool[];
+  /** 掉落 ID → 槽位（用于给 buff 槽上色、识别徘徊赐福） */
+  lotSlots: Record<string, LotSlot[]>;
+  /** 词条 ID → 出现的池 */
+  entryPools: Record<string, string[]>;
 }

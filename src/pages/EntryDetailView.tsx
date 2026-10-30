@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Table, Input, Select, Tabs, Tag, Spin, Button, Checkbox, Space } from 'antd';
+import { Table, Input, Select, Tabs, Tag, Spin, Button, Checkbox, Space, Tooltip } from 'antd';
 import { message } from '../utils/feedback';
 import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
@@ -9,6 +9,7 @@ import type { EnhancementCategory, ItemEffect } from '../utils/dataManager';
 import { debounce } from 'lodash';
 import { SearchOutlined } from '@ant-design/icons';
 import CustomPagination from '../components/CustomPagination';
+import { POTENTIAL_POOL_TAGS } from '../config/potentialPoolConfig';
 
 // 自定义搜索组件接口
 interface CustomSearchProps {
@@ -279,6 +280,8 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const [selectedInGameTypes, setSelectedInGameTypes] = useState<string[]>([]);
   const [selectedCharacter, setSelectedCharacter] = useState<string>('');
   const [selectedItemEffectTypes, setSelectedItemEffectTypes] = useState<string[]>([]);
+  // 「潜在能力」按出现池筛选
+  const [selectedPools, setSelectedPools] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [activeEntryTab, setActiveEntryTab] = useState(activeSubTab || '局外词条');
@@ -345,6 +348,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     setSelectedInGameTypes([]);
     setSelectedCharacter('');
     setSelectedItemEffectTypes([]);
+    setSelectedPools([]);
     setFilteredInfo({});
     setSortedInfo({});
     setCurrentPage(1);
@@ -758,6 +762,38 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   ];
 
   // 深夜模式局外词条表格列定义（复用局外词条的列定义）
+  // 「局内-潜在能力」页签额外展示各词条出现的池
+  const potentialPoolColumn: TableColumnsType<EntryData>[number] = {
+    title: '出现池',
+    key: 'pools',
+    width: '17%',
+    align: 'center',
+    render: (_: unknown, record: EntryData) => {
+      const pools = record.pools ?? [];
+      if (pools.length === 0) return '-';
+      return (
+        <Space size={4} wrap>
+          {pools.map((key) => {
+            const meta = POTENTIAL_POOL_TAGS[key];
+            if (!meta) return null;
+            return (
+              <Tooltip key={key} title={meta.tip}>
+                <Tag color={meta.color} style={{ marginInlineEnd: 0 }}>
+                  {meta.label}
+                </Tag>
+              </Tooltip>
+            );
+          })}
+        </Space>
+      );
+    },
+  };
+
+  const potentialColumns: TableColumnsType<EntryData> = [
+    ...inGameColumns.map((column) => (column.key === 'explanation' ? { ...column, width: '28%' } : column)),
+    potentialPoolColumn,
+  ];
+
   const deepNightColumns: TableColumnsType<EntryData> = [
     {
       title: 'ID',
@@ -1068,7 +1104,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       case '潜在能力':
         // 这 43 条都是已实装词条，没有「显示未实装」开关，也不需要隐藏逻辑
         tableData = data.inGamePotentialEntries;
-        columns = inGameColumns;
+        columns = potentialColumns;
         tableData = filterData(
           tableData,
           searchKeyword,
@@ -1077,6 +1113,9 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           undefined,
           filteredInfo.superposability as string[],
         );
+        if (selectedPools.length > 0) {
+          tableData = tableData.filter((entry) => (entry.pools ?? []).some((pool) => selectedPools.includes(pool)));
+        }
         break;
       default:
         tableData = data.outsiderEntries;
@@ -1469,6 +1508,25 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
                 />
               )}
+              {tabKey === '潜在能力' && (
+                <Select
+                  className="in-game-type-select"
+                  mode="multiple"
+                  allowClear
+                  tagRender={tagRender}
+                  placeholder="按出现池筛选"
+                  value={selectedPools}
+                  onChange={(values) => {
+                    setSelectedPools(values);
+                    setCurrentPage(1);
+                  }}
+                  options={Object.entries(POTENTIAL_POOL_TAGS).map(([value, meta]) => ({
+                    value,
+                    label: meta.label,
+                  }))}
+                  maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
+                />
+              )}
               {/* 「潜在能力」这 43 条都是已实装词条，不提供「显示未实装」开关 */}
               {tabKey === '局内词条' && (
                 <Checkbox
@@ -1508,6 +1566,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           setSelectedInGameTypes([]);
           setSelectedCharacter('');
           setSelectedItemEffectTypes([]);
+          setSelectedPools([]);
           setFilteredInfo({});
           setSortedInfo({});
         }}
