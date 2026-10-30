@@ -251,7 +251,7 @@ const TeardropConversion: React.FC = () => {
           type="info"
           showIcon
           style={{ marginBottom: 12 }}
-          message="遗物携带「【角色】提升…但降低…」的局外词条，等于该渡夜者「泪滴转职」"
+          title="遗物携带「【角色】提升…但降低…」的局外词条，等于该渡夜者「泪滴转职」"
           description={
             <span style={{ fontSize: 12 }}>
               同一角色的两条词条可叠加、同一条不能重复装备；数值为 Lv12+ 满值，基础属性取 Lv{data.meta.baseLevel}。

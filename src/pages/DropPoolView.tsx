@@ -170,7 +170,7 @@ const DropPoolView: React.FC = () => {
         type="info"
         showIcon
         className={styles.intro}
-        message="一颗「潜在能力球」（掉球）里有 2~3 个选项，玩家只能选一个；每个选项下是各槽位的权重占比"
+        title="一颗「潜在能力球」（掉球）里有 2~3 个选项，玩家只能选一个；每个选项下是各槽位的权重占比"
         description={
           <div className={styles.introDesc}>
             <div>普通模式：据点 / 精英的普通掉落，选项数量 2~3 个。</div>
