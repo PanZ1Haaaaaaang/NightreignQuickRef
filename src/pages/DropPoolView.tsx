@@ -264,7 +264,8 @@ const DropPoolView: React.FC = () => {
 
       <div className={styles.footnote}>
         <Text type="secondary" style={{ fontSize: 12 }}>
-          {DATA.meta.sourceNote} 普通 / 变异 / 入侵分别对应解包里的 +0 / +10 / +50 三套掉落。
+          {DATA.meta.sourceNote} 普通 / 变异 / 入侵分别对应解包里的 +0 / +10 / +50 三套掉落（个别据点如 6500920 是 +5 /
+          +40）；入侵球 5 个以上槽位是两套球拼一行，这里只展示后一半。
         </Text>
       </div>
     </div>

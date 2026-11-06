@@ -1,6 +1,6 @@
 {
   "meta": {
-    "sourceNote": "数据来自 Smithbox 2.2.6 解包（ItemLotParam_enemy → ItemTableParam → 武器 / 潜在能力 / 遗物）；百分比为球选项内各槽位的权重占比。",
+    "sourceNote": "数据来自 Smithbox 2.2.6 解包（ItemLotParam_enemy → ItemTableParam → 武器 / 潜在能力 / 遗物），含 DLC 新增「湖沼」；百分比为球选项内各槽位的权重占比。",
     "states": {
       "normal": "普通",
       "mutation": "变异",
@@ -82,23 +82,15 @@
           "id": 6000050,
           "segments": [
             [
-              32.5,
+              65,
               "weapon"
             ],
             [
-              17.5,
+              30,
               "weapon"
             ],
             [
-              32.5,
-              "weapon"
-            ],
-            [
-              15,
-              "weapon"
-            ],
-            [
-              2.5,
+              5,
               "cursed"
             ]
           ]
@@ -191,23 +183,15 @@
           "id": 6000150,
           "segments": [
             [
-              32.5,
+              65,
               "weapon"
             ],
             [
-              17.5,
+              30,
               "weapon"
             ],
             [
-              32.5,
-              "weapon"
-            ],
-            [
-              15,
-              "weapon"
-            ],
-            [
-              2.5,
+              5,
               "cursed"
             ]
           ]
@@ -300,23 +284,15 @@
           "id": 6000850,
           "segments": [
             [
-              32.5,
+              65,
               "weapon"
             ],
             [
-              17.5,
+              30,
               "weapon"
             ],
             [
-              32.5,
-              "weapon"
-            ],
-            [
-              15,
-              "weapon"
-            ],
-            [
-              2.5,
+              5,
               "cursed"
             ]
           ]
@@ -410,23 +386,15 @@
           "id": 6002050,
           "segments": [
             [
-              32.5,
+              65,
               "weapon"
             ],
             [
-              17.5,
+              30,
               "weapon"
             ],
             [
-              32.5,
-              "weapon"
-            ],
-            [
-              15,
-              "weapon"
-            ],
-            [
-              2.5,
+              5,
               "cursed"
             ]
           ]
@@ -519,23 +487,15 @@
           "id": 6002550,
           "segments": [
             [
-              32.5,
+              65,
               "weapon"
             ],
             [
-              17.5,
+              30,
               "weapon"
             ],
             [
-              32.5,
-              "weapon"
-            ],
-            [
-              15,
-              "weapon"
-            ],
-            [
-              2.5,
+              5,
               "cursed"
             ]
           ]
@@ -628,23 +588,15 @@
           "id": 6002750,
           "segments": [
             [
-              32.5,
+              65,
               "weapon"
             ],
             [
-              17.5,
+              30,
               "weapon"
             ],
             [
-              32.5,
-              "weapon"
-            ],
-            [
-              15,
-              "weapon"
-            ],
-            [
-              2.5,
+              5,
               "cursed"
             ]
           ]
@@ -759,23 +711,15 @@
           "id": 6010050,
           "segments": [
             [
-              17.5,
+              35,
               "weapon"
             ],
             [
-              32.5,
+              55,
               "weapon"
             ],
             [
-              17.5,
-              "weapon"
-            ],
-            [
-              27.5,
-              "weapon"
-            ],
-            [
-              5,
+              10,
               "cursed"
             ]
           ]
@@ -886,23 +830,15 @@
           "id": 6010550,
           "segments": [
             [
-              17.5,
+              35,
               "weapon"
             ],
             [
-              32.5,
+              55,
               "weapon"
             ],
             [
-              17.5,
-              "weapon"
-            ],
-            [
-              27.5,
-              "weapon"
-            ],
-            [
-              5,
+              10,
               "cursed"
             ]
           ]
@@ -1012,23 +948,15 @@
           "id": 6010650,
           "segments": [
             [
-              17.5,
+              35,
               "weapon"
             ],
             [
-              32.5,
+              55,
               "weapon"
             ],
             [
-              17.5,
-              "weapon"
-            ],
-            [
-              27.5,
-              "weapon"
-            ],
-            [
-              5,
+              10,
               "cursed"
             ]
           ]
@@ -1146,35 +1074,23 @@
           "id": 6011550,
           "segments": [
             [
-              17.5,
+              35,
               "weapon"
             ],
             [
-              30,
+              50,
               "weapon"
             ],
             [
-              2.5,
+              5,
               "weapon"
             ],
             [
-              17.5,
-              "weapon"
-            ],
-            [
-              25,
-              "weapon"
-            ],
-            [
-              2.5,
-              "weapon"
-            ],
-            [
-              2.5,
+              5,
               "cursed"
             ],
             [
-              2.5,
+              5,
               "cursed"
             ]
           ]
@@ -1285,23 +1201,15 @@
           "id": 6012050,
           "segments": [
             [
-              17.5,
+              35,
               "weapon"
             ],
             [
-              32.5,
+              55,
               "weapon"
             ],
             [
-              17.5,
-              "weapon"
-            ],
-            [
-              27.5,
-              "weapon"
-            ],
-            [
-              5,
+              10,
               "cursed"
             ]
           ]
@@ -1411,23 +1319,15 @@
           "id": 6012650,
           "segments": [
             [
-              17.5,
+              35,
               "weapon"
             ],
             [
-              32.5,
+              55,
               "weapon"
             ],
             [
-              17.5,
-              "weapon"
-            ],
-            [
-              27.5,
-              "weapon"
-            ],
-            [
-              5,
+              10,
               "cursed"
             ]
           ]
@@ -1537,23 +1437,15 @@
           "id": 6012750,
           "segments": [
             [
-              17.5,
+              35,
               "weapon"
             ],
             [
-              32.5,
+              55,
               "weapon"
             ],
             [
-              17.5,
-              "weapon"
-            ],
-            [
-              27.5,
-              "weapon"
-            ],
-            [
-              5,
+              10,
               "cursed"
             ]
           ]
@@ -1663,23 +1555,15 @@
           "id": 6012850,
           "segments": [
             [
-              17.5,
+              35,
               "weapon"
             ],
             [
-              32.5,
+              55,
               "weapon"
             ],
             [
-              17.5,
-              "weapon"
-            ],
-            [
-              27.5,
-              "weapon"
-            ],
-            [
-              5,
+              10,
               "cursed"
             ]
           ]
@@ -1790,23 +1674,15 @@
           "id": 6012950,
           "segments": [
             [
-              17.5,
+              35,
               "weapon"
             ],
             [
-              32.5,
+              55,
               "weapon"
             ],
             [
-              17.5,
-              "weapon"
-            ],
-            [
-              27.5,
-              "weapon"
-            ],
-            [
-              5,
+              10,
               "cursed"
             ]
           ]
@@ -1917,23 +1793,15 @@
           "id": 6013050,
           "segments": [
             [
-              17.5,
+              35,
               "weapon"
             ],
             [
-              32.5,
+              55,
               "weapon"
             ],
             [
-              17.5,
-              "weapon"
-            ],
-            [
-              27.5,
-              "weapon"
-            ],
-            [
-              5,
+              10,
               "cursed"
             ]
           ]
@@ -2043,23 +1911,15 @@
           "id": 6013150,
           "segments": [
             [
-              17.5,
+              35,
               "weapon"
             ],
             [
-              32.5,
+              55,
               "weapon"
             ],
             [
-              17.5,
-              "weapon"
-            ],
-            [
-              27.5,
-              "weapon"
-            ],
-            [
-              5,
+              10,
               "cursed"
             ]
           ]
@@ -2164,23 +2024,15 @@
           "id": 6013450,
           "segments": [
             [
-              17.5,
+              35,
               "weapon"
             ],
             [
-              32.5,
+              55,
               "weapon"
             ],
             [
-              17.5,
-              "weapon"
-            ],
-            [
-              27.5,
-              "weapon"
-            ],
-            [
-              5,
+              10,
               "cursed"
             ]
           ]
@@ -5297,6 +5149,839 @@
             [
               100,
               "cursed"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6501100",
+      "names": [
+        "（出血）湖沼",
+        "鲜血贵族"
+      ],
+      "options": [
+        {
+          "id": 6501100,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501101,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501102,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6501110,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501111,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6501112,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6501150,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              25,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6501151,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501152,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6500900",
+      "names": [
+        "（寒冷）湖沼",
+        "霜冻螯虾"
+      ],
+      "options": [
+        {
+          "id": 6500900,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6500901,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6500902,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6500910,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6500911,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6500912,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6500950,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              25,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6500951,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6500952,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6500920",
+      "names": [
+        "（寒冷）湖沼",
+        "卢恩熊"
+      ],
+      "options": [
+        {
+          "id": 6500920,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6500921,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6500925,
+          "segments": [
+            [
+              25,
+              "cursed"
+            ],
+            [
+              75,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6500926,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6500960,
+          "segments": [
+            [
+              25,
+              "weapon"
+            ],
+            [
+              65,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6500961,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6501500",
+      "names": [
+        "（癫火）湖沼",
+        "癫火花"
+      ],
+      "options": [
+        {
+          "id": 6501500,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501501,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501502,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6501510,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501511,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              30,
+              "cursed"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6501512,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6501550,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              25,
+              "weapon"
+            ],
+            [
+              5,
+              "cursed"
+            ],
+            [
+              5,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6501551,
+          "segments": [
+            [
+              95,
+              "weapon"
+            ],
+            [
+              5,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501552,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6501000",
+      "names": [
+        "（毒）湖沼",
+        "腐败眷属",
+        "蜘蛛蝎"
+      ],
+      "options": [
+        {
+          "id": 6501000,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501001,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6501010,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501011,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6501012,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6501050,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              25,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6501051,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6501400",
+      "names": [
+        "（睡眠）湖沼",
+        "杜鹃骑士"
+      ],
+      "options": [
+        {
+          "id": 6501400,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501401,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501402,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6501410,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501411,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6501412,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6501450,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              25,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6501451,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501452,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6501300",
+      "names": [
+        "（腐败）湖沼",
+        "尊腐骑士"
+      ],
+      "options": [
+        {
+          "id": 6501300,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501301,
+          "segments": [
+            [
+              90,
+              "weapon"
+            ],
+            [
+              10,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501302,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6501310,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501311,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              35,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6501312,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6501350,
+          "segments": [
+            [
+              65,
+              "weapon"
+            ],
+            [
+              25,
+              "weapon"
+            ],
+            [
+              10,
+              "cursed"
+            ]
+          ]
+        },
+        {
+          "id": 6501351,
+          "segments": [
+            [
+              100,
+              "weapon"
+            ]
+          ]
+        },
+        {
+          "id": 6501352,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
             ]
           ]
         }
