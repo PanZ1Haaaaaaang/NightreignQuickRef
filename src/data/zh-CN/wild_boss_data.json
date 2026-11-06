@@ -1391,7 +1391,7 @@
     "poison": 112,
     "scarletRot": 112,
     "frost": 154,
-    "location": ""
+    "location": "大空洞遗迹"
   },
   {
     "name": "挖石山妖",
@@ -1649,6 +1649,23 @@
     "location": "锻造村、大空洞遗迹"
   },
   {
+    "name": "神鸟战士",
+    "normal": 0.6,
+    "strike": 0.6,
+    "slash": 0.6,
+    "pierce": 1,
+    "magic": 0.8,
+    "fire": 0.8,
+    "lightning": 0.8,
+    "holy": 1,
+    "basePoise": 80,
+    "bleed": 112,
+    "poison": 112,
+    "scarletRot": 112,
+    "frost": 112,
+    "location": "锻造村、大空洞大教堂、大空洞主城"
+  },
+  {
     "name": "唤灵蜗牛",
     "normal": 1.1,
     "strike": 1.1,
@@ -1697,6 +1714,23 @@
     "poison": 112,
     "scarletRot": 112,
     "frost": 112,
+    "location": "大空洞大教堂"
+  },
+  {
+    "name": "死之鸟",
+    "normal": 0.9,
+    "strike": 1.4,
+    "slash": 0.9,
+    "pierce": 0.65,
+    "magic": 0.8,
+    "fire": 0.8,
+    "lightning": 0.6,
+    "holy": 1.4,
+    "basePoise": 120,
+    "bleed": "免疫",
+    "poison": "免疫",
+    "scarletRot": 252,
+    "frost": "免疫",
     "location": "大空洞大教堂"
   },
   {
