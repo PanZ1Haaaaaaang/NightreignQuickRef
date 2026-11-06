@@ -15,7 +15,11 @@ type NightState = 'normal' | 'mutation' | 'invasion';
 
 const KIND_CLASS: Record<string, string> = {
   weapon: styles.kindWeapon,
+  weaponPurple: styles.kindWeaponPurple,
   cursed: styles.kindCursed,
+  char: styles.kindChar,
+  charCursed: styles.kindCharCursed,
+  flameWeapon: styles.kindFlameWeapon,
   buff: styles.kindBuff,
   antique: styles.kindAntique,
   accessory: styles.kindAccessory,
@@ -50,9 +54,10 @@ const hasState = (group: DropGroup, nightState: NightState) => {
  * 单个槽位：百分比 + 掉落类型
  * buff 段使用「局内-潜在能力」的词条池标签（buff / 紫buff / 特殊buff池…），
  * 普通池蓝色、其余紫色；徘徊赐福金色；锻造石【2】紫色。这里不做悬停。
+ * 第四项 note：湖沼的武器段是元素变体（出血 / 冻伤 / 火焰…），癫火武器段是可能掉落的武器名（悬停显示）。
  */
 const SegmentChip: React.FC<{ segment: DropSegment }> = ({ segment }) => {
-  const [percent, kind, pool] = segment;
+  const [percent, kind, pool, , detail] = segment;
   let label = kindLabel(kind);
   let className = KIND_CLASS[kind] ?? '';
 
@@ -66,14 +71,29 @@ const SegmentChip: React.FC<{ segment: DropSegment }> = ({ segment }) => {
     className = styles.kindWending;
   } else if (kind === '锻造石【2】') {
     className = styles.kindBuffPurple;
+  } else if (kind === 'flameWeapon') {
+    // 具体武器名放到悬停说明里，标签保持短
   }
 
-  return (
+  const chip = (
     <span className={`${styles.segment} ${className}`}>
       <b className={styles.percent}>{percent}%</b>
       <span>{label}</span>
     </span>
   );
+
+  // 悬停说明：癫火武器列具体武器；湖沼武器段列池内的变体 / 原版比例
+  const tooltip =
+    kind === 'flameWeapon' && detail ? `可能的武器：${detail}` : detail && kind !== 'buff' ? detail : null;
+
+  if (tooltip) {
+    return (
+      <Tooltip title={tooltip} placement="bottom" mouseEnterDelay={0.2}>
+        <span className={styles.noteHover}>{chip}</span>
+      </Tooltip>
+    );
+  }
+  return chip;
 };
 
 const DropCard: React.FC<{ group: DropGroup; nightMode: boolean; nightState: NightState }> = ({
@@ -114,16 +134,16 @@ const DropCard: React.FC<{ group: DropGroup; nightMode: boolean; nightState: Nig
 
       <div className={styles.options}>
         {options.map((option, index) => (
-          <Tooltip key={option.id} title={String(option.id)} placement="top" mouseEnterDelay={0.2}>
-            <div className={styles.option} data-option-id={option.id}>
+          <div key={option.id} className={styles.option} data-option-id={option.id}>
+            <Tooltip title={String(option.id)} placement="top" mouseEnterDelay={0.2}>
               <span className={styles.optionLabel}>选项 {index + 1}</span>
-              <div className={styles.segments}>
-                {option.segments.map((segment, segmentIndex) => (
-                  <SegmentChip key={segmentIndex} segment={segment} />
-                ))}
-              </div>
+            </Tooltip>
+            <div className={styles.segments}>
+              {option.segments.map((segment, segmentIndex) => (
+                <SegmentChip key={segmentIndex} segment={segment} />
+              ))}
             </div>
-          </Tooltip>
+          </div>
         ))}
       </div>
     </div>
@@ -181,6 +201,8 @@ const DropPoolView: React.FC = () => {
             <div>
               槽位类型按解包物品表判定（武器 / 诅咒武器 / 潜在能力 / 遗物 / 护符 / 道具），鼠标移到选项上可看掉落 ID。
               潜在能力池：普通 buff 为蓝色、高级 buff 为紫色；5% 的道具槽是徘徊赐福（金色）；锻造石【2】为紫色。
+              DLC「湖沼」进一步把武器池拆成角色池、武器池、紫武器池、诅咒武器池（浮色不同），悬停可看池内 75% 变体 / 25%
+              原版的构成。
             </div>
           </div>
         }

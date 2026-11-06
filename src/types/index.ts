@@ -296,8 +296,10 @@ export type DropKind = 'weapon' | 'cursed' | 'buff' | 'wending' | 'antique' | 'a
  * 掉落段（紧凑数组，控制 JSON 体积）：[百分比, 掉落类型, 潜在能力池?]
  * - kind 除标准类型外，数据里也有「锻造石【2】」「1w卢恩」这类具体物品标签
  * - 第三项仅 buff 段有：normal / purple / night1 / night1b / night2（见 config/potentialPoolConfig.ts）
+ * - 第四项 note：湖沼武器段的元素变体（出血 / 冻伤 / 火焰…），显示在标签括号里
+ * - 第五项 detail：悬停说明（湖沼武器段的「变体 / 原版」比例；癫火武器段的具体武器名）
  */
-export type DropSegment = [percent: number, kind: string, pool?: string];
+export type DropSegment = [percent: number, kind: string, pool?: string | null, note?: string, detail?: string];
 
 export interface DropOption {
   id: number;

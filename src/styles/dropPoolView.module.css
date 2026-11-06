@@ -131,6 +131,7 @@
   padding-top: 2px;
   color: var(--color-text-3);
   font-size: 12px;
+  cursor: help;
 }
 
 .segments {
@@ -233,6 +234,40 @@
   color: var(--color-text-2);
 }
 
+/* DLC 湖沼等据点：把「武器池」细分出角色池 / 紫武器池 / 角色池（诅咒） */
+.kindChar {
+  border-color: #b7eb8f;
+  background: #f6ffed;
+  color: #237804;
+}
+
+.kindWeaponPurple {
+  border-color: #ffadd2;
+  background: #fff0f6;
+  color: #c41d7f;
+}
+
+.kindCharCursed {
+  border-color: #ffbb96;
+  background: #fff2e8;
+  color: #d4380d;
+}
+
+.kindFlameWeapon {
+  border-color: #ffd591;
+  background: #fff7e6;
+  color: #d46b08;
+}
+
+/* 有悬停说明的槽位（如癫火武器） */
+.noteHover {
+  display: inline-flex;
+}
+
+.noteHover > span {
+  border-bottom: 1px dashed currentColor;
+}
+
 [data-theme='dark'] .kindWeapon {
   border-color: rgba(105, 177, 255, 0.45);
   background: rgba(22, 119, 255, 0.18);
@@ -273,6 +308,30 @@
   border-color: rgba(94, 219, 199, 0.45);
   background: rgba(19, 194, 194, 0.18);
   color: #5cdbd3;
+}
+
+[data-theme='dark'] .kindChar {
+  border-color: rgba(149, 222, 100, 0.45);
+  background: rgba(82, 196, 26, 0.18);
+  color: #95de64;
+}
+
+[data-theme='dark'] .kindWeaponPurple {
+  border-color: rgba(255, 133, 192, 0.45);
+  background: rgba(235, 47, 150, 0.18);
+  color: #ff85c0;
+}
+
+[data-theme='dark'] .kindCharCursed {
+  border-color: rgba(255, 169, 64, 0.45);
+  background: rgba(212, 56, 13, 0.2);
+  color: #ffa940;
+}
+
+[data-theme='dark'] .kindFlameWeapon {
+  border-color: rgba(255, 197, 61, 0.45);
+  background: rgba(212, 107, 8, 0.22);
+  color: #ffc53d;
 }
 
 [data-theme='dark'] .nightBadge {
