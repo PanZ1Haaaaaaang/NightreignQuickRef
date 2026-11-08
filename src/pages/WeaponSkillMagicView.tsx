@@ -397,6 +397,9 @@ const DataTable: React.FC<DataTableProps> = ({
           <Select
             mode="multiple"
             allowClear
+            popupMatchSelectWidth={false}
+            classNames={{ popup: { root: 'hint-option-popup' } }}
+            styles={{ popup: { root: { minWidth: 340 } } }}
             placeholder="按分类筛选"
             options={categoryOptions}
             optionRender={skillFilterKind === 'weaponArt' ? renderHintOption : undefined}

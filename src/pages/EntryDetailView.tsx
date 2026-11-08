@@ -11,6 +11,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import CustomPagination from '../components/CustomPagination';
 import { POTENTIAL_POOL_TAGS } from '../config/potentialPoolConfig';
 import { renderHintOption } from '../components/HintOption';
+import { TALISMAN_CATEGORIES, TALISMAN_CATEGORY_ORDER } from '../config/talismanCategoryConfig';
 
 // 自定义搜索组件接口
 interface CustomSearchProps {
@@ -283,6 +284,8 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const [selectedItemEffectTypes, setSelectedItemEffectTypes] = useState<string[]>([]);
   // 「潜在能力」按出现池筛选
   const [selectedPools, setSelectedPools] = useState<string[]>([]);
+  // 「护符词条」按分类筛选
+  const [selectedTalismanCategories, setSelectedTalismanCategories] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [activeEntryTab, setActiveEntryTab] = useState(activeSubTab || '局外词条');
@@ -350,6 +353,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     setSelectedCharacter('');
     setSelectedItemEffectTypes([]);
     setSelectedPools([]);
+    setSelectedTalismanCategories([]);
     setFilteredInfo({});
     setSortedInfo({});
     setCurrentPage(1);
@@ -630,14 +634,25 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       title: '护符',
       dataIndex: 'talisman',
       key: 'talisman',
-      width: '15%',
+      width: '14%',
       render: (text) => text || '-',
+    },
+    {
+      title: '分类',
+      dataIndex: 'category',
+      key: 'category',
+      width: '9%',
+      align: 'center',
+      render: (text: string) => {
+        const meta = TALISMAN_CATEGORIES[text];
+        return meta ? <Tag color={meta.color}>{meta.label}</Tag> : '-';
+      },
     },
     {
       title: '词条名称',
       dataIndex: 'entry_name',
       key: 'entry_name',
-      width: '30%',
+      width: '25%',
       sorter: (a, b) => {
         const nameA = a.entry_name || '';
         const nameB = b.entry_name || '';
@@ -651,7 +666,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       title: '解释',
       dataIndex: 'explanation',
       key: 'explanation',
-      width: '45%',
+      width: '38%',
       render: (text) => {
         if (!text) return '-';
 
@@ -1085,6 +1100,9 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         tableData = data.talismanEntries;
         columns = talismanColumns;
         tableData = filterData(tableData, searchKeyword);
+        if (selectedTalismanCategories.length > 0) {
+          tableData = tableData.filter((entry) => selectedTalismanCategories.includes(entry.category ?? '其他'));
+        }
         break;
       case '局内词条':
         tableData = data.inGameEntries;
@@ -1309,6 +1327,53 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       );
     }
 
+    if (tabKey === '护符词条') {
+      return (
+        <div className="filter-search-row">
+          <div className="filter-search-content">
+            <div className="filter-controls">
+              <CustomSearch
+                placeholder={`搜索 ${tabKey} 关键字`}
+                value={searchKeyword}
+                onChange={setSearchKeyword}
+                onSearch={(value) => {
+                  setSearchKeyword(value);
+                  setCurrentPage(1);
+                }}
+                className="custom-search-input"
+                allowClear
+              />
+              <Select
+                className="talisman-category-select"
+                mode="multiple"
+                allowClear
+                popupMatchSelectWidth={false}
+                classNames={{ popup: { root: 'hint-option-popup' } }}
+                styles={{ popup: { root: { minWidth: 340 } } }}
+                tagRender={tagRender}
+                placeholder="按分类筛选"
+                value={selectedTalismanCategories}
+                onChange={(values) => {
+                  setSelectedTalismanCategories(values);
+                  setCurrentPage(1);
+                }}
+                options={TALISMAN_CATEGORY_ORDER.map((value) => ({
+                  value,
+                  label: TALISMAN_CATEGORIES[value].label,
+                  hint: TALISMAN_CATEGORIES[value].hint,
+                }))}
+                optionRender={renderHintOption}
+                maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
+              />
+              <Button onClick={clearAll} type="default" size="medium">
+                清除所有
+              </Button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     if (tabKey === '局外词条') {
       return (
         <div className="filter-search-row">
@@ -1514,6 +1579,9 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   className="in-game-type-select"
                   mode="multiple"
                   allowClear
+                  popupMatchSelectWidth={false}
+                  classNames={{ popup: { root: 'hint-option-popup' } }}
+                  styles={{ popup: { root: { minWidth: 340 } } }}
                   tagRender={tagRender}
                   placeholder="按出现池筛选"
                   value={selectedPools}
@@ -1570,6 +1638,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           setSelectedCharacter('');
           setSelectedItemEffectTypes([]);
           setSelectedPools([]);
+          setSelectedTalismanCategories([]);
           setFilteredInfo({});
           setSortedInfo({});
         }}

@@ -744,6 +744,12 @@ body[tomato-theme='dark'] .custom-tab-button::after {
   width: auto;
 }
 
+.talisman-category-select {
+  min-width: 220px;
+  max-width: 280px;
+  width: auto;
+}
+
 .deep-night-type-select {
   min-width: 220px;
   max-width: 280px;
@@ -770,6 +776,7 @@ body[tomato-theme='dark'] .custom-tab-button::after {
   .outsider-type-select,
   .in-game-type-select,
   .item-effect-type-select,
+  .talisman-category-select,
   .deep-night-type-select,
   .deep-night-in-game-type-select {
     min-width: auto;
@@ -1287,8 +1294,7 @@ body[tomato-theme='dark'] .weapon-skill-detail-panel {
 .hint-option {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
 }
 
@@ -1297,11 +1303,18 @@ body[tomato-theme='dark'] .weapon-skill-detail-panel {
 }
 
 .hint-option-hint {
-  flex: none;
-  max-width: 62%;
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
   color: var(--theme-text-tertiary);
   font-size: 12px;
+  text-align: right;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* 带右侧说明的下拉：按内容加宽（配合 popupMatchSelectWidth={false}），避免说明被截断 */
+.ant-select-dropdown.hint-option-popup {
+  min-width: 340px;
+  max-width: min(480px, calc(100vw - 24px));
 }

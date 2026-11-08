@@ -11,6 +11,8 @@ export interface EntryData {
   tags?: string[];
   /** 「局内-潜在能力」的潜在能力池：normal / purple / night1 / night1b / night2 */
   pools?: string[];
+  /** 护符词条的分类：属性抗性类 / 增伤类 / 杂项类 / 其他 */
+  category?: string;
 }
 
 // Boss数据接口
