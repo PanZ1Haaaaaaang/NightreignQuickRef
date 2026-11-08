@@ -8454,6 +8454,131 @@
           ]
         }
       ]
+    },
+    {
+      "id": "6630000",
+      "names": [
+        "大空洞-（左上）矿洞",
+        "挖石山妖"
+      ],
+      "options": [
+        {
+          "id": 6630000,
+          "segments": [
+            [
+              100,
+              "blueWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6630001,
+          "segments": [
+            [
+              100,
+              "forgeStone"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6630010,
+          "segments": [
+            [
+              100,
+              "redWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6630011,
+          "segments": [
+            [
+              100,
+              "forgeStone"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6840000",
+      "names": [
+        "大空洞-小遗迹",
+        "凯丹佣兵们"
+      ],
+      "options": [
+        {
+          "id": 6840000,
+          "segments": [
+            [
+              65,
+              "blueChar"
+            ],
+            [
+              35,
+              "blueWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6840001,
+          "segments": [
+            [
+              100,
+              "blueWeapon"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6841000",
+      "names": [
+        "大空洞-（右侧）矿洞",
+        "结晶人们"
+      ],
+      "options": [
+        {
+          "id": 6841000,
+          "segments": [
+            [
+              100,
+              "blueWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6841001,
+          "segments": [
+            [
+              100,
+              "forgeStone"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6841010,
+          "segments": [
+            [
+              100,
+              "redWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6841011,
+          "segments": [
+            [
+              100,
+              "forgeStone"
+            ]
+          ]
+        }
+      ]
     }
   ]
 }
