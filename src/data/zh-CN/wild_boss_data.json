@@ -575,7 +575,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": 252,
-    "location": "监牢、主城、第二夜、大空洞遗迹"
+    "location": "监牢、主城、第二夜、大空洞遗迹、神殿塔"
   },
   {
     "name": "龙人士兵",
@@ -592,7 +592,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": 542,
-    "location": "监牢、隐城、第二夜"
+    "location": "监牢、隐城、第二夜、神殿塔"
   },
   {
     "name": "神皮使徒",
@@ -813,7 +813,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "野外蓝名、隐城、第二夜、大空洞主城"
+    "location": "野外蓝名、隐城、第二夜、大空洞主城、神殿塔"
   },
   {
     "name": "王室幽魂",
@@ -847,7 +847,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "野外红名、主城地下、主城楼顶、腐败森林、第一夜、大空洞异变"
+    "location": "野外红名、主城地下、主城楼顶、腐败森林、第一夜、神殿塔、大空洞异变"
   },
   {
     "name": "腐烂树灵",
@@ -915,7 +915,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "野外红名、主城楼顶、腐败森林、第二夜"
+    "location": "野外红名、主城楼顶、腐败森林、第二夜、神殿塔"
   },
   {
     "name": "黄金树化身",
@@ -1068,7 +1068,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": "免疫",
-    "location": "火山口、第二夜、突发事件"
+    "location": "火山口、第二夜、突发事件、神殿塔"
   },
   {
     "name": "雪原山妖",
@@ -1221,7 +1221,7 @@
     "poison": "免疫",
     "scarletRot": "免疫",
     "frost": 154,
-    "location": "第一夜"
+    "location": "第一夜、神殿塔"
   },
   {
     "name": "百足恶魔",
@@ -1238,7 +1238,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": 252,
-    "location": "第一夜"
+    "location": "第一夜、神殿塔"
   },
   {
     "name": "公爵的夫雷迪亚",
