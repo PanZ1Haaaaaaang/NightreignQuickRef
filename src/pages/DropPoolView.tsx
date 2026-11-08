@@ -14,33 +14,31 @@ const PAGE_SIZE = 12;
 type NightState = 'normal' | 'mutation' | 'invasion';
 
 const KIND_CLASS: Record<string, string> = {
-  weapon: styles.kindWeapon,
-  weaponPurple: styles.kindWeaponPurple,
-  cursed: styles.kindCursed,
-  char: styles.kindChar,
-  charCursed: styles.kindCharCursed,
-  flameWeapon: styles.kindFlameWeapon,
-  weaponItem: styles.kindWeapon,
-  specialBuff: styles.kindAntique,
-  // 主城 / 野外 Boss / 陨石的随机池：按稀有度上色
+  // 12 个基池
   blueWeapon: styles.kindWeapon,
   blueChar: styles.kindWeapon,
   purpleWeapon: styles.kindWeaponPurple,
   purpleChar: styles.kindWeaponPurple,
   redWeapon: styles.kindCursed,
-  redChar: styles.kindCursed,
+  redChar: styles.kindCharCursed,
   goldWeapon: styles.kindWending,
   goldChar: styles.kindWending,
-  itemName: styles.kindGoods,
+  // 窄池：「窄」= 战灰可换
+  narrowBlueWeapon: styles.kindWeapon,
+  narrowBlueChar: styles.kindChar,
+  narrowPurpleWeapon: styles.kindWeaponPurple,
+  narrowRedWeapon: styles.kindCursed,
+  // 其他池 / 具体条目
   buff: styles.kindBuff,
-  antique: styles.kindAntique,
   accessory: styles.kindAccessory,
-  goods: styles.kindGoods,
-  other: styles.kindOther,
-  // 监牢的卢恩：1w 蓝 / 2w 紫 / 3w 金（复用已有配色）
-  '1w卢恩': styles.kindWeapon,
-  '2w卢恩': styles.kindBuffPurple,
-  '3w卢恩': styles.kindWending,
+  wending: styles.kindWending,
+  flameWeapon: styles.kindFlameWeapon,
+  specialBuff: styles.kindAntique,
+  weaponItem: styles.kindWeapon,
+  forgeStone: styles.kindBuffPurple,
+  rune1w: styles.kindWeapon,
+  rune2w: styles.kindBuffPurple,
+  rune3w: styles.kindWending,
 };
 
 const kindLabel = (kind: string) => DATA.meta.kinds[kind as keyof typeof DATA.meta.kinds] ?? kind;
@@ -69,8 +67,8 @@ const hasState = (group: DropGroup, nightState: NightState) => {
 /**
  * 单个槽位：百分比 + 掉落类型
  * buff 段使用「局内-潜在能力」的词条池标签（buff / 紫buff / 特殊buff池…），
- * 普通池蓝色、其余紫色；徘徊赐福金色；锻造石【2】紫色。这里不做悬停。
- * 第四项 note：湖沼的武器段是元素变体（出血 / 冻伤 / 火焰…），癫火武器段是可能掉落的武器名（悬停显示）。
+ * 普通池蓝色、其余紫色；徘徊赐福金色；锻造石【2】紫色。
+ * 第四项 note：元素变体（出血 / 冻伤 / 火焰…）、护符分类、特殊效果名等；detail 只放池内拆分。
  */
 const SegmentChip: React.FC<{ segment: DropSegment }> = ({ segment }) => {
   const [percent, kind, pool, note, detail] = segment;
@@ -85,11 +83,7 @@ const SegmentChip: React.FC<{ segment: DropSegment }> = ({ segment }) => {
   } else if (kind === 'wending') {
     label = DATA.meta.kinds.wending ?? '徘徊赐福';
     className = styles.kindWending;
-  } else if (kind === '锻造石【2】') {
-    className = styles.kindBuffPurple;
-  } else if (kind === 'flameWeapon') {
-    // 具体武器名放到悬停说明里，标签保持短
-  } else if ((kind === 'specialBuff' || kind === 'weaponItem' || kind === 'itemName') && note) {
+  } else if ((kind === 'specialBuff' || kind === 'weaponItem') && note) {
     label = note;
   } else if (kind === 'accessory' && note) {
     label = `护符池（${note}）`;
@@ -102,7 +96,7 @@ const SegmentChip: React.FC<{ segment: DropSegment }> = ({ segment }) => {
     </span>
   );
 
-  // 悬停说明：癫火武器列具体武器；湖沼武器段列池内的变体 / 原版比例
+  // 悬停说明：只放池内拆分；癫火武器额外列出 3 把可能武器
   const tooltip = kind === 'flameWeapon' && detail ? `可能的武器：${detail}` : (detail ?? null);
 
   if (tooltip) {
@@ -220,8 +214,9 @@ const DropPoolView: React.FC = () => {
             <div>
               槽位类型按解包物品表判定（武器 / 诅咒武器 / 潜在能力 / 遗物 / 护符 / 道具），鼠标移到选项上可看掉落 ID。
               潜在能力池：普通 buff 为蓝色、高级 buff 为紫色；5% 的道具槽是徘徊赐福（金色）；锻造石【2】为紫色。
-              DLC「湖沼」进一步把武器池拆成角色池、武器池、紫武器池、诅咒武器池（浮色不同），悬停可看池内 75% 变体 / 25%
-              原版的构成。
+              武器槽会标到具体池：蓝武器池 / 蓝角色池 / 紫武器池 / 紫角色池 / 红武器池 / 红角色池 / 金武器池 /
+              金角色池； 「窄」池指战灰可换的武器（窄蓝武器池 / 窄蓝角色池 / 窄紫武器池 / 窄红武器池），悬停可看池内 75%
+              变体 / 25% 原版的构成。
             </div>
           </div>
         }
@@ -306,7 +301,7 @@ const DropPoolView: React.FC = () => {
       <div className={styles.footnote}>
         <Text type="secondary" style={{ fontSize: 12 }}>
           {DATA.meta.sourceNote} 普通 / 变异 / 入侵分别对应解包里的 +0 / +10 / +50 三套掉落（个别据点如 6500920 是 +5 /
-          +40）；入侵球 5 个以上槽位是两套球拼一行，这里只展示后一半。
+          +40）；入侵球 5 个以上槽位是两套球拼一行，这里只展示后一半。「窄」= 战灰可换的武器池。
         </Text>
       </div>
     </div>
