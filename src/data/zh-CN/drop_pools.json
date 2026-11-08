@@ -1,6 +1,6 @@
 {
   "meta": {
-    "sourceNote": "数据来自 Smithbox 2.2.6 解包（ItemLotParam_enemy → ItemTableParam → 武器 / 潜在能力 / 遗物），含 DLC 新增「湖沼」；百分比为球选项内各槽位的权重占比。",
+    "sourceNote": "数据来自 Smithbox 2.2.6 解包（ItemLotParam_enemy → ItemTableParam → 武器 / 潜在能力 / 遗物），含 DLC 新增「湖沼」「锻造村」；百分比为球选项内各槽位的权重占比。",
     "states": {
       "normal": "普通",
       "mutation": "变异",
@@ -7581,6 +7581,870 @@
         },
         {
           "id": 6501352,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6510000",
+      "names": [
+        "锻造村",
+        "恶兆之子们"
+      ],
+      "options": [
+        {
+          "id": 6510000,
+          "segments": [
+            [
+              35,
+              "blueChar"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ]
+          ]
+        },
+        {
+          "id": 6510001,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ]
+          ]
+        },
+        {
+          "id": 6510002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6510010,
+          "segments": [
+            [
+              35,
+              "blueChar"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ]
+          ]
+        },
+        {
+          "id": 6510011,
+          "segments": [
+            [
+              100,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ]
+          ]
+        },
+        {
+          "id": 6510012,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6510050,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              55,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ]
+          ]
+        },
+        {
+          "id": 6510051,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6510052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6510500",
+      "names": [
+        "（火焰）锻造村",
+        "黑焰习武修士们"
+      ],
+      "options": [
+        {
+          "id": 6510500,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 火焰变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 火焰变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510501,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 火焰变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 火焰变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510502,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6510510,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 火焰变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 火焰变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510511,
+          "segments": [
+            [
+              100,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 火焰变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510512,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6510550,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              55,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 火焰变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 火焰变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510551,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6510552,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6510600",
+      "names": [
+        "（雷电）锻造村",
+        "祖灵之民的战士们"
+      ],
+      "options": [
+        {
+          "id": 6510600,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510601,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510602,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6510610,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510611,
+          "segments": [
+            [
+              100,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510612,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6510650,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              55,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510651,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6510652,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6510700",
+      "names": [
+        "（神圣）锻造村",
+        "神鸟战士"
+      ],
+      "options": [
+        {
+          "id": 6510700,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510701,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510702,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6510710,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510711,
+          "segments": [
+            [
+              100,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510712,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6510750,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              55,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6510751,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6510752,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6511000",
+      "names": [
+        "（毒）锻造村",
+        "恶兆猎人们"
+      ],
+      "options": [
+        {
+          "id": 6511000,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6511001,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6511002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6511010,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6511011,
+          "segments": [
+            [
+              100,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6511012,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6511050,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              55,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6511051,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6511052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6511100",
+      "names": [
+        "（出血）锻造村",
+        "血怪之首"
+      ],
+      "options": [
+        {
+          "id": 6511100,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6511101,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6511102,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6511110,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6511111,
+          "segments": [
+            [
+              100,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6511112,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6511150,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              55,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6511151,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6511152,
           "segments": [
             [
               100,
