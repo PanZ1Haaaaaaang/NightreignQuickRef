@@ -2075,7 +2075,7 @@
     {
       "id": "6012900",
       "names": [
-        "（寒冷）遗迹",
+        "（冻伤）遗迹",
         "萨米尔的古英雄们",
         "白金之子射手们"
       ],
@@ -6667,7 +6667,7 @@
     {
       "id": "6500900",
       "names": [
-        "（寒冷）湖沼",
+        "（冻伤）湖沼",
         "霜冻螯虾"
       ],
       "options": [
@@ -6824,7 +6824,7 @@
     {
       "id": "6500920",
       "names": [
-        "（寒冷）湖沼",
+        "（冻伤）湖沼",
         "卢恩熊"
       ],
       "options": [
@@ -9138,7 +9138,7 @@
     {
       "id": "6802000",
       "names": [
-        "大空洞-（寒冷）大教堂外",
+        "大空洞-（冻伤）大教堂外",
         "灵火龙"
       ],
       "options": [
@@ -9287,7 +9287,7 @@
     {
       "id": "6802100",
       "names": [
-        "大空洞-（寒冷）大教堂",
+        "大空洞-（冻伤）大教堂",
         "唤灵蜗牛"
       ],
       "options": [
@@ -9424,7 +9424,7 @@
     {
       "id": "6802200",
       "names": [
-        "大空洞-（寒冷）大教堂",
+        "大空洞-（冻伤）大教堂",
         "萨米尔的古英雄们"
       ],
       "options": [
@@ -9812,6 +9812,1834 @@
         },
         {
           "id": 6811112,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6820000",
+      "names": [
+        "大空洞-（出血）遗迹",
+        "血病巨鸦群"
+      ],
+      "options": [
+        {
+          "id": 6820000,
+          "segments": [
+            [
+              65,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              35,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820001,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6820010,
+          "segments": [
+            [
+              65,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              35,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820011,
+          "segments": [
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              35,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820012,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6820050,
+          "segments": [
+            [
+              65,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              25,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820051,
+          "segments": [
+            [
+              100,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6820100",
+      "names": [
+        "大空洞-（出血）遗迹",
+        "血怪之首"
+      ],
+      "options": [
+        {
+          "id": 6820100,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820101,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820102,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6820110,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820111,
+          "segments": [
+            [
+              100,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820112,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6820150,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              55,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820151,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6820152,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6820200",
+      "names": [
+        "大空洞-（出血）遗迹",
+        "鲜血贵族"
+      ],
+      "options": [
+        {
+          "id": 6820200,
+          "segments": [
+            [
+              25,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820201,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6820210,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              75,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820211,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6820250,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              45,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ],
+            [
+              20,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 出血变体"
+            ]
+          ]
+        },
+        {
+          "id": 6820251,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6820252,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6822000",
+      "names": [
+        "大空洞-（毒）遗迹",
+        "咒剑士"
+      ],
+      "options": [
+        {
+          "id": 6822000,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822001,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6822010,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822011,
+          "segments": [
+            [
+              100,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822012,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6822050,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              55,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822051,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6822052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6822100",
+      "names": [
+        "大空洞-（毒）遗迹",
+        "蜘蛛蝎群"
+      ],
+      "options": [
+        {
+          "id": 6822100,
+          "segments": [
+            [
+              65,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              35,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822101,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822102,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6822110,
+          "segments": [
+            [
+              65,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              35,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822111,
+          "segments": [
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              35,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822112,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6822150,
+          "segments": [
+            [
+              65,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              25,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822151,
+          "segments": [
+            [
+              100,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822152,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6822200",
+      "names": [
+        "大空洞-（毒）遗迹",
+        "墓地影子"
+      ],
+      "options": [
+        {
+          "id": 6822200,
+          "segments": [
+            [
+              25,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822201,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6822210,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              75,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822211,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6822250,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              45,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ],
+            [
+              20,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 中毒变体"
+            ]
+          ]
+        },
+        {
+          "id": 6822251,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6822252,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6830000",
+      "names": [
+        "大空洞-（魔力）遗迹",
+        "祖灵"
+      ],
+      "options": [
+        {
+          "id": 6830000,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              65,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ]
+          ]
+        },
+        {
+          "id": 6830001,
+          "segments": [
+            [
+              90,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ],
+            [
+              10,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6830002,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6830010,
+          "segments": [
+            [
+              35,
+              "redChar"
+            ],
+            [
+              65,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ]
+          ]
+        },
+        {
+          "id": 6830011,
+          "segments": [
+            [
+              30,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ],
+            [
+              55,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ],
+            [
+              15,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6830012,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6830050,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              45,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ],
+            [
+              20,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ]
+          ]
+        },
+        {
+          "id": 6830051,
+          "segments": [
+            [
+              85,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ],
+            [
+              15,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6830052,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6830100",
+      "names": [
+        "大空洞-（魔力）遗迹",
+        "王夫的红狼"
+      ],
+      "options": [
+        {
+          "id": 6830100,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 魔力变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ]
+          ]
+        },
+        {
+          "id": 6830101,
+          "segments": [
+            [
+              75,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ],
+            [
+              25,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ]
+          ]
+        },
+        {
+          "id": 6830102,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6830110,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 魔力变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ]
+          ]
+        },
+        {
+          "id": 6830111,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              75,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ]
+          ]
+        },
+        {
+          "id": 6830112,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6830150,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              45,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ],
+            [
+              20,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ]
+          ]
+        },
+        {
+          "id": 6830151,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6830152,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6830200",
+      "names": [
+        "大空洞-（魔力）遗迹",
+        "卢恩熊"
+      ],
+      "options": [
+        {
+          "id": 6830200,
+          "segments": [
+            [
+              25,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 魔力变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ]
+          ]
+        },
+        {
+          "id": 6830201,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6830210,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              75,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ]
+          ]
+        },
+        {
+          "id": 6830211,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6830250,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              45,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ],
+            [
+              20,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 55% 魔力变体 / 20% 触媒"
+            ]
+          ]
+        },
+        {
+          "id": 6830251,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6830252,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6830300",
+      "names": [
+        "大空洞-（睡眠）遗迹",
+        "老狮子"
+      ],
+      "options": [
+        {
+          "id": 6830300,
+          "segments": [
+            [
+              25,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6830301,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6830310,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              75,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6830311,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6830350,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              45,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              20,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6830351,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6830352,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6832000",
+      "names": [
+        "大空洞-（睡眠）遗迹",
+        "紫怪之首"
+      ],
+      "options": [
+        {
+          "id": 6832000,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6832001,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6832002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6832010,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6832011,
+          "segments": [
+            [
+              100,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6832012,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6832050,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              55,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6832051,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6832052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6832100",
+      "names": [
+        "大空洞-（睡眠）遗迹",
+        "熔炉骑士们"
+      ],
+      "options": [
+        {
+          "id": 6832100,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              65,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6832101,
+          "segments": [
+            [
+              90,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              10,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6832102,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6832110,
+          "segments": [
+            [
+              35,
+              "redChar"
+            ],
+            [
+              65,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6832111,
+          "segments": [
+            [
+              30,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              55,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              15,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6832112,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6832150,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              45,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              20,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6832151,
+          "segments": [
+            [
+              85,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              15,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6832152,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6832200",
+      "names": [
+        "大空洞-（睡眠）遗迹",
+        "守墓斗士"
+      ],
+      "options": [
+        {
+          "id": 6832200,
+          "segments": [
+            [
+              25,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6832201,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6832210,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              75,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6832211,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6832250,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              45,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              20,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6832251,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6832252,
           "segments": [
             [
               100,
