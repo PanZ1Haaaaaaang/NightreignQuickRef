@@ -20,11 +20,27 @@ const KIND_CLASS: Record<string, string> = {
   char: styles.kindChar,
   charCursed: styles.kindCharCursed,
   flameWeapon: styles.kindFlameWeapon,
+  weaponItem: styles.kindWeapon,
+  specialBuff: styles.kindAntique,
+  // 主城 / 野外 Boss / 陨石的随机池：按稀有度上色
+  blueWeapon: styles.kindWeapon,
+  blueChar: styles.kindWeapon,
+  purpleWeapon: styles.kindWeaponPurple,
+  purpleChar: styles.kindWeaponPurple,
+  redWeapon: styles.kindCursed,
+  redChar: styles.kindCursed,
+  goldWeapon: styles.kindWending,
+  goldChar: styles.kindWending,
+  itemName: styles.kindGoods,
   buff: styles.kindBuff,
   antique: styles.kindAntique,
   accessory: styles.kindAccessory,
   goods: styles.kindGoods,
   other: styles.kindOther,
+  // 监牢的卢恩：1w 蓝 / 2w 紫 / 3w 金（复用已有配色）
+  '1w卢恩': styles.kindWeapon,
+  '2w卢恩': styles.kindBuffPurple,
+  '3w卢恩': styles.kindWending,
 };
 
 const kindLabel = (kind: string) => DATA.meta.kinds[kind as keyof typeof DATA.meta.kinds] ?? kind;
@@ -57,7 +73,7 @@ const hasState = (group: DropGroup, nightState: NightState) => {
  * 第四项 note：湖沼的武器段是元素变体（出血 / 冻伤 / 火焰…），癫火武器段是可能掉落的武器名（悬停显示）。
  */
 const SegmentChip: React.FC<{ segment: DropSegment }> = ({ segment }) => {
-  const [percent, kind, pool, , detail] = segment;
+  const [percent, kind, pool, note, detail] = segment;
   let label = kindLabel(kind);
   let className = KIND_CLASS[kind] ?? '';
 
@@ -73,6 +89,10 @@ const SegmentChip: React.FC<{ segment: DropSegment }> = ({ segment }) => {
     className = styles.kindBuffPurple;
   } else if (kind === 'flameWeapon') {
     // 具体武器名放到悬停说明里，标签保持短
+  } else if ((kind === 'specialBuff' || kind === 'weaponItem' || kind === 'itemName') && note) {
+    label = note;
+  } else if (kind === 'accessory' && note) {
+    label = `护符池（${note}）`;
   }
 
   const chip = (
@@ -83,8 +103,7 @@ const SegmentChip: React.FC<{ segment: DropSegment }> = ({ segment }) => {
   );
 
   // 悬停说明：癫火武器列具体武器；湖沼武器段列池内的变体 / 原版比例
-  const tooltip =
-    kind === 'flameWeapon' && detail ? `可能的武器：${detail}` : detail && kind !== 'buff' ? detail : null;
+  const tooltip = kind === 'flameWeapon' && detail ? `可能的武器：${detail}` : (detail ?? null);
 
   if (tooltip) {
     return (
