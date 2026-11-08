@@ -8579,6 +8579,1248 @@
           ]
         }
       ]
+    },
+    {
+      "id": "6800000",
+      "names": [
+        "大空洞-（神圣）大教堂",
+        "拷问官"
+      ],
+      "options": [
+        {
+          "id": 6800000,
+          "segments": [
+            [
+              65,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              35,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800001,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6800010,
+          "segments": [
+            [
+              65,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              35,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800011,
+          "segments": [
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              35,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800012,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6800050,
+          "segments": [
+            [
+              65,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              25,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800051,
+          "segments": [
+            [
+              100,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6800100",
+      "names": [
+        "大空洞-（神圣）大教堂",
+        "拷问老者"
+      ],
+      "options": [
+        {
+          "id": 6800100,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800101,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800102,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6800110,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800111,
+          "segments": [
+            [
+              100,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800112,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6800150,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              55,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800151,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6800152,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6800200",
+      "names": [
+        "大空洞-（神圣）大教堂外",
+        "死之鸟"
+      ],
+      "options": [
+        {
+          "id": 6800200,
+          "segments": [
+            [
+              25,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              45,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              22,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6800201,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6800210,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              67,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6800211,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6800250,
+          "segments": [
+            [
+              25,
+              "purpleChar"
+            ],
+            [
+              43,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              20,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              12,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6800251,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6800252,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6800300",
+      "names": [
+        "大空洞-（神圣）大教堂",
+        "神鸟战士"
+      ],
+      "options": [
+        {
+          "id": 6800300,
+          "segments": [
+            [
+              25,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800301,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6800310,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              75,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800311,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6800350,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              45,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              20,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6800351,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6800352,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6802000",
+      "names": [
+        "大空洞-（寒冷）大教堂外",
+        "灵火龙"
+      ],
+      "options": [
+        {
+          "id": 6802000,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6802001,
+          "segments": [
+            [
+              75,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              25,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6802002,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6802010,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6802011,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              75,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6802012,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6802050,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              45,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              20,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6802051,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6802052,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6802100",
+      "names": [
+        "大空洞-（寒冷）大教堂",
+        "唤灵蜗牛"
+      ],
+      "options": [
+        {
+          "id": 6802100,
+          "segments": [
+            [
+              65,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              35,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6802101,
+          "segments": [
+            [
+              100,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6802110,
+          "segments": [
+            [
+              65,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              35,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6802111,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              10,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6802150,
+          "segments": [
+            [
+              65,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              30,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              5,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6802151,
+          "segments": [
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              35,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6802152,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6802200",
+      "names": [
+        "大空洞-（寒冷）大教堂",
+        "萨米尔的古英雄们"
+      ],
+      "options": [
+        {
+          "id": 6802200,
+          "segments": [
+            [
+              25,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6802201,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6802210,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              75,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6802211,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "invasionOptions": [
+        {
+          "id": 6802250,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              45,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ],
+            [
+              20,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 冻伤变体"
+            ]
+          ]
+        },
+        {
+          "id": 6802251,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        },
+        {
+          "id": 6802252,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6810100",
+      "names": [
+        "大空洞-（睡眠）大教堂",
+        "大螃蟹群"
+      ],
+      "options": [
+        {
+          "id": 6810100,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6810101,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6810102,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6810110,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6810111,
+          "segments": [
+            [
+              100,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 睡眠变体"
+            ]
+          ]
+        },
+        {
+          "id": 6810112,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6810200",
+      "names": [
+        "大空洞-（右上）大教堂",
+        "巨型螯虾"
+      ],
+      "options": [
+        {
+          "id": 6810200,
+          "segments": [
+            [
+              25,
+              "blueChar"
+            ],
+            [
+              45,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 55% 原版 / 22.5% 属性 / 22.5% 异常"
+            ],
+            [
+              22,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 55% 原版 / 22.5% 属性 / 22.5% 异常"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6810201,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6810210,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              67,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 55% 原版 / 22.5% 属性 / 22.5% 异常"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6810211,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6811100",
+      "names": [
+        "大空洞-（雷电）大教堂",
+        "仿身泪滴群"
+      ],
+      "options": [
+        {
+          "id": 6811100,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ]
+          ]
+        },
+        {
+          "id": 6811101,
+          "segments": [
+            [
+              90,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ],
+            [
+              10,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ]
+          ]
+        },
+        {
+          "id": 6811102,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6811110,
+          "segments": [
+            [
+              35,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ],
+            [
+              65,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ]
+          ]
+        },
+        {
+          "id": 6811111,
+          "segments": [
+            [
+              100,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 雷电变体"
+            ]
+          ]
+        },
+        {
+          "id": 6811112,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ]
     }
   ]
 }
