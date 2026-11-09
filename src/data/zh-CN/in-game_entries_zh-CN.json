@@ -512,7 +512,7 @@
         "entry_id":"8510000",
         "entry_name":"提升观察力",
         "entry_type":"能力值",
-        "explanation":"观察力+20",
+        "explanation":"观察力+20 \/ +30 \/ +40",
         "superposability":"可叠加"
     },
     {
