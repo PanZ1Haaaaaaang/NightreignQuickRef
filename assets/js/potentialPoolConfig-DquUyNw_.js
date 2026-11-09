@@ -1,0 +1,1 @@
+var l={normal:{label:"buff",tip:"普通 buff",color:"blue"},purple:{label:"紫buff",tip:"高级 buff",color:"purple"},night1:{label:"特殊buff池",tip:"初夜 BOSS",color:"gold"},night1b:{label:"特殊buff池2",tip:"初夜 BOSS / 监牢",color:"orange"},night2:{label:"特殊buff池3",tip:"次夜 BOSS / 变异",color:"volcano"}},b=Object.fromEntries(Object.entries(l).map(([l,b])=>[l,b.label]));export{l as n,b as t};
