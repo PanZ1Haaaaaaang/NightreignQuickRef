@@ -10,7 +10,6 @@ import DataManager from '../utils/dataManager';
 import { Line } from '@ant-design/plots';
 import { getCurrentTheme } from '../utils/themeUtils';
 import { throttle } from 'lodash';
-import { getPageByKey } from '../config/navigationConfig';
 import styles from '../styles/bossDataView.module.css';
 import EnemyRaceSection from './bossDataView/EnemyRaceSection';
 import {
@@ -56,10 +55,14 @@ import deathBlightResistance from '../assets/Resistances/blight_status_effect_el
 
 interface BossDataViewProps {
   activeSubTab?: string;
+  // 拆页后固定只显示一个分段：夜王（每局开局即确定）/ 地图（由地图种子决定）
+  scope?: BossScope;
 }
 
+type BossScope = '夜王' | '地图';
+
 // 页内分段：夜王（每局开局即确定）/ 地图与敌人（由地图种子决定）
-const TAB_SCOPE: Record<string, string> = {
+const TAB_SCOPE: Record<string, BossScope> = {
   'boss-data': '夜王',
   'sinner-data': '夜王',
   'lipula-trades': '夜王',
@@ -68,18 +71,19 @@ const TAB_SCOPE: Record<string, string> = {
   'special-events': '地图',
 };
 
-const BOSS_SCOPES = getPageByKey('夜王Boss数据')?.scopes ?? [];
-const scopeOfTab = (tab: string): string => TAB_SCOPE[tab] ?? '夜王';
-const firstTabOfScope = (scope: string): string | undefined =>
-  Object.keys(TAB_SCOPE).find((key) => TAB_SCOPE[key] === scope);
+const scopeOfTab = (tab: string): BossScope => TAB_SCOPE[tab] ?? '夜王';
+const firstTabOfScope = (scope: BossScope): string =>
+  Object.keys(TAB_SCOPE).find((key) => TAB_SCOPE[key] === scope) ?? 'boss-data';
 
-const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
+const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab, scope }) => {
   const [filteredData] = useState<BossData[]>(bossData);
   const [wildBossSearchKeyword, setWildBossSearchKeyword] = useState('');
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
   const [playerCount, setPlayerCount] = useState<number>(1); // 添加人数选择状态
   const [deepNightDepth, setDeepNightDepth] = useState<number>(0); // 0=普通，1~5=深夜深度
-  const [activeBossTab, setActiveBossTab] = useState<string>(activeSubTab || 'boss-data');
+  const [activeBossTab, setActiveBossTab] = useState<string>(
+    activeSubTab || (scope ? firstTabOfScope(scope) : 'boss-data'),
+  );
 
   // 特殊事件相关状态
   const [specialEventData, setSpecialEventData] = useState<EntryData[]>([]);
@@ -925,24 +929,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     }
   }, [activeSubTab, activeBossTab]);
 
-  // 当前分段由当前标签决定，避免两处状态互相打架
-  const activeScope = scopeOfTab(activeBossTab);
-  const activeScopeMeta = BOSS_SCOPES.find((scope) => scope.key === activeScope);
+  // 拆页后每个入口固定一个分段；未指定时按当前标签推断（保留旧行为）
+  const activeScope = scope ?? scopeOfTab(activeBossTab);
 
   return (
     <div className={styles.bossDataViewContainer}>
       <Card className={styles.bossCard}>
-        <div className="page-scope-bar">
-          <Segmented
-            value={activeScope}
-            onChange={(value) => {
-              const first = firstTabOfScope(String(value));
-              if (first) setActiveBossTab(first);
-            }}
-            options={BOSS_SCOPES.map((scope) => ({ label: scope.label, value: scope.key }))}
-          />
-          {activeScopeMeta && <span className="page-scope-note">{activeScopeMeta.note}</span>}
-        </div>
         <Tabs
           style={{ marginTop: '5px' }}
           type="card"

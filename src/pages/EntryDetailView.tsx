@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Table, Input, Select, Tabs, Tag, Spin, Button, Checkbox, Space, Segmented, Tooltip } from 'antd';
+import { Table, Input, Select, Tabs, Tag, Spin, Button, Checkbox, Space, Tooltip } from 'antd';
 import { message } from '../utils/feedback';
 import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
@@ -12,7 +12,6 @@ import CustomPagination from '../components/CustomPagination';
 import { POTENTIAL_POOL_TAGS } from '../config/potentialPoolConfig';
 import { renderHintOption } from '../components/HintOption';
 import { TALISMAN_CATEGORIES, TALISMAN_CATEGORY_ORDER } from '../config/talismanCategoryConfig';
-import { getPageByKey } from '../config/navigationConfig';
 
 // 自定义搜索组件接口
 interface CustomSearchProps {
@@ -275,10 +274,13 @@ const getSuperposabilityColor = (superposability: string | null | undefined): st
 
 interface EntryDetailViewProps {
   activeSubTab?: string;
+  // 拆页后固定只显示一个分段：局外（遗物词条，出击前生效）/ 局内（护符、道具、武器固有）
+  scope?: EntryScope;
 }
 
-// 页内分段：局外（遗物词条，出击前生效）/ 局内（护符、道具、武器固有）
-const ENTRY_TAB_SCOPE: Record<string, string> = {
+type EntryScope = '局外' | '局内';
+
+const ENTRY_TAB_SCOPE: Record<string, EntryScope> = {
   局外词条: '局外',
   强化类别词条适用范围: '局外',
   深夜模式局外词条: '局外',
@@ -289,12 +291,12 @@ const ENTRY_TAB_SCOPE: Record<string, string> = {
   深夜模式局内词条: '局内',
 };
 
-const ENTRY_SCOPES = getPageByKey('词条详细数据')?.scopes ?? [];
-const scopeOfEntryTab = (tab: string): string => ENTRY_TAB_SCOPE[tab] ?? '局外';
-const firstEntryTabOfScope = (scope: string): string | undefined =>
-  Object.keys(ENTRY_TAB_SCOPE).find((key) => ENTRY_TAB_SCOPE[key] === scope);
+const scopeOfEntryTab = (tab: string): EntryScope => ENTRY_TAB_SCOPE[tab] ?? '局外';
+const firstEntryTabOfScope = (scope: EntryScope): string =>
+  Object.keys(ENTRY_TAB_SCOPE).find((key) => ENTRY_TAB_SCOPE[key] === scope) ?? '局外词条';
 
-const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
+const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab, scope }) => {
+  const initialTab = activeSubTab || (scope ? firstEntryTabOfScope(scope) : '局外词条');
   const [searchKeyword, setSearchKeyword] = useState('');
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedInGameTypes, setSelectedInGameTypes] = useState<string[]>([]);
@@ -306,7 +308,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const [selectedTalismanCategories, setSelectedTalismanCategories] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
-  const [activeEntryTab, setActiveEntryTab] = useState(activeSubTab || '局外词条');
+  const [activeEntryTab, setActiveEntryTab] = useState(initialTab);
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [sortedInfo, setSortedInfo] = useState<Sorts>({});
   // 是否展示未实装词条（默认不展示）
@@ -1638,26 +1640,11 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     }
   };
 
-  // 当前分段由当前标签决定，避免两处状态互相打架
-  const activeScope = scopeOfEntryTab(activeEntryTab);
-  const activeScopeMeta = ENTRY_SCOPES.find((scope) => scope.key === activeScope);
+  // 拆页后每个入口固定一个分段；未指定时按当前标签推断（保留旧行为）
+  const activeScope = scope ?? scopeOfEntryTab(activeEntryTab);
 
   return (
     <div className="content-wrapper">
-      <div className="page-scope-bar">
-        <Segmented
-          value={activeScope}
-          onChange={(value) => {
-            const first = firstEntryTabOfScope(String(value));
-            if (first) {
-              setActiveEntryTab(first);
-              setCurrentPage(1);
-            }
-          }}
-          options={ENTRY_SCOPES.map((scope) => ({ label: scope.label, value: scope.key }))}
-        />
-        {activeScopeMeta && <span className="page-scope-note">{activeScopeMeta.note}</span>}
-      </div>
       <Tabs
         type="card"
         style={{

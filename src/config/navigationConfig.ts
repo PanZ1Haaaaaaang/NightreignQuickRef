@@ -3,7 +3,7 @@
 // 顶部「分组目录卡」、左下角功能菜单、页面头（面包屑 / 角标 / 一句话定位）全部由这里生成，
 // 新增页面或页内子项只需要改这一个文件，不必再在两处各写一遍。
 //
-// 分组口径（按游戏内核）：对局规则 → 局外构筑 → 武器 → 局内实战 → 对局内容
+// 分组口径（按游戏内核）：对局规则 → 局外构筑 → 对局内容 → 局内实战 → 武器
 // 角标口径：
 //   通用 / 工具  —— 与单局进度无关的规则页、可交互计算器
 //   局外 / 局内  —— 内容生效的时机（出击前确定的角色与遗物 / 对局中获取的装备与道具）
@@ -18,15 +18,6 @@ export interface NavSection {
   anchorId: string;
   tabKey?: string;
   stepIndex?: number;
-  // 页内分段（见 NavPage.scopes），用于把子 Tab 归到「局外 / 局内」「夜王 / 地图」
-  scope?: string;
-}
-
-// 页内分段：页面顶部的一条分组切换（如词条页的 局外 / 局内）
-export interface NavScope {
-  key: string;
-  label: string;
-  note: string;
 }
 
 export interface NavPage {
@@ -37,7 +28,6 @@ export interface NavPage {
   desc: string;
   badges: NavBadge[];
   group: string;
-  scopes?: NavScope[];
   sections: NavSection[];
 }
 
@@ -53,9 +43,9 @@ export const DEFAULT_PAGE = '游戏机制';
 export const NAV_GROUPS: NavGroup[] = [
   { key: '对局规则', label: '对局规则', note: '时间轴 · 评分 · 计算器' },
   { key: '局外构筑', label: '局外构筑', note: '角色 · 遗物词条' },
-  { key: '武器', label: '武器', note: '传说武器 · 战技 · 魔法祷告' },
-  { key: '局内实战', label: '局内实战', note: '掉落与商人' },
   { key: '对局内容', label: '对局内容', note: '夜王固定 · 地图随种子' },
+  { key: '局内实战', label: '局内实战', note: '词条 · 掉落 · 商人' },
+  { key: '武器', label: '武器', note: '传说武器 · 战技 · 魔法祷告' },
 ];
 
 export const NAV_PAGES: NavPage[] = [
@@ -97,54 +87,25 @@ export const NAV_PAGES: NavPage[] = [
     ],
   },
   {
-    key: '词条详细数据',
-    label: '词条详细数据',
-    icon: '📋',
-    desc: '遗物词条、护符、道具采集与强化类别适用范围',
-    badges: ['局外', '局内'],
+    key: '遗物词条',
+    label: '遗物词条',
+    icon: '🌕',
+    desc: '遗物随机词条、强化类别适用范围与深夜模式局外词条',
+    badges: ['局外'],
     group: '局外构筑',
-    scopes: [
-      { key: '局外', label: '局外', note: '遗物词条 · 出击前生效' },
-      { key: '局内', label: '局内', note: '护符 / 道具 / 武器固有' },
-    ],
     sections: [
-      { key: '局外词条', label: '🌕 局外词条', anchorId: 'outsider-entries', tabKey: '局外词条', scope: '局外' },
+      { key: '局外词条', label: '🌕 局外词条', anchorId: 'outsider-entries', tabKey: '局外词条' },
       {
         key: '强化类别词条适用范围',
         label: '🌘 强化类别词条适用范围',
         anchorId: 'enhancement-categories',
         tabKey: '强化类别词条适用范围',
-        scope: '局外',
       },
       {
         key: '深夜模式-局外词条',
         label: '🌌 深夜模式-局外词条',
         anchorId: 'deep-night-entries',
         tabKey: '深夜模式局外词条',
-        scope: '局外',
-      },
-      { key: '局内词条', label: '🌖 局内词条', anchorId: 'in-game-entries', tabKey: '局内词条', scope: '局内' },
-      {
-        key: '潜在能力',
-        label: '🌖 局内-潜在能力',
-        anchorId: 'in-game-potential-entries',
-        tabKey: '潜在能力',
-        scope: '局内',
-      },
-      { key: '护符词条', label: '🌗 护符词条', anchorId: 'talisman-entries', tabKey: '护符词条', scope: '局内' },
-      {
-        key: '道具/采集效果',
-        label: '🌒 道具/采集效果',
-        anchorId: 'item-effects',
-        tabKey: '道具效果',
-        scope: '局内',
-      },
-      {
-        key: '深夜模式-局内词条',
-        label: '🌌 深夜模式-局内词条',
-        anchorId: 'deep-night-in-game-entries',
-        tabKey: '深夜模式局内词条',
-        scope: '局内',
       },
     ],
   },
@@ -178,6 +139,31 @@ export const NAV_PAGES: NavPage[] = [
       { key: '魔法', label: '🔮 魔法', anchorId: 'sorceries', tabKey: '魔法' },
       { key: '祷告', label: '🙏 祷告', anchorId: 'incantations', tabKey: '祷告' },
       { key: '辅助类', label: '✨ 辅助类', anchorId: 'support-skills', tabKey: '辅助类' },
+    ],
+  },
+  {
+    key: '局内词条',
+    label: '局内词条',
+    icon: '🌖',
+    desc: '局内词条、潜在能力、护符、道具采集与深夜模式局内词条',
+    badges: ['局内'],
+    group: '局内实战',
+    sections: [
+      { key: '局内词条', label: '🌖 局内词条', anchorId: 'in-game-entries', tabKey: '局内词条' },
+      {
+        key: '潜在能力',
+        label: '🌖 局内-潜在能力',
+        anchorId: 'in-game-potential-entries',
+        tabKey: '潜在能力',
+      },
+      { key: '护符词条', label: '🌗 护符词条', anchorId: 'talisman-entries', tabKey: '护符词条' },
+      { key: '道具/采集效果', label: '🌒 道具/采集效果', anchorId: 'item-effects', tabKey: '道具效果' },
+      {
+        key: '深夜模式-局内词条',
+        label: '🌌 深夜模式-局内词条',
+        anchorId: 'deep-night-in-game-entries',
+        tabKey: '深夜模式局内词条',
+      },
     ],
   },
   {
@@ -215,58 +201,43 @@ export const NAV_PAGES: NavPage[] = [
     ],
   },
   {
-    key: '夜王Boss数据',
-    label: '夜王Boss数据',
-    icon: '👑',
-    desc: '夜王血量抗性、野生 Boss、种族克制与地形事件',
-    badges: ['固定', '种子'],
+    key: '夜王数据',
+    label: '夜王数据',
+    icon: '🌙',
+    desc: '每局开局即确定：血量抗性、永夜山羊召唤、利普拉交易',
+    badges: ['固定'],
     group: '对局内容',
-    scopes: [
-      { key: '夜王', label: '夜王', note: '每局开局即确定' },
-      { key: '地图', label: '地图与敌人', note: '由地图种子决定' },
-    ],
     sections: [
-      {
-        key: '夜王基础数据',
-        label: '🌙 夜王基础数据',
-        anchorId: 'night-king-basic',
-        tabKey: 'boss-data',
-        scope: '夜王',
-      },
+      { key: '夜王基础数据', label: '🌙 夜王基础数据', anchorId: 'night-king-basic', tabKey: 'boss-data' },
       {
         key: '永夜山羊召唤罪人详情',
         label: '🐐 永夜山羊召唤罪人详情',
         anchorId: 'sinner-details',
         tabKey: 'sinner-data',
-        scope: '夜王',
       },
       {
         key: '利普拉的交易选项',
         label: '⚖️ 利普拉的交易(Boss战)',
         anchorId: 'lipula-trades',
         tabKey: 'lipula-trades',
-        scope: '夜王',
       },
-      {
-        key: '野生Boss数据',
-        label: '☠️ 野生Boss数据',
-        anchorId: 'wild-boss-data',
-        tabKey: 'wild-boss-data',
-        scope: '地图',
-      },
-      {
-        key: '敌人种族说明',
-        label: '🧬 敌人种族说明',
-        anchorId: 'enemy-race-data',
-        tabKey: 'enemy-race-data',
-        scope: '地图',
-      },
+    ],
+  },
+  {
+    key: '敌人与地图',
+    label: '敌人与地图',
+    icon: '🗺️',
+    desc: '由地图种子决定：野生Boss、种族克制、特殊地形与事件',
+    badges: ['种子'],
+    group: '对局内容',
+    sections: [
+      { key: '野生Boss数据', label: '☠️ 野生Boss数据', anchorId: 'wild-boss-data', tabKey: 'wild-boss-data' },
+      { key: '敌人种族说明', label: '🧬 敌人种族说明', anchorId: 'enemy-race-data', tabKey: 'enemy-race-data' },
       {
         key: '特殊事件及地形效果',
         label: '🌋 特殊事件及地形效果',
         anchorId: 'special-events',
         tabKey: 'special-events',
-        scope: '地图',
       },
     ],
   },
