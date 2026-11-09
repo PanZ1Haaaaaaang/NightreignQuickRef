@@ -147,7 +147,7 @@ function App() {
       case '传说武器详情':
         return <LegendaryWeaponView activeStep={activeStep} />;
       case '角色数据':
-        return <CharacterDataView />;
+        return <CharacterDataView activeSubTab={activeSubTab} />;
       case '游戏机制':
         return <GameMechanicsView functionName="游戏机制" />;
       case '夜王数据':

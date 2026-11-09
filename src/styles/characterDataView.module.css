@@ -1,3 +1,52 @@
+/* ===== 分栏卡片（基础属性与等级成长 / 泪滴转职 / 无敌帧 / 隐士 / 圆桌人物） =====
+   分栏条和内容放在同一张卡片里，避免「分栏条一块、内容卡片一块」的割裂感。 */
+.characterPanel {
+  width: min(1400px, 92%);
+  max-width: 1400px;
+  min-height: auto;
+  margin: 0 auto 20px auto;
+  padding: 6px 24px 24px 24px;
+}
+
+.characterPanel :global(.ant-tabs-nav) {
+  margin-bottom: 10px;
+}
+
+/* 分栏内的原卡片降级为普通内容块：不再有阴影、背景、淡入动画与悬停动效 */
+.characterPanel :global(.content-wrapper).cardItem {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  margin: 0 0 12px 0 !important;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  animation: none;
+  cursor: default;
+}
+
+.characterPanel :global(.content-wrapper).cardItem:hover {
+  box-shadow: none !important;
+}
+
+.characterPanel .cardItem .cardHeader {
+  padding: 0 0 8px 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.characterPanel .cardItem .cardBody {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+@media (max-width: 999px) {
+  .characterPanel {
+    width: 95%;
+    min-width: auto;
+  }
+}
 /* CharacterDataView 组件专用样式 */
 
 .characterDataContainer {
@@ -21,30 +70,12 @@
 .cardItem {
   margin-bottom: 20px !important;
   transition: all var(--transition-normal);
-  cursor: pointer;
-  animation: fadeInUp 0.3s ease-out;
-}
-
-.cardItem:hover {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* 卡片内容动画 */
 .cardItem .cardHeader,
 .cardItem .cardBody {
   transition: all var(--transition-normal);
-}
-
-/* 淡入动画 */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .cardItem .cardHeader {
@@ -62,11 +93,6 @@
 [data-theme='dark'] .cardItem,
 body[tomato-theme='dark'] .cardItem {
   border-color: transparent;
-}
-
-[data-theme='dark'] .cardItem:hover,
-body[tomato-theme='dark'] .cardItem:hover {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
 }
 
 [data-theme='dark'] .cardItem .cardHeader,
