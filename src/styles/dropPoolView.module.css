@@ -273,6 +273,30 @@
   border-bottom: 1px dashed currentColor;
 }
 
+/* 可点击的基池槽位：点开「基池对照表」并定位到对应行 */
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.clickable:active {
+  transform: translateY(1px);
+}
+
+.tipBox {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tipHint {
+  font-size: 11px;
+  opacity: 0.65;
+}
+
 [data-theme='dark'] .kindWeapon {
   border-color: rgba(105, 177, 255, 0.45);
   background: rgba(22, 119, 255, 0.18);
@@ -429,6 +453,76 @@
 
 .elementCode {
   white-space: nowrap;
+}
+
+/* ===== 潜在能力池明细（抽屉） ===== */
+.buffLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 48px 0;
+  color: var(--color-text-2);
+  font-size: 13px;
+}
+
+.buffList {
+  display: flex;
+  flex-direction: column;
+}
+
+.buffItem {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.buffItem:last-child {
+  border-bottom: none;
+}
+
+.buffHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.buffName {
+  color: var(--color-text-1);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.buffTag {
+  margin: 0;
+  padding: 0 6px;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.buffEffect {
+  margin-top: 4px;
+  color: var(--color-text-2);
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* 「普通 +10% / 深夜 +15%」：当前池的数值高亮，另一个淡显 */
+.buffValue {
+  color: var(--color-text-1);
+  font-weight: 600;
+}
+
+.buffValueMuted {
+  color: var(--color-text-3);
+}
+
+.buffFootnote {
+  margin-top: 12px;
+  color: var(--color-text-3);
+  font-size: 11px;
+  line-height: 1.6;
 }
 
 @media (max-width: 768px) {

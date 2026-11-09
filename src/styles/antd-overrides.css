@@ -339,6 +339,20 @@ body[tomato-theme='dark'] .custom-card .ant-card-body {
   white-space: nowrap;
 }
 
+/* 从卡片槽位点进来时高亮的那一行 */
+.base-pool-table tr.base-pool-row-active > td {
+  background: rgba(22, 119, 255, 0.12);
+}
+
+.base-pool-table tr.base-pool-row-active > td:first-child {
+  box-shadow: inset 3px 0 0 #1677ff;
+}
+
+body[tomato-theme='dark'] .base-pool-table tr.base-pool-row-active > td,
+[data-theme='dark'] .base-pool-table tr.base-pool-row-active > td {
+  background: rgba(64, 150, 255, 0.24);
+}
+
 /* ===== 自定义搜索组件样式 ===== */
 .custom-search-wrapper .ant-input {
   border-radius: 8px;

@@ -23,15 +23,24 @@ interface BasePoolDrawerProps {
   onClose: () => void;
   basePools: DropBasePool[];
   kinds: Record<DropKind, string>;
+  /** 从卡片槽位点进来时要高亮并滚动到的基池 kind */
+  focusKind?: string | null;
 }
 
 /**
  * 基池对照表：12 个基池的名称 / 池 ID / 条目数 / 说明。
  * 放在抽屉里，页面本身只留一行入口，不占纵向空间；窄屏下把「名称 + ID + 条目数」并成一格。
  */
-const BasePoolDrawer: React.FC<BasePoolDrawerProps> = ({ open, onClose, basePools, kinds }) => {
+const BasePoolDrawer: React.FC<BasePoolDrawerProps> = ({ open, onClose, basePools, kinds, focusKind }) => {
   const screens = Grid.useBreakpoint();
   const narrow = screens.md === false;
+
+  /** 抽屉动画结束后把目标行滚到视口中间（12 行在手机上放不下） */
+  const scrollToFocus = () => {
+    if (!focusKind) return;
+    const row = document.querySelector(`.base-pool-table tr[data-row-key="${focusKind}"]`);
+    row?.scrollIntoView({ block: 'center' });
+  };
 
   const renderName = (pool: DropBasePool) => (
     <Tag className={`${styles.basePoolTag} ${KIND_CLASS[pool.kind] ?? ''}`}>{kinds[pool.kind]}</Tag>
@@ -101,6 +110,9 @@ const BasePoolDrawer: React.FC<BasePoolDrawerProps> = ({ open, onClose, basePool
         </div>
       }
       styles={{ body: { padding: '12px 16px 20px' } }}
+      afterOpenChange={(visible) => {
+        if (visible) scrollToFocus();
+      }}
     >
       <Table<DropBasePool>
         className="base-pool-table"
@@ -111,6 +123,7 @@ const BasePoolDrawer: React.FC<BasePoolDrawerProps> = ({ open, onClose, basePool
         bordered
         pagination={false}
         tableLayout="fixed"
+        rowClassName={(pool) => (pool.kind === focusKind ? 'base-pool-row-active' : '')}
       />
 
       <div className={styles.basePoolNotes}>

@@ -4,8 +4,9 @@ import { TableOutlined } from '@ant-design/icons';
 import dropPoolsJson from '../data/zh-CN/drop_pools.json';
 import type { DropGroup, DropPoolsData, DropSegment } from '../types';
 import { POTENTIAL_POOL_LABEL } from '../config/potentialPoolConfig';
-import { KIND_CLASS } from './dropPoolView/poolKinds';
+import { BASE_POOL_KINDS, KIND_CLASS } from './dropPoolView/poolKinds';
 import BasePoolDrawer from './dropPoolView/BasePoolDrawer';
+import PotentialPoolDrawer from './dropPoolView/PotentialPoolDrawer';
 import styles from '../styles/dropPoolView.module.css';
 
 const { Title, Text } = Typography;
@@ -44,8 +45,14 @@ const hasState = (group: DropGroup, nightState: NightState) => {
  * buff 段使用「局内-潜在能力」的词条池标签（buff / 紫buff / 特殊buff池…），
  * 普通池蓝色、其余紫色；徘徊赐福金色；锻造石【2】紫色。
  * 第四项 note：元素变体（出血 / 冻伤 / 火焰…）、护符分类、特殊效果名等；detail 只放池内拆分。
+ * 12 个基池的槽位可点击：打开「基池对照表」并高亮对应行；
+ * buff 槽位可点击：打开「潜在能力池明细」，词条数据按需懒加载。
  */
-const SegmentChip: React.FC<{ segment: DropSegment }> = ({ segment }) => {
+const SegmentChip: React.FC<{
+  segment: DropSegment;
+  onPoolClick?: (kind: string) => void;
+  onBuffClick?: (pool: string) => void;
+}> = ({ segment, onPoolClick, onBuffClick }) => {
   const [percent, kind, pool, note, detail] = segment;
   let label = kindLabel(kind);
   let className = KIND_CLASS[kind] ?? '';
@@ -64,15 +71,32 @@ const SegmentChip: React.FC<{ segment: DropSegment }> = ({ segment }) => {
     label = `护符池（${note}）`;
   }
 
+  const canOpenBasePool = BASE_POOL_KINDS.has(kind) && Boolean(onPoolClick);
+  const canOpenBuff = kind === 'buff' && Boolean(pool) && Boolean(onBuffClick);
+  const clickable = canOpenBasePool || canOpenBuff;
+
   const chip = (
-    <span className={`${styles.segment} ${className}`}>
+    <span
+      className={`${styles.segment} ${className} ${clickable ? styles.clickable : ''}`}
+      onClick={
+        canOpenBasePool ? () => onPoolClick?.(kind) : canOpenBuff ? () => onBuffClick?.(pool as string) : undefined
+      }
+    >
       <b className={styles.percent}>{percent}%</b>
       <span>{label}</span>
     </span>
   );
 
-  // 悬停说明：只放池内拆分；癫火武器额外列出 3 把可能武器
-  const tooltip = kind === 'flameWeapon' && detail ? `可能的武器：${detail}` : (detail ?? null);
+  // 悬停说明：只放池内拆分；癫火武器额外列出 3 把可能武器；可点的槽位提示点了会打开什么
+  const detailText = kind === 'flameWeapon' && detail ? `可能的武器：${detail}` : (detail ?? null);
+  const clickHint = canOpenBasePool ? '点击查看基池对照表' : canOpenBuff ? '点击查看该池可能的词条' : null;
+  const tooltip =
+    detailText || clickHint ? (
+      <div className={styles.tipBox}>
+        {detailText && <div>{detailText}</div>}
+        {clickHint && <div className={styles.tipHint}>{clickHint}</div>}
+      </div>
+    ) : null;
 
   if (tooltip) {
     return (
@@ -84,11 +108,13 @@ const SegmentChip: React.FC<{ segment: DropSegment }> = ({ segment }) => {
   return chip;
 };
 
-const DropCard: React.FC<{ group: DropGroup; nightMode: boolean; nightState: NightState }> = ({
-  group,
-  nightMode,
-  nightState,
-}) => {
+const DropCard: React.FC<{
+  group: DropGroup;
+  nightMode: boolean;
+  nightState: NightState;
+  onPoolClick?: (kind: string) => void;
+  onBuffClick?: (pool: string) => void;
+}> = ({ group, nightMode, nightState, onPoolClick, onBuffClick }) => {
   const options = optionsOf(group, nightMode, nightState);
   const titleName = group.names[0] ?? '未命名';
   const otherNames = group.names.slice(1);
@@ -128,7 +154,7 @@ const DropCard: React.FC<{ group: DropGroup; nightMode: boolean; nightState: Nig
             </Tooltip>
             <div className={styles.segments}>
               {option.segments.map((segment, segmentIndex) => (
-                <SegmentChip key={segmentIndex} segment={segment} />
+                <SegmentChip key={segmentIndex} segment={segment} onPoolClick={onPoolClick} onBuffClick={onBuffClick} />
               ))}
             </div>
           </div>
@@ -144,9 +170,25 @@ const DropPoolView: React.FC = () => {
   const [keyword, setKeyword] = useState('');
   const [page, setPage] = useState(1);
   const [basePoolOpen, setBasePoolOpen] = useState(false);
+  /** 从卡片槽位点进来时要高亮的基池 kind；从按钮打开则为 null */
+  const [basePoolKind, setBasePoolKind] = useState<string | null>(null);
+  /** 潜在能力池明细：当前池 key（normal / purple / …） */
+  const [buffOpen, setBuffOpen] = useState(false);
+  const [buffPool, setBuffPool] = useState<string | null>(null);
   const screens = Grid.useBreakpoint();
   // 窄屏时把「基池对照表」放到说明末尾：Alert 右上角放按钮会把标题挤成多行
   const narrow = screens.md === false;
+
+  const openBasePool = (kind?: string) => {
+    setBasePoolKind(kind ?? null);
+    setBasePoolOpen(true);
+  };
+
+  /** buff 槽位：打开潜在能力池明细（词条 JSON 在抽屉里懒加载） */
+  const openBuffPool = (pool: string) => {
+    setBuffPool(pool);
+    setBuffOpen(true);
+  };
 
   const filtered = useMemo(() => {
     const kw = keyword.trim().toLowerCase();
@@ -173,7 +215,7 @@ const DropPoolView: React.FC = () => {
   const stateLabel = DATA.meta.states[nightState] ?? '';
 
   const basePoolButton = (
-    <Button size="small" icon={<TableOutlined />} onClick={() => setBasePoolOpen(true)}>
+    <Button size="small" icon={<TableOutlined />} onClick={() => openBasePool()}>
       基池对照表
     </Button>
   );
@@ -268,7 +310,14 @@ const DropPoolView: React.FC = () => {
         <>
           <div className={styles.grid} id="drop-pool-grid">
             {pageGroups.map((group) => (
-              <DropCard key={group.id} group={group} nightMode={mode === 'night'} nightState={nightState} />
+              <DropCard
+                key={group.id}
+                group={group}
+                nightMode={mode === 'night'}
+                nightState={nightState}
+                onPoolClick={openBasePool}
+                onBuffClick={openBuffPool}
+              />
             ))}
           </div>
           <div className={styles.pager}>
@@ -295,7 +344,10 @@ const DropPoolView: React.FC = () => {
         onClose={() => setBasePoolOpen(false)}
         basePools={DATA.meta.basePools}
         kinds={DATA.meta.kinds}
+        focusKind={basePoolKind}
       />
+
+      <PotentialPoolDrawer open={buffOpen} onClose={() => setBuffOpen(false)} poolKey={buffPool} />
     </div>
   );
 };

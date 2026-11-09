@@ -187,7 +187,7 @@
         "entry_id":"8430000",
         "entry_name":"强化突刺反击",
         "entry_type":"强化",
-        "explanation":"触发突刺反击时，额外造成物理伤害+10% \/ +15% \/ +20%",
+        "explanation":"触发突刺反击时，额外造成物理伤害+20%",
         "superposability":"可叠加",
         "pools":["purple","night1"]
     },

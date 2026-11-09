@@ -1,5 +1,21 @@
 import styles from '../../styles/dropPoolView.module.css';
 
+/** 12 个基池的 kind：这些槽位可以点开「基池对照表」并定位到对应行 */
+export const BASE_POOL_KINDS = new Set([
+  'blueWeapon',
+  'blueChar',
+  'purpleWeapon',
+  'purpleChar',
+  'redWeapon',
+  'redChar',
+  'goldWeapon',
+  'goldChar',
+  'narrowBlueWeapon',
+  'narrowBlueChar',
+  'narrowPurpleWeapon',
+  'narrowRedWeapon',
+]);
+
 /**
  * 槽位种类 → 配色。
  * 卡片上的槽位 chip 与「基池对照表」抽屉共用，保证同一个池在两处颜色一致。

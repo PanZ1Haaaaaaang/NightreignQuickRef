@@ -458,6 +458,13 @@
         "superposability":"可叠加"
     },
     {
+        "entry_id":"8430000",
+        "entry_name":"强化突刺反击",
+        "entry_type":"强化",
+        "explanation":"触发突刺反击时，额外造成物理伤害+10% \/ +15% \/ +20%",
+        "superposability":"可叠加"
+    },
+    {
         "entry_id":"8440100",
         "entry_name":"使用圣杯瓶时，连同恢复周围我方人物",
         "explanation":"未实装？",
