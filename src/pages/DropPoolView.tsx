@@ -1,9 +1,24 @@
 import { useMemo, useState } from 'react';
-import { Alert, Button, Empty, Grid, Input, Pagination, Segmented, Space, Tag, Tooltip, Typography } from 'antd';
+import {
+  Alert,
+  Button,
+  Empty,
+  Grid,
+  Input,
+  Pagination,
+  Segmented,
+  Select,
+  Space,
+  Switch,
+  Tag,
+  Tooltip,
+  Typography,
+} from 'antd';
 import { TableOutlined } from '@ant-design/icons';
 import dropPoolsJson from '../data/zh-CN/drop_pools.json';
-import type { DropGroup, DropPoolsData, DropSegment } from '../types';
+import type { DropGroup, DropOption, DropPoolsData, DropSegment } from '../types';
 import { POTENTIAL_POOL_LABEL } from '../config/potentialPoolConfig';
+import { TERRAIN_OPTIONS, terrainOf, type TerrainKey } from '../config/terrainConfig';
 import { BASE_POOL_KINDS, KIND_CLASS } from './dropPoolView/poolKinds';
 import BasePoolDrawer from './dropPoolView/BasePoolDrawer';
 import PotentialPoolDrawer from './dropPoolView/PotentialPoolDrawer';
@@ -39,6 +54,10 @@ const hasState = (group: DropGroup, nightState: NightState) => {
   if (nightState === 'invasion') return Boolean(group.invasionOptions?.length);
   return true;
 };
+
+/** 当前展示的选项里是否能出金：只要有权重带金武器池 / 金角色池就算 */
+const hasGoldDrop = (options: DropOption[]) =>
+  options.some((option) => option.segments.some(([, kind]) => kind === 'goldWeapon' || kind === 'goldChar'));
 
 /**
  * 单个槽位：百分比 + 掉落类型
@@ -168,6 +187,8 @@ const DropPoolView: React.FC = () => {
   const [mode, setMode] = useState<'normal' | 'night'>('normal');
   const [nightState, setNightState] = useState<NightState>('normal');
   const [keyword, setKeyword] = useState('');
+  const [terrain, setTerrain] = useState<TerrainKey | null>(null);
+  const [goldOnly, setGoldOnly] = useState(false);
   const [page, setPage] = useState(1);
   const [basePoolOpen, setBasePoolOpen] = useState(false);
   /** 从卡片槽位点进来时要高亮的基池 kind；从按钮打开则为 null */
@@ -196,7 +217,11 @@ const DropPoolView: React.FC = () => {
     return DATA.groups.filter((group) => {
       // 变异 / 入侵只列出确实有这套掉落的据点
       if (night && !hasState(group, nightState)) return false;
+      // 特殊地形（火山 / 山顶 / 隐城 / 大空洞）
+      if (terrain && terrainOf(group) !== terrain) return false;
       const options = optionsOf(group, night, nightState);
+      // 只看能出金：当前展示的选项里带金武器池 / 金角色池
+      if (goldOnly && !hasGoldDrop(options)) return false;
       if (kw) {
         const ids = options.map((option) => String(option.id));
         const matched =
@@ -205,7 +230,7 @@ const DropPoolView: React.FC = () => {
       }
       return true;
     });
-  }, [mode, nightState, keyword]);
+  }, [mode, nightState, keyword, terrain, goldOnly]);
 
   const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const currentPage = Math.min(page, pageCount);
@@ -286,6 +311,32 @@ const DropPoolView: React.FC = () => {
             </Space>
           )}
 
+          <Space size={[8, 8]} wrap>
+            <span className={styles.filterLabel}>特殊地形</span>
+            <Select
+              allowClear
+              placeholder="全部地形"
+              style={{ width: 120 }}
+              value={terrain}
+              onChange={(value) => {
+                setTerrain((value as TerrainKey | undefined) ?? null);
+                resetPage();
+              }}
+              options={TERRAIN_OPTIONS}
+            />
+          </Space>
+
+          <Space size={[8, 8]} wrap>
+            <span className={styles.filterLabel}>只看能出金</span>
+            <Switch
+              checked={goldOnly}
+              onChange={(checked) => {
+                setGoldOnly(checked);
+                resetPage();
+              }}
+            />
+          </Space>
+
           <Input.Search
             allowClear
             placeholder="搜索地形 / 敌人 / 掉落ID"
@@ -302,6 +353,8 @@ const DropPoolView: React.FC = () => {
         共 {filtered.length} 颗球
         {keyword && ` · 搜索「${keyword}」`}
         {mode === 'night' && ` · 深夜 · ${stateLabel}据点`}
+        {terrain && ` · ${TERRAIN_OPTIONS.find((option) => option.value === terrain)?.label ?? ''}`}
+        {goldOnly && ' · 只看能出金'}
       </div>
 
       {filtered.length === 0 ? (
