@@ -12474,13 +12474,7 @@
       "id": "6640000",
       "names": [
         "大空洞-（火焰）左上主城楼顶",
-        "铃珠猎人",
-        "大树守卫",
-        "龙装大树守卫",
-        "黑剑眷属",
-        "接肢君王",
-        "死亡仪式鸟",
-        "腐败树灵"
+        "大树守卫"
       ],
       "options": [
         {
@@ -12535,13 +12529,7 @@
       "id": "6640100",
       "names": [
         "大空洞-（魔力）左上主城楼顶",
-        "铃珠猎人",
-        "大树守卫",
-        "龙装大树守卫",
-        "黑剑眷属",
-        "接肢君王",
-        "死亡仪式鸟",
-        "腐败树灵"
+        "黑剑眷属"
       ],
       "options": [
         {
@@ -12578,6 +12566,1085 @@
         },
         {
           "id": 6640102,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6702000",
+      "names": [
+        "大空洞-（腐败）右下主城",
+        "尊腐骑士"
+      ],
+      "options": [
+        {
+          "id": 6702000,
+          "segments": [
+            [
+              25,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              45,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              22,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6702001,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6702010,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              67,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6702011,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6702100",
+      "names": [
+        "大空洞-（腐败）右下主城",
+        "腐败化身"
+      ],
+      "options": [
+        {
+          "id": 6702100,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              65,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ]
+          ]
+        },
+        {
+          "id": 6702101,
+          "segments": [
+            [
+              90,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              10,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6702102,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6702110,
+          "segments": [
+            [
+              35,
+              "redChar"
+            ],
+            [
+              65,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ]
+          ]
+        },
+        {
+          "id": 6702111,
+          "segments": [
+            [
+              30,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              55,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              15,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6702112,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6702200",
+      "names": [
+        "大空洞-（腐败）右下主城",
+        "尊腐骑士们"
+      ],
+      "options": [
+        {
+          "id": 6702200,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              65,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ]
+          ]
+        },
+        {
+          "id": 6702201,
+          "segments": [
+            [
+              90,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              10,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6702202,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6702210,
+          "segments": [
+            [
+              35,
+              "redChar"
+            ],
+            [
+              65,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ]
+          ]
+        },
+        {
+          "id": 6702211,
+          "segments": [
+            [
+              30,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              55,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              15,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6702212,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6702300",
+      "names": [
+        "大空洞-（腐败）右下主城",
+        "黄金河马"
+      ],
+      "options": [
+        {
+          "id": 6702300,
+          "segments": [
+            [
+              25,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              45,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              22,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6702301,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6702310,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              67,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 腐败变体"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6702311,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6703000",
+      "names": [
+        "大空洞-（神圣）右下主城",
+        "神鸟战士"
+      ],
+      "options": [
+        {
+          "id": 6703000,
+          "segments": [
+            [
+              25,
+              "narrowBlueChar",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              45,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              22,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6703001,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6703010,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              67,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6703011,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6703100",
+      "names": [
+        "大空洞-（神圣）右下主城",
+        "神兽战士（电）"
+      ],
+      "options": [
+        {
+          "id": 6703100,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              65,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6703101,
+          "segments": [
+            [
+              90,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              10,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6703102,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6703110,
+          "segments": [
+            [
+              35,
+              "redChar"
+            ],
+            [
+              65,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6703111,
+          "segments": [
+            [
+              30,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              55,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              15,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6703112,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6703200",
+      "names": [
+        "大空洞-（神圣）右下主城",
+        "神兽战士（冰）"
+      ],
+      "options": [
+        {
+          "id": 6703200,
+          "segments": [
+            [
+              35,
+              "purpleChar"
+            ],
+            [
+              65,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6703201,
+          "segments": [
+            [
+              90,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              10,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6703202,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6703210,
+          "segments": [
+            [
+              35,
+              "redChar"
+            ],
+            [
+              65,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ]
+          ]
+        },
+        {
+          "id": 6703211,
+          "segments": [
+            [
+              30,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              55,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 25% 原版 / 75% 神圣变体"
+            ],
+            [
+              15,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6703212,
+          "segments": [
+            [
+              80,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ],
+            [
+              15,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6710000",
+      "names": [
+        "大空洞-右下主城下水道",
+        "失乡骑士"
+      ],
+      "options": [
+        {
+          "id": 6710000,
+          "segments": [
+            [
+              25,
+              "blueChar"
+            ],
+            [
+              45,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ],
+            [
+              22,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6710001,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6710010,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              67,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6710011,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6711000",
+      "names": [
+        "大空洞-右下主城下水道",
+        "咒剑士"
+      ],
+      "options": [
+        {
+          "id": 6711000,
+          "segments": [
+            [
+              25,
+              "blueChar"
+            ],
+            [
+              45,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ],
+            [
+              22,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6711001,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6711010,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              67,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6711011,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6712000",
+      "names": [
+        "大空洞-右下主城下水道",
+        "恶兆之子"
+      ],
+      "options": [
+        {
+          "id": 6712000,
+          "segments": [
+            [
+              25,
+              "blueChar"
+            ],
+            [
+              45,
+              "narrowBlueWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ],
+            [
+              22,
+              "narrowPurpleWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6712001,
+          "segments": [
+            [
+              100,
+              "buff",
+              "normal"
+            ]
+          ]
+        }
+      ],
+      "mutationOptions": [
+        {
+          "id": 6712010,
+          "segments": [
+            [
+              25,
+              "redChar"
+            ],
+            [
+              67,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ],
+            [
+              8,
+              "goldWeapon"
+            ]
+          ]
+        },
+        {
+          "id": 6712011,
+          "segments": [
+            [
+              90,
+              "buff",
+              "normal"
+            ],
+            [
+              10,
+              "buff",
+              "night2"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6721000",
+      "names": [
+        "大空洞-（腐败）右下主城楼顶",
+        "铃珠猎人",
+        "腐败树灵"
+      ],
+      "options": [
+        {
+          "id": 6721000,
+          "segments": [
+            [
+              35,
+              "redChar"
+            ],
+            [
+              65,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ]
+          ]
+        },
+        {
+          "id": 6721001,
+          "segments": [
+            [
+              35,
+              "redChar"
+            ],
+            [
+              65,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ]
+          ]
+        },
+        {
+          "id": 6721002,
+          "segments": [
+            [
+              95,
+              "buff",
+              "purple"
+            ],
+            [
+              5,
+              "wending"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6721100",
+      "names": [
+        "大空洞-（神圣）右下主城楼顶",
+        "接肢君王",
+        "死亡仪式鸟"
+      ],
+      "options": [
+        {
+          "id": 6721100,
+          "segments": [
+            [
+              35,
+              "redChar"
+            ],
+            [
+              65,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ]
+          ]
+        },
+        {
+          "id": 6721101,
+          "segments": [
+            [
+              35,
+              "redChar"
+            ],
+            [
+              65,
+              "narrowRedWeapon",
+              null,
+              null,
+              "池内 60% 原版 / 25% 属性 / 15% 异常"
+            ]
+          ]
+        },
+        {
+          "id": 6721102,
           "segments": [
             [
               95,
