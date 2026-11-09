@@ -344,11 +344,24 @@ export interface DropGroup {
   invasionOptions?: DropOption[];
 }
 
+/** 12 个基池（「基池对照表」抽屉用，口径见 docs/verify/掉落池池子口径.md） */
+export interface DropBasePool {
+  /** 与 meta.kinds 的 key 一致，可直接取标签文字与配色 */
+  kind: DropKind;
+  /** 池 ID；窄蓝角色池有 3000250 / 3000251 两个等价 ID */
+  ids: string[];
+  /** 条目数：按基础武器 ID 去重，并剔除权重 0 的空占位条目 */
+  count: number;
+  /** 一句话说明 */
+  note: string;
+}
+
 export interface DropPoolsData {
   meta: {
     sourceNote: string;
     states: Record<'normal' | 'mutation' | 'invasion', string>;
     kinds: Record<DropKind, string>;
+    basePools: DropBasePool[];
   };
   groups: DropGroup[];
 }

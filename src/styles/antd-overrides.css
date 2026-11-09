@@ -325,6 +325,20 @@ body[tomato-theme='dark'] .custom-card .ant-card-body {
 
 /* 已合并到999px的媒体查询中 */
 
+/* ===== 掉落池 · 基池对照表（抽屉内的窄表，不套用移动端 800px 最小宽度） ===== */
+.base-pool-table .ant-table {
+  min-width: 0;
+}
+
+.base-pool-table .ant-table-cell {
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.base-pool-table .ant-table-thead > tr > th {
+  white-space: nowrap;
+}
+
 /* ===== 自定义搜索组件样式 ===== */
 .custom-search-wrapper .ant-input {
   border-radius: 8px;

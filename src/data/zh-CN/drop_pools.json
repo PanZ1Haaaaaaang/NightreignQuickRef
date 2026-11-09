@@ -1,6 +1,6 @@
 {
   "meta": {
-    "sourceNote": "数据来自 Smithbox 2.2.6 解包（ItemLotParam_enemy → ItemTableParam → 武器 / 潜在能力 / 遗物），含 DLC 新增「湖沼」「锻造村」；百分比为球选项内各槽位的权重占比。",
+    "sourceNote": "数据来自 Smithbox 2.2.6 解包（ItemLotParam_enemy → ItemTableParam → 武器 / 潜在能力 / 遗物）",
     "states": {
       "normal": "普通",
       "mutation": "变异",
@@ -29,7 +29,106 @@
       "rune1w": "1w卢恩",
       "rune2w": "2w卢恩",
       "rune3w": "3w卢恩"
-    }
+    },
+    "basePools": [
+      {
+        "kind": "blueWeapon",
+        "ids": [
+          "7910021"
+        ],
+        "count": 141,
+        "note": "132 把常规蓝武 + 9 把特殊蓝武（结晶小刀、梵雷的花束、象牙小镰刀、波纹剑、恶兆猎人大柴刀、大蛇狩猎矛、残缺波纹戟、神圣绘画盾、猎犬长牙）"
+      },
+      {
+        "kind": "blueChar",
+        "ids": [
+          "3000201"
+        ],
+        "count": 141,
+        "note": "与蓝武器池同一套，按角色分配"
+      },
+      {
+        "kind": "purpleWeapon",
+        "ids": [
+          "2000003"
+        ],
+        "count": 112,
+        "note": "全部紫武"
+      },
+      {
+        "kind": "purpleChar",
+        "ids": [
+          "3000300"
+        ],
+        "count": 112,
+        "note": "与紫武器池同一套，按角色分配"
+      },
+      {
+        "kind": "redWeapon",
+        "ids": [
+          "2000008"
+        ],
+        "count": 110,
+        "note": "紫武的诅咒（红）版本；少 2 把，因为托莉娜烛火 / 灵火火把没有诅咒版"
+      },
+      {
+        "kind": "redChar",
+        "ids": [
+          "3000310"
+        ],
+        "count": 110,
+        "note": "与红武器池同一套，按角色分配"
+      },
+      {
+        "kind": "goldWeapon",
+        "ids": [
+          "2000004"
+        ],
+        "count": 26,
+        "note": "26 把传说武器（玛莉卡的石槌、暗月大剑、玛莲妮亚的义手刀…）"
+      },
+      {
+        "kind": "goldChar",
+        "ids": [
+          "3000400"
+        ],
+        "count": 26,
+        "note": "与金武器池同一套，按角色分配"
+      },
+      {
+        "kind": "narrowBlueWeapon",
+        "ids": [
+          "2000052"
+        ],
+        "count": 132,
+        "note": "「战灰可换」的蓝武"
+      },
+      {
+        "kind": "narrowBlueChar",
+        "ids": [
+          "3000250",
+          "3000251"
+        ],
+        "count": 132,
+        "note": "窄蓝的按角色版；两个 ID 内容相同"
+      },
+      {
+        "kind": "narrowPurpleWeapon",
+        "ids": [
+          "2000053"
+        ],
+        "count": 45,
+        "note": "「战灰可换」的紫武"
+      },
+      {
+        "kind": "narrowRedWeapon",
+        "ids": [
+          "2000058"
+        ],
+        "count": 43,
+        "note": "「战灰可换」的诅咒武器"
+      }
+    ]
   },
   "groups": [
     {

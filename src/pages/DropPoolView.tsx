@@ -1,8 +1,11 @@
 import { useMemo, useState } from 'react';
-import { Alert, Empty, Input, Pagination, Segmented, Space, Tag, Tooltip, Typography } from 'antd';
+import { Alert, Button, Empty, Grid, Input, Pagination, Segmented, Space, Tag, Tooltip, Typography } from 'antd';
+import { TableOutlined } from '@ant-design/icons';
 import dropPoolsJson from '../data/zh-CN/drop_pools.json';
 import type { DropGroup, DropPoolsData, DropSegment } from '../types';
 import { POTENTIAL_POOL_LABEL } from '../config/potentialPoolConfig';
+import { KIND_CLASS } from './dropPoolView/poolKinds';
+import BasePoolDrawer from './dropPoolView/BasePoolDrawer';
 import styles from '../styles/dropPoolView.module.css';
 
 const { Title, Text } = Typography;
@@ -12,34 +15,6 @@ const PAGE_SIZE = 12;
 
 /** 深夜模式下据点的三种状态（变异 / 入侵可分别对应 +10 / +50 两套掉落） */
 type NightState = 'normal' | 'mutation' | 'invasion';
-
-const KIND_CLASS: Record<string, string> = {
-  // 12 个基池
-  blueWeapon: styles.kindWeapon,
-  blueChar: styles.kindWeapon,
-  purpleWeapon: styles.kindWeaponPurple,
-  purpleChar: styles.kindWeaponPurple,
-  redWeapon: styles.kindCursed,
-  redChar: styles.kindCharCursed,
-  goldWeapon: styles.kindWending,
-  goldChar: styles.kindWending,
-  // 窄池：「窄」= 战灰可换
-  narrowBlueWeapon: styles.kindWeapon,
-  narrowBlueChar: styles.kindChar,
-  narrowPurpleWeapon: styles.kindWeaponPurple,
-  narrowRedWeapon: styles.kindCursed,
-  // 其他池 / 具体条目
-  buff: styles.kindBuff,
-  accessory: styles.kindAccessory,
-  wending: styles.kindWending,
-  flameWeapon: styles.kindFlameWeapon,
-  specialBuff: styles.kindAntique,
-  weaponItem: styles.kindWeapon,
-  forgeStone: styles.kindBuffPurple,
-  rune1w: styles.kindWeapon,
-  rune2w: styles.kindBuffPurple,
-  rune3w: styles.kindWending,
-};
 
 const kindLabel = (kind: string) => DATA.meta.kinds[kind as keyof typeof DATA.meta.kinds] ?? kind;
 
@@ -168,6 +143,10 @@ const DropPoolView: React.FC = () => {
   const [nightState, setNightState] = useState<NightState>('normal');
   const [keyword, setKeyword] = useState('');
   const [page, setPage] = useState(1);
+  const [basePoolOpen, setBasePoolOpen] = useState(false);
+  const screens = Grid.useBreakpoint();
+  // 窄屏时把「基池对照表」放到说明末尾：Alert 右上角放按钮会把标题挤成多行
+  const narrow = screens.md === false;
 
   const filtered = useMemo(() => {
     const kw = keyword.trim().toLowerCase();
@@ -193,6 +172,12 @@ const DropPoolView: React.FC = () => {
 
   const stateLabel = DATA.meta.states[nightState] ?? '';
 
+  const basePoolButton = (
+    <Button size="small" icon={<TableOutlined />} onClick={() => setBasePoolOpen(true)}>
+      基池对照表
+    </Button>
+  );
+
   return (
     <div className="content-wrapper" id="drop-pool-top">
       <Title level={3} className={styles.title}>
@@ -204,6 +189,7 @@ const DropPoolView: React.FC = () => {
         showIcon
         className={styles.intro}
         title="一颗「潜在能力球」（掉球）里有 2~3 个选项，玩家只能选一个；每个选项下是各槽位的权重占比"
+        action={narrow ? undefined : basePoolButton}
         description={
           <div className={styles.introDesc}>
             <div>普通模式：据点 / 精英的普通掉落，选项数量 2~3 个。</div>
@@ -214,10 +200,10 @@ const DropPoolView: React.FC = () => {
             <div>
               槽位类型按解包物品表判定（武器 / 诅咒武器 / 潜在能力 / 遗物 / 护符 / 道具），鼠标移到选项上可看掉落 ID。
               潜在能力池：普通 buff 为蓝色、高级 buff 为紫色；5% 的道具槽是徘徊赐福（金色）；锻造石【2】为紫色。
-              武器槽会标到具体池：蓝武器池 / 蓝角色池 / 紫武器池 / 紫角色池 / 红武器池 / 红角色池 / 金武器池 /
-              金角色池； 「窄」池指战灰可换的武器（窄蓝武器池 / 窄蓝角色池 / 窄紫武器池 / 窄红武器池），悬停可看池内 75%
-              变体 / 25% 原版的构成。
+              武器槽会标到具体池（12 个基池的名称、池 ID、条目数见「基池对照表」）；「窄」池 = 战灰可换的武器，
+              悬停可看池内 75% 变体 / 25% 原版的构成。
             </div>
+            {narrow && <div className={styles.introAction}>{basePoolButton}</div>}
           </div>
         }
       />
@@ -300,10 +286,16 @@ const DropPoolView: React.FC = () => {
 
       <div className={styles.footnote}>
         <Text type="secondary" style={{ fontSize: 12 }}>
-          {DATA.meta.sourceNote} 普通 / 变异 / 入侵分别对应解包里的 +0 / +10 / +50 三套掉落（个别据点如 6500920 是 +5 /
-          +40）；入侵球 5 个以上槽位是两套球拼一行，这里只展示后一半。「窄」= 战灰可换的武器池。
+          {DATA.meta.sourceNote} & 黑夜君临 掉落数据 by：Supuritto
         </Text>
       </div>
+
+      <BasePoolDrawer
+        open={basePoolOpen}
+        onClose={() => setBasePoolOpen(false)}
+        basePools={DATA.meta.basePools}
+        kinds={DATA.meta.kinds}
+      />
     </div>
   );
 };

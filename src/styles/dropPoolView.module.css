@@ -13,6 +13,11 @@
   font-size: 12px;
 }
 
+.introAction {
+  align-self: flex-start;
+  margin-top: 6px;
+}
+
 .filterBar {
   padding: 12px;
   border: 1px solid var(--theme-border);
@@ -347,6 +352,83 @@
 
 .footnote {
   margin-top: 16px;
+}
+
+/* ===== 基池对照表（抽屉） ===== */
+.basePoolTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.basePoolTitleMain {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.basePoolTitleSub {
+  color: var(--color-text-3);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.basePoolTag {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.basePoolId {
+  color: var(--color-text-2);
+  font-family: 'Consolas', 'SFMono-Regular', monospace;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.basePoolCount {
+  font-variant-numeric: tabular-nums;
+}
+
+.basePoolNote {
+  color: var(--color-text-2);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.basePoolCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.basePoolMeta {
+  color: var(--color-text-3);
+  font-size: 11px;
+}
+
+.basePoolNotes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+  color: var(--color-text-2);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.basePoolNotes b {
+  color: var(--color-text-1);
+  font-weight: 600;
+}
+
+.elementCodes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  font-size: 11px;
+}
+
+.elementCode {
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
