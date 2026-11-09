@@ -117,7 +117,7 @@ const DiscoveryDrawer: React.FC<DiscoveryDrawerProps> = ({ open, onClose, setup,
 
         <div className={styles.discRow}>
           <div className={styles.discInfo}>
-            <span className={styles.discLabel}>铁眼被动「观察入微」</span>
+            <span className={styles.discLabel}>铁之眼被动「观察入微」</span>
             <span className={styles.discNote}>+30/人 · 最多 3 人</span>
           </div>
           <Segmented

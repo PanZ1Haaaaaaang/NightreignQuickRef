@@ -46,7 +46,7 @@ const RecoveryCalculator: React.FC = () => {
   const characterOptions = [
     { value: 1120, label: '追踪者', focus: 140 },
     { value: 1280, label: '守护者', focus: 115 },
-    { value: 820, label: '铁眼', focus: 115 },
+    { value: 820, label: '铁之眼', focus: 115 },
     { value: 860, label: '女爵', focus: 180 },
     { value: 1200, label: '无赖', focus: 95 },
     { value: 1000, label: '执行者', focus: 100 },

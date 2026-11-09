@@ -9,6 +9,7 @@ import styles from '../styles/characterDataView.module.css';
 import DataManager from '../utils/dataManager';
 import DataSourceTooltip from '../components/DataSourceTooltip';
 import TeardropConversion from './characterDataView/TeardropConversion';
+import CharacterName from './characterDataView/CharacterName';
 
 const { Title, Text } = Typography;
 
@@ -525,7 +526,7 @@ const CharacterDataView: React.FC = () => {
                     fontSize: '13px',
                   }}
                 >
-                  {text}
+                  <CharacterName name={text} />
                 </span>
               ),
             },
@@ -719,10 +720,14 @@ const CharacterDataView: React.FC = () => {
       title: '角色',
       dataIndex: 'character',
       key: 'character',
-      width: 60,
+      width: 84,
       fixed: 'left',
       align: 'center' as const,
-      render: (text: string) => <Text style={{ color: 'var(--color-text-1)' }}>{text}</Text>,
+      render: (text: string) => (
+        <Text style={{ color: 'var(--color-text-1)' }}>
+          <CharacterName name={text} size={16} />
+        </Text>
+      ),
     },
     // 动态生成属性列（排除"擅长武器"）
     ...getAttributeNames()
@@ -1139,7 +1144,7 @@ const CharacterDataView: React.FC = () => {
                                   fontSize: '13px',
                                 }}
                               >
-                                {text}
+                                <CharacterName name={text} />
                               </span>
                             ),
                           },
@@ -1201,7 +1206,7 @@ const CharacterDataView: React.FC = () => {
                                   fontSize: '13px',
                                 }}
                               >
-                                {text}
+                                <CharacterName name={text} />
                               </span>
                             ),
                           },
@@ -1263,7 +1268,7 @@ const CharacterDataView: React.FC = () => {
                                   fontSize: '13px',
                                 }}
                               >
-                                {text}
+                                <CharacterName name={text} />
                               </span>
                             ),
                           },

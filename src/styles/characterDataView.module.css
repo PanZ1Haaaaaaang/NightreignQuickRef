@@ -445,3 +445,27 @@ body[tomato-theme='dark']
     padding-left: 0;
   }
 }
+
+/* 渡夜者名字 + 图标 */
+.characterName {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  vertical-align: middle;
+}
+
+/* 图标在上、名字在下 */
+.characterNameStacked {
+  flex-direction: column;
+  gap: 6px;
+}
+
+.characterIcon {
+  flex: none;
+  padding: 2px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, #2b4468 0%, #101e33 100%);
+  box-shadow: 0 0 0 1px rgba(95, 142, 247, 0.35);
+  object-fit: contain;
+  box-sizing: border-box;
+}
