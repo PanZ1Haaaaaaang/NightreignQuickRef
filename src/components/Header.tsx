@@ -218,7 +218,6 @@ const Header: React.FC<HeaderProps> = React.memo(
                               <br />• 冲击力说明 + 救人值
                               <br />• 夜王弱点硬直
                               <br />• 仇恨机制
-                              <br />• 传说武器清单待补 2 把
                             </div>
                           </div>
                         </div>
