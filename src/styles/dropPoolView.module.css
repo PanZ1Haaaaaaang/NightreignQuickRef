@@ -14,8 +14,19 @@
 }
 
 .introAction {
+  display: flex;
+  flex-wrap: wrap;
   align-self: flex-start;
+  gap: 8px;
   margin-top: 6px;
+}
+
+/* Alert 右上角：基池对照表 / 观察力 两个按钮竖排 */
+.alertActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
 }
 
 .filterBar {

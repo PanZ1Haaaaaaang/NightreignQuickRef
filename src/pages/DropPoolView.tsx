@@ -291,6 +291,19 @@ const DropPoolView: React.FC = () => {
     </Button>
   );
 
+  const discoveryButton = (
+    <Button size="small" icon={<EyeOutlined />} onClick={() => setDiscoveryOpen(true)}>
+      观察力 {discovery}
+    </Button>
+  );
+
+  const alertActions = (
+    <div className={styles.alertActions}>
+      {basePoolButton}
+      {discoveryButton}
+    </div>
+  );
+
   return (
     <div className="content-wrapper" id="drop-pool-top">
       <Title level={3} className={styles.title}>
@@ -302,7 +315,7 @@ const DropPoolView: React.FC = () => {
         showIcon
         className={styles.intro}
         title="一颗「潜在能力球」（掉球）里有 2~3 个选项，玩家只能选一个；每个选项下是各槽位的权重占比"
-        action={narrow ? undefined : basePoolButton}
+        action={narrow ? undefined : alertActions}
         description={
           <div className={styles.introDesc}>
             <div>普通模式：据点 / 精英的普通掉落，选项数量 2~3 个。</div>
@@ -319,7 +332,12 @@ const DropPoolView: React.FC = () => {
             <div>
               <EyeOutlined /> 标记 = 该槽位受「观察力」影响：观察力越高，该槽位权重越高（100 为原始权重）。
             </div>
-            {narrow && <div className={styles.introAction}>{basePoolButton}</div>}
+            {narrow && (
+              <div className={styles.introAction}>
+                {basePoolButton}
+                {discoveryButton}
+              </div>
+            )}
           </div>
         }
       />
@@ -385,10 +403,6 @@ const DropPoolView: React.FC = () => {
               }}
             />
           </Space>
-
-          <Button size="small" icon={<EyeOutlined />} onClick={() => setDiscoveryOpen(true)}>
-            观察力 {discovery}
-          </Button>
 
           <Input.Search
             allowClear
