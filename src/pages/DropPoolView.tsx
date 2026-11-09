@@ -168,7 +168,8 @@ const DropCard: React.FC<{
         <span className={styles.primary}>{titleName}</span>
         <span className={styles.tags}>
           {showMutation && <Tag color="volcano">变异</Tag>}
-          {showInvasion && <Tag color="red">入侵</Tag>}
+          {showInvasion && !group.invader && <Tag color="red">入侵</Tag>}
+          {group.invader && <Tag color="purple">黑夜入侵者</Tag>}
         </span>
       </div>
 
@@ -261,8 +262,13 @@ const DropPoolView: React.FC = () => {
     const kw = keyword.trim().toLowerCase();
     const night = mode === 'night';
     return DATA.groups.filter((group) => {
-      // 变异 / 入侵只列出确实有这套掉落的据点
-      if (night && !hasState(group, nightState)) return false;
+      // 黑夜入侵者：只在「深夜 · 入侵据点」出现
+      if (group.invader) {
+        if (!night || nightState !== 'invasion') return false;
+      } else if (night && !hasState(group, nightState)) {
+        // 变异 / 入侵只列出确实有这套掉落的据点
+        return false;
+      }
       // 特殊地形（火山 / 山顶 / 隐城 / 大空洞）
       if (terrain && terrainOf(group) !== terrain) return false;
       const options = optionsOf(group, night, nightState);
@@ -318,19 +324,24 @@ const DropPoolView: React.FC = () => {
         action={narrow ? undefined : alertActions}
         description={
           <div className={styles.introDesc}>
-            <div>普通模式：据点 / 精英的普通掉落，选项数量 2~3 个。</div>
+            <div>∘ 普通模式：据点 / 精英的普通掉落，选项数量 2~3 个。</div>
             <div>
-              深夜模式：据点分三种状态 —— 普通据点沿用普通掉落；「变异」指红皮怪，选项数量不变、池子升级；
+              ∘ 深夜模式：据点分三种状态 —— 普通据点沿用普通掉落；「变异」指红皮怪，选项数量不变、池子升级；
               「入侵」（灾域）会让 要塞 / 教堂的球变成 3 个选项，且 boss 只使用入侵那套池。
             </div>
             <div>
-              槽位类型按解包物品表判定（武器 / 诅咒武器 / 潜在能力 / 遗物 / 护符 / 道具），鼠标移到选项上可看掉落 ID。
+              ∘ 深夜 · 入侵据点还会出现「黑夜入侵者」：大教堂、小型要塞固定单入侵者，其他据点均为双入侵者； 固定 2
+              个选项 —— 选项 1 是它使用的武器（75% 原版 / 25% 诅咒版），选项 2 是通用掉落（75% 蓝武器池 / 25%
+              紫武器池）。
+            </div>
+            <div>
+              ∘ 槽位类型按解包物品表判定（武器 / 诅咒武器 / 潜在能力 / 遗物 / 护符 / 道具），鼠标移到选项上可看掉落 ID。
               潜在能力池：普通 buff 为蓝色、高级 buff 为紫色；5% 的道具槽是徘徊赐福（金色）；锻造石【2】为紫色。
               武器槽会标到具体池（12 个基池的名称、池 ID、条目数见「基池对照表」）；「窄」池 = 战灰可换的武器，
               悬停可看池内 75% 变体 / 25% 原版的构成。
             </div>
             <div>
-              <EyeOutlined /> 标记 = 该槽位受「观察力」影响：观察力越高，该槽位权重越高（100 为原始权重）。
+              ∘ <EyeOutlined /> 标记 = 该槽位受「观察力」影响：观察力越高，该槽位权重越高（100 为原始权重）。
             </div>
             {narrow && (
               <div className={styles.introAction}>

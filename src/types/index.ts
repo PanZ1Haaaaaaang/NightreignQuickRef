@@ -344,6 +344,8 @@ export interface DropGroup {
   id: string;
   /** 地形 / 敌人 / 备注，按表格原始顺序 */
   names: string[];
+  /** 黑夜入侵者掉落：只在「深夜 · 入侵据点」出现，且固定 2 个选项（第 1 个是入侵者武器） */
+  invader?: boolean;
   /** 普通掉落 */
   options: DropOption[];
   /** 深夜 · 变异（红皮怪）：选项数不变，池子升级 */
