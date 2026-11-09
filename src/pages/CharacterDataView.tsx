@@ -57,8 +57,27 @@ const ENHANCED_DODGE_BONUS_OVERRIDES: { [name: string]: number } = {
   '女爵（闪身）': 2,
 };
 
+/**
+ * 图表只在分栏可见时挂载，且延后一帧再挂：
+ * 分栏隐藏时容器宽度为 0，@ant-design/plots 会按 0 宽度重排；切回来的那一帧如果直接复用/新建图表，
+ * 会先画出「柱子挤在左半边」的窄图。等一帧让面板完成布局后再挂载，图表一次就按正确宽度绘制。
+ */
+const useChartMountWhenVisible = (active: boolean) => {
+  const [mounted, setMounted] = useState(active);
+  useEffect(() => {
+    if (!active) {
+      setMounted(false);
+      return;
+    }
+    const raf = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(raf);
+  }, [active]);
+  return mounted;
+};
+
 // 闪避无敌帧对比组件
-const DodgeFramesComparison = () => {
+const DodgeFramesComparison = ({ active = true }: { active?: boolean }) => {
+  const chartMounted = useChartMountWhenVisible(active);
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
   const [chartKey, setChartKey] = useState(0);
   const [frameData, setFrameData] = useState<Array<{ name: string; type: string; value: number }>>([]);
@@ -327,7 +346,9 @@ const DodgeFramesComparison = () => {
             position: 'relative',
           }}
         >
-          <Column key={`dodge-frames-${chartKey}-${enhancedDodge ? 'enhanced' : 'base'}`} {...config} />
+          {chartMounted && (
+            <Column key={`dodge-frames-${chartKey}-${enhancedDodge ? 'enhanced' : 'base'}`} {...config} />
+          )}
         </div>
 
         {/* 提示信息 */}
@@ -483,14 +504,6 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
       setActiveCharTab(activeSubTab);
     }
   }, [activeSubTab, activeCharTab]);
-
-  // 分栏切换后图表要重新测量容器宽度：隐藏时容器宽度为 0，
-  // 直接切回来 @ant-design/plots 会按旧宽度绘制，出现「只画了左半边」的窄图。
-  // 发一次 resize 让各图表按当前可见宽度重建（它们内部都监听 resize 并换 key 重绘）。
-  useEffect(() => {
-    const timer = window.setTimeout(() => window.dispatchEvent(new Event('resize')), 120);
-    return () => window.clearTimeout(timer);
-  }, [activeCharTab]);
 
   // 隐士出招表数据
   const [magicMoves, setMagicMoves] = useState<MagicMove[]>([]);
@@ -890,6 +903,9 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
     },
   ];
 
+  // 雷达图跟随分栏挂载：不可见时不保留实例，切回来等面板布局完成再绘制
+  const radarMounted = useChartMountWhenVisible(activeCharTab === '基础属性');
+
   // 行选择配置
   const rowSelection: TableProps<{ key: string; character: string; [key: string]: string }>['rowSelection'] = {
     selectedRowKeys,
@@ -960,7 +976,8 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
 
                         {/* 雷达图容器 - 动态高度响应拖拽和窗口变化 */}
                         <div className={styles.radarChartContainer} id="radar-chart-container">
-                          {selectedRowKeys.length > 0 ? (
+                          {/* 分栏不可见时不渲染图表：避免按 0 宽度重排，切回来的首帧变窄 */}
+                          {!radarMounted ? null : selectedRowKeys.length > 0 ? (
                             <>
                               <div className={styles.radarChartInner}>
                                 <RadarLegend
@@ -1385,7 +1402,7 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
               label: '⚡ 翻滚/闪避无敌帧',
               children: (
                 <div id="dodge-frames">
-                  <DodgeFramesComparison />
+                  <DodgeFramesComparison active={activeCharTab === '无敌帧'} />
                 </div>
               ),
             },
