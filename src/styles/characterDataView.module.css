@@ -10,8 +10,8 @@
 }
 
 :global(.content-wrapper).cardItem {
-  max-width: 1280px;
-  width: 70%;
+  max-width: 1400px;
+  width: min(1400px, 92%);
   margin: 0 auto 20px auto;
   min-height: auto;
   padding: 0;

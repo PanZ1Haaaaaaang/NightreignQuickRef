@@ -2,7 +2,13 @@ import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import { Typography, Table, Alert, Tabs, Divider, Switch, Tooltip } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar, Column } from '@ant-design/plots';
-import { ThunderboltTwoTone, QuestionCircleOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import {
+  ThunderboltTwoTone,
+  QuestionCircleOutlined,
+  LeftOutlined,
+  RightOutlined,
+  TeamOutlined,
+} from '@ant-design/icons';
 import { throttle } from 'lodash';
 import { getCurrentTheme } from '../utils/themeUtils';
 import styles from '../styles/characterDataView.module.css';
@@ -10,6 +16,7 @@ import DataManager from '../utils/dataManager';
 import DataSourceTooltip from '../components/DataSourceTooltip';
 import TeardropConversion from './characterDataView/TeardropConversion';
 import CharacterName from './characterDataView/CharacterName';
+import RoundtableCharacters from './characterDataView/RoundtableCharacters';
 
 const { Title, Text } = Typography;
 
@@ -1352,6 +1359,19 @@ const CharacterDataView: React.FC = () => {
             style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
             footer={() => <div className="footer-text">备注：总伤害为角色 15 级时测试数据</div>}
           />
+        </div>
+      </div>
+
+      {/* 圆桌厅堂人物数据（渡夜者 + 友方 NPC 的吸收值 / 抗性） */}
+      <div className={`content-wrapper ${styles.cardItem}`} id="roundtable-characters">
+        <div className={styles.cardHeader}>
+          <Title level={5} className="character-card-title">
+            <TeamOutlined />
+            圆桌厅堂人物数据
+          </Title>
+        </div>
+        <div className={styles.cardBody}>
+          <RoundtableCharacters />
         </div>
       </div>
 

@@ -11,8 +11,8 @@
 
 /* 主布局容器 - 可配置最大宽度 */
 .mechanicsLayout {
-  width: 70%;
-  max-width: 1200px;
+  width: min(1400px, 92%);
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
 }

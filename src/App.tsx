@@ -6,6 +6,7 @@ import { geekblue } from '@ant-design/colors';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Navigation from './components/Navigation';
+import PageHeader from './components/PageHeader';
 import FunctionMenu from './components/FunctionMenu';
 import { initializeTheme, setupThemeListener, toggleTheme } from './utils/themeUtils';
 import DataManager, { type DataGroup } from './utils/dataManager';
@@ -196,6 +197,8 @@ function App() {
           />
 
           <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+
+          <PageHeader pageKey={activeTab} />
 
           {renderContent()}
 

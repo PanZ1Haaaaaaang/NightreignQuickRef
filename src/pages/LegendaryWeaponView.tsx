@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Steps } from 'antd';
+import { Table, Segmented } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import DataManager from '../utils/dataManager';
 
@@ -340,38 +340,37 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
     </div>
   );
 
-  // 自定义步骤条
-  const customSteps = (
-    <div className="custom-steps-container legendary-weapon-steps-container">
-      <Steps
-        size="small"
-        current={currentStep}
-        onChange={(current) => {
-          if (typeof current === 'number') {
-            setCurrentStep(current);
-          }
-        }}
-        items={[{ title: '全角色传说武器面板' }, { title: '传说武器庇佑效果' }]}
+  // 页内分段：面板 / 庇佑（原先的 Steps 进度条对两个平级表格没有进度含义，改成与其它页一致的分段切换）
+  const scopeBar = (
+    <div className="page-scope-bar">
+      <Segmented
+        value={currentStep}
+        onChange={(value) => setCurrentStep(Number(value))}
+        options={[
+          { label: '全角色面板', value: 0 },
+          { label: '庇佑效果', value: 1 },
+        ]}
       />
+      <span className="page-scope-note">
+        {currentStep === 0 ? '同一把武器在 10 名渡夜者手中的总面板' : '26 把传说武器的庇佑词条与描述'}
+      </span>
     </div>
   );
 
   if (loading) {
     return (
-      <div className="legendary-weapon-container" style={{ padding: '16px', textAlign: 'center' }}>
-        <div>加载中...</div>
+      <div className="content-wrapper">
+        <div style={{ padding: '24px', textAlign: 'center' }}>加载中...</div>
       </div>
     );
   }
 
   return (
-    <div className="steps-container">
-      <div className="legendary-weapon-container" style={{ padding: '16px' }}>
-        {customSteps}
-        <div className="legendary-weapon-content">
-          {currentStep === 0 && <div id="weapon-strength-panel">{firstTable}</div>}
-          {currentStep === 1 && <div id="weapon-blessing-effects">{secondTable}</div>}
-        </div>
+    <div className="content-wrapper">
+      {scopeBar}
+      <div className="legendary-weapon-content">
+        {currentStep === 0 && <div id="weapon-strength-panel">{firstTable}</div>}
+        {currentStep === 1 && <div id="weapon-blessing-effects">{secondTable}</div>}
       </div>
     </div>
   );

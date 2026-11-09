@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Tooltip, Menu } from 'antd';
 import type { MenuProps } from 'antd';
 import logoImage from '../assets/logo-circle.svg';
-import { getMainNavigationOrder } from '../config/navigationConfig';
+import { getNavigationGroups } from '../config/navigationConfig';
+import type { NavSection } from '../config/navigationConfig';
 
 interface FunctionMenuProps {
   onTabChange: (tab: string) => void;
@@ -10,256 +11,84 @@ interface FunctionMenuProps {
   onStepChange?: (stepIndex: number) => void; // Step切换回调
 }
 
-interface MenuItemMetadata {
-  anchorId?: string;
-  tabKey?: string;
-  stepIndex?: number;
-  parentKey?: string;
-}
-
 type MenuItemType = NonNullable<MenuProps['items']>[number];
 
-interface MenuItemWithMetadata {
-  key: string;
-  label: React.ReactNode;
-  anchorId?: string;
-  tabKey?: string;
-  stepIndex?: number;
-  children?: MenuItemWithMetadata[];
+interface SectionMetadata {
+  pageKey: string;
+  section: NavSection;
 }
 
+const GROUP_KEY_PREFIX = 'group:';
+const SECTION_KEY_PREFIX = 'section:';
+
+// 目标页可能是懒加载 + 异步取数，锚点要等 DOM 出现后再滚（最多等约 3s）
+const scrollToAnchor = (anchorId: string, tries = 0) => {
+  const element = document.getElementById(anchorId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+  if (tries < 25) {
+    window.setTimeout(() => scrollToAnchor(anchorId, tries + 1), 120);
+  }
+};
+
+// 左下角功能菜单：完整索引（分组 → 页面 → 页内子项），数据全部来自 navigationConfig，
+// 不再在这里单独维护一份菜单，避免与顶部导航的命名/顺序漂移。
 const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange, onStepChange }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
 
-  // 功能导航菜单项 - 使用Menu组件的数据结构
-  const menuItems: MenuItemWithMetadata[] = [
-    {
-      key: '游戏机制',
-      label: '⚙️ 游戏机制',
-      children: [
-        { key: '游戏时间机制', label: '⏰ 游戏时间机制', anchorId: 'game-time-mechanism' },
-        { key: '升级所需卢恩', label: '💰 升级所需卢恩统计', anchorId: 'runes-required' },
-        { key: '游戏时间机制: 监牢/夜雨', label: '🌧️ 游戏时间机制: 监牢/夜雨', anchorId: 'prison-rain-mechanism' },
-        { key: '深夜模式评分规则', label: '🌌 深夜模式评分规则', anchorId: 'deep-night-rating-rules' },
-        { key: '血量恢复计算器', label: '❤️ 血量恢复计算器', anchorId: 'recovery-calculator' },
-        { key: '评论与讨论', label: '💬 评论与讨论', anchorId: 'comments-discussion' },
-      ],
-    },
-    {
-      key: '角色数据',
-      label: '👤 角色数据',
-      children: [
-        { key: '角色属性数据', label: '📊 角色基础属性对比', anchorId: 'character-attributes' },
-        { key: '角色详细数据', label: '📈 角色等级成长数据', anchorId: 'character-detail-data' },
-        { key: '泪滴转职', label: '💧 泪滴转职（属性修正）', anchorId: 'teardrop-conversion' },
-        { key: '无敌帧长度对比', label: '⚡ 翻滚/闪避无敌帧对比', anchorId: 'dodge-frames' },
-        { key: '隐士出招表', label: '🔮 隐士混合魔法出招表', anchorId: 'hermit-magic-list' },
-      ],
-    },
-    {
-      key: '词条详细数据',
-      label: '📋 词条详细数据',
-      children: [
-        { key: '局外词条', label: '🌕 局外词条', anchorId: 'outsider-entries', tabKey: '局外词条' },
-        { key: '局内词条', label: '🌖 局内词条', anchorId: 'in-game-entries', tabKey: '局内词条' },
-        { key: '潜在能力', label: '🌖 局内-潜在能力', anchorId: 'in-game-potential-entries', tabKey: '潜在能力' },
-        { key: '护符词条', label: '🌗 护符词条', anchorId: 'talisman-entries', tabKey: '护符词条' },
-        {
-          key: '强化类别词条适用范围',
-          label: '🌘 强化类别词条适用范围',
-          anchorId: 'enhancement-categories',
-          tabKey: '强化类别词条适用范围',
-        },
-        { key: '道具/采集效果', label: '🌒 道具/采集效果', anchorId: 'item-effects', tabKey: '道具效果' },
-        {
-          key: '深夜模式-局外词条',
-          label: '🌌 深夜模式-局外词条',
-          anchorId: 'deep-night-entries',
-          tabKey: '深夜模式局外词条',
-        },
-        {
-          key: '深夜模式-局内词条',
-          label: '🌌 深夜模式-局内词条',
-          anchorId: 'deep-night-in-game-entries',
-          tabKey: '深夜模式局内词条',
-        },
-      ],
-    },
-    {
-      key: '夜王Boss数据',
-      label: '👑 夜王Boss数据',
-      children: [
-        { key: '夜王基础数据', label: '🌙 夜王基础数据', anchorId: 'night-king-basic', tabKey: 'boss-data' },
-        { key: '野生Boss数据', label: '☠️ 野生Boss数据', anchorId: 'wild-boss-data', tabKey: 'wild-boss-data' },
-        {
-          key: '敌人种族说明',
-          label: '🧬 敌人种族说明',
-          anchorId: 'enemy-race-data',
-          tabKey: 'enemy-race-data',
-        },
-        {
-          key: '圆桌厅堂人物数据',
-          label: '🏛️ 圆桌厅堂人物数据',
-          anchorId: 'roundtable-characters',
-          tabKey: 'character-data',
-        },
-        {
-          key: '永夜山羊召唤罪人详情',
-          label: '🐐 永夜山羊召唤罪人详情',
-          anchorId: 'sinner-details',
-          tabKey: 'sinner-data',
-        },
-        {
-          key: '利普拉的交易选项',
-          label: '⚖️ 利普拉的交易(Boss战)',
-          anchorId: 'lipula-trades',
-          tabKey: 'lipula-trades',
-        },
-        {
-          key: '特殊事件及地形效果',
-          label: '🌋 特殊事件及地形效果',
-          anchorId: 'special-events',
-          tabKey: 'special-events',
-        },
-      ],
-    },
-    {
-      key: '传说武器详情',
-      label: '⚔️ 传说武器详情',
-      children: [
-        {
-          key: '传说武器强度面板',
-          label: '🛡️ 不同角色使用传说武器的强度面板',
-          anchorId: 'weapon-strength-panel',
-          stepIndex: 0,
-        },
-        { key: '武器庇佑效果', label: '🗡️ 传说武器的庇佑效果', anchorId: 'weapon-blessing-effects', stepIndex: 1 },
-      ],
-    },
-    {
-      key: '武器战技与魔法祷告',
-      label: '✨ 武器战技与魔法祷告',
-      children: [
-        { key: '武器战技', label: '⚔️ 战技', anchorId: 'weapon-skills', tabKey: '战技' },
-        { key: '专用战技', label: '🗡️ 专用战技', anchorId: 'unique-weapon-skills', tabKey: '专用战技' },
-        { key: '魔法', label: '🔮 魔法', anchorId: 'sorceries', tabKey: '魔法' },
-        { key: '祷告', label: '🙏 祷告', anchorId: 'incantations', tabKey: '祷告' },
-        { key: '辅助类', label: '✨ 辅助类', anchorId: 'support-skills', tabKey: '辅助类' },
-      ],
-    },
-    {
-      key: '商人数据',
-      label: '🏪 商人数据',
-      children: [
-        { key: '普通商人', label: '🧾 普通商人', anchorId: 'merchant-normal', tabKey: '普通商人' },
-        { key: '村落商人', label: '🏘️ 村落商人', anchorId: 'merchant-village', tabKey: '村落商人' },
-        { key: '黄金树商人', label: '🌳 黄金树商人', anchorId: 'merchant-golden-tree', tabKey: '黄金树商人' },
-        {
-          key: '大空洞传说商人',
-          label: '🕳️ 大空洞传说商人',
-          anchorId: 'merchant-hollow-legendary',
-          tabKey: '大空洞传说商人',
-        },
-        {
-          key: '不可购买露滴',
-          label: '💧 不可购买的灵药露滴',
-          anchorId: 'merchant-unpurchasable-tears',
-          tabKey: '不可购买露滴',
-        },
-      ],
-    },
-    {
-      key: '掉落池',
-      label: '🎁 掉落池',
-      children: [{ key: '掉球总览', label: '🎁 掉落池总览', anchorId: 'drop-pool-top' }],
-    },
-  ];
+  const sectionMetadata = new Map<string, SectionMetadata>();
 
-  // 创建映射对象存储每个菜单项的自定义属性
-  const menuItemMetadata = new Map<string, MenuItemMetadata>();
-
-  menuItems.forEach((item) => {
-    if (item.children) {
-      item.children.forEach((child) => {
-        menuItemMetadata.set(child.key, {
-          anchorId: child.anchorId,
-          tabKey: child.tabKey,
-          stepIndex: child.stepIndex,
-          parentKey: item.key,
-        });
+  const menuItems: MenuItemType[] = getNavigationGroups().map((group) => ({
+    key: `${GROUP_KEY_PREFIX}${group.key}`,
+    label: group.label,
+    children: group.pages.map((page) => {
+      const children = page.sections.map((section) => {
+        const key = `${SECTION_KEY_PREFIX}${page.key}:${section.key}`;
+        sectionMetadata.set(key, { pageKey: page.key, section });
+        return { key, label: section.label };
       });
-    }
-  });
 
-  // 清理菜单项，移除自定义属性，只保留 Menu 组件需要的属性
-  const cleanMenuItem = (item: MenuItemWithMetadata): MenuItemType => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { anchorId, tabKey, stepIndex, ...cleanedItem } = item;
-    return {
-      key: cleanedItem.key,
-      label: cleanedItem.label,
-      ...(cleanedItem.children && {
-        children: cleanedItem.children.map(cleanMenuItem),
-      }),
-    };
-  };
-
-  // 根据配置文件中的顺序重新排列菜单项
-  const getOrderedMenuItems = (): MenuItemType[] => {
-    const order = getMainNavigationOrder();
-    return order
-      .map((key) => {
-        const item = menuItems.find((item) => item.key === key);
-        return item ? cleanMenuItem(item) : null;
-      })
-      .filter((item): item is MenuItemType => item !== null);
-  };
+      return {
+        key: page.key,
+        label: `${page.icon} ${page.label}`,
+        ...(children.length > 0 && { children }),
+      };
+    }),
+  }));
 
   const handleMenuClick = ({ key }: { key: string }) => {
-    // 检查是否是主菜单项
-    const mainMenuItem = menuItems.find((item) => item.key === key);
-    if (mainMenuItem) {
-      // 切换到对应的功能页面
+    // 分组本身只负责展开/收起
+    if (key.startsWith(GROUP_KEY_PREFIX)) return;
+
+    // 页面级：直接切页
+    if (!key.startsWith(SECTION_KEY_PREFIX)) {
       onTabChange(key);
       setMenuVisible(false);
-    } else {
-      // 从映射对象中获取子菜单项的元数据
-      const metadata = menuItemMetadata.get(key);
-      if (metadata && metadata.parentKey) {
-        // 先切换到父菜单页面
-        onTabChange(metadata.parentKey);
-        setMenuVisible(false);
-
-        // 延迟执行锚点跳转，确保页面已经渲染
-        setTimeout(() => {
-          // 处理Tab页面的切换
-          if (metadata.tabKey && onSubTabChange) {
-            onSubTabChange(metadata.tabKey);
-          }
-
-          // 处理Step页面的切换
-          if (typeof metadata.stepIndex === 'number' && onStepChange) {
-            onStepChange(metadata.stepIndex);
-          }
-
-          // 执行锚点跳转
-          if (metadata.anchorId) {
-            const element = document.getElementById(metadata.anchorId);
-            if (element) {
-              element.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-              });
-            }
-          }
-        }, 200);
-      }
+      return;
     }
-  };
 
-  const handleOpenChange = (keys: string[]) => {
-    setOpenKeys(keys);
+    // 页内子项：先切页，再联动子Tab / Step，最后滚到锚点
+    const metadata = sectionMetadata.get(key);
+    if (!metadata) return;
+
+    const { pageKey, section } = metadata;
+    onTabChange(pageKey);
+    setMenuVisible(false);
+
+    setTimeout(() => {
+      if (section.tabKey && onSubTabChange) {
+        onSubTabChange(section.tabKey);
+      }
+      if (typeof section.stepIndex === 'number' && onStepChange) {
+        onStepChange(section.stepIndex);
+      }
+      if (section.anchorId) {
+        scrollToAnchor(section.anchorId);
+      }
+    }, 200);
   };
 
   return (
@@ -302,10 +131,11 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         >
           <Menu
             mode="inline"
-            items={getOrderedMenuItems()}
+            items={menuItems}
             onClick={handleMenuClick}
             openKeys={openKeys}
-            onOpenChange={handleOpenChange}
+            onOpenChange={setOpenKeys}
+            inlineIndent={12}
             style={{
               border: 'none',
               backgroundColor: 'transparent',

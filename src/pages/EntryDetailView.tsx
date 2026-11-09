@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Table, Input, Select, Tabs, Tag, Spin, Button, Checkbox, Space, Tooltip } from 'antd';
+import { Table, Input, Select, Tabs, Tag, Spin, Button, Checkbox, Space, Segmented, Tooltip } from 'antd';
 import { message } from '../utils/feedback';
 import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
@@ -12,6 +12,7 @@ import CustomPagination from '../components/CustomPagination';
 import { POTENTIAL_POOL_TAGS } from '../config/potentialPoolConfig';
 import { renderHintOption } from '../components/HintOption';
 import { TALISMAN_CATEGORIES, TALISMAN_CATEGORY_ORDER } from '../config/talismanCategoryConfig';
+import { getPageByKey } from '../config/navigationConfig';
 
 // 自定义搜索组件接口
 interface CustomSearchProps {
@@ -275,6 +276,23 @@ const getSuperposabilityColor = (superposability: string | null | undefined): st
 interface EntryDetailViewProps {
   activeSubTab?: string;
 }
+
+// 页内分段：局外（遗物词条，出击前生效）/ 局内（护符、道具、武器固有）
+const ENTRY_TAB_SCOPE: Record<string, string> = {
+  局外词条: '局外',
+  强化类别词条适用范围: '局外',
+  深夜模式局外词条: '局外',
+  局内词条: '局内',
+  潜在能力: '局内',
+  护符词条: '局内',
+  道具效果: '局内',
+  深夜模式局内词条: '局内',
+};
+
+const ENTRY_SCOPES = getPageByKey('词条详细数据')?.scopes ?? [];
+const scopeOfEntryTab = (tab: string): string => ENTRY_TAB_SCOPE[tab] ?? '局外';
+const firstEntryTabOfScope = (scope: string): string | undefined =>
+  Object.keys(ENTRY_TAB_SCOPE).find((key) => ENTRY_TAB_SCOPE[key] === scope);
 
 const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -1620,12 +1638,30 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     }
   };
 
+  // 当前分段由当前标签决定，避免两处状态互相打架
+  const activeScope = scopeOfEntryTab(activeEntryTab);
+  const activeScopeMeta = ENTRY_SCOPES.find((scope) => scope.key === activeScope);
+
   return (
     <div className="content-wrapper">
+      <div className="page-scope-bar">
+        <Segmented
+          value={activeScope}
+          onChange={(value) => {
+            const first = firstEntryTabOfScope(String(value));
+            if (first) {
+              setActiveEntryTab(first);
+              setCurrentPage(1);
+            }
+          }}
+          options={ENTRY_SCOPES.map((scope) => ({ label: scope.label, value: scope.key }))}
+        />
+        {activeScopeMeta && <span className="page-scope-note">{activeScopeMeta.note}</span>}
+      </div>
       <Tabs
         type="card"
         style={{
-          marginTop: '20px',
+          marginTop: '8px',
         }}
         activeKey={activeEntryTab}
         onChange={(key) => {
@@ -1723,7 +1759,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
               </div>
             ),
           },
-        ]}
+        ].filter((item) => ENTRY_TAB_SCOPE[String(item.key)] === activeScope)}
         className="custom-tabs"
       />
     </div>
