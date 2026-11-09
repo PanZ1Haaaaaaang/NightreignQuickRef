@@ -317,13 +317,21 @@ export type DropKind =
   | 'rune3w';
 
 /**
- * 掉落段（紧凑数组，控制 JSON 体积）：[百分比, 掉落类型, 潜在能力池?]
+ * 掉落段（紧凑数组，控制 JSON 体积）：[百分比, 掉落类型, 潜在能力池?, note?, detail?, luck?]
  * - kind 为上面的 22 种；标签文字在 `meta.kinds`
  * - 第三项仅 buff 段有：normal / purple / night1 / night1b / night2（见 config/potentialPoolConfig.ts）
  * - 第四项 note：元素变体（出血 / 冻伤 / 火焰…）、护符分类、特殊效果名等，部分 kind 会把它当标签
  * - 第五项 detail：悬停说明，只放池内拆分比例（癫火武器段放具体武器名）
+ * - 第六项 luck：1 = 该槽位受「观察力」影响（解包 ItemLotParam_enemy 的 enableLuck），观察力越高权重越高
  */
-export type DropSegment = [percent: number, kind: string, pool?: string | null, note?: string, detail?: string];
+export type DropSegment = [
+  percent: number,
+  kind: string,
+  pool?: string | null,
+  note?: string,
+  detail?: string,
+  luck?: 1,
+];
 
 export interface DropOption {
   id: number;

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   Alert,
   Button,
@@ -14,14 +14,21 @@ import {
   Tooltip,
   Typography,
 } from 'antd';
-import { TableOutlined } from '@ant-design/icons';
+import { EyeOutlined, TableOutlined } from '@ant-design/icons';
 import dropPoolsJson from '../data/zh-CN/drop_pools.json';
 import type { DropGroup, DropOption, DropPoolsData, DropSegment } from '../types';
 import { POTENTIAL_POOL_LABEL } from '../config/potentialPoolConfig';
 import { TERRAIN_OPTIONS, terrainOf, type TerrainKey } from '../config/terrainConfig';
+import {
+  adjustSegmentPercents,
+  calcDiscovery,
+  DEFAULT_DISCOVERY_SETUP,
+  type DiscoverySetup,
+} from '../config/discoveryConfig';
 import { BASE_POOL_KINDS, KIND_CLASS } from './dropPoolView/poolKinds';
 import BasePoolDrawer from './dropPoolView/BasePoolDrawer';
 import PotentialPoolDrawer from './dropPoolView/PotentialPoolDrawer';
+import DiscoveryDrawer from './dropPoolView/DiscoveryDrawer';
 import styles from '../styles/dropPoolView.module.css';
 
 const { Title, Text } = Typography;
@@ -66,13 +73,16 @@ const hasGoldDrop = (options: DropOption[]) =>
  * 第四项 note：元素变体（出血 / 冻伤 / 火焰…）、护符分类、特殊效果名等；detail 只放池内拆分。
  * 12 个基池的槽位可点击：打开「基池对照表」并高亮对应行；
  * buff 槽位可点击：打开「潜在能力池明细」，词条数据按需懒加载。
+ * 第六项 luck：带「观察力」小标记，表示该槽位权重随观察力提升。
  */
 const SegmentChip: React.FC<{
   segment: DropSegment;
+  /** 观察力模拟开启时该槽位换算后的权重（%），与原始值相同则不显示 */
+  adjustedPercent?: number;
   onPoolClick?: (kind: string) => void;
   onBuffClick?: (pool: string) => void;
-}> = ({ segment, onPoolClick, onBuffClick }) => {
-  const [percent, kind, pool, note, detail] = segment;
+}> = ({ segment, adjustedPercent, onPoolClick, onBuffClick }) => {
+  const [percent, kind, pool, note, detail, luck] = segment;
   let label = kindLabel(kind);
   let className = KIND_CLASS[kind] ?? '';
 
@@ -102,7 +112,11 @@ const SegmentChip: React.FC<{
       }
     >
       <b className={styles.percent}>{percent}%</b>
+      {adjustedPercent !== undefined && adjustedPercent !== percent ? (
+        <span className={adjustedPercent > percent ? styles.percentUp : styles.percentDown}>→{adjustedPercent}%</span>
+      ) : null}
       <span>{label}</span>
+      {luck ? <EyeOutlined className={styles.luckIcon} /> : null}
     </span>
   );
 
@@ -110,10 +124,11 @@ const SegmentChip: React.FC<{
   const detailText = kind === 'flameWeapon' && detail ? `可能的武器：${detail}` : (detail ?? null);
   const clickHint = canOpenBasePool ? '点击查看基池对照表' : canOpenBuff ? '点击查看该池可能的词条' : null;
   const tooltip =
-    detailText || clickHint ? (
+    detailText || clickHint || luck ? (
       <div className={styles.tipBox}>
         {detailText && <div>{detailText}</div>}
         {clickHint && <div className={styles.tipHint}>{clickHint}</div>}
+        {luck ? <div className={styles.tipHint}>受观察力影响：观察力越高，该槽位权重越高</div> : null}
       </div>
     ) : null;
 
@@ -133,7 +148,9 @@ const DropCard: React.FC<{
   nightState: NightState;
   onPoolClick?: (kind: string) => void;
   onBuffClick?: (pool: string) => void;
-}> = ({ group, nightMode, nightState, onPoolClick, onBuffClick }) => {
+  /** 观察力模拟：换算后的槽位权重，100 时不做换算 */
+  discovery: number;
+}> = ({ group, nightMode, nightState, onPoolClick, onBuffClick, discovery }) => {
   const options = optionsOf(group, nightMode, nightState);
   const titleName = group.names[0] ?? '未命名';
   const otherNames = group.names.slice(1);
@@ -166,18 +183,27 @@ const DropCard: React.FC<{
       )}
 
       <div className={styles.options}>
-        {options.map((option, index) => (
-          <div key={option.id} className={styles.option} data-option-id={option.id}>
-            <Tooltip title={String(option.id)} placement="top" mouseEnterDelay={0.2}>
-              <span className={styles.optionLabel}>选项 {index + 1}</span>
-            </Tooltip>
-            <div className={styles.segments}>
-              {option.segments.map((segment, segmentIndex) => (
-                <SegmentChip key={segmentIndex} segment={segment} onPoolClick={onPoolClick} onBuffClick={onBuffClick} />
-              ))}
+        {options.map((option, index) => {
+          const adjusted = adjustSegmentPercents(option.segments, discovery);
+          return (
+            <div key={option.id} className={styles.option} data-option-id={option.id}>
+              <Tooltip title={String(option.id)} placement="top" mouseEnterDelay={0.2}>
+                <span className={styles.optionLabel}>选项 {index + 1}</span>
+              </Tooltip>
+              <div className={styles.segments}>
+                {option.segments.map((segment, segmentIndex) => (
+                  <SegmentChip
+                    key={segmentIndex}
+                    segment={segment}
+                    adjustedPercent={adjusted[segmentIndex]}
+                    onPoolClick={onPoolClick}
+                    onBuffClick={onBuffClick}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -196,6 +222,26 @@ const DropPoolView: React.FC = () => {
   /** 潜在能力池明细：当前池 key（normal / purple / …） */
   const [buffOpen, setBuffOpen] = useState(false);
   const [buffPool, setBuffPool] = useState<string | null>(null);
+  /** 观察力模拟：来源选择 + 换算后的观察力 */
+  const [discoveryOpen, setDiscoveryOpen] = useState(false);
+  const [discoverySetup, setDiscoverySetup] = useState<DiscoverySetup>(() => {
+    try {
+      const raw = localStorage.getItem('nightreign-discovery-setup');
+      if (raw) return { ...DEFAULT_DISCOVERY_SETUP, ...(JSON.parse(raw) as Partial<DiscoverySetup>) };
+    } catch {
+      // 本地存档损坏时退回默认值
+    }
+    return DEFAULT_DISCOVERY_SETUP;
+  });
+  const discovery = calcDiscovery(discoverySetup);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('nightreign-discovery-setup', JSON.stringify(discoverySetup));
+    } catch {
+      // 无痕模式写不进去也不影响使用
+    }
+  }, [discoverySetup]);
   const screens = Grid.useBreakpoint();
   // 窄屏时把「基池对照表」放到说明末尾：Alert 右上角放按钮会把标题挤成多行
   const narrow = screens.md === false;
@@ -270,6 +316,9 @@ const DropPoolView: React.FC = () => {
               武器槽会标到具体池（12 个基池的名称、池 ID、条目数见「基池对照表」）；「窄」池 = 战灰可换的武器，
               悬停可看池内 75% 变体 / 25% 原版的构成。
             </div>
+            <div>
+              <EyeOutlined /> 标记 = 该槽位受「观察力」影响：观察力越高，该槽位权重越高（100 为原始权重）。
+            </div>
             {narrow && <div className={styles.introAction}>{basePoolButton}</div>}
           </div>
         }
@@ -337,6 +386,10 @@ const DropPoolView: React.FC = () => {
             />
           </Space>
 
+          <Button size="small" icon={<EyeOutlined />} onClick={() => setDiscoveryOpen(true)}>
+            观察力 {discovery}
+          </Button>
+
           <Input.Search
             allowClear
             placeholder="搜索地形 / 敌人 / 掉落ID"
@@ -370,6 +423,7 @@ const DropPoolView: React.FC = () => {
                 nightState={nightState}
                 onPoolClick={openBasePool}
                 onBuffClick={openBuffPool}
+                discovery={discovery}
               />
             ))}
           </div>
@@ -401,6 +455,13 @@ const DropPoolView: React.FC = () => {
       />
 
       <PotentialPoolDrawer open={buffOpen} onClose={() => setBuffOpen(false)} poolKey={buffPool} />
+
+      <DiscoveryDrawer
+        open={discoveryOpen}
+        onClose={() => setDiscoveryOpen(false)}
+        setup={discoverySetup}
+        onChange={setDiscoverySetup}
+      />
     </div>
   );
 };
