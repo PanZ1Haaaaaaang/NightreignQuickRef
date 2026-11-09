@@ -368,7 +368,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
   return (
     <div className="content-wrapper">
       {scopeBar}
-      <div className="legendary-weapon-content">
+      <div className="legendary-weapon-content motion-enter" key={currentStep}>
         {currentStep === 0 && <div id="weapon-strength-panel">{firstTable}</div>}
         {currentStep === 1 && <div id="weapon-blessing-effects">{secondTable}</div>}
       </div>

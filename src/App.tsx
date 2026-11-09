@@ -206,7 +206,10 @@ function App() {
 
           <PageHeader pageKey={activeTab} />
 
-          {renderContent()}
+          {/* key 绑定当前 tab：切页时整块内容重新入场，统一动效见 styles/motion.css */}
+          <div className="page-enter" key={activeTab}>
+            {renderContent()}
+          </div>
 
           <Footer />
         </div>

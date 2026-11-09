@@ -11,6 +11,9 @@
 /* 导入组件样式 */
 @import './components.css';
 
+/* 统一动效层（页面切换 / 页内页签切换） */
+@import './motion.css';
+
 /* 导入工具类 */
 @import './utilities.css';
 
