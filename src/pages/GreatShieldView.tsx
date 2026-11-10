@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Image, Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import shieldData from '../data/zh-CN/great_shield_data.json';
@@ -24,6 +24,66 @@ interface ShieldRow {
 type NumberKey = Exclude<keyof ShieldRow, 'name'>;
 
 const NUMBER_KEYS: NumberKey[] = ['guard', 'magic', 'fire', 'lightning', 'holy'];
+
+// 盾牌截图：目录里的文件名与盾名一一对应，用 glob 一次性拿到 URL（图片本体仍走懒加载）
+const SHIELD_IMAGES = import.meta.glob<string>('../assets/Shields/*.png', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
+
+const shieldImageOf = (name: string): string | undefined => SHIELD_IMAGES[`../assets/Shields/${name}.png`];
+
+/**
+ * 盾牌缩略图：进入视口（提前 200px）才真正设置 src，
+ * 29 面盾一屏渲染时不会一次性把全部图片拉下来；占位块保持行高不跳动。
+ */
+const ShieldThumb: React.FC<{ name: string }> = ({ name }) => {
+  const src = shieldImageOf(name);
+  const holderRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const holder = holderRef.current;
+    if (!holder || !src) return;
+
+    // 老浏览器 / 无 IntersectionObserver 时直接加载
+    if (typeof IntersectionObserver === 'undefined') {
+      setVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px 0px' },
+    );
+    observer.observe(holder);
+
+    return () => observer.disconnect();
+  }, [src]);
+
+  if (!src) return null;
+
+  return (
+    <div ref={holderRef} className={styles.shieldThumb}>
+      {visible && (
+        <img
+          src={src}
+          alt={name}
+          width={40}
+          height={40}
+          loading="lazy"
+          decoding="async"
+          className={styles.shieldImage}
+        />
+      )}
+    </div>
+  );
+};
 
 interface NumberColumn {
   key: NumberKey;
@@ -61,12 +121,10 @@ const GreatShieldView: React.FC = () => {
   const columns: TableColumnsType<ShieldRow> = [
     {
       title: '图片',
-      dataIndex: 'name',
       key: 'image',
-      width: 64,
+      width: 72,
       align: 'center',
-      // 图片列暂时留空，后续补截图
-      render: () => null,
+      render: (_: unknown, record: ShieldRow) => <ShieldThumb name={record.name} />,
     },
     {
       title: '名称',

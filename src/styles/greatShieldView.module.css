@@ -63,6 +63,20 @@ body[tomato-theme='dark'] .guardianRow td {
   background: rgba(133, 165, 255, 0.14);
 }
 
+/* 盾牌缩略图：占位块固定尺寸，图片进入视口后才挂上 */
+.shieldThumb {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+}
+
+.shieldImage {
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
 /* 数值单元格：与「夜王基础数据」一致，整体略微加粗 */
 .value {
   font-weight: 500;
