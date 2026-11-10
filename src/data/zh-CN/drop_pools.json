@@ -28,7 +28,8 @@
       "forgeStone": "锻造石【2】",
       "rune1w": "1w卢恩",
       "rune2w": "2w卢恩",
-      "rune3w": "3w卢恩"
+      "rune3w": "3w卢恩",
+      "redWeaponItem": "诅咒武器"
     },
     "basePools": [
       {
@@ -14536,9 +14537,9 @@
             ],
             [
               25,
-              "weaponItem",
+              "redWeaponItem",
               null,
-              "追踪者的大剑+2（诅咒）",
+              "追踪者的大剑+2",
               null,
               1
             ]
@@ -14582,9 +14583,9 @@
             ],
             [
               25,
-              "weaponItem",
+              "redWeaponItem",
               null,
-              "守护者的戟+2（诅咒）",
+              "守护者的戟+2",
               null,
               1
             ]
@@ -14628,9 +14629,9 @@
             ],
             [
               25,
-              "weaponItem",
+              "redWeaponItem",
               null,
-              "铁之眼的弓+2（诅咒）",
+              "铁之眼的弓+2",
               null,
               1
             ]
@@ -14674,9 +14675,9 @@
             ],
             [
               25,
-              "weaponItem",
+              "redWeaponItem",
               null,
-              "女爵的短剑+2（诅咒）",
+              "女爵的短剑+2",
               null,
               1
             ]
@@ -14720,9 +14721,9 @@
             ],
             [
               25,
-              "weaponItem",
+              "redWeaponItem",
               null,
-              "无赖的大斧+2（诅咒）",
+              "无赖的大斧+2",
               null,
               1
             ]
@@ -14766,9 +14767,9 @@
             ],
             [
               25,
-              "weaponItem",
+              "redWeaponItem",
               null,
-              "隐士的手杖+2（诅咒）",
+              "隐士的手杖+2",
               null,
               1
             ]
@@ -14812,9 +14813,9 @@
             ],
             [
               25,
-              "weaponItem",
+              "redWeaponItem",
               null,
-              "执行者的刀+2（诅咒）",
+              "执行者的刀+2",
               null,
               1
             ]
@@ -14858,9 +14859,9 @@
             ],
             [
               25,
-              "weaponItem",
+              "redWeaponItem",
               null,
-              "学者的刺剑+2（诅咒）",
+              "学者的刺剑+2",
               null,
               1
             ]
@@ -14904,9 +14905,9 @@
             ],
             [
               25,
-              "weaponItem",
+              "redWeaponItem",
               null,
-              "送葬者的铁锤+2（诅咒）",
+              "送葬者的铁锤+2",
               null,
               1
             ]

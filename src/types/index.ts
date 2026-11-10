@@ -311,6 +311,7 @@ export type DropKind =
   | 'flameWeapon'
   | 'specialBuff'
   | 'weaponItem'
+  | 'redWeaponItem'
   | 'forgeStone'
   | 'rune1w'
   | 'rune2w'

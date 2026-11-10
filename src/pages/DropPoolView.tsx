@@ -115,6 +115,9 @@ const SegmentChip: React.FC<{
   } else if (kind === 'wending') {
     label = DATA.meta.kinds.wending ?? '徘徊赐福';
     className = styles.kindWending;
+  } else if (kind === 'redWeaponItem') {
+    label = note ? `${note}（诅咒）` : kindLabel(kind);
+    className = KIND_CLASS[kind] ?? '';
   } else if ((kind === 'specialBuff' || kind === 'weaponItem') && note) {
     label = note;
   } else if (kind === 'accessory' && note) {
@@ -154,7 +157,7 @@ const SegmentChip: React.FC<{
         {affixes && affixes.length > 0 ? (
           <div>
             <div className={styles.tipHint}>
-              {note?.endsWith('（诅咒）')
+              {kind === 'redWeaponItem'
                 ? `诅咒版：2 条正面词条 + 1 条负面，正面词条取自下表`
                 : `原版：随机 1 条词条（池 ${affixPoolId}），各词条权重如下`}
             </div>
@@ -254,8 +257,16 @@ const DropCard: React.FC<{
                     onPoolClick={onPoolClick}
                     onBuffClick={onBuffClick}
                     // 只有第 1 个选项里、入侵者使用的那把武器才带词条概率
-                    affixes={index === 0 && segment[1] === 'weaponItem' ? invaderAffix?.affixes : undefined}
-                    affixPoolId={index === 0 && segment[1] === 'weaponItem' ? invaderAffix?.poolId : undefined}
+                    affixes={
+                      index === 0 && (segment[1] === 'weaponItem' || segment[1] === 'redWeaponItem')
+                        ? invaderAffix?.affixes
+                        : undefined
+                    }
+                    affixPoolId={
+                      index === 0 && (segment[1] === 'weaponItem' || segment[1] === 'redWeaponItem')
+                        ? invaderAffix?.poolId
+                        : undefined
+                    }
                   />
                 ))}
               </div>

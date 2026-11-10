@@ -42,6 +42,7 @@ export const KIND_CLASS: Record<string, string> = {
   flameWeapon: styles.kindFlameWeapon,
   specialBuff: styles.kindAntique,
   weaponItem: styles.kindWeapon,
+  redWeaponItem: styles.kindCursed,
   forgeStone: styles.kindBuffPurple,
   rune1w: styles.kindWeapon,
   rune2w: styles.kindBuffPurple,
