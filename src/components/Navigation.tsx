@@ -1,5 +1,5 @@
 import React from 'react';
-import { getNavigationGroups } from '../config/navigationConfig';
+import { SHOW_NAV_GROUP_NOTE, SHOW_PAGE_BADGES, getNavigationGroups } from '../config/navigationConfig';
 
 interface NavigationProps {
   activeTab: string;
@@ -24,7 +24,7 @@ const Navigation: React.FC<NavigationProps> = React.memo(({ activeTab, onTabChan
           >
             <div className="nav-group-head">
               <span className="nav-group-label">{group.label}</span>
-              <span className="nav-group-note">{group.note}</span>
+              {SHOW_NAV_GROUP_NOTE && <span className="nav-group-note">{group.note}</span>}
             </div>
             <div className="nav-group-items">
               {group.pages.map((page) => (
@@ -42,13 +42,15 @@ const Navigation: React.FC<NavigationProps> = React.memo(({ activeTab, onTabChan
                     </span>
                     {page.label}
                   </span>
-                  <span className="nav-pill-badges">
-                    {page.badges.map((badge) => (
-                      <span key={badge} className="nav-badge" data-badge={badge}>
-                        {badge}
-                      </span>
-                    ))}
-                  </span>
+                  {SHOW_PAGE_BADGES && (
+                    <span className="nav-pill-badges">
+                      {page.badges.map((badge) => (
+                        <span key={badge} className="nav-badge" data-badge={badge}>
+                          {badge}
+                        </span>
+                      ))}
+                    </span>
+                  )}
                 </button>
               ))}
             </div>

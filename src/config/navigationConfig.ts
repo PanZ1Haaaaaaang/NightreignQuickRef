@@ -40,6 +40,12 @@ export interface NavGroup {
 // 默认页面设置
 export const DEFAULT_PAGE = '游戏机制';
 
+// 展示开关：数据仍保留在下面的页面配置里，只是先不渲染出来。
+// 想恢复显示，把对应开关改回 true 即可（只影响顶部目录卡与页面头）。
+export const SHOW_PAGE_BADGES = false;
+export const SHOW_PAGE_DESC = false;
+export const SHOW_NAV_GROUP_NOTE = false;
+
 export const NAV_GROUPS: NavGroup[] = [
   { key: '对局规则', label: '对局规则', note: '时间轴 · 评分 · 计算器' },
   { key: '局外构筑', label: '局外构筑', note: '角色 · 遗物词条' },

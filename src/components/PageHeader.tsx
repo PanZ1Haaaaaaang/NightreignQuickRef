@@ -1,5 +1,5 @@
 import React from 'react';
-import { getGroupByKey, getPageByKey } from '../config/navigationConfig';
+import { SHOW_PAGE_BADGES, SHOW_PAGE_DESC, getGroupByKey, getPageByKey } from '../config/navigationConfig';
 
 interface PageHeaderProps {
   pageKey: string;
@@ -30,15 +30,17 @@ const PageHeader: React.FC<PageHeaderProps> = ({ pageKey }) => {
             {page.label}
           </h2>
         </div>
-        <div className="page-header-badges">
-          {page.badges.map((badge) => (
-            <span key={badge} className="page-badge" data-badge={badge}>
-              {badge}
-            </span>
-          ))}
-        </div>
+        {SHOW_PAGE_BADGES && (
+          <div className="page-header-badges">
+            {page.badges.map((badge) => (
+              <span key={badge} className="page-badge" data-badge={badge}>
+                {badge}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
-      <p className="page-header-desc">{page.desc}</p>
+      {SHOW_PAGE_DESC && <p className="page-header-desc">{page.desc}</p>}
     </header>
   );
 };

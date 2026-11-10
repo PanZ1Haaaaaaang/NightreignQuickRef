@@ -720,7 +720,7 @@ body[tomato-theme='dark'] [data-badge='工具'] {
   width: min(1400px, 92%);
   max-width: 1400px;
   min-width: 1000px;
-  margin: var(--spacing-md) auto 0 auto;
+  margin: var(--spacing-md) auto var(--spacing-sm) auto;
   padding: 0;
 }
 
