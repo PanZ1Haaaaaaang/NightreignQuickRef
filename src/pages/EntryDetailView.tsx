@@ -274,9 +274,29 @@ const getSuperposabilityColor = (superposability: string | null | undefined): st
 
 interface EntryDetailViewProps {
   activeSubTab?: string;
+  // 拆页后固定只显示一个分段：局外（遗物词条，出击前生效）/ 局内（护符、道具、武器固有）
+  scope?: EntryScope;
 }
 
-const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
+type EntryScope = '局外' | '局内';
+
+const ENTRY_TAB_SCOPE: Record<string, EntryScope> = {
+  局外词条: '局外',
+  强化类别词条适用范围: '局外',
+  深夜模式局外词条: '局外',
+  局内词条: '局内',
+  潜在能力: '局内',
+  护符词条: '局内',
+  道具效果: '局内',
+  深夜模式局内词条: '局内',
+};
+
+const scopeOfEntryTab = (tab: string): EntryScope => ENTRY_TAB_SCOPE[tab] ?? '局外';
+const firstEntryTabOfScope = (scope: EntryScope): string =>
+  Object.keys(ENTRY_TAB_SCOPE).find((key) => ENTRY_TAB_SCOPE[key] === scope) ?? '局外词条';
+
+const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab, scope }) => {
+  const initialTab = activeSubTab || (scope ? firstEntryTabOfScope(scope) : '局外词条');
   const [searchKeyword, setSearchKeyword] = useState('');
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedInGameTypes, setSelectedInGameTypes] = useState<string[]>([]);
@@ -288,7 +308,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const [selectedTalismanCategories, setSelectedTalismanCategories] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
-  const [activeEntryTab, setActiveEntryTab] = useState(activeSubTab || '局外词条');
+  const [activeEntryTab, setActiveEntryTab] = useState(initialTab);
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [sortedInfo, setSortedInfo] = useState<Sorts>({});
   // 是否展示未实装词条（默认不展示）
@@ -1620,12 +1640,15 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     }
   };
 
+  // 拆页后每个入口固定一个分段；未指定时按当前标签推断（保留旧行为）
+  const activeScope = scope ?? scopeOfEntryTab(activeEntryTab);
+
   return (
     <div className="content-wrapper">
       <Tabs
         type="card"
         style={{
-          marginTop: '20px',
+          marginTop: '8px',
         }}
         activeKey={activeEntryTab}
         onChange={(key) => {
@@ -1723,7 +1746,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
               </div>
             ),
           },
-        ]}
+        ].filter((item) => ENTRY_TAB_SCOPE[String(item.key)] === activeScope)}
         className="custom-tabs"
       />
     </div>

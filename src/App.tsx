@@ -6,6 +6,7 @@ import { geekblue } from '@ant-design/colors';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Navigation from './components/Navigation';
+import PageHeader from './components/PageHeader';
 import FunctionMenu from './components/FunctionMenu';
 import { initializeTheme, setupThemeListener, toggleTheme } from './utils/themeUtils';
 import DataManager, { type DataGroup } from './utils/dataManager';
@@ -40,9 +41,11 @@ const ViewLoading = () => (
 // 各 tab 依赖的数据组。游戏机制 / 武器战技与魔法祷告 用的是随页面 chunk 打包的静态 JSON，
 // 不在此表内，因此这两个页面切换时不需要任何额外请求。
 const TAB_DATA_GROUPS: Record<string, DataGroup | undefined> = {
-  词条详细数据: 'entries',
+  遗物词条: 'entries',
+  局内词条: 'entries',
   角色数据: 'character',
-  夜王Boss数据: 'boss',
+  夜王数据: 'boss',
+  强敌与事件: 'boss',
   传说武器详情: 'weapon',
 };
 
@@ -137,16 +140,20 @@ function App() {
   // 渲染内容（视图组件已懒加载，需由 Suspense 包裹）
   const renderView = () => {
     switch (activeTab) {
-      case '词条详细数据':
-        return <EntryDetailView activeSubTab={activeSubTab} />;
+      case '遗物词条':
+        return <EntryDetailView key="entries-outer" scope="局外" activeSubTab={activeSubTab} />;
+      case '局内词条':
+        return <EntryDetailView key="entries-inner" scope="局内" activeSubTab={activeSubTab} />;
       case '传说武器详情':
         return <LegendaryWeaponView activeStep={activeStep} />;
       case '角色数据':
-        return <CharacterDataView />;
+        return <CharacterDataView activeSubTab={activeSubTab} />;
       case '游戏机制':
         return <GameMechanicsView functionName="游戏机制" />;
-      case '夜王Boss数据':
-        return <BossDataView activeSubTab={activeSubTab} />;
+      case '夜王数据':
+        return <BossDataView key="boss-nightlord" scope="夜王" activeSubTab={activeSubTab} />;
+      case '强敌与事件':
+        return <BossDataView key="boss-map" scope="地图" activeSubTab={activeSubTab} />;
       case '武器战技与魔法祷告':
         return <WeaponSkillMagicView activeSubTab={activeSubTab} />;
       case '商人数据':
@@ -154,7 +161,7 @@ function App() {
       case '掉落池':
         return <DropPoolView />;
       default:
-        return <EntryDetailView activeSubTab={activeSubTab} />;
+        return <EntryDetailView key="entries-outer" scope="局外" activeSubTab={activeSubTab} />;
     }
   };
 
@@ -197,7 +204,12 @@ function App() {
 
           <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
 
-          {renderContent()}
+          <PageHeader pageKey={activeTab} />
+
+          {/* key 绑定当前 tab：切页时整块内容重新入场，统一动效见 styles/motion.css */}
+          <div className="page-enter" key={activeTab}>
+            {renderContent()}
+          </div>
 
           <Footer />
         </div>

@@ -2,7 +2,13 @@ import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import { Typography, Table, Alert, Tabs, Divider, Switch, Tooltip } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar, Column } from '@ant-design/plots';
-import { ThunderboltTwoTone, QuestionCircleOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import {
+  ThunderboltTwoTone,
+  QuestionCircleOutlined,
+  LeftOutlined,
+  RightOutlined,
+  TeamOutlined,
+} from '@ant-design/icons';
 import { throttle } from 'lodash';
 import { getCurrentTheme } from '../utils/themeUtils';
 import styles from '../styles/characterDataView.module.css';
@@ -10,6 +16,7 @@ import DataManager from '../utils/dataManager';
 import DataSourceTooltip from '../components/DataSourceTooltip';
 import TeardropConversion from './characterDataView/TeardropConversion';
 import CharacterName from './characterDataView/CharacterName';
+import RoundtableCharacters from './characterDataView/RoundtableCharacters';
 
 const { Title, Text } = Typography;
 
@@ -50,8 +57,27 @@ const ENHANCED_DODGE_BONUS_OVERRIDES: { [name: string]: number } = {
   '女爵（闪身）': 2,
 };
 
+/**
+ * 图表只在分栏可见时挂载，且延后一帧再挂：
+ * 分栏隐藏时容器宽度为 0，@ant-design/plots 会按 0 宽度重排；切回来的那一帧如果直接复用/新建图表，
+ * 会先画出「柱子挤在左半边」的窄图。等一帧让面板完成布局后再挂载，图表一次就按正确宽度绘制。
+ */
+const useChartMountWhenVisible = (active: boolean) => {
+  const [mounted, setMounted] = useState(active);
+  useEffect(() => {
+    if (!active) {
+      setMounted(false);
+      return;
+    }
+    const raf = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(raf);
+  }, [active]);
+  return mounted;
+};
+
 // 闪避无敌帧对比组件
-const DodgeFramesComparison = () => {
+const DodgeFramesComparison = ({ active = true }: { active?: boolean }) => {
+  const chartMounted = useChartMountWhenVisible(active);
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
   const [chartKey, setChartKey] = useState(0);
   const [frameData, setFrameData] = useState<Array<{ name: string; type: string; value: number }>>([]);
@@ -320,7 +346,9 @@ const DodgeFramesComparison = () => {
             position: 'relative',
           }}
         >
-          <Column key={`dodge-frames-${chartKey}-${enhancedDodge ? 'enhanced' : 'base'}`} {...config} />
+          {chartMounted && (
+            <Column key={`dodge-frames-${chartKey}-${enhancedDodge ? 'enhanced' : 'base'}`} {...config} />
+          )}
         </div>
 
         {/* 提示信息 */}
@@ -457,12 +485,25 @@ const RadarLegend: React.FC<{
   );
 };
 
-const CharacterDataView: React.FC = () => {
+interface CharacterDataViewProps {
+  activeSubTab?: string;
+}
+
+const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) => {
   // 数据状态
   const [data, setData] = useState<DataState>({
     characterStatesData: [],
     loading: true,
   });
+
+  // 分栏状态：基础属性与等级成长同一栏，其余各自一栏
+  const [activeCharTab, setActiveCharTab] = useState<string>(activeSubTab || '基础属性');
+
+  useEffect(() => {
+    if (activeSubTab && activeSubTab !== activeCharTab) {
+      setActiveCharTab(activeSubTab);
+    }
+  }, [activeSubTab, activeCharTab]);
 
   // 隐士出招表数据
   const [magicMoves, setMagicMoves] = useState<MagicMove[]>([]);
@@ -862,6 +903,9 @@ const CharacterDataView: React.FC = () => {
     },
   ];
 
+  // 雷达图跟随分栏挂载：不可见时不保留实例，切回来等面板布局完成再绘制
+  const radarMounted = useChartMountWhenVisible(activeCharTab === '基础属性');
+
   // 行选择配置
   const rowSelection: TableProps<{ key: string; character: string; [key: string]: string }>['rowSelection'] = {
     selectedRowKeys,
@@ -886,473 +930,540 @@ const CharacterDataView: React.FC = () => {
     }),
   };
 
+  // 分栏都放在同一张卡片内：分栏条在卡片顶部，内容也在卡片内部，
+  // 不再出现「分栏条一块、内容卡片一块」的割裂感
   return (
     <div className={styles.characterDataContainer}>
-      <div className={`content-wrapper ${styles.cardItem}`} id="character-attributes">
-        <div className={styles.cardHeader}>
-          <Title level={5} className="character-card-title">
-            基础属性
-          </Title>
-        </div>
-        <div className={styles.cardBody}>
-          <div className={styles.attributesAndRadar} style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-            {/* 角色属性表格 */}
-            <div className={styles.characterAttributesTableContainer}>
-              <Table
-                rowSelection={rowSelection}
-                columns={columns}
-                dataSource={generateTableData()}
-                rowKey="key"
-                pagination={false}
-                size="small"
-                bordered
-                scroll={{ x: 'max-content' }}
-                className={styles.characterAttributesTable}
-                // style={{ height: '350px' }}
-                style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
-                footer={characterAttributesFooter}
-              />
-            </div>
-
-            {/* 雷达图容器 - 动态高度响应拖拽和窗口变化 */}
-            <div className={styles.radarChartContainer} id="radar-chart-container">
-              {selectedRowKeys.length > 0 ? (
+      <div className={`content-wrapper ${styles.characterPanel}`}>
+        <Tabs
+          type="card"
+          activeKey={activeCharTab}
+          onChange={setActiveCharTab}
+          items={[
+            {
+              key: '基础属性',
+              label: '📊 基础属性与等级成长',
+              children: (
                 <>
-                  <div className={styles.radarChartInner}>
-                    <RadarLegend names={selectedRowKeys.map((key) => key.toString())} getColor={getRadarColor} />
-                    <Radar
-                      key={`radar-main-${chartKey}-${selectedRowKeys.join('-')}`}
-                      data={radarData}
-                      xField="item" // 用于X轴（雷达图的各个顶点）的字段
-                      yField="score" // 用于Y轴（数值）的字段
-                      colorField="type" // 用于区分不同角色的字段
-                      legend={false} // 使用自定义单行图例
-                      height={380} // 雷达图高度
-                      autoFit={true} // 自适应容器大小
-                      animate={false} // 关闭更新动画，避免切换角色超过 8 个时残留外圈
-                      theme={currentTheme} // 根据当前主题动态设置
+                  <div className={`content-wrapper ${styles.cardItem}`} id="character-attributes">
+                    <div className={styles.cardHeader}>
+                      <Title level={5} className="character-card-title">
+                        基础属性
+                      </Title>
+                    </div>
+                    <div className={styles.cardBody}>
+                      <div
+                        className={styles.attributesAndRadar}
+                        style={{ display: 'flex', gap: '10px', marginTop: '10px' }}
+                      >
+                        {/* 角色属性表格 */}
+                        <div className={styles.characterAttributesTableContainer}>
+                          <Table
+                            rowSelection={rowSelection}
+                            columns={columns}
+                            dataSource={generateTableData()}
+                            rowKey="key"
+                            pagination={false}
+                            size="small"
+                            bordered
+                            scroll={{ x: 'max-content' }}
+                            className={styles.characterAttributesTable}
+                            // style={{ height: '350px' }}
+                            style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
+                            footer={characterAttributesFooter}
+                          />
+                        </div>
 
-                      // 坐标轴配置
-                      axis={{
-                        x: {
-                          grid: true,
-                          gridLineWidth: 1,
-                          tick: false,
-                          gridLineDash: [0, 0],
-                        },
-                        y: {
-                          zIndex: 1,
-                          title: false,
-                          gridLineWidth: 1,
-                          gridLineDash: [0, 0],
-                          gridAreaFill: (_: unknown, index: number) => {
-                            return index % 2 === 1 ? 'rgba(0, 0, 0, 0.04)' : '';
-                          },
-                          labelFormatter: (value: number) => {
-                            const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
-                            return levelMap[value] || '';
-                          },
-                        },
-                      }}
+                        {/* 雷达图容器 - 动态高度响应拖拽和窗口变化 */}
+                        <div className={styles.radarChartContainer} id="radar-chart-container">
+                          {/* 分栏不可见时不渲染图表：避免按 0 宽度重排，切回来的首帧变窄 */}
+                          {!radarMounted ? null : selectedRowKeys.length > 0 ? (
+                            <>
+                              <div className={styles.radarChartInner}>
+                                <RadarLegend
+                                  names={selectedRowKeys.map((key) => key.toString())}
+                                  getColor={getRadarColor}
+                                />
+                                <Radar
+                                  key={`radar-main-${chartKey}-${selectedRowKeys.join('-')}`}
+                                  data={radarData}
+                                  xField="item" // 用于X轴（雷达图的各个顶点）的字段
+                                  yField="score" // 用于Y轴（数值）的字段
+                                  colorField="type" // 用于区分不同角色的字段
+                                  legend={false} // 使用自定义单行图例
+                                  height={380} // 雷达图高度
+                                  autoFit={true} // 自适应容器大小
+                                  animate={false} // 关闭更新动画，避免切换角色超过 8 个时残留外圈
+                                  theme={currentTheme} // 根据当前主题动态设置
 
-                      // 数据点配置
-                      point={{
-                        size: 4,
-                      }}
+                                  // 坐标轴配置
+                                  axis={{
+                                    x: {
+                                      grid: true,
+                                      gridLineWidth: 1,
+                                      tick: false,
+                                      gridLineDash: [0, 0],
+                                    },
+                                    y: {
+                                      zIndex: 1,
+                                      title: false,
+                                      gridLineWidth: 1,
+                                      gridLineDash: [0, 0],
+                                      gridAreaFill: (_: unknown, index: number) => {
+                                        return index % 2 === 1 ? 'rgba(0, 0, 0, 0.04)' : '';
+                                      },
+                                      labelFormatter: (value: number) => {
+                                        const levelMap: Record<number, string> = {
+                                          1: 'D',
+                                          2: 'C',
+                                          3: 'B',
+                                          4: 'A',
+                                          5: 'S',
+                                        };
+                                        return levelMap[value] || '';
+                                      },
+                                    },
+                                  }}
 
-                      // 刻度配置 - 恢复辅助线
-                      scale={{
-                        x: { padding: 50, align: 0 },
-                        y: {
-                          tickCount: 5,
-                          domainMin: 0,
-                          domainMax: 5,
-                        },
-                        color: {
-                          domain: characterNames,
-                          range: RADAR_COLORS,
-                        },
-                      }}
+                                  // 数据点配置
+                                  point={{
+                                    size: 4,
+                                  }}
 
-                      // 线条样式
-                      style={{
-                        lineWidth: 2,
-                      }}
+                                  // 刻度配置 - 恢复辅助线
+                                  scale={{
+                                    x: { padding: 50, align: 0 },
+                                    y: {
+                                      tickCount: 5,
+                                      domainMin: 0,
+                                      domainMax: 5,
+                                    },
+                                    color: {
+                                      domain: characterNames,
+                                      range: RADAR_COLORS,
+                                    },
+                                  }}
 
-                      // 提示框配置
-                      tooltip={{
-                        items: [
-                          {
-                            channel: 'y',
-                            valueFormatter: (value: number) => {
-                              const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
-                              return levelMap[value] || value.toString();
-                            },
-                          },
-                        ],
-                      }}
+                                  // 线条样式
+                                  style={{
+                                    lineWidth: 2,
+                                  }}
 
-                      // 填充区域样式
-                      area={{
-                        style: {
-                          fillOpacity: 0.1, // 填充透明度
-                        },
-                      }}
+                                  // 提示框配置
+                                  tooltip={{
+                                    items: [
+                                      {
+                                        channel: 'y',
+                                        valueFormatter: (value: number) => {
+                                          const levelMap: Record<number, string> = {
+                                            1: 'D',
+                                            2: 'C',
+                                            3: 'B',
+                                            4: 'A',
+                                            5: 'S',
+                                          };
+                                          return levelMap[value] || value.toString();
+                                        },
+                                      },
+                                    ],
+                                  }}
 
-                      // 线样式
-                      line={{
-                        style: {
-                          lineWidth: 2,
-                        },
-                      }}
-                    />
+                                  // 填充区域样式
+                                  area={{
+                                    style: {
+                                      fillOpacity: 0.1, // 填充透明度
+                                    },
+                                  }}
+
+                                  // 线样式
+                                  line={{
+                                    style: {
+                                      lineWidth: 2,
+                                    },
+                                  }}
+                                />
+                              </div>
+                            </>
+                          ) : (
+                            // 空状态显示
+                            <div
+                              className={styles.radarWrapper}
+                              style={{
+                                height: '400px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}
+                            >
+                              <Radar
+                                key={`radar-empty-${chartKey}`}
+                                data={radarAttributes.map((attr) => ({
+                                  item: attr,
+                                  type: '',
+                                  score: 0,
+                                }))}
+                                xField="item"
+                                yField="score"
+                                colorField="type"
+                                height={350}
+                                theme={currentTheme} // 根据当前主题动态设置
+                                axis={{
+                                  x: {
+                                    grid: true,
+                                    gridLineWidth: 1,
+                                    tick: false,
+                                    gridLineDash: [0, 0],
+                                  },
+                                  y: {
+                                    zIndex: 1,
+                                    title: false,
+                                    gridLineWidth: 1,
+                                    gridLineDash: [0, 0],
+                                    tick: {
+                                      formatter: (value: number) => {
+                                        const levelMap: { [key: number]: string } = {
+                                          1: 'D',
+                                          2: 'C',
+                                          3: 'B',
+                                          4: 'A',
+                                          5: 'S',
+                                        };
+                                        return levelMap[value] || '';
+                                      },
+                                    },
+                                  },
+                                }}
+                                scale={{
+                                  x: { padding: 0.5, align: 0 },
+                                  y: {
+                                    tickCount: 5,
+                                    domainMin: 0,
+                                    domainMax: 5,
+                                  },
+                                }}
+                                // 隐藏图例和数据点
+                                legend={false}
+                                point={{ size: 0 }}
+                                line={{ style: { lineWidth: 0 } }}
+                                area={false}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 角色详细数据 */}
+                  <div className={`content-wrapper ${styles.cardItem}`} id="character-detail-data">
+                    <div className={styles.cardHeader}>
+                      <Title level={5} className="character-card-title">
+                        角色详细数据
+                      </Title>
+                    </div>
+                    <div className={styles.cardBody}>
+                      <Title level={5} style={{ margin: '12px 0 8px', color: 'var(--color-text-1)' }}>
+                        同等级角色属性对比
+                      </Title>
+                      {/* 角色详细数据标签页 */}
+                      <Tabs
+                        type="card"
+                        items={jsonTabs.map((tab) => ({
+                          key: tab.name,
+                          label: tab.name,
+                          children: (
+                            <Table
+                              dataSource={tab.data}
+                              columns={tab.columns}
+                              rowKey="character"
+                              pagination={false}
+                              size="small"
+                              bordered
+                              scroll={{ x: 'max-content' }}
+                              style={{
+                                wordBreak: 'break-word',
+                                whiteSpace: 'pre-wrap',
+                              }}
+                              footer={bottomTablesFooter}
+                            />
+                          ),
+                        }))}
+                      />
+                      <Divider />
+                      {jsonTabs.length > 0 && (
+                        <>
+                          <Title level={5} style={{ marginBottom: 8, color: 'var(--color-text-1)' }}>
+                            血量、专注、耐力具体数值
+                          </Title>
+                          {/* HP/FP/ST 数据表格（通过 Tabs 切换） */}
+                          <Tabs
+                            type="card"
+                            items={[
+                              {
+                                key: 'hp',
+                                label: '❤️ 血量值成长',
+                                children: (
+                                  <Table
+                                    dataSource={hpData}
+                                    rowKey="character"
+                                    rowClassName={(_record, index) =>
+                                      index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
+                                    }
+                                    columns={[
+                                      {
+                                        title: '等级',
+                                        dataIndex: 'character',
+                                        key: 'character',
+                                        width: 100,
+                                        fixed: 'left',
+                                        align: 'center' as const,
+                                        render: (text: string) => (
+                                          <span
+                                            style={{
+                                              fontWeight: 'bold',
+                                              color: 'var(--color-text-1)',
+                                              fontSize: '13px',
+                                            }}
+                                          >
+                                            <CharacterName name={text} />
+                                          </span>
+                                        ),
+                                      },
+                                      ...Array.from({ length: 15 }, (_, i) => ({
+                                        title: (
+                                          <span
+                                            style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}
+                                          >{`Lv${i + 1}`}</span>
+                                        ),
+                                        dataIndex: `Lv${i + 1}`,
+                                        key: `Lv${i + 1}`,
+                                        width: 60,
+                                        align: 'center' as const,
+                                        render: (value: string | number | undefined) => (
+                                          <span
+                                            style={{
+                                              fontWeight: '500',
+                                              color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
+                                              fontSize: '13px',
+                                            }}
+                                          >
+                                            {value || '-'}
+                                          </span>
+                                        ),
+                                      })),
+                                    ]}
+                                    pagination={false}
+                                    size="small"
+                                    bordered
+                                    scroll={{ x: 'max-content' }}
+                                    style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
+                                    footer={topTablesFooter}
+                                  />
+                                ),
+                              },
+                              {
+                                key: 'fp',
+                                label: '💙 专注值成长',
+                                children: (
+                                  <Table
+                                    dataSource={fpData}
+                                    rowKey="character"
+                                    rowClassName={(_record, index) =>
+                                      index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
+                                    }
+                                    columns={[
+                                      {
+                                        title: '等级',
+                                        dataIndex: 'character',
+                                        key: 'character',
+                                        width: 100,
+                                        fixed: 'left',
+                                        align: 'center' as const,
+                                        render: (text: string) => (
+                                          <span
+                                            style={{
+                                              fontWeight: 'bold',
+                                              color: 'var(--color-text-1)',
+                                              fontSize: '13px',
+                                            }}
+                                          >
+                                            <CharacterName name={text} />
+                                          </span>
+                                        ),
+                                      },
+                                      ...Array.from({ length: 15 }, (_, i) => ({
+                                        title: (
+                                          <span
+                                            style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}
+                                          >{`Lv${i + 1}`}</span>
+                                        ),
+                                        dataIndex: `Lv${i + 1}`,
+                                        key: `Lv${i + 1}`,
+                                        width: 60,
+                                        align: 'center' as const,
+                                        render: (value: string | number | undefined) => (
+                                          <span
+                                            style={{
+                                              fontWeight: '500',
+                                              color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
+                                              fontSize: '13px',
+                                            }}
+                                          >
+                                            {value || '-'}
+                                          </span>
+                                        ),
+                                      })),
+                                    ]}
+                                    pagination={false}
+                                    size="small"
+                                    bordered
+                                    scroll={{ x: 'max-content' }}
+                                    style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
+                                    footer={topTablesFooter}
+                                  />
+                                ),
+                              },
+                              {
+                                key: 'st',
+                                label: '💚 耐力值成长',
+                                children: (
+                                  <Table
+                                    dataSource={stData}
+                                    rowKey="character"
+                                    rowClassName={(_record, index) =>
+                                      index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
+                                    }
+                                    columns={[
+                                      {
+                                        title: '等级',
+                                        dataIndex: 'character',
+                                        key: 'character',
+                                        width: 100,
+                                        fixed: 'left',
+                                        align: 'center' as const,
+                                        render: (text: string) => (
+                                          <span
+                                            style={{
+                                              fontWeight: 'bold',
+                                              color: 'var(--color-text-1)',
+                                              fontSize: '13px',
+                                            }}
+                                          >
+                                            <CharacterName name={text} />
+                                          </span>
+                                        ),
+                                      },
+                                      ...Array.from({ length: 15 }, (_, i) => ({
+                                        title: (
+                                          <span
+                                            style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}
+                                          >{`Lv${i + 1}`}</span>
+                                        ),
+                                        dataIndex: `Lv${i + 1}`,
+                                        key: `Lv${i + 1}`,
+                                        width: 60,
+                                        align: 'center' as const,
+                                        render: (value: string | number | undefined) => (
+                                          <span
+                                            style={{
+                                              fontWeight: '500',
+                                              color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
+                                              fontSize: '13px',
+                                            }}
+                                          >
+                                            {value || '-'}
+                                          </span>
+                                        ),
+                                      })),
+                                    ]}
+                                    pagination={false}
+                                    size="small"
+                                    bordered
+                                    scroll={{ x: 'max-content' }}
+                                    style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
+                                    footer={topTablesFooter}
+                                  />
+                                ),
+                              },
+                            ]}
+                            style={{ marginBottom: 30 }}
+                          />
+                        </>
+                      )}
+                    </div>
                   </div>
                 </>
-              ) : (
-                // 空状态显示
-                <div
-                  className={styles.radarWrapper}
-                  style={{
-                    height: '400px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Radar
-                    key={`radar-empty-${chartKey}`}
-                    data={radarAttributes.map((attr) => ({
-                      item: attr,
-                      type: '',
-                      score: 0,
-                    }))}
-                    xField="item"
-                    yField="score"
-                    colorField="type"
-                    height={350}
-                    theme={currentTheme} // 根据当前主题动态设置
-                    axis={{
-                      x: {
-                        grid: true,
-                        gridLineWidth: 1,
-                        tick: false,
-                        gridLineDash: [0, 0],
-                      },
-                      y: {
-                        zIndex: 1,
-                        title: false,
-                        gridLineWidth: 1,
-                        gridLineDash: [0, 0],
-                        tick: {
-                          formatter: (value: number) => {
-                            const levelMap: { [key: number]: string } = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
-                            return levelMap[value] || '';
-                          },
-                        },
-                      },
-                    }}
-                    scale={{
-                      x: { padding: 0.5, align: 0 },
-                      y: {
-                        tickCount: 5,
-                        domainMin: 0,
-                        domainMax: 5,
-                      },
-                    }}
-                    // 隐藏图例和数据点
-                    legend={false}
-                    point={{ size: 0 }}
-                    line={{ style: { lineWidth: 0 } }}
-                    area={false}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 角色详细数据 */}
-      <div className={`content-wrapper ${styles.cardItem}`} id="character-detail-data">
-        <div className={styles.cardHeader}>
-          <Title level={5} className="character-card-title">
-            角色详细数据
-          </Title>
-        </div>
-        <div className={styles.cardBody}>
-          <Title level={5} style={{ margin: '12px 0 8px', color: 'var(--color-text-1)' }}>
-            同等级角色属性对比
-          </Title>
-          {/* 角色详细数据标签页 */}
-          <Tabs
-            type="card"
-            items={jsonTabs.map((tab) => ({
-              key: tab.name,
-              label: tab.name,
-              children: (
-                <Table
-                  dataSource={tab.data}
-                  columns={tab.columns}
-                  rowKey="character"
-                  pagination={false}
-                  size="small"
-                  bordered
-                  scroll={{ x: 'max-content' }}
-                  style={{
-                    wordBreak: 'break-word',
-                    whiteSpace: 'pre-wrap',
-                  }}
-                  footer={bottomTablesFooter}
-                />
               ),
-            }))}
-          />
-          <Divider />
-          {jsonTabs.length > 0 && (
-            <>
-              <Title level={5} style={{ marginBottom: 8, color: 'var(--color-text-1)' }}>
-                血量、专注、耐力具体数值
-              </Title>
-              {/* HP/FP/ST 数据表格（通过 Tabs 切换） */}
-              <Tabs
-                type="card"
-                items={[
-                  {
-                    key: 'hp',
-                    label: '❤️ 血量值成长',
-                    children: (
-                      <Table
-                        dataSource={hpData}
-                        rowKey="character"
-                        rowClassName={(_record, index) =>
-                          index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
-                        }
-                        columns={[
+            },
+            { key: '泪滴转职', label: '💧 泪滴转职', children: <TeardropConversion /> },
+            {
+              key: '无敌帧',
+              label: '⚡ 翻滚/闪避无敌帧',
+              children: (
+                <div id="dodge-frames">
+                  <DodgeFramesComparison active={activeCharTab === '无敌帧'} />
+                </div>
+              ),
+            },
+            {
+              key: '隐士出招表',
+              label: '🔮 隐士出招表',
+              children: (
+                <div className={`content-wrapper ${styles.cardItem}`} id="hermit-magic-list">
+                  <div className={styles.cardHeader}>
+                    <Title level={5} className="character-card-title">
+                      <ThunderboltTwoTone />
+                      隐士出招表
+                      <DataSourceTooltip
+                        links={[
                           {
-                            title: '等级',
-                            dataIndex: 'character',
-                            key: 'character',
-                            width: 100,
-                            fixed: 'left',
-                            align: 'center' as const,
-                            render: (text: string) => (
-                              <span
-                                style={{
-                                  fontWeight: 'bold',
-                                  color: 'var(--color-text-1)',
-                                  fontSize: '13px',
-                                }}
-                              >
-                                <CharacterName name={text} />
-                              </span>
-                            ),
+                            text: '1. 混合魔法太复杂？没关系我来讲清楚！',
+                            url: 'https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=758970790a0a',
                           },
-                          ...Array.from({ length: 15 }, (_, i) => ({
-                            title: (
-                              <span
-                                style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}
-                              >{`Lv${i + 1}`}</span>
-                            ),
-                            dataIndex: `Lv${i + 1}`,
-                            key: `Lv${i + 1}`,
-                            width: 60,
-                            align: 'center' as const,
-                            render: (value: string | number | undefined) => (
-                              <span
-                                style={{
-                                  fontWeight: '500',
-                                  color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
-                                  fontSize: '13px',
-                                }}
-                              >
-                                {value || '-'}
-                              </span>
-                            ),
-                          })),
-                        ]}
-                        pagination={false}
-                        size="small"
-                        bordered
-                        scroll={{ x: 'max-content' }}
-                        style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
-                        footer={topTablesFooter}
-                      />
-                    ),
-                  },
-                  {
-                    key: 'fp',
-                    label: '💙 专注值成长',
-                    children: (
-                      <Table
-                        dataSource={fpData}
-                        rowKey="character"
-                        rowClassName={(_record, index) =>
-                          index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
-                        }
-                        columns={[
                           {
-                            title: '等级',
-                            dataIndex: 'character',
-                            key: 'character',
-                            width: 100,
-                            fixed: 'left',
-                            align: 'center' as const,
-                            render: (text: string) => (
-                              <span
-                                style={{
-                                  fontWeight: 'bold',
-                                  color: 'var(--color-text-1)',
-                                  fontSize: '13px',
-                                }}
-                              >
-                                <CharacterName name={text} />
-                              </span>
-                            ),
+                            text: '2. 黑夜君临 v1.01数据汇总-技艺、绝招数据',
+                            url: 'https://tieba.baidu.com/p/9906444262?pid=152430482433&cid=#152430482433',
                           },
-                          ...Array.from({ length: 15 }, (_, i) => ({
-                            title: (
-                              <span
-                                style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}
-                              >{`Lv${i + 1}`}</span>
-                            ),
-                            dataIndex: `Lv${i + 1}`,
-                            key: `Lv${i + 1}`,
-                            width: 60,
-                            align: 'center' as const,
-                            render: (value: string | number | undefined) => (
-                              <span
-                                style={{
-                                  fontWeight: '500',
-                                  color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
-                                  fontSize: '13px',
-                                }}
-                              >
-                                {value || '-'}
-                              </span>
-                            ),
-                          })),
                         ]}
-                        pagination={false}
-                        size="small"
-                        bordered
-                        scroll={{ x: 'max-content' }}
-                        style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
-                        footer={topTablesFooter}
                       />
-                    ),
-                  },
-                  {
-                    key: 'st',
-                    label: '💚 耐力值成长',
-                    children: (
-                      <Table
-                        dataSource={stData}
-                        rowKey="character"
-                        rowClassName={(_record, index) =>
-                          index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
-                        }
-                        columns={[
-                          {
-                            title: '等级',
-                            dataIndex: 'character',
-                            key: 'character',
-                            width: 100,
-                            fixed: 'left',
-                            align: 'center' as const,
-                            render: (text: string) => (
-                              <span
-                                style={{
-                                  fontWeight: 'bold',
-                                  color: 'var(--color-text-1)',
-                                  fontSize: '13px',
-                                }}
-                              >
-                                <CharacterName name={text} />
-                              </span>
-                            ),
-                          },
-                          ...Array.from({ length: 15 }, (_, i) => ({
-                            title: (
-                              <span
-                                style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}
-                              >{`Lv${i + 1}`}</span>
-                            ),
-                            dataIndex: `Lv${i + 1}`,
-                            key: `Lv${i + 1}`,
-                            width: 60,
-                            align: 'center' as const,
-                            render: (value: string | number | undefined) => (
-                              <span
-                                style={{
-                                  fontWeight: '500',
-                                  color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
-                                  fontSize: '13px',
-                                }}
-                              >
-                                {value || '-'}
-                              </span>
-                            ),
-                          })),
-                        ]}
-                        pagination={false}
-                        size="small"
-                        bordered
-                        scroll={{ x: 'max-content' }}
-                        style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
-                        footer={topTablesFooter}
-                      />
-                    ),
-                  },
-                ]}
-                style={{ marginBottom: 30 }}
-              />
-            </>
-          )}
-        </div>
-      </div>
-
-      {/* 泪滴转职（属性修正） */}
-      <TeardropConversion />
-
-      {/* 闪避无敌帧对比 */}
-      <div id="dodge-frames">
-        <DodgeFramesComparison />
-      </div>
-
-      {/* 隐士出招表 */}
-      <div className={`content-wrapper ${styles.cardItem}`} id="hermit-magic-list">
-        <div className={styles.cardHeader}>
-          <Title level={5} className="character-card-title">
-            <ThunderboltTwoTone />
-            隐士出招表
-            <DataSourceTooltip
-              links={[
-                {
-                  text: '1. 混合魔法太复杂？没关系我来讲清楚！',
-                  url: 'https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=758970790a0a',
-                },
-                {
-                  text: '2. 黑夜君临 v1.01数据汇总-技艺、绝招数据',
-                  url: 'https://tieba.baidu.com/p/9906444262?pid=152430482433&cid=#152430482433',
-                },
-              ]}
-            />
-          </Title>
-        </div>
-        <div className={styles.cardBody}>
-          <Table
-            dataSource={magicMoves}
-            columns={magicMoveColumns}
-            pagination={false}
-            size="small"
-            bordered
-            rowKey={(record) => (record as MagicMove).attributeMark || (record as MagicMove)['属性痕'] || ''}
-            scroll={{ x: '100%' }}
-            style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
-            footer={() => <div className="footer-text">备注：总伤害为角色 15 级时测试数据</div>}
-          />
-        </div>
+                    </Title>
+                  </div>
+                  <div className={styles.cardBody}>
+                    <Table
+                      dataSource={magicMoves}
+                      columns={magicMoveColumns}
+                      pagination={false}
+                      size="small"
+                      bordered
+                      rowKey={(record) => (record as MagicMove).attributeMark || (record as MagicMove)['属性痕'] || ''}
+                      scroll={{ x: '100%' }}
+                      style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
+                      footer={() => <div className="footer-text">备注：总伤害为角色 15 级时测试数据</div>}
+                    />
+                  </div>
+                </div>
+              ),
+            },
+            {
+              key: '圆桌人物',
+              label: '🏛️ 圆桌厅堂人物数据',
+              children: (
+                <div className={`content-wrapper ${styles.cardItem}`} id="roundtable-characters">
+                  <div className={styles.cardHeader}>
+                    <Title level={5} className="character-card-title">
+                      <TeamOutlined />
+                      圆桌厅堂人物数据
+                    </Title>
+                  </div>
+                  <div className={styles.cardBody}>
+                    <RoundtableCharacters />
+                  </div>
+                </div>
+              ),
+            },
+          ]}
+        />
       </div>
 
       {/* ----------------- */}

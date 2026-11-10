@@ -6,7 +6,6 @@ import type { ColumnsType } from 'antd/es/table';
 import type { BossData, EntryData } from '../types';
 import bossData from '../data/zh-CN/night_king_data.json';
 import wildBossData from '../data/zh-CN/wild_boss_data.json';
-import characterData from '../data/character-info/character_data.json';
 import DataManager from '../utils/dataManager';
 import { Line } from '@ant-design/plots';
 import { getCurrentTheme } from '../utils/themeUtils';
@@ -21,13 +20,7 @@ import {
   lipulaTradesData,
   processSinnerData,
 } from './bossDataView/data';
-import {
-  characterColumns,
-  lipulaColumns,
-  sinnerColumns,
-  specialEventColumns,
-  wildBossColumns,
-} from './bossDataView/columns';
+import { lipulaColumns, sinnerColumns, specialEventColumns, wildBossColumns } from './bossDataView/columns';
 
 // 导入boss图片
 import nightOfTheBeast from '../assets/BossRelics/night-of-the-beast.avif';
@@ -62,17 +55,35 @@ import deathBlightResistance from '../assets/Resistances/blight_status_effect_el
 
 interface BossDataViewProps {
   activeSubTab?: string;
+  // 拆页后固定只显示一个分段：夜王（每局开局即确定）/ 地图（由地图种子决定）
+  scope?: BossScope;
 }
 
-const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
+type BossScope = '夜王' | '地图';
+
+// 页内分段：夜王（每局开局即确定）/ 地图与敌人（由地图种子决定）
+const TAB_SCOPE: Record<string, BossScope> = {
+  'boss-data': '夜王',
+  'sinner-data': '夜王',
+  'lipula-trades': '夜王',
+  'wild-boss-data': '地图',
+  'enemy-race-data': '地图',
+  'special-events': '地图',
+};
+
+const scopeOfTab = (tab: string): BossScope => TAB_SCOPE[tab] ?? '夜王';
+const firstTabOfScope = (scope: BossScope): string =>
+  Object.keys(TAB_SCOPE).find((key) => TAB_SCOPE[key] === scope) ?? 'boss-data';
+
+const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab, scope }) => {
   const [filteredData] = useState<BossData[]>(bossData);
   const [wildBossSearchKeyword, setWildBossSearchKeyword] = useState('');
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
-  const [characterSearchKeyword, setCharacterSearchKeyword] = useState('');
-  const [selectedCharacterLocations, setSelectedCharacterLocations] = useState<string[]>([]);
   const [playerCount, setPlayerCount] = useState<number>(1); // 添加人数选择状态
   const [deepNightDepth, setDeepNightDepth] = useState<number>(0); // 0=普通，1~5=深夜深度
-  const [activeBossTab, setActiveBossTab] = useState<string>(activeSubTab || 'boss-data');
+  const [activeBossTab, setActiveBossTab] = useState<string>(
+    activeSubTab || (scope ? firstTabOfScope(scope) : 'boss-data'),
+  );
 
   // 特殊事件相关状态
   const [specialEventData, setSpecialEventData] = useState<EntryData[]>([]);
@@ -249,50 +260,6 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   const clearWildBossFilters = () => {
     setWildBossSearchKeyword('');
     setSelectedLocations([]);
-  };
-
-  // 获取所有唯一的圆桌厅堂人物位置选项
-  const getCharacterLocationOptions = () => {
-    const locations = new Set<string>();
-    characterData.forEach((character) => {
-      if (character.location) {
-        locations.add(character.location.trim());
-      }
-    });
-
-    return Array.from(locations)
-      .sort()
-      .map((location) => ({
-        value: location,
-        label: location,
-      }));
-  };
-
-  // 过滤圆桌厅堂人物数据
-  const getFilteredCharacterData = () => {
-    let filtered = characterData;
-
-    // 按位置筛选
-    if (selectedCharacterLocations.length > 0) {
-      filtered = filtered.filter((character) => {
-        if (!character.location) return false;
-        return selectedCharacterLocations.includes(character.location.trim());
-      });
-    }
-
-    // 按搜索关键词筛选（仅搜索人物名称）
-    if (characterSearchKeyword.trim()) {
-      const searchLower = characterSearchKeyword.toLowerCase();
-      filtered = filtered.filter((character) => character.name.toLowerCase().includes(searchLower));
-    }
-
-    return filtered;
-  };
-
-  // 清除圆桌厅堂人物筛选
-  const clearCharacterFilters = () => {
-    setCharacterSearchKeyword('');
-    setSelectedCharacterLocations([]);
   };
 
   // 根据吸收数值返回CSS类名
@@ -842,11 +809,6 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     <div className="footer-text">野生Boss数据：包含各种敌人和Boss的吸收值和抗性（异常耐受上限）数据</div>
   );
 
-  // 圆桌厅堂人物数据表格列定义
-  const characterFooter = () => (
-    <div className="footer-text">圆桌厅堂人物数据：包含各种NPC和角色的吸收值和抗性（异常耐受上限）数据</div>
-  );
-
   // 利普拉的交易选项
   const lipulaFooter = () => (
     <div className="footer-text">
@@ -967,6 +929,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     }
   }, [activeSubTab, activeBossTab]);
 
+  // 拆页后每个入口固定一个分段；未指定时按当前标签推断（保留旧行为）
+  const activeScope = scope ?? scopeOfTab(activeBossTab);
+
   return (
     <div className={styles.bossDataViewContainer}>
       <Card className={styles.bossCard}>
@@ -1084,44 +1049,6 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               ),
             },
             {
-              key: 'character-data',
-              label: '🏛️ 圆桌厅堂人物数据',
-              children: (
-                <div className={styles.wildBossFilterContainer} id="roundtable-characters">
-                  <div className={styles.filterInputs}>
-                    <Input
-                      placeholder="搜索人物名称"
-                      prefix={<SearchOutlined />}
-                      style={{ width: 200 }}
-                      value={characterSearchKeyword}
-                      onChange={(e) => setCharacterSearchKeyword(e.target.value)}
-                    />
-                    <Select
-                      mode="multiple"
-                      placeholder="选择位置"
-                      options={getCharacterLocationOptions()}
-                      value={selectedCharacterLocations}
-                      onChange={setSelectedCharacterLocations}
-                      tagRender={locationTagRender}
-                      style={{ minWidth: 200, maxWidth: 400 }}
-                    />
-                    <Button onClick={clearCharacterFilters}>清除筛选</Button>
-                  </div>
-                  <Table
-                    columns={characterColumns}
-                    dataSource={getFilteredCharacterData()}
-                    rowKey="name"
-                    pagination={false}
-                    size="small"
-                    bordered
-                    footer={characterFooter}
-                    sticky={{ offsetHeader: 0 }}
-                    scroll={{ x: 1000, y: 700 }}
-                  />
-                </div>
-              ),
-            },
-            {
               key: 'sinner-data',
               label: '🐐 永夜山羊召唤罪人详情',
               children: (
@@ -1231,7 +1158,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                 </div>
               ),
             },
-          ]}
+          ].filter((item) => TAB_SCOPE[String(item.key)] === activeScope)}
         />
       </Card>
     </div>

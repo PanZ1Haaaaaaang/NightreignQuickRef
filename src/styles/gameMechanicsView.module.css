@@ -11,8 +11,8 @@
 
 /* 主布局容器 - 可配置最大宽度 */
 .mechanicsLayout {
-  width: 70%;
-  max-width: 1200px;
+  width: min(1400px, 92%);
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -300,30 +300,6 @@ body[tomato-theme='dark'] .weaponLevelNote {
 .mechanicsDevelopmentText {
   font-size: var(--font-size-md);
   color: var(--color-text-2);
-}
-
-/* 动画效果 */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.mechanicCard {
-  animation: fadeInUp 0.4s ease-out;
-}
-
-.mechanicCard:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.mechanicCard:nth-child(3) {
-  animation-delay: 0.2s;
 }
 
 /* 深色模式适配 */

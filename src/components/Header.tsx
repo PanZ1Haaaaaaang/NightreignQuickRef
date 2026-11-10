@@ -17,6 +17,7 @@ import { getVersionDisplayText /*getVersionNumber*/ } from '../config/versionCon
 import { DATA_SOURCE_CONFIG } from '../config/dataSourceConfig';
 import type { DataSourceIcon } from '../config/dataSourceConfig';
 import { SITE_CONFIG } from '../config/siteConfig';
+import { LATEST_UPDATES, ROADMAP_TODO } from '../config/roadmapConfig';
 import NewsEntry from './NewsEntry';
 
 const { Title, Text } = Typography;
@@ -178,7 +179,7 @@ const Header: React.FC<HeaderProps> = React.memo(
                 <Tooltip title="查看更新记录和计划" placement="bottom" className="theme-toggle-btn">
                   <Popover
                     content={
-                      <div style={{ padding: '8px', maxWidth: '280px' }}>
+                      <div style={{ padding: '8px', maxWidth: '300px' }}>
                         <div
                           style={{
                             fontSize: '13px',
@@ -194,10 +195,12 @@ const Header: React.FC<HeaderProps> = React.memo(
                           {/* 最新更新 */}
                           <div style={{ marginBottom: '8px' }}>
                             <div style={{ fontWeight: 'bold', color: '#1890ff', marginBottom: '4px' }}>✅ 最新更新</div>
-                            <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                              • 新增官方更新公告以及翻译内容；
-                              <br />• 泪滴转职
-                              <br />• 潜在能力池概率
+                            <div style={{ marginLeft: '12px' }}>
+                              {LATEST_UPDATES.map((item) => (
+                                <div key={item} style={{ marginBottom: '2px' }}>
+                                  • {item}
+                                </div>
+                              ))}
                             </div>
                           </div>
 
@@ -208,17 +211,19 @@ const Header: React.FC<HeaderProps> = React.memo(
                               paddingTop: '8px',
                             }}
                           >
-                            <div style={{ fontWeight: 'bold', color: '#52c41a', marginBottom: '4px' }}>🔧 TODO</div>
-                            <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                              • 大盾数值 + 防御强度说明
-                              <br />• 渡夜者绝招、技艺效果，送葬者开启技艺后无敌帧变化
-                              <br />• 学者能力
-                              <br />• 异常值说明
-                              <br />• 黑焰烧血效果
-                              <br />• 冲击力说明 + 救人值
-                              <br />• 夜王弱点硬直
-                              <br />• 仇恨机制
+                            <div style={{ fontWeight: 'bold', color: '#52c41a', marginBottom: '6px' }}>
+                              🔧 TODO（按目标页面分组）
                             </div>
+                            {ROADMAP_TODO.map((group) => (
+                              <div key={group.page} className="todo-group">
+                                <span className="todo-page-tag">{group.page}</span>
+                                <ul className="todo-item-list">
+                                  {group.items.map((item) => (
+                                    <li key={item}>{item}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
                           </div>
                         </div>
                       </div>

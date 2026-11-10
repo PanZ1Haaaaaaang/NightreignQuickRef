@@ -1,0 +1,39 @@
+/* ===== 统一动效层 =====
+   全站只有这一处定义过渡：页面切换、页内页签、分段切换共用同一套参数。
+   想整体调快 / 调慢 / 关掉，只改这里的变量或注释掉 .motion-enter 的 animation 即可。 */
+
+:root {
+  --motion-duration: 180ms;
+  --motion-ease: cubic-bezier(0.2, 0, 0, 1);
+  --motion-rise: 6px;
+}
+
+@keyframes viewEnter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--motion-rise));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 通用入场：容器上挂 .motion-enter 并给它一个会变化的 key，
+   就会在每次切换时重新淡入（目前用于分段切换的表格区） */
+.motion-enter,
+/* 主 Tab 切换：App 里按 activeTab 换 key 的容器 */
+.page-enter,
+/* 页内页签（分栏）切换：antd v6 的激活面板每次切回都会重新加上 -active 类 */
+.ant-tabs-content-active {
+  animation: viewEnter var(--motion-duration) var(--motion-ease) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-enter,
+  .page-enter,
+  .ant-tabs-content-active {
+    animation: none;
+  }
+}

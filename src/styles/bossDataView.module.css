@@ -31,9 +31,9 @@
 
 /* 卡片样式 - 使用百分比宽度，与传说武器详情页面保持一致 */
 .bossCard {
-  max-width: 1300px;
+  width: min(1400px, 92%);
+  max-width: 1400px;
   min-width: 1000px;
-  width: 70%;
   margin: 0 auto;
   border-radius: 15px;
   background-color: var(--content-bg);
