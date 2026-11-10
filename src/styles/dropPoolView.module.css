@@ -86,6 +86,16 @@
   color: var(--color-text-1);
   font-size: 15px;
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 黑夜入侵者球：标题前的渡夜者头像 */
+.primaryIcon {
+  flex: none;
+  width: 18px;
+  height: 18px;
 }
 
 .id {

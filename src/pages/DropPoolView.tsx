@@ -29,6 +29,7 @@ import { BASE_POOL_KINDS, KIND_CLASS } from './dropPoolView/poolKinds';
 import BasePoolDrawer from './dropPoolView/BasePoolDrawer';
 import PotentialPoolDrawer from './dropPoolView/PotentialPoolDrawer';
 import DiscoveryDrawer from './dropPoolView/DiscoveryDrawer';
+import { characterIconOf } from './characterDataView/characterIcons';
 import styles from '../styles/dropPoolView.module.css';
 
 const { Title, Text } = Typography;
@@ -157,6 +158,11 @@ const DropCard: React.FC<{
   const showMutation = nightMode && nightState === 'mutation';
   const showInvasion = nightMode && nightState === 'invasion';
 
+  // 9 个黑夜入侵者球：第二个名字是它使用的武器（「追踪者的大剑」），
+  // 取下「XX」前缀即可拿到对应渡夜者，用来在标题前挂头像
+  const invaderOwner = group.invader ? group.names[1]?.split('的')[0] : undefined;
+  const invaderIcon = invaderOwner ? characterIconOf(invaderOwner) : undefined;
+
   return (
     <div
       className={styles.card}
@@ -165,7 +171,10 @@ const DropCard: React.FC<{
       data-state={nightMode ? nightState : 'normal'}
     >
       <div className={styles.cardHead}>
-        <span className={styles.primary}>{titleName}</span>
+        <span className={styles.primary}>
+          {invaderIcon && <img src={invaderIcon} alt="" width={18} height={18} className={styles.primaryIcon} />}
+          {titleName}
+        </span>
         <span className={styles.tags}>
           {showMutation && <Tag color="volcano">变异</Tag>}
           {showInvasion && !group.invader && <Tag color="red">入侵</Tag>}
