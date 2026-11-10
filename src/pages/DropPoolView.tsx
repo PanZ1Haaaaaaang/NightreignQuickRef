@@ -14,9 +14,17 @@ import {
   Tooltip,
   Typography,
 } from 'antd';
-import { EyeOutlined, TableOutlined } from '@ant-design/icons';
+import { EyeOutlined, InfoCircleOutlined, TableOutlined } from '@ant-design/icons';
 import dropPoolsJson from '../data/zh-CN/drop_pools.json';
-import type { DropGroup, DropOption, DropPoolsData, DropSegment } from '../types';
+import invaderAffixJson from '../data/zh-CN/invader_affix_data.json';
+import type {
+  DropGroup,
+  DropOption,
+  DropPoolsData,
+  DropSegment,
+  InvaderWeaponAffix,
+  InvaderWeaponAffixData,
+} from '../types';
 import { POTENTIAL_POOL_LABEL } from '../config/potentialPoolConfig';
 import { TERRAIN_OPTIONS, terrainOf, type TerrainKey } from '../config/terrainConfig';
 import {
@@ -35,7 +43,15 @@ import styles from '../styles/dropPoolView.module.css';
 const { Title, Text } = Typography;
 
 const DATA = dropPoolsJson as unknown as DropPoolsData;
+const INVADER_AFFIXES = invaderAffixJson as InvaderWeaponAffixData;
 const PAGE_SIZE = 12;
+
+/** 入侵者球：第二个名字是它使用的武器，取「的」前作为渡夜者名，查该武器的词条概率 */
+const invaderAffixesOf = (group: DropGroup): InvaderWeaponAffix[] | undefined => {
+  if (!group.invader) return undefined;
+  const owner = group.names[1]?.split('的')[0];
+  return owner ? INVADER_AFFIXES.byCharacter[owner]?.affixes : undefined;
+};
 
 /** 深夜模式下据点的三种状态（变异 / 入侵可分别对应 +10 / +50 两套掉落） */
 type NightState = 'normal' | 'mutation' | 'invasion';
@@ -82,7 +98,9 @@ const SegmentChip: React.FC<{
   adjustedPercent?: number;
   onPoolClick?: (kind: string) => void;
   onBuffClick?: (pool: string) => void;
-}> = ({ segment, adjustedPercent, onPoolClick, onBuffClick }) => {
+  /** 入侵者武器：该武器的词条概率（只在「选项 1」的武器槽位上带） */
+  affixes?: InvaderWeaponAffix[];
+}> = ({ segment, adjustedPercent, onPoolClick, onBuffClick, affixes }) => {
   const [percent, kind, pool, note, detail, luck] = segment;
   let label = kindLabel(kind);
   let className = KIND_CLASS[kind] ?? '';
@@ -117,6 +135,7 @@ const SegmentChip: React.FC<{
         <span className={adjustedPercent > percent ? styles.percentUp : styles.percentDown}>→{adjustedPercent}%</span>
       ) : null}
       <span>{label}</span>
+      {affixes && affixes.length > 0 ? <InfoCircleOutlined className={styles.affixIcon} /> : null}
       {luck ? <EyeOutlined className={styles.luckIcon} /> : null}
     </span>
   );
@@ -125,17 +144,40 @@ const SegmentChip: React.FC<{
   const detailText = kind === 'flameWeapon' && detail ? `可能的武器：${detail}` : (detail ?? null);
   const clickHint = canOpenBasePool ? '点击查看基池对照表' : canOpenBuff ? '点击查看该池可能的词条' : null;
   const tooltip =
-    detailText || clickHint || luck ? (
+    detailText || clickHint || luck || (affixes && affixes.length > 0) ? (
       <div className={styles.tipBox}>
         {detailText && <div>{detailText}</div>}
         {clickHint && <div className={styles.tipHint}>{clickHint}</div>}
         {luck ? <div className={styles.tipHint}>受观察力影响：观察力越高，该槽位权重越高</div> : null}
+        {affixes && affixes.length > 0 ? (
+          <div>
+            <div className={styles.tipHint}>
+              {note?.endsWith('（诅咒）')
+                ? '诅咒版：2 条正面词条 + 1 条负面，正面词条取自下表'
+                : '原版：随机 1 条词条，各词条权重如下'}
+            </div>
+            <ul className={styles.affixList}>
+              {affixes.map((affix) => (
+                <li key={affix.id}>
+                  <span>{affix.name}</span>
+                  <b>{affix.percent}%</b>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
     ) : null;
 
   if (tooltip) {
     return (
-      <Tooltip title={tooltip} placement="bottom" mouseEnterDelay={0.2}>
+      <Tooltip
+        title={tooltip}
+        placement="bottom"
+        mouseEnterDelay={0.2}
+        // 词条概率的列表用更宽的 tooltip，避免长词条名换行
+        classNames={affixes && affixes.length > 0 ? { root: styles.affixTip } : undefined}
+      >
         <span className={styles.noteHover}>{chip}</span>
       </Tooltip>
     );
@@ -162,6 +204,7 @@ const DropCard: React.FC<{
   // 取下「XX」前缀即可拿到对应渡夜者，用来在标题前挂头像
   const invaderOwner = group.invader ? group.names[1]?.split('的')[0] : undefined;
   const invaderIcon = invaderOwner ? characterIconOf(invaderOwner) : undefined;
+  const invaderAffixes = invaderAffixesOf(group);
 
   return (
     <div
@@ -208,6 +251,8 @@ const DropCard: React.FC<{
                     adjustedPercent={adjusted[segmentIndex]}
                     onPoolClick={onPoolClick}
                     onBuffClick={onBuffClick}
+                    // 只有第 1 个选项里、入侵者使用的那把武器才带词条概率
+                    affixes={index === 0 && segment[1] === 'weaponItem' ? invaderAffixes : undefined}
                   />
                 ))}
               </div>

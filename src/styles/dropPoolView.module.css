@@ -190,6 +190,39 @@
   opacity: 0.75;
 }
 
+/* 入侵者武器：悬停看词条概率 */
+.affixIcon {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.affixList {
+  margin: 4px 0 0;
+  padding-left: 14px;
+  max-height: 240px;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.affixList li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  white-space: nowrap;
+}
+
+.affixList b {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* 词条概率 tooltip 放宽，避免长词条名折行（antd v6 容器类名是 .ant-tooltip-container） */
+.affixTip :global(.ant-tooltip-container) {
+  max-width: 460px;
+  width: max-content;
+}
+
 /* 观察力模拟：换算后的权重（升 / 降） */
 .percentUp {
   color: #389e0d;

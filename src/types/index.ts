@@ -339,6 +339,21 @@ export interface DropOption {
   segments: DropSegment[];
 }
 
+// ===== 黑夜入侵者武器词条（src/data/zh-CN/invader_affix_data.json） =====
+
+export interface InvaderWeaponAffix {
+  /** 词条 ID（与「局内词条」一致） */
+  id: string;
+  name: string;
+  /** 该词条在原版（75%）武器上的出现概率，单位 % */
+  percent: number;
+}
+
+export interface InvaderWeaponAffixData {
+  meta: { source: string; note: string };
+  byCharacter: Record<string, { weapon: string; affixes: InvaderWeaponAffix[] }>;
+}
+
 export interface DropGroup {
   /** 球 ID（选项位抹掉后的整数，如 6000000） */
   id: string;
