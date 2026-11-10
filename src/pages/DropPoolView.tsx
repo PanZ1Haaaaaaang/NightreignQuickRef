@@ -46,11 +46,11 @@ const DATA = dropPoolsJson as unknown as DropPoolsData;
 const INVADER_AFFIXES = invaderAffixJson as InvaderWeaponAffixData;
 const PAGE_SIZE = 12;
 
-/** 入侵者球：第二个名字是它使用的武器，取「的」前作为渡夜者名，查该武器的词条概率 */
-const invaderAffixesOf = (group: DropGroup): InvaderWeaponAffix[] | undefined => {
+/** 入侵者球：第二个名字是它使用的武器，取「的」前作为渡夜者名，查该武器的词条池 */
+const invaderAffixOf = (group: DropGroup): InvaderWeaponAffixData['byCharacter'][string] | undefined => {
   if (!group.invader) return undefined;
   const owner = group.names[1]?.split('的')[0];
-  return owner ? INVADER_AFFIXES.byCharacter[owner]?.affixes : undefined;
+  return owner ? INVADER_AFFIXES.byCharacter[owner] : undefined;
 };
 
 /** 深夜模式下据点的三种状态（变异 / 入侵可分别对应 +10 / +50 两套掉落） */
@@ -100,7 +100,9 @@ const SegmentChip: React.FC<{
   onBuffClick?: (pool: string) => void;
   /** 入侵者武器：该武器的词条概率（只在「选项 1」的武器槽位上带） */
   affixes?: InvaderWeaponAffix[];
-}> = ({ segment, adjustedPercent, onPoolClick, onBuffClick, affixes }) => {
+  /** 词条池 ID（AttachEffectTableParam），显示在 tooltip 里便于核对 */
+  affixPoolId?: string;
+}> = ({ segment, adjustedPercent, onPoolClick, onBuffClick, affixes, affixPoolId }) => {
   const [percent, kind, pool, note, detail, luck] = segment;
   let label = kindLabel(kind);
   let className = KIND_CLASS[kind] ?? '';
@@ -153,8 +155,8 @@ const SegmentChip: React.FC<{
           <div>
             <div className={styles.tipHint}>
               {note?.endsWith('（诅咒）')
-                ? '诅咒版：2 条正面词条 + 1 条负面，正面词条取自下表'
-                : '原版：随机 1 条词条，各词条权重如下'}
+                ? `诅咒版：2 条正面词条 + 1 条负面，正面词条取自下表`
+                : `原版：随机 1 条词条（池 ${affixPoolId}），各词条权重如下`}
             </div>
             <ul className={styles.affixList}>
               {affixes.map((affix) => (
@@ -204,7 +206,7 @@ const DropCard: React.FC<{
   // 取下「XX」前缀即可拿到对应渡夜者，用来在标题前挂头像
   const invaderOwner = group.invader ? group.names[1]?.split('的')[0] : undefined;
   const invaderIcon = invaderOwner ? characterIconOf(invaderOwner) : undefined;
-  const invaderAffixes = invaderAffixesOf(group);
+  const invaderAffix = invaderAffixOf(group);
 
   return (
     <div
@@ -252,7 +254,8 @@ const DropCard: React.FC<{
                     onPoolClick={onPoolClick}
                     onBuffClick={onBuffClick}
                     // 只有第 1 个选项里、入侵者使用的那把武器才带词条概率
-                    affixes={index === 0 && segment[1] === 'weaponItem' ? invaderAffixes : undefined}
+                    affixes={index === 0 && segment[1] === 'weaponItem' ? invaderAffix?.affixes : undefined}
+                    affixPoolId={index === 0 && segment[1] === 'weaponItem' ? invaderAffix?.poolId : undefined}
                   />
                 ))}
               </div>

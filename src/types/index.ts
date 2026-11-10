@@ -351,7 +351,7 @@ export interface InvaderWeaponAffix {
 
 export interface InvaderWeaponAffixData {
   meta: { source: string; note: string };
-  byCharacter: Record<string, { weapon: string; affixes: InvaderWeaponAffix[] }>;
+  byCharacter: Record<string, { weapon: string; poolId: string; affixes: InvaderWeaponAffix[] }>;
 }
 
 export interface DropGroup {
