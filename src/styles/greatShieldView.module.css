@@ -1,0 +1,129 @@
+/* GreatShieldView 专用样式 */
+
+.page {
+  width: min(1400px, 92%);
+  margin: 0 auto var(--spacing-xl, 24px) auto;
+}
+
+/* 「数值」与「防御强度机制」并列 */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.card {
+  min-width: 0;
+  padding: 20px 24px;
+  background: var(--content-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-1);
+}
+
+.columnHeader {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+/* 名称单元格里的小图标 */
+.nameWithIcon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nameIcon {
+  flex: none;
+}
+
+/* 守护者的大盾：轻量标注，淡色底 + 左侧细色条，不用标签抢视线 */
+.guardianRow td {
+  background: rgba(133, 165, 255, 0.1);
+}
+
+.guardianRow td:first-child {
+  box-shadow: inset 3px 0 0 var(--color-primary-300);
+}
+
+[data-theme='dark'] .guardianRow td,
+body[tomato-theme='dark'] .guardianRow td {
+  background: rgba(133, 165, 255, 0.14);
+}
+
+/* 数值单元格：与「夜王基础数据」一致，整体略微加粗 */
+.value {
+  font-weight: 500;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* 每列最高 / 最低（这几列都是越大越好） */
+.valueMax {
+  color: #237804;
+}
+
+.valueMin {
+  color: #cf1322;
+}
+
+[data-theme='dark'] .valueMax,
+body[tomato-theme='dark'] .valueMax {
+  color: #95de64;
+}
+
+[data-theme='dark'] .valueMin,
+body[tomato-theme='dark'] .valueMin {
+  color: #ff7875;
+}
+
+.legend {
+  margin-left: 10px;
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  padding: 16px;
+  border: 1px dashed var(--color-text-2);
+  border-radius: 10px;
+  color: var(--color-text-2);
+  font-size: 13px;
+  text-align: center;
+}
+
+.note {
+  margin-top: 10px;
+  color: var(--color-text-2);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+@media (max-width: 1200px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 999px) {
+  .page {
+    width: 95%;
+  }
+
+  .card {
+    padding: 16px;
+  }
+}

@@ -508,7 +508,7 @@ body[tomato-theme='dark'] #giscus-comments {
   display: flex;
   align-items: stretch;
   justify-content: center;
-  gap: var(--spacing-md);
+  gap: 12px;
   width: min(1400px, 92%);
   margin: var(--spacing-md) auto 0 auto;
   padding: 12px 16px;
@@ -524,13 +524,14 @@ body[tomato-theme='dark'] #giscus-comments {
   flex-direction: column;
   gap: 8px;
   min-width: 0;
-  flex: 1 1 auto;
+  /* 组宽按内容自适应，避免某一组 pill 多就被挤到换行 */
+  flex: 0 1 auto;
   padding: 0 2px;
 }
 
 .nav-group + .nav-group {
   border-left: 1px solid rgba(47, 84, 235, 0.12);
-  padding-left: var(--spacing-md);
+  padding-left: 12px;
 }
 
 .nav-group-head {

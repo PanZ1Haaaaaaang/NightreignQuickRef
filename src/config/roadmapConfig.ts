@@ -6,7 +6,12 @@ export interface RoadmapTodoGroup {
   items: string[];
 }
 
-export const LATEST_UPDATES: string[] = ['新增官方更新公告以及翻译内容', '泪滴转职', '潜在能力池概率'];
+export const LATEST_UPDATES: string[] = [
+  '新增官方更新公告以及翻译内容',
+  '泪滴转职',
+  '潜在能力池概率',
+  '大盾数值 + 防御强度说明',
+];
 
 export const ROADMAP_TODO: RoadmapTodoGroup[] = [
   {
@@ -27,6 +32,6 @@ export const ROADMAP_TODO: RoadmapTodoGroup[] = [
   },
   {
     page: '武器',
-    items: ['大盾数值 + 防御强度说明', '冲击力说明', '黑焰烧血效果'],
+    items: ['冲击力说明', '黑焰烧血效果'],
   },
 ];

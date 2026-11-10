@@ -16,12 +16,7 @@ const Navigation: React.FC<NavigationProps> = React.memo(({ activeTab, onTabChan
         const isActiveGroup = group.pages.some((page) => page.key === activeTab);
 
         return (
-          <div
-            key={group.key}
-            className={`nav-group ${isActiveGroup ? 'nav-group-active' : ''}`}
-            // 页面多的一组占更宽，组宽自然反映内容量
-            style={{ flexGrow: group.pages.length }}
-          >
+          <div key={group.key} className={`nav-group ${isActiveGroup ? 'nav-group-active' : ''}`}>
             <div className="nav-group-head">
               <span className="nav-group-label">{group.label}</span>
               {SHOW_NAV_GROUP_NOTE && <span className="nav-group-note">{group.note}</span>}
