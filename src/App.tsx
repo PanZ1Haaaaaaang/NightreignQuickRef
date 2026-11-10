@@ -45,7 +45,7 @@ const TAB_DATA_GROUPS: Record<string, DataGroup | undefined> = {
   局内词条: 'entries',
   角色数据: 'character',
   夜王数据: 'boss',
-  敌人与地图: 'boss',
+  强敌与事件: 'boss',
   传说武器详情: 'weapon',
 };
 
@@ -152,7 +152,7 @@ function App() {
         return <GameMechanicsView functionName="游戏机制" />;
       case '夜王数据':
         return <BossDataView key="boss-nightlord" scope="夜王" activeSubTab={activeSubTab} />;
-      case '敌人与地图':
+      case '强敌与事件':
         return <BossDataView key="boss-map" scope="地图" activeSubTab={activeSubTab} />;
       case '武器战技与魔法祷告':
         return <WeaponSkillMagicView activeSubTab={activeSubTab} />;

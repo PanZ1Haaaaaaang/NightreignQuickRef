@@ -231,8 +231,8 @@ export const NAV_PAGES: NavPage[] = [
     ],
   },
   {
-    key: '敌人与地图',
-    label: '敌人与地图',
+    key: '强敌与事件',
+    label: '强敌与事件',
     icon: '🗺️',
     desc: '由地图种子决定：野生Boss、种族克制、特殊地形与事件',
     badges: ['种子'],
