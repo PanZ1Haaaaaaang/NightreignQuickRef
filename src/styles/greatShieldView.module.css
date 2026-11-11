@@ -1,8 +1,7 @@
 /* GreatShieldView 专用样式 */
 
-.page {
-  width: min(1400px, 92%);
-  margin: 0 auto var(--spacing-xl, 24px) auto;
+.pageBody {
+  min-width: 0;
 }
 
 /* 「数值」与「防御强度机制」并列 */

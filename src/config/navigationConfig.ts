@@ -117,15 +117,31 @@ export const NAV_PAGES: NavPage[] = [
     ],
   },
   {
-    key: '大盾',
-    label: '大盾',
-    icon: '🛡️',
-    desc: '29 面大盾的防御强度与四系抗性，数值列均可排序',
+    key: '机制',
+    label: '机制',
+    icon: '🛠️',
+    desc: '大盾数值与防御强度机制、冲击力（硬直）机制',
     badges: ['局内'],
     group: '武器',
     sections: [
-      { key: '大盾数值', label: '📊 大盾数值', anchorId: 'shield-values' },
-      { key: '防御强度机制', label: '🛡️ 防御强度机制', anchorId: 'shield-mechanics' },
+      {
+        key: '大盾数值',
+        label: '📊 大盾数值',
+        anchorId: 'shield-values',
+        tabKey: 'mechanics-shield',
+      },
+      {
+        key: '防御强度机制',
+        label: '🛡️ 防御强度机制',
+        anchorId: 'shield-mechanics',
+        tabKey: 'mechanics-shield',
+      },
+      {
+        key: '冲击力机制',
+        label: '💥 冲击力机制',
+        anchorId: 'impulse-mechanics',
+        tabKey: 'mechanics-impulse',
+      },
     ],
   },
   {

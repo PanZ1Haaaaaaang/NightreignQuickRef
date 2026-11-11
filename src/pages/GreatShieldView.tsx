@@ -173,7 +173,7 @@ const GreatShieldView: React.FC = () => {
   ];
 
   return (
-    <div className={styles.page}>
+    <div className={styles.pageBody}>
       <div className={styles.layout}>
         <section className={styles.card} id="shield-values">
           <h3 className={styles.cardTitle}>

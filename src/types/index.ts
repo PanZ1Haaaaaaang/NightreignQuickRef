@@ -340,6 +340,32 @@ export interface DropOption {
   segments: DropSegment[];
 }
 
+// ===== 冲击力机制（src/data/zh-CN/impulse_data.json） =====
+
+export interface ImpulseRow {
+  /** 冲击力编号（0~12，12 为废案） */
+  level: number;
+  effect: string;
+  /** 玩家模型硬直动画编号区间 */
+  anim: string;
+  /** 到可翻滚的帧数（无硬直为 null） */
+  roll: number | null;
+  /** 到可使用战技的帧数（无硬直为 null） */
+  skill: number | null;
+  /** 硬直动画无敌帧 */
+  invuln: string;
+  examples: string;
+  interrupt: string;
+  /** 是否无视韧性系统强制产生硬直（受击方为玩家时） */
+  ignorePoise: boolean;
+}
+
+export interface ImpulseData {
+  meta: { source: string; videoUrl: string };
+  notes: string[];
+  rows: ImpulseRow[];
+}
+
 // ===== 大盾页「防御强度机制」（src/data/zh-CN/guard_mechanic_data.json） =====
 
 export interface GuardMechanicEntry {

@@ -12,6 +12,7 @@ export const LATEST_UPDATES: string[] = [
   '潜在能力池概率',
   '大盾数值 + 防御强度说明',
   '夜王弱点累积值',
+  '冲击力机制',
 ];
 
 export const ROADMAP_TODO: RoadmapTodoGroup[] = [
@@ -29,10 +30,10 @@ export const ROADMAP_TODO: RoadmapTodoGroup[] = [
   },
   {
     page: '武器',
-    items: ['冲击力说明', '黑焰烧血效果'],
+    items: ['黑焰烧血效果'],
   },
   {
-    page: '大盾',
+    page: '机制',
     items: ['两处待验证'],
   },
   {

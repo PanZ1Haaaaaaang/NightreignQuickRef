@@ -1,0 +1,5 @@
+/* 「武器 → 机制」页容器：与其它页面同宽，页签与内容都对齐 */
+.page {
+  width: min(1400px, 92%);
+  margin: 0 auto var(--spacing-xl, 24px) auto;
+}

@@ -17,7 +17,7 @@ import { getDefaultPage } from './config/navigationConfig';
 const EntryDetailView = lazy(() => import('./pages/EntryDetailView'));
 const GameMechanicsView = lazy(() => import('./pages/GameMechanicsView'));
 const LegendaryWeaponView = lazy(() => import('./pages/LegendaryWeaponView'));
-const GreatShieldView = lazy(() => import('./pages/GreatShieldView'));
+const WeaponMechanicsView = lazy(() => import('./pages/WeaponMechanicsView'));
 const CharacterDataView = lazy(() => import('./pages/CharacterDataView'));
 const BossDataView = lazy(() => import('./pages/BossDataView'));
 const WeaponSkillMagicView = lazy(() => import('./pages/WeaponSkillMagicView'));
@@ -145,8 +145,8 @@ function App() {
         return <EntryDetailView key="entries-outer" scope="局外" activeSubTab={activeSubTab} />;
       case '局内词条':
         return <EntryDetailView key="entries-inner" scope="局内" activeSubTab={activeSubTab} />;
-      case '大盾':
-        return <GreatShieldView />;
+      case '机制':
+        return <WeaponMechanicsView activeSubTab={activeSubTab} />;
       case '传说武器详情':
         return <LegendaryWeaponView activeStep={activeStep} />;
       case '角色数据':

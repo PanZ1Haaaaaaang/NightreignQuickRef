@@ -147,6 +147,11 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
         url: 'https://www.bilibili.com/opus/1126592307126075427',
         icon: 'bilibili',
       },
+      {
+        title: '【艾尔登法环】8分钟了解，重要隐藏属性！——冲击力！（硬直系统）',
+        url: 'https://www.bilibili.com/video/BV1xT411o7Xh',
+        icon: 'bilibili',
+      },
     ],
   },
   {

@@ -1,0 +1,157 @@
+{
+  "meta": {
+    "source": "Cinderella小辛",
+    "videoUrl": "https://www.bilibili.com/video/BV1xT411o7Xh/"
+  },
+  "notes": [
+    "冲击力决定了硬直时间，但不同的冲击力可能会有相同的硬直表现，比如玩家模型的 4/7/10 号冲击力。",
+    "8 号微硬直并不比 1 号短硬直短：硬直动画完全播放结束时，微硬直在 11 帧解硬直、短硬直是 15 帧；直接反打时，微硬直第 2 帧就能启动、短硬直要第 7 帧。",
+    "4/7/10 号冲击力（受击方为玩家时）虽然可以无视玩家韧性造成硬直，但不再造成原本的击倒硬直，而是一个较大的站立硬直。",
+    "冲击力的具体说明见视频：https://www.bilibili.com/video/BV1xT411o7Xh/"
+  ],
+  "rows": [
+    {
+      "level": 0,
+      "effect": "无硬直",
+      "anim": "无",
+      "roll": null,
+      "skill": null,
+      "invuln": "无",
+      "examples": "毁灭流星、光环、化三光环",
+      "interrupt": "不可打断（仅震荡模型）",
+      "ignorePoise": false
+    },
+    {
+      "level": 1,
+      "effect": "短硬直",
+      "anim": "5100~5134",
+      "roll": 10,
+      "skill": 7,
+      "invuln": "无",
+      "examples": "辉石魔砾、流星雨、直剑单持轻击",
+      "interrupt": "可打断",
+      "ignorePoise": false
+    },
+    {
+      "level": 2,
+      "effect": "中硬直",
+      "anim": "5200~5234",
+      "roll": 25,
+      "skill": 30,
+      "invuln": "无",
+      "examples": "岩石球、雷电枪、大剑单持轻击",
+      "interrupt": "可打断",
+      "ignorePoise": false
+    },
+    {
+      "level": 3,
+      "effect": "长硬直",
+      "anim": "5300~5334",
+      "roll": 35,
+      "skill": 30,
+      "invuln": "无",
+      "examples": "风暴足、古兰格的岩石、特大剑单持轻击",
+      "interrupt": "可打断",
+      "ignorePoise": false
+    },
+    {
+      "level": 4,
+      "effect": "击倒，并震飞",
+      "anim": "5400~5470",
+      "roll": 69,
+      "skill": 107,
+      "invuln": "0~70",
+      "examples": "黑王推力波（波）、古兰桑克斯的雷电（满蓄）",
+      "interrupt": "可打断",
+      "ignorePoise": true
+    },
+    {
+      "level": 5,
+      "effect": "推开",
+      "anim": "5500~5570",
+      "roll": 25,
+      "skill": 30,
+      "invuln": "无",
+      "examples": "踢击、野兽咆哮",
+      "interrupt": "可打断",
+      "ignorePoise": false
+    },
+    {
+      "level": 6,
+      "effect": "砸趴",
+      "anim": "5700",
+      "roll": 30,
+      "skill": 52,
+      "invuln": "0~31",
+      "examples": "海摩大槌、狮子斩、祈祷一击",
+      "interrupt": "可打断",
+      "ignorePoise": true
+    },
+    {
+      "level": 7,
+      "effect": "击倒，并震飞",
+      "anim": "5400~5470",
+      "roll": 69,
+      "skill": 107,
+      "invuln": "0~70",
+      "examples": "海摩炮弹、卡利亚贯刺（满蓄）",
+      "interrupt": "可打断",
+      "ignorePoise": true
+    },
+    {
+      "level": 8,
+      "effect": "微硬直",
+      "anim": "5000~5002",
+      "roll": 10,
+      "skill": 10,
+      "invuln": "无",
+      "examples": "辉石迅魔砾、火焰啊，喷发吧、短剑单持轻击",
+      "interrupt": "可打断",
+      "ignorePoise": false
+    },
+    {
+      "level": 9,
+      "effect": "向上击飞 + 身体翻转",
+      "anim": "5710",
+      "roll": 73,
+      "skill": 82,
+      "invuln": "0~74",
+      "examples": "熔炉百相之角（满蓄）、贵族气场（满蓄）",
+      "interrupt": "可打断",
+      "ignorePoise": true
+    },
+    {
+      "level": 10,
+      "effect": "击倒，并震飞",
+      "anim": "5400~5470",
+      "roll": 69,
+      "skill": 107,
+      "invuln": "0~70",
+      "examples": "巨人大巴掌横扫（渡夜者各种绝招）",
+      "interrupt": "可打断",
+      "ignorePoise": true
+    },
+    {
+      "level": 11,
+      "effect": "原地击倒",
+      "anim": "5600~5630",
+      "roll": 45,
+      "skill": 116,
+      "invuln": "0~81",
+      "examples": "黄金波动",
+      "interrupt": "可打断",
+      "ignorePoise": true
+    },
+    {
+      "level": 12,
+      "effect": "无（仅存在于数据中的废案）",
+      "anim": "无",
+      "roll": null,
+      "skill": null,
+      "invuln": "无",
+      "examples": "无（仅存在于数据中的废案）",
+      "interrupt": "无",
+      "ignorePoise": false
+    }
+  ]
+}
