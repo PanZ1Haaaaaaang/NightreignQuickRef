@@ -340,6 +340,25 @@ export interface DropOption {
   segments: DropSegment[];
 }
 
+// ===== 大盾页「防御强度机制」（src/data/zh-CN/guard_mechanic_data.json） =====
+
+export interface GuardMechanicEntry {
+  name: string;
+  type: '1类' | '2类';
+  effect: string;
+  /** 解包 = 已用 Smithbox 核对；社区 = 来自社区旧表；待核对 = 数值已知过时但尚未核对 */
+  source: '解包' | '社区' | '待核对';
+}
+
+export interface GuardMechanicData {
+  meta: { source: string; verifiedAt: string; note: string };
+  intro: string;
+  types: { key: string; desc: string }[];
+  entries: GuardMechanicEntry[];
+  upgrade: { note: string; columns: string[]; rows: string[][] };
+  notes: string[];
+}
+
 // ===== 黑夜入侵者武器词条（src/data/zh-CN/invader_affix_data.json） =====
 
 export interface InvaderWeaponAffix {

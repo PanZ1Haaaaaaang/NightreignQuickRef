@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Image, Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import shieldData from '../data/zh-CN/great_shield_data.json';
+import mechanicJson from '../data/zh-CN/guard_mechanic_data.json';
+import type { GuardMechanicData } from '../types';
 import styles from '../styles/greatShieldView.module.css';
 import magicIcon from '../assets/Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 import fireIcon from '../assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
@@ -11,6 +13,9 @@ import guardianIcon from '../assets/icons/char/Guardian.svg';
 
 // 守护者（渡夜者）的被动是「开启强防御」，所以这面盾对玩守护者的玩家最常用，单独做轻标注
 const GUARDIAN_SHIELD = '守护者的大盾';
+
+// 防御强度机制（数据见 src/data/zh-CN/guard_mechanic_data.json）
+const MECHANIC = mechanicJson as unknown as GuardMechanicData;
 
 interface ShieldRow {
   name: string;
@@ -193,7 +198,66 @@ const GreatShieldView: React.FC = () => {
             <span aria-hidden="true">🛡️</span>
             防御强度机制
           </h3>
-          <div className={styles.placeholder}>资料整理中，后续补充</div>
+          <p className={styles.mechIntro}>{MECHANIC.intro}</p>
+          <ul className={styles.mechTypes}>
+            {MECHANIC.types.map((item) => (
+              <li key={item.key}>
+                <b>{item.key}</b>
+                {item.desc}
+              </li>
+            ))}
+          </ul>
+
+          <table className={styles.mechTable}>
+            <thead>
+              <tr>
+                <th>来源</th>
+                <th>类型</th>
+                <th>效果</th>
+              </tr>
+            </thead>
+            <tbody>
+              {MECHANIC.entries.map((entry) => (
+                <tr key={entry.name} className={entry.source === '解包' ? undefined : styles.mechUnverified}>
+                  <td className={styles.mechName}>
+                    {entry.name}
+                    {entry.source === '解包' ? null : <span className={styles.sourceTag}>{entry.source}</span>}
+                  </td>
+                  <td className={styles.mechType}>{entry.type}</td>
+                  <td>{entry.effect}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <h4 className={styles.mechSubtitle}>强化系数（防御强度 × 系数）</h4>
+          <table className={styles.upgradeTable}>
+            <thead>
+              <tr>
+                {MECHANIC.upgrade.columns.map((col) => (
+                  <th key={col}>{col}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {MECHANIC.upgrade.rows.map((row) => (
+                <tr key={row[0]}>
+                  {row.map((cell, index) => (
+                    <td key={index} className={index === 0 ? styles.upgradeName : undefined}>
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className={styles.note}>{MECHANIC.upgrade.note}</div>
+          <ul className={styles.mechNotes}>
+            {MECHANIC.notes.map((note) => (
+              <li key={note}>{note}</li>
+            ))}
+          </ul>
+          <div className={styles.note}>{MECHANIC.meta.source}</div>
         </section>
       </div>
     </div>

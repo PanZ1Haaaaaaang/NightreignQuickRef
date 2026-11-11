@@ -141,3 +141,97 @@ body[tomato-theme='dark'] .valueMin {
     padding: 16px;
   }
 }
+
+/* ===== 防御强度机制 ===== */
+.mechIntro {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}
+
+.mechTypes {
+  margin: 0 0 12px;
+  padding-left: 18px;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.mechTypes b {
+  margin-right: 6px;
+  color: var(--color-text-1);
+}
+
+.mechTable,
+.upgradeTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.mechTable th,
+.mechTable td,
+.upgradeTable th,
+.upgradeTable td {
+  padding: 6px 8px;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  vertical-align: top;
+  text-align: left;
+}
+
+.mechTable th,
+.upgradeTable th {
+  background: var(--table-header-bg);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.mechName {
+  width: 30%;
+}
+
+.mechType {
+  width: 52px;
+  white-space: nowrap;
+  text-align: center !important;
+}
+
+.mechUnverified td {
+  opacity: 0.75;
+}
+
+.sourceTag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 5px;
+  border-radius: 4px;
+  font-size: 10px;
+  line-height: 16px;
+  background: rgba(250, 173, 20, 0.16);
+  color: #d48806;
+  white-space: nowrap;
+}
+
+.mechSubtitle {
+  margin: 16px 0 6px;
+  font-size: 13px;
+}
+
+.upgradeTable th,
+.upgradeTable td {
+  text-align: center;
+}
+
+.upgradeTable .upgradeName {
+  text-align: left;
+  white-space: nowrap;
+}
+
+.mechNotes {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}
