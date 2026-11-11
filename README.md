@@ -73,6 +73,9 @@
 - [种族特攻？武器隐藏属性！夜王特殊机制分析](https://www.bilibili.com/video/BV17HWCzhEYz)
 - [黑夜君临商人表 v1.02.4 修正版v2（by 小辛）](https://www.bilibili.com/video/BV1weyMBMEN3)
 - [黑夜君临 泪滴转职属性修正一览（by 模组工艺）](https://www.bilibili.com/video/BV1EB2rBhERC)
+- [黑夜君临 BOSS精英掉落解包数据](https://www.bilibili.com/opus/1088631358950998023)
+- [黑夜君临DLC BOSS精英掉落数据](https://www.bilibili.com/opus/1145131756809093159)
+- [黑夜君临 夜王弱点属性累积值数据](https://www.bilibili.com/opus/1126592307126075427)
 
 #### 其他资源
 - [黑夜君临官方网站（新闻 / 维护公告）](https://nightreign.eldenring.jp/news.html)
@@ -139,7 +142,7 @@ npm run dev
 
 - 感谢原作者 [Cecilia（xxiixi）](https://github.com/xxiixi) 创建并维护 [NightreignQuickRef](https://github.com/xxiixi/NightreignQuickRef)
 - 感谢各位数据测试与整理的社区 UP 主、贴吧大佬（见「数据来源」）
-- 特别感谢：虚空蛋黄酱（武器战技 / 魔法祷告数据）、小辛（商人表 / 敌人种族说明）、小黑盒社区
+- 特别感谢：虚空蛋黄酱（武器战技 / 魔法祷告数据）、小辛（商人表 / 敌人种族说明）、Supuritto（各种游戏机制）、小黑盒社区
 
 ## License
 

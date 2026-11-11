@@ -142,6 +142,11 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
         url: 'https://www.bilibili.com/opus/1145131756809093159',
         icon: 'bilibili',
       },
+      {
+        title: '黑夜君临 夜王弱点属性累积值数据 更新DLC by：Supuritto',
+        url: 'https://www.bilibili.com/opus/1126592307126075427',
+        icon: 'bilibili',
+      },
     ],
   },
   {

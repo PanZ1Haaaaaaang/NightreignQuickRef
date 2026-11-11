@@ -11,6 +11,7 @@ export const LATEST_UPDATES: string[] = [
   '泪滴转职',
   '潜在能力池概率',
   '大盾数值 + 防御强度说明',
+  '夜王弱点累积值',
 ];
 
 export const ROADMAP_TODO: RoadmapTodoGroup[] = [
@@ -20,7 +21,7 @@ export const ROADMAP_TODO: RoadmapTodoGroup[] = [
   },
   {
     page: '角色数据',
-    items: ['渡夜者绝招、技艺效果，送葬者开启技艺后无敌帧变化', '学者能力'],
+    items: ['渡夜者绝招、技艺效果，送葬者开启技艺后无敌帧变化', '学者能力', '执行者技艺'],
   },
   {
     page: '对局内容',
@@ -33,5 +34,9 @@ export const ROADMAP_TODO: RoadmapTodoGroup[] = [
   {
     page: '大盾',
     items: ['两处待验证'],
+  },
+  {
+    page: '夜王弱点累积值',
+    items: ['补充视频的细节内容'],
   },
 ];
