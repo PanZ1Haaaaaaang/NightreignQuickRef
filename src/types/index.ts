@@ -340,6 +340,43 @@ export interface DropOption {
   segments: DropSegment[];
 }
 
+// ===== 黑焰烧血机制（src/data/zh-CN/black_flame_data.json） =====
+
+export interface BlackFlameRow {
+  /** SpEffectParam 编号 */
+  id: string;
+  name: string;
+  type: '黑焰' | '死亡灼烧';
+  /** 每跳伤害：最大生命百分比 + 固定值 */
+  tick: string;
+  interval: string;
+  duration: string;
+  note: string;
+}
+
+export interface BlackFlameMaxHpRow {
+  id: string;
+  source: string;
+  effect: string;
+  duration: string;
+  note: string;
+}
+
+export interface BossHpEffectRow {
+  id: string;
+  source: string;
+  effect: string;
+  duration: string;
+  note: string;
+}
+
+export interface BlackFlameData {
+  meta: { source: string; verified: string; note: string };
+  intro: string;
+  rows: BlackFlameRow[];
+  maxHp: { intro: string; rows: BlackFlameMaxHpRow[] };
+  bossEffects: { intro: string; rows: BossHpEffectRow[] };
+}
 // ===== 冲击力机制（src/data/zh-CN/impulse_data.json） =====
 
 export interface ImpulseRow {

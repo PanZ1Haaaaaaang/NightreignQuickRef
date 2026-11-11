@@ -142,6 +142,12 @@ export const NAV_PAGES: NavPage[] = [
         anchorId: 'impulse-mechanics',
         tabKey: 'mechanics-impulse',
       },
+      {
+        key: '黑焰烧血机制',
+        label: '🔥 黑焰烧血机制',
+        anchorId: 'black-flame-mechanics',
+        tabKey: 'mechanics-blackflame',
+      },
     ],
   },
   {

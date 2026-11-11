@@ -13,6 +13,7 @@ export const LATEST_UPDATES: string[] = [
   '大盾数值 + 防御强度说明',
   '夜王弱点累积值',
   '冲击力机制',
+  '黑焰烧血机制',
 ];
 
 export const ROADMAP_TODO: RoadmapTodoGroup[] = [
@@ -27,10 +28,6 @@ export const ROADMAP_TODO: RoadmapTodoGroup[] = [
   {
     page: '对局内容',
     items: ['仇恨机制'],
-  },
-  {
-    page: '武器',
-    items: ['黑焰烧血效果'],
   },
   {
     page: '机制',

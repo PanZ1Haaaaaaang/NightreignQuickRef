@@ -1,0 +1,36 @@
+/* ===== 黑焰烧血机制 ===== */
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.intro {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--color-text-2);
+}
+
+.mono {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.source {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}
+
+.subtitle {
+  margin: 18px 0 4px;
+  font-size: 14px;
+}
+
+.subIntro {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}

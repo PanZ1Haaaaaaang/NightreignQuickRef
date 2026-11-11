@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Tabs } from 'antd';
 import GreatShieldView from './GreatShieldView';
 import ImpulseView from './ImpulseView';
+import BlackFlameView from './BlackFlameView';
 import styles from '../styles/weaponMechanicsView.module.css';
 
-const TAB_KEYS = ['mechanics-shield', 'mechanics-impulse'];
+const TAB_KEYS = ['mechanics-shield', 'mechanics-impulse', 'mechanics-blackflame'];
 
 /**
  * 「武器 → 机制」页：把大盾与防御强度、冲击力两个机制放在同一个页签容器里，
@@ -34,6 +35,11 @@ const WeaponMechanicsView: React.FC<{ activeSubTab?: string }> = ({ activeSubTab
             key: 'mechanics-impulse',
             label: '💥 冲击力机制',
             children: <ImpulseView />,
+          },
+          {
+            key: 'mechanics-blackflame',
+            label: '🔥 黑焰烧血机制',
+            children: <BlackFlameView />,
           },
         ]}
       />
