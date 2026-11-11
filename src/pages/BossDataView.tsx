@@ -12,6 +12,7 @@ import { getCurrentTheme } from '../utils/themeUtils';
 import { throttle } from 'lodash';
 import styles from '../styles/bossDataView.module.css';
 import EnemyRaceSection from './bossDataView/EnemyRaceSection';
+import WeaknessSection from './bossDataView/WeaknessSection';
 import {
   curseData,
   getAbsorptionClass,
@@ -66,6 +67,7 @@ const TAB_SCOPE: Record<string, BossScope> = {
   'boss-data': '夜王',
   'sinner-data': '夜王',
   'lipula-trades': '夜王',
+  'weakness-data': '夜王',
   'wild-boss-data': '地图',
   'enemy-race-data': '地图',
   'special-events': '地图',
@@ -1157,6 +1159,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab, scope }) => {
                   )}
                 </div>
               ),
+            },
+            {
+              key: 'weakness-data',
+              label: '🎯 弱点累积值',
+              children: <WeaknessSection />,
             },
           ].filter((item) => TAB_SCOPE[String(item.key)] === activeScope)}
         />

@@ -1,0 +1,121 @@
+/* ===== 夜王弱点累积值 ===== */
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.intro {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--color-text-2);
+}
+
+.noteGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 4px 18px;
+  margin-bottom: 6px;
+}
+
+.noteItem {
+  position: relative;
+  padding-left: 14px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}
+
+.noteItem::before {
+  content: '•';
+  position: absolute;
+  left: 2px;
+  color: var(--theme-primary);
+}
+
+.sectionTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  margin: 18px 0 10px;
+  font-size: 14px;
+}
+
+.sectionHint {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-text-2);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.bossName {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.groupDot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #bfbfbf;
+}
+
+.groupDot[data-group='三狼'] {
+  background: #fa8c16;
+}
+
+.groupDot[data-group='皮蛋'] {
+  background: #69b1ff;
+}
+
+.groupDot[data-group='冰龙'] {
+  background: #13c2c2;
+}
+
+.groupDot[data-group='山羊'] {
+  background: #d4b106;
+}
+
+.groupDot[data-group='黑夜王'] {
+  background: #9254de;
+}
+
+.groupDot[data-group='废弃物之王'] {
+  background: #ff4d4f;
+}
+
+.source {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}
+
+.bossCell {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bossImage {
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.toolbarRight {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}

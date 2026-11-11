@@ -27,10 +27,6 @@ export const ROADMAP_TODO: RoadmapTodoGroup[] = [
     items: ['仇恨机制'],
   },
   {
-    page: '夜王数据',
-    items: ['夜王弱点硬直'],
-  },
-  {
     page: '武器',
     items: ['冲击力说明', '黑焰烧血效果'],
   },

@@ -229,6 +229,12 @@ export const NAV_PAGES: NavPage[] = [
     sections: [
       { key: '夜王基础数据', label: '🌙 夜王基础数据', anchorId: 'night-king-basic', tabKey: 'boss-data' },
       {
+        key: '弱点累积值',
+        label: '🎯 弱点累积值',
+        anchorId: 'weakness-data',
+        tabKey: 'weakness-data',
+      },
+      {
         key: '永夜山羊召唤罪人详情',
         label: '🐐 永夜山羊召唤罪人详情',
         anchorId: 'sinner-details',
