@@ -8,6 +8,13 @@ import styles from '../../styles/scholarKnowledge.module.css';
 
 const DATA = scholarJson as unknown as ScholarKnowledgeData;
 
+const GOODS_IMAGES = import.meta.glob('../../assets/Goods/*.png', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
+
+const goodsImageOf = (name?: string) => (name ? GOODS_IMAGES[`../../assets/Goods/${name}.png`] : undefined);
+
 const ScholarKnowledge: React.FC = () => {
   const [category, setCategory] = useState<string>(DATA.categories[0]?.key ?? '');
   const [keyword, setKeyword] = useState('');
@@ -30,18 +37,21 @@ const ScholarKnowledge: React.FC = () => {
       dataIndex: 'name',
       key: 'name',
       width: '18%',
-      render: (name: string, record) => (
-        <span className={styles.itemCell}>
-          <span className={styles.thumb}>
-            {record.image ? <img src={record.image} alt="" /> : <span className={styles.thumbFallback}>图</span>}
+      render: (name: string, record) => {
+        const src = goodsImageOf(record.image);
+        return (
+          <span className={styles.itemCell}>
+            <span className={styles.thumb}>
+              {src ? <img src={src} alt="" /> : <span className={styles.thumbFallback}>图</span>}
+            </span>
+            <span className={styles.itemName}>
+              {name}
+              {record.usePoints ? <em className={styles.itemMeta}>{record.usePoints}</em> : null}
+              {record.upgrade ? <em className={styles.itemMeta}>{record.upgrade}</em> : null}
+            </span>
           </span>
-          <span className={styles.itemName}>
-            {name}
-            {record.usePoints ? <em className={styles.itemMeta}>{record.usePoints}</em> : null}
-            {record.upgrade ? <em className={styles.itemMeta}>{record.upgrade}</em> : null}
-          </span>
-        </span>
-      ),
+        );
+      },
     },
     {
       title: (
@@ -134,7 +144,7 @@ const ScholarKnowledge: React.FC = () => {
         <a href={DATA.meta.url} target="_blank" rel="noreferrer">
           {DATA.meta.source}
         </a>
-        （作者：{DATA.meta.author}，版本 {DATA.meta.version}）。物品图片待补，暂以占位框显示。
+        （作者：{DATA.meta.author}，版本 {DATA.meta.version}）。
       </div>
     </div>
   );
