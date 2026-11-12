@@ -2,13 +2,7 @@ import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import { Typography, Table, Alert, Tabs, Divider, Switch, Tooltip } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar, Column } from '@ant-design/plots';
-import {
-  ThunderboltTwoTone,
-  QuestionCircleOutlined,
-  LeftOutlined,
-  RightOutlined,
-  TeamOutlined,
-} from '@ant-design/icons';
+import { QuestionCircleOutlined, LeftOutlined, RightOutlined, TeamOutlined } from '@ant-design/icons';
 import { throttle } from 'lodash';
 import { getCurrentTheme } from '../utils/themeUtils';
 import styles from '../styles/characterDataView.module.css';
@@ -17,6 +11,8 @@ import DataSourceTooltip from '../components/DataSourceTooltip';
 import TeardropConversion from './characterDataView/TeardropConversion';
 import CharacterName from './characterDataView/CharacterName';
 import RoundtableCharacters from './characterDataView/RoundtableCharacters';
+import reclusePassive from '../assets/char/ReclusePassiveAbility.png';
+import scholarSkill from '../assets/char/ScholarCharacterSkill.png';
 
 const { Title, Text } = Typography;
 
@@ -1398,6 +1394,23 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
             },
             { key: '泪滴转职', label: '💧 泪滴转职', children: <TeardropConversion /> },
             {
+              key: '圆桌人物',
+              label: '🏛️ 圆桌厅堂人物数据',
+              children: (
+                <div className={`content-wrapper ${styles.cardItem}`} id="roundtable-characters">
+                  <div className={styles.cardHeader}>
+                    <Title level={5} className="character-card-title">
+                      <TeamOutlined />
+                      圆桌厅堂人物数据
+                    </Title>
+                  </div>
+                  <div className={styles.cardBody}>
+                    <RoundtableCharacters />
+                  </div>
+                </div>
+              ),
+            },
+            {
               key: '无敌帧',
               label: '⚡ 翻滚/闪避无敌帧',
               children: (
@@ -1408,13 +1421,18 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
             },
             {
               key: '隐士出招表',
-              label: '🔮 隐士出招表',
+              label: (
+                <span className={styles.tabLabel}>
+                  <img src={reclusePassive} alt="" className={styles.tabIcon} />
+                  隐士混合魔法
+                </span>
+              ),
               children: (
                 <div className={`content-wrapper ${styles.cardItem}`} id="hermit-magic-list">
                   <div className={styles.cardHeader}>
                     <Title level={5} className="character-card-title">
-                      <ThunderboltTwoTone />
-                      隐士出招表
+                      <img src={reclusePassive} alt="" className={styles.titleIcon} />
+                      隐士混合魔法
                       <DataSourceTooltip
                         links={[
                           {
@@ -1446,18 +1464,23 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
               ),
             },
             {
-              key: '圆桌人物',
-              label: '🏛️ 圆桌厅堂人物数据',
+              key: '学者携物知识',
+              label: (
+                <span className={styles.tabLabel}>
+                  <img src={scholarSkill} alt="" className={styles.tabIcon} />
+                  学者携物知识
+                </span>
+              ),
               children: (
-                <div className={`content-wrapper ${styles.cardItem}`} id="roundtable-characters">
+                <div className={`content-wrapper ${styles.cardItem}`} id="scholar-knowledge">
                   <div className={styles.cardHeader}>
                     <Title level={5} className="character-card-title">
-                      <TeamOutlined />
-                      圆桌厅堂人物数据
+                      <img src={scholarSkill} alt="" className={styles.titleIcon} />
+                      学者携物知识
                     </Title>
                   </div>
                   <div className={styles.cardBody}>
-                    <RoundtableCharacters />
+                    <div className={styles.characterDevelopmentPlaceholder}>资料整理中，后续补充</div>
                   </div>
                 </div>
               ),
