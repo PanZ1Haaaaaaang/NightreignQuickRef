@@ -1,0 +1,111 @@
+/* ===== 学者携物知识 ===== */
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.introBox {
+  padding: 10px 14px;
+  border-left: 3px solid var(--theme-primary);
+  background: rgba(22, 119, 255, 0.05);
+  border-radius: 6px;
+}
+
+.introText {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--color-text-2);
+}
+
+.notes {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}
+
+.categoryBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.categoryMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  color: var(--color-text-2);
+}
+
+.categoryMeta b {
+  color: var(--color-text-1);
+  font-weight: 600;
+}
+
+.count {
+  margin-left: auto;
+}
+
+.itemCell {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.thumb {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px dashed rgba(128, 128, 128, 0.45);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.thumbFallback {
+  font-size: 10px;
+  color: var(--color-text-2);
+}
+
+.itemName {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+.itemMeta {
+  font-size: 10px;
+  font-style: normal;
+  color: var(--color-text-2);
+}
+
+.colHint {
+  margin-left: 4px;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--color-text-2);
+}
+
+.dash {
+  color: var(--color-text-2);
+}
+
+.source {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--color-text-2);
+}

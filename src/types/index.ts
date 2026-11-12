@@ -377,6 +377,33 @@ export interface BlackFlameData {
   maxHp: { intro: string; rows: BlackFlameMaxHpRow[] };
   bossEffects: { intro: string; rows: BossHpEffectRow[] };
 }
+// ===== 学者携物知识（src/data/zh-CN/scholar_knowledge_data.json） =====
+
+export interface ScholarItem {
+  name: string;
+  lv1: string;
+  lv2: string;
+  lv3: string;
+  usePoints?: string;
+  upgrade?: string;
+  /** 物品图标，后续补图时填 */
+  image?: string;
+}
+
+export interface ScholarCategory {
+  key: string;
+  name: string;
+  usePoints: string;
+  upgrade: string;
+  items: ScholarItem[];
+}
+
+export interface ScholarKnowledgeData {
+  meta: { source: string; author: string; url: string; version: string; damageNote?: string };
+  intro: string[];
+  categories: ScholarCategory[];
+}
+
 // ===== 冲击力机制（src/data/zh-CN/impulse_data.json） =====
 
 export interface ImpulseRow {

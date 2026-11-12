@@ -11,6 +11,7 @@ import DataSourceTooltip from '../components/DataSourceTooltip';
 import TeardropConversion from './characterDataView/TeardropConversion';
 import CharacterName from './characterDataView/CharacterName';
 import RoundtableCharacters from './characterDataView/RoundtableCharacters';
+import ScholarKnowledge from './characterDataView/ScholarKnowledge';
 import reclusePassive from '../assets/char/ReclusePassiveAbility.png';
 import scholarSkill from '../assets/char/ScholarCharacterSkill.png';
 
@@ -1480,7 +1481,7 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
                     </Title>
                   </div>
                   <div className={styles.cardBody}>
-                    <div className={styles.characterDevelopmentPlaceholder}>资料整理中，后续补充</div>
+                    <ScholarKnowledge />
                   </div>
                 </div>
               ),
