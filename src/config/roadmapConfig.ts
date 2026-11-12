@@ -12,6 +12,7 @@ export const LATEST_UPDATES: string[] = [
   '冲击力机制',
   '黑焰烧血机制',
   '学者能力',
+  '渡夜者能力/技艺/绝招效果',
 ];
 
 export const ROADMAP_TODO: RoadmapTodoGroup[] = [
@@ -21,7 +22,7 @@ export const ROADMAP_TODO: RoadmapTodoGroup[] = [
   },
   {
     page: '角色数据',
-    items: ['渡夜者绝招、技艺效果，送葬者开启技艺后无敌帧变化', '执行者技艺'],
+    items: ['送葬者开启技艺后无敌帧变化', '执行者技艺'],
   },
   {
     page: '对局内容',
@@ -29,10 +30,14 @@ export const ROADMAP_TODO: RoadmapTodoGroup[] = [
   },
   {
     page: '机制',
-    items: ['两处待验证'],
+    items: ['大盾与防御强度待补充'],
   },
   {
     page: '夜王弱点累积值',
-    items: ['补充视频的细节内容'],
+    items: ['补充Supuritto的视频更多细节内容'],
+  },
+  {
+    page: '渡夜者能力/技艺/绝招效果',
+    items: ['需要用 smithbox 验证数据'],
   },
 ];

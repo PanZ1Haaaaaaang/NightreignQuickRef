@@ -90,6 +90,12 @@ export const NAV_PAGES: NavPage[] = [
         tabKey: '圆桌人物',
       },
       { key: '无敌帧长度对比', label: '⚡ 翻滚/闪避无敌帧对比', anchorId: 'dodge-frames', tabKey: '无敌帧' },
+      {
+        key: '渡夜者能力技艺绝招',
+        label: '📜 渡夜者能力/技艺/绝招',
+        anchorId: 'nightfarer-skills',
+        tabKey: 'nightfarer-skills',
+      },
       { key: '隐士混合魔法', label: '🔮 隐士混合魔法', anchorId: 'hermit-magic-list', tabKey: '隐士出招表' },
       {
         key: '学者携物知识',

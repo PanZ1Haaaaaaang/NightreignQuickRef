@@ -12,8 +12,10 @@ import TeardropConversion from './characterDataView/TeardropConversion';
 import CharacterName from './characterDataView/CharacterName';
 import RoundtableCharacters from './characterDataView/RoundtableCharacters';
 import ScholarKnowledge from './characterDataView/ScholarKnowledge';
+import NightfarerSkills from './characterDataView/NightfarerSkills';
 import recluseSkill from '../assets/char/RecluseCharacterSkill.png';
 import scholarSkill from '../assets/char/ScholarCharacterSkill.png';
+import wylderPassive from '../assets/char/WylderPassiveAbility.png';
 import magicAttrIcon from '../assets/Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 import fireAttrIcon from '../assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 import lightningAttrIcon from '../assets/Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
@@ -1443,6 +1445,28 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
               children: (
                 <div id="dodge-frames">
                   <DodgeFramesComparison active={activeCharTab === '无敌帧'} />
+                </div>
+              ),
+            },
+            {
+              key: 'nightfarer-skills',
+              label: (
+                <span className={styles.tabLabel}>
+                  <img src={wylderPassive} alt="" className={styles.tabIcon} />
+                  渡夜者能力/技艺/绝招
+                </span>
+              ),
+              children: (
+                <div className={`content-wrapper ${styles.cardItem}`} id="nightfarer-skills">
+                  <div className={styles.cardHeader}>
+                    <Title level={5} className="character-card-title">
+                      <img src={wylderPassive} alt="" className={styles.titleIcon} />
+                      渡夜者能力/技艺/绝招
+                    </Title>
+                  </div>
+                  <div className={styles.cardBody}>
+                    <NightfarerSkills />
+                  </div>
                 </div>
               ),
             },

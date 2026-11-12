@@ -377,6 +377,24 @@ export interface BlackFlameData {
   maxHp: { intro: string; rows: BlackFlameMaxHpRow[] };
   bossEffects: { intro: string; rows: BossHpEffectRow[] };
 }
+// ===== 渡夜者能力 / 技艺 / 绝招（src/data/zh-CN/nightfarer_skill_data.json） =====
+
+export interface NightfarerSkillRow {
+  character: string;
+  /** 形如「技艺：钩爪射击」 */
+  skill: string;
+  base: string;
+  scaling: string;
+  poise: string;
+  rescue: string;
+  note: string;
+}
+
+export interface NightfarerSkillData {
+  meta: { title: string; author: string; version: string };
+  rows: NightfarerSkillRow[];
+}
+
 // ===== 学者携物知识（src/data/zh-CN/scholar_knowledge_data.json） =====
 
 export interface ScholarItem {
