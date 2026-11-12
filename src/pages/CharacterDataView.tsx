@@ -12,8 +12,12 @@ import TeardropConversion from './characterDataView/TeardropConversion';
 import CharacterName from './characterDataView/CharacterName';
 import RoundtableCharacters from './characterDataView/RoundtableCharacters';
 import ScholarKnowledge from './characterDataView/ScholarKnowledge';
-import reclusePassive from '../assets/char/ReclusePassiveAbility.png';
+import recluseSkill from '../assets/char/RecluseCharacterSkill.png';
 import scholarSkill from '../assets/char/ScholarCharacterSkill.png';
+import magicAttrIcon from '../assets/Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
+import fireAttrIcon from '../assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
+import lightningAttrIcon from '../assets/Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
+import holyAttrIcon from '../assets/Negations/holy-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 
 const { Title, Text } = Typography;
 
@@ -872,9 +876,31 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
   }, [characterData]);
 
   // 隐士出招表列定义
+  const ATTR_ICONS: Record<string, string> = {
+    魔: magicAttrIcon,
+    火: fireAttrIcon,
+    雷: lightningAttrIcon,
+    圣: holyAttrIcon,
+  };
+
+  const renderAttrIcons = (mark: string) => (
+    <span className={styles.attrIcons}>
+      {Array.from(mark || '').map((char) =>
+        ATTR_ICONS[char] ? <img key={char} src={ATTR_ICONS[char]} alt={char} /> : null,
+      )}
+    </span>
+  );
+
   const magicMoveColumns = [
     { title: '属性痕', dataIndex: '属性痕', key: 'attributeMark', width: '12%', align: 'center' as const },
-    { title: '属性图标', dataIndex: '属性图标', key: 'attributeIcon', width: '12%', align: 'center' as const },
+    {
+      title: '属性图标',
+      dataIndex: '属性图标',
+      key: 'attributeIcon',
+      width: '12%',
+      align: 'center' as const,
+      render: (_: string, record: MagicMove) => renderAttrIcons(record['属性痕'] || ''),
+    },
     { title: '混合魔法', dataIndex: '混合魔法', key: 'mixedMagic', width: '12%', align: 'center' as const },
     { title: '总伤害', dataIndex: '总伤害', key: 'totalDamage', width: '9%', align: 'center' as const },
     { title: '持续时间', dataIndex: '持续时间', key: 'duration', width: '9%', align: 'center' as const },
@@ -1424,7 +1450,7 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
               key: '隐士出招表',
               label: (
                 <span className={styles.tabLabel}>
-                  <img src={reclusePassive} alt="" className={styles.tabIcon} />
+                  <img src={recluseSkill} alt="" className={styles.tabIcon} />
                   隐士混合魔法
                 </span>
               ),
@@ -1432,7 +1458,7 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
                 <div className={`content-wrapper ${styles.cardItem}`} id="hermit-magic-list">
                   <div className={styles.cardHeader}>
                     <Title level={5} className="character-card-title">
-                      <img src={reclusePassive} alt="" className={styles.titleIcon} />
+                      <img src={recluseSkill} alt="" className={styles.titleIcon} />
                       隐士混合魔法
                       <DataSourceTooltip
                         links={[

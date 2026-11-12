@@ -515,3 +515,17 @@ body[tomato-theme='dark']
   object-fit: contain;
   vertical-align: -3px;
 }
+
+/* 隐士混合魔法：属性痕图标 */
+.attrIcons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.attrIcons img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
