@@ -59,7 +59,7 @@ export const NAV_PAGES: NavPage[] = [
     key: '游戏机制',
     label: '游戏机制',
     icon: '⚙️',
-    desc: '时间轴、缩圈、卢恩、深夜评分、血量计算器与冲击力机制',
+    desc: '时间轴、缩圈、卢恩、深夜评分、血量计算器、冲击力与仇恨机制',
     badges: ['通用', '工具'],
     group: '对局规则',
     sections: [
@@ -79,6 +79,7 @@ export const NAV_PAGES: NavPage[] = [
       },
       { key: '血量恢复计算器', label: '❤️ 血量恢复计算器', anchorId: 'recovery-calculator', tabKey: '回血量计算器' },
       { key: '冲击力机制', label: '💥 冲击力机制', anchorId: 'impulse-mechanics', tabKey: '冲击力机制' },
+      { key: '仇恨机制', label: '😡 仇恨机制', anchorId: 'aggro-mechanics', tabKey: '仇恨机制' },
       { key: '评论与讨论', label: '💬 评论与讨论', anchorId: 'comments-discussion' },
     ],
   },

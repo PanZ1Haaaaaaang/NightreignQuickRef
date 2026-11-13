@@ -377,6 +377,34 @@ export interface BlackFlameData {
   maxHp: { intro: string; rows: BlackFlameMaxHpRow[] };
   bossEffects: { intro: string; rows: BossHpEffectRow[] };
 }
+// ===== 仇恨机制（src/data/zh-CN/aggro_data.json、aggro_spell_data.json） =====
+
+/** [名称, 冲击力, 基础仇恨值, 次数, 总仇恨] */
+export type AggroRow = [string, number | null, number | null, number | null, number | null];
+
+export interface AggroData {
+  meta: {
+    title: string;
+    author: string;
+    articleUrl: string;
+    videoUrl: string;
+    unpackerUrl: string;
+    unpackerNote: string;
+  };
+  intro: string[];
+  /** [冲击力, 仇恨值, 效果, 示例] */
+  impulseTable: (number | string)[][];
+  weaponTable: [string, number][];
+  skillHighlights: [string, string][];
+  characterRows: AggroRow[];
+  miscRows: AggroRow[];
+}
+
+export interface AggroSpellData {
+  spells: AggroRow[];
+  incantations: AggroRow[];
+}
+
 // ===== 执行者弹刀 / 开刃（src/data/zh-CN/executor_parry_data.json） =====
 
 export interface ExecutorParryFrameRow {

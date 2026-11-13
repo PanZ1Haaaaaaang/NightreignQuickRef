@@ -16,6 +16,7 @@ import {
 } from '@ant-design/icons';
 import RecoveryCalculator from '../components/RecoveryCalculator';
 import ImpulseView from './ImpulseView';
+import AggroView from './AggroView';
 import DataSourceTooltip from '../components/DataSourceTooltip';
 import GiscusComments from '../components/GiscusComments';
 import styles from '../styles/gameMechanicsView.module.css';
@@ -184,6 +185,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName, act
                   { key: '深夜模式评分规则', label: '🌌 深夜模式评分规则' },
                   { key: '回血量计算器', label: '❤️ 回血量计算器' },
                   { key: '冲击力机制', label: '💥 冲击力机制' },
+                  { key: '仇恨机制', label: '😡 仇恨机制' },
                 ]}
               />
               <div className={styles.mechanicsLayout}>
@@ -821,6 +823,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName, act
                 )}
 
                 {activeMechanicsTab === '冲击力机制' && <ImpulseView />}
+                {activeMechanicsTab === '仇恨机制' && <AggroView />}
               </div>
             </div>
 

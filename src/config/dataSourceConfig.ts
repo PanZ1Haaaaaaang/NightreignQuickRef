@@ -162,6 +162,11 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
         url: 'https://www.bilibili.com/opus/1134615426311913481',
         icon: 'bilibili',
       },
+      {
+        title: '黑夜君临 动作仇恨值一览 by：Supuritto',
+        url: 'https://www.bilibili.com/opus/1216365314145517591',
+        icon: 'bilibili',
+      },
     ],
   },
   {

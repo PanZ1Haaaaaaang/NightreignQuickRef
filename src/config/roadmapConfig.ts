@@ -14,24 +14,29 @@ export const LATEST_UPDATES: string[] = [
   '学者能力',
   '渡夜者能力/技艺/绝招效果',
   '执行者技艺',
+  '仇恨机制',
 ];
 
 export const ROADMAP_TODO: RoadmapTodoGroup[] = [
   {
     page: '游戏机制',
-    items: ['异常值说明', '救人值'],
+    items: ['救人值'],
   },
   {
     page: '角色数据',
     items: ['送葬者开启技艺后无敌帧变化'],
   },
   {
-    page: '对局内容',
-    items: ['仇恨机制'],
+    page: '机制',
+    items: ['大盾与防御强度待补充'],
   },
   {
     page: '机制',
-    items: ['大盾与防御强度待补充'],
+    items: ['异常值说明'],
+  },
+  {
+    page: '游戏机制',
+    items: ['补充仇恨机制更多细节'],
   },
   {
     page: '夜王弱点累积值',
