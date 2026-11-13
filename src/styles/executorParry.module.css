@@ -35,14 +35,14 @@
   align-items: center;
   gap: 2px;
   padding: 10px 8px;
-  border: 1px solid var(--color-border-2);
+  border: 1px solid var(--panel-border);
   border-radius: 8px;
-  background: var(--color-fill-1);
+  background: var(--panel-bg);
 }
 
 .statLabel {
   font-size: 12px;
-  color: var(--color-text-3);
+  color: var(--theme-text-tertiary);
   text-align: center;
 }
 
@@ -54,7 +54,7 @@
 
 .statNote {
   font-size: 11px;
-  color: var(--color-text-3);
+  color: var(--theme-text-tertiary);
 }
 
 .heading {
@@ -72,9 +72,9 @@
 
 .card {
   padding: 12px 14px;
-  border: 1px solid var(--color-border-2);
+  border: 1px solid var(--panel-border);
   border-radius: 8px;
-  background: var(--color-fill-1);
+  background: var(--panel-bg);
 }
 
 .list {
@@ -96,5 +96,5 @@
 .source {
   font-size: 12px;
   line-height: 1.7;
-  color: var(--color-text-3);
+  color: var(--theme-text-tertiary);
 }

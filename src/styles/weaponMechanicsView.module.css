@@ -3,3 +3,10 @@
   width: min(1400px, 92%);
   margin: 0 auto var(--spacing-xl, 24px) auto;
 }
+
+.shell {
+  padding: 20px 24px 24px;
+  background: var(--content-bg);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px var(--content-shadow);
+}

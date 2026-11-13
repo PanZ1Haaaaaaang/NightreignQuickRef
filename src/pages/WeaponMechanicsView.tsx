@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Tabs } from 'antd';
 import GreatShieldView from './GreatShieldView';
-import ImpulseView from './ImpulseView';
 import BlackFlameView from './BlackFlameView';
 import styles from '../styles/weaponMechanicsView.module.css';
 
-const TAB_KEYS = ['mechanics-shield', 'mechanics-impulse', 'mechanics-blackflame'];
+const TAB_KEYS = ['mechanics-shield', 'mechanics-blackflame'];
 
 /**
  * 「武器 → 机制」页：把大盾与防御强度、冲击力两个机制放在同一个页签容器里，
@@ -20,29 +19,26 @@ const WeaponMechanicsView: React.FC<{ activeSubTab?: string }> = ({ activeSubTab
 
   return (
     <div className={styles.page}>
-      <Tabs
-        type="card"
-        activeKey={tab}
-        onChange={setTab}
-        destroyOnHidden={false}
-        items={[
-          {
-            key: 'mechanics-shield',
-            label: '🛡️ 大盾与防御强度机制',
-            children: <GreatShieldView />,
-          },
-          {
-            key: 'mechanics-impulse',
-            label: '💥 冲击力机制',
-            children: <ImpulseView />,
-          },
-          {
-            key: 'mechanics-blackflame',
-            label: '🔥 黑焰烧血机制',
-            children: <BlackFlameView />,
-          },
-        ]}
-      />
+      <div className={styles.shell}>
+        <Tabs
+          type="card"
+          activeKey={tab}
+          onChange={setTab}
+          destroyOnHidden={false}
+          items={[
+            {
+              key: 'mechanics-shield',
+              label: '🛡️ 大盾与防御强度机制',
+              children: <GreatShieldView />,
+            },
+            {
+              key: 'mechanics-blackflame',
+              label: '🔥 黑焰烧血机制',
+              children: <BlackFlameView />,
+            },
+          ]}
+        />
+      </div>
     </div>
   );
 };

@@ -20,10 +20,29 @@
 }
 
 .mechanicsShell {
-  padding: 16px 20px 20px;
+  padding: 20px 24px 24px;
   background: var(--content-bg);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px var(--content-shadow);
+}
+
+/* 壳层内的子卡片：整体白壳 + 浅色面板，靠底色/描边区分，不再叠阴影 */
+.mechanicsShell .mechanicCard {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.mechanicsShell .mechanicCard:hover {
+  box-shadow: none;
+}
+
+/* 单模块页签：不再套一层卡片，直接铺在壳里 */
+.mechanicPlain {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .mechanicsLayout {

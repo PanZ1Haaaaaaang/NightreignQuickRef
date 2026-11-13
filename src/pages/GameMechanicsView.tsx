@@ -15,6 +15,7 @@ import {
   TrophyTwoTone,
 } from '@ant-design/icons';
 import RecoveryCalculator from '../components/RecoveryCalculator';
+import ImpulseView from './ImpulseView';
 import DataSourceTooltip from '../components/DataSourceTooltip';
 import GiscusComments from '../components/GiscusComments';
 import styles from '../styles/gameMechanicsView.module.css';
@@ -182,6 +183,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName, act
                   { key: '游戏时间机制', label: '⏰ 游戏时间机制' },
                   { key: '深夜模式评分规则', label: '🌌 深夜模式评分规则' },
                   { key: '回血量计算器', label: '❤️ 回血量计算器' },
+                  { key: '冲击力机制', label: '💥 冲击力机制' },
                 ]}
               />
               <div className={styles.mechanicsLayout}>
@@ -559,7 +561,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName, act
                   <>
                     {/* 评分系统板块 */}
                     <div className={styles.mechanicsGrid}>
-                      <div className={styles.mechanicCard} id="deep-night-rating-rules">
+                      <div className={styles.mechanicPlain} id="deep-night-rating-rules">
                         <div className={styles.cardContent}>
                           <div className={styles.cardTitleSection}>
                             <Title level={5} className={styles.mechanicCardTitle}>
@@ -793,7 +795,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName, act
                 {activeMechanicsTab === '回血量计算器' && (
                   <>
                     <div className={styles.mechanicsGrid}>
-                      <div className={styles.mechanicCard} id="recovery-calculator">
+                      <div className={styles.mechanicPlain} id="recovery-calculator">
                         <div className={styles.cardContent}>
                           <div className={styles.cardTitleSection}>
                             <Title level={5} className={styles.mechanicCardTitle}>
@@ -817,6 +819,8 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName, act
                     </div>
                   </>
                 )}
+
+                {activeMechanicsTab === '冲击力机制' && <ImpulseView />}
               </div>
             </div>
 

@@ -59,7 +59,7 @@ export const NAV_PAGES: NavPage[] = [
     key: '游戏机制',
     label: '游戏机制',
     icon: '⚙️',
-    desc: '时间轴、缩圈、卢恩、深夜评分与血量计算器',
+    desc: '时间轴、缩圈、卢恩、深夜评分、血量计算器与冲击力机制',
     badges: ['通用', '工具'],
     group: '对局规则',
     sections: [
@@ -78,6 +78,7 @@ export const NAV_PAGES: NavPage[] = [
         tabKey: '深夜模式评分规则',
       },
       { key: '血量恢复计算器', label: '❤️ 血量恢复计算器', anchorId: 'recovery-calculator', tabKey: '回血量计算器' },
+      { key: '冲击力机制', label: '💥 冲击力机制', anchorId: 'impulse-mechanics', tabKey: '冲击力机制' },
       { key: '评论与讨论', label: '💬 评论与讨论', anchorId: 'comments-discussion' },
     ],
   },
@@ -148,7 +149,7 @@ export const NAV_PAGES: NavPage[] = [
     key: '机制',
     label: '机制',
     icon: '🛠️',
-    desc: '大盾数值与防御强度机制、冲击力（硬直）机制',
+    desc: '大盾数值与防御强度机制、黑焰烧血机制',
     badges: ['局内'],
     group: '武器',
     sections: [
@@ -163,12 +164,6 @@ export const NAV_PAGES: NavPage[] = [
         label: '🛡️ 防御强度机制',
         anchorId: 'shield-mechanics',
         tabKey: 'mechanics-shield',
-      },
-      {
-        key: '冲击力机制',
-        label: '💥 冲击力机制',
-        anchorId: 'impulse-mechanics',
-        tabKey: 'mechanics-impulse',
       },
       {
         key: '黑焰烧血机制',
