@@ -152,6 +152,11 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
         url: 'https://www.bilibili.com/video/BV1xT411o7Xh',
         icon: 'bilibili',
       },
+      {
+        title: '黑夜君临 1.03.4更新内容(Reg版本)',
+        url: 'https://www.bilibili.com/opus/1158092104127217697',
+        icon: 'bilibili',
+      },
     ],
   },
   {

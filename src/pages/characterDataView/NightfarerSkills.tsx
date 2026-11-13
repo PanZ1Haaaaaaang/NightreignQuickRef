@@ -149,6 +149,7 @@ const NightfarerSkills: React.FC = () => {
 
       <div className={styles.source}>
         数据来自「{DATA.meta.title}」（作者：{DATA.meta.author}，{DATA.meta.version}）。
+        {DATA.meta.patchNote ? <div className={styles.patchNote}>{DATA.meta.patchNote}</div> : null}
       </div>
     </div>
   );

@@ -391,7 +391,7 @@ export interface NightfarerSkillRow {
 }
 
 export interface NightfarerSkillData {
-  meta: { title: string; author: string; version: string };
+  meta: { title: string; author: string; version: string; patchNote?: string };
   rows: NightfarerSkillRow[];
 }
 

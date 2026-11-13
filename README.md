@@ -77,6 +77,7 @@
 - [黑夜君临DLC BOSS精英掉落数据](https://www.bilibili.com/opus/1145131756809093159)
 - [黑夜君临 夜王弱点属性累积值数据](https://www.bilibili.com/opus/1126592307126075427)
 - [【艾尔登法环】8分钟了解，重要隐藏属性！——冲击力！（硬直系统）](https://www.bilibili.com/video/BV1xT411o7Xh)
+- [黑夜君临 1.03.4更新内容(Reg版本)](https://www.bilibili.com/opus/1158092104127217697)
 
 #### 其他资源
 - [黑夜君临官方网站（新闻 / 维护公告）](https://nightreign.eldenring.jp/news.html)

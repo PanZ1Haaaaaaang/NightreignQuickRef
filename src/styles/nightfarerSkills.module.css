@@ -54,3 +54,12 @@
 .skillNoIcon {
   padding-left: 28px;
 }
+
+.patchNote {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-left: 3px solid rgba(120, 160, 255, 0.55);
+  border-radius: 4px;
+  background: rgba(120, 160, 255, 0.08);
+  line-height: 1.7;
+}
