@@ -13,6 +13,7 @@ export const LATEST_UPDATES: string[] = [
   '黑焰烧血机制',
   '学者能力',
   '渡夜者能力/技艺/绝招效果',
+  '执行者技艺',
 ];
 
 export const ROADMAP_TODO: RoadmapTodoGroup[] = [
@@ -22,7 +23,7 @@ export const ROADMAP_TODO: RoadmapTodoGroup[] = [
   },
   {
     page: '角色数据',
-    items: ['送葬者开启技艺后无敌帧变化', '执行者技艺'],
+    items: ['送葬者开启技艺后无敌帧变化'],
   },
   {
     page: '对局内容',

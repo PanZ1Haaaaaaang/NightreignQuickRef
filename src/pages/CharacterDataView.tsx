@@ -13,9 +13,11 @@ import CharacterName from './characterDataView/CharacterName';
 import RoundtableCharacters from './characterDataView/RoundtableCharacters';
 import ScholarKnowledge from './characterDataView/ScholarKnowledge';
 import NightfarerSkills from './characterDataView/NightfarerSkills';
+import ExecutorParry from './characterDataView/ExecutorParry';
 import recluseSkill from '../assets/char/RecluseCharacterSkill.png';
 import scholarSkill from '../assets/char/ScholarCharacterSkill.png';
 import wylderPassive from '../assets/char/WylderPassiveAbility.png';
+import executorSkill from '../assets/char/ExecutorCharacterSkill.png';
 import magicAttrIcon from '../assets/Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 import fireAttrIcon from '../assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 import lightningAttrIcon from '../assets/Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
@@ -1510,6 +1512,28 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
                       style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
                       footer={() => <div className="footer-text">备注：总伤害为角色 15 级时测试数据</div>}
                     />
+                  </div>
+                </div>
+              ),
+            },
+            {
+              key: '执行者攫阳',
+              label: (
+                <span className={styles.tabLabel}>
+                  <img src={executorSkill} alt="" className={styles.tabIcon} />
+                  执行者攫阳
+                </span>
+              ),
+              children: (
+                <div className={`content-wrapper ${styles.cardItem}`} id="executor-parry">
+                  <div className={styles.cardHeader}>
+                    <Title level={5} className="character-card-title">
+                      <img src={executorSkill} alt="" className={styles.titleIcon} />
+                      执行者攫阳
+                    </Title>
+                  </div>
+                  <div className={styles.cardBody}>
+                    <ExecutorParry />
                   </div>
                 </div>
               ),

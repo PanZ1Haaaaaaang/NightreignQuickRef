@@ -98,6 +98,12 @@ export const NAV_PAGES: NavPage[] = [
       },
       { key: '隐士混合魔法', label: '🔮 隐士混合魔法', anchorId: 'hermit-magic-list', tabKey: '隐士出招表' },
       {
+        key: '执行者攫阳',
+        label: '⚔️ 执行者攫阳',
+        anchorId: 'executor-parry',
+        tabKey: '执行者攫阳',
+      },
+      {
         key: '学者携物知识',
         label: '📚 学者携物知识',
         anchorId: 'scholar-knowledge',

@@ -1,0 +1,100 @@
+/* ===== 执行者攫阳（弹刀 / 开刃） ===== */
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.intro {
+  padding: 12px 14px;
+  border-left: 3px solid rgba(120, 160, 255, 0.55);
+  border-radius: 6px;
+  background: rgba(120, 160, 255, 0.08);
+}
+
+.paragraph {
+  margin: 0 0 6px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--color-text-2);
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 8px;
+  border: 1px solid var(--color-border-2);
+  border-radius: 8px;
+  background: var(--color-fill-1);
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--color-text-3);
+  text-align: center;
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-1);
+}
+
+.statNote {
+  font-size: 11px;
+  color: var(--color-text-3);
+}
+
+.heading {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-1);
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  padding: 12px 14px;
+  border: 1px solid var(--color-border-2);
+  border-radius: 8px;
+  background: var(--color-fill-1);
+}
+
+.list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--color-text-2);
+}
+
+.list li + li {
+  margin-top: 4px;
+}
+
+.otherTable {
+  margin-top: 10px;
+}
+
+.source {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--color-text-3);
+}

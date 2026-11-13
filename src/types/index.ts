@@ -377,6 +377,46 @@ export interface BlackFlameData {
   maxHp: { intro: string; rows: BlackFlameMaxHpRow[] };
   bossEffects: { intro: string; rows: BossHpEffectRow[] };
 }
+// ===== 执行者弹刀 / 开刃（src/data/zh-CN/executor_parry_data.json） =====
+
+export interface ExecutorParryFrameRow {
+  action: string;
+  window: string;
+  time: string;
+  next: string;
+  note: string;
+}
+
+export interface ExecutorParryImpactRow {
+  impact: string;
+  example: string;
+  anim: string;
+  accum: string;
+}
+
+export interface ExecutorParryOtherRow {
+  action: string;
+  accum: string;
+}
+
+export interface ExecutorParryData {
+  meta: { title: string; author: string; frameBase: number; appVersion: string; url: string };
+  intro: string[];
+  basics: { label: string; value: string; note?: string }[];
+  basicsNote: string;
+  frameRows: ExecutorParryFrameRow[];
+  frameNote: string;
+  shakerNotes: string[];
+  comboNotes: string[];
+  blade: {
+    summary: string;
+    effect: string;
+    rows: ExecutorParryImpactRow[];
+    otherRows: ExecutorParryOtherRow[];
+  };
+  conclusions: string[];
+}
+
 // ===== 渡夜者能力 / 技艺 / 绝招（src/data/zh-CN/nightfarer_skill_data.json） =====
 
 export interface NightfarerSkillRow {

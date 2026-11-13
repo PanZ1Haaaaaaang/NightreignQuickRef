@@ -148,13 +148,18 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
         icon: 'bilibili',
       },
       {
-        title: '【艾尔登法环】8分钟了解，重要隐藏属性！——冲击力！（硬直系统）',
+        title: '【艾尔登法环】8分钟了解，重要隐藏属性！——冲击力！（硬直系统） by：小辛',
         url: 'https://www.bilibili.com/video/BV1xT411o7Xh',
         icon: 'bilibili',
       },
       {
-        title: '黑夜君临 1.03.4更新内容(Reg版本)',
+        title: '黑夜君临 1.03.4更新内容(Reg版本) by：Supuritto',
         url: 'https://www.bilibili.com/opus/1158092104127217697',
+        icon: 'bilibili',
+      },
+      {
+        title: '黑夜君临 执行者弹刀、开刃机制详解 by：Supuritto',
+        url: 'https://www.bilibili.com/opus/1134615426311913481',
         icon: 'bilibili',
       },
     ],
