@@ -32,12 +32,51 @@ const toRecords = (rows: AggroRow[], prefix: string): AggroRecord[] =>
 
 const fmt = (v: number | null | undefined) => (v === null || v === undefined ? '—' : v.toLocaleString());
 
+const compareNum = (a: number | null, b: number | null) => {
+  if (a === null && b === null) return 0;
+  if (a === null) return 1;
+  if (b === null) return -1;
+  return a - b;
+};
+
 const aggroColumns: TableColumnsType<AggroRecord> = [
   { title: '名称', dataIndex: 'name', key: 'name' },
-  { title: '冲击力', dataIndex: 'impulse', key: 'impulse', width: 80, align: 'center', render: fmt },
-  { title: '基础仇恨值', dataIndex: 'base', key: 'base', width: 110, align: 'right', render: fmt },
-  { title: '次数', dataIndex: 'hits', key: 'hits', width: 70, align: 'center', render: fmt },
-  { title: '总仇恨', dataIndex: 'total', key: 'total', width: 100, align: 'right', render: fmt },
+  {
+    title: '冲击力',
+    dataIndex: 'impulse',
+    key: 'impulse',
+    width: 80,
+    align: 'center',
+    render: fmt,
+    sorter: (a, b) => compareNum(a.impulse, b.impulse),
+  },
+  {
+    title: '基础仇恨值',
+    dataIndex: 'base',
+    key: 'base',
+    width: 110,
+    align: 'right',
+    render: fmt,
+    sorter: (a, b) => compareNum(a.base, b.base),
+  },
+  {
+    title: '次数',
+    dataIndex: 'hits',
+    key: 'hits',
+    width: 70,
+    align: 'center',
+    render: fmt,
+    sorter: (a, b) => compareNum(a.hits, b.hits),
+  },
+  {
+    title: '总仇恨',
+    dataIndex: 'total',
+    key: 'total',
+    width: 100,
+    align: 'right',
+    render: fmt,
+    sorter: (a, b) => compareNum(a.total, b.total),
+  },
 ];
 
 interface ImpulseRecord {
