@@ -10,11 +10,26 @@
 }
 
 /* 主布局容器 - 可配置最大宽度 */
-.mechanicsLayout {
+.mechanicsPage {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   width: min(1400px, 92%);
-  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding-bottom: 40px;
+}
+
+.mechanicsShell {
+  padding: 16px 20px 20px;
+  background: var(--content-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.mechanicsLayout {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* 板块网格布局 */
@@ -882,4 +897,8 @@ body[tomato-theme='dark'] .bossSectionTitle .anticon {
     white-space: normal;
     word-break: break-word;
   }
+}
+
+.mechanicsTabs {
+  margin-bottom: 12px;
 }

@@ -152,7 +152,7 @@ function App() {
       case '角色数据':
         return <CharacterDataView activeSubTab={activeSubTab} />;
       case '游戏机制':
-        return <GameMechanicsView functionName="游戏机制" />;
+        return <GameMechanicsView functionName="游戏机制" activeSubTab={activeSubTab} />;
       case '夜王数据':
         return <BossDataView key="boss-nightlord" scope="夜王" activeSubTab={activeSubTab} />;
       case '强敌与事件':
