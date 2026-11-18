@@ -1,1 +1,0 @@
-var s="/NightreignQuickRef/assets/svg/Guardian-CizwWjT8.svg";export{s as t};

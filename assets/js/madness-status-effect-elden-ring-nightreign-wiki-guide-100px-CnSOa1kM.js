@@ -1,0 +1,1 @@
+var e="/NightreignQuickRef/assets/png/blight_status_effect_elden_ring_wiki_guide_100px-4nvOpBZb.png",i="/NightreignQuickRef/assets/png/sleep-status-effect-elden-ring-nightreign-wiki-guide-100px-PFMFd59X.png",g="/NightreignQuickRef/assets/png/madness-status-effect-elden-ring-nightreign-wiki-guide-100px-DtS46YeP.png";export{i as n,e as r,g as t};
