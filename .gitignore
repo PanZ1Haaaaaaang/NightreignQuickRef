@@ -45,7 +45,6 @@ coverage
 /docs/*
 !/docs/commit_convention.md
 !/docs/deploy_record.md
-!/docs/project_notes.md
 
 # IDE 插件（DirectoryV3）的本地目录/文件标注文件
 /DirectoryV3.xml
