@@ -3,51 +3,33 @@ import { Tooltip, Menu } from 'antd';
 import type { MenuProps } from 'antd';
 import logoImage from '../assets/logo-circle.svg';
 import { getNavigationGroups } from '../config/navigationConfig';
-import type { NavSection } from '../config/navigationConfig';
+import type { NavigationTarget } from '../utils/navigationUrl';
 
 interface FunctionMenuProps {
-  onTabChange: (tab: string) => void;
-  onSubTabChange?: (tabKey: string) => void; // 子Tab切换回调
-  onStepChange?: (stepIndex: number) => void; // Step切换回调
+  onNavigate: (target: NavigationTarget) => void;
 }
 
 type MenuItemType = NonNullable<MenuProps['items']>[number];
 
-interface SectionMetadata {
-  pageKey: string;
-  section: NavSection;
-}
-
 const GROUP_KEY_PREFIX = 'group:';
 const SECTION_KEY_PREFIX = 'section:';
 
-// 目标页可能是懒加载 + 异步取数，锚点要等 DOM 出现后再滚（最多等约 3s）
-const scrollToAnchor = (anchorId: string, tries = 0) => {
-  const element = document.getElementById(anchorId);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    return;
-  }
-  if (tries < 25) {
-    window.setTimeout(() => scrollToAnchor(anchorId, tries + 1), 120);
-  }
-};
-
 // 左下角功能菜单：完整索引（分组 → 页面 → 页内子项），数据全部来自 navigationConfig，
 // 不再在这里单独维护一份菜单，避免与顶部导航的命名/顺序漂移。
-const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange, onStepChange }) => {
+const FunctionMenu: React.FC<FunctionMenuProps> = ({ onNavigate }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
 
-  const sectionMetadata = new Map<string, SectionMetadata>();
+  const targets = new Map<string, NavigationTarget>();
 
   const menuItems: MenuItemType[] = getNavigationGroups().map((group) => ({
     key: `${GROUP_KEY_PREFIX}${group.key}`,
     label: group.label,
     children: group.pages.map((page) => {
+      targets.set(page.key, { page });
       const children = page.sections.map((section) => {
         const key = `${SECTION_KEY_PREFIX}${page.key}:${section.key}`;
-        sectionMetadata.set(key, { pageKey: page.key, section });
+        targets.set(key, { page, section });
         return { key, label: section.label };
       });
 
@@ -60,35 +42,10 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
   }));
 
   const handleMenuClick = ({ key }: { key: string }) => {
-    // 分组本身只负责展开/收起
-    if (key.startsWith(GROUP_KEY_PREFIX)) return;
-
-    // 页面级：直接切页
-    if (!key.startsWith(SECTION_KEY_PREFIX)) {
-      onTabChange(key);
-      setMenuVisible(false);
-      return;
-    }
-
-    // 页内子项：先切页，再联动子Tab / Step，最后滚到锚点
-    const metadata = sectionMetadata.get(key);
-    if (!metadata) return;
-
-    const { pageKey, section } = metadata;
-    onTabChange(pageKey);
+    const target = targets.get(key);
+    if (!target) return;
+    onNavigate(target);
     setMenuVisible(false);
-
-    setTimeout(() => {
-      if (section.tabKey && onSubTabChange) {
-        onSubTabChange(section.tabKey);
-      }
-      if (typeof section.stepIndex === 'number' && onStepChange) {
-        onStepChange(section.stepIndex);
-      }
-      if (section.anchorId) {
-        scrollToAnchor(section.anchorId);
-      }
-    }, 200);
   };
 
   return (

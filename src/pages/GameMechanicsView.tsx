@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import type { PageTabProps } from '../config/navigationConfig';
 import { Typography, Timeline, Table, Alert, Steps, Progress, Statistic, Tabs } from 'antd';
 import {
   CheckCircleTwoTone,
@@ -23,9 +24,8 @@ import styles from '../styles/gameMechanicsView.module.css';
 
 const { Title, Text } = Typography;
 
-interface GameMechanicsViewProps {
+interface GameMechanicsViewProps extends PageTabProps {
   functionName: string;
-  activeSubTab?: string;
 }
 
 const CircleShrinkEffect: React.FC<{ currentStep: number }> = ({ currentStep }) => {
@@ -137,18 +137,13 @@ const CircleShrinkEffect: React.FC<{ currentStep: number }> = ({ currentStep }) 
   );
 };
 
-const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName, activeSubTab }) => {
+const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({
+  functionName,
+  activeSubTab: activeMechanicsTab,
+  onSubTabChange,
+}) => {
   // 时间轴状态
   const [day1TimelineStep, setDay1TimelineStep] = useState(0);
-
-  // 大板块内的子页签：游戏时间机制 / 深夜模式评分规则 / 回血量计算器
-  const [activeMechanicsTab, setActiveMechanicsTab] = useState<string>(activeSubTab || '游戏时间机制');
-
-  useEffect(() => {
-    if (activeSubTab && activeSubTab !== activeMechanicsTab) {
-      setActiveMechanicsTab(activeSubTab);
-    }
-  }, [activeSubTab, activeMechanicsTab]);
 
   // 获取当前时间点的时间和描述
   const getCurrentTimeInfo = (step: number) => {
@@ -179,7 +174,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName, act
                 className={styles.mechanicsTabs}
                 type="card"
                 activeKey={activeMechanicsTab}
-                onChange={setActiveMechanicsTab}
+                onChange={onSubTabChange}
                 items={[
                   { key: '游戏时间机制', label: '⏰ 游戏时间机制' },
                   { key: '深夜模式评分规则', label: '🌌 深夜模式评分规则' },

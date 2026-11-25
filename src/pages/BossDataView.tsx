@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import type { PageTabProps } from '../config/navigationConfig';
 import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio, Segmented, Space, Spin } from 'antd';
 import { message } from '../utils/feedback';
 import { SearchOutlined } from '@ant-design/icons';
@@ -54,8 +55,7 @@ import frostResistance from '../assets/Resistances/frostbite-status-effect-elden
 import sleepResistance from '../assets/Resistances/sleep-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
 import madnessResistance from '../assets/Resistances/madness-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
 
-interface BossDataViewProps {
-  activeSubTab?: string;
+interface BossDataViewProps extends PageTabProps {
   // 拆页后固定只显示一个分段：夜王（每局开局即确定）/ 地图（由地图种子决定）
   scope?: BossScope;
 }
@@ -91,18 +91,12 @@ const tabOrderIndex = (key: unknown) => {
 };
 
 const scopeOfTab = (tab: string): BossScope => TAB_SCOPE[tab] ?? '夜王';
-const firstTabOfScope = (scope: BossScope): string =>
-  Object.keys(TAB_SCOPE).find((key) => TAB_SCOPE[key] === scope) ?? 'boss-data';
-
-const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab, scope }) => {
+const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab, onSubTabChange, scope }) => {
   const [filteredData] = useState<BossData[]>(bossData);
   const [wildBossSearchKeyword, setWildBossSearchKeyword] = useState('');
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
   const [playerCount, setPlayerCount] = useState<number>(1); // 添加人数选择状态
   const [deepNightDepth, setDeepNightDepth] = useState<number>(0); // 0=普通，1~5=深夜深度
-  const [activeBossTab, setActiveBossTab] = useState<string>(
-    activeSubTab || (scope ? firstTabOfScope(scope) : 'boss-data'),
-  );
 
   // 特殊事件相关状态
   const [specialEventData, setSpecialEventData] = useState<EntryData[]>([]);
@@ -908,13 +902,6 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab, scope }) => {
     }
   }, [activeBossTab]);
 
-  // 监听外部Tab切换
-  useEffect(() => {
-    if (activeSubTab && activeSubTab !== activeBossTab) {
-      setActiveBossTab(activeSubTab);
-    }
-  }, [activeSubTab, activeBossTab]);
-
   // 拆页后每个入口固定一个分段；未指定时按当前标签推断（保留旧行为）
   const activeScope = scope ?? scopeOfTab(activeBossTab);
 
@@ -925,7 +912,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab, scope }) => {
           style={{ marginTop: '5px' }}
           type="card"
           activeKey={activeBossTab}
-          onChange={setActiveBossTab}
+          onChange={onSubTabChange}
           items={[
             {
               key: 'boss-data',

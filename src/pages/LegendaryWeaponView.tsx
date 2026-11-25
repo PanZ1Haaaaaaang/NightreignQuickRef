@@ -159,11 +159,11 @@ const ColorLegend = () => {
 };
 
 interface LegendaryWeaponViewProps {
-  activeStep?: number;
+  activeStep: number;
+  onStepChange: (step: number) => void;
 }
 
-const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep }) => {
-  const [currentStep, setCurrentStep] = React.useState(activeStep || 0);
+const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep: currentStep, onStepChange }) => {
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [dataState, setDataState] = useState<DataState>({
     weaponCharacterData: [],
@@ -194,13 +194,6 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
 
     void loadData();
   }, []);
-
-  // 监听外部Step切换
-  useEffect(() => {
-    if (typeof activeStep === 'number') {
-      setCurrentStep(activeStep);
-    }
-  }, [activeStep]);
 
   const { weaponCharacterData, weaponEffectData, loading } = dataState;
 
@@ -345,7 +338,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
     <div className="page-scope-bar">
       <Segmented
         value={currentStep}
-        onChange={(value) => setCurrentStep(Number(value))}
+        onChange={onStepChange}
         options={[
           { label: '全角色面板', value: 0 },
           { label: '庇佑效果', value: 1 },

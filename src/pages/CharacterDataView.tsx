@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { Typography, Table, Tabs, Divider } from 'antd';
+import type { PageTabProps } from '../config/navigationConfig';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar } from '@ant-design/plots';
 import { LeftOutlined, RightOutlined, TeamOutlined } from '@ant-design/icons';
@@ -171,25 +172,12 @@ const RadarLegend: React.FC<{
   );
 };
 
-interface CharacterDataViewProps {
-  activeSubTab?: string;
-}
-
-const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) => {
+const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab, onSubTabChange }) => {
   // 数据状态
   const [data, setData] = useState<DataState>({
     characterStatesData: [],
     loading: true,
   });
-
-  // 分栏状态：基础属性与等级成长同一栏，其余各自一栏
-  const [activeCharTab, setActiveCharTab] = useState<string>(activeSubTab || '基础属性');
-
-  useEffect(() => {
-    if (activeSubTab && activeSubTab !== activeCharTab) {
-      setActiveCharTab(activeSubTab);
-    }
-  }, [activeSubTab, activeCharTab]);
 
   // 隐士出招表数据
   const [magicMoves, setMagicMoves] = useState<MagicMove[]>([]);
@@ -646,7 +634,7 @@ const CharacterDataView: React.FC<CharacterDataViewProps> = ({ activeSubTab }) =
         <Tabs
           type="card"
           activeKey={activeCharTab}
-          onChange={setActiveCharTab}
+          onChange={onSubTabChange}
           items={[
             {
               key: '基础属性',

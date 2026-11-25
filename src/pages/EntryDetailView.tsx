@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import type { PageTabProps } from '../config/navigationConfig';
 import { Table, Input, Select, Tabs, Tag, Spin, Button, Checkbox, Space, Tooltip } from 'antd';
 import { message } from '../utils/feedback';
 import type { TableColumnsType, TableProps } from 'antd';
@@ -272,8 +273,7 @@ const getSuperposabilityColor = (superposability: string | null | undefined): st
   }
 };
 
-interface EntryDetailViewProps {
-  activeSubTab?: string;
+interface EntryDetailViewProps extends PageTabProps {
   // 拆页后固定只显示一个分段：局外（遗物词条，出击前生效）/ 局内（护符、道具、武器固有）
   scope?: EntryScope;
 }
@@ -292,11 +292,7 @@ const ENTRY_TAB_SCOPE: Record<string, EntryScope> = {
 };
 
 const scopeOfEntryTab = (tab: string): EntryScope => ENTRY_TAB_SCOPE[tab] ?? '局外';
-const firstEntryTabOfScope = (scope: EntryScope): string =>
-  Object.keys(ENTRY_TAB_SCOPE).find((key) => ENTRY_TAB_SCOPE[key] === scope) ?? '局外词条';
-
-const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab, scope }) => {
-  const initialTab = activeSubTab || (scope ? firstEntryTabOfScope(scope) : '局外词条');
+const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeEntryTab, onSubTabChange, scope }) => {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedInGameTypes, setSelectedInGameTypes] = useState<string[]>([]);
@@ -308,7 +304,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab, scope }
   const [selectedTalismanCategories, setSelectedTalismanCategories] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
-  const [activeEntryTab, setActiveEntryTab] = useState(initialTab);
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [sortedInfo, setSortedInfo] = useState<Sorts>({});
   // 是否展示未实装词条（默认不展示）
@@ -325,12 +320,19 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab, scope }
     loading: true,
   });
 
-  // 监听外部Tab切换
+  // 菜单和历史导航切换页签时，与手动切换一样重置筛选。
   useEffect(() => {
-    if (activeSubTab && activeSubTab !== activeEntryTab) {
-      setActiveEntryTab(activeSubTab);
-    }
-  }, [activeSubTab, activeEntryTab]);
+    setCurrentPage(1);
+    setSearchKeyword('');
+    setSelectedTypes([]);
+    setSelectedInGameTypes([]);
+    setSelectedCharacter('');
+    setSelectedItemEffectTypes([]);
+    setSelectedPools([]);
+    setSelectedTalismanCategories([]);
+    setFilteredInfo({});
+    setSortedInfo({});
+  }, [activeEntryTab]);
 
   // 从DataManager获取数据
   useEffect(() => {
@@ -1651,20 +1653,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab, scope }
           marginTop: '8px',
         }}
         activeKey={activeEntryTab}
-        onChange={(key) => {
-          setActiveEntryTab(key);
-          setCurrentPage(1);
-          // 清空搜索相关状态
-          setSearchKeyword('');
-          setSelectedTypes([]);
-          setSelectedInGameTypes([]);
-          setSelectedCharacter('');
-          setSelectedItemEffectTypes([]);
-          setSelectedPools([]);
-          setSelectedTalismanCategories([]);
-          setFilteredInfo({});
-          setSortedInfo({});
-        }}
+        onChange={onSubTabChange}
         items={[
           {
             key: '局外词条',

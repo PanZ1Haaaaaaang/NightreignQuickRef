@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import type { PageTabProps } from '../config/navigationConfig';
 import { Button, Checkbox, Input, Select, Table, Tabs, Tag, Tooltip } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
@@ -28,8 +29,6 @@ const uniqueWeaponArtRows = uniqueWeaponArts as unknown as Row[];
 const supportMagicRows = supportSpells['辅助魔法'] as unknown as Row[];
 const supportIncantationRows = supportSpells['辅助祷告'] as unknown as Row[];
 const categoryHints = weaponArtCategoryHints as Record<string, string>;
-
-const TAB_KEYS = ['战技', '专用战技', '魔法', '祷告', '辅助类'];
 
 const weaponArtNotes = [
   '黑夜君临 v1.01 战灰战技倍率、基础攻击力表  by: 虚空蛋黄酱',
@@ -699,26 +698,14 @@ const uniqueWeaponArtMergeRules: MergeRule[] = [
   },
 ];
 
-interface WeaponSkillMagicViewProps {
-  activeSubTab?: string;
-}
-
-const WeaponSkillMagicView: React.FC<WeaponSkillMagicViewProps> = ({ activeSubTab }) => {
-  const [activeTab, setActiveTab] = useState('战技');
-
-  useEffect(() => {
-    if (activeSubTab && TAB_KEYS.includes(activeSubTab)) {
-      setActiveTab(activeSubTab);
-    }
-  }, [activeSubTab]);
-
+const WeaponSkillMagicView: React.FC<PageTabProps> = ({ activeSubTab, onSubTabChange }) => {
   return (
     <div className="content-wrapper">
       <Tabs
         type="card"
         style={{ marginTop: '20px' }}
-        activeKey={activeTab}
-        onChange={setActiveTab}
+        activeKey={activeSubTab}
+        onChange={onSubTabChange}
         className="custom-tabs"
         items={[
           {

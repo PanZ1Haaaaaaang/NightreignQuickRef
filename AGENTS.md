@@ -33,6 +33,7 @@ pnpm run preview
 
 - 顶部五组导航固定使用以下 11 项，按这个顺序展示：游戏机制、角色数据、遗物词条、夜王数据、强敌与事件、局内词条、掉落池、商人数据、机制、传说武器、战技与魔法祷告。
 - 顶部按钮、页面标题和功能菜单共享 `navigationConfig.ts` 的展示名称。维持已有内部 key、页内 Tab、步骤和锚点契约。调整入口时同时检查 `App.tsx` 的视图选择、懒加载和 `TAB_DATA_GROUPS`。 [导航配置](src/config/navigationConfig.ts) · [应用入口](src/App.tsx)
+- 公开链接使用 `?page=<slug>&section=<anchorId>`。调整页面文案或目录时保留已发布的标识，新增主页面页签或传说武器步骤时登记对应的锚点。 [链接解析](src/utils/navigationUrl.ts)
 - 页面专用组件、样式和逻辑随页面归属。跨功能复用的 UI 放 `src/components/common/`，跨页领域逻辑放对应 `src/features/` 模块。
 - 公共数据类型统一从 `src/types/index.ts` 导出。优先复用现有的加载和派生逻辑，保留 `DataManager` 与 `DataGate` 已有分组。大 JSON 和图表按页面或功能延迟加载。站内链接、版本与来源统一放在 `src/config/`。 [数据分组](src/utils/dataManager.ts)
 - Giscus 使用当前 fork 的 Discussions。仓库变更后按 Giscus 配置重新取得对应仓库和分类 ID。 [评论配置](src/config/siteConfig.ts)

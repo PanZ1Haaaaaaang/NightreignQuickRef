@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import type { PageTabProps } from '../config/navigationConfig';
 import { Alert, Button, Checkbox, Input, Popover, Segmented, Select, Switch, Table, Tabs, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
@@ -60,8 +61,6 @@ interface MerchantData {
 }
 
 const merchantData = merchantJson as unknown as MerchantData;
-
-const TAB_KEYS = ['普通商人', '村落商人', '黄金树商人', '大空洞传说商人', '不可购买露滴'];
 
 // 去掉武器名后的变体括注（如「志留亚的树矛(强化防御反击)」→「志留亚的树矛」）
 const stripVariant = (name: string): string => name.replace(/[（(][^（(）)]*[）)]/g, '').trim();
@@ -659,14 +658,9 @@ const TearsSection: React.FC = () => {
   );
 };
 
-interface MerchantViewProps {
-  activeSubTab?: string;
-}
-
 const MERCHANT_NO_OPTIONS = Array.from({ length: 21 }, (_, i) => ({ value: `${i}号`, label: `${i}号` }));
 
-const MerchantView: React.FC<MerchantViewProps> = ({ activeSubTab }) => {
-  const [activeTab, setActiveTab] = useState('普通商人');
+const MerchantView: React.FC<PageTabProps> = ({ activeSubTab, onSubTabChange }) => {
   const [hollowFocus, setHollowFocus] = useState<HollowFocus | null>(null);
   // 本局商人编号：同一对局内普通/村落/黄金树商人为同一编号，并联动大空洞金武组
   const [merchantNo, setMerchantNo] = useState<string | null>(null);
@@ -681,14 +675,8 @@ const MerchantView: React.FC<MerchantViewProps> = ({ activeSubTab }) => {
     } else {
       setHollowFocus(null);
     }
-    setActiveTab('大空洞传说商人');
+    onSubTabChange('大空洞传说商人');
   };
-
-  useEffect(() => {
-    if (activeSubTab && TAB_KEYS.includes(activeSubTab)) {
-      setActiveTab(activeSubTab);
-    }
-  }, [activeSubTab]);
 
   return (
     <div className="content-wrapper">
@@ -714,8 +702,8 @@ const MerchantView: React.FC<MerchantViewProps> = ({ activeSubTab }) => {
       </div>
       <Tabs
         type="card"
-        activeKey={activeTab}
-        onChange={setActiveTab}
+        activeKey={activeSubTab}
+        onChange={onSubTabChange}
         className="custom-tabs"
         items={[
           {
