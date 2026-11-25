@@ -138,6 +138,7 @@ pnpm run dev
 
 ### 代码规范
 
+- 提交 PR 或委托编码代理前，请先阅读项目的开发与验收约定。 [项目开发约定](AGENTS.md)
 - 提交信息遵循 [Conventional Commits](docs/commit_convention.md)：`<type>(<scope>): <subject>`，由 husky + commitlint 在提交时强制校验
 - pre-commit 钩子自动对暂存文件执行 `oxlint --fix` 和 `oxfmt`
 
