@@ -21,7 +21,7 @@
 After modifying code, run the following command to redeploy:
 
 ```bash
-npm run deploy
+pnpm run deploy
 ```
 
 ### Access URL
