@@ -18,6 +18,7 @@
   --bg-color: #fff;
   --color-text-1: #415394;
   --color-text-2: #637fbb;
+  --color-text-3: var(--theme-text-tertiary);
   --bg-gradient: linear-gradient(135deg, var(--geekblue-1) 0%, var(--geekblue-2) 100%);
   --content-bg: white;
   --content-shadow: rgba(0, 0, 0, 0.08);
@@ -37,6 +38,7 @@ body[tomato-theme='dark'] {
   --bg-color: #141414;
   --color-text-1: rgba(255, 255, 255, 0.85);
   --color-text-2: rgba(255, 255, 255, 0.45);
+  --color-text-3: var(--theme-text-tertiary);
   --bg-gradient: linear-gradient(135deg, #1f1f1f 0%, #0a0a0a 100%);
   --content-bg: #1f1f1f;
   --content-shadow: rgba(0, 0, 0, 0.3);
