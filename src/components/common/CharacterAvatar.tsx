@@ -1,0 +1,40 @@
+import { characterIconOf } from '../../assets/icons/characters';
+import styles from './CharacterAvatar.module.css';
+
+interface CharacterAvatarProps {
+  name: string;
+  /** 图标边长，默认 20 */
+  size?: number;
+  /** true：图标在上、名字在下（用于行高较大的表格单元格） */
+  stacked?: boolean;
+  showName?: boolean;
+  className?: string;
+}
+
+/** 渡夜者名字 + 头像图标；没有对应图标时只显示名字 */
+const CharacterAvatar: React.FC<CharacterAvatarProps> = ({
+  name,
+  size = 20,
+  stacked = false,
+  showName = true,
+  className,
+}) => {
+  const icon = characterIconOf(name);
+  if (!icon) return <span className={className}>{name}</span>;
+
+  return (
+    <span className={[styles.avatar, stacked ? styles.stacked : '', className ?? ''].filter(Boolean).join(' ')}>
+      <img
+        src={icon}
+        alt={showName ? '' : name}
+        width={size}
+        height={size}
+        className={styles.icon}
+        style={{ width: size, height: size }}
+      />
+      {showName && <span>{name}</span>}
+    </span>
+  );
+};
+
+export default CharacterAvatar;

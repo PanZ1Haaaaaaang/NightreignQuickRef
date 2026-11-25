@@ -4,7 +4,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { ThunderboltTwoTone } from '@ant-design/icons';
 import styles from '../../styles/characterDataView.module.css';
 import DataSourceTooltip from '../../components/DataSourceTooltip';
-import CharacterName from './CharacterName';
+import CharacterAvatar from '../../components/common/CharacterAvatar';
 import teardropJson from '../../data/zh-CN/teardrop_conversion.json';
 import lipulaStatsJson from '../../data/zh-CN/lipula_trade_stats.json';
 import type { TeardropAffix, TeardropConversionData, TeardropLipulaOption } from '../../types';
@@ -203,7 +203,7 @@ const TeardropConversion: React.FC = () => {
       fixed: 'left',
       render: (value: string) => (
         <span style={{ fontWeight: 600, color: 'var(--color-text-1)' }}>
-          <CharacterName name={value} size={36} stacked />
+          <CharacterAvatar name={value} size={36} stacked />
         </span>
       ),
       // 每位角色 4 行（基础 / 词条① / 词条② / 双词条），角色列合并显示
@@ -276,7 +276,7 @@ const TeardropConversion: React.FC = () => {
               style={{ width: 180 }}
               options={data.characters.map((item) => ({
                 value: item.name,
-                label: <CharacterName name={item.name} size={16} />,
+                label: <CharacterAvatar name={item.name} size={16} />,
               }))}
             />
           </div>

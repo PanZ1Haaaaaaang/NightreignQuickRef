@@ -11,7 +11,7 @@ import {
   weaponCount,
   WEAPON_SLOT_LIMIT,
 } from '../../config/discoveryConfig';
-import { characterIconOf } from '../characterDataView/characterIcons';
+import { characterIconOf } from '../../assets/icons/characters';
 import styles from '../../styles/dropPoolView.module.css';
 
 interface DiscoveryDrawerProps {

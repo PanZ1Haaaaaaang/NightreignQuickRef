@@ -38,7 +38,7 @@ import { BASE_POOL_KINDS, KIND_CLASS } from './dropPoolView/poolKinds';
 import BasePoolDrawer from './dropPoolView/BasePoolDrawer';
 import PotentialPoolDrawer from './dropPoolView/PotentialPoolDrawer';
 import DiscoveryDrawer from './dropPoolView/DiscoveryDrawer';
-import { characterIconOf } from './characterDataView/characterIcons';
+import { characterIconOf } from '../assets/icons/characters';
 import styles from '../styles/dropPoolView.module.css';
 
 const { Title, Text } = Typography;

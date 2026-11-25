@@ -11,7 +11,7 @@ import DataManager from '../utils/dataManager';
 import DataSourceTooltip from '../components/DataSourceTooltip';
 import DodgeFramesComparison from './characterDataView/DodgeFramesComparison';
 import TeardropConversion from './characterDataView/TeardropConversion';
-import CharacterName from './characterDataView/CharacterName';
+import CharacterAvatar from '../components/common/CharacterAvatar';
 import RoundtableCharacters from './characterDataView/RoundtableCharacters';
 import ScholarKnowledge from './characterDataView/ScholarKnowledge';
 import NightfarerSkills from './characterDataView/NightfarerSkills';
@@ -241,7 +241,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
                     fontSize: '13px',
                   }}
                 >
-                  <CharacterName name={text} />
+                  <CharacterAvatar name={text} />
                 </span>
               ),
             },
@@ -440,7 +440,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
       align: 'center' as const,
       render: (text: string) => (
         <Text style={{ color: 'var(--color-text-1)' }}>
-          <CharacterName name={text} size={16} />
+          <CharacterAvatar name={text} size={16} />
         </Text>
       ),
     },
@@ -922,7 +922,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
                                               fontSize: '13px',
                                             }}
                                           >
-                                            <CharacterName name={text} />
+                                            <CharacterAvatar name={text} />
                                           </span>
                                         ),
                                       },
@@ -984,7 +984,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
                                               fontSize: '13px',
                                             }}
                                           >
-                                            <CharacterName name={text} />
+                                            <CharacterAvatar name={text} />
                                           </span>
                                         ),
                                       },
@@ -1046,7 +1046,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
                                               fontSize: '13px',
                                             }}
                                           >
-                                            <CharacterName name={text} />
+                                            <CharacterAvatar name={text} />
                                           </span>
                                         ),
                                       },

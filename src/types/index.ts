@@ -590,6 +590,18 @@ export interface ExecutorParryData {
 
 // ===== 渡夜者能力 / 技艺 / 绝招（src/data/zh-CN/nightfarer_skill_data.json） =====
 
+export type NightfarerName =
+  | '追踪者'
+  | '守护者'
+  | '无赖'
+  | '女爵'
+  | '隐士'
+  | '铁之眼'
+  | '执行者'
+  | '复仇者'
+  | '学者'
+  | '送葬者';
+
 export interface NightfarerSkillRow {
   character: string;
   /** 形如「技艺：钩爪射击」 */

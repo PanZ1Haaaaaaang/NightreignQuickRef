@@ -3,6 +3,7 @@ import { Button, Checkbox, Drawer, Modal, Segmented, Select, Statistic, Table, T
 import type { TableColumnsType } from 'antd';
 import { ExperimentOutlined, LineChartOutlined } from '@ant-design/icons';
 import { Line } from '@ant-design/plots';
+import CharacterAvatar from '../components/common/CharacterAvatar';
 import scalingJson from '../data/zh-CN/weapon_scaling_data.json';
 import uniqueWeaponArts from '../data/zh-CN/unique_weapon_arts.json';
 import weaponArtCategoryHints from '../data/zh-CN/weapon_art_category_hints.json';
@@ -13,31 +14,7 @@ import { getCurrentTheme } from '../utils/themeUtils';
 import type { WeaponScalingCurve, WeaponScalingDamageType, WeaponScalingData, WeaponScalingRow } from '../types';
 import styles from '../styles/weaponScalingView.module.css';
 
-import trackerIcon from '../assets/icons/char/Wylder.svg';
-import guardianIcon from '../assets/icons/char/Guardian.svg';
-import ironeyeIcon from '../assets/icons/char/Ironeye.svg';
-import duchessIcon from '../assets/icons/char/Duchess.svg';
-import revenantIcon from '../assets/icons/char/Revenant.svg';
-import recluseIcon from '../assets/icons/char/Recluse.svg';
-import raiderIcon from '../assets/icons/char/Raider.svg';
-import executorIcon from '../assets/icons/char/Executor.svg';
-import scholarIcon from '../assets/icons/char/Scholar.svg';
-import undertakerIcon from '../assets/icons/char/Undertaker.svg';
-
 const DATA = scalingJson as unknown as WeaponScalingData;
-
-const CHARACTER_ICONS: Record<string, string> = {
-  追踪者: trackerIcon,
-  守护者: guardianIcon,
-  铁之眼: ironeyeIcon,
-  女爵: duchessIcon,
-  复仇者: revenantIcon,
-  隐士: recluseIcon,
-  无赖: raiderIcon,
-  执行者: executorIcon,
-  学者: scholarIcon,
-  送葬者: undertakerIcon,
-};
 
 const STAT_KEYS = ['力气', '敏捷', '智力', '信仰', '感应'] as const;
 const STAT_LABELS = ['力量', '灵巧', '智力', '信仰', '感应'] as const;
@@ -607,8 +584,7 @@ const WeaponScalingView: React.FC = () => {
       key: 'name',
       render: (name: string, _, index) => (
         <span className={styles.nameCell}>
-          <img src={CHARACTER_ICONS[name]} alt="" className={styles.charIcon} />
-          <span>{name}</span>
+          <CharacterAvatar name={name} size={22} className={styles.nameCell} />
           {index === 0 ? <Tag color="gold">最适配</Tag> : null}
           {conversions[name] && (conversions[name].affixA || conversions[name].affixB || conversions[name].lipula) ? (
             <Tag color="cyan">转职</Tag>
@@ -648,12 +624,7 @@ const WeaponScalingView: React.FC = () => {
       dataIndex: 'name',
       key: 'name',
       width: 130,
-      render: (name: string) => (
-        <span className={styles.nameCell}>
-          <img src={CHARACTER_ICONS[name]} alt="" className={styles.charIcon} />
-          <span>{name}</span>
-        </span>
-      ),
+      render: (name: string) => <CharacterAvatar name={name} size={22} className={styles.nameCell} />,
     },
     {
       title: '泪滴词条 A',

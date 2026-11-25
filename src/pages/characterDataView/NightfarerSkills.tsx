@@ -4,7 +4,7 @@ import type { TableColumnsType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import skillJson from '../../data/zh-CN/nightfarer_skill_data.json';
 import type { NightfarerSkillData, NightfarerSkillRow } from '../../types';
-import { characterIconOf } from './characterIcons';
+import { characterIconOf } from '../../assets/icons/characters';
 import styles from '../../styles/nightfarerSkills.module.css';
 
 const DATA = skillJson as unknown as NightfarerSkillData;
