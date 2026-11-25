@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Image, Table } from 'antd';
 import type { TableColumnsType } from 'antd';
+import CharacterAvatar from '../components/common/CharacterAvatar';
 import shieldData from '../data/zh-CN/great_shield_data.json';
 import mechanicJson from '../data/zh-CN/guard_mechanic_data.json';
 import type { GuardMechanicData } from '../types';
@@ -9,7 +10,6 @@ import magicIcon from '../assets/Negations/magic-upgrade-affinity-elden-ring-nig
 import fireIcon from '../assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 import lightningIcon from '../assets/Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 import holyIcon from '../assets/Negations/holy-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import guardianIcon from '../assets/icons/char/Guardian.svg';
 
 // 守护者（渡夜者）的被动是「开启强防御」，所以这面盾对玩守护者的玩家最常用，单独做轻标注
 const GUARDIAN_SHIELD = '守护者的大盾';
@@ -138,14 +138,7 @@ const GreatShieldView: React.FC = () => {
       width: 160,
       align: 'left',
       render: (name: string) =>
-        name === GUARDIAN_SHIELD ? (
-          <span className={styles.nameWithIcon}>
-            <img src={guardianIcon} alt="" width={18} height={18} className={styles.nameIcon} />
-            <span>{name}</span>
-          </span>
-        ) : (
-          name
-        ),
+        name === GUARDIAN_SHIELD ? <CharacterAvatar name="守护者" label={name} size={18} /> : name,
     },
     ...NUMBER_COLUMNS.map((column) => ({
       title: column.icon ? (

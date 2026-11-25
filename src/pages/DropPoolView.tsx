@@ -15,6 +15,7 @@ import {
   Typography,
 } from 'antd';
 import { EyeOutlined, InfoCircleOutlined, TableOutlined } from '@ant-design/icons';
+import CharacterAvatar from '../components/common/CharacterAvatar';
 import dropPoolsJson from '../data/zh-CN/drop_pools.json';
 import invaderAffixJson from '../data/zh-CN/invader_affix_data.json';
 import type {
@@ -38,7 +39,6 @@ import { BASE_POOL_KINDS, KIND_CLASS } from './dropPoolView/poolKinds';
 import BasePoolDrawer from './dropPoolView/BasePoolDrawer';
 import PotentialPoolDrawer from './dropPoolView/PotentialPoolDrawer';
 import DiscoveryDrawer from './dropPoolView/DiscoveryDrawer';
-import { characterIconOf } from '../assets/icons/characters';
 import styles from '../styles/dropPoolView.module.css';
 
 const { Title, Text } = Typography;
@@ -46,13 +46,6 @@ const { Title, Text } = Typography;
 const DATA = dropPoolsJson as unknown as DropPoolsData;
 const INVADER_AFFIXES = invaderAffixJson as InvaderWeaponAffixData;
 const PAGE_SIZE = 12;
-
-/** 入侵者球：第二个名字是它使用的武器，取「的」前作为渡夜者名，查该武器的词条池 */
-const invaderAffixOf = (group: DropGroup): InvaderWeaponAffixData['byCharacter'][string] | undefined => {
-  if (!group.invader) return undefined;
-  const owner = group.names[1]?.split('的')[0];
-  return owner ? INVADER_AFFIXES.byCharacter[owner] : undefined;
-};
 
 /** 深夜模式下据点的三种状态（变异 / 入侵可分别对应 +10 / +50 两套掉落） */
 type NightState = 'normal' | 'mutation' | 'invasion';
@@ -206,11 +199,9 @@ const DropCard: React.FC<{
   const showMutation = nightMode && nightState === 'mutation';
   const showInvasion = nightMode && nightState === 'invasion';
 
-  // 9 个黑夜入侵者球：第二个名字是它使用的武器（「追踪者的大剑」），
-  // 取下「XX」前缀即可拿到对应渡夜者，用来在标题前挂头像
+  // 入侵者球的第二个名字是使用的武器，取「的」之前的渡夜者名。
   const invaderOwner = group.invader ? group.names[1]?.split('的')[0] : undefined;
-  const invaderIcon = invaderOwner ? characterIconOf(invaderOwner) : undefined;
-  const invaderAffix = invaderAffixOf(group);
+  const invaderAffix = invaderOwner ? INVADER_AFFIXES.byCharacter[invaderOwner] : undefined;
 
   return (
     <div
@@ -221,8 +212,7 @@ const DropCard: React.FC<{
     >
       <div className={styles.cardHead}>
         <span className={styles.primary}>
-          {invaderIcon && <img src={invaderIcon} alt="" width={18} height={18} className={styles.primaryIcon} />}
-          {titleName}
+          {invaderOwner ? <CharacterAvatar name={invaderOwner} label={titleName} size={18} /> : titleName}
         </span>
         <span className={styles.tags}>
           {showMutation && <Tag color="volcano">变异</Tag>}

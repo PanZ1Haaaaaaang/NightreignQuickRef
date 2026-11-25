@@ -37,17 +37,6 @@
   white-space: nowrap;
 }
 
-/* 名称单元格里的小图标 */
-.nameWithIcon {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.nameIcon {
-  flex: none;
-}
-
 /* 守护者的大盾：轻量标注，淡色底 + 左侧细色条，不用标签抢视线 */
 .guardianRow td {
   background: rgba(133, 165, 255, 0.1);

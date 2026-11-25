@@ -4,6 +4,7 @@
 
 import { Image, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import CharacterAvatar from '../../components/common/CharacterAvatar';
 import type { CharacterData, EntryData, WildBossData } from '../../types';
 import styles from '../../styles/bossDataView.module.css';
 import standardDamage from '../../assets/Negations/standard-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
@@ -37,7 +38,11 @@ export const sinnerColumns: ColumnsType<SinnerData> = [
     width: 100,
     align: 'center',
     fixed: 'left',
-    render: (text) => <strong>{text}</strong>,
+    render: (name: string) => (
+      <strong>
+        <CharacterAvatar name={name} size={18} />
+      </strong>
+    ),
     onCell: (record) => {
       const currentIndex = processSinnerData().findIndex(
         (item) => item.characterName === record.characterName && item.buildIndex === record.buildIndex,
@@ -315,7 +320,11 @@ export const characterColumns: ColumnsType<CharacterData> = [
     width: 120,
     align: 'center',
     fixed: 'left',
-    render: (text) => <strong>{text}</strong>,
+    render: (name: string) => (
+      <strong>
+        <CharacterAvatar name={name} size={18} />
+      </strong>
+    ),
   },
   {
     title: '位置',

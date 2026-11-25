@@ -91,13 +91,6 @@
   gap: 6px;
 }
 
-/* 黑夜入侵者球：标题前的渡夜者头像 */
-.primaryIcon {
-  flex: none;
-  width: 18px;
-  height: 18px;
-}
-
 .id {
   color: var(--color-text-3);
   font-family: 'Consolas', 'SFMono-Regular', monospace;
@@ -739,18 +732,17 @@ body[tomato-theme='dark'] .percentDown {
   outline: none;
 }
 
-.discArcaneAvatarIcon {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-}
-
-.discArcaneAvatarName {
-  overflow: hidden;
+.discArcaneAvatar .discArcaneAvatarName {
+  gap: 2px;
   max-width: 100%;
   color: var(--color-text-1);
   font-size: 11px;
   line-height: 1.3;
+}
+
+.discArcaneAvatarName > span {
+  overflow: hidden;
+  max-width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

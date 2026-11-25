@@ -848,7 +848,9 @@ const WeaponScalingView: React.FC = () => {
       <div className={styles.summary}>
         <Statistic title={activeLabel} value={best.value.toFixed(3)} precision={3} prefix="×" />
         <span className={styles.summaryText}>
-          最适配：{best.name}（{STAT_LABELS.map((label, i) => `${label}${best.stats[i]}`).join(' / ')}）
+          最适配：
+          <CharacterAvatar name={best.name} size={16} />（
+          {STAT_LABELS.map((label, i) => `${label}${best.stats[i]}`).join(' / ')}）
         </span>
         {activeDesc ? <span className={styles.summaryText}>{activeDesc}</span> : null}
       </div>
@@ -889,7 +891,15 @@ const WeaponScalingView: React.FC = () => {
       />
 
       <Modal
-        title={calcRecord ? `适配度计算 · ${calcRecord.name}` : '适配度计算'}
+        title={
+          calcRecord ? (
+            <>
+              适配度计算 · <CharacterAvatar name={calcRecord.name} size={18} />
+            </>
+          ) : (
+            '适配度计算'
+          )
+        }
         open={Boolean(calcName)}
         onCancel={() => setCalcName(null)}
         footer={null}

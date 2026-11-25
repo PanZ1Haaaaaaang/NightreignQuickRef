@@ -102,13 +102,6 @@
   object-fit: contain;
 }
 
-.iconChip {
-  box-sizing: border-box;
-  padding: 2px;
-  border-radius: 50%;
-  background: rgba(28, 34, 48, 0.85);
-}
-
 .cellIcon {
   border-radius: 50%;
 }

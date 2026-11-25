@@ -4,7 +4,7 @@ import type { TableColumnsType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import skillJson from '../../data/zh-CN/nightfarer_skill_data.json';
 import type { NightfarerSkillData, NightfarerSkillRow } from '../../types';
-import { characterIconOf } from '../../assets/icons/characters';
+import CharacterAvatar from '../../components/common/CharacterAvatar';
 import styles from '../../styles/nightfarerSkills.module.css';
 
 const DATA = skillJson as unknown as NightfarerSkillData;
@@ -87,15 +87,7 @@ const NightfarerSkills: React.FC = () => {
       width: '8%',
       align: 'center',
       onCell: (_, index) => ({ rowSpan: spans[index ?? 0] ?? 0 }),
-      render: (name: string) => {
-        const icon = characterIconOf(name);
-        return (
-          <span className={styles.character}>
-            {icon ? <img src={icon} alt="" className={styles.characterIcon} /> : null}
-            <span>{name}</span>
-          </span>
-        );
-      },
+      render: (name: string) => <CharacterAvatar name={name} size={18} className={styles.character} />,
     },
     {
       title: '技能',

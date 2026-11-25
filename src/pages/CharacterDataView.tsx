@@ -155,7 +155,7 @@ const RadarLegend: React.FC<{
         {names.map((name) => (
           <span className={styles.radarLegendItem} key={name}>
             <span className={styles.radarLegendDot} style={{ backgroundColor: getColor(name) }} />
-            <span>{name}</span>
+            <CharacterAvatar name={name} size={16} />
           </span>
         ))}
       </div>

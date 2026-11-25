@@ -19,16 +19,7 @@
 }
 
 .character {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
   font-weight: 600;
-}
-
-.characterIcon {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
 }
 
 .skill {

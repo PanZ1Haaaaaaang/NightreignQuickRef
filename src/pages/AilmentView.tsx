@@ -14,16 +14,7 @@ import scarletRotIcon from '../assets/Resistances/scarlet-rot-status-effect-elde
 import sleepIcon from '../assets/Resistances/sleep-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
 import madnessIcon from '../assets/Resistances/madness-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
 import blightIcon from '../assets/Resistances/blight_status_effect_elden_ring_wiki_guide_100px.png';
-import trackerIcon from '../assets/icons/char/Wylder.svg';
-import guardianIcon from '../assets/icons/char/Guardian.svg';
-import ironeyeIcon from '../assets/icons/char/Ironeye.svg';
-import duchessIcon from '../assets/icons/char/Duchess.svg';
-import revenantIcon from '../assets/icons/char/Revenant.svg';
-import recluseIcon from '../assets/icons/char/Recluse.svg';
-import raiderIcon from '../assets/icons/char/Raider.svg';
-import executorIcon from '../assets/icons/char/Executor.svg';
-import scholarIcon from '../assets/icons/char/Scholar.svg';
-import undertakerIcon from '../assets/icons/char/Undertaker.svg';
+import CharacterAvatar from '../components/common/CharacterAvatar';
 
 const DATA = ailmentJson as unknown as AilmentData;
 
@@ -39,29 +30,16 @@ const EFFECT_ICONS: Record<string, string> = {
   骤死: blightIcon,
 };
 
-const CHARACTER_ICONS: Record<string, string> = {
-  追踪者: trackerIcon,
-  守护者: guardianIcon,
-  铁之眼: ironeyeIcon,
-  女爵: duchessIcon,
-  复仇者: revenantIcon,
-  隐士: recluseIcon,
-  无赖: raiderIcon,
-  执行者: executorIcon,
-  学者: scholarIcon,
-  送葬者: undertakerIcon,
-};
-
 /** 按文本里出现的异常名找图标，供「其他异常 / 战技」的数值列使用 */
 const statusIconFor = (text: string) => {
   const hit = Object.keys(EFFECT_ICONS).find((name) => text.includes(name));
   return hit ? EFFECT_ICONS[hit] : undefined;
 };
 
-const WithIcon: React.FC<{ src?: string; chip?: boolean; children: React.ReactNode }> = ({ src, chip, children }) =>
+const WithIcon: React.FC<{ src?: string; children: React.ReactNode }> = ({ src, children }) =>
   src ? (
     <span className={styles.iconLabel}>
-      <img src={src} alt="" className={[styles.cellIcon, chip ? styles.iconChip : ''].filter(Boolean).join(' ')} />
+      <img src={src} alt="" className={styles.cellIcon} />
       <span>{children}</span>
     </span>
   ) : (
@@ -101,11 +79,7 @@ const bonusColumns: TableColumnsType<CharacterBonus> = [
     title: '角色',
     dataIndex: 'name',
     key: 'name',
-    render: (v: string) => (
-      <WithIcon src={CHARACTER_ICONS[v]} chip>
-        {v}
-      </WithIcon>
-    ),
+    render: (name: string) => <CharacterAvatar name={name} />,
   },
   { title: '感应（15 级）', dataIndex: 'sense', key: 'sense', width: 130, align: 'center' },
   {

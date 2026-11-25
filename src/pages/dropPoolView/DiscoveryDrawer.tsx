@@ -11,7 +11,7 @@ import {
   weaponCount,
   WEAPON_SLOT_LIMIT,
 } from '../../config/discoveryConfig';
-import { characterIconOf } from '../../assets/icons/characters';
+import CharacterAvatar from '../../components/common/CharacterAvatar';
 import styles from '../../styles/dropPoolView.module.css';
 
 interface DiscoveryDrawerProps {
@@ -84,23 +84,19 @@ const DiscoveryDrawer: React.FC<DiscoveryDrawerProps> = ({ open, onClose, setup,
         <div className={styles.discArcaneQuick}>
           <div className={styles.discArcaneQuickLabel}>快捷选择渡夜者默认感应</div>
           <div className={styles.discArcaneAvatars}>
-            {NIGHTFARER_ARCANE_PRESETS.map(({ name, arcane }) => {
-              const icon = characterIconOf(name);
-              return (
-                <button
-                  key={name}
-                  type="button"
-                  className={styles.discArcaneAvatar}
-                  title={`${name} · 感应 ${arcane}`}
-                  aria-label={`${name}，感应 ${arcane}`}
-                  onClick={() => update({ arcane })}
-                >
-                  {icon ? <img src={icon} alt="" className={styles.discArcaneAvatarIcon} /> : null}
-                  <span className={styles.discArcaneAvatarName}>{name}</span>
-                  <span className={styles.discArcaneAvatarValue}>{arcane}</span>
-                </button>
-              );
-            })}
+            {NIGHTFARER_ARCANE_PRESETS.map(({ name, arcane }) => (
+              <button
+                key={name}
+                type="button"
+                className={styles.discArcaneAvatar}
+                title={`${name} · 感应 ${arcane}`}
+                aria-label={`${name}，感应 ${arcane}`}
+                onClick={() => update({ arcane })}
+              >
+                <CharacterAvatar name={name} size={28} stacked className={styles.discArcaneAvatarName} />
+                <span className={styles.discArcaneAvatarValue}>{arcane}</span>
+              </button>
+            ))}
           </div>
         </div>
 
@@ -167,7 +163,9 @@ const DiscoveryDrawer: React.FC<DiscoveryDrawerProps> = ({ open, onClose, setup,
 
         <div className={styles.discRow}>
           <div className={styles.discInfo}>
-            <span className={styles.discLabel}>铁之眼被动「观察入微」</span>
+            <span className={styles.discLabel}>
+              <CharacterAvatar name="铁之眼" label="铁之眼被动「观察入微」" size={16} />
+            </span>
             <span className={styles.discNote}>+30/人 · 最多 3 人</span>
           </div>
           <Segmented

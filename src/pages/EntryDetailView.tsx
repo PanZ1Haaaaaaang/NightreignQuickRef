@@ -10,6 +10,7 @@ import type { EnhancementCategory, ItemEffect } from '../utils/dataManager';
 import { debounce } from 'lodash';
 import { SearchOutlined } from '@ant-design/icons';
 import CustomPagination from '../components/CustomPagination';
+import CharacterAvatar from '../components/common/CharacterAvatar';
 import { POTENTIAL_POOL_TAGS } from '../config/potentialPoolConfig';
 import { renderHintOption } from '../components/HintOption';
 import { TALISMAN_CATEGORIES, TALISMAN_CATEGORY_ORDER } from '../config/talismanCategoryConfig';
@@ -151,17 +152,17 @@ const deepNightTypeOptions = [
 ];
 
 const characterOptions = [
-  { value: '追踪者', label: '追踪者' },
-  { value: '守护者', label: '守护者' },
-  { value: '女爵', label: '女爵' },
-  { value: '执行者', label: '执行者' },
-  { value: '铁之眼', label: '铁之眼' },
-  { value: '复仇者', label: '复仇者' },
-  { value: '隐士', label: '隐士' },
-  { value: '无赖', label: '无赖' },
-  { value: '学者', label: '学者' },
-  { value: '送葬者', label: '送葬者' },
-];
+  '追踪者',
+  '守护者',
+  '女爵',
+  '执行者',
+  '铁之眼',
+  '复仇者',
+  '隐士',
+  '无赖',
+  '学者',
+  '送葬者',
+].map((name) => ({ value: name, label: <CharacterAvatar name={name} size={16} /> }));
 
 // 道具效果分类选项
 const itemEffectTypeOptions = [
@@ -523,7 +524,19 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
   const renderEntryName = (name: string | null | undefined, record: EntryData) => {
     const tags = (record.tags || []).filter((tag) => tag !== NOT_IMPLEMENTED_TAG);
     // 少数词条名里带 \n（如 7030500「【追踪者】发动绝招后，\n能提升…」），要 pre-wrap 才会换行
-    const label = <span style={{ whiteSpace: 'pre-wrap' }}>{name || '-'}</span>;
+    const rolePrefix = name?.match(/^【([^】]+)】/);
+    const label = (
+      <span style={{ whiteSpace: 'pre-wrap' }}>
+        {rolePrefix ? (
+          <>
+            <CharacterAvatar name={rolePrefix[1]} label={rolePrefix[0]} size={16} />
+            {name?.slice(rolePrefix[0].length)}
+          </>
+        ) : (
+          name || '-'
+        )}
+      </span>
+    );
     if (tags.length === 0) return label;
     return (
       <Space size={4} wrap>

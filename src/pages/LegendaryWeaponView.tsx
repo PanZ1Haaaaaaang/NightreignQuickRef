@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Segmented } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
+import CharacterAvatar from '../components/common/CharacterAvatar';
 import DataManager from '../utils/dataManager';
 
 type OnChange = NonNullable<TableProps<TransformedWeaponEffect>['onChange']>;
@@ -213,7 +214,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep: c
       render: (text) => <span className="legendary-weapon-text-center">{text}</span>,
     },
     ...characterNames.map((characterName) => ({
-      title: characterName,
+      title: <CharacterAvatar name={characterName} size={18} stacked />,
       dataIndex: characterName,
       key: characterName,
       width: 70,
