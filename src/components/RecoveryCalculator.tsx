@@ -1,10 +1,32 @@
 import { Typography, Card, Select, Button, Divider, Tag, Empty } from 'antd';
 import { HeartOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import CharacterAvatar from './common/CharacterAvatar';
 import recoverCalculateData from '../data/zh-CN/recover_calculate.json';
+import type { NightfarerName } from '../types';
+import DataManager from '../utils/dataManager';
 import styles from '../styles/recoveryCalculator.module.css';
 
 const { Text } = Typography;
+
+const characterNames: NightfarerName[] = [
+  '追踪者',
+  '守护者',
+  '铁之眼',
+  '女爵',
+  '无赖',
+  '执行者',
+  '复仇者',
+  '隐士',
+  '学者',
+  '送葬者',
+];
+
+interface RecoveryCharacter {
+  name: NightfarerName;
+  health: number;
+  focus: number;
+}
 
 const RecoveryCalculator: React.FC = () => {
   // 获取category对应的颜色
@@ -24,8 +46,9 @@ const RecoveryCalculator: React.FC = () => {
   };
 
   // 回血量计算器状态 - 初始选中追踪者，队友选择女爵
-  const [selectedCharacter, setSelectedCharacter] = useState<string>('1120');
-  const [selectedAllyCharacter, setSelectedAllyCharacter] = useState<string>('860');
+  const [selectedCharacter, setSelectedCharacter] = useState<NightfarerName>('追踪者');
+  const [selectedAllyCharacter, setSelectedAllyCharacter] = useState<NightfarerName>('女爵');
+  const [characters, setCharacters] = useState<RecoveryCharacter[] | null>(null);
   const [selectedEffects, setSelectedEffects] = useState<string[]>([]);
   const [calculationResult, setCalculationResult] = useState<{
     selfHealth: number;
@@ -42,35 +65,42 @@ const RecoveryCalculator: React.FC = () => {
   // 回血效果数据
   const recoverEffects = recoverCalculateData.items;
 
-  // 角色选项 以及 15级时对应的血量和蓝量
-  const characterOptions = [
-    { value: 1120, label: '追踪者', focus: 140 },
-    { value: 1280, label: '守护者', focus: 115 },
-    { value: 820, label: '铁之眼', focus: 115 },
-    { value: 860, label: '女爵', focus: 180 },
-    { value: 1200, label: '无赖', focus: 95 },
-    { value: 1000, label: '执行者', focus: 100 },
-    { value: 780, label: '复仇者', focus: 200 },
-    { value: 740, label: '隐士', focus: 195 },
-  ];
+  useEffect(() => {
+    const dataManager = DataManager.getInstance();
+    let disposed = false;
+    void dataManager
+      .loadGroup('character')
+      .then(() => {
+        if (disposed) return;
+        const levels = dataManager.getCharacterDetailData();
+        setCharacters(
+          characterNames.flatMap((name) => {
+            const row = levels[name]?.find((level) => (level['等级'] ?? level.level) === 15);
+            if (!row || !Number.isFinite(row.HP) || !Number.isFinite(row.FP)) return [];
+            return [{ name, health: row.HP, focus: row.FP }];
+          }),
+        );
+      })
+      .catch(() => {
+        if (!disposed) setCharacters([]);
+      });
+    return () => {
+      disposed = true;
+    };
+  }, []);
+
+  const characterOptions = characters?.map(({ name, health, focus }) => ({
+    value: name,
+    label: <CharacterAvatar name={name} size={18} label={`${name}（血量 ${health}，蓝量 ${focus}）`} />,
+  }));
+  const self = characters?.find(({ name }) => name === selectedCharacter);
+  const ally = characters?.find(({ name }) => name === selectedAllyCharacter);
 
   // 计算回血量
   const calculateRecovery = () => {
-    if (!selectedCharacter || !selectedAllyCharacter) {
-      return;
-    }
-
-    // 获取角色基础血量和蓝量
-    const characterHealth = parseInt(selectedCharacter);
-    const allyCharacterHealth = parseInt(selectedAllyCharacter);
-
-    const selectedCharacterData = characterOptions.find((option) => option.value.toString() === selectedCharacter);
-    const selectedAllyCharacterData = characterOptions.find(
-      (option) => option.value.toString() === selectedAllyCharacter,
-    );
-
-    const characterFocus = selectedCharacterData?.focus || 0;
-    const allyCharacterFocus = selectedAllyCharacterData?.focus || 0;
+    if (!self || !ally) return;
+    const { health: characterHealth, focus: characterFocus } = self;
+    const { health: allyCharacterHealth, focus: allyCharacterFocus } = ally;
 
     // 基础回血量（红露滴圣杯瓶）
     let baseHealthRecovery = 0.6; // 60%生命值
@@ -92,12 +122,10 @@ const RecoveryCalculator: React.FC = () => {
     // 记录计算步骤
     const calculationSteps = [];
     calculationSteps.push(`-------------基础信息-------------`);
-    calculationSteps.push(
-      `【${selectedCharacterData?.label}-自己】基础血量: ${characterHealth} 点 | 基础蓝量: ${characterFocus} 点`,
-    );
+    calculationSteps.push(`【${self.name}-自己】基础血量: ${characterHealth} 点 | 基础蓝量: ${characterFocus} 点`);
 
     calculationSteps.push(
-      `【${selectedAllyCharacterData?.label}-队友】基础血量: ${allyCharacterHealth} 点 | 基础蓝量: ${allyCharacterFocus} 点`,
+      `【${ally.name}-队友】基础血量: ${allyCharacterHealth} 点 | 基础蓝量: ${allyCharacterFocus} 点`,
     );
 
     if (hasSlowRecovery) {
@@ -241,21 +269,21 @@ const RecoveryCalculator: React.FC = () => {
 
     calculationSteps.push(`--------自己喝一口圣杯瓶的总效果--------`);
     calculationSteps.push(
-      `【${selectedCharacterData?.label}-自己】回血量: ${characterHealth} × ${result.selfHealthPercent}% = ${result.selfHealth} 点`,
+      `【${self.name}-自己】回血量: ${characterHealth} × ${result.selfHealthPercent}% = ${result.selfHealth} 点`,
     );
     if (baseFocusRecovery > 0) {
       calculationSteps.push(
-        `【${selectedCharacterData?.label}-自己】回蓝量: ${characterFocus} × ${result.selfFocusPercent}% = ${result.selfFocus} 点`,
+        `【${self.name}-自己】回蓝量: ${characterFocus} × ${result.selfFocusPercent}% = ${result.selfFocus} 点`,
       );
     }
     if (baseHealthRecoveryAlly > 0) {
       calculationSteps.push(
-        `【${selectedAllyCharacterData?.label}-队友】回血量: ${allyCharacterHealth} × ${result.allyHealthPercent}% = ${result.allyHealth} 点`,
+        `【${ally.name}-队友】回血量: ${allyCharacterHealth} × ${result.allyHealthPercent}% = ${result.allyHealth} 点`,
       );
     }
     if (baseFocusRecoveryAlly > 0) {
       calculationSteps.push(
-        `【${selectedAllyCharacterData?.label}-队友】回蓝量: ${allyCharacterFocus} × ${result.allyFocusPercent}% = ${result.allyFocus} 点`,
+        `【${ally.name}-队友】回蓝量: ${allyCharacterFocus} × ${result.allyFocusPercent}% = ${result.allyFocus} 点`,
       );
     }
 
@@ -271,30 +299,31 @@ const RecoveryCalculator: React.FC = () => {
           <div className={styles.characterRow}>
             <Text strong>选择我的角色:</Text>
             <Select
+              aria-label="选择我的角色"
               placeholder="请选择你的角色"
               className={styles.characterSelect}
-              value={selectedCharacter}
+              value={self?.name}
+              loading={characters === null}
+              disabled={characters === null}
               onChange={setSelectedCharacter}
-              options={characterOptions.map((option) => ({
-                value: option.value.toString(),
-                label: `${option.label} ( 血量: ${option.value}, 蓝量: ${option.focus} )`,
-              }))}
+              options={characterOptions}
             />
           </div>
 
           <div className={styles.characterRow}>
             <Text strong>选择队友的角色:</Text>
             <Select
+              aria-label="选择队友的角色"
               placeholder="请选择队友的角色"
               className={styles.characterSelect}
-              value={selectedAllyCharacter}
+              value={ally?.name}
+              loading={characters === null}
+              disabled={characters === null}
               onChange={setSelectedAllyCharacter}
-              options={characterOptions.map((option) => ({
-                value: option.value.toString(),
-                label: `${option.label} ( 血量: ${option.value}, 蓝量: ${option.focus} )`,
-              }))}
+              options={characterOptions}
             />
           </div>
+          {characters?.length === 0 && <Text type="danger">角色数据加载失败，请刷新页面重试。</Text>}
         </div>
 
         {/* 回血效果选择 - 网格布局，每行两个 */}
@@ -357,6 +386,7 @@ const RecoveryCalculator: React.FC = () => {
         <div>
           <Button
             type="primary"
+            disabled={!self || !ally}
             onClick={calculateRecovery}
             icon={<HeartOutlined />}
             className={styles.calculateButton}

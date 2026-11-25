@@ -269,20 +269,29 @@
 
 /* 移动端基础适配 - 简化版 */
 @media (max-width: 999px) {
-  .recovery-calculator {
+  .recoveryCalculator {
     flex-direction: column;
     gap: 16px;
   }
 
-  .recovery-calculator .effects-grid {
+  .recoveryCalculator .effectsGrid {
     grid-template-columns: 1fr;
   }
 
-  .recovery-calculator .character-select {
-    width: 100%;
+  .recoveryCalculator .characterSelection {
+    align-items: stretch;
   }
 
-  .recovery-calculator .divider {
+  .recoveryCalculator .characterRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .recoveryCalculator .characterRow .characterSelect {
+    min-width: 0;
+  }
+
+  .recoveryCalculator .divider {
     display: none;
   }
 }
