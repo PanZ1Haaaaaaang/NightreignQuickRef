@@ -11,6 +11,8 @@ interface CharacterAvatarProps {
   stacked?: boolean;
   showName?: boolean;
   className?: string;
+  /** 名称文本的类名；用于覆盖字体、省略等文本样式。 */
+  labelClassName?: string;
 }
 
 /** 渡夜者名字 + 头像图标；没有对应图标时只显示名字 */
@@ -21,6 +23,7 @@ const CharacterAvatar: React.FC<CharacterAvatarProps> = ({
   stacked = false,
   showName = true,
   className,
+  labelClassName,
 }) => {
   const icon = characterIconOf(name);
   if (!icon) return <span className={className}>{label}</span>;
@@ -35,7 +38,7 @@ const CharacterAvatar: React.FC<CharacterAvatarProps> = ({
         className={styles.icon}
         style={{ width: size, height: size }}
       />
-      {showName && <span>{label}</span>}
+      {showName && <span className={labelClassName}>{label}</span>}
     </span>
   );
 };

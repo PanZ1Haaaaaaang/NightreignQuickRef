@@ -12,6 +12,7 @@ import {
   WEAPON_SLOT_LIMIT,
 } from '../../config/discoveryConfig';
 import CharacterAvatar from '../../components/common/CharacterAvatar';
+import ironeyePassive from '../../assets/char/IroneyePassiveAbility.png';
 import styles from '../../styles/dropPoolView.module.css';
 
 interface DiscoveryDrawerProps {
@@ -93,7 +94,13 @@ const DiscoveryDrawer: React.FC<DiscoveryDrawerProps> = ({ open, onClose, setup,
                 aria-label={`${name}，感应 ${arcane}`}
                 onClick={() => update({ arcane })}
               >
-                <CharacterAvatar name={name} size={28} stacked className={styles.discArcaneAvatarName} />
+                <CharacterAvatar
+                  name={name}
+                  size={28}
+                  stacked
+                  className={styles.discArcaneAvatarStack}
+                  labelClassName={styles.discArcaneAvatarName}
+                />
                 <span className={styles.discArcaneAvatarValue}>{arcane}</span>
               </button>
             ))}
@@ -164,7 +171,10 @@ const DiscoveryDrawer: React.FC<DiscoveryDrawerProps> = ({ open, onClose, setup,
         <div className={styles.discRow}>
           <div className={styles.discInfo}>
             <span className={styles.discLabel}>
-              <CharacterAvatar name="铁之眼" label="铁之眼被动「观察入微」" size={16} />
+              <span className={styles.discLabelWithIcon}>
+                <img src={ironeyePassive} alt="" width={16} height={16} className={styles.discInlineIcon} />
+                <span>铁之眼被动「观察入微」</span>
+              </span>
             </span>
             <span className={styles.discNote}>+30/人 · 最多 3 人</span>
           </div>

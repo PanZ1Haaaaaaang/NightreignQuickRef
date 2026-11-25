@@ -732,17 +732,17 @@ body[tomato-theme='dark'] .percentDown {
   outline: none;
 }
 
-.discArcaneAvatar .discArcaneAvatarName {
+.discArcaneAvatar .discArcaneAvatarStack {
   gap: 2px;
+  max-width: 100%;
+}
+
+.discArcaneAvatarName {
+  overflow: hidden;
   max-width: 100%;
   color: var(--color-text-1);
   font-size: 11px;
   line-height: 1.3;
-}
-
-.discArcaneAvatarName > span {
-  overflow: hidden;
-  max-width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -751,4 +751,17 @@ body[tomato-theme='dark'] .percentDown {
   color: var(--color-text-3);
   font-size: 11px;
   line-height: 1.2;
+}
+
+.discLabelWithIcon {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.discInlineIcon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
 }
