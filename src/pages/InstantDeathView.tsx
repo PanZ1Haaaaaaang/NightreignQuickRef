@@ -4,7 +4,8 @@ import type { TableColumnsType } from 'antd';
 import { FilterOutlined, SearchOutlined } from '@ant-design/icons';
 import deathJson from '../data/zh-CN/instant_death_data.json';
 import type { InstantDeathData, InstantDeathEnemyRow, InstantDeathProbabilityRow } from '../types';
-import CustomPagination from '../components/CustomPagination';
+import PagedTable from '../components/common/PagedTable';
+import type { PageLocalColumns } from '../components/common/PagedTable';
 import styles from '../styles/instantDeath.module.css';
 
 const DATA = deathJson as unknown as InstantDeathData;
@@ -69,11 +70,26 @@ const TIER_FILTER_OPTIONS = [
   { label: '不可即死', value: 'X' },
 ];
 
+const enemyPageSpans = (rows: readonly InstantDeathEnemyRow[]) => {
+  const spans: Record<number, number> = {};
+  let start = 0;
+  while (start < rows.length) {
+    const { id, place } = rows[start];
+    let end = start + 1;
+    while (end < rows.length && rows[end].id === id && rows[end].place === place) {
+      end += 1;
+    }
+    spans[start] = end - start;
+    start = end;
+  }
+  return spans;
+};
+
 const buildEnemyColumns = (
   spans: Record<number, number>,
   tierFilter: string[],
   onTierChange: (values: string[]) => void,
-): TableColumnsType<InstantDeathEnemyRow> => [
+): PageLocalColumns<InstantDeathEnemyRow> => [
   {
     title: 'ID',
     dataIndex: 'id',
@@ -124,7 +140,6 @@ const buildEnemyColumns = (
       <FilterOutlined style={{ color: filtered ? 'var(--theme-primary)' : undefined }} />
     ),
     filteredValue: tierFilter,
-    onFilter: () => true,
     render: (v: string) =>
       !v ? (
         <span className={styles.tierEmpty}>—</span>
@@ -140,53 +155,25 @@ const buildEnemyColumns = (
 const InstantDeathView: React.FC = () => {
   const [probTab, setProbTab] = useState<(typeof PROBABILITY_KEYS)[number]>('普通即死');
   const [keyword, setKeyword] = useState('');
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
   const [showUnkillable, setShowUnkillable] = useState(true);
   const [tierFilter, setTierFilter] = useState<string[]>([]);
 
   const prob = DATA.probability[probTab];
+  const search = keyword.trim();
 
   const filteredRows = useMemo(() => {
-    const kw = keyword.trim();
     let rows = DATA.enemyRows;
     if (!showUnkillable) rows = rows.filter((row) => !row.tier.startsWith('X'));
     if (tierFilter.length > 0) rows = rows.filter((row) => tierFilter.includes(tierKey(row.tier)));
-    if (!kw) return rows;
+    if (!search) return rows;
     return rows.filter(
-      (row) => row.id.includes(kw) || row.place.includes(kw) || row.enemy.includes(kw) || (row.note ?? '').includes(kw),
+      (row) =>
+        row.id.includes(search) ||
+        row.place.includes(search) ||
+        row.enemy.includes(search) ||
+        (row.note ?? '').includes(search),
     );
-  }, [keyword, showUnkillable, tierFilter]);
-
-  const pageRows = filteredRows.slice((page - 1) * pageSize, page * pageSize);
-
-  // 同一 ID / 地点的连续行合并单元格
-  const spans = useMemo(() => {
-    const map: Record<number, number> = {};
-    let i = 0;
-    while (i < pageRows.length) {
-      let j = i;
-      while (
-        j + 1 < pageRows.length &&
-        pageRows[j + 1].id === pageRows[i].id &&
-        pageRows[j + 1].place === pageRows[i].place
-      ) {
-        j += 1;
-      }
-      map[i] = j - i + 1;
-      i = j + 1;
-    }
-    return map;
-  }, [pageRows]);
-
-  const enemyColumns = useMemo(
-    () =>
-      buildEnemyColumns(spans, tierFilter, (values) => {
-        setTierFilter(values);
-        setPage(1);
-      }),
-    [spans, tierFilter],
-  );
+  }, [search, showUnkillable, tierFilter]);
 
   return (
     <div className={styles.wrap} id="instant-death-mechanics">
@@ -224,13 +211,7 @@ const InstantDeathView: React.FC = () => {
       <div className={styles.toolbar}>
         <span className={styles.count}>共 {filteredRows.length} 条</span>
         <div className={styles.toolbarRight}>
-          <Checkbox
-            checked={showUnkillable}
-            onChange={(e) => {
-              setShowUnkillable(e.target.checked);
-              setPage(1);
-            }}
-          >
+          <Checkbox checked={showUnkillable} onChange={(event) => setShowUnkillable(event.target.checked)}>
             显示不可即死
           </Checkbox>
           <Input
@@ -238,31 +219,19 @@ const InstantDeathView: React.FC = () => {
             placeholder="搜索地点 / 敌人 / ID"
             prefix={<SearchOutlined />}
             value={keyword}
-            onChange={(e) => {
-              setKeyword(e.target.value);
-              setPage(1);
-            }}
+            onChange={(event) => setKeyword(event.target.value)}
             style={{ width: 240 }}
           />
         </div>
       </div>
-      <Table
-        columns={enemyColumns}
-        dataSource={pageRows}
+      <PagedTable
+        columns={(pageRows) => buildEnemyColumns(enemyPageSpans(pageRows), tierFilter, setTierFilter)}
+        dataSource={filteredRows}
+        contextKey={JSON.stringify([search, showUnkillable, tierFilter])}
         rowKey={(row) => `${row.id}-${row.enemy}`}
         size="small"
         bordered
-        pagination={false}
       />
-      {filteredRows.length >= 20 ? (
-        <CustomPagination
-          currentPage={page}
-          pageSize={pageSize}
-          totalItems={filteredRows.length}
-          onPageChange={setPage}
-          onPageSizeChange={setPageSize}
-        />
-      ) : null}
       <p className={styles.note}>
         「不可即死」表示该敌人不带可即死标志；小怪未全部列出，但基本都可即死。同名多敌人表示该据点会从中随机出现。
       </p>
