@@ -3,7 +3,7 @@ import { Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import ImpulseBadge from '../../../components/common/ImpulseBadge';
 import { renderImpulseText } from '../../../components/common/renderImpulseText';
-import impulseJson from '../../../data/zh-CN/impulse_data.json';
+import impulseJson from '../../../data/zh-CN/impulse.json';
 import type { ImpulseData, ImpulseRow } from '../../../types';
 import styles from './impulseView.module.css';
 

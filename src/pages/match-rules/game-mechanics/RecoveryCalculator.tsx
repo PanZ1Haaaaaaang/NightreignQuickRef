@@ -2,7 +2,7 @@ import { Typography, Card, Select, Button, Divider, Tag, Empty } from 'antd';
 import { HeartOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import CharacterAvatar from '../../../components/common/CharacterAvatar';
-import recoverCalculateData from '../../../data/zh-CN/recover_calculate.json';
+import recoverCalculateData from '../../../data/zh-CN/health-recovery.json';
 import type { NightfarerName } from '../../../types';
 import { useNightfarerLevel15 } from '../../../features/nightfarers/useNightfarerLevel15';
 import styles from './recoveryCalculator.module.css';

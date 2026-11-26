@@ -542,7 +542,7 @@ export interface InstantDeathData {
   enemyRows: InstantDeathEnemyRow[];
 }
 
-// ===== 仇恨机制（src/data/zh-CN/aggro_data.json、aggro_spell_data.json） =====
+// ===== 仇恨机制（src/data/zh-CN/aggro.json、spell-aggro.json） =====
 
 /** [名称, 冲击力, 基础仇恨值, 次数, 总仇恨] */
 export type AggroRow = [string, number | null, number | null, number | null, number | null];
@@ -673,7 +673,7 @@ export interface ScholarKnowledgeData {
   categories: ScholarCategory[];
 }
 
-// ===== 冲击力机制（src/data/zh-CN/impulse_data.json） =====
+// ===== 冲击力机制（src/data/zh-CN/impulse.json） =====
 
 export interface ImpulseRow {
   /** 冲击力编号（0~12，12 为废案） */
