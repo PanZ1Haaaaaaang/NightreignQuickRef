@@ -320,7 +320,8 @@ body[tomato-theme='dark'] .custom-card .ant-card-body {
     min-width: 800px; /* 确保表格内容完整显示 */
   }
 
-  .merchant-weapon-table .ant-table {
+  .merchant-weapon-table .ant-table,
+  .weapon-skill-magic-table .ant-table {
     min-width: 0;
   }
 }

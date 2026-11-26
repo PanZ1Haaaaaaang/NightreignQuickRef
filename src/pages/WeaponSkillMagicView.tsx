@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import type { PageTabProps } from '../config/navigationConfig';
 import { Button, Checkbox, Input, Select, Table, Tabs, Tag, Tooltip } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
-import CustomPagination from '../components/CustomPagination';
+import PagedTable from '../components/common/PagedTable';
+import type { PageLocalColumns } from '../components/common/PagedTable';
 import sorceries from '../data/zh-CN/sorceries.json';
 import incantations from '../data/zh-CN/incantations.json';
 import weaponArts from '../data/zh-CN/weapon_arts.json';
@@ -159,7 +159,7 @@ const getRowKey = (row: Row) => {
 };
 
 interface DataTableProps {
-  columns: ColumnsType<Row>;
+  columns: PageLocalColumns<Row>;
   data: Row[];
   title?: string;
   searchPlaceholder: string;
@@ -186,12 +186,12 @@ const DataTable: React.FC<DataTableProps> = ({
   damageFilter,
 }) => {
   const [keyword, setKeyword] = useState('');
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
+  const [paginationReset, setPaginationReset] = useState(0);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedDamageTypes, setSelectedDamageTypes] = useState<string[]>([]);
   const [showNotImplemented, setShowNotImplemented] = useState(false);
   const [expandedRowKeys, setExpandedRowKeys] = useState<string[]>([]);
+  const search = keyword.trim().toLowerCase();
 
   const categoryOptions = useMemo(() => {
     if (!skillFilterKind) return [];
@@ -232,78 +232,18 @@ const DataTable: React.FC<DataTableProps> = ({
       });
     }
 
-    const k = keyword.trim().toLowerCase();
-    if (!k) return rows;
+    if (!search) return rows;
     return rows.filter(
       (row) =>
-        Object.values(row).some((value) => String(value).toLowerCase().includes(k)) ||
-        damageTypesOf(row).some((type) => type.toLowerCase().includes(k)),
+        Object.values(row).some((value) => String(value).toLowerCase().includes(search)) ||
+        damageTypesOf(row).some((type) => type.toLowerCase().includes(search)),
     );
-  }, [data, damageFilter, keyword, selectedCategories, selectedDamageTypes, showNotImplemented, skillFilterKind]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [keyword, selectedCategories, selectedDamageTypes, showNotImplemented]);
-
-  const totalPages = Math.max(1, Math.ceil(filteredData.length / pageSize));
-
-  useEffect(() => {
-    if (page > totalPages) {
-      setPage(totalPages);
-    }
-  }, [page, totalPages]);
-
-  const pagedData = useMemo(
-    () => filteredData.slice((page - 1) * pageSize, page * pageSize),
-    [filteredData, page, pageSize],
-  );
-
-  const visibleData = pagination ? pagedData : filteredData;
-
-  const mergedColumns = useMemo(() => {
-    if (!mergeRules || mergeRules.length === 0) return columns;
-
-    const spansByColumn = new Map<string, number[]>();
-    mergeRules.forEach((rule) => {
-      const spans = new Array<number>(visibleData.length).fill(1);
-      let start = 0;
-      while (start < visibleData.length) {
-        const key = rule.groupKey(visibleData[start]);
-        let end = start + 1;
-        while (end < visibleData.length && rule.groupKey(visibleData[end]) === key) {
-          end += 1;
-        }
-        spans[start] = end - start;
-        for (let index = start + 1; index < end; index += 1) {
-          spans[index] = 0;
-        }
-        start = end;
-      }
-      spansByColumn.set(rule.columnKey, spans);
-    });
-
-    return columns.map((column) => {
-      const columnKey = String(column.key);
-      if (!spansByColumn.has(columnKey)) return column;
-      return {
-        ...column,
-        onCell: (record: Row, index?: number) => {
-          const rowIndex = index ?? 0;
-          const previous = column.onCell?.(record, rowIndex) ?? {};
-          return {
-            ...previous,
-            rowSpan: spansByColumn.get(columnKey)?.[rowIndex] ?? 1,
-            style: { ...previous.style, verticalAlign: 'top' },
-          };
-        },
-      };
-    });
-  }, [columns, mergeRules, visibleData]);
+  }, [data, damageFilter, search, selectedCategories, selectedDamageTypes, showNotImplemented, skillFilterKind]);
 
   const displayColumns = useMemo(() => {
-    if (!detail) return mergedColumns;
+    if (!detail) return columns;
 
-    return mergedColumns.map((column) => {
+    return columns.map((column) => {
       if (String(column.key) !== detail.linkColumnKey) return column;
 
       const originalRender = column.render;
@@ -335,7 +275,47 @@ const DataTable: React.FC<DataTableProps> = ({
         },
       };
     });
-  }, [detail, expandedRowKeys, mergedColumns]);
+  }, [columns, detail, expandedRowKeys]);
+
+  const buildPageColumns = (pageRows: readonly Row[]): PageLocalColumns<Row> => {
+    if (!mergeRules?.length) return displayColumns;
+
+    const spansByColumn = new Map<string, number[]>();
+    mergeRules.forEach((rule) => {
+      const spans = new Array<number>(pageRows.length).fill(1);
+      let start = 0;
+      while (start < pageRows.length) {
+        const key = rule.groupKey(pageRows[start]);
+        let end = start + 1;
+        while (end < pageRows.length && rule.groupKey(pageRows[end]) === key) {
+          end += 1;
+        }
+        spans[start] = end - start;
+        for (let index = start + 1; index < end; index += 1) {
+          spans[index] = 0;
+        }
+        start = end;
+      }
+      spansByColumn.set(rule.columnKey, spans);
+    });
+
+    return displayColumns.map((column) => {
+      const spans = spansByColumn.get(String(column.key));
+      if (!spans) return column;
+      return {
+        ...column,
+        onCell: (record: Row, index?: number) => {
+          const rowIndex = index ?? 0;
+          const previous = column.onCell?.(record, rowIndex) ?? {};
+          return {
+            ...previous,
+            rowSpan: spans[rowIndex] ?? 1,
+            style: { ...previous.style, verticalAlign: 'top' },
+          };
+        },
+      };
+    });
+  };
 
   const expandable = detail
     ? {
@@ -351,6 +331,16 @@ const DataTable: React.FC<DataTableProps> = ({
         expandedRowClassName: () => 'weapon-skill-detail-row',
       }
     : undefined;
+
+  const tableProps = {
+    className: 'weapon-skill-magic-table',
+    rowKey: getRowKey,
+    size: 'small' as const,
+    bordered: true,
+    scroll: { x: 'max-content' },
+    expandable,
+    locale: { emptyText: '没有匹配的数据' },
+  };
 
   return (
     <div style={{ marginBottom }}>
@@ -426,7 +416,7 @@ const DataTable: React.FC<DataTableProps> = ({
                 setSelectedCategories([]);
                 setSelectedDamageTypes([]);
                 setShowNotImplemented(false);
-                setPage(1);
+                setPaginationReset((reset) => reset + 1);
               }}
             >
               清除所有
@@ -434,28 +424,25 @@ const DataTable: React.FC<DataTableProps> = ({
           </>
         )}
       </div>
-      <Table<Row>
-        className="weapon-skill-magic-table"
-        columns={displayColumns}
-        dataSource={visibleData}
-        rowKey={getRowKey}
-        size="small"
-        bordered
-        scroll={{ x: 'max-content' }}
-        pagination={false}
-        expandable={expandable}
-        locale={{ emptyText: '没有匹配的数据' }}
-      />
-      {pagination && (
-        <CustomPagination
-          currentPage={page}
-          pageSize={pageSize}
-          totalItems={filteredData.length}
-          onPageChange={setPage}
-          onPageSizeChange={(size) => {
-            setPageSize(size);
-            setPage(1);
-          }}
+      {pagination ? (
+        <PagedTable<Row>
+          {...tableProps}
+          columns={mergeRules?.length ? buildPageColumns : displayColumns}
+          dataSource={filteredData}
+          contextKey={JSON.stringify([
+            search,
+            selectedCategories,
+            selectedDamageTypes,
+            showNotImplemented,
+            paginationReset,
+          ])}
+        />
+      ) : (
+        <Table<Row>
+          {...tableProps}
+          columns={buildPageColumns(filteredData)}
+          dataSource={filteredData}
+          pagination={false}
         />
       )}
       {notes && notes.length > 0 && (
@@ -477,7 +464,7 @@ const textColumn = (
   key: string,
   width: number,
   render?: (value: string) => React.ReactNode,
-): ColumnsType<Row>[number] => ({
+): PageLocalColumns<Row>[number] => ({
   title,
   dataIndex: key,
   key,
@@ -485,7 +472,7 @@ const textColumn = (
   render,
 });
 
-const damageTypeColumn = (width: number): ColumnsType<Row>[number] => ({
+const damageTypeColumn = (width: number): PageLocalColumns<Row>[number] => ({
   title: '伤害类型',
   dataIndex: '伤害类型',
   key: '伤害类型',
@@ -499,7 +486,7 @@ const spellDetailConfig: DetailConfig = {
   title: '弹道说明',
 };
 
-const spellColumns: ColumnsType<Row> = [
+const spellColumns: PageLocalColumns<Row> = [
   textColumn('名称', '名称', 120),
   textColumn('基础威力', '基础威力', 190),
   textColumn('耗蓝', '耗蓝', 90),
@@ -510,7 +497,7 @@ const spellColumns: ColumnsType<Row> = [
   textColumn('备注', '备注', 320, renderImpulseText),
 ];
 
-const supportColumns: ColumnsType<Row> = [
+const supportColumns: PageLocalColumns<Row> = [
   textColumn('名称', '名称', 120),
   textColumn('效果', '效果', 480, renderImpulseText),
   textColumn('耗蓝', '耗蓝', 80),
@@ -610,7 +597,7 @@ const renderUniqueCategory = (_: string, record: Row) => {
   return renderCategoryTags(tags);
 };
 
-const weaponArtColumns: ColumnsType<Row> = [
+const weaponArtColumns: PageLocalColumns<Row> = [
   {
     title: '分类',
     dataIndex: '分类',
@@ -631,7 +618,7 @@ const weaponArtColumns: ColumnsType<Row> = [
   textColumn('备注', '备注', 320, renderImpulseText),
 ];
 
-const uniqueWeaponArtColumns: ColumnsType<Row> = [
+const uniqueWeaponArtColumns: PageLocalColumns<Row> = [
   {
     title: '分类',
     dataIndex: '分类',
