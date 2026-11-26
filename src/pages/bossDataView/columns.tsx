@@ -2,23 +2,13 @@
 // 只依赖 data.ts 中的静态数据/纯函数与 CSS Modules 样式，
 // 因此可以放在模块级，不必每次渲染重建。
 
-import { Image, Tag } from 'antd';
+import { Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import DamageTypeIcon from '../../components/common/DamageTypeIcon';
+import StatusIcon from '../../components/common/StatusIcon';
 import CharacterAvatar from '../../components/common/CharacterAvatar';
 import type { CharacterData, EntryData, WildBossData } from '../../types';
 import styles from '../../styles/bossDataView.module.css';
-import standardDamage from '../../assets/Negations/standard-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import slashDamage from '../../assets/Negations/slash-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import strikeDamage from '../../assets/Negations/strike-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import pierceDamage from '../../assets/Negations/pierce-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import magicDamage from '../../assets/Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import fireDamage from '../../assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import lightningDamage from '../../assets/Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import holyDamage from '../../assets/Negations/holy-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import poisonResistance from '../../assets/Resistances/poison-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import scarletRotResistance from '../../assets/Resistances/scarlet-rot-status-effect-elden-ring-nightreing-wiki-guide-100px.png';
-import bleedResistance from '../../assets/Resistances/hemorrhage-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import frostResistance from '../../assets/Resistances/frostbite-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
 import {
   getAbsorptionClass,
   getResistanceClass,
@@ -137,7 +127,7 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="standard" />
             <span>普通</span>
           </div>
         ),
@@ -150,7 +140,7 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="strike" />
             <span>打击</span>
           </div>
         ),
@@ -163,7 +153,7 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="slash" />
             <span>斩击</span>
           </div>
         ),
@@ -176,7 +166,7 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="pierce" />
             <span>突刺</span>
           </div>
         ),
@@ -195,7 +185,7 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="magic" />
             <span>魔力</span>
           </div>
         ),
@@ -208,7 +198,7 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="fire" />
             <span>火焰</span>
           </div>
         ),
@@ -221,7 +211,7 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="lightning" />
             <span>雷电</span>
           </div>
         ),
@@ -234,7 +224,7 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="holy" />
             <span>神圣</span>
           </div>
         ),
@@ -252,7 +242,7 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
       {
         title: (
           <div className={styles.resistanceTypeContainer}>
-            <Image src={bleedResistance} alt="出血" width={18} height={18} preview={false} />
+            <StatusIcon status="bleed" />
             <span>出血</span>
           </div>
         ),
@@ -265,7 +255,7 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
       {
         title: (
           <div className={styles.resistanceTypeContainer}>
-            <Image src={poisonResistance} alt="中毒" width={18} height={18} preview={false} />
+            <StatusIcon status="poison" />
             <span>中毒</span>
           </div>
         ),
@@ -278,7 +268,7 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
       {
         title: (
           <div className={styles.resistanceTypeContainer}>
-            <Image src={scarletRotResistance} alt="腐败" width={18} height={18} preview={false} />
+            <StatusIcon status="scarletRot" />
             <span>腐败</span>
           </div>
         ),
@@ -291,7 +281,7 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
       {
         title: (
           <div className={styles.resistanceTypeContainer}>
-            <Image src={frostResistance} alt="冻伤" width={18} height={18} preview={false} />
+            <StatusIcon status="frostbite" />
             <span>冻伤</span>
           </div>
         ),
@@ -348,7 +338,7 @@ export const characterColumns: ColumnsType<CharacterData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="standard" />
             <span>普通</span>
           </div>
         ),
@@ -361,7 +351,7 @@ export const characterColumns: ColumnsType<CharacterData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="strike" />
             <span>打击</span>
           </div>
         ),
@@ -374,7 +364,7 @@ export const characterColumns: ColumnsType<CharacterData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="slash" />
             <span>斩击</span>
           </div>
         ),
@@ -387,7 +377,7 @@ export const characterColumns: ColumnsType<CharacterData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="pierce" />
             <span>突刺</span>
           </div>
         ),
@@ -406,7 +396,7 @@ export const characterColumns: ColumnsType<CharacterData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="magic" />
             <span>魔力</span>
           </div>
         ),
@@ -419,7 +409,7 @@ export const characterColumns: ColumnsType<CharacterData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="fire" />
             <span>火焰</span>
           </div>
         ),
@@ -432,7 +422,7 @@ export const characterColumns: ColumnsType<CharacterData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="lightning" />
             <span>雷电</span>
           </div>
         ),
@@ -445,7 +435,7 @@ export const characterColumns: ColumnsType<CharacterData> = [
       {
         title: (
           <div className={styles.damageTypeContainer}>
-            <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
+            <DamageTypeIcon type="holy" />
             <span>神圣</span>
           </div>
         ),
@@ -463,7 +453,7 @@ export const characterColumns: ColumnsType<CharacterData> = [
       {
         title: (
           <div className={styles.resistanceTypeContainer}>
-            <Image src={bleedResistance} alt="出血" width={18} height={18} preview={false} />
+            <StatusIcon status="bleed" />
             <span>出血</span>
           </div>
         ),
@@ -476,7 +466,7 @@ export const characterColumns: ColumnsType<CharacterData> = [
       {
         title: (
           <div className={styles.resistanceTypeContainer}>
-            <Image src={poisonResistance} alt="中毒" width={18} height={18} preview={false} />
+            <StatusIcon status="poison" />
             <span>中毒</span>
           </div>
         ),
@@ -489,7 +479,7 @@ export const characterColumns: ColumnsType<CharacterData> = [
       {
         title: (
           <div className={styles.resistanceTypeContainer}>
-            <Image src={scarletRotResistance} alt="腐败" width={18} height={18} preview={false} />
+            <StatusIcon status="scarletRot" />
             <span>腐败</span>
           </div>
         ),
@@ -502,7 +492,7 @@ export const characterColumns: ColumnsType<CharacterData> = [
       {
         title: (
           <div className={styles.resistanceTypeContainer}>
-            <Image src={frostResistance} alt="冻伤" width={18} height={18} preview={false} />
+            <StatusIcon status="frostbite" />
             <span>冻伤</span>
           </div>
         ),

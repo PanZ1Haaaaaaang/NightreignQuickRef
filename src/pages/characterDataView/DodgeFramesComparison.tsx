@@ -5,6 +5,7 @@ import { commonDodgeProfiles, situationalDodgeProfiles, type DodgeProfile } from
 import type { DodgeAnimation, DodgeFlagType } from '../../types';
 import DataManager from '../../utils/dataManager';
 import styles from '../../styles/dodgeFramesComparison.module.css';
+import AbilityIcon from '../../components/common/AbilityIcon';
 import CharacterAvatar from '../../components/common/CharacterAvatar';
 
 const MOVE_FLAG = 11;
@@ -69,9 +70,7 @@ function DodgeRow({
               profile.characters.map((name) => <CharacterAvatar key={name} name={name} size={18} />)
             ) : (
               <>
-                {profile.actionIcon && (
-                  <img src={profile.actionIcon} alt="" width={20} height={20} className={styles.actionIcon} />
-                )}
+                {profile.ability && <AbilityIcon {...profile.ability} size={20} />}
                 <span>{profile.characters.join('、')}</span>
               </>
             )}

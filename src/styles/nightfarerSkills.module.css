@@ -35,13 +35,6 @@
   color: var(--color-text-2);
 }
 
-.skillIcon {
-  flex: none;
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-}
-
 .skillNoIcon {
   padding-left: 28px;
 }

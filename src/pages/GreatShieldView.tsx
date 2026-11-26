@@ -1,15 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Image, Table } from 'antd';
+import { Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import CharacterAvatar from '../components/common/CharacterAvatar';
+import DamageTypeIcon from '../components/common/DamageTypeIcon';
 import shieldData from '../data/zh-CN/great_shield_data.json';
 import mechanicJson from '../data/zh-CN/guard_mechanic_data.json';
-import type { GuardMechanicData } from '../types';
+import type { DamageType, GuardMechanicData } from '../types';
 import styles from '../styles/greatShieldView.module.css';
-import magicIcon from '../assets/Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import fireIcon from '../assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import lightningIcon from '../assets/Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import holyIcon from '../assets/Negations/holy-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 
 // 守护者（渡夜者）的被动是「开启强防御」，所以这面盾对玩守护者的玩家最常用，单独做轻标注
 const GUARDIAN_SHIELD = '守护者的大盾';
@@ -93,18 +90,17 @@ const ShieldThumb: React.FC<{ name: string }> = ({ name }) => {
 interface NumberColumn {
   key: NumberKey;
   title: string;
-  // 表头图标：四系抗性用 Negations 里对应的属性图标
-  icon?: string;
+  damageType?: DamageType;
   defaultSortOrder?: 'ascend' | 'descend';
 }
 
 // 五个数值列都可排序，默认按防御强度降序
 const NUMBER_COLUMNS: NumberColumn[] = [
   { key: 'guard', title: '防御强度' },
-  { key: 'magic', title: '魔力抗性', icon: magicIcon },
-  { key: 'fire', title: '火焰抗性', icon: fireIcon },
-  { key: 'lightning', title: '雷电抗性', icon: lightningIcon },
-  { key: 'holy', title: '神圣抗性', icon: holyIcon },
+  { key: 'magic', title: '魔力抗性', damageType: 'magic' },
+  { key: 'fire', title: '火焰抗性', damageType: 'fire' },
+  { key: 'lightning', title: '雷电抗性', damageType: 'lightning' },
+  { key: 'holy', title: '神圣抗性', damageType: 'holy' },
 ];
 
 /**
@@ -141,9 +137,9 @@ const GreatShieldView: React.FC = () => {
         name === GUARDIAN_SHIELD ? <CharacterAvatar name="守护者" label={name} size={18} /> : name,
     },
     ...NUMBER_COLUMNS.map((column) => ({
-      title: column.icon ? (
+      title: column.damageType ? (
         <span className={styles.columnHeader}>
-          <Image src={column.icon} alt={column.title} width={18} height={18} preview={false} />
+          <DamageTypeIcon type={column.damageType} />
           <span>{column.title}</span>
         </span>
       ) : (

@@ -590,6 +590,12 @@ export interface ExecutorParryData {
 
 // ===== 渡夜者能力 / 技艺 / 绝招（src/data/zh-CN/nightfarer_skill_data.json） =====
 
+export type DamageType = 'standard' | 'strike' | 'slash' | 'pierce' | 'magic' | 'fire' | 'lightning' | 'holy';
+
+export type StatusType = 'poison' | 'scarletRot' | 'bleed' | 'frostbite' | 'sleep' | 'madness' | 'deathBlight';
+
+export type AbilityKind = 'passive' | 'skill' | 'ultimate';
+
 export type NightfarerName =
   | '追踪者'
   | '守护者'

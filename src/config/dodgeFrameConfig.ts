@@ -1,14 +1,10 @@
-import wylderSkill from '../assets/char/WylderCharacterSkill.png';
-import wylderPassive from '../assets/char/WylderPassiveAbility.png';
-import guardianPassive from '../assets/char/GuardianPassiveAbility.png';
-import executorSkill from '../assets/char/ExecutorCharacterSkill.png';
-import undertakerSkill from '../assets/char/UndertakerCharacterSkill.png';
+import type { AbilityKind, NightfarerName } from '../types';
 
 export interface DodgeProfile {
   id: string;
   name: string;
   characters: string[];
-  actionIcon?: string;
+  ability?: { character: NightfarerName; kind: AbilityKind };
   variants: { id: string; label: string }[];
 }
 
@@ -65,21 +61,21 @@ export const situationalDodgeProfiles: DodgeProfile[] = [
     id: 'grapple-roll',
     name: '钩爪位移中翻滚',
     characters: ['追踪者'],
-    actionIcon: wylderSkill,
+    ability: { character: '追踪者', kind: 'skill' },
     variants: directionalVariants(27180),
   },
   {
     id: 'sixth-sense',
     name: '「第六感」自动闪避',
     characters: ['追踪者'],
-    actionIcon: wylderPassive,
+    ability: { character: '追踪者', kind: 'passive' },
     variants: directionalVariants(27300),
   },
   {
     id: 'steel-guard',
     name: '「强力防御」移动',
     characters: ['守护者'],
-    actionIcon: guardianPassive,
+    ability: { character: '守护者', kind: 'passive' },
     variants: directionalVariants(27200),
   },
   { id: 'throw-counter', name: '投技反制', characters: ['全渡夜者'], variants: directionalVariants(27210) },
@@ -87,21 +83,21 @@ export const situationalDodgeProfiles: DodgeProfile[] = [
     id: 'cursed-sword',
     name: '「攫阳」妖刀闪避',
     characters: ['执行者'],
-    actionIcon: executorSkill,
+    ability: { character: '执行者', kind: 'skill' },
     variants: directionalVariants(27220),
   },
   {
     id: 'trance',
     name: '「恍惚」主动闪避',
     characters: ['送葬者'],
-    actionIcon: undertakerSkill,
+    ability: { character: '送葬者', kind: 'skill' },
     variants: directionalVariants(27240),
   },
   {
     id: 'enhanced-trance',
     name: '「恍惚」受击自动闪避',
     characters: ['送葬者'],
-    actionIcon: undertakerSkill,
+    ability: { character: '送葬者', kind: 'skill' },
     variants: directionalVariants(27310),
   },
   {

@@ -758,10 +758,3 @@ body[tomato-theme='dark'] .percentDown {
   align-items: center;
   gap: 5px;
 }
-
-.discInlineIcon {
-  flex: none;
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-}

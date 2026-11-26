@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import type { PageTabProps } from '../config/navigationConfig';
+import DamageTypeIcon from '../components/common/DamageTypeIcon';
+import StatusIcon from '../components/common/StatusIcon';
 import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio, Segmented, Space, Spin } from 'antd';
 import { message } from '../utils/feedback';
 import { SearchOutlined } from '@ant-design/icons';
@@ -38,22 +40,8 @@ import nightOfTheBalancers from '../assets/BossRelics/the-will-of-the-balancers.
 import nightOfTheDreglords from '../assets/BossRelics/the-night-of-dregs.avif';
 
 // 导入Negations图片
-import standardDamage from '../assets/Negations/standard-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import slashDamage from '../assets/Negations/slash-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import strikeDamage from '../assets/Negations/strike-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import pierceDamage from '../assets/Negations/pierce-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import magicDamage from '../assets/Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import fireDamage from '../assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import lightningDamage from '../assets/Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import holyDamage from '../assets/Negations/holy-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 
 // 导入Resistances图片
-import poisonResistance from '../assets/Resistances/poison-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import scarletRotResistance from '../assets/Resistances/scarlet-rot-status-effect-elden-ring-nightreing-wiki-guide-100px.png';
-import bleedResistance from '../assets/Resistances/hemorrhage-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import frostResistance from '../assets/Resistances/frostbite-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import sleepResistance from '../assets/Resistances/sleep-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import madnessResistance from '../assets/Resistances/madness-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
 
 interface BossDataViewProps extends PageTabProps {
   // 拆页后固定只显示一个分段：夜王（每局开局即确定）/ 地图（由地图种子决定）
@@ -496,7 +484,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.damageTypeContainer}>
-              <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
+              <DamageTypeIcon type="standard" />
               <span>普通</span>
             </div>
           ),
@@ -509,7 +497,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.damageTypeContainer}>
-              <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
+              <DamageTypeIcon type="strike" />
               <span>打击</span>
             </div>
           ),
@@ -522,7 +510,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.damageTypeContainer}>
-              <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
+              <DamageTypeIcon type="slash" />
               <span>斩击</span>
             </div>
           ),
@@ -535,7 +523,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.damageTypeContainer}>
-              <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
+              <DamageTypeIcon type="pierce" />
               <span>突刺</span>
             </div>
           ),
@@ -553,7 +541,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.damageTypeContainer}>
-              <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
+              <DamageTypeIcon type="magic" />
               <span>魔力</span>
             </div>
           ),
@@ -566,7 +554,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.damageTypeContainer}>
-              <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
+              <DamageTypeIcon type="fire" />
               <span>火焰</span>
             </div>
           ),
@@ -579,7 +567,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.damageTypeContainer}>
-              <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
+              <DamageTypeIcon type="lightning" />
               <span>雷电</span>
             </div>
           ),
@@ -592,7 +580,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.damageTypeContainer}>
-              <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
+              <DamageTypeIcon type="holy" />
               <span>神圣</span>
             </div>
           ),
@@ -692,7 +680,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.resistanceTypeContainer}>
-              <Image src={poisonResistance} alt="中毒" width={18} height={18} preview={false} />
+              <StatusIcon status="poison" />
               <span>中毒</span>
             </div>
           ),
@@ -709,7 +697,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.resistanceTypeContainer}>
-              <Image src={scarletRotResistance} alt="腐败" width={18} height={18} preview={false} />
+              <StatusIcon status="scarletRot" />
               <span>腐败</span>
             </div>
           ),
@@ -726,7 +714,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.resistanceTypeContainer}>
-              <Image src={bleedResistance} alt="出血" width={18} height={18} preview={false} />
+              <StatusIcon status="bleed" />
               <span>出血</span>
             </div>
           ),
@@ -743,7 +731,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.resistanceTypeContainer}>
-              <Image src={frostResistance} alt="冻伤" width={18} height={18} preview={false} />
+              <StatusIcon status="frostbite" />
               <span>冻伤</span>
             </div>
           ),
@@ -760,7 +748,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.resistanceTypeContainer}>
-              <Image src={sleepResistance} alt="睡眠" width={18} height={18} preview={false} />
+              <StatusIcon status="sleep" />
               <span>睡眠</span>
             </div>
           ),
@@ -777,7 +765,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
         {
           title: (
             <div className={styles.resistanceTypeContainer}>
-              <Image src={madnessResistance} alt="发狂" width={18} height={18} preview={false} />
+              <StatusIcon status="madness" />
               <span>发狂</span>
             </div>
           ),

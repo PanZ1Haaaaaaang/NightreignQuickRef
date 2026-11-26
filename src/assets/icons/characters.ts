@@ -14,18 +14,22 @@ import wylder from './char/Wylder.svg';
  * 渡夜者图标（src/assets/icons/char/*.svg）。
  * 键是站内数据里的中文名（character_states / character-info / 泪滴转职统一用「铁之眼」）。
  */
-const CHARACTER_ICONS: Record<NightfarerName, string> = {
-  追踪者: wylder,
-  女爵: duchess,
-  复仇者: revenant,
-  守护者: guardian,
-  学者: scholar,
-  执行者: executor,
-  铁之眼: ironeye,
-  无赖: raider,
-  隐士: recluse,
-  送葬者: undertaker,
+const CHARACTERS: Record<NightfarerName, { assetName: string; avatar: string }> = {
+  追踪者: { assetName: 'Wylder', avatar: wylder },
+  女爵: { assetName: 'Duchess', avatar: duchess },
+  复仇者: { assetName: 'Revenant', avatar: revenant },
+  守护者: { assetName: 'Guardian', avatar: guardian },
+  学者: { assetName: 'Scholar', avatar: scholar },
+  执行者: { assetName: 'Executor', avatar: executor },
+  铁之眼: { assetName: 'Ironeye', avatar: ironeye },
+  无赖: { assetName: 'Raider', avatar: raider },
+  隐士: { assetName: 'Recluse', avatar: recluse },
+  送葬者: { assetName: 'Undertaker', avatar: undertaker },
 };
 
-export const characterIconOf = (name: string): string | undefined =>
-  Object.hasOwn(CHARACTER_ICONS, name) ? CHARACTER_ICONS[name as NightfarerName] : undefined;
+const characterAssetsOf = (name: string) =>
+  Object.hasOwn(CHARACTERS, name) ? CHARACTERS[name as NightfarerName] : undefined;
+
+export const characterIconOf = (name: string): string | undefined => characterAssetsOf(name)?.avatar;
+
+export const characterAssetNameOf = (name: string): string | undefined => characterAssetsOf(name)?.assetName;

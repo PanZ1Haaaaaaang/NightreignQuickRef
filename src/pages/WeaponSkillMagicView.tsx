@@ -11,14 +11,9 @@ import uniqueWeaponArts from '../data/zh-CN/unique_weapon_arts.json';
 import supportSpells from '../data/zh-CN/support_spells.json';
 import weaponArtCategoryHints from '../data/zh-CN/weapon_art_category_hints.json';
 import { renderHintOption } from '../components/HintOption';
-import standardDamageIcon from '../assets/Negations/standard-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import strikeDamageIcon from '../assets/Negations/strike-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import slashDamageIcon from '../assets/Negations/slash-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import pierceDamageIcon from '../assets/Negations/pierce-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import magicDamageIcon from '../assets/Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import fireDamageIcon from '../assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import lightningDamageIcon from '../assets/Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import holyDamageIcon from '../assets/Negations/holy-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
+import { DAMAGE_LABELS, damageTypeOf } from '../assets/icons/damage';
+import DamageTypeIcon from '../components/common/DamageTypeIcon';
+import type { DamageType } from '../types';
 
 type Row = Record<string, string>;
 
@@ -60,31 +55,12 @@ const supportNotes = [
 
 const NOT_IMPLEMENTED = '未实装';
 
-const DAMAGE_TYPE_ALIASES: Record<string, string> = {
-  普通: '普通',
-  物: '普通',
-  物理: '普通',
-  挥击: '斩击',
-  打击: '打击',
-  斩击: '斩击',
-  突刺: '突刺',
-  戳击: '突刺',
-  魔: '魔力',
-  魔力: '魔力',
-  火: '火焰',
-  火焰: '火焰',
-  雷: '雷电',
-  雷电: '雷电',
-  圣: '神圣',
-  神圣: '神圣',
-};
-
-const damageTypeOption = (value: string, label: string, icon: string) => ({
-  value,
+const damageTypeOption = (type: DamageType) => ({
+  value: DAMAGE_LABELS[type],
   label: (
     <span className="damage-type-option">
-      <img src={icon} alt="" className="damage-type-icon" />
-      <span>{label}</span>
+      <DamageTypeIcon type={type} size={16} className="damage-type-icon" />
+      <span>{DAMAGE_LABELS[type]}</span>
     </span>
   ),
 });
@@ -93,28 +69,34 @@ const damageFilterOptions = [
   {
     label: '攻击类别',
     options: [
-      damageTypeOption('普通', '普通', standardDamageIcon),
-      damageTypeOption('打击', '打击', strikeDamageIcon),
-      damageTypeOption('斩击', '斩击', slashDamageIcon),
-      damageTypeOption('突刺', '突刺', pierceDamageIcon),
+      damageTypeOption('standard'),
+      damageTypeOption('strike'),
+      damageTypeOption('slash'),
+      damageTypeOption('pierce'),
     ],
   },
   {
     label: '属性类别',
     options: [
-      damageTypeOption('魔力', '魔力', magicDamageIcon),
-      damageTypeOption('火焰', '火焰', fireDamageIcon),
-      damageTypeOption('雷电', '雷电', lightningDamageIcon),
-      damageTypeOption('神圣', '神圣', holyDamageIcon),
+      damageTypeOption('magic'),
+      damageTypeOption('fire'),
+      damageTypeOption('lightning'),
+      damageTypeOption('holy'),
     ],
   },
 ];
 
-const formatDamageType = (value: string) =>
-  value.replace(/[^+＋/\n、,，]+/g, (token) => {
-    const trimmed = token.trim();
-    const canonical = DAMAGE_TYPE_ALIASES[trimmed];
-    return canonical ? token.replace(trimmed, canonical) : token;
+const renderDamageTypes = (value: string) =>
+  value.split(/([+＋/\n、,，]+)/).map((token, index) => {
+    const type = damageTypeOf(token.trim());
+    return type ? (
+      <span className="damage-type-option" key={index}>
+        <DamageTypeIcon type={type} size={14} />
+        <span>{DAMAGE_LABELS[type]}</span>
+      </span>
+    ) : (
+      token
+    );
   });
 
 const damageTypesOf = (row: Row): string[] => {
@@ -122,8 +104,8 @@ const damageTypesOf = (row: Row): string[] => {
   [row['伤害类型'], row['物理类型']].forEach((value) => {
     if (!value) return;
     value.split(/[+＋/\n、,，]+/).forEach((token) => {
-      const canonical = DAMAGE_TYPE_ALIASES[token.trim()];
-      if (canonical) result.add(canonical);
+      const type = damageTypeOf(token.trim());
+      if (type) result.add(DAMAGE_LABELS[type]);
     });
   });
   return [...result];
@@ -501,7 +483,7 @@ const damageTypeColumn = (width: number): ColumnsType<Row>[number] => ({
   dataIndex: '伤害类型',
   key: '伤害类型',
   width,
-  render: (value: string) => formatDamageType(value || ''),
+  render: (value: string) => renderDamageTypes(value || ''),
 });
 
 const spellDetailConfig: DetailConfig = {

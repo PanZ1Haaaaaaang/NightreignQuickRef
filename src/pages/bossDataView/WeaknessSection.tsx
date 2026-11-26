@@ -3,19 +3,11 @@ import { Image, Input, Segmented, Select, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import weaknessJson from '../../data/zh-CN/boss_weakness_data.json';
-import magicIcon from '../../assets/Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import fireIcon from '../../assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import lightningIcon from '../../assets/Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import holyIcon from '../../assets/Negations/holy-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import standardIcon from '../../assets/Negations/standard-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import poisonIcon from '../../assets/Resistances/poison-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import frostIcon from '../../assets/Resistances/frostbite-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import rotIcon from '../../assets/Resistances/scarlet-rot-status-effect-elden-ring-nightreing-wiki-guide-100px.png';
-import blightIcon from '../../assets/Resistances/blight_status_effect_elden_ring_wiki_guide_100px.png';
-import bleedIcon from '../../assets/Resistances/hemorrhage-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import sleepIcon from '../../assets/Resistances/sleep-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import madnessIcon from '../../assets/Resistances/madness-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
+import { damageTypeOf } from '../../assets/icons/damage';
+import { statusTypeIn } from '../../assets/icons/status';
 import CustomPagination from '../../components/CustomPagination';
+import DamageTypeIcon from '../../components/common/DamageTypeIcon';
+import StatusIcon from '../../components/common/StatusIcon';
 import beastImg from '../../assets/BossRelics/night-of-the-beast.avif';
 import fathomImg from '../../assets/BossRelics/night-of-the-fathom.avif';
 import miasmaImg from '../../assets/BossRelics/night-of-the-miasma.avif';
@@ -78,14 +70,24 @@ const baseAttr = (attr: string) => attr.replace(/（.*$/, '').trim();
 
 const attrTag = (attr: string) => {
   const key = Object.keys(ATTR_COLOR).find((k) => attr.startsWith(k)) ?? '无属性';
-  return <Tag color={ATTR_COLOR[key]}>{attr}</Tag>;
+  const type = damageTypeOf(baseAttr(attr));
+  const status = statusTypeIn(baseAttr(attr));
+  return (
+    <Tag color={ATTR_COLOR[key]}>
+      <span className="damage-type-option">
+        {type && <DamageTypeIcon type={type} size={14} />}
+        {status && <StatusIcon status={status} size={14} />}
+        <span>{attr}</span>
+      </span>
+    </Tag>
+  );
 };
 
-const damageOption = (value: string, icon: string) => ({
+const damageOption = (value: string, icon: React.ReactNode) => ({
   value,
   label: (
     <span className="damage-type-option">
-      <img src={icon} alt="" className="damage-type-icon" />
+      {icon}
       <span>{value}</span>
     </span>
   ),
@@ -96,27 +98,27 @@ const DAMAGE_FILTER_OPTIONS = [
   {
     label: '异常类别',
     options: [
-      damageOption('中毒', poisonIcon),
-      damageOption('冻伤', frostIcon),
-      damageOption('腐败', rotIcon),
-      damageOption('骤死', blightIcon),
-      damageOption('出血', bleedIcon),
-      damageOption('催眠', sleepIcon),
-      damageOption('发狂', madnessIcon),
+      damageOption('中毒', <StatusIcon status="poison" size={16} className="damage-type-icon" />),
+      damageOption('冻伤', <StatusIcon status="frostbite" size={16} className="damage-type-icon" />),
+      damageOption('腐败', <StatusIcon status="scarletRot" size={16} className="damage-type-icon" />),
+      damageOption('骤死', <StatusIcon status="deathBlight" size={16} className="damage-type-icon" />),
+      damageOption('出血', <StatusIcon status="bleed" size={16} className="damage-type-icon" />),
+      damageOption('催眠', <StatusIcon status="sleep" size={16} className="damage-type-icon" />),
+      damageOption('发狂', <StatusIcon status="madness" size={16} className="damage-type-icon" />),
     ],
   },
   {
     label: '属性类别',
     options: [
-      damageOption('魔力', magicIcon),
-      damageOption('火焰', fireIcon),
-      damageOption('雷电', lightningIcon),
-      damageOption('神圣', holyIcon),
+      damageOption('魔力', <DamageTypeIcon type="magic" size={16} className="damage-type-icon" />),
+      damageOption('火焰', <DamageTypeIcon type="fire" size={16} className="damage-type-icon" />),
+      damageOption('雷电', <DamageTypeIcon type="lightning" size={16} className="damage-type-icon" />),
+      damageOption('神圣', <DamageTypeIcon type="holy" size={16} className="damage-type-icon" />),
     ],
   },
   {
     label: '其他',
-    options: [damageOption('无属性', standardIcon)],
+    options: [damageOption('无属性', <DamageTypeIcon type="standard" size={16} className="damage-type-icon" />)],
   },
 ];
 

@@ -12,18 +12,13 @@ import DataSourceTooltip from '../components/DataSourceTooltip';
 import DodgeFramesComparison from './characterDataView/DodgeFramesComparison';
 import TeardropConversion from './characterDataView/TeardropConversion';
 import CharacterAvatar from '../components/common/CharacterAvatar';
+import AbilityIcon from '../components/common/AbilityIcon';
+import DamageTypeIcon from '../components/common/DamageTypeIcon';
+import { damageTypeOf } from '../assets/icons/damage';
 import RoundtableCharacters from './characterDataView/RoundtableCharacters';
 import ScholarKnowledge from './characterDataView/ScholarKnowledge';
 import NightfarerSkills from './characterDataView/NightfarerSkills';
 import ExecutorParry from './characterDataView/ExecutorParry';
-import recluseSkill from '../assets/char/RecluseCharacterSkill.png';
-import scholarSkill from '../assets/char/ScholarCharacterSkill.png';
-import wylderPassive from '../assets/char/WylderPassiveAbility.png';
-import executorSkill from '../assets/char/ExecutorCharacterSkill.png';
-import magicAttrIcon from '../assets/Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import fireAttrIcon from '../assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import lightningAttrIcon from '../assets/Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import holyAttrIcon from '../assets/Negations/holy-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 
 const { Title, Text } = Typography;
 
@@ -549,18 +544,12 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
   }, [characterData]);
 
   // 隐士出招表列定义
-  const ATTR_ICONS: Record<string, string> = {
-    魔: magicAttrIcon,
-    火: fireAttrIcon,
-    雷: lightningAttrIcon,
-    圣: holyAttrIcon,
-  };
-
   const renderAttrIcons = (mark: string) => (
     <span className={styles.attrIcons}>
-      {Array.from(mark || '').map((char) =>
-        ATTR_ICONS[char] ? <img key={char} src={ATTR_ICONS[char]} alt={char} /> : null,
-      )}
+      {Array.from(mark).map((char, index) => {
+        const type = damageTypeOf(char);
+        return type ? <DamageTypeIcon key={`${char}-${index}`} type={type} size={22} alt={char} /> : null;
+      })}
     </span>
   );
 
@@ -568,7 +557,6 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
     { title: '属性痕', dataIndex: '属性痕', key: 'attributeMark', width: '12%', align: 'center' as const },
     {
       title: '属性图标',
-      dataIndex: '属性图标',
       key: 'attributeIcon',
       width: '12%',
       align: 'center' as const,
@@ -1123,7 +1111,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
               key: 'nightfarer-skills',
               label: (
                 <span className={styles.tabLabel}>
-                  <img src={wylderPassive} alt="" className={styles.tabIcon} />
+                  <AbilityIcon character="追踪者" kind="passive" size={16} />
                   渡夜者能力/技艺/绝招
                 </span>
               ),
@@ -1131,7 +1119,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
                 <div className={`content-wrapper ${styles.cardItem}`} id="nightfarer-skills">
                   <div className={styles.cardHeader}>
                     <Title level={5} className="character-card-title">
-                      <img src={wylderPassive} alt="" className={styles.titleIcon} />
+                      <AbilityIcon character="追踪者" kind="passive" className={styles.titleIcon} />
                       渡夜者能力/技艺/绝招
                     </Title>
                   </div>
@@ -1145,7 +1133,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
               key: '隐士出招表',
               label: (
                 <span className={styles.tabLabel}>
-                  <img src={recluseSkill} alt="" className={styles.tabIcon} />
+                  <AbilityIcon character="隐士" kind="skill" size={16} />
                   隐士混合魔法
                 </span>
               ),
@@ -1153,7 +1141,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
                 <div className={`content-wrapper ${styles.cardItem}`} id="hermit-magic-list">
                   <div className={styles.cardHeader}>
                     <Title level={5} className="character-card-title">
-                      <img src={recluseSkill} alt="" className={styles.titleIcon} />
+                      <AbilityIcon character="隐士" kind="skill" className={styles.titleIcon} />
                       隐士混合魔法
                       <DataSourceTooltip
                         links={[
@@ -1189,7 +1177,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
               key: '执行者攫阳',
               label: (
                 <span className={styles.tabLabel}>
-                  <img src={executorSkill} alt="" className={styles.tabIcon} />
+                  <AbilityIcon character="执行者" kind="skill" size={16} />
                   执行者攫阳
                 </span>
               ),
@@ -1197,7 +1185,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
                 <div className={`content-wrapper ${styles.cardItem}`} id="executor-parry">
                   <div className={styles.cardHeader}>
                     <Title level={5} className="character-card-title">
-                      <img src={executorSkill} alt="" className={styles.titleIcon} />
+                      <AbilityIcon character="执行者" kind="skill" className={styles.titleIcon} />
                       执行者攫阳
                     </Title>
                   </div>
@@ -1211,7 +1199,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
               key: '学者携物知识',
               label: (
                 <span className={styles.tabLabel}>
-                  <img src={scholarSkill} alt="" className={styles.tabIcon} />
+                  <AbilityIcon character="学者" kind="skill" size={16} />
                   学者携物知识
                 </span>
               ),
@@ -1219,7 +1207,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
                 <div className={`content-wrapper ${styles.cardItem}`} id="scholar-knowledge">
                   <div className={styles.cardHeader}>
                     <Title level={5} className="character-card-title">
-                      <img src={scholarSkill} alt="" className={styles.titleIcon} />
+                      <AbilityIcon character="学者" kind="skill" className={styles.titleIcon} />
                       学者携物知识
                     </Title>
                   </div>

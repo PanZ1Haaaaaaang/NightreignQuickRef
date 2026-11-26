@@ -7,44 +7,23 @@ import ailmentJson from '../data/zh-CN/ailment_data.json';
 import type { AilmentData, AilmentEffect, AilmentWeaponRow } from '../types';
 import { getCurrentTheme } from '../utils/themeUtils';
 import styles from '../styles/ailmentView.module.css';
-import hemorrhageIcon from '../assets/Resistances/hemorrhage-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import frostbiteIcon from '../assets/Resistances/frostbite-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import poisonIcon from '../assets/Resistances/poison-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import scarletRotIcon from '../assets/Resistances/scarlet-rot-status-effect-elden-ring-nightreing-wiki-guide-100px.png';
-import sleepIcon from '../assets/Resistances/sleep-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import madnessIcon from '../assets/Resistances/madness-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import blightIcon from '../assets/Resistances/blight_status_effect_elden_ring_wiki_guide_100px.png';
+import { statusTypeIn } from '../assets/icons/status';
 import CharacterAvatar from '../components/common/CharacterAvatar';
+import StatusIcon from '../components/common/StatusIcon';
 
 const DATA = ailmentJson as unknown as AilmentData;
 
-const EFFECT_ICONS: Record<string, string> = {
-  出血: hemorrhageIcon,
-  冰冻: frostbiteIcon,
-  冻伤: frostbiteIcon,
-  中毒: poisonIcon,
-  猩红腐败: scarletRotIcon,
-  腐败: scarletRotIcon,
-  睡眠: sleepIcon,
-  发狂: madnessIcon,
-  骤死: blightIcon,
-};
-
-/** 按文本里出现的异常名找图标，供「其他异常 / 战技」的数值列使用 */
-const statusIconFor = (text: string) => {
-  const hit = Object.keys(EFFECT_ICONS).find((name) => text.includes(name));
-  return hit ? EFFECT_ICONS[hit] : undefined;
-};
-
-const WithIcon: React.FC<{ src?: string; children: React.ReactNode }> = ({ src, children }) =>
-  src ? (
+const renderStatusLabel = (text: string) => {
+  const status = statusTypeIn(text);
+  return status ? (
     <span className={styles.iconLabel}>
-      <img src={src} alt="" className={styles.cellIcon} />
-      <span>{children}</span>
+      <StatusIcon status={status} size={20} className={styles.cellIcon} />
+      <span>{text}</span>
     </span>
   ) : (
-    <>{children}</>
+    text
   );
+};
 
 interface CharacterBonus {
   key: string;
@@ -107,7 +86,7 @@ const effectColumns: TableColumnsType<AilmentEffect> = [
     key: 'name',
     width: 160,
     align: 'center',
-    render: (v: string) => <WithIcon src={EFFECT_ICONS[v]}>{v}</WithIcon>,
+    render: renderStatusLabel,
   },
   { title: '效果', dataIndex: 'desc', key: 'desc' },
 ];
@@ -125,7 +104,7 @@ const listColumns: TableColumnsType<{ name: string; value: string }> = [
     title: '异常值（基础）',
     dataIndex: 'value',
     key: 'value',
-    render: (v: string) => <WithIcon src={statusIconFor(v)}>{v}</WithIcon>,
+    render: renderStatusLabel,
   },
 ];
 
@@ -135,7 +114,7 @@ const skillColumns: TableColumnsType<{ name: string; value: string }> = [
     title: '异常值',
     dataIndex: 'value',
     key: 'value',
-    render: (v: string) => <WithIcon src={statusIconFor(v)}>{v}</WithIcon>,
+    render: renderStatusLabel,
   },
 ];
 

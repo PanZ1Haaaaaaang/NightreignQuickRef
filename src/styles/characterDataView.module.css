@@ -448,17 +448,8 @@ body[tomato-theme='dark']
   gap: 6px;
 }
 
-.tabIcon {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-}
-
 .titleIcon {
-  width: 18px;
-  height: 18px;
   margin-right: 4px;
-  object-fit: contain;
   vertical-align: -3px;
 }
 
@@ -468,10 +459,4 @@ body[tomato-theme='dark']
   align-items: center;
   justify-content: center;
   gap: 3px;
-}
-
-.attrIcons img {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
 }

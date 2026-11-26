@@ -39,7 +39,6 @@ export interface CharacterData {
 
 export interface MagicMove {
   attributeMark: string; // 属性痕
-  attributeIcon: string; // 属性图标
   mixedMagic: string; // 混合魔法
   totalDamage: string; // 总伤害
   duration: string; // 持续时间

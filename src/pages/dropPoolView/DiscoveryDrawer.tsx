@@ -12,7 +12,7 @@ import {
   WEAPON_SLOT_LIMIT,
 } from '../../config/discoveryConfig';
 import CharacterAvatar from '../../components/common/CharacterAvatar';
-import ironeyePassive from '../../assets/char/IroneyePassiveAbility.png';
+import AbilityIcon from '../../components/common/AbilityIcon';
 import styles from '../../styles/dropPoolView.module.css';
 
 interface DiscoveryDrawerProps {
@@ -172,7 +172,7 @@ const DiscoveryDrawer: React.FC<DiscoveryDrawerProps> = ({ open, onClose, setup,
           <div className={styles.discInfo}>
             <span className={styles.discLabel}>
               <span className={styles.discLabelWithIcon}>
-                <img src={ironeyePassive} alt="" width={16} height={16} className={styles.discInlineIcon} />
+                <AbilityIcon character="铁之眼" kind="passive" size={16} />
                 <span>铁之眼被动「观察入微」</span>
               </span>
             </span>

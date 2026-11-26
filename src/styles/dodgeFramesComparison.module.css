@@ -166,11 +166,6 @@
   font-size: var(--font-size-xs);
 }
 
-.actionIcon {
-  flex: none;
-  object-fit: contain;
-}
-
 .track {
   display: block;
   position: relative;
