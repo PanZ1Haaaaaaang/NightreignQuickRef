@@ -1,25 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Drawer, Empty, Spin, Tag } from 'antd';
+import { Button, Drawer, Empty, Space, Spin, Tag } from 'antd';
 import { renderImpulseText } from '../../components/common/renderImpulseText';
 import type { EntryData } from '../../types';
 import { POTENTIAL_POOL_TAGS } from '../../config/potentialPoolConfig';
+import { loadPotentialEntries, PotentialEntriesMissingError } from '../../features/entries/potentialEntries';
 import styles from '../../styles/dropPoolView.module.css';
-
-/** 43 条「局内-潜在能力」词条（约 13KB）：只在第一次点开 buff 槽位时才拉这份 chunk */
-let cache: EntryData[] | null = null;
-let pending: Promise<EntryData[]> | null = null;
-
-const loadPotentialEntries = (): Promise<EntryData[]> => {
-  if (cache) return Promise.resolve(cache);
-  if (!pending) {
-    pending = import('../../data/zh-CN/in-game_potential_entries_zh-CN.json').then((mod) => {
-      const data = ((mod as { default?: EntryData[] }).default ?? mod) as EntryData[];
-      cache = data;
-      return data;
-    });
-  }
-  return pending;
-};
 
 interface PotentialPoolDrawerProps {
   open: boolean;
@@ -48,11 +33,12 @@ const activeValueIndex = (entry: EntryData, poolKey: string): number | null => {
 
 /**
  * 潜在能力池明细：点掉球卡片上的 buff 槽位打开，列出这个池可能出现的词条。
- * 词条数据按需动态 import，加载期间在抽屉里转圈。
+ * 打开抽屉后按需请求词条。
  */
 const PotentialPoolDrawer: React.FC<PotentialPoolDrawerProps> = ({ open, onClose, poolKey }) => {
-  const [entries, setEntries] = useState<EntryData[] | null>(cache);
-  const [failed, setFailed] = useState(false);
+  const [entries, setEntries] = useState<EntryData[] | null>(null);
+  const [failure, setFailure] = useState<'retry' | 'reload' | null>(null);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     if (!open || entries || !poolKey) return;
@@ -61,13 +47,23 @@ const PotentialPoolDrawer: React.FC<PotentialPoolDrawerProps> = ({ open, onClose
       .then((all) => {
         if (alive) setEntries(all);
       })
-      .catch(() => {
-        if (alive) setFailed(true);
+      .catch((error: unknown) => {
+        if (alive) setFailure(error instanceof PotentialEntriesMissingError ? 'reload' : 'retry');
       });
     return () => {
       alive = false;
     };
-  }, [open, entries, poolKey]);
+  }, [open, entries, poolKey, attempt]);
+
+  const retry = () => {
+    setFailure(null);
+    setAttempt((previous) => previous + 1);
+  };
+
+  const close = () => {
+    setFailure(null);
+    onClose();
+  };
 
   const meta = poolKey ? POTENTIAL_POOL_TAGS[poolKey] : undefined;
   const list = useMemo(
@@ -91,10 +87,32 @@ const PotentialPoolDrawer: React.FC<PotentialPoolDrawerProps> = ({ open, onClose
   };
 
   const renderBody = () => {
-    if (failed) return <Empty description="加载失败，关闭后重试" />;
+    if (failure) {
+      const resourceMissing = failure === 'reload';
+      return (
+        <Empty
+          description={
+            <span role="alert">
+              {resourceMissing ? '词条资源无法找到，页面可能已更新。' : '潜在能力词条加载失败。'}
+            </span>
+          }
+        >
+          <Space wrap>
+            <Button type={resourceMissing ? 'default' : 'primary'} onClick={retry}>
+              重试
+            </Button>
+            {resourceMissing && (
+              <Button type="primary" onClick={() => window.location.reload()}>
+                刷新页面
+              </Button>
+            )}
+          </Space>
+        </Empty>
+      );
+    }
     if (!entries) {
       return (
-        <div className={styles.buffLoading}>
+        <div className={styles.buffLoading} role="status">
           <Spin />
           <span>正在加载词条…</span>
         </div>
@@ -129,7 +147,7 @@ const PotentialPoolDrawer: React.FC<PotentialPoolDrawerProps> = ({ open, onClose
   return (
     <Drawer
       open={open}
-      onClose={onClose}
+      onClose={close}
       size="min(560px, 100vw)"
       // 与「基池对照表」同因：避开左上角 fixed-logo（z-index 1050）
       zIndex={1100}

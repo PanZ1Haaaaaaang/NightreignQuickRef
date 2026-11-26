@@ -2,6 +2,7 @@
 import { message } from './feedback';
 import type { CharacterDetailData, DodgeFrameData, EntryData } from '../types';
 import { loadNightfarerLevels } from '../features/nightfarers/levels';
+import { loadPotentialEntries } from '../features/entries/potentialEntries';
 
 // 词条数据类型统一由 src/types 定义（此处 re-export，避免两份定义漂移：
 // 曾因这里的副本缺 tags，导致深夜模式词条的「未实装」标签与筛选失效）
@@ -89,7 +90,7 @@ const GROUP_FILES: Record<DataGroup, GroupFile[]> = {
     { key: 'inGameEntries', load: () => import('../data/zh-CN/in-game_entries_zh-CN.json') },
     {
       key: 'inGamePotentialEntries',
-      load: () => import('../data/zh-CN/in-game_potential_entries_zh-CN.json'),
+      load: async () => ({ default: await loadPotentialEntries() }),
     },
     { key: 'enhancementCategories', load: () => import('../data/zh-CN/enhancement_categories.json') },
     { key: 'itemEffects', load: () => import('../data/zh-CN/item_effect.json') },
