@@ -7,6 +7,7 @@ import type { NightfarerSkillData, NightfarerSkillRow } from '../../types';
 import { abilityKindOf } from '../../assets/icons/abilities';
 import AbilityIcon from '../../components/common/AbilityIcon';
 import CharacterAvatar from '../../components/common/CharacterAvatar';
+import { renderImpulseText } from '../../components/common/renderImpulseText';
 import styles from '../../styles/nightfarerSkills.module.css';
 
 const DATA = skillJson as unknown as NightfarerSkillData;
@@ -71,7 +72,7 @@ const NightfarerSkills: React.FC = () => {
     { title: '补正', dataIndex: 'scaling', key: 'scaling', width: '19%' },
     { title: '削韧', dataIndex: 'poise', key: 'poise', width: '12%' },
     { title: '救人值', dataIndex: 'rescue', key: 'rescue', width: '9%', align: 'center' },
-    { title: '备注', dataIndex: 'note', key: 'note' },
+    { title: '备注', dataIndex: 'note', key: 'note', render: renderImpulseText },
   ];
 
   return (

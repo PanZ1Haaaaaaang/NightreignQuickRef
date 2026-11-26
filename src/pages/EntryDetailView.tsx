@@ -11,6 +11,7 @@ import { debounce } from 'lodash';
 import { SearchOutlined } from '@ant-design/icons';
 import CustomPagination from '../components/CustomPagination';
 import CharacterAvatar from '../components/common/CharacterAvatar';
+import { renderImpulseText } from '../components/common/renderImpulseText';
 import { POTENTIAL_POOL_TAGS } from '../config/potentialPoolConfig';
 import { renderHintOption } from '../components/HintOption';
 import { TALISMAN_CATEGORIES, TALISMAN_CATEGORY_ORDER } from '../config/talismanCategoryConfig';
@@ -612,7 +613,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
               fontSize: '13px',
             }}
           >
-            {text}
+            {renderImpulseText(text)}
           </div>
         );
       },
@@ -714,7 +715,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
               fontSize: '13px',
             }}
           >
-            {text}
+            {renderImpulseText(text)}
           </div>
         );
       },
@@ -776,7 +777,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
               fontSize: '13px',
             }}
           >
-            {text}
+            {renderImpulseText(text)}
           </div>
         );
       },
@@ -894,7 +895,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
               fontSize: '13px',
             }}
           >
-            {text}
+            {renderImpulseText(text)}
           </div>
         );
       },
@@ -972,7 +973,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
       dataIndex: 'effect',
       key: 'effect',
       width: '70%',
-      render: (text) => text || '-',
+      render: (text) => renderImpulseText(text || '-'),
     },
   ];
 

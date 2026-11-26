@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Drawer, Empty, Spin, Tag } from 'antd';
+import { renderImpulseText } from '../../components/common/renderImpulseText';
 import type { EntryData } from '../../types';
 import { POTENTIAL_POOL_TAGS } from '../../config/potentialPoolConfig';
 import styles from '../../styles/dropPoolView.module.css';
@@ -76,13 +77,15 @@ const PotentialPoolDrawer: React.FC<PotentialPoolDrawerProps> = ({ open, onClose
 
   /** 「普通 +10% / 深夜 +15%」：高亮当前池对应的那个数值，另一个淡显 */
   const renderExplanation = (entry: EntryData) => {
+    const explanation = entry.explanation;
+    if (!explanation) return null;
     const activeIndex = poolKey ? activeValueIndex(entry, poolKey) : null;
-    if (activeIndex === null || !entry.explanation) return entry.explanation;
-    const parts = entry.explanation.split(' / ');
+    if (activeIndex === null) return renderImpulseText(explanation);
+    const parts = explanation.split(' / ');
     return parts.map((part, index) => (
       <span key={index} className={index === activeIndex ? styles.buffValue : styles.buffValueMuted}>
         {index > 0 ? ' / ' : ''}
-        {part}
+        {renderImpulseText(part)}
       </span>
     ));
   };

@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Select, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import { renderImpulseText } from '../../components/common/renderImpulseText';
 import enemyRaceJson from '../../data/zh-CN/enemy_race_data.json';
 
 // ---- 数据类型（对应 src/data/zh-CN/enemy_race_data.json 结构）----
@@ -202,14 +203,18 @@ const SpecialBuffSection: React.FC = () => {
       dataIndex: 'effect',
       key: 'effect',
       width: 460,
-      render: (value: string) => <span style={{ whiteSpace: 'pre-line' }}>{value}</span>,
+      render: (value: string) => <span style={{ whiteSpace: 'pre-line' }}>{renderImpulseText(value)}</span>,
     },
     {
       title: '备注',
       dataIndex: 'note',
       key: 'note',
       render: (value: string) =>
-        value ? <span style={{ whiteSpace: 'pre-line' }}>{value}</span> : <span style={{ color: '#999' }}>{DASH}</span>,
+        value ? (
+          <span style={{ whiteSpace: 'pre-line' }}>{renderImpulseText(value)}</span>
+        ) : (
+          <span style={{ color: '#999' }}>{DASH}</span>
+        ),
     },
   ];
 

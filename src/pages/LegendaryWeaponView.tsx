@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Segmented } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import CharacterAvatar from '../components/common/CharacterAvatar';
+import { renderImpulseText } from '../components/common/renderImpulseText';
 import DataManager from '../utils/dataManager';
 
 type OnChange = NonNullable<TableProps<TransformedWeaponEffect>['onChange']>;
@@ -293,6 +294,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep: c
       dataIndex: '描述',
       key: '描述',
       width: 300,
+      render: renderImpulseText,
     },
     {
       title: '削韧',

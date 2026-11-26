@@ -1,6 +1,8 @@
 import React from 'react';
 import { Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
+import ImpulseBadge from '../components/common/ImpulseBadge';
+import { renderImpulseText } from '../components/common/renderImpulseText';
 import impulseJson from '../data/zh-CN/impulse_data.json';
 import type { ImpulseData, ImpulseRow } from '../types';
 import styles from '../styles/impulseView.module.css';
@@ -8,6 +10,7 @@ import styles from '../styles/impulseView.module.css';
 const DATA = impulseJson as unknown as ImpulseData;
 
 const DASH = <span className={styles.muted}>—</span>;
+const PLAYER_KNOCKDOWN_LEVELS = [4, 7, 10];
 
 const ImpulseView: React.FC = () => {
   const columns: TableColumnsType<ImpulseRow> = [
@@ -17,7 +20,7 @@ const ImpulseView: React.FC = () => {
       key: 'level',
       width: '7%',
       align: 'center',
-      render: (level: number) => <span className={styles.level}>{level}</span>,
+      render: (level: number) => <ImpulseBadge level={level} highlight={PLAYER_KNOCKDOWN_LEVELS.includes(level)} />,
     },
     {
       title: '效果',
@@ -86,7 +89,7 @@ const ImpulseView: React.FC = () => {
       <div className={styles.notes}>
         {DATA.notes.map((note) => (
           <div key={note} className={styles.noteItem}>
-            {note}
+            {renderImpulseText(note)}
           </div>
         ))}
       </div>
@@ -99,12 +102,17 @@ const ImpulseView: React.FC = () => {
         bordered
         pagination={false}
         rowClassName={(record) =>
-          record.level === 12 ? styles.deprecatedRow : [4, 7, 10].includes(record.level) ? styles.knockdownRow : ''
+          record.level === 12
+            ? styles.deprecatedRow
+            : PLAYER_KNOCKDOWN_LEVELS.includes(record.level)
+              ? styles.knockdownRow
+              : ''
         }
       />
 
       <div className={styles.source}>
-        数据来自 {DATA.meta.source} 的冲击力视频；4/7/10 号行标红底，表示受击方为玩家时「无视韧性、但改为站立硬直」。
+        数据来自 {DATA.meta.source} 的冲击力视频。
+        {renderImpulseText('表中 4/7/10 号冲击力以红底标出，表示受击方为玩家时「无视韧性、但改为站立硬直」。')}
         具体说明见{' '}
         <a href={DATA.meta.videoUrl} target="_blank" rel="noreferrer">
           bilibili 视频

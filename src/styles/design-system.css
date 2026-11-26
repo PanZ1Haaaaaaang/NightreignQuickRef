@@ -36,6 +36,16 @@
   --color-error: #ff4d4f;
   --color-info: #1890ff;
 
+  /* 冲击力徽章 */
+  --impulse-size-sm: 20px;
+  --impulse-size-md: 26px;
+  --impulse-size-lg: 32px;
+  --impulse-bg: rgba(22, 119, 255, 0.1);
+  --impulse-color: var(--color-primary-500);
+  --impulse-highlight-bg: rgba(255, 77, 79, 0.12);
+  --impulse-highlight-color: #a8071a;
+  --impulse-highlight-border: rgba(255, 77, 79, 0.35);
+
   /* 亮色模式主题 */
   --theme-bg-primary: #ffffff;
   --theme-bg-secondary: #fafafa;
@@ -122,6 +132,12 @@ body[tomato-theme='dark'] {
   --theme-border: #434343;
   --theme-shadow: rgba(0, 0, 0, 0.3);
   --theme-shadow-hover: rgba(0, 0, 0, 0.4);
+
+  --impulse-bg: rgba(22, 119, 255, 0.16);
+  --impulse-color: var(--color-primary-300);
+  --impulse-highlight-bg: rgba(255, 77, 79, 0.18);
+  --impulse-highlight-color: #ff7875;
+  --impulse-highlight-border: rgba(255, 77, 79, 0.5);
 
   /* 深色模式下的自定义标题颜色 - 更鲜明的变体 */
   --color-title-primary: #8a9dd8;

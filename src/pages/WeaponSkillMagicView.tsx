@@ -13,6 +13,7 @@ import weaponArtCategoryHints from '../data/zh-CN/weapon_art_category_hints.json
 import { renderHintOption } from '../components/HintOption';
 import { DAMAGE_LABELS, damageTypeOf } from '../assets/icons/damage';
 import DamageTypeIcon from '../components/common/DamageTypeIcon';
+import { renderImpulseText } from '../components/common/renderImpulseText';
 import type { DamageType } from '../types';
 
 type Row = Record<string, string>;
@@ -341,7 +342,7 @@ const DataTable: React.FC<DataTableProps> = ({
         expandedRowRender: (record: Row) => (
           <div className="weapon-skill-detail-panel">
             <div className="weapon-skill-detail-title">{detail.title}</div>
-            <div className="weapon-skill-detail-text">{record[detail.field]}</div>
+            <div className="weapon-skill-detail-text">{renderImpulseText(record[detail.field])}</div>
           </div>
         ),
         rowExpandable: (record: Row) => Boolean(record[detail.field]),
@@ -471,11 +472,17 @@ const DataTable: React.FC<DataTableProps> = ({
   );
 };
 
-const textColumn = (title: string, key: string, width: number): ColumnsType<Row>[number] => ({
+const textColumn = (
+  title: string,
+  key: string,
+  width: number,
+  render?: (value: string) => React.ReactNode,
+): ColumnsType<Row>[number] => ({
   title,
   dataIndex: key,
   key,
   width,
+  render,
 });
 
 const damageTypeColumn = (width: number): ColumnsType<Row>[number] => ({
@@ -500,15 +507,15 @@ const spellColumns: ColumnsType<Row> = [
   damageTypeColumn(90),
   textColumn('加成', '加成', 90),
   textColumn('削韧', '削韧', 160),
-  textColumn('备注', '备注', 320),
+  textColumn('备注', '备注', 320, renderImpulseText),
 ];
 
 const supportColumns: ColumnsType<Row> = [
   textColumn('名称', '名称', 120),
-  textColumn('效果', '效果', 480),
+  textColumn('效果', '效果', 480, renderImpulseText),
   textColumn('耗蓝', '耗蓝', 80),
   textColumn('持续时间', '持续时间', 100),
-  textColumn('备注', '备注', 280),
+  textColumn('备注', '备注', 280, renderImpulseText),
 ];
 
 const categoryColorMap: Record<string, string> = {
@@ -621,7 +628,7 @@ const weaponArtColumns: ColumnsType<Row> = [
   textColumn('物理类型', '物理类型', 90),
   damageTypeColumn(100),
   textColumn('特殊加成', '特殊加成', 100),
-  textColumn('备注', '备注', 320),
+  textColumn('备注', '备注', 320, renderImpulseText),
 ];
 
 const uniqueWeaponArtColumns: ColumnsType<Row> = [
@@ -643,7 +650,7 @@ const uniqueWeaponArtColumns: ColumnsType<Row> = [
   textColumn('特殊加成', '特殊加成', 100),
   textColumn('削韧', '削韧', 180),
   damageTypeColumn(110),
-  textColumn('备注', '备注', 320),
+  textColumn('备注', '备注', 320, renderImpulseText),
 ];
 
 const mergeKey = (...parts: string[]) => parts.join('\u0000');

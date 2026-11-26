@@ -41,6 +41,7 @@ pnpm run preview
 ## 公共 UI 与 Ant Design
 
 - 渡夜者头像以「角色数据 → 基础属性与等级成长」的圆形头像为基线，复用 `CharacterAvatar` 与十名渡夜者的资源映射。共用伤害、异常、技能图标的语义映射，并保留相邻的文字标签。冲击力徽章按场景含义展示。 [头像组件](src/components/common/CharacterAvatar.tsx) · [资源映射](src/assets/icons/characters.ts)
+- 冲击力数值统一用 `ImpulseBadge` / `renderImpulseText`。新增文案只使用当前规则可识别的写法：`冲击力7`、`7号冲击力`、`4/7/10 号冲击力`、`7号微硬直`、`7 冲`；不要写 `冲击力：7`、`冲击力为7`、`冲击力 7/10` 等未覆盖形式。4/7/10 的高亮徽章只用于冲击力表，其他页面按普通徽章展示。
 - 表格复用 `CustomPagination` 的分页条样式。对全量筛选结果排序后再切页，筛选和页长变化时回到第一页。宽表把横向滚动留在表格容器内。
 - 主题用 `App.tsx` 的 `ConfigProvider` 和现有 token。全局 antd 覆写放 `src/styles/antd-overrides.css`，局部样式用 CSS Module。反馈消息使用 `src/utils/feedback.ts` 提供的实例，由 `MessageBridge` 注入。
 - 编写 antd 组件前，按 `package.json` 的版本查询 API。当前为 6.7.2，例如 `antd info Table --version 6.7.2 --format json`。可用 antd 技能、CLI 或官方文档，也可用 `pnpm dlx @ant-design/cli` 临时运行 CLI。`Alert` 的标题用 `title`，说明用 `description`。 [antd 官方文档索引](https://ant.design/llms.txt)

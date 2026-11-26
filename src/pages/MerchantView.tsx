@@ -4,6 +4,7 @@ import { Alert, Button, Checkbox, Input, Popover, Segmented, Select, Switch, Tab
 import type { ColumnsType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
 import CustomPagination from '../components/CustomPagination';
+import { renderImpulseText } from '../components/common/renderImpulseText';
 import merchantJson from '../data/zh-CN/merchant_data.json';
 
 // ---- 数据类型（对应 src/data/zh-CN/merchant_data.json 结构）----
@@ -154,7 +155,12 @@ const ConsumableSection: React.FC<{ rows: ConsumableRow[]; merchantNo?: string |
       width: 140,
       render: (value: string | number | null) => value ?? DASH,
     },
-    { title: '效果说明', dataIndex: 'effect', key: 'effect', render: (value: string | null) => value ?? DASH },
+    {
+      title: '效果说明',
+      dataIndex: 'effect',
+      key: 'effect',
+      render: (value: string | null) => renderImpulseText(value ?? DASH),
+    },
   ];
 
   return (
@@ -633,7 +639,12 @@ const TearsSection: React.FC = () => {
 
   const columns: ColumnsType<TearRow> = [
     { title: '物品名称', dataIndex: 'name', key: 'name', width: 220 },
-    { title: '效果说明', dataIndex: 'effect', key: 'effect', render: (value: string | null) => value ?? DASH },
+    {
+      title: '效果说明',
+      dataIndex: 'effect',
+      key: 'effect',
+      render: (value: string | null) => renderImpulseText(value ?? DASH),
+    },
   ];
 
   return (

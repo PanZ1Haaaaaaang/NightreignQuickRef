@@ -26,19 +26,6 @@
   color: var(--theme-primary);
 }
 
-.level {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: rgba(22, 119, 255, 0.1);
-  color: var(--theme-primary);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
 .mono {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Table } from 'antd';
 import type { TableColumnsType } from 'antd';
+import ImpulseBadge from '../../components/common/ImpulseBadge';
+import { renderImpulseText } from '../../components/common/renderImpulseText';
 import parryJson from '../../data/zh-CN/executor_parry_data.json';
 import type {
   ExecutorParryData,
@@ -21,7 +23,16 @@ const frameColumns: TableColumnsType<ExecutorParryFrameRow> = [
 ];
 
 const impactColumns: TableColumnsType<ExecutorParryImpactRow> = [
-  { title: '冲击力', dataIndex: 'impact', key: 'impact', width: '26%' },
+  {
+    title: '冲击力',
+    dataIndex: 'impact',
+    key: 'impact',
+    width: '26%',
+    render: (impact: string) => {
+      const match = /^(\d+) - (.+)$/.exec(impact);
+      return match ? <ImpulseBadge level={Number(match[1])} effect={match[2]} /> : impact;
+    },
+  },
   { title: '示例', dataIndex: 'example', key: 'example', width: '30%' },
   { title: '弹刀成功动画', dataIndex: 'anim', key: 'anim', width: '22%', align: 'center' },
   { title: '开刃累积值', dataIndex: 'accum', key: 'accum', width: '22%', align: 'center' },
@@ -78,7 +89,7 @@ const ExecutorParry: React.FC = () => {
           <h4 className={styles.heading}>连续弹刀</h4>
           <ul className={styles.list}>
             {DATA.comboNotes.map((text) => (
-              <li key={text}>{text}</li>
+              <li key={text}>{renderImpulseText(text)}</li>
             ))}
           </ul>
         </section>
@@ -87,7 +98,7 @@ const ExecutorParry: React.FC = () => {
       <section className={styles.card}>
         <h4 className={styles.heading}>妖刀开刃</h4>
         <p className={styles.paragraph}>{DATA.blade.summary}</p>
-        <p className={styles.paragraph}>{DATA.blade.effect}</p>
+        <p className={styles.paragraph}>{renderImpulseText(DATA.blade.effect)}</p>
         <Table
           columns={impactColumns}
           dataSource={DATA.blade.rows}
@@ -112,7 +123,7 @@ const ExecutorParry: React.FC = () => {
         <h4 className={styles.heading}>结论</h4>
         <ol className={styles.list}>
           {DATA.conclusions.map((text) => (
-            <li key={text}>{text}</li>
+            <li key={text}>{renderImpulseText(text)}</li>
           ))}
         </ol>
       </section>

@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Input, Segmented, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
+import { renderImpulseText } from '../../components/common/renderImpulseText';
 import scholarJson from '../../data/zh-CN/scholar_knowledge_data.json';
 import type { ScholarCategory, ScholarItem, ScholarKnowledgeData } from '../../types';
 import styles from '../../styles/scholarKnowledge.module.css';
@@ -62,6 +63,7 @@ const ScholarKnowledge: React.FC = () => {
       dataIndex: 'lv1',
       key: 'lv1',
       width: '26%',
+      render: renderImpulseText,
     },
     {
       title: (
@@ -72,6 +74,7 @@ const ScholarKnowledge: React.FC = () => {
       dataIndex: 'lv2',
       key: 'lv2',
       width: '28%',
+      render: renderImpulseText,
     },
     {
       title: (

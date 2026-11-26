@@ -6,6 +6,8 @@ import aggroJson from '../data/zh-CN/aggro_data.json';
 import spellJson from '../data/zh-CN/aggro_spell_data.json';
 import type { AggroData, AggroRow, AggroSpellData } from '../types';
 import CustomPagination from '../components/CustomPagination';
+import ImpulseBadge from '../components/common/ImpulseBadge';
+import { renderImpulseText } from '../components/common/renderImpulseText';
 import styles from '../styles/aggroView.module.css';
 
 const DATA = aggroJson as unknown as AggroData;
@@ -32,6 +34,9 @@ const toRecords = (rows: AggroRow[], prefix: string): AggroRecord[] =>
 
 const fmt = (v: number | null | undefined) => (v === null || v === undefined ? '—' : v.toLocaleString());
 
+const renderImpulse = (level?: number | null) =>
+  level === null || level === undefined ? fmt(level) : <ImpulseBadge level={level} />;
+
 const compareNum = (a: number | null, b: number | null) => {
   if (a === null && b === null) return 0;
   if (a === null) return 1;
@@ -47,7 +52,7 @@ const aggroColumns: TableColumnsType<AggroRecord> = [
     key: 'impulse',
     width: 80,
     align: 'center',
-    render: fmt,
+    render: renderImpulse,
     sorter: (a, b) => compareNum(a.impulse, b.impulse),
   },
   {
@@ -88,7 +93,7 @@ interface ImpulseRecord {
 }
 
 const impulseColumns: TableColumnsType<ImpulseRecord> = [
-  { title: '冲击力', dataIndex: 'level', key: 'level', width: 80, align: 'center' },
+  { title: '冲击力', dataIndex: 'level', key: 'level', width: 80, align: 'center', render: renderImpulse },
   {
     title: '仇恨值',
     dataIndex: 'aggro',
@@ -201,7 +206,7 @@ const AggroView: React.FC = () => {
     <div className={styles.wrap} id="aggro-mechanics">
       {DATA.intro.map((text) => (
         <p key={text} className={styles.paragraph}>
-          {text}
+          {renderImpulseText(text)}
         </p>
       ))}
 
