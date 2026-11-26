@@ -1,21 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import {
-  Alert,
-  Button,
-  Empty,
-  Grid,
-  Input,
-  Pagination,
-  Segmented,
-  Select,
-  Space,
-  Switch,
-  Tag,
-  Tooltip,
-  Typography,
-} from 'antd';
+import { Alert, Button, Empty, Grid, Input, Segmented, Select, Space, Switch, Tag, Tooltip, Typography } from 'antd';
 import { EyeOutlined, InfoCircleOutlined, TableOutlined } from '@ant-design/icons';
 import CharacterAvatar from '../components/common/CharacterAvatar';
+import CustomPagination from '../components/CustomPagination';
+import { usePagination } from '../hooks/usePagination';
 import dropPoolsJson from '../data/zh-CN/drop_pools.json';
 import invaderAffixJson from '../data/zh-CN/invader_affix_data.json';
 import type {
@@ -275,7 +263,6 @@ const DropPoolView: React.FC = () => {
   const [keyword, setKeyword] = useState('');
   const [terrain, setTerrain] = useState<TerrainKey | null>(null);
   const [goldOnly, setGoldOnly] = useState(false);
-  const [page, setPage] = useState(1);
   const [basePoolOpen, setBasePoolOpen] = useState(false);
   /** 从卡片槽位点进来时要高亮的基池 kind；从按钮打开则为 null */
   const [basePoolKind, setBasePoolKind] = useState<string | null>(null);
@@ -320,8 +307,8 @@ const DropPoolView: React.FC = () => {
     setBuffOpen(true);
   };
 
+  const search = keyword.trim().toLowerCase();
   const filtered = useMemo(() => {
-    const kw = keyword.trim().toLowerCase();
     const night = mode === 'night';
     return DATA.groups.filter((group) => {
       // 黑夜入侵者：只在「深夜 · 入侵据点」出现
@@ -336,20 +323,23 @@ const DropPoolView: React.FC = () => {
       const options = optionsOf(group, night, nightState);
       // 只看能出金：当前展示的选项里带金武器池 / 金角色池
       if (goldOnly && !hasGoldDrop(options)) return false;
-      if (kw) {
+      if (search) {
         const ids = options.map((option) => String(option.id));
         const matched =
-          ids.some((id) => id.includes(kw)) || group.names.some((name) => name.toLowerCase().includes(kw));
+          ids.some((id) => id.includes(search)) || group.names.some((name) => name.toLowerCase().includes(search));
         if (!matched) return false;
       }
       return true;
     });
-  }, [mode, nightState, keyword, terrain, goldOnly]);
+  }, [mode, nightState, search, terrain, goldOnly]);
 
-  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const currentPage = Math.min(page, pageCount);
+  const { currentPage, showPagination, onPageChange } = usePagination(
+    filtered.length,
+    PAGE_SIZE,
+    JSON.stringify([mode, nightState, search, terrain, goldOnly]),
+    PAGE_SIZE + 1,
+  );
   const pageGroups = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
-  const resetPage = () => setPage(1);
 
   const stateLabel = DATA.meta.states[nightState] ?? '';
 
@@ -424,7 +414,6 @@ const DropPoolView: React.FC = () => {
               onChange={(value) => {
                 setMode(value as 'normal' | 'night');
                 setNightState('normal');
-                resetPage();
               }}
               options={[
                 { label: '普通', value: 'normal' },
@@ -438,10 +427,7 @@ const DropPoolView: React.FC = () => {
               <span className={styles.filterLabel}>据点状态</span>
               <Segmented
                 value={nightState}
-                onChange={(value) => {
-                  setNightState(value as NightState);
-                  resetPage();
-                }}
+                onChange={(value) => setNightState(value as NightState)}
                 options={[
                   { label: '普通据点', value: 'normal' },
                   { label: '变异据点', value: 'mutation' },
@@ -458,33 +444,21 @@ const DropPoolView: React.FC = () => {
               placeholder="全部地形"
               style={{ width: 120 }}
               value={terrain}
-              onChange={(value) => {
-                setTerrain((value as TerrainKey | undefined) ?? null);
-                resetPage();
-              }}
+              onChange={(value) => setTerrain((value as TerrainKey | undefined) ?? null)}
               options={TERRAIN_OPTIONS}
             />
           </Space>
 
           <Space size={[8, 8]} wrap>
             <span className={styles.filterLabel}>只看能出金</span>
-            <Switch
-              checked={goldOnly}
-              onChange={(checked) => {
-                setGoldOnly(checked);
-                resetPage();
-              }}
-            />
+            <Switch checked={goldOnly} onChange={setGoldOnly} />
           </Space>
 
           <Input.Search
             allowClear
             placeholder="搜索地形 / 敌人 / 掉落ID"
             style={{ width: 240, maxWidth: '100%' }}
-            onChange={(event) => {
-              setKeyword(event.target.value);
-              resetPage();
-            }}
+            onChange={(event) => setKeyword(event.target.value)}
           />
         </Space>
       </div>
@@ -514,16 +488,16 @@ const DropPoolView: React.FC = () => {
               />
             ))}
           </div>
-          <div className={styles.pager}>
-            <Pagination
-              current={currentPage}
+          {showPagination && (
+            <CustomPagination
+              currentPage={currentPage}
               pageSize={PAGE_SIZE}
-              total={filtered.length}
-              showSizeChanger={false}
-              showTotal={(total) => `共 ${total} 颗球`}
-              onChange={(nextPage) => setPage(nextPage)}
+              totalItems={filtered.length}
+              onPageChange={onPageChange}
+              itemUnit="颗球"
+              ariaLabel="掉落池分页"
             />
-          </div>
+          )}
         </>
       )}
 

@@ -528,12 +528,6 @@ body[tomato-theme='dark'] .percentDown {
   color: #ff7875;
 }
 
-.pager {
-  display: flex;
-  justify-content: center;
-  margin-top: 16px;
-}
-
 .footnote {
   margin-top: 16px;
 }

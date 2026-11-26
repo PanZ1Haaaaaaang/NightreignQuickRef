@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { MIN_PAGINATED_ROWS } from '../config/tablePagination';
 
 type PaginationState = { page: number; pageSize: number; contextKey: string };
 
@@ -9,9 +8,9 @@ const reconcilePage = (state: PaginationState, contextKey: string, pageSize: num
   return state;
 };
 
-export const useTablePagination = (totalItems: number, pageSize: number, contextKey: string) => {
+export const usePagination = (totalItems: number, pageSize: number, contextKey: string, minItems: number) => {
   const [state, setState] = useState({ page: 1, pageSize, contextKey });
-  const showPagination = totalItems >= MIN_PAGINATED_ROWS;
+  const showPagination = totalItems >= minItems;
   const lastPage = showPagination ? Math.ceil(totalItems / pageSize) : 1;
   const currentPage = reconcilePage(state, contextKey, pageSize, lastPage).page;
 

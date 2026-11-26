@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Table } from 'antd';
 import type { TableColumnType, TableProps } from 'antd';
-import { DEFAULT_TABLE_PAGE_SIZE } from '../../config/tablePagination';
-import { useTablePagination } from '../../hooks/useTablePagination';
+import { DEFAULT_TABLE_PAGE_SIZE, MIN_PAGINATED_ROWS } from '../../config/tablePagination';
+import { usePagination } from '../../hooks/usePagination';
 import CustomPagination from '../CustomPagination';
 
 export type PageLocalColumns<Row extends object> = (TableColumnType<Row> & {
@@ -32,7 +32,12 @@ const PagedTable = <Row extends object>({
 }: PagedTableProps<Row>) => {
   const [localPageSize, setLocalPageSize] = useState(DEFAULT_TABLE_PAGE_SIZE);
   const pageSize = controlledPageSize ?? localPageSize;
-  const { currentPage, showPagination, onPageChange } = useTablePagination(dataSource.length, pageSize, contextKey);
+  const { currentPage, showPagination, onPageChange } = usePagination(
+    dataSource.length,
+    pageSize,
+    contextKey,
+    MIN_PAGINATED_ROWS,
+  );
   const start = (currentPage - 1) * pageSize;
   const pageLocal = typeof columns === 'function';
   const tableRows = pageLocal && showPagination ? dataSource.slice(start, start + pageSize) : dataSource;

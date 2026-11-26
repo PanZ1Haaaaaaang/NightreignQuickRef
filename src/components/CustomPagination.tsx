@@ -9,17 +9,20 @@ export interface CustomPaginationProps {
   pageSize: number;
   totalItems: number;
   onPageChange: (page: number) => void;
-  onPageSizeChange: (pageSize: number) => void;
+  onPageSizeChange?: (pageSize: number) => void;
+  itemUnit?: string;
+  ariaLabel?: string;
   loading?: boolean;
 }
 
-// 词条详情页 / 武器战技页共用的分页条
 const CustomPagination: React.FC<CustomPaginationProps> = ({
   currentPage,
   pageSize,
   totalItems,
   onPageChange,
   onPageSizeChange,
+  itemUnit = '条记录',
+  ariaLabel = '表格分页',
   loading = false,
 }) => {
   const totalPages = Math.ceil(totalItems / pageSize);
@@ -30,7 +33,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
 
   return (
     <nav
-      aria-label="表格分页"
+      aria-label={ariaLabel}
       className="custom-pagination-row"
       style={{
         display: 'flex',
@@ -40,19 +43,29 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
       }}
     >
       <div className="page-size-controls" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <span style={{ color: 'var(--theme-text-secondary)', fontSize: '14px' }}>每页显示</span>
-        <Select
-          aria-label="每页显示条数"
-          value={pageSize}
-          onChange={(value) => {
-            onPageSizeChange(value);
-            onPageChange(1);
-          }}
-          options={pageSizeOptions}
-          size="small"
-          style={{ width: '100px' }}
-        />
-        <span style={{ color: 'var(--theme-text-secondary)', fontSize: '14px' }}>共 {totalItems} 条记录</span>
+        {onPageSizeChange ? (
+          <>
+            <span className="pagination-label">每页显示</span>
+            <Select
+              aria-label="每页显示条数"
+              value={pageSize}
+              onChange={(value) => {
+                onPageSizeChange(value);
+                onPageChange(1);
+              }}
+              options={pageSizeOptions}
+              size="small"
+              style={{ width: '100px' }}
+            />
+          </>
+        ) : (
+          <span className="pagination-label">
+            每页 {pageSize} {itemUnit}
+          </span>
+        )}
+        <span className="pagination-label">
+          共 {totalItems} {itemUnit}
+        </span>
       </div>
 
       <div className="page-nav-controls" style={{ display: 'flex', alignItems: 'center' }}>
