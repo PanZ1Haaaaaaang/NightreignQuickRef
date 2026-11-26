@@ -1,5 +1,8 @@
 import React from 'react';
 import { Button, Select } from 'antd';
+import { TABLE_PAGE_SIZES } from '../config/tablePagination';
+
+const pageSizeOptions = TABLE_PAGE_SIZES.map((size) => ({ value: size, label: `${size} 条` }));
 
 export interface CustomPaginationProps {
   currentPage: number;
@@ -26,7 +29,8 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
   }
 
   return (
-    <div
+    <nav
+      aria-label="表格分页"
       className="custom-pagination-row"
       style={{
         display: 'flex',
@@ -39,19 +43,13 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
       <div className="page-size-controls" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         <span style={{ color: 'var(--theme-text-secondary)', fontSize: '14px' }}>每页显示</span>
         <Select
-          value={pageSize.toString()}
+          aria-label="每页显示条数"
+          value={pageSize}
           onChange={(value) => {
-            onPageSizeChange(Number(value));
+            onPageSizeChange(value);
             onPageChange(1);
           }}
-          options={[
-            { value: '15', label: '15 条' },
-            { value: '20', label: '20 条' },
-            { value: '30', label: '30 条' },
-            { value: '50', label: '50 条' },
-            { value: '80', label: '80 条' },
-            { value: '100', label: '100 条' },
-          ]}
+          options={pageSizeOptions}
           size="small"
           style={{ width: '100px' }}
         />
@@ -64,8 +62,9 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
         </Button>
 
         <span
+          role="status"
+          className="page-position"
           style={{
-            margin: '0 15px',
             color: 'var(--theme-text-secondary)',
             fontSize: '14px',
           }}
@@ -77,7 +76,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
           下一页
         </Button>
       </div>
-    </div>
+    </nav>
   );
 };
 

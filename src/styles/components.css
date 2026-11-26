@@ -992,6 +992,10 @@ body[tomato-theme='dark'] .todo-page-tag {
 .custom-pagination-row {
   width: 100%;
 }
+.custom-pagination-row .page-position {
+  margin-inline: 15px;
+  white-space: nowrap;
+}
 @media (max-width: 999px) {
   .custom-pagination-row {
     flex-direction: column !important;
@@ -1005,6 +1009,11 @@ body[tomato-theme='dark'] .todo-page-tag {
 
   .custom-pagination-row .page-nav-controls {
     justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .custom-pagination-row .page-position {
+    margin-inline: 0;
   }
 }
 

@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Image, Input, Segmented, Select, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import weaknessJson from '../../data/zh-CN/boss_weakness_data.json';
 import { damageTypeOf } from '../../assets/icons/damage';
 import { statusTypeIn } from '../../assets/icons/status';
-import CustomPagination from '../../components/CustomPagination';
+import PagedTable from '../../components/common/PagedTable';
 import DamageTypeIcon from '../../components/common/DamageTypeIcon';
 import StatusIcon from '../../components/common/StatusIcon';
 import beastImg from '../../assets/BossRelics/night-of-the-beast.avif';
@@ -139,30 +139,22 @@ const groupSpans = (rows: BossWeaknessRow[]) => {
 
 const PLAYER_LABEL: Record<PlayerCount, string> = { '1': '单人', '2': '双人', '3': '三人' };
 
-const BuildupTable: React.FC<{ rows: BuildupRow[]; keyword: string; damageTypes: string[]; empty: string }> = ({
-  rows,
-  keyword,
-  damageTypes,
-  empty,
-}) => {
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
+const BuildupTable: React.FC<{
+  rows: BuildupRow[];
+  category: string;
+  keyword: string;
+  damageTypes: string[];
+}> = ({ rows, category, keyword, damageTypes }) => {
+  const search = keyword.trim();
 
   const filtered = useMemo(() => {
-    const kw = keyword.trim();
     const selected = damageTypes.length > 0 ? new Set(damageTypes) : null;
     return rows.filter((row) => {
       if (selected && !selected.has(baseAttr(row.attr))) return false;
-      if (!kw) return true;
-      return row.name.includes(kw) || row.attr.includes(kw) || row.value.includes(kw);
+      if (!search) return true;
+      return row.name.includes(search) || row.attr.includes(search) || row.value.includes(search);
     });
-  }, [rows, keyword, damageTypes]);
-
-  useEffect(() => {
-    setPage(1);
-  }, [keyword, rows, damageTypes]);
-
-  const paged = useMemo(() => filtered.slice((page - 1) * pageSize, page * pageSize), [filtered, page, pageSize]);
+  }, [rows, search, damageTypes]);
 
   const columns: TableColumnsType<BuildupRow> = [
     { title: '名称', dataIndex: 'name', key: 'name', width: '32%' },
@@ -177,25 +169,16 @@ const BuildupTable: React.FC<{ rows: BuildupRow[]; keyword: string; damageTypes:
   ];
 
   return (
-    <>
-      <Table
-        columns={columns}
-        dataSource={paged}
-        rowKey={(row) => `${row.name}-${row.attr}`}
-        size="small"
-        bordered
-        pagination={false}
-        scroll={{ x: 520 }}
-        locale={{ emptyText: empty }}
-      />
-      <CustomPagination
-        currentPage={page}
-        pageSize={pageSize}
-        totalItems={filtered.length}
-        onPageChange={setPage}
-        onPageSizeChange={setPageSize}
-      />
-    </>
+    <PagedTable
+      columns={columns}
+      dataSource={filtered}
+      contextKey={JSON.stringify([category, search, damageTypes])}
+      rowKey={(row) => `${row.name}-${row.attr}`}
+      size="small"
+      bordered
+      scroll={{ x: 520 }}
+      locale={{ emptyText: '没有匹配的条目' }}
+    />
   );
 };
 
@@ -351,9 +334,9 @@ const WeaknessSection: React.FC = () => {
       ) : (
         <BuildupTable
           rows={tab === 'arts' ? DATA.arts : tab === 'spells' ? DATA.spells : DATA.items}
+          category={tab}
           keyword={keyword}
           damageTypes={damageTypes}
-          empty="没有匹配的条目"
         />
       )}
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import type { PageTabProps } from '../config/navigationConfig';
-import { Table, Input, Select, Tabs, Tag, Spin, Button, Checkbox, Space, Tooltip } from 'antd';
+import { Input, Select, Tabs, Tag, Spin, Button, Checkbox, Space, Tooltip } from 'antd';
 import { message } from '../utils/feedback';
 import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
@@ -9,10 +9,12 @@ import DataManager from '../utils/dataManager';
 import type { EnhancementCategory, ItemEffect } from '../utils/dataManager';
 import { debounce } from 'lodash';
 import { SearchOutlined } from '@ant-design/icons';
-import CustomPagination from '../components/CustomPagination';
+import PagedTable from '../components/common/PagedTable';
+import type { PageLocalColumns } from '../components/common/PagedTable';
 import CharacterAvatar from '../components/common/CharacterAvatar';
 import { renderImpulseText } from '../components/common/renderImpulseText';
 import { POTENTIAL_POOL_TAGS } from '../config/potentialPoolConfig';
+import { DEFAULT_TABLE_PAGE_SIZE } from '../config/tablePagination';
 import { renderHintOption } from '../components/HintOption';
 import { TALISMAN_CATEGORIES, TALISMAN_CATEGORY_ORDER } from '../config/talismanCategoryConfig';
 
@@ -21,7 +23,6 @@ interface CustomSearchProps {
   placeholder: string;
   value: string;
   onChange: (value: string) => void;
-  onSearch?: (value: string) => void;
   className?: string;
   allowClear?: boolean;
 }
@@ -31,21 +32,15 @@ const CustomSearch: React.FC<CustomSearchProps> = ({
   placeholder,
   value,
   onChange,
-  onSearch,
   className = '',
   allowClear = true,
 }) => {
   const [inputValue, setInputValue] = useState(value);
 
   // 防抖处理搜索
-  const debouncedSearch = useMemo(
-    () =>
-      debounce((searchValue: string) => {
-        onChange(searchValue);
-        onSearch?.(searchValue);
-      }, 300),
-    [onChange, onSearch],
-  );
+  const debouncedSearch = useMemo(() => debounce(onChange, 300), [onChange]);
+
+  useEffect(() => () => debouncedSearch.cancel(), [debouncedSearch]);
 
   // 处理输入变化
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,15 +51,15 @@ const CustomSearch: React.FC<CustomSearchProps> = ({
 
   // 处理回车搜索
   const handlePressEnter = () => {
+    debouncedSearch.cancel();
     onChange(inputValue);
-    onSearch?.(inputValue);
   };
 
   // 处理清除
   const handleClear = () => {
+    debouncedSearch.cancel();
     setInputValue('');
     onChange('');
-    onSearch?.('');
   };
 
   // 同步外部value变化
@@ -98,6 +93,11 @@ type OnChange = NonNullable<TableProps<EntryData>['onChange']>;
 type Filters = Parameters<OnChange>[1];
 type GetSingle<T> = T extends (infer U)[] ? U : never;
 type Sorts = GetSingle<Parameters<OnChange>[2]>;
+
+const compareEntryIds = (a: EntryData, b: EntryData) =>
+  String(a.entry_id ?? '').localeCompare(String(b.entry_id ?? ''));
+const compareEntryNames = (a: EntryData, b: EntryData) =>
+  (a.entry_name || '').localeCompare(b.entry_name || '', 'zh-CN');
 
 // 数据接口
 interface DataState {
@@ -304,8 +304,8 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
   const [selectedPools, setSelectedPools] = useState<string[]>([]);
   // 「护符词条」按分类筛选
   const [selectedTalismanCategories, setSelectedTalismanCategories] = useState<string[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
+  const [pageSize, setPageSize] = useState(DEFAULT_TABLE_PAGE_SIZE);
+  const [paginationReset, setPaginationReset] = useState(0);
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [sortedInfo, setSortedInfo] = useState<Sorts>({});
   // 是否展示未实装词条（默认不展示）
@@ -324,7 +324,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
 
   // 菜单和历史导航切换页签时，与手动切换一样重置筛选。
   useEffect(() => {
-    setCurrentPage(1);
     setSearchKeyword('');
     setSelectedTypes([]);
     setSelectedInGameTypes([]);
@@ -364,11 +363,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
     void loadData();
   }, []);
 
-  // 监听筛选状态变化，用于调试
-  useEffect(() => {
-    // console.log('FilteredInfo changed:', filteredInfo);
-  }, [filteredInfo]);
-
   // 清除所有筛选和排序
   const clearAll = () => {
     setSearchKeyword('');
@@ -380,8 +374,8 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
     setSelectedTalismanCategories([]);
     setFilteredInfo({});
     setSortedInfo({});
-    setCurrentPage(1);
-    setPageSize(20);
+    setPaginationReset((previous) => previous + 1);
+    setPageSize(DEFAULT_TABLE_PAGE_SIZE);
     message.success('已清除所有筛选和排序');
   };
 
@@ -392,17 +386,27 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
     setSortedInfo(sorter as Sorts);
   };
 
-  // 强化类别表格变化处理函数
-  const handleEnhancementTableChange: TableProps<EnhancementCategory>['onChange'] = (_pagination, filters, sorter) => {
-    setFilteredInfo(filters);
-    setSortedInfo(sorter as Sorts);
-  };
-
   // 道具效果表格变化处理函数
   const handleItemEffectTableChange: TableProps<ItemEffect>['onChange'] = (_pagination, filters, sorter) => {
     setFilteredInfo(filters);
     setSortedInfo(sorter as Sorts);
   };
+
+  const paginationContext = JSON.stringify([
+    activeEntryTab,
+    searchKeyword.trim().toLowerCase().split(/\s+/),
+    selectedTypes,
+    selectedInGameTypes,
+    selectedCharacter,
+    selectedItemEffectTypes,
+    selectedPools,
+    selectedTalismanCategories,
+    showNotImplemented,
+    filteredInfo.superposability,
+    sortedInfo.columnKey,
+    sortedInfo.order,
+    paginationReset,
+  ]);
 
   // 搜索过滤函数
   const filterData = (
@@ -574,11 +578,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
       onCell: () => ({
         style: { fontSize: '11px', color: 'var(--theme-text-secondary)' },
       }),
-      sorter: (a, b) => {
-        const idA = a.entry_id || '';
-        const idB = b.entry_id || '';
-        return idA.localeCompare(idB);
-      },
+      sorter: compareEntryIds,
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
     },
@@ -587,11 +587,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
       dataIndex: 'entry_name',
       key: 'entry_name',
       width: '30%',
-      sorter: (a, b) => {
-        const nameA = a.entry_name || '';
-        const nameB = b.entry_name || '';
-        return nameA.localeCompare(nameB, 'zh-CN');
-      },
+      sorter: compareEntryNames,
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
       render: (text: string, record: EntryData) => renderEntryName(text, record),
@@ -658,11 +654,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
       onCell: () => ({
         style: { fontSize: '11px', color: 'var(--theme-text-secondary)' },
       }),
-      sorter: (a, b) => {
-        const idA = a.entry_id || '';
-        const idB = b.entry_id || '';
-        return idA.localeCompare(idB);
-      },
+      sorter: compareEntryIds,
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
     },
@@ -689,11 +681,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
       dataIndex: 'entry_name',
       key: 'entry_name',
       width: '25%',
-      sorter: (a, b) => {
-        const nameA = a.entry_name || '';
-        const nameB = b.entry_name || '';
-        return nameA.localeCompare(nameB, 'zh-CN');
-      },
+      sorter: compareEntryNames,
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
       render: (text: string, record: EntryData) => renderEntryName(text, record),
@@ -738,11 +726,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
       onCell: () => ({
         style: { fontSize: '11px', color: 'var(--theme-text-secondary)' },
       }),
-      sorter: (a, b) => {
-        const idA = a.entry_id || '';
-        const idB = b.entry_id || '';
-        return idA.localeCompare(idB);
-      },
+      sorter: compareEntryIds,
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
     },
@@ -751,11 +735,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
       dataIndex: 'entry_name',
       key: 'entry_name',
       width: '20%',
-      sorter: (a, b) => {
-        const nameA = a.entry_name || '';
-        const nameB = b.entry_name || '';
-        return nameA.localeCompare(nameB, 'zh-CN');
-      },
+      sorter: compareEntryNames,
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
       render: (text: string, record: EntryData) => renderEntryName(text, record),
@@ -856,11 +836,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
       onCell: () => ({
         style: { fontSize: '11px', color: 'var(--theme-text-secondary)' },
       }),
-      sorter: (a, b) => {
-        const idA = a.entry_id || '';
-        const idB = b.entry_id || '';
-        return idA.localeCompare(idB);
-      },
+      sorter: compareEntryIds,
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
     },
@@ -869,11 +845,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
       dataIndex: 'entry_name',
       key: 'entry_name',
       width: '35%',
-      sorter: (a, b) => {
-        const nameA = a.entry_name || '';
-        const nameB = b.entry_name || '';
-        return nameA.localeCompare(nameB, 'zh-CN');
-      },
+      sorter: compareEntryNames,
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
       render: (text: string, record: EntryData) => renderEntryName(text, record),
@@ -979,8 +951,8 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
 
   // 创建强化类别表格列定义
   const createEnhancementColumns = (
-    paginatedData: EnhancedEnhancementCategory[],
-  ): TableColumnsType<EnhancedEnhancementCategory> => {
+    paginatedData: readonly EnhancedEnhancementCategory[],
+  ): PageLocalColumns<EnhancedEnhancementCategory> => {
     // 计算rowSpan信息
     const rowSpanInfo = new Map<string, { firstIndex: number; count: number }>();
 
@@ -1185,72 +1157,38 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
         );
     }
 
-    // 分页处理
-    const startIndex = (currentPage - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    const paginatedData = tableData.slice(startIndex, endIndex);
-
-    // 表格样式
     return (
-      <div>
-        <Table
-          columns={columns}
-          dataSource={paginatedData}
-          rowKey="entry_id"
-          onChange={handleTableChange}
-          pagination={false}
-          size="small"
-          bordered
-          loading={data.loading}
-        />
-
-        {/* 自定义分页导航 */}
-        {!data.loading && tableData.length > 0 && (
-          <CustomPagination
-            currentPage={currentPage}
-            pageSize={pageSize}
-            totalItems={tableData.length}
-            onPageChange={setCurrentPage}
-            onPageSizeChange={setPageSize}
-            loading={data.loading}
-          />
-        )}
-      </div>
+      <PagedTable
+        columns={columns}
+        dataSource={tableData}
+        contextKey={paginationContext}
+        pageSize={pageSize}
+        onPageSizeChange={setPageSize}
+        rowKey="entry_id"
+        onChange={handleTableChange}
+        size="small"
+        bordered
+        loading={data.loading}
+      />
     );
   };
 
   // 渲染强化类别表格
   const renderEnhancementTable = () => {
     const transformedData = transformEnhancementData(data.enhancementCategories);
-    const startIndex = (currentPage - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    const paginatedData = transformedData.slice(startIndex, endIndex);
 
     return (
-      <div>
-        <Table<EnhancedEnhancementCategory>
-          columns={createEnhancementColumns(paginatedData)}
-          dataSource={paginatedData}
-          rowKey={(record) => `${record.category}-${record.skillType}`}
-          onChange={handleEnhancementTableChange}
-          pagination={false}
-          size="small"
-          bordered
-          loading={data.loading}
-        />
-
-        {/* 自定义分页导航 */}
-        {!data.loading && transformedData.length > 0 && (
-          <CustomPagination
-            currentPage={currentPage}
-            pageSize={pageSize}
-            totalItems={transformedData.length}
-            onPageChange={setCurrentPage}
-            onPageSizeChange={setPageSize}
-            loading={data.loading}
-          />
-        )}
-      </div>
+      <PagedTable
+        columns={createEnhancementColumns}
+        dataSource={transformedData}
+        contextKey={paginationContext}
+        pageSize={pageSize}
+        onPageSizeChange={setPageSize}
+        rowKey={(record) => `${record.category}-${record.skillType}`}
+        size="small"
+        bordered
+        loading={data.loading}
+      />
     );
   };
 
@@ -1268,41 +1206,25 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
       tableData = filterItemEffectData(tableData, '', selectedItemEffectTypes); // 使用空字符串作为搜索关键词，只进行分类筛选
     }
 
-    const startIndex = (currentPage - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    const paginatedData = tableData.slice(startIndex, endIndex);
-
     // 道具效果表格 footer
     const itemEffectFooter = () => (
       <div className="footer-text">表内所有攻击力、异常值全部为固定值，不随等级成长，不吃任何补正。</div>
     );
 
     return (
-      <div>
-        <Table<ItemEffect>
-          columns={itemEffectColumns}
-          dataSource={paginatedData}
-          rowKey="name"
-          onChange={handleItemEffectTableChange}
-          pagination={false}
-          size="small"
-          bordered
-          loading={data.loading}
-          footer={itemEffectFooter}
-        />
-
-        {/* 自定义分页导航 */}
-        {!data.loading && tableData.length > 0 && (
-          <CustomPagination
-            currentPage={currentPage}
-            pageSize={pageSize}
-            totalItems={tableData.length}
-            onPageChange={setCurrentPage}
-            onPageSizeChange={setPageSize}
-            loading={data.loading}
-          />
-        )}
-      </div>
+      <PagedTable
+        columns={itemEffectColumns}
+        dataSource={tableData}
+        contextKey={paginationContext}
+        pageSize={pageSize}
+        onPageSizeChange={setPageSize}
+        rowKey="name"
+        onChange={handleItemEffectTableChange}
+        size="small"
+        bordered
+        loading={data.loading}
+        footer={itemEffectFooter}
+      />
     );
   };
 
@@ -1319,7 +1241,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
       );
     }
 
-    if (tabKey === '强化类别词条适用范围') {
+    if (tabKey !== activeEntryTab || tabKey === '强化类别词条适用范围') {
       return null;
     }
 
@@ -1330,13 +1252,10 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
             {/* 左侧：搜索、多选、清除 */}
             <div className="filter-controls">
               <CustomSearch
+                key={paginationReset}
                 placeholder={`搜索 ${tabKey} 关键字`}
                 value={searchKeyword}
                 onChange={setSearchKeyword}
-                onSearch={(value) => {
-                  setSearchKeyword(value);
-                  setCurrentPage(1);
-                }}
                 className="custom-search-input"
                 allowClear
               />
@@ -1347,10 +1266,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
                 tagRender={tagRender}
                 placeholder="按分类筛选"
                 value={selectedItemEffectTypes}
-                onChange={(values) => {
-                  setSelectedItemEffectTypes(values);
-                  setCurrentPage(1);
-                }}
+                onChange={setSelectedItemEffectTypes}
                 options={itemEffectTypeOptions}
                 maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
               />
@@ -1369,13 +1285,10 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
           <div className="filter-search-content">
             <div className="filter-controls">
               <CustomSearch
+                key={paginationReset}
                 placeholder={`搜索 ${tabKey} 关键字`}
                 value={searchKeyword}
                 onChange={setSearchKeyword}
-                onSearch={(value) => {
-                  setSearchKeyword(value);
-                  setCurrentPage(1);
-                }}
                 className="custom-search-input"
                 allowClear
               />
@@ -1389,10 +1302,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
                 tagRender={tagRender}
                 placeholder="按分类筛选"
                 value={selectedTalismanCategories}
-                onChange={(values) => {
-                  setSelectedTalismanCategories(values);
-                  setCurrentPage(1);
-                }}
+                onChange={setSelectedTalismanCategories}
                 options={TALISMAN_CATEGORY_ORDER.map((value) => ({
                   value,
                   label: TALISMAN_CATEGORIES[value].label,
@@ -1417,13 +1327,10 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
             {/* 左侧：搜索、多选、单选、清除 */}
             <div className="filter-controls">
               <CustomSearch
+                key={paginationReset}
                 placeholder={`搜索 ${tabKey} 关键字`}
                 value={searchKeyword}
                 onChange={setSearchKeyword}
-                onSearch={(value) => {
-                  setSearchKeyword(value);
-                  setCurrentPage(1);
-                }}
                 className="custom-search-input"
                 allowClear
               />
@@ -1434,10 +1341,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
                 tagRender={tagRender}
                 placeholder="按词条类型筛选"
                 value={selectedTypes}
-                onChange={(values) => {
-                  setSelectedTypes(values);
-                  setCurrentPage(1);
-                }}
+                onChange={setSelectedTypes}
                 options={withNotImplemented(outsiderTypeOptions)}
                 maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
               />
@@ -1446,21 +1350,12 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
                 allowClear
                 placeholder="按角色筛选"
                 value={selectedCharacter || undefined}
-                onChange={(value) => {
-                  setSelectedCharacter(value);
-                  setCurrentPage(1);
-                }}
+                onChange={setSelectedCharacter}
                 options={characterOptions}
                 notFoundContent="暂无角色"
                 showSearch={false}
               />
-              <Checkbox
-                checked={showNotImplemented}
-                onChange={(e) => {
-                  setShowNotImplemented(e.target.checked);
-                  setCurrentPage(1);
-                }}
-              >
+              <Checkbox checked={showNotImplemented} onChange={(e) => setShowNotImplemented(e.target.checked)}>
                 显示未实装
               </Checkbox>
               <Button onClick={clearAll} type="default" size="medium">
@@ -1477,13 +1372,10 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
             {/* 左侧：搜索、多选、单选、清除 */}
             <div className="filter-controls">
               <CustomSearch
+                key={paginationReset}
                 placeholder={`搜索 ${tabKey} 关键字`}
                 value={searchKeyword}
                 onChange={setSearchKeyword}
-                onSearch={(value) => {
-                  setSearchKeyword(value);
-                  setCurrentPage(1);
-                }}
                 className="custom-search-input"
                 allowClear
               />
@@ -1494,10 +1386,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
                 tagRender={tagRender}
                 placeholder="按词条类型筛选"
                 value={selectedTypes}
-                onChange={(values) => {
-                  setSelectedTypes(values);
-                  setCurrentPage(1);
-                }}
+                onChange={setSelectedTypes}
                 options={withNotImplemented(deepNightTypeOptions)}
                 maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
               />
@@ -1506,21 +1395,12 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
                 allowClear
                 placeholder="按角色筛选"
                 value={selectedCharacter || undefined}
-                onChange={(value) => {
-                  setSelectedCharacter(value);
-                  setCurrentPage(1);
-                }}
+                onChange={setSelectedCharacter}
                 options={characterOptions}
                 notFoundContent="暂无角色"
                 showSearch={false}
               />
-              <Checkbox
-                checked={showNotImplemented}
-                onChange={(e) => {
-                  setShowNotImplemented(e.target.checked);
-                  setCurrentPage(1);
-                }}
-              >
+              <Checkbox checked={showNotImplemented} onChange={(e) => setShowNotImplemented(e.target.checked)}>
                 显示未实装
               </Checkbox>
               <Button onClick={clearAll} type="default" size="medium">
@@ -1537,13 +1417,10 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
             {/* 左侧：搜索、多选、清除 */}
             <div className="filter-controls">
               <CustomSearch
+                key={paginationReset}
                 placeholder={`搜索 ${tabKey} 关键字`}
                 value={searchKeyword}
                 onChange={setSearchKeyword}
-                onSearch={(value) => {
-                  setSearchKeyword(value);
-                  setCurrentPage(1);
-                }}
                 className="custom-search-input"
                 allowClear
               />
@@ -1554,20 +1431,11 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
                 tagRender={tagRender}
                 placeholder="按词条类型筛选"
                 value={selectedInGameTypes}
-                onChange={(values) => {
-                  setSelectedInGameTypes(values);
-                  setCurrentPage(1);
-                }}
+                onChange={setSelectedInGameTypes}
                 options={withNotImplemented(inGameDeepNightTypeOptions)}
                 maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
               />
-              <Checkbox
-                checked={showNotImplemented}
-                onChange={(e) => {
-                  setShowNotImplemented(e.target.checked);
-                  setCurrentPage(1);
-                }}
-              >
+              <Checkbox checked={showNotImplemented} onChange={(e) => setShowNotImplemented(e.target.checked)}>
                 显示未实装
               </Checkbox>
               <Button onClick={clearAll} type="default" size="medium">
@@ -1584,13 +1452,10 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
             {/* 左侧：搜索、清除 */}
             <div className="filter-controls">
               <CustomSearch
+                key={paginationReset}
                 placeholder={`搜索 ${tabKey} 关键字`}
                 value={searchKeyword}
                 onChange={setSearchKeyword}
-                onSearch={(value) => {
-                  setSearchKeyword(value);
-                  setCurrentPage(1);
-                }}
                 className="custom-search-input"
                 allowClear
               />
@@ -1602,10 +1467,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
                   tagRender={tagRender}
                   placeholder="按词条类型筛选"
                   value={selectedInGameTypes}
-                  onChange={(values) => {
-                    setSelectedInGameTypes(values);
-                    setCurrentPage(1);
-                  }}
+                  onChange={setSelectedInGameTypes}
                   options={tabKey === '潜在能力' ? potentialAbilityTypeOptions : withNotImplemented(inGameTypeOptions)}
                   maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
                 />
@@ -1621,10 +1483,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
                   tagRender={tagRender}
                   placeholder="按出现池筛选"
                   value={selectedPools}
-                  onChange={(values) => {
-                    setSelectedPools(values);
-                    setCurrentPage(1);
-                  }}
+                  onChange={setSelectedPools}
                   options={Object.entries(POTENTIAL_POOL_TAGS).map(([value, meta]) => ({
                     value,
                     label: meta.label,
@@ -1636,13 +1495,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
               )}
               {/* 「潜在能力」这 43 条都是已实装词条，不提供「显示未实装」开关 */}
               {tabKey === '局内词条' && (
-                <Checkbox
-                  checked={showNotImplemented}
-                  onChange={(e) => {
-                    setShowNotImplemented(e.target.checked);
-                    setCurrentPage(1);
-                  }}
-                >
+                <Checkbox checked={showNotImplemented} onChange={(e) => setShowNotImplemented(e.target.checked)}>
                   显示未实装
                 </Checkbox>
               )}
