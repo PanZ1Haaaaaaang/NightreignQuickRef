@@ -13,6 +13,7 @@ import PagedTable from '../components/common/PagedTable';
 import type { PageLocalColumns } from '../components/common/PagedTable';
 import CharacterAvatar from '../components/common/CharacterAvatar';
 import { renderImpulseText } from '../components/common/renderImpulseText';
+import { DEEP_NIGHT_IN_GAME_TYPE_ORDER } from '../config/entryTypeConfig';
 import { POTENTIAL_POOL_TAGS } from '../config/potentialPoolConfig';
 import { DEFAULT_TABLE_PAGE_SIZE } from '../config/tablePagination';
 import { renderHintOption } from '../components/HintOption';
@@ -216,19 +217,6 @@ const NOT_IMPLEMENTED_TAG = '未实装';
 // 未实装标签配色（antd 预设色；放在「词条类型」列，需与普通类型标签明显区分）
 const NOT_IMPLEMENTED_COLOR = 'orange';
 
-// 深夜模式局内词条类型选项
-const inGameDeepNightTypeOptions = [
-  { value: '能力值', label: '能力值' },
-  { value: '攻击力', label: '攻击力' },
-  { value: '减伤率', label: '减伤率' },
-  { value: '恢复', label: '恢复' },
-  { value: '减益(能力值)', label: '减益(能力值)' },
-  { value: '减益(减伤率)', label: '减益(减伤率)' },
-  { value: '减益(恢复)', label: '减益(恢复)' },
-  { value: '减益(行动)', label: '减益(行动)' },
-  { value: '特殊效果', label: '特殊效果' },
-];
-
 const tagRender = (props: { label: React.ReactNode; value: string; closable?: boolean; onClose?: () => void }) => {
   const { label, value, closable, onClose } = props;
   const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -322,6 +310,27 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
     loading: true,
   });
 
+  const implementedDeepNightInGameEntries = useMemo(
+    () => data.inGameDeepNightEntries.filter((entry) => !entry.tags?.includes(NOT_IMPLEMENTED_TAG)),
+    [data.inGameDeepNightEntries],
+  );
+  const visibleDeepNightInGameEntries = showNotImplemented
+    ? data.inGameDeepNightEntries
+    : implementedDeepNightInGameEntries;
+  const inGameDeepNightTypeOptions = useMemo(() => {
+    const types = new Set<string>();
+    for (const { entry_type } of visibleDeepNightInGameEntries) {
+      if (entry_type && entry_type !== NOT_IMPLEMENTED_TAG) types.add(entry_type);
+    }
+    const ordered = DEEP_NIGHT_IN_GAME_TYPE_ORDER.filter((type) => types.has(type));
+    const extra = [...types].filter((type) => !DEEP_NIGHT_IN_GAME_TYPE_ORDER.includes(type));
+    const options = [...ordered, ...extra];
+    if (visibleDeepNightInGameEntries.length > implementedDeepNightInGameEntries.length) {
+      options.push(NOT_IMPLEMENTED_TAG);
+    }
+    return options.map((type) => ({ value: type, label: type }));
+  }, [visibleDeepNightInGameEntries, implementedDeepNightInGameEntries.length]);
+
   // 菜单和历史导航切换页签时，与手动切换一样重置筛选。
   useEffect(() => {
     setSearchKeyword('');
@@ -392,6 +401,19 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
     setSortedInfo(sorter as Sorts);
   };
 
+  const handleDeepNightInGameVisibilityChange = (checked: boolean) => {
+    setShowNotImplemented(checked);
+    if (!checked) {
+      setSelectedInGameTypes((selected) =>
+        selected.filter(
+          (type) =>
+            type !== NOT_IMPLEMENTED_TAG &&
+            implementedDeepNightInGameEntries.some((entry) => entry.entry_type === type),
+        ),
+      );
+    }
+  };
+
   const paginationContext = JSON.stringify([
     activeEntryTab,
     searchKeyword.trim().toLowerCase().split(/\s+/),
@@ -421,7 +443,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
 
     // 类型筛选（「未实装」是标签而不是 entry_type，需要单独匹配）
     const matchesType = (item: EntryData, list: string[]) =>
-      list.includes(item.entry_type || '') ||
+      (item.entry_type !== NOT_IMPLEMENTED_TAG && list.includes(item.entry_type || '')) ||
       (list.includes(NOT_IMPLEMENTED_TAG) && (item.tags || []).includes(NOT_IMPLEMENTED_TAG));
 
     if (types && types.length > 0) {
@@ -1089,20 +1111,15 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
         }
         break;
       case '深夜模式局内词条':
-        tableData = data.inGameDeepNightEntries;
         columns = inGameColumns; // 复用局内词条的列定义
         tableData = filterData(
-          tableData,
+          visibleDeepNightInGameEntries,
           searchKeyword,
           selectedInGameTypes,
           undefined,
           undefined,
           filteredInfo.superposability as string[],
         );
-        // 默认隐藏未实装词条，勾选「显示未实装」后才展示
-        if (!showNotImplemented) {
-          tableData = tableData.filter((item) => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
-        }
         break;
       case '护符词条':
         tableData = data.talismanEntries;
@@ -1432,10 +1449,13 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
                 placeholder="按词条类型筛选"
                 value={selectedInGameTypes}
                 onChange={setSelectedInGameTypes}
-                options={withNotImplemented(inGameDeepNightTypeOptions)}
+                options={inGameDeepNightTypeOptions}
                 maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
               />
-              <Checkbox checked={showNotImplemented} onChange={(e) => setShowNotImplemented(e.target.checked)}>
+              <Checkbox
+                checked={showNotImplemented}
+                onChange={(e) => handleDeepNightInGameVisibilityChange(e.target.checked)}
+              >
                 显示未实装
               </Checkbox>
               <Button onClick={clearAll} type="default" size="medium">

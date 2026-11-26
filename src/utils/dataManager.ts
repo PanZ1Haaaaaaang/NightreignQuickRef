@@ -95,7 +95,10 @@ const GROUP_FILES: Record<DataGroup, GroupFile[]> = {
     { key: 'enhancementCategories', load: () => import('../data/zh-CN/enhancement_categories.json') },
     { key: 'itemEffects', load: () => import('../data/zh-CN/item_effect.json') },
     { key: 'deepNightEntries', load: () => import('../data/zh-CN/deep_night_entries.json') },
-    { key: 'inGameDeepNightEntries', load: () => import('../data/zh-CN/in-game_deep_night_entries.json') },
+    {
+      key: 'inGameDeepNightEntries',
+      load: () => import('../data/zh-CN/in-game_deep_night_entries.json') satisfies Promise<{ default: EntryData[] }>,
+    },
   ],
   // 角色数据页（也加载渡夜者逐级数据）
   character: [
@@ -250,33 +253,7 @@ class DataManager {
   }
 
   public getInGameDeepNightEntries(): EntryData[] {
-    const rawData = this.dataCache.get('inGameDeepNightEntries') || [];
-    // 处理深夜模式局内词条的数据格式
-    const processedData: EntryData[] = [];
-
-    if (Array.isArray(rawData)) {
-      rawData.forEach((group) => {
-        if (typeof group === 'object' && group !== null) {
-          Object.values(group).forEach((entry: unknown) => {
-            if (entry && typeof entry === 'object') {
-              const entryObj = entry as Record<string, unknown>;
-              processedData.push({
-                entry_id: (entryObj.entry_id as string) || (entryObj.entry_entry_id as string) || '',
-                entry_name: (entryObj.entry_name as string) || '',
-                entry_type: (entryObj.entry_type as string) || null,
-                explanation: (entryObj.explanation as string) || null,
-                superposability: (entryObj.superposability as string) || null,
-                notes: (entryObj.notes as string) || null,
-                // tags 必须原样带上，否则「未实装」标签与筛选都会失效
-                tags: (entryObj.tags as string[]) || undefined,
-              });
-            }
-          });
-        }
-      });
-    }
-
-    return processedData;
+    return (this.dataCache.get('inGameDeepNightEntries') as EntryData[]) || [];
   }
 }
 
