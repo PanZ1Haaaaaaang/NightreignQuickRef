@@ -16,7 +16,7 @@ import { navigationUrl, readNavigationTarget, type NavigationTarget } from './ut
 
 // 视图级懒加载：每个页面独立成 chunk，首屏只下载当前 tab
 const EntryDetailView = lazy(() => import('./pages/EntryDetailView'));
-const GameMechanicsView = lazy(() => import('./pages/GameMechanicsView'));
+const GameMechanicsView = lazy(() => import('./pages/match-rules/game-mechanics/GameMechanicsView'));
 const LegendaryWeaponView = lazy(() => import('./pages/LegendaryWeaponView'));
 const WeaponMechanicsView = lazy(() => import('./pages/WeaponMechanicsView'));
 const CharacterDataView = lazy(() => import('./pages/CharacterDataView'));
