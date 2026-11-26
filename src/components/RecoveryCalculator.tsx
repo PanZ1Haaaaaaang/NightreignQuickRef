@@ -1,10 +1,10 @@
 import { Typography, Card, Select, Button, Divider, Tag, Empty } from 'antd';
 import { HeartOutlined } from '@ant-design/icons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CharacterAvatar from './common/CharacterAvatar';
 import recoverCalculateData from '../data/zh-CN/recover_calculate.json';
 import type { NightfarerName } from '../types';
-import DataManager from '../utils/dataManager';
+import { useNightfarerLevel15 } from '../features/nightfarers/useNightfarerLevel15';
 import styles from '../styles/recoveryCalculator.module.css';
 
 const { Text } = Typography;
@@ -21,12 +21,6 @@ const characterNames: NightfarerName[] = [
   '学者',
   '送葬者',
 ];
-
-interface RecoveryCharacter {
-  name: NightfarerName;
-  health: number;
-  focus: number;
-}
 
 const RecoveryCalculator: React.FC = () => {
   // 获取category对应的颜色
@@ -48,7 +42,7 @@ const RecoveryCalculator: React.FC = () => {
   // 回血量计算器状态 - 初始选中追踪者，队友选择女爵
   const [selectedCharacter, setSelectedCharacter] = useState<NightfarerName>('追踪者');
   const [selectedAllyCharacter, setSelectedAllyCharacter] = useState<NightfarerName>('女爵');
-  const [characters, setCharacters] = useState<RecoveryCharacter[] | null>(null);
+  const snapshots = useNightfarerLevel15();
   const [selectedEffects, setSelectedEffects] = useState<string[]>([]);
   const [calculationResult, setCalculationResult] = useState<{
     selfHealth: number;
@@ -65,29 +59,13 @@ const RecoveryCalculator: React.FC = () => {
   // 回血效果数据
   const recoverEffects = recoverCalculateData.items;
 
-  useEffect(() => {
-    const dataManager = DataManager.getInstance();
-    let disposed = false;
-    void dataManager
-      .loadGroup('character')
-      .then(() => {
-        if (disposed) return;
-        const levels = dataManager.getCharacterDetailData();
-        setCharacters(
-          characterNames.flatMap((name) => {
-            const row = levels[name]?.find((level) => (level['等级'] ?? level.level) === 15);
-            if (!row || !Number.isFinite(row.HP) || !Number.isFinite(row.FP)) return [];
-            return [{ name, health: row.HP, focus: row.FP }];
-          }),
-        );
+  const characters = snapshots
+    ? characterNames.flatMap((name) => {
+        const row = snapshots.get(name)?.row;
+        if (!row || !Number.isFinite(row.HP) || !Number.isFinite(row.FP)) return [];
+        return [{ name, health: row.HP, focus: row.FP }];
       })
-      .catch(() => {
-        if (!disposed) setCharacters([]);
-      });
-    return () => {
-      disposed = true;
-    };
-  }, []);
+    : null;
 
   const characterOptions = characters?.map(({ name, health, focus }) => ({
     value: name,

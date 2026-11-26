@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Drawer, Table } from 'antd';
+import { Button, Drawer, Spin, Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { LineChartOutlined, TableOutlined } from '@ant-design/icons';
 import { Line } from '@ant-design/plots';
@@ -10,6 +10,7 @@ import styles from '../styles/ailmentView.module.css';
 import { statusTypeIn } from '../assets/icons/status';
 import CharacterAvatar from '../components/common/CharacterAvatar';
 import StatusIcon from '../components/common/StatusIcon';
+import { useNightfarerLevel15 } from '../features/nightfarers/useNightfarerLevel15';
 
 const DATA = ailmentJson as unknown as AilmentData;
 
@@ -33,25 +34,12 @@ interface CharacterBonus {
   multiplier: number;
 }
 
-// 感应值直接读站内角色数据（15 级），加成公式来自「成长曲线」的异常补正曲线
-const CHARACTER_MODULES = import.meta.glob('../data/character-info/*.json', {
-  eager: true,
-  import: 'default',
-}) as Record<string, Record<string, Array<Record<string, number | string>>>>;
-
-const CHARACTER_BONUSES: CharacterBonus[] = Object.entries(CHARACTER_MODULES)
-  .filter(([path]) => !path.includes('character_data'))
-  .map(([, data]) => {
-    const name = Object.keys(data)[0];
-    const levels = data[name];
-    const last = levels[levels.length - 1];
-    const sense = Number(last['感应']);
-    const { threshold, maxVal, growVal } = DATA.sensing.curve;
-    const raw = Math.max(0, sense - threshold) * (growVal / (maxVal - threshold));
-    const bonus = Math.floor(raw);
-    return { key: name, name, sense, bonus, multiplier: 1 + bonus / 100 };
-  })
-  .sort((a, b) => b.sense - a.sense);
+const getCharacterBonus = (name: string, sense: number): CharacterBonus => {
+  const { threshold, maxVal, growVal } = DATA.sensing.curve;
+  const raw = Math.max(0, sense - threshold) * (growVal / (maxVal - threshold));
+  const bonus = Math.floor(raw);
+  return { key: name, name, sense, bonus, multiplier: 1 + bonus / 100 };
+};
 
 const bonusColumns: TableColumnsType<CharacterBonus> = [
   {
@@ -78,6 +66,34 @@ const bonusColumns: TableColumnsType<CharacterBonus> = [
     render: (v: number) => `×${v.toFixed(2)}`,
   },
 ];
+
+const SensingBonusTable = () => {
+  const snapshots = useNightfarerLevel15();
+  if (!snapshots) {
+    return (
+      <div className={styles.drawerLoading} role="status">
+        <Spin size="small" aria-hidden />
+        <span>正在加载角色等级数据…</span>
+      </div>
+    );
+  }
+
+  const characterBonuses = [...snapshots]
+    .map(([name, { stats }]) => getCharacterBonus(name, stats.感应))
+    .sort((a, b) => b.sense - a.sense);
+
+  return (
+    <Table
+      columns={bonusColumns}
+      dataSource={characterBonuses}
+      locale={{ emptyText: '暂无角色等级数据' }}
+      rowKey="key"
+      size="small"
+      bordered
+      pagination={false}
+    />
+  );
+};
 
 const effectColumns: TableColumnsType<AilmentEffect> = [
   {
@@ -155,7 +171,6 @@ const AilmentView: React.FC = () => {
   const [sensingOpen, setSensingOpen] = useState(false);
   const [curveOpen, setCurveOpen] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>(getCurrentTheme());
-
   useEffect(() => {
     const observer = new MutationObserver(() => setTheme(getCurrentTheme()));
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
@@ -193,7 +208,13 @@ const AilmentView: React.FC = () => {
           {DATA.sensing.formula}
         </p>
       </div>
-      <Drawer title="感应加成异常值" size={560} open={sensingOpen} onClose={() => setSensingOpen(false)}>
+      <Drawer
+        title="感应加成异常值"
+        size={560}
+        open={sensingOpen}
+        onClose={() => setSensingOpen(false)}
+        destroyOnHidden
+      >
         <p className={styles.paragraph}>
           <strong>公式：</strong>
           {DATA.sensing.formula}
@@ -202,14 +223,7 @@ const AilmentView: React.FC = () => {
           <strong>蛇弓专用异常补正公式：</strong>
           {DATA.sensing.serpentFormula}
         </p>
-        <Table
-          columns={bonusColumns}
-          dataSource={CHARACTER_BONUSES}
-          rowKey="key"
-          size="small"
-          bordered
-          pagination={false}
-        />
+        <SensingBonusTable />
         <p className={styles.drawerNote}>{DATA.sensing.note}</p>
       </Drawer>
 

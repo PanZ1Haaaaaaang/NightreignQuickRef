@@ -88,6 +88,15 @@
   color: var(--color-text-2);
 }
 
+.drawerLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 0;
+  color: var(--theme-text-secondary);
+}
+
 .iconLabel {
   display: inline-flex;
   align-items: center;

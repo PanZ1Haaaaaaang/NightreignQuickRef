@@ -7,16 +7,22 @@ import CharacterAvatar from '../components/common/CharacterAvatar';
 import scalingJson from '../data/zh-CN/weapon_scaling_data.json';
 import uniqueWeaponArts from '../data/zh-CN/unique_weapon_arts.json';
 import weaponArtCategoryHints from '../data/zh-CN/weapon_art_category_hints.json';
-import teardropJson from '../data/zh-CN/teardrop_conversion.json';
-import lipulaStatsJson from '../data/zh-CN/lipula_trade_stats.json';
-import type { TeardropAffix, TeardropConversionData, TeardropLipulaOption } from '../types';
+import {
+  convertNightfarerStats,
+  findTeardropAffixes,
+  getTeardropAffixes,
+  shortAffixName,
+} from '../features/nightfarers/conversion';
+import { getLipulaOption, LIPULA_OPTIONS } from '../features/nightfarers/lipula';
+import { useNightfarerLevel15 } from '../features/nightfarers/useNightfarerLevel15';
+import type { NightfarerName } from '../types';
 import { getCurrentTheme } from '../utils/themeUtils';
 import type { WeaponScalingCurve, WeaponScalingDamageType, WeaponScalingData, WeaponScalingRow } from '../types';
 import styles from '../styles/weaponScalingView.module.css';
 
 const DATA = scalingJson as unknown as WeaponScalingData;
 
-const STAT_KEYS = ['力气', '敏捷', '智力', '信仰', '感应'] as const;
+const STAT_KEYS = ['力气', '灵巧', '智力', '信仰', '感应'] as const;
 const STAT_LABELS = ['力量', '灵巧', '智力', '信仰', '感应'] as const;
 const SCALING_STATS = ['str', 'dex', 'int', 'faith', 'arc'] as const;
 const CURVE_LABELS: Record<WeaponScalingCurve, string> = { physical: '0 号曲线', elemental: '4 号曲线' };
@@ -91,14 +97,9 @@ const damageColumn = {
   render: (_: unknown, row: CalcRow) => (row.damage ? DAMAGE_LABELS[row.damage] : null),
 };
 
-const CHARACTER_MODULES = import.meta.glob('../data/character-info/*.json', {
-  eager: true,
-  import: 'default',
-}) as Record<string, Record<string, Array<Record<string, number | string>>>>;
-
 interface CharacterRow {
   key: string;
-  name: string;
+  name: NightfarerName;
   stats: number[];
 }
 
@@ -107,41 +108,6 @@ interface ConversionState {
   affixB?: string;
   lipula?: string;
 }
-
-const CHARACTERS: CharacterRow[] = Object.entries(CHARACTER_MODULES)
-  .filter(([path]) => !path.includes('character_data'))
-  .map(([, data]) => {
-    const name = Object.keys(data)[0];
-    const levels = data[name];
-    const last = levels[levels.length - 1];
-    return {
-      key: name,
-      name,
-      stats: STAT_KEYS.map((key) => Number(last[key])),
-    };
-  });
-
-const TEARDROP_DATA = teardropJson as unknown as TeardropConversionData;
-const LIPULA_OPTIONS = lipulaStatsJson.options as unknown as TeardropLipulaOption[];
-const TEARDROP_BY_NAME = new Map(TEARDROP_DATA.characters.map((character) => [character.name, character]));
-const AFFIX_STAT_KEYS = ['力气', '灵巧', '智力', '信仰', '感应'] as const;
-
-const shortAffixName = (name: string) => name.replace(/^【.*?】/, '');
-
-const applyAffixes = (base: number[], affixes: TeardropAffix[]): number[] => {
-  const result = [...base];
-  for (const affix of affixes) {
-    for (const [attr, value] of Object.entries(affix.boost)) {
-      const index = AFFIX_STAT_KEYS.indexOf(attr as (typeof AFFIX_STAT_KEYS)[number]);
-      if (index >= 0) result[index] += value;
-    }
-    for (const [attr, value] of Object.entries(affix.reduce)) {
-      const index = AFFIX_STAT_KEYS.indexOf(attr as (typeof AFFIX_STAT_KEYS)[number]);
-      if (index >= 0) result[index] -= value;
-    }
-  }
-  return result;
-};
 
 /** 成长曲线：分段线性插值，结果按百分比处理 */
 const curveValue = (curveKey: WeaponScalingCurve, stat: number) => {
@@ -434,6 +400,7 @@ const weaponColumns: TableColumnsType<WeaponScalingRow> = [
 ];
 
 const WeaponScalingView: React.FC = () => {
+  const snapshots = useNightfarerLevel15();
   const [curveKey, setCurveKey] = useState<WeaponScalingCurve>('physical');
   const [mode, setMode] = useState<'universal' | 'unique'>('universal');
   const [selectedKey, setSelectedKey] = useState('');
@@ -532,25 +499,18 @@ const WeaponScalingView: React.FC = () => {
 
   const convertedCharacters = useMemo(
     () =>
-      CHARACTERS.map((character) => {
-        const conversion = conversions[character.name];
-        if (!conversion) return character;
-        const teardrop = TEARDROP_BY_NAME.get(character.name);
-        if (conversion.lipula) {
-          const option = LIPULA_OPTIONS.find((item) => item.key === conversion.lipula);
-          if (option) {
-            return {
-              ...character,
-              stats: AFFIX_STAT_KEYS.map((key) => Number(option.stats[key] ?? 0)),
-            };
-          }
-        }
-        const affixes = [conversion.affixA, conversion.affixB]
-          .map((id) => teardrop?.affixes.find((affix) => affix.entryId === id))
-          .filter((affix): affix is TeardropAffix => Boolean(affix));
-        return { ...character, stats: applyAffixes(character.stats, affixes) };
+      [...(snapshots ?? [])].map(([name, { stats: base }]): CharacterRow => {
+        const conversion = conversions[name];
+        const stats = conversion
+          ? convertNightfarerStats(
+              base,
+              findTeardropAffixes(getTeardropAffixes(name), [conversion.affixA, conversion.affixB]),
+              getLipulaOption(conversion.lipula),
+            )
+          : base;
+        return { key: name, name, stats: STAT_KEYS.map((key) => stats[key]) };
       }),
-    [conversions],
+    [conversions, snapshots],
   );
 
   const conversionCount = Object.values(conversions).filter((item) => item.affixA || item.affixB || item.lipula).length;
@@ -632,14 +592,13 @@ const WeaponScalingView: React.FC = () => {
       width: 220,
       render: (_, record) => {
         const conversion = conversions[record.name] ?? {};
-        const teardrop = TEARDROP_BY_NAME.get(record.name);
         return (
           <Select
             allowClear
             value={conversion.affixA}
             placeholder="不装备"
             disabled={Boolean(conversion.lipula)}
-            options={(teardrop?.affixes ?? [])
+            options={getTeardropAffixes(record.name)
               .filter((affix) => affix.entryId !== conversion.affixB)
               .map((affix) => ({ value: affix.entryId, label: shortAffixName(affix.name) }))}
             onChange={(value) => updateConversion(record.name, { affixA: value })}
@@ -654,14 +613,13 @@ const WeaponScalingView: React.FC = () => {
       width: 220,
       render: (_, record) => {
         const conversion = conversions[record.name] ?? {};
-        const teardrop = TEARDROP_BY_NAME.get(record.name);
         return (
           <Select
             allowClear
             value={conversion.affixB}
             placeholder="不装备"
             disabled={Boolean(conversion.lipula)}
-            options={(teardrop?.affixes ?? [])
+            options={getTeardropAffixes(record.name)
               .filter((affix) => affix.entryId !== conversion.affixA)
               .map((affix) => ({ value: affix.entryId, label: shortAffixName(affix.name) }))}
             onChange={(value) => updateConversion(record.name, { affixB: value })}
@@ -840,23 +798,34 @@ const WeaponScalingView: React.FC = () => {
             </Checkbox>
           </>
         )}
-        <Button icon={<ExperimentOutlined />} onClick={() => setConversionOpen(true)}>
+        <Button icon={<ExperimentOutlined />} disabled={!best} onClick={() => setConversionOpen(true)}>
           泪滴转职{conversionCount > 0 ? `（${conversionCount}）` : ''}
         </Button>
       </div>
 
-      <div className={styles.summary}>
-        <Statistic title={activeLabel} value={best.value.toFixed(3)} precision={3} prefix="×" />
-        <span className={styles.summaryText}>
-          最适配：
-          <CharacterAvatar name={best.name} size={16} />（
-          {STAT_LABELS.map((label, i) => `${label}${best.stats[i]}`).join(' / ')}）
-        </span>
-        {activeDesc ? <span className={styles.summaryText}>{activeDesc}</span> : null}
-      </div>
+      {best && (
+        <div className={styles.summary}>
+          <Statistic title={activeLabel} value={best.value.toFixed(3)} precision={3} prefix="×" />
+          <span className={styles.summaryText}>
+            最适配：
+            <CharacterAvatar name={best.name} size={16} />（
+            {STAT_LABELS.map((label, i) => `${label}${best.stats[i]}`).join(' / ')}）
+          </span>
+          {activeDesc ? <span className={styles.summaryText}>{activeDesc}</span> : null}
+        </div>
+      )}
 
       <p className={styles.hint}>点击「适配度」倍率可查看逐项计算过程。</p>
-      <Table columns={rankingColumns} dataSource={rankings} rowKey="key" size="small" bordered pagination={false} />
+      <Table
+        columns={rankingColumns}
+        dataSource={rankings}
+        loading={!snapshots}
+        locale={{ emptyText: '暂无角色等级数据' }}
+        rowKey="key"
+        size="small"
+        bordered
+        pagination={false}
+      />
 
       <p className={styles.note}>
         专用战技的补正取自 「战技与魔法祷告」，同一战技多段动作只取第一条补正； 勾选「显示未实装」时会列出未标注补正（按

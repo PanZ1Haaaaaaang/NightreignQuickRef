@@ -12,6 +12,7 @@ import DataSourceTooltip from '../components/DataSourceTooltip';
 import DodgeFramesComparison from './characterDataView/DodgeFramesComparison';
 import TeardropConversion from './characterDataView/TeardropConversion';
 import CharacterAvatar from '../components/common/CharacterAvatar';
+import { findCharacterLevel } from '../features/nightfarers/levels';
 import AbilityIcon from '../components/common/AbilityIcon';
 import DamageTypeIcon from '../components/common/DamageTypeIcon';
 import { damageTypeOf } from '../assets/icons/damage';
@@ -42,15 +43,6 @@ interface JsonTab {
   name: string;
   columns: ColumnsType<CharacterDetailRow>;
   data: CharacterDetailRow[];
-}
-
-// 角色等级数据类型
-interface CharacterLevelData {
-  level: number; // 等级
-  HP: number;
-  FP: number;
-  ST: number;
-  [key: string]: string | number;
 }
 
 /**
@@ -211,9 +203,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
         const stRows: CharacterDetailRow[] = [];
 
         // 统一获取属性列（排除 HP/FP/ST/等级）
-        const firstCharacterWithData = Object.values(characterDetailData).find(
-          (arr): arr is CharacterLevelData[] => Array.isArray(arr) && arr.length > 0,
-        );
+        const firstCharacterWithData = Object.values(characterDetailData).find((rows) => rows.length > 0);
         const attributeKeys = firstCharacterWithData
           ? Object.keys(firstCharacterWithData[0]).filter((key) => !['HP', 'FP', 'ST', '等级', 'level'].includes(key))
           : [];
@@ -270,12 +260,10 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
           const rowsAtLevel: CharacterDetailRow[] = [];
           Object.entries(characterDetailData).forEach(([characterName, characterLevels]) => {
             if (Array.isArray(characterLevels) && characterLevels.length > 0) {
-              const levelData = (characterLevels as CharacterLevelData[]).find(
-                (item: CharacterLevelData) => (item['等级'] ?? item.level) === lv,
-              );
+              const levelData = findCharacterLevel(characterLevels, lv);
               const row: CharacterDetailRow = { character: characterName };
               attributeKeys.forEach((attrKey) => {
-                row[attrKey] = levelData ? levelData[attrKey] : '';
+                row[attrKey] = levelData?.[attrKey] ?? '';
               });
               rowsAtLevel.push(row);
             }
@@ -294,10 +282,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
             const buildRow = (statKey: string): CharacterDetailRow => {
               const row: CharacterDetailRow = { character: characterName };
               for (let lv = 1; lv <= 15; lv++) {
-                const levelData = (characterData as CharacterLevelData[]).find(
-                  (item: CharacterLevelData) => (item['等级'] ?? item.level) === lv,
-                );
-                row[`Lv${lv}`] = levelData ? levelData[statKey] : '';
+                row[`Lv${lv}`] = findCharacterLevel(characterData, lv)?.[statKey] ?? '';
               }
               return row;
             };

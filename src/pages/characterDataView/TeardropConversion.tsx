@@ -5,14 +5,17 @@ import { ThunderboltTwoTone } from '@ant-design/icons';
 import styles from '../../styles/characterDataView.module.css';
 import DataSourceTooltip from '../../components/DataSourceTooltip';
 import CharacterAvatar from '../../components/common/CharacterAvatar';
-import teardropJson from '../../data/zh-CN/teardrop_conversion.json';
-import lipulaStatsJson from '../../data/zh-CN/lipula_trade_stats.json';
-import type { TeardropAffix, TeardropConversionData, TeardropLipulaOption } from '../../types';
+import {
+  convertNightfarerStats,
+  findTeardropAffixes,
+  shortAffixName,
+  TEARDROP_DATA,
+} from '../../features/nightfarers/conversion';
+import { getLipulaOption, LIPULA_OPTIONS } from '../../features/nightfarers/lipula';
+import { useNightfarerLevel15 } from '../../features/nightfarers/useNightfarerLevel15';
+import type { NightfarerStats, TeardropAffix } from '../../types';
 
 const { Title, Text } = Typography;
-
-const TEARDROP_DATA = teardropJson as unknown as TeardropConversionData;
-const LIPULA_OPTIONS = lipulaStatsJson.options as unknown as TeardropLipulaOption[];
 
 const POSITIVE_COLOR = '#52c41a';
 const NEGATIVE_COLOR = '#ff4d4f';
@@ -27,25 +30,8 @@ interface StatRow {
   isTotal?: boolean;
 }
 
-/** 把若干条泪滴词条的增减叠到基础属性上（同一属性多条叠加） */
-const applyAffixes = (base: Record<string, number>, affixes: TeardropAffix[]): Record<string, number> => {
-  const result = { ...base };
-  affixes.forEach((affix) => {
-    Object.entries(affix.boost).forEach(([attr, value]) => {
-      result[attr] = (result[attr] ?? 0) + value;
-    });
-    Object.entries(affix.reduce).forEach(([attr, value]) => {
-      result[attr] = (result[attr] ?? 0) - value;
-    });
-  });
-  return result;
-};
-
 const diffColor = (diff: number) => (diff > 0 ? POSITIVE_COLOR : diff < 0 ? NEGATIVE_COLOR : 'var(--color-text-3)');
 const formatDiff = (diff: number) => (diff > 0 ? `+${diff}` : `${diff}`);
-
-/** 去掉词条名里的「【角色】」前缀（角色已经单独选了） */
-const shortAffixName = (name: string): string => name.replace(/^【.*?】/, '');
 
 /** 词条满值文字，如「Lv12 满值：智力+15、信仰+15，力气-7、灵巧-5」 */
 const affixSummary = (affix: TeardropAffix): string => {
@@ -69,22 +55,21 @@ const affixSummary = (affix: TeardropAffix): string => {
 const TeardropConversion: React.FC = () => {
   const data = TEARDROP_DATA;
   const attrs = data.attributes;
+  const snapshots = useNightfarerLevel15();
+  const characters = useMemo(
+    () => data.characters.map((item) => ({ ...item, base: snapshots?.get(item.name)?.stats ?? item.base })),
+    [data.characters, snapshots],
+  );
 
   const [charName, setCharName] = useState(data.characters[0].name);
   const [affixA, setAffixA] = useState<string | undefined>(undefined);
   const [affixB, setAffixB] = useState<string | undefined>(undefined);
   const [lipulaKey, setLipulaKey] = useState<string | undefined>(undefined);
 
-  const character = data.characters.find((item) => item.name === charName) ?? data.characters[0];
-  const lipula = lipulaKey ? LIPULA_OPTIONS.find((item) => item.key === lipulaKey) : undefined;
-
-  const result = useMemo(() => {
-    if (lipula) return { ...lipula.stats };
-    const chosen = [affixA, affixB]
-      .map((id) => character.affixes.find((affix) => affix.entryId === id))
-      .filter((affix): affix is TeardropAffix => Boolean(affix));
-    return applyAffixes(character.base, chosen);
-  }, [character, affixA, affixB, lipula]);
+  const character = characters.find((item) => item.name === charName) ?? characters[0];
+  const lipula = getLipulaOption(lipulaKey);
+  const selectedAffixes = findTeardropAffixes(character.affixes, [affixA, affixB]);
+  const result = convertNightfarerStats(character.base, selectedAffixes, lipula);
 
   const rows: StatRow[] = attrs.map((attr) => ({
     key: attr,
@@ -152,29 +137,25 @@ const TeardropConversion: React.FC = () => {
     },
   ];
 
-  const handleCharacterChange = (name: string) => {
+  const handleCharacterChange = (name: typeof charName) => {
     setCharName(name);
     setAffixA(undefined);
     setAffixB(undefined);
   };
-
-  const selectedAffixes = [affixA, affixB]
-    .map((id) => character.affixes.find((affix) => affix.entryId === id))
-    .filter((affix): affix is TeardropAffix => Boolean(affix));
 
   // 参考对照表：每位角色的基础 / 单条词条 / 双词条叠加
   const referenceRows = useMemo(() => {
     const list: Array<
       { key: string; character: string; scene: string; total: number } & Record<string, string | number>
     > = [];
-    data.characters.forEach((item) => {
-      const scenes: Array<[string, Record<string, number>]> = [
+    characters.forEach((item) => {
+      const scenes: Array<[string, NightfarerStats]> = [
         ['基础', item.base],
-        ...item.affixes.map((affix): [string, Record<string, number>] => [
-          affix.name.replace(/^【.*?】/, ''),
-          applyAffixes(item.base, [affix]),
+        ...item.affixes.map((affix): [string, NightfarerStats] => [
+          shortAffixName(affix.name),
+          convertNightfarerStats(item.base, [affix]),
         ]),
-        ['双词条叠加', applyAffixes(item.base, item.affixes)],
+        ['双词条叠加', convertNightfarerStats(item.base, item.affixes)],
       ];
       scenes.forEach(([scene, stats], index) => {
         const row: { key: string; character: string; scene: string; total: number } & Record<string, string | number> =
@@ -191,7 +172,7 @@ const TeardropConversion: React.FC = () => {
       });
     });
     return list;
-  }, [data.characters, attrs]);
+  }, [characters, attrs]);
 
   const referenceColumns: ColumnsType<Record<string, string | number>> = [
     {

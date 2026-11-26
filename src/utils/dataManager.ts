@@ -1,6 +1,7 @@
 // 数据管理器 - 按页面分组按需加载 JSON
 import { message } from './feedback';
-import type { DodgeFrameData, EntryData } from '../types';
+import type { CharacterDetailData, DodgeFrameData, EntryData } from '../types';
+import { loadNightfarerLevels } from '../features/nightfarers/levels';
 
 // 词条数据类型统一由 src/types 定义（此处 re-export，避免两份定义漂移：
 // 曾因这里的副本缺 tags，导致深夜模式词条的「未实装」标签与筛选失效）
@@ -55,20 +56,6 @@ export interface ItemEffect {
   type: string;
 }
 
-// 角色等级数据接口
-export interface CharacterLevelData {
-  level: number; // 等级
-  HP: number;
-  FP: number;
-  ST: number;
-  [key: string]: string | number;
-}
-
-// 角色详细数据接口
-export interface CharacterDetailData {
-  [characterName: string]: CharacterLevelData[];
-}
-
 // 缓存数据类型
 type CacheData =
   | EntryData[]
@@ -109,7 +96,7 @@ const GROUP_FILES: Record<DataGroup, GroupFile[]> = {
     { key: 'deepNightEntries', load: () => import('../data/zh-CN/deep_night_entries.json') },
     { key: 'inGameDeepNightEntries', load: () => import('../data/zh-CN/in-game_deep_night_entries.json') },
   ],
-  // 角色数据页（含 10 个角色等级文件，见 CHARACTER_FILES）
+  // 角色数据页（也加载渡夜者逐级数据）
   character: [
     { key: 'characterStates', load: () => import('../data/zh-CN/character_states.json') },
     { key: 'dodgeFrames', load: () => import('../data/zh-CN/invincible_frames.json') },
@@ -123,20 +110,6 @@ const GROUP_FILES: Record<DataGroup, GroupFile[]> = {
   // 夜王Boss数据页
   boss: [{ key: 'inGameSpecialBuff', load: () => import('../data/zh-CN/in-game_special_buff.json') }],
 };
-
-// 角色详细数据文件（英文文件名 → 中文名）
-const CHARACTER_FILES: Array<{ name: string; load: () => Promise<{ default: Record<string, unknown> }> }> = [
-  { name: '追踪者', load: () => import('../data/character-info/tracker.json') },
-  { name: '女爵', load: () => import('../data/character-info/duchess.json') },
-  { name: '隐士', load: () => import('../data/character-info/hermit.json') },
-  { name: '铁之眼', load: () => import('../data/character-info/iron-eye.json') },
-  { name: '无赖', load: () => import('../data/character-info/rogue.json') },
-  { name: '执行者', load: () => import('../data/character-info/executor.json') },
-  { name: '守护者', load: () => import('../data/character-info/guardian.json') },
-  { name: '复仇者', load: () => import('../data/character-info/avenger.json') },
-  { name: '学者', load: () => import('../data/character-info/scholar.json') },
-  { name: '送葬者', load: () => import('../data/character-info/undertaker.json') },
-];
 
 // 全局数据存储
 class DataManager {
@@ -186,30 +159,10 @@ class DataManager {
       this.dataCache.set(files[index].key, mod.default as CacheData);
     });
 
-    // 角色页额外需要 10 个角色等级文件，合并成一个 characterDetailData
     if (group === 'character') {
-      this.dataCache.set('characterDetailData', await this.loadCharacterDetails());
+      const { levels } = await loadNightfarerLevels();
+      this.dataCache.set('characterDetailData', levels);
     }
-  }
-
-  private async loadCharacterDetails(): Promise<CharacterDetailData> {
-    const result: CharacterDetailData = {};
-
-    await Promise.all(
-      CHARACTER_FILES.map(async (item) => {
-        try {
-          const mod = await item.load();
-          const moduleData = mod.default;
-          if (moduleData[item.name]) {
-            result[item.name] = moduleData[item.name] as CharacterLevelData[];
-          }
-        } catch (error) {
-          console.warn(`无法加载角色详细数据文件 ${item.name}:`, error);
-        }
-      }),
-    );
-
-    return result;
   }
 
   // 获取数据的方法

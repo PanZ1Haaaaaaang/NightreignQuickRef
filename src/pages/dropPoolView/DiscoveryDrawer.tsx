@@ -6,13 +6,14 @@ import {
   DISCOVERY_ARCANE_MAX,
   DISCOVERY_BASE,
   FORTRESS_MAX_STACK,
-  NIGHTFARER_ARCANE_PRESETS,
   normalizeDiscoveryArcane,
   weaponCount,
   WEAPON_SLOT_LIMIT,
 } from '../../config/discoveryConfig';
 import CharacterAvatar from '../../components/common/CharacterAvatar';
 import AbilityIcon from '../../components/common/AbilityIcon';
+import { useNightfarerLevel15 } from '../../features/nightfarers/useNightfarerLevel15';
+import type { NightfarerName } from '../../types';
 import styles from '../../styles/dropPoolView.module.css';
 
 interface DiscoveryDrawerProps {
@@ -29,9 +30,27 @@ const WEAPON_FIELDS: Array<{ key: 'weapon20' | 'weapon30' | 'weapon40'; label: s
   { key: 'weapon40', label: '+40', value: 40 },
 ];
 
+const ARCANE_PRESET_ORDER: NightfarerName[] = [
+  '追踪者',
+  '守护者',
+  '铁之眼',
+  '女爵',
+  '无赖',
+  '隐士',
+  '复仇者',
+  '执行者',
+  '学者',
+  '送葬者',
+];
+
 const DiscoveryDrawer: React.FC<DiscoveryDrawerProps> = ({ open, onClose, setup, onChange }) => {
   const discovery = calcDiscovery(setup);
   const weapons = weaponCount(setup);
+  const snapshots = useNightfarerLevel15(open);
+  const presets = ARCANE_PRESET_ORDER.flatMap((name) => {
+    const stats = snapshots?.get(name)?.stats;
+    return stats ? [{ name, arcane: stats.感应 }] : [];
+  });
 
   const update = (patch: Partial<DiscoverySetup>) => onChange({ ...setup, ...patch });
 
@@ -84,8 +103,11 @@ const DiscoveryDrawer: React.FC<DiscoveryDrawerProps> = ({ open, onClose, setup,
 
         <div className={styles.discArcaneQuick}>
           <div className={styles.discArcaneQuickLabel}>快捷选择渡夜者默认感应</div>
+          {presets.length === 0 && (
+            <div className={styles.discNote}>{snapshots ? '暂无渡夜者感应数据' : '正在加载渡夜者感应…'}</div>
+          )}
           <div className={styles.discArcaneAvatars}>
-            {NIGHTFARER_ARCANE_PRESETS.map(({ name, arcane }) => (
+            {presets.map(({ name, arcane }) => (
               <button
                 key={name}
                 type="button"

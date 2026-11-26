@@ -3,13 +3,12 @@ import { Segmented, Table } from 'antd';
 import { lipulaColumns } from './columns';
 import { lipulaNotes, lipulaScenarios, lipulaTradesData } from './data';
 import type { LipulaStats, LipulaTrade } from './data';
-import lipulaStatsJson from '../../data/zh-CN/lipula_trade_stats.json';
+import { getLipulaOption } from '../../features/nightfarers/lipula';
+import type { NightfarerStats } from '../../types';
 import styles from '../../styles/bossDataView.module.css';
 
 const tradeByKey = new Map(lipulaTradesData.map((trade) => [trade.key, trade]));
-const statsByKey = new Map(lipulaStatsJson.options.map((option) => [option.key, option.stats]));
-
-const toStats = (stats: Record<string, number>): LipulaStats => ({
+const toStats = (stats: NightfarerStats): LipulaStats => ({
   level: 15,
   hp: stats['生命'] ?? 0,
   fp: stats['集中'] ?? 0,
@@ -30,7 +29,7 @@ const LipulaTrades: React.FC = () => {
         .map((key) => tradeByKey.get(key))
         .filter((trade): trade is LipulaTrade => Boolean(trade))
         .map((trade) => {
-          const stats = statsByKey.get(trade.key);
+          const stats = getLipulaOption(trade.key)?.stats;
           return stats ? { ...trade, stats: toStats(stats) } : trade;
         }),
     [scenario],

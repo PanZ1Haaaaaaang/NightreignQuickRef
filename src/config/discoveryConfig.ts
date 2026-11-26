@@ -84,17 +84,3 @@ export const adjustSegmentPercents = (segments: DropSegment[], discovery: number
   for (let i = 0; i < order.length && rest > 0; i += 1, rest -= 1) floors[order[i].index] += 1;
   return floors;
 };
-
-/** 渡夜者默认感应值：来自站内 character-info，固定不随等级/泪滴转职变化 */
-export const NIGHTFARER_ARCANE_PRESETS = [
-  { name: '追踪者', arcane: 10 },
-  { name: '守护者', arcane: 10 },
-  { name: '铁之眼', arcane: 13 },
-  { name: '女爵', arcane: 11 },
-  { name: '无赖', arcane: 10 },
-  { name: '隐士', arcane: 10 },
-  { name: '复仇者', arcane: 12 },
-  { name: '执行者', arcane: 28 },
-  { name: '学者', arcane: 50 },
-  { name: '送葬者', arcane: 10 },
-] as const;
