@@ -319,6 +319,10 @@ body[tomato-theme='dark'] .custom-card .ant-card-body {
   .ant-table {
     min-width: 800px; /* 确保表格内容完整显示 */
   }
+
+  .merchant-weapon-table .ant-table {
+    min-width: 0;
+  }
 }
 
 /* 已合并到999px的媒体查询中 */

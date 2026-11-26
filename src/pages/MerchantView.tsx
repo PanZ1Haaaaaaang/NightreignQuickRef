@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import type { PageTabProps } from '../config/navigationConfig';
 import { Alert, Button, Checkbox, Input, Popover, Segmented, Select, Switch, Table, Tabs, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
-import CustomPagination from '../components/CustomPagination';
+import PagedTable from '../components/common/PagedTable';
+import type { PageLocalColumns } from '../components/common/PagedTable';
 import { renderImpulseText } from '../components/common/renderImpulseText';
 import merchantJson from '../data/zh-CN/merchant_data.json';
 
@@ -193,6 +194,21 @@ const ConsumableSection: React.FC<{ rows: ConsumableRow[]; merchantNo?: string |
   );
 };
 
+const merchantPageSpans = (rows: readonly WeaponRow[]) => {
+  const spans = new Array<number>(rows.length).fill(0);
+  let start = 0;
+  while (start < rows.length) {
+    const merchantNo = rows[start].merchantNo;
+    let end = start + 1;
+    while (end < rows.length && rows[end].merchantNo === merchantNo) {
+      end += 1;
+    }
+    spans[start] = end - start;
+    start = end;
+  }
+  return spans;
+};
+
 // ---- 武器表（含深夜模式切换）----
 const WeaponSection: React.FC<{
   merchant: string;
@@ -211,8 +227,8 @@ const WeaponSection: React.FC<{
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedHighlights, setSelectedHighlights] = useState<string[]>([]);
   const [deepNight, setDeepNight] = useState(true);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
+  const [paginationReset, setPaginationReset] = useState(0);
+  const search = keyword.trim().toLowerCase();
 
   const typeOptions = useMemo(() => {
     const set = new Set<string>();
@@ -227,54 +243,20 @@ const WeaponSection: React.FC<{
   }, [rows]);
 
   const filtered = useMemo(() => {
-    const k = keyword.trim().toLowerCase();
     return rows.filter((row) => {
       if (selectedTypes.length > 0 && (!row.type || !selectedTypes.includes(row.type))) return false;
       if (selectedHighlights.length > 0) {
         const tags = highlightTagsOf(row.highlight);
         if (!selectedHighlights.some((tag) => tags.includes(tag))) return false;
       }
-      if (!k) return true;
+      if (!search) return true;
       return [row.merchantNo, row.name, row.affinity, row.type, row.skill, row.affix, row.deepNightAffix].some((v) =>
-        (v ?? '').toLowerCase().includes(k),
+        (v ?? '').toLowerCase().includes(search),
       );
     });
-  }, [rows, keyword, selectedTypes, selectedHighlights]);
+  }, [rows, search, selectedTypes, selectedHighlights]);
 
-  useEffect(() => {
-    setPage(1);
-  }, [keyword, selectedTypes, selectedHighlights, deepNight, merchantNo]);
-
-  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
-
-  useEffect(() => {
-    if (page > totalPages) {
-      setPage(totalPages);
-    }
-  }, [page, totalPages]);
-
-  const paged = useMemo(() => filtered.slice((page - 1) * pageSize, page * pageSize), [filtered, page, pageSize]);
-
-  // 商人编号列的纵向合并（按当前可见行分组）
-  const merchantSpans = useMemo(() => {
-    const spans = new Array<number>(paged.length).fill(1);
-    let start = 0;
-    while (start < paged.length) {
-      const key = paged[start].merchantNo;
-      let end = start + 1;
-      while (end < paged.length && paged[end].merchantNo === key) {
-        end += 1;
-      }
-      spans[start] = end - start;
-      for (let index = start + 1; index < end; index += 1) {
-        spans[index] = 0;
-      }
-      start = end;
-    }
-    return spans;
-  }, [paged]);
-
-  const columns: ColumnsType<WeaponRow> = [
+  const buildColumns = (merchantSpans: readonly number[]): PageLocalColumns<WeaponRow> => [
     {
       title: '商人编号',
       dataIndex: 'merchantNo',
@@ -389,7 +371,7 @@ const WeaponSection: React.FC<{
     setSelectedTypes([]);
     setSelectedHighlights([]);
     setDeepNight(true);
-    setPage(1);
+    setPaginationReset((previous) => previous + 1);
   };
 
   return (
@@ -429,25 +411,24 @@ const WeaponSection: React.FC<{
         </span>
         <Button onClick={handleReset}>清除所有</Button>
       </div>
-      <Table<WeaponRow>
-        columns={columns}
-        dataSource={paged}
-        rowKey={(record, index) => `${record.merchantNo ?? ''}-${record.name}-${index}`}
+      <PagedTable<WeaponRow>
+        className="merchant-weapon-table"
+        columns={(pageRows) => buildColumns(merchantPageSpans(pageRows))}
+        dataSource={filtered}
+        contextKey={JSON.stringify([
+          merchant,
+          merchantNo,
+          search,
+          selectedTypes,
+          selectedHighlights,
+          deepNight,
+          paginationReset,
+        ])}
+        rowKey={(record) => `${record.merchantNo ?? ''}-${record.name}`}
         size="small"
         bordered
         scroll={{ x: 'max-content' }}
-        pagination={false}
         locale={{ emptyText: '没有匹配的数据' }}
-      />
-      <CustomPagination
-        currentPage={page}
-        pageSize={pageSize}
-        totalItems={filtered.length}
-        onPageChange={setPage}
-        onPageSizeChange={(size) => {
-          setPageSize(size);
-          setPage(1);
-        }}
       />
       {notes.length > 0 && (
         <div className="weapon-skill-magic-notes">
