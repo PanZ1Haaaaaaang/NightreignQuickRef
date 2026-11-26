@@ -27,6 +27,7 @@ const PagedTable = <Row extends object>({
   contextKey,
   pageSize: controlledPageSize,
   onPageSizeChange,
+  onChange,
   ...tableProps
 }: PagedTableProps<Row>) => {
   const [localPageSize, setLocalPageSize] = useState(DEFAULT_TABLE_PAGE_SIZE);
@@ -44,6 +45,10 @@ const PagedTable = <Row extends object>({
         columns={pageColumns}
         dataSource={tableRows}
         pagination={showPagination && !pageLocal ? { current: currentPage, pageSize, placement: ['none'] } : false}
+        onChange={(pagination, filters, sorter, extra) => {
+          if (currentPage > 1 && (extra.action === 'sort' || extra.action === 'filter')) onPageChange(1);
+          onChange?.(pagination, filters, sorter, extra);
+        }}
       />
       {showPagination && (
         <CustomPagination

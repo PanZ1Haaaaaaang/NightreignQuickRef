@@ -991,6 +991,10 @@ body[tomato-theme='dark'] .todo-page-tag {
 /* 自定义分页行：移动端换行显示 */
 .custom-pagination-row {
   width: 100%;
+  padding-inline: 16px;
+}
+.custom-pagination-row .page-nav-controls {
+  gap: 10px;
 }
 .custom-pagination-row .page-position {
   margin-inline: 15px;
@@ -1001,6 +1005,7 @@ body[tomato-theme='dark'] .todo-page-tag {
     flex-direction: column !important;
     align-items: stretch !important;
     gap: var(--spacing-sm);
+    padding-inline: 8px;
   }
 
   .custom-pagination-row .page-size-controls {
@@ -1010,6 +1015,7 @@ body[tomato-theme='dark'] .todo-page-tag {
   .custom-pagination-row .page-nav-controls {
     justify-content: center;
     flex-wrap: wrap;
+    gap: 6px;
   }
 
   .custom-pagination-row .page-position {

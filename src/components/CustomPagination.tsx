@@ -37,7 +37,6 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginTop: '15px',
-        padding: '0 16px',
       }}
     >
       <div className="page-size-controls" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -56,7 +55,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
         <span style={{ color: 'var(--theme-text-secondary)', fontSize: '14px' }}>共 {totalItems} 条记录</span>
       </div>
 
-      <div className="page-nav-controls" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <div className="page-nav-controls" style={{ display: 'flex', alignItems: 'center' }}>
         <Button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage <= 1} size="medium">
           上一页
         </Button>

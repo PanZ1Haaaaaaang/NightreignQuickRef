@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import { Button, Drawer, Input, Segmented, Table } from 'antd';
+import { Button, Drawer, Input, Segmented } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { SearchOutlined, TableOutlined } from '@ant-design/icons';
 import aggroJson from '../data/zh-CN/aggro_data.json';
 import spellJson from '../data/zh-CN/aggro_spell_data.json';
 import type { AggroData, AggroRow, AggroSpellData } from '../types';
-import CustomPagination from '../components/CustomPagination';
 import ImpulseBadge from '../components/common/ImpulseBadge';
+import PagedTable from '../components/common/PagedTable';
 import { renderImpulseText } from '../components/common/renderImpulseText';
 import styles from '../styles/aggroView.module.css';
 
@@ -129,28 +129,6 @@ const skillColumns: TableColumnsType<{ key: string; name: string; value: string 
   { title: '仇恨值', dataIndex: 'value', key: 'value', width: '45%' },
 ];
 
-/** 带网站统一分页条的表 */
-const PagedTable = <T extends { key: string }>({ rows, columns }: { rows: T[]; columns: TableColumnsType<T> }) => {
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(20);
-  const pageRows = rows.slice((page - 1) * pageSize, page * pageSize);
-
-  return (
-    <>
-      <Table columns={columns} dataSource={pageRows} rowKey="key" size="small" bordered pagination={false} />
-      {rows.length >= 20 ? (
-        <CustomPagination
-          currentPage={page}
-          pageSize={pageSize}
-          totalItems={rows.length}
-          onPageChange={setPage}
-          onPageSizeChange={setPageSize}
-        />
-      ) : null}
-    </>
-  );
-};
-
 const CATEGORY_OPTIONS = [
   { label: '常见高仇恨战技', value: 'skills' },
   { label: '角色相关', value: 'character' },
@@ -237,9 +215,25 @@ const AggroView: React.FC = () => {
         </div>
 
         {category === 'skills' ? (
-          <PagedTable key={`skills-${kw}`} rows={filteredSkills} columns={skillColumns} />
+          <PagedTable
+            key={category}
+            contextKey={kw}
+            dataSource={filteredSkills}
+            columns={skillColumns}
+            rowKey="key"
+            size="small"
+            bordered
+          />
         ) : (
-          <PagedTable key={`${category}-${kw}`} rows={filteredAggro} columns={aggroColumns} />
+          <PagedTable
+            key={category}
+            contextKey={kw}
+            dataSource={filteredAggro}
+            columns={aggroColumns}
+            rowKey="key"
+            size="small"
+            bordered
+          />
         )}
       </div>
 
@@ -250,7 +244,14 @@ const AggroView: React.FC = () => {
         open={drawer === 'impulse'}
         onClose={() => setDrawer(null)}
       >
-        <PagedTable rows={impulseRows} columns={impulseColumns} />
+        <PagedTable
+          contextKey="impulse"
+          dataSource={impulseRows}
+          columns={impulseColumns}
+          rowKey="key"
+          size="small"
+          bordered
+        />
       </Drawer>
 
       <Drawer
@@ -260,7 +261,14 @@ const AggroView: React.FC = () => {
         open={drawer === 'weapon'}
         onClose={() => setDrawer(null)}
       >
-        <PagedTable rows={weaponRows} columns={weaponColumns} />
+        <PagedTable
+          contextKey="weapon"
+          dataSource={weaponRows}
+          columns={weaponColumns}
+          rowKey="key"
+          size="small"
+          bordered
+        />
         <p className={styles.note}>
           基础值单指 R1 的冲击力对应仇恨；模组过多、包含多种冲击力的武器请参考原表。双武器模组可看作原仇恨值 ×2。
         </p>
