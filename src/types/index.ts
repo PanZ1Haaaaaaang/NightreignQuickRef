@@ -328,7 +328,7 @@ export interface TeardropConversionData {
   characters: TeardropCharacter[];
 }
 
-// ===== 掉落池（src/data/zh-CN/drop_pools.json） =====
+// ===== 掉落池（src/data/zh-CN/drop-pools.json） =====
 
 /** 球选项里一个槽位的掉落类型（解包按物品表判定；12 个基池 + 特殊槽位） */
 export type DropKind =
@@ -718,7 +718,7 @@ export interface GuardMechanicData {
   notes: string[];
 }
 
-// ===== 黑夜入侵者武器词条（src/data/zh-CN/invader_affix_data.json） =====
+// ===== 黑夜入侵者武器词条（src/data/zh-CN/invader-affixes.json） =====
 
 export interface InvaderWeaponAffix {
   /** 词条 ID（与「局内词条」一致） */

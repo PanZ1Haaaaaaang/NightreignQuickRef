@@ -4,8 +4,8 @@ import { EyeOutlined, InfoCircleOutlined, TableOutlined } from '@ant-design/icon
 import CharacterAvatar from '../../../components/common/CharacterAvatar';
 import CustomPagination from '../../../components/CustomPagination';
 import { usePagination } from '../../../hooks/usePagination';
-import dropPoolsJson from '../../../data/zh-CN/drop_pools.json';
-import invaderAffixJson from '../../../data/zh-CN/invader_affix_data.json';
+import dropPoolsJson from '../../../data/zh-CN/drop-pools.json';
+import invaderAffixJson from '../../../data/zh-CN/invader-affixes.json';
 import type {
   DropGroup,
   DropOption,

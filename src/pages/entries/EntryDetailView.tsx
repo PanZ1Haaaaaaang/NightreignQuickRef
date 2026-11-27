@@ -197,7 +197,7 @@ const inGameTypeOptions = [
 ];
 
 // 「潜在能力」是局内武器固有的一类词条（43 条），单独放在
-// src/data/zh-CN/in-game_potential_entries_zh-CN.json，页签「局内-潜在能力」
+// src/data/zh-CN/in-game-potential-entries.json，页签「局内-潜在能力」
 
 // 局内-潜在能力词条类型选项（这 43 条里实际出现的类型）
 const potentialAbilityTypeOptions = [

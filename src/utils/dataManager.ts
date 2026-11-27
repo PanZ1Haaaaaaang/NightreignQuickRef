@@ -86,18 +86,18 @@ const GROUP_FILES: Record<DataGroup, GroupFile[]> = {
   // 词条详细数据页
   entries: [
     { key: 'outsiderEntries', load: () => import('../data/zh-CN/out-of-run-entries.json') },
-    { key: 'talismanEntries', load: () => import('../data/zh-CN/talisman_entries_zh-CN.json') },
-    { key: 'inGameEntries', load: () => import('../data/zh-CN/in-game_entries_zh-CN.json') },
+    { key: 'talismanEntries', load: () => import('../data/zh-CN/talisman-entries.json') },
+    { key: 'inGameEntries', load: () => import('../data/zh-CN/in-game-entries.json') },
     {
       key: 'inGamePotentialEntries',
       load: async () => ({ default: await loadPotentialEntries() }),
     },
     { key: 'enhancementCategories', load: () => import('../data/zh-CN/enhancement-categories.json') },
-    { key: 'itemEffects', load: () => import('../data/zh-CN/item_effect.json') },
+    { key: 'itemEffects', load: () => import('../data/zh-CN/item-effects.json') },
     { key: 'deepNightEntries', load: () => import('../data/zh-CN/deep-night-out-of-run-entries.json') },
     {
       key: 'inGameDeepNightEntries',
-      load: () => import('../data/zh-CN/in-game_deep_night_entries.json') satisfies Promise<{ default: EntryData[] }>,
+      load: () => import('../data/zh-CN/in-game-deep-night-entries.json') satisfies Promise<{ default: EntryData[] }>,
     },
   ],
   // 角色数据页（也加载渡夜者逐级数据）
