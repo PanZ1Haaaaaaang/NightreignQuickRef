@@ -3,16 +3,12 @@ import type { MouseEvent, ReactNode } from 'react';
 import { Button, Input, Select, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
-import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
-import StatusIcon from '../../../components/common/StatusIcon';
-import {
-  getAbsorptionClass,
-  getLocationColor,
-  getResistanceClass,
-} from '../../../components/common/combatTablePresentation';
-import tableStyles from '../../../components/common/combatTable.module.css';
-import wildBossData from '../../../data/zh-CN/wild-bosses.json';
-import type { WildBossData } from '../../../types';
+import DamageTypeIcon from '@/components/common/DamageTypeIcon';
+import StatusIcon from '@/components/common/StatusIcon';
+import { getAbsorptionClass, getLocationColor, getResistanceClass } from '@/components/common/combatTablePresentation';
+import tableStyles from '@/components/common/combatTable.module.css';
+import wildBossData from '@/data/zh-CN/wild-bosses.json';
+import type { WildBossData } from '@/types';
 
 const wildBossColumns: ColumnsType<WildBossData> = [
   {

@@ -1,5 +1,5 @@
-import potentialEntriesUrl from '../../data/zh-CN/in-game-potential-entries.json?url&no-inline';
-import type { EntryData } from '../../types';
+import potentialEntriesUrl from '@/data/zh-CN/in-game-potential-entries.json?url&no-inline';
+import type { EntryData } from '@/types';
 
 export class PotentialEntriesMissingError extends Error {}
 

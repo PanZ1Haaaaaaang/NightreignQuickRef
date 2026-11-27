@@ -3,11 +3,11 @@ import { Button, Space, Spin, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { Line } from '@ant-design/plots';
 import { throttle } from 'lodash';
-import { typeColorMap } from '../../../types';
-import type { EntryData } from '../../../types';
-import DataManager from '../../../utils/dataManager';
-import { message } from '../../../utils/feedback';
-import { getCurrentTheme } from '../../../utils/themeUtils';
+import { typeColorMap } from '@/types';
+import type { EntryData } from '@/types';
+import DataManager from '@/utils/dataManager';
+import { message } from '@/utils/feedback';
+import { getCurrentTheme } from '@/utils/themeUtils';
 
 const curseData = [
   { rune: '0', damageIncrease: 0 },

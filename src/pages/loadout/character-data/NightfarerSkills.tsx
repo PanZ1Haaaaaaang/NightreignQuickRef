@@ -2,12 +2,12 @@ import React, { useMemo, useState } from 'react';
 import { Input, Table, Tooltip } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import skillJson from '../../../data/zh-CN/nightfarer-skills.json';
-import type { NightfarerSkillData, NightfarerSkillRow } from '../../../types';
-import { abilityKindOf } from '../../../assets/icons/abilities';
-import AbilityIcon from '../../../components/common/AbilityIcon';
-import CharacterAvatar from '../../../components/common/CharacterAvatar';
-import { renderImpulseText } from '../../../components/common/renderImpulseText';
+import skillJson from '@/data/zh-CN/nightfarer-skills.json';
+import type { NightfarerSkillData, NightfarerSkillRow } from '@/types';
+import { abilityKindOf } from '@/assets/icons/abilities';
+import AbilityIcon from '@/components/common/AbilityIcon';
+import CharacterAvatar from '@/components/common/CharacterAvatar';
+import { renderImpulseText } from '@/components/common/renderImpulseText';
 import styles from './nightfarerSkills.module.css';
 
 const DATA = skillJson as unknown as NightfarerSkillData;

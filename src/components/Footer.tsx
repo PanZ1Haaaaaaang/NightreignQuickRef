@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Space } from 'antd';
 import { HeartOutlined, GithubOutlined } from '@ant-design/icons';
-import { SITE_CONFIG } from '../config/siteConfig';
+import { SITE_CONFIG } from '@/config/siteConfig';
 
 const { Text } = Typography;
 

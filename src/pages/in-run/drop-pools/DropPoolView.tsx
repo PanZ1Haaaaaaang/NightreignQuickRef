@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Alert, Button, Empty, Grid, Input, Segmented, Select, Space, Switch, Tag, Tooltip, Typography } from 'antd';
 import { EyeOutlined, InfoCircleOutlined, TableOutlined } from '@ant-design/icons';
-import CharacterAvatar from '../../../components/common/CharacterAvatar';
-import CustomPagination from '../../../components/CustomPagination';
-import { usePagination } from '../../../hooks/usePagination';
-import dropPoolsJson from '../../../data/zh-CN/drop-pools.json';
-import invaderAffixJson from '../../../data/zh-CN/invader-affixes.json';
+import CharacterAvatar from '@/components/common/CharacterAvatar';
+import CustomPagination from '@/components/CustomPagination';
+import { usePagination } from '@/hooks/usePagination';
+import dropPoolsJson from '@/data/zh-CN/drop-pools.json';
+import invaderAffixJson from '@/data/zh-CN/invader-affixes.json';
 import type {
   DropGroup,
   DropOption,
@@ -13,8 +13,8 @@ import type {
   DropSegment,
   InvaderWeaponAffix,
   InvaderWeaponAffixData,
-} from '../../../types';
-import { POTENTIAL_POOL_LABEL } from '../../../config/potentialPoolConfig';
+} from '@/types';
+import { POTENTIAL_POOL_LABEL } from '@/config/potentialPoolConfig';
 import { TERRAIN_OPTIONS, terrainOf, type TerrainKey } from './terrainConfig';
 import {
   adjustSegmentPercents,

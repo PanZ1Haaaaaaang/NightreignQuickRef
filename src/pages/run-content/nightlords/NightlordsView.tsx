@@ -1,5 +1,5 @@
-import type { PageTabProps } from '../../../config/navigationConfig';
-import RunContentTabs from '../RunContentTabs';
+import type { PageTabProps } from '@/config/navigationConfig';
+import RunContentTabs from '@/pages/run-content/RunContentTabs';
 import NightlordStats from './NightlordStats';
 import WeaknessSection from './WeaknessSection';
 import LipulaTrades from './LipulaTrades';

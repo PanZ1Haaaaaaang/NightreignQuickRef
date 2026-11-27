@@ -1,5 +1,5 @@
 import React from 'react';
-import { SHOW_NAV_GROUP_NOTE, SHOW_PAGE_BADGES, getNavigationGroups } from '../config/navigationConfig';
+import { SHOW_NAV_GROUP_NOTE, SHOW_PAGE_BADGES, getNavigationGroups } from '@/config/navigationConfig';
 
 interface NavigationProps {
   activeTab: string;

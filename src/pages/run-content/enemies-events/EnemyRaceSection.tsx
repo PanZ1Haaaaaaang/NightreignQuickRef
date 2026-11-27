@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { Select, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { renderImpulseText } from '../../../components/common/renderImpulseText';
-import enemyRaceJson from '../../../data/zh-CN/enemy-races.json';
+import { renderImpulseText } from '@/components/common/renderImpulseText';
+import enemyRaceJson from '@/data/zh-CN/enemy-races.json';
 
 // ---- 数据类型（对应 src/data/zh-CN/enemy-races.json 结构）----
 interface RaceInfo {

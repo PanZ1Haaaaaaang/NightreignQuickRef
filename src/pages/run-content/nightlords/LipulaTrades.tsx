@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
 import { Segmented, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import CharacterStatLabel from '../../../components/common/CharacterStatLabel';
-import lipulaTradesJson from '../../../data/zh-CN/lipula-trades.json';
-import { getLipulaOption } from '../../../features/nightfarers/lipula';
-import type { NightfarerStats } from '../../../types';
+import CharacterStatLabel from '@/components/common/CharacterStatLabel';
+import lipulaTradesJson from '@/data/zh-CN/lipula-trades.json';
+import { getLipulaOption } from '@/features/nightfarers/lipula';
+import type { NightfarerStats } from '@/types';
 import styles from './lipula.module.css';
 
 const ABILITY_ORDER = ['生命', '集中', '耐力', '力气', '灵巧', '智力', '信仰', '感应'] as const;

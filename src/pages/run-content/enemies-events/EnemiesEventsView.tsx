@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Spin } from 'antd';
-import type { PageTabProps } from '../../../config/navigationConfig';
-import RunContentTabs from '../RunContentTabs';
+import type { PageTabProps } from '@/config/navigationConfig';
+import RunContentTabs from '@/pages/run-content/RunContentTabs';
 import EnemyRaceSection from './EnemyRaceSection';
 import WildBossSection from './WildBossSection';
 

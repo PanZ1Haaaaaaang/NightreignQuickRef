@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Table } from 'antd';
 import type { TableColumnType, TableProps } from 'antd';
-import { DEFAULT_TABLE_PAGE_SIZE, MIN_PAGINATED_ROWS } from '../../config/tablePagination';
-import { usePagination } from '../../hooks/usePagination';
-import CustomPagination from '../CustomPagination';
+import { DEFAULT_TABLE_PAGE_SIZE, MIN_PAGINATED_ROWS } from '@/config/tablePagination';
+import { usePagination } from '@/hooks/usePagination';
+import CustomPagination from '@/components/CustomPagination';
 
 export type PageLocalColumns<Row extends object> = (TableColumnType<Row> & {
   sorter?: never;

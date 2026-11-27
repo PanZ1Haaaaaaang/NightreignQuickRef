@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Table } from 'antd';
 import type { TableColumnsType } from 'antd';
-import CharacterAvatar from '../../../components/common/CharacterAvatar';
-import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
-import Panel from '../../../components/common/Panel';
-import shieldData from '../../../data/zh-CN/greatshields.json';
-import mechanicJson from '../../../data/zh-CN/guard-boost-mechanics.json';
-import type { DamageType, GuardMechanicData } from '../../../types';
+import CharacterAvatar from '@/components/common/CharacterAvatar';
+import DamageTypeIcon from '@/components/common/DamageTypeIcon';
+import Panel from '@/components/common/Panel';
+import shieldData from '@/data/zh-CN/greatshields.json';
+import mechanicJson from '@/data/zh-CN/guard-boost-mechanics.json';
+import type { DamageType, GuardMechanicData } from '@/types';
 import styles from './greatShieldView.module.css';
 
 // 守护者（渡夜者）的被动是「开启强防御」，所以这面盾对玩守护者的玩家最常用，单独做轻标注

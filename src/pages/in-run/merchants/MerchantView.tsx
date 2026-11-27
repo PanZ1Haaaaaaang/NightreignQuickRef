@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import type { PageTabProps } from '../../../config/navigationConfig';
+import type { PageTabProps } from '@/config/navigationConfig';
 import { Alert, Button, Checkbox, Input, Popover, Segmented, Select, Switch, Table, Tabs, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
-import PagedTable from '../../../components/common/PagedTable';
-import type { PageLocalColumns } from '../../../components/common/PagedTable';
-import { renderImpulseText } from '../../../components/common/renderImpulseText';
-import merchantJson from '../../../data/zh-CN/merchants.json';
+import PagedTable from '@/components/common/PagedTable';
+import type { PageLocalColumns } from '@/components/common/PagedTable';
+import { renderImpulseText } from '@/components/common/renderImpulseText';
+import merchantJson from '@/data/zh-CN/merchants.json';
 import styles from './merchantView.module.css';
 
 // ---- 数据类型（对应 src/data/zh-CN/merchants.json 结构）----

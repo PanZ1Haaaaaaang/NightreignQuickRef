@@ -1,4 +1,4 @@
-import type { NewsAnnouncementMeta, NewsArticle, NewsIndexData, NewsTitleMap, NewsTranslation } from '../types';
+import type { NewsAnnouncementMeta, NewsArticle, NewsIndexData, NewsTitleMap, NewsTranslation } from '@/types';
 
 /**
  * 官方公告数据按需加载：
@@ -27,7 +27,7 @@ let titleMapPromise: Promise<Record<string, string>> | null = null;
 export const loadNewsIndex = (): Promise<NewsAnnouncementMeta[]> => {
   if (indexPromise) return indexPromise;
 
-  const task = import('../data/news/index.json').then((mod) => {
+  const task = import('@/data/news/index.json').then((mod) => {
     const data = mod.default as NewsIndexData;
     return [...data.announcements].sort((a, b) => b.date.localeCompare(a.date));
   });

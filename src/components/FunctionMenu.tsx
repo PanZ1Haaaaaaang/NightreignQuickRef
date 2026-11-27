@@ -1,9 +1,9 @@
 import React, { useEffect, useId, useRef, useState } from 'react';
 import { Tooltip, Menu } from 'antd';
 import type { MenuProps, MenuRef } from 'antd';
-import logoImage from '../assets/logo-circle.svg';
-import { getNavigationGroups } from '../config/navigationConfig';
-import type { NavigationTarget } from '../utils/navigationUrl';
+import logoImage from '@/assets/logo-circle.svg';
+import { getNavigationGroups } from '@/config/navigationConfig';
+import type { NavigationTarget } from '@/utils/navigationUrl';
 
 interface FunctionMenuProps {
   onNavigate: (target: NavigationTarget) => void;

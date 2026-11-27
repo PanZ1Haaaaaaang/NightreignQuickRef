@@ -1,8 +1,8 @@
 // 数据管理器 - 按页面分组按需加载 JSON
 import { message } from './feedback';
-import type { CharacterDetailData, DodgeFrameData, EntryData } from '../types';
-import { loadNightfarerLevels } from '../features/nightfarers/levels';
-import { loadPotentialEntries } from '../features/entries/potentialEntries';
+import type { CharacterDetailData, DodgeFrameData, EntryData } from '@/types';
+import { loadNightfarerLevels } from '@/features/nightfarers/levels';
+import { loadPotentialEntries } from '@/features/entries/potentialEntries';
 
 // 词条数据类型统一由 src/types 定义（此处 re-export，避免两份定义漂移：
 // 曾因这里的副本缺 tags，导致深夜模式词条的「未实装」标签与筛选失效）
@@ -85,34 +85,34 @@ interface GroupFile {
 const GROUP_FILES: Record<DataGroup, GroupFile[]> = {
   // 词条详细数据页
   entries: [
-    { key: 'outsiderEntries', load: () => import('../data/zh-CN/out-of-run-entries.json') },
-    { key: 'talismanEntries', load: () => import('../data/zh-CN/talisman-entries.json') },
-    { key: 'inGameEntries', load: () => import('../data/zh-CN/in-game-entries.json') },
+    { key: 'outsiderEntries', load: () => import('@/data/zh-CN/out-of-run-entries.json') },
+    { key: 'talismanEntries', load: () => import('@/data/zh-CN/talisman-entries.json') },
+    { key: 'inGameEntries', load: () => import('@/data/zh-CN/in-game-entries.json') },
     {
       key: 'inGamePotentialEntries',
       load: async () => ({ default: await loadPotentialEntries() }),
     },
-    { key: 'enhancementCategories', load: () => import('../data/zh-CN/enhancement-categories.json') },
-    { key: 'itemEffects', load: () => import('../data/zh-CN/item-effects.json') },
-    { key: 'deepNightEntries', load: () => import('../data/zh-CN/deep-night-out-of-run-entries.json') },
+    { key: 'enhancementCategories', load: () => import('@/data/zh-CN/enhancement-categories.json') },
+    { key: 'itemEffects', load: () => import('@/data/zh-CN/item-effects.json') },
+    { key: 'deepNightEntries', load: () => import('@/data/zh-CN/deep-night-out-of-run-entries.json') },
     {
       key: 'inGameDeepNightEntries',
-      load: () => import('../data/zh-CN/in-game-deep-night-entries.json') satisfies Promise<{ default: EntryData[] }>,
+      load: () => import('@/data/zh-CN/in-game-deep-night-entries.json') satisfies Promise<{ default: EntryData[] }>,
     },
   ],
   // 角色数据页（也加载渡夜者逐级数据）
   character: [
-    { key: 'characterStates', load: () => import('../data/zh-CN/nightfarer-stat-grades.json') },
-    { key: 'dodgeFrames', load: () => import('../data/zh-CN/dodge-frames.json') },
-    { key: 'magicMoveList', load: () => import('../data/zh-CN/recluse-mixed-magic.json') },
+    { key: 'characterStates', load: () => import('@/data/zh-CN/nightfarer-stat-grades.json') },
+    { key: 'dodgeFrames', load: () => import('@/data/zh-CN/dodge-frames.json') },
+    { key: 'magicMoveList', load: () => import('@/data/zh-CN/recluse-mixed-magic.json') },
   ],
   // 传说武器详情页
   weapon: [
-    { key: 'weaponCharacter', load: () => import('../data/zh-CN/legendary-weapon-attack-by-nightfarer.json') },
-    { key: 'weaponEffect', load: () => import('../data/zh-CN/legendary-weapon-effects.json') },
+    { key: 'weaponCharacter', load: () => import('@/data/zh-CN/legendary-weapon-attack-by-nightfarer.json') },
+    { key: 'weaponEffect', load: () => import('@/data/zh-CN/legendary-weapon-effects.json') },
   ],
   // 夜王Boss数据页
-  boss: [{ key: 'inGameSpecialBuff', load: () => import('../data/zh-CN/in-game-special-buffs.json') }],
+  boss: [{ key: 'inGameSpecialBuff', load: () => import('@/data/zh-CN/in-game-special-buffs.json') }],
 };
 
 // 全局数据存储

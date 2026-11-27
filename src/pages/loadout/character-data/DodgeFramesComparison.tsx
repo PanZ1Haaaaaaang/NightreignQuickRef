@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { Button, Modal, Segmented, Switch } from 'antd';
 import { DownOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import { commonDodgeProfiles, situationalDodgeProfiles, type DodgeProfile } from './dodgeFrameConfig';
-import type { DodgeAnimation, DodgeFlagType } from '../../../types';
-import DataManager from '../../../utils/dataManager';
+import type { DodgeAnimation, DodgeFlagType } from '@/types';
+import DataManager from '@/utils/dataManager';
 import styles from './dodgeFramesComparison.module.css';
-import AbilityIcon from '../../../components/common/AbilityIcon';
-import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import AbilityIcon from '@/components/common/AbilityIcon';
+import CharacterAvatar from '@/components/common/CharacterAvatar';
 
 const MOVE_FLAG = 11;
 const SCALE_TICKS = 6;

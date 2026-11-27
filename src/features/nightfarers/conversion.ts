@@ -1,4 +1,4 @@
-import teardropJson from '../../data/zh-CN/teardrop-conversion.json';
+import teardropJson from '@/data/zh-CN/teardrop-conversion.json';
 import type {
   NightfarerName,
   NightfarerStat,
@@ -6,7 +6,7 @@ import type {
   TeardropAffix,
   TeardropConversionData,
   TeardropLipulaOption,
-} from '../../types';
+} from '@/types';
 
 export const TEARDROP_DATA = teardropJson as TeardropConversionData;
 

@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Button, Drawer, Empty, Space, Spin, Tag } from 'antd';
-import { renderImpulseText } from '../../../components/common/renderImpulseText';
-import type { EntryData } from '../../../types';
-import { POTENTIAL_POOL_TAGS } from '../../../config/potentialPoolConfig';
-import { loadPotentialEntries, PotentialEntriesMissingError } from '../../../features/entries/potentialEntries';
+import { renderImpulseText } from '@/components/common/renderImpulseText';
+import type { EntryData } from '@/types';
+import { POTENTIAL_POOL_TAGS } from '@/config/potentialPoolConfig';
+import { loadPotentialEntries, PotentialEntriesMissingError } from '@/features/entries/potentialEntries';
 import styles from './dropPoolView.module.css';
 
 interface PotentialPoolDrawerProps {

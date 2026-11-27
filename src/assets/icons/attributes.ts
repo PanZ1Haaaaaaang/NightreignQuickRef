@@ -1,4 +1,4 @@
-import type { NightfarerStat } from '../../types';
+import type { NightfarerStat } from '@/types';
 import arcane from './attributes/arcane.webp';
 import dexterity from './attributes/dexterity.webp';
 import endurance from './attributes/endurance.webp';

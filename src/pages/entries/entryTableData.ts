@@ -1,4 +1,4 @@
-import type { EntryData } from '../../types';
+import type { EntryData } from '@/types';
 
 export const compareEntryIds = (a: EntryData, b: EntryData) =>
   String(a.entry_id ?? '').localeCompare(String(b.entry_id ?? ''));

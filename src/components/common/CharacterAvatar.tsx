@@ -1,4 +1,4 @@
-import { characterIconOf } from '../../assets/icons/characters';
+import { characterIconOf } from '@/assets/icons/characters';
 import styles from './CharacterAvatar.module.css';
 
 interface CharacterAvatarProps {

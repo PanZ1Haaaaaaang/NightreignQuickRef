@@ -1,12 +1,12 @@
-import type { DamageType } from '../../types';
-import standard from '../Negations/standard-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import strike from '../Negations/strike-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import slash from '../Negations/slash-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import pierce from '../Negations/pierce-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
-import magic from '../Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import fire from '../Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import lightning from '../Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
-import holy from '../Negations/holy-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
+import type { DamageType } from '@/types';
+import standard from '@/assets/Negations/standard-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
+import strike from '@/assets/Negations/strike-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
+import slash from '@/assets/Negations/slash-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
+import pierce from '@/assets/Negations/pierce-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
+import magic from '@/assets/Negations/magic-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
+import fire from '@/assets/Negations/fire-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
+import lightning from '@/assets/Negations/lightning-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
+import holy from '@/assets/Negations/holy-upgrade-affinity-elden-ring-nightreign-wiki-guide.png';
 
 export const DAMAGE_ICONS: Record<DamageType, string> = {
   standard,

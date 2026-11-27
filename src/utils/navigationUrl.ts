@@ -1,4 +1,4 @@
-import { getDefaultPage, getPageByKey, NAV_PAGES, type NavPage, type NavSection } from '../config/navigationConfig';
+import { getDefaultPage, getPageByKey, NAV_PAGES, type NavPage, type NavSection } from '@/config/navigationConfig';
 
 export interface NavigationTarget {
   page: NavPage;

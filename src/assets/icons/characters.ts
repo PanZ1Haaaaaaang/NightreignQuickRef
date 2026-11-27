@@ -1,4 +1,4 @@
-import type { NightfarerName } from '../../types';
+import type { NightfarerName } from '@/types';
 import duchess from './char/Duchess.svg';
 import executor from './char/Executor.svg';
 import guardian from './char/Guardian.svg';

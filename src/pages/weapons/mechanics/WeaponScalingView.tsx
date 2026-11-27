@@ -2,23 +2,23 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Button, Checkbox, Drawer, Modal, Segmented, Select, Statistic, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { ExperimentOutlined, LineChartOutlined } from '@ant-design/icons';
-import CharacterAvatar from '../../../components/common/CharacterAvatar';
-import CharacterStatLabel from '../../../components/common/CharacterStatLabel';
-import { CHARACTER_STATS } from '../../../assets/icons/attributes';
-import scalingJson from '../../../data/zh-CN/weapon-scaling.json';
-import uniqueWeaponArts from '../../../data/zh-CN/unique-weapon-arts.json';
-import weaponArtCategoryHints from '../../../data/zh-CN/weapon-art-category-hints.json';
+import CharacterAvatar from '@/components/common/CharacterAvatar';
+import CharacterStatLabel from '@/components/common/CharacterStatLabel';
+import { CHARACTER_STATS } from '@/assets/icons/attributes';
+import scalingJson from '@/data/zh-CN/weapon-scaling.json';
+import uniqueWeaponArts from '@/data/zh-CN/unique-weapon-arts.json';
+import weaponArtCategoryHints from '@/data/zh-CN/weapon-art-category-hints.json';
 import {
   convertNightfarerStats,
   findTeardropAffixes,
   getTeardropAffixes,
   shortAffixName,
-} from '../../../features/nightfarers/conversion';
-import { getLipulaOption, LIPULA_OPTIONS } from '../../../features/nightfarers/lipula';
-import { useNightfarerLevel15 } from '../../../features/nightfarers/useNightfarerLevel15';
-import type { NightfarerName } from '../../../types';
-import { getCurrentTheme } from '../../../utils/themeUtils';
-import type { WeaponScalingCurve, WeaponScalingDamageType, WeaponScalingData, WeaponScalingRow } from '../../../types';
+} from '@/features/nightfarers/conversion';
+import { getLipulaOption, LIPULA_OPTIONS } from '@/features/nightfarers/lipula';
+import { useNightfarerLevel15 } from '@/features/nightfarers/useNightfarerLevel15';
+import type { NightfarerName } from '@/types';
+import { getCurrentTheme } from '@/utils/themeUtils';
+import type { WeaponScalingCurve, WeaponScalingDamageType, WeaponScalingData, WeaponScalingRow } from '@/types';
 import ScalingCurveChart from './ScalingCurveChart';
 import styles from './weaponScalingView.module.css';
 

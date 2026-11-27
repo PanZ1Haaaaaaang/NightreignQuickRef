@@ -1,8 +1,8 @@
 import React from 'react';
 import { Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
-import flameJson from '../../../data/zh-CN/black-flame.json';
-import type { BlackFlameData, BlackFlameMaxHpRow, BlackFlameRow, BossHpEffectRow } from '../../../types';
+import flameJson from '@/data/zh-CN/black-flame.json';
+import type { BlackFlameData, BlackFlameMaxHpRow, BlackFlameRow, BossHpEffectRow } from '@/types';
 import styles from './blackFlameView.module.css';
 
 const DATA = flameJson as unknown as BlackFlameData;

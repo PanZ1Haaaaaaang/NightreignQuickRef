@@ -13,11 +13,11 @@ import {
   BilibiliOutlined,
   LinkOutlined,
 } from '@ant-design/icons';
-import { getVersionDisplayText /*getVersionNumber*/ } from '../config/versionConfig';
-import { DATA_SOURCE_CONFIG } from '../config/dataSourceConfig';
-import type { DataSourceIcon } from '../config/dataSourceConfig';
-import { SITE_CONFIG } from '../config/siteConfig';
-import { LATEST_UPDATES, ROADMAP_TODO } from '../config/roadmapConfig';
+import { getVersionDisplayText /*getVersionNumber*/ } from '@/config/versionConfig';
+import { DATA_SOURCE_CONFIG } from '@/config/dataSourceConfig';
+import type { DataSourceIcon } from '@/config/dataSourceConfig';
+import { SITE_CONFIG } from '@/config/siteConfig';
+import { LATEST_UPDATES, ROADMAP_TODO } from '@/config/roadmapConfig';
 import NewsEntry from './NewsEntry';
 
 const { Title, Text } = Typography;

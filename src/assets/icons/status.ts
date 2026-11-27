@@ -1,11 +1,11 @@
-import type { StatusType } from '../../types';
-import poison from '../Resistances/poison-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import scarletRot from '../Resistances/scarlet-rot-status-effect-elden-ring-nightreing-wiki-guide-100px.png';
-import bleed from '../Resistances/hemorrhage-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import frostbite from '../Resistances/frostbite-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import sleep from '../Resistances/sleep-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import madness from '../Resistances/madness-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
-import deathBlight from '../Resistances/blight_status_effect_elden_ring_wiki_guide_100px.png';
+import type { StatusType } from '@/types';
+import poison from '@/assets/Resistances/poison-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
+import scarletRot from '@/assets/Resistances/scarlet-rot-status-effect-elden-ring-nightreing-wiki-guide-100px.png';
+import bleed from '@/assets/Resistances/hemorrhage-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
+import frostbite from '@/assets/Resistances/frostbite-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
+import sleep from '@/assets/Resistances/sleep-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
+import madness from '@/assets/Resistances/madness-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
+import deathBlight from '@/assets/Resistances/blight_status_effect_elden_ring_wiki_guide_100px.png';
 
 export const STATUS_ICONS: Record<StatusType, string> = {
   poison,

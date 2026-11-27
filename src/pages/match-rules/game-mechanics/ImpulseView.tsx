@@ -1,10 +1,10 @@
 import React from 'react';
 import { Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
-import ImpulseBadge from '../../../components/common/ImpulseBadge';
-import { renderImpulseText } from '../../../components/common/renderImpulseText';
-import impulseJson from '../../../data/zh-CN/impulse.json';
-import type { ImpulseData, ImpulseRow } from '../../../types';
+import ImpulseBadge from '@/components/common/ImpulseBadge';
+import { renderImpulseText } from '@/components/common/renderImpulseText';
+import impulseJson from '@/data/zh-CN/impulse.json';
+import type { ImpulseData, ImpulseRow } from '@/types';
 import styles from './impulseView.module.css';
 
 const DATA = impulseJson as unknown as ImpulseData;

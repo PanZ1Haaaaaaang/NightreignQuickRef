@@ -3,12 +3,12 @@ import type { ReactNode } from 'react';
 import { Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import type { SorterResult } from 'antd/es/table/interface';
-import CustomPagination from '../../components/CustomPagination';
-import { renderImpulseText } from '../../components/common/renderImpulseText';
-import { MIN_PAGINATED_ROWS } from '../../config/tablePagination';
-import { TALISMAN_CATEGORIES } from '../../config/talismanCategoryConfig';
-import { usePagination } from '../../hooks/usePagination';
-import type { EntryData } from '../../types';
+import CustomPagination from '@/components/CustomPagination';
+import { renderImpulseText } from '@/components/common/renderImpulseText';
+import { MIN_PAGINATED_ROWS } from '@/config/tablePagination';
+import { TALISMAN_CATEGORIES } from '@/config/talismanCategoryConfig';
+import { usePagination } from '@/hooks/usePagination';
+import type { EntryData } from '@/types';
 import { compareEntryIds, compareEntryNames, entrySearchFields, entrySearchTerms } from './entryTableData';
 
 type TalismanSort = Pick<SorterResult<EntryData>, 'columnKey' | 'order'>;

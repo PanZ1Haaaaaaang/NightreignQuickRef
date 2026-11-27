@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/loading-moon.module.css';
+import styles from '@/styles/loading-moon.module.css';
 
 interface LoadingSpinnerProps {
   message?: string;

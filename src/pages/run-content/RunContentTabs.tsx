@@ -1,6 +1,6 @@
 import { Card, Tabs } from 'antd';
 import type { TabsProps } from 'antd';
-import type { PageTabProps } from '../../config/navigationConfig';
+import type { PageTabProps } from '@/config/navigationConfig';
 import styles from './runContentTabs.module.css';
 
 interface RunContentTabsProps extends PageTabProps {

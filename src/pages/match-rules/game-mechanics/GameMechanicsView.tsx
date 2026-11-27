@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { PageTabProps } from '../../../config/navigationConfig';
+import type { PageTabProps } from '@/config/navigationConfig';
 import { Typography, Timeline, Table, Alert, Steps, Progress, Statistic, Tabs } from 'antd';
 import {
   CheckCircleTwoTone,
@@ -18,10 +18,10 @@ import {
 import RecoveryCalculator from './RecoveryCalculator';
 import ImpulseView from './ImpulseView';
 import AggroView from './AggroView';
-import DataSourceTooltip from '../../../components/DataSourceTooltip';
-import GiscusComments from '../../../components/GiscusComments';
-import PageShell from '../../../components/common/PageShell';
-import Panel from '../../../components/common/Panel';
+import DataSourceTooltip from '@/components/DataSourceTooltip';
+import GiscusComments from '@/components/GiscusComments';
+import PageShell from '@/components/common/PageShell';
+import Panel from '@/components/common/Panel';
 import styles from './gameMechanicsView.module.css';
 
 const { Title, Text } = Typography;

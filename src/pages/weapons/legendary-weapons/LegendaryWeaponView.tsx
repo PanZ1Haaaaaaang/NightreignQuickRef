@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Segmented } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
-import CharacterAvatar from '../../../components/common/CharacterAvatar';
-import { renderImpulseText } from '../../../components/common/renderImpulseText';
-import DataManager from '../../../utils/dataManager';
+import CharacterAvatar from '@/components/common/CharacterAvatar';
+import { renderImpulseText } from '@/components/common/renderImpulseText';
+import DataManager from '@/utils/dataManager';
 import styles from './legendaryWeaponView.module.css';
 
 type OnChange = NonNullable<TableProps<TransformedWeaponEffect>['onChange']>;

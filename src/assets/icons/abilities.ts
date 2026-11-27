@@ -1,4 +1,4 @@
-import type { AbilityKind } from '../../types';
+import type { AbilityKind } from '@/types';
 import { characterAssetNameOf } from './characters';
 
 const ABILITY_IMAGES = import.meta.glob<string>('../char/*.png', { eager: true, import: 'default' });

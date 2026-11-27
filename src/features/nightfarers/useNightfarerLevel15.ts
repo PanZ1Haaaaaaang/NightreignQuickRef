@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { NightfarerLevel15, NightfarerName } from '../../types';
+import type { NightfarerLevel15, NightfarerName } from '@/types';
 import { loadNightfarerLevels } from './levels';
 
 export const useNightfarerLevel15 = (enabled = true) => {

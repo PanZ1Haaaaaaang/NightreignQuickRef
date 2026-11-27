@@ -1,6 +1,6 @@
 import { Drawer, Grid, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
-import type { DropBasePool, DropKind } from '../../../types';
+import type { DropBasePool, DropKind } from '@/types';
 import { KIND_CLASS } from './poolKinds';
 import styles from './dropPoolView.module.css';
 

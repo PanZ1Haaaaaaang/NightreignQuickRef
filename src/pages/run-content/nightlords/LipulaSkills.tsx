@@ -1,7 +1,7 @@
 import { Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import skillsJson from '../../../data/zh-CN/everdark-lipula-skills.json';
-import type { LipulaSkill, LipulaSkillsData } from '../../../types';
+import skillsJson from '@/data/zh-CN/everdark-lipula-skills.json';
+import type { LipulaSkill, LipulaSkillsData } from '@/types';
 import styles from './lipula.module.css';
 
 const DATA = skillsJson as unknown as LipulaSkillsData;

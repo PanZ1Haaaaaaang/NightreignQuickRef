@@ -17,6 +17,9 @@ const vendorGroups: Array<{ name: string; test: RegExp }> = [
 export default defineConfig({
   base: isVercel ? '/' : '/NightreignQuickRef/',
   plugins: [react()],
+  resolve: {
+    tsconfigPaths: true,
+  },
   // 构建时注入部署时间
   define: {
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()),

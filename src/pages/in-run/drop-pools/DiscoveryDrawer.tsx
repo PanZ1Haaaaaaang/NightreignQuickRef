@@ -10,11 +10,11 @@ import {
   weaponCount,
   WEAPON_SLOT_LIMIT,
 } from './discoveryConfig';
-import CharacterAvatar from '../../../components/common/CharacterAvatar';
-import CharacterStatLabel from '../../../components/common/CharacterStatLabel';
-import AbilityIcon from '../../../components/common/AbilityIcon';
-import { useNightfarerLevel15 } from '../../../features/nightfarers/useNightfarerLevel15';
-import type { NightfarerName } from '../../../types';
+import CharacterAvatar from '@/components/common/CharacterAvatar';
+import CharacterStatLabel from '@/components/common/CharacterStatLabel';
+import AbilityIcon from '@/components/common/AbilityIcon';
+import { useNightfarerLevel15 } from '@/features/nightfarers/useNightfarerLevel15';
+import type { NightfarerName } from '@/types';
 import styles from './dropPoolView.module.css';
 
 interface DiscoveryDrawerProps {

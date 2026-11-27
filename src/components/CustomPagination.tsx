@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Select } from 'antd';
-import { TABLE_PAGE_SIZES } from '../config/tablePagination';
+import { TABLE_PAGE_SIZES } from '@/config/tablePagination';
 
 const pageSizeOptions = TABLE_PAGE_SIZES.map((size) => ({ value: size, label: `${size} 条` }));
 

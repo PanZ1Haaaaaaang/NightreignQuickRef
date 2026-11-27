@@ -1,5 +1,5 @@
-import { abilityIconOf } from '../../assets/icons/abilities';
-import type { AbilityKind } from '../../types';
+import { abilityIconOf } from '@/assets/icons/abilities';
+import type { AbilityKind } from '@/types';
 import GameIcon, { type GameIconProps } from './GameIcon';
 
 const AbilityIcon = ({ character, kind, ...props }: GameIconProps & { character: string; kind: AbilityKind }) => (

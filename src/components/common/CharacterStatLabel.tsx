@@ -1,4 +1,4 @@
-import { CHARACTER_STATS } from '../../assets/icons/attributes';
+import { CHARACTER_STATS } from '@/assets/icons/attributes';
 import GameIcon from './GameIcon';
 import styles from './characterStatLabel.module.css';
 

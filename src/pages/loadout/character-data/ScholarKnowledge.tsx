@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
-import FilterBar from '../../../components/common/FilterBar';
-import Panel from '../../../components/common/Panel';
-import { renderImpulseText } from '../../../components/common/renderImpulseText';
-import scholarJson from '../../../data/zh-CN/scholar-item-knowledge.json';
-import type { ScholarCategory, ScholarItem, ScholarKnowledgeData } from '../../../types';
+import FilterBar from '@/components/common/FilterBar';
+import Panel from '@/components/common/Panel';
+import { renderImpulseText } from '@/components/common/renderImpulseText';
+import scholarJson from '@/data/zh-CN/scholar-item-knowledge.json';
+import type { ScholarCategory, ScholarItem, ScholarKnowledgeData } from '@/types';
 import styles from './scholarKnowledge.module.css';
 
 const DATA = scholarJson as unknown as ScholarKnowledgeData;

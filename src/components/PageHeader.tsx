@@ -1,5 +1,5 @@
 import React from 'react';
-import { SHOW_PAGE_BADGES, SHOW_PAGE_DESC, getGroupByKey, getPageByKey } from '../config/navigationConfig';
+import { SHOW_PAGE_BADGES, SHOW_PAGE_DESC, getGroupByKey, getPageByKey } from '@/config/navigationConfig';
 
 interface PageHeaderProps {
   pageKey: string;

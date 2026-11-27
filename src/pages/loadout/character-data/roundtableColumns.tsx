@@ -1,15 +1,11 @@
 import { Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import CharacterAvatar from '../../../components/common/CharacterAvatar';
-import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
-import StatusIcon from '../../../components/common/StatusIcon';
-import {
-  getAbsorptionClass,
-  getLocationColor,
-  getResistanceClass,
-} from '../../../components/common/combatTablePresentation';
-import styles from '../../../components/common/combatTable.module.css';
-import type { CharacterData } from '../../../types';
+import CharacterAvatar from '@/components/common/CharacterAvatar';
+import DamageTypeIcon from '@/components/common/DamageTypeIcon';
+import StatusIcon from '@/components/common/StatusIcon';
+import { getAbsorptionClass, getLocationColor, getResistanceClass } from '@/components/common/combatTablePresentation';
+import styles from '@/components/common/combatTable.module.css';
+import type { CharacterData } from '@/types';
 
 export const characterColumns: ColumnsType<CharacterData> = [
   {

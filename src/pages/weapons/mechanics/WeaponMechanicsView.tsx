@@ -1,7 +1,7 @@
 import type React from 'react';
 import { Tabs } from 'antd';
-import PageShell from '../../../components/common/PageShell';
-import type { PageTabProps } from '../../../config/navigationConfig';
+import PageShell from '@/components/common/PageShell';
+import type { PageTabProps } from '@/config/navigationConfig';
 import GreatShieldView from './GreatShieldView';
 import AilmentView from './AilmentView';
 import WeaponScalingView from './WeaponScalingView';

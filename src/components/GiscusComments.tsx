@@ -1,6 +1,6 @@
 import React from 'react';
 import Giscus from '@giscus/react';
-import { SITE_CONFIG } from '../config/siteConfig';
+import { SITE_CONFIG } from '@/config/siteConfig';
 
 const GiscusComments: React.FC = () => {
   // 检测当前主题

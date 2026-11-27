@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { Badge, Button, Drawer, Empty, Segmented, Space, Spin, Tag, Typography } from 'antd';
 import { ArrowLeftOutlined, LinkOutlined, NotificationOutlined, UnorderedListOutlined } from '@ant-design/icons';
-import { NIGHTREIGN_VERSION } from '../config/versionConfig';
+import { NIGHTREIGN_VERSION } from '@/config/versionConfig';
 import {
   hasNewsTranslation,
   loadNewsArticle,
   loadNewsIndex,
   loadNewsTitleMap,
   loadNewsTranslation,
-} from '../utils/newsLoader';
-import type { NewsAnnouncementMeta, NewsArticle, NewsBlock, NewsCategory, NewsTranslation } from '../types';
+} from '@/utils/newsLoader';
+import type { NewsAnnouncementMeta, NewsArticle, NewsBlock, NewsCategory, NewsTranslation } from '@/types';
 
 const { Paragraph, Text, Title } = Typography;
 
