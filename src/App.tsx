@@ -21,7 +21,8 @@ const GameMechanicsView = lazy(() => import('./pages/match-rules/game-mechanics/
 const LegendaryWeaponView = lazy(() => import('./pages/LegendaryWeaponView'));
 const WeaponMechanicsView = lazy(() => import('./pages/WeaponMechanicsView'));
 const CharacterDataView = lazy(() => import('./pages/loadout/character-data/CharacterDataView'));
-const BossDataView = lazy(() => import('./pages/BossDataView'));
+const NightlordsView = lazy(() => import('./pages/run-content/nightlords/NightlordsView'));
+const EnemiesEventsView = lazy(() => import('./pages/run-content/enemies-events/EnemiesEventsView'));
 const WeaponSkillMagicView = lazy(() => import('./pages/WeaponSkillMagicView'));
 const MerchantView = lazy(() => import('./pages/MerchantView'));
 const DropPoolView = lazy(() => import('./pages/DropPoolView'));
@@ -203,9 +204,9 @@ function App() {
       case '游戏机制':
         return <GameMechanicsView functionName="游戏机制" {...pageTabs} />;
       case '夜王数据':
-        return <BossDataView scope="夜王" {...pageTabs} />;
+        return <NightlordsView {...pageTabs} />;
       case '强敌与事件':
-        return <BossDataView scope="地图" {...pageTabs} />;
+        return <EnemiesEventsView {...pageTabs} />;
       case '武器战技与魔法祷告':
         return <WeaponSkillMagicView {...pageTabs} />;
       case '商人数据':

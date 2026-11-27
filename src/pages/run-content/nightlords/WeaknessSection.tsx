@@ -2,19 +2,19 @@ import React, { useMemo, useState } from 'react';
 import { Image, Input, Segmented, Select, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import weaknessJson from '../../data/zh-CN/boss_weakness_data.json';
-import { damageTypeOf } from '../../assets/icons/damage';
-import { statusTypeIn } from '../../assets/icons/status';
-import PagedTable from '../../components/common/PagedTable';
-import DamageTypeIcon from '../../components/common/DamageTypeIcon';
-import StatusIcon from '../../components/common/StatusIcon';
-import beastImg from '../../assets/BossRelics/night-of-the-beast.avif';
-import fathomImg from '../../assets/BossRelics/night-of-the-fathom.avif';
-import miasmaImg from '../../assets/BossRelics/night-of-the-miasma.avif';
-import demonImg from '../../assets/BossRelics/night-of-the-demon.avif';
-import lordImg from '../../assets/BossRelics/night-of-the-lord.avif';
-import dregsImg from '../../assets/BossRelics/the-night-of-dregs.avif';
-import styles from '../../styles/weaknessSection.module.css';
+import weaknessJson from '../../../data/zh-CN/boss_weakness_data.json';
+import { damageTypeOf } from '../../../assets/icons/damage';
+import { statusTypeIn } from '../../../assets/icons/status';
+import PagedTable from '../../../components/common/PagedTable';
+import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
+import StatusIcon from '../../../components/common/StatusIcon';
+import beastImg from '../../../assets/BossRelics/night-of-the-beast.avif';
+import fathomImg from '../../../assets/BossRelics/night-of-the-fathom.avif';
+import miasmaImg from '../../../assets/BossRelics/night-of-the-miasma.avif';
+import demonImg from '../../../assets/BossRelics/night-of-the-demon.avif';
+import lordImg from '../../../assets/BossRelics/night-of-the-lord.avif';
+import dregsImg from '../../../assets/BossRelics/the-night-of-dregs.avif';
+import styles from './weaknessSection.module.css';
 
 const BOSS_IMAGES = {
   beast: beastImg,

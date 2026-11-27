@@ -1,91 +1,20 @@
-// 夜王Boss数据页的表格列定义（无状态依赖的部分）。
-// 列定义在模块级，避免渲染时重复创建。
-
-import { Tag } from 'antd';
+import { useState } from 'react';
+import type { MouseEvent, ReactNode } from 'react';
+import { Button, Input, Select, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import DamageTypeIcon from '../../components/common/DamageTypeIcon';
-import StatusIcon from '../../components/common/StatusIcon';
-import CharacterAvatar from '../../components/common/CharacterAvatar';
-import type { EntryData, WildBossData } from '../../types';
-import styles from '../../styles/bossDataView.module.css';
-import tableStyles from '../../components/common/combatTable.module.css';
+import { SearchOutlined } from '@ant-design/icons';
+import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
+import StatusIcon from '../../../components/common/StatusIcon';
 import {
   getAbsorptionClass,
   getLocationColor,
   getResistanceClass,
-} from '../../components/common/combatTablePresentation';
-import { getTypeColor, processSinnerData, type LipulaTrade, type LipulaBuff, type SinnerData } from './data';
+} from '../../../components/common/combatTablePresentation';
+import tableStyles from '../../../components/common/combatTable.module.css';
+import wildBossData from '../../../data/zh-CN/wild_boss_data.json';
+import type { WildBossData } from '../../../types';
 
-export const sinnerColumns: ColumnsType<SinnerData> = [
-  {
-    title: '角色名称',
-    dataIndex: 'characterName',
-    key: 'characterName',
-    width: 100,
-    align: 'center',
-    fixed: 'left',
-    render: (name: string) => (
-      <strong>
-        <CharacterAvatar name={name} size={18} />
-      </strong>
-    ),
-    onCell: (record) => {
-      const currentIndex = processSinnerData().findIndex(
-        (item) => item.characterName === record.characterName && item.buildIndex === record.buildIndex,
-      );
-
-      // 计算相同角色的行数
-      let rowSpan = 1;
-      const allData = processSinnerData();
-      for (let i = currentIndex + 1; i < allData.length; i++) {
-        if (allData[i].characterName === record.characterName) {
-          rowSpan++;
-        } else {
-          break;
-        }
-      }
-
-      // 如果是相同角色的第一行，设置rowSpan
-      if (currentIndex === 0 || allData[currentIndex - 1]?.characterName !== record.characterName) {
-        return { rowSpan };
-      }
-
-      // 否则隐藏单元格
-      return { rowSpan: 0 };
-    },
-  },
-  {
-    title: '配置',
-    dataIndex: 'buildIndex',
-    key: 'buildIndex',
-    width: 60,
-    align: 'center',
-    render: (text) => `配置${text}`,
-  },
-  {
-    title: '左手装备',
-    dataIndex: 'leftHand',
-    key: 'leftHand',
-    width: 200,
-    align: 'center',
-  },
-  {
-    title: '右手装备',
-    dataIndex: 'rightHand',
-    key: 'rightHand',
-    width: 200,
-    align: 'center',
-  },
-  {
-    title: '消耗品',
-    dataIndex: 'consumable',
-    key: 'consumable',
-    width: 120,
-    align: 'center',
-  },
-];
-
-export const wildBossColumns: ColumnsType<WildBossData> = [
+const wildBossColumns: ColumnsType<WildBossData> = [
   {
     title: 'Boss名称',
     dataIndex: 'name',
@@ -322,113 +251,120 @@ export const wildBossColumns: ColumnsType<WildBossData> = [
   },
 ];
 
-export const lipulaColumns: ColumnsType<LipulaTrade> = [
-  {
-    title: '利普拉的交易',
-    dataIndex: 'desire',
-    key: 'desire',
-    width: 220,
-    align: 'center',
-    render: (text) => <strong>{text}</strong>,
-    fixed: 'left',
-  },
-  {
-    title: '效果',
-    dataIndex: 'effect',
-    key: 'effect',
-    align: 'left',
-    render: (text: string, record) => (
-      <div>
-        <div>{text}</div>
-        {record.stats ? (
-          <div className={styles.lipulaStatsBlock}>
-            <div className={styles.lipulaStatsLabel}>15 级属性示例</div>
-            <div className={styles.lipulaStats}>
-              {[
-                ['血量', record.stats.hp],
-                ['专注', record.stats.fp],
-                ['耐力', record.stats.stamina],
-                ['力气', record.stats.str],
-                ['敏捷', record.stats.dex],
-                ['智力', record.stats.intl],
-                ['信仰', record.stats.fth],
-                ['感应', record.stats.arc],
-              ].map(([label, value]) => (
-                <span className={styles.lipulaStat} key={label}>
-                  <span>{label}</span>
-                  <strong>{value}</strong>
-                </span>
-              ))}
-            </div>
-          </div>
-        ) : null}
-      </div>
-    ),
-  },
-  {
-    title: 'Buff / 具体数值',
-    dataIndex: 'buff',
-    key: 'buff',
-    width: 360,
-    render: (buff?: LipulaBuff) =>
-      buff ? (
-        <div className={styles.lipulaBuff}>
-          <Tag color="purple">{buff.name}</Tag>
-          <ul className={styles.lipulaBuffEffects}>
-            {buff.effects.map((effect) => (
-              <li key={effect}>{effect}</li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <span className={styles.emptyCell}>—</span>
-      ),
-  },
-];
+const WildBossSection = () => {
+  const [wildBossSearchKeyword, setWildBossSearchKeyword] = useState('');
+  const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
 
-export const specialEventColumns: ColumnsType<EntryData> = [
-  {
-    title: 'ID',
-    dataIndex: 'entry_id',
-    key: 'entry_id',
-    width: '8%',
-    align: 'center',
-    onCell: () => ({
-      style: { fontSize: '11px', color: 'var(--theme-text-secondary)' },
-    }),
-    sorter: (a, b) => {
-      const idA = a.entry_id || '';
-      const idB = b.entry_id || '';
-      return idA.localeCompare(idB);
-    },
-    sortDirections: ['ascend', 'descend'],
-  },
-  {
-    title: '类型',
-    dataIndex: 'entry_type',
-    key: 'entry_type',
-    align: 'center',
-    width: '15%',
-    render: (text) => (text ? <Tag color={getTypeColor(text)}>{text}</Tag> : '-'),
-    sorter: (a, b) => {
-      const typeA = a.entry_type || '';
-      const typeB = b.entry_type || '';
-      return typeA.localeCompare(typeB, 'zh-CN');
-    },
-    sortDirections: ['ascend', 'descend'],
-  },
-  {
-    title: '效果名称',
-    dataIndex: 'entry_name',
-    key: 'entry_name',
-    width: '20%',
-  },
-  {
-    title: '效果描述',
-    dataIndex: 'explanation',
-    key: 'explanation',
-    width: '55%',
-    // 数据里用 \n 分行（如「地底神殿的恩惠」），要 pre-wrap 才会真的换行
-    render: (text) => <span style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{text || '-'}</span>,
-  },
-];
+  // 标签渲染函数
+  const locationTagRender = (props: { label: ReactNode; value: string; closable?: boolean; onClose?: () => void }) => {
+    const { label, value, closable, onClose } = props;
+    const onPreventMouseDown = (event: MouseEvent<HTMLSpanElement>) => {
+      event.preventDefault();
+      event.stopPropagation();
+    };
+
+    const color = getLocationColor(value);
+
+    return (
+      <Tag
+        color={color}
+        onMouseDown={onPreventMouseDown}
+        closable={closable}
+        onClose={onClose}
+        style={{ marginInlineEnd: 2 }}
+      >
+        {label}
+      </Tag>
+    );
+  };
+
+  // 获取所有唯一的位置选项
+  const getLocationOptions = () => {
+    const locations = new Set<string>();
+    wildBossData.forEach((boss) => {
+      if (boss.location) {
+        // 处理多个位置用、分隔的情况
+        const locationList = boss.location.split('、');
+        locationList.forEach((loc) => {
+          locations.add(loc.trim());
+        });
+      }
+    });
+
+    return Array.from(locations)
+      .sort()
+      .map((location) => ({
+        value: location,
+        label: location,
+      }));
+  };
+
+  // 过滤野生Boss数据
+  const getFilteredWildBossData = () => {
+    let filtered = wildBossData;
+
+    // 按位置筛选
+    if (selectedLocations.length > 0) {
+      filtered = filtered.filter((boss) => {
+        if (!boss.location) return false;
+        const bossLocations = boss.location.split('、').map((loc) => loc.trim());
+        return selectedLocations.some((selectedLoc) => bossLocations.includes(selectedLoc));
+      });
+    }
+
+    // 按搜索关键词筛选（仅搜索Boss名称）
+    if (wildBossSearchKeyword.trim()) {
+      const searchLower = wildBossSearchKeyword.toLowerCase();
+      filtered = filtered.filter((boss) => boss.name.toLowerCase().includes(searchLower));
+    }
+
+    return filtered;
+  };
+
+  // 清除野生Boss筛选
+  const clearWildBossFilters = () => {
+    setWildBossSearchKeyword('');
+    setSelectedLocations([]);
+  };
+
+  const wildBossFooter = () => (
+    <div className="footer-text">野生Boss数据：包含各种敌人和Boss的吸收值和抗性（异常耐受上限）数据</div>
+  );
+
+  return (
+    <div className={tableStyles.filterableTable} id="wild-boss-data">
+      <div className={tableStyles.filterInputs}>
+        <Input
+          placeholder="搜索Boss名称"
+          prefix={<SearchOutlined />}
+          style={{ width: 200 }}
+          value={wildBossSearchKeyword}
+          onChange={(e) => setWildBossSearchKeyword(e.target.value)}
+        />
+        <Select
+          mode="multiple"
+          placeholder="选择位置"
+          options={getLocationOptions()}
+          value={selectedLocations}
+          onChange={setSelectedLocations}
+          tagRender={locationTagRender}
+          style={{ minWidth: 200, maxWidth: 400 }}
+        />
+        <Button onClick={clearWildBossFilters}>清除筛选</Button>
+      </div>
+      <Table
+        columns={wildBossColumns}
+        dataSource={getFilteredWildBossData()}
+        rowKey="name"
+        pagination={false}
+        size="small"
+        bordered
+        footer={wildBossFooter}
+        sticky={{ offsetHeader: 0 }}
+        scroll={{ x: 1000, y: 700 }}
+      />
+    </div>
+  );
+};
+
+export default WildBossSection;
