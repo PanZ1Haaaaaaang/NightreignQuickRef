@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import CharacterAvatar from '../../../components/common/CharacterAvatar';
 import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
+import Panel from '../../../components/common/Panel';
 import shieldData from '../../../data/zh-CN/greatshields.json';
 import mechanicJson from '../../../data/zh-CN/guard-boost-mechanics.json';
 import type { DamageType, GuardMechanicData } from '../../../types';
@@ -164,7 +165,7 @@ const GreatShieldView: React.FC = () => {
   return (
     <div className={styles.pageBody}>
       <div className={styles.layout}>
-        <section className={styles.card} id="shield-values">
+        <Panel className={styles.panel} id="shield-values">
           <h3 className={styles.cardTitle}>
             <span aria-hidden="true">📊</span>
             数值
@@ -180,9 +181,9 @@ const GreatShieldView: React.FC = () => {
             rowClassName={(record) => (record.name === GUARDIAN_SHIELD ? styles.guardianRow : '')}
           />
           <div className={styles.note}>数据来源：b站-模组工艺。</div>
-        </section>
+        </Panel>
 
-        <section className={styles.card} id="shield-mechanics">
+        <Panel className={styles.panel} id="shield-mechanics">
           <h3 className={styles.cardTitle}>
             <span aria-hidden="true">🛡️</span>
             防御强度机制
@@ -247,7 +248,7 @@ const GreatShieldView: React.FC = () => {
             ))}
           </ul>
           <div className={styles.note}>{MECHANIC.meta.source}</div>
-        </section>
+        </Panel>
       </div>
     </div>
   );

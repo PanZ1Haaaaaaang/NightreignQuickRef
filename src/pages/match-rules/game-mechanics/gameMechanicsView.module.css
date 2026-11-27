@@ -1,43 +1,5 @@
 /* GameMechanicsView 组件专用样式 */
 
-.gameMechanicsContainer {
-  /* padding: 20px 0; */
-  padding-bottom: 40px;
-  max-width: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* 主布局容器 - 可配置最大宽度 */
-.mechanicsPage {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: min(1400px, 92%);
-  margin: 0 auto;
-  padding-bottom: 40px;
-}
-
-.mechanicsShell {
-  padding: 20px 24px 24px;
-  background: var(--content-bg);
-  border-radius: 15px;
-  box-shadow: 0 4px 20px var(--content-shadow);
-}
-
-/* 壳层内的子卡片：整体白壳 + 浅色面板，靠底色/描边区分，不再叠阴影 */
-.mechanicsShell .mechanicCard {
-  background: var(--panel-bg);
-  border: 1px solid var(--panel-border);
-  border-radius: 12px;
-  box-shadow: none;
-}
-
-.mechanicsShell .mechanicCard:hover {
-  box-shadow: none;
-}
-
 /* 单模块页签：不再套一层卡片，直接铺在壳里 */
 .mechanicPlain {
   display: flex;
@@ -58,21 +20,6 @@
   margin-bottom: 15px;
 }
 
-/* 单列布局 */
-.mechanicsGrid.singleColumn {
-  grid-template-columns: 1fr;
-}
-
-/* 双列布局 */
-.mechanicsGrid.twoColumns {
-  grid-template-columns: 1fr 1fr;
-}
-
-/* 三列布局 */
-.mechanicsGrid.threeColumns {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
 /* 自定义列宽布局 */
 .mechanicsGrid.customColumns {
   grid-template-columns: var(--mechanics-grid-columns, 1fr 1fr);
@@ -85,32 +32,21 @@
     margin: 0 auto;
     padding: 0;
   }
-
-  .mechanicCard {
-    width: 100%;
-  }
 }
 
-/* 新卡片样式 - 融合设计 */
-.mechanicCard {
-  background: var(--content-bg);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  transition: all var(--transition-normal);
+.mechanicPanel {
   overflow: hidden;
-  height: 100%;
   min-height: 200px;
-  position: relative;
   display: flex;
   flex-direction: column;
 }
 
-.mechanicCard:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+.discussion {
+  margin-top: 15px;
 }
 
 /* 新卡片内容布局 */
-.mechanicCard .cardContent {
+.mechanicPanel .cardContent {
   padding: 24px;
   position: relative;
   display: flex;
@@ -136,33 +72,6 @@
 
 .timelineContent.inactive {
   pointer-events: none !important;
-}
-
-/* Segmented 控制器样式增强 */
-.mechanicCard :global(.ant-segmented) {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  /* border: 1px solid #d9d9d9; */
-}
-
-.mechanicCard :global(.ant-segmented-item) {
-  transition: all 0.3s ease;
-}
-
-.mechanicCard :global(.ant-segmented-item-selected) {
-  background: linear-gradient(135deg, #1890ff, #40a9ff);
-  color: white;
-  box-shadow: 0 2px 4px rgba(24, 144, 255, 0.3);
-}
-
-/* 垂直分段控制器特殊样式 */
-.mechanicCard :global(.ant-segmented)[data-vertical='true'] {
-  min-height: 120px;
-}
-
-.mechanicCard :global(.ant-segmented)[data-vertical='true'] :global(.ant-segmented-item) {
-  padding: 12px 16px;
-  min-width: 80px;
-  text-align: center;
 }
 
 /* 时间轴布局样式 */
@@ -243,12 +152,12 @@
   color: #666;
 }
 
-.mechanicCard .cardTitleSection {
+.mechanicPanel .cardTitleSection {
   padding-bottom: 16px;
   border-bottom: 2px solid var(--color-primary-100);
 }
 
-.mechanicCard .cardTitleSection::after {
+.mechanicPanel .cardTitleSection::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -288,7 +197,7 @@ body[tomato-theme='dark'] .weaponLevelNote {
 }
 
 /* 卡片内容区域 */
-.mechanicCard .cardBody {
+.mechanicPanel .cardBody {
   padding: 5px;
   margin-top: 10px;
   flex: 1; /* 让内容区域占据剩余空间 */
@@ -336,20 +245,8 @@ body[tomato-theme='dark'] .weaponLevelNote {
   color: var(--color-text-2);
 }
 
-/* 深色模式适配 */
-[data-theme='dark'] .mechanicCard,
-body[tomato-theme='dark'] .mechanicCard {
-  background: var(--content-bg);
-  border-color: var(--theme-border);
-}
-
-[data-theme='dark'] .mechanicCard:hover,
-body[tomato-theme='dark'] .mechanicCard:hover {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-}
-
-[data-theme='dark'] .mechanicCard .cardTitleSection,
-body[tomato-theme='dark'] .mechanicCard .cardTitleSection {
+[data-theme='dark'] .mechanicPanel .cardTitleSection,
+body[tomato-theme='dark'] .mechanicPanel .cardTitleSection {
   border-bottom-color: var(--color-primary-700);
 }
 
@@ -860,8 +757,6 @@ body[tomato-theme='dark'] .bossSectionTitle .anticon {
 } /* 移动端适配强化：时间机制与卢恩布局自动换行 */
 @media (max-width: 999px) {
   /* 主网格在小屏下单列 */
-  .mechanicsGrid.twoColumns,
-  .mechanicsGrid.threeColumns,
   .mechanicsGrid.customColumns {
     grid-template-columns: 1fr;
   }

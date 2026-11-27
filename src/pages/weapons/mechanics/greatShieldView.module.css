@@ -12,12 +12,8 @@
   align-items: start;
 }
 
-.card {
-  min-width: 0;
+.panel {
   padding: 20px 24px;
-  background: var(--panel-bg);
-  border: 1px solid var(--panel-border);
-  border-radius: 12px;
 }
 
 .cardTitle {
@@ -121,11 +117,7 @@ body[tomato-theme='dark'] .valueMin {
 }
 
 @media (max-width: 999px) {
-  .page {
-    width: 95%;
-  }
-
-  .card {
+  .panel {
     padding: 16px;
   }
 }
