@@ -18,6 +18,8 @@ import { POTENTIAL_POOL_TAGS } from '../../config/potentialPoolConfig';
 import { DEFAULT_TABLE_PAGE_SIZE } from '../../config/tablePagination';
 import { renderHintOption } from '../../components/HintOption';
 import { TALISMAN_CATEGORIES, TALISMAN_CATEGORY_ORDER } from '../../config/talismanCategoryConfig';
+import TalismanEntriesTable from './TalismanEntriesTable';
+import { compareEntryIds, compareEntryNames, entrySearchFields, entrySearchTerms } from './entryTableData';
 
 // 自定义搜索组件接口
 interface CustomSearchProps {
@@ -94,11 +96,6 @@ type OnChange = NonNullable<TableProps<EntryData>['onChange']>;
 type Filters = Parameters<OnChange>[1];
 type GetSingle<T> = T extends (infer U)[] ? U : never;
 type Sorts = GetSingle<Parameters<OnChange>[2]>;
-
-const compareEntryIds = (a: EntryData, b: EntryData) =>
-  String(a.entry_id ?? '').localeCompare(String(b.entry_id ?? ''));
-const compareEntryNames = (a: EntryData, b: EntryData) =>
-  (a.entry_name || '').localeCompare(b.entry_name || '', 'zh-CN');
 
 // 数据接口
 interface DataState {
@@ -416,7 +413,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
 
   const paginationContext = JSON.stringify([
     activeEntryTab,
-    searchKeyword.trim().toLowerCase().split(/\s+/),
+    entrySearchTerms(searchKeyword),
     selectedTypes,
     selectedInGameTypes,
     selectedCharacter,
@@ -478,25 +475,11 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
     }
 
     // 关键词搜索
-    if (!searchValue.trim()) return filtered;
-
-    const searchTerms = searchValue
-      .toLowerCase()
-      .split(/\s+/)
-      .filter((term) => term.length > 0);
+    const searchTerms = entrySearchTerms(searchValue);
+    if (searchTerms.length === 0) return filtered;
 
     return filtered.filter((item) => {
-      // 搜索字段
-      const searchableFields = [
-        item.entry_name || '',
-        item.explanation || '',
-        item.entry_type || '',
-        item.superposability || '',
-        item.talisman || '',
-        item.entry_id || '',
-      ].map((field) => String(field).toLowerCase());
-
-      // 检查所有搜索词是否都在至少一个字段中出现
+      const searchableFields = entrySearchFields(item);
       return searchTerms.every((term) => searchableFields.some((field) => field.includes(term)));
     });
   };
@@ -662,78 +645,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
         { text: '未知', value: '未知' },
       ],
       filteredValue: filteredInfo.superposability || null,
-    },
-  ];
-
-  // 护符词条表格列定义
-  const talismanColumns: TableColumnsType<EntryData> = [
-    {
-      title: 'ID',
-      dataIndex: 'entry_id',
-      key: 'entry_id',
-      width: '8%',
-      align: 'center',
-      onCell: () => ({
-        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' },
-      }),
-      sorter: compareEntryIds,
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
-    },
-    {
-      title: '护符',
-      dataIndex: 'talisman',
-      key: 'talisman',
-      width: '14%',
-      render: (text) => text || '-',
-    },
-    {
-      title: '分类',
-      dataIndex: 'category',
-      key: 'category',
-      width: '9%',
-      align: 'center',
-      render: (text: string) => {
-        const meta = TALISMAN_CATEGORIES[text];
-        return meta ? <Tag color={meta.color}>{meta.label}</Tag> : '-';
-      },
-    },
-    {
-      title: '词条名称',
-      dataIndex: 'entry_name',
-      key: 'entry_name',
-      width: '25%',
-      sorter: compareEntryNames,
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
-      render: (text: string, record: EntryData) => renderEntryName(text, record),
-    },
-    {
-      title: '解释',
-      dataIndex: 'explanation',
-      key: 'explanation',
-      width: '38%',
-      render: (text) => {
-        if (!text) return '-';
-
-        return (
-          <div
-            style={{
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-word',
-              lineHeight: '1.6',
-              fontSize: '13px',
-            }}
-          >
-            {renderImpulseText(text)}
-          </div>
-        );
-      },
-      onCell: () => ({
-        style: {
-          padding: '12px 8px',
-        },
-      }),
     },
   ];
 
@@ -1120,14 +1031,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
           undefined,
           filteredInfo.superposability as string[],
         );
-        break;
-      case '护符词条':
-        tableData = data.talismanEntries;
-        columns = talismanColumns;
-        tableData = filterData(tableData, searchKeyword);
-        if (selectedTalismanCategories.length > 0) {
-          tableData = tableData.filter((entry) => selectedTalismanCategories.includes(entry.category ?? '其他'));
-        }
         break;
       case '局内词条':
         tableData = data.inGameEntries;
@@ -1578,7 +1481,18 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
             children: (
               <div id="talisman-entries">
                 {renderSearchAndFilter('护符词条')}
-                {renderTableContent('护符词条')}
+                <TalismanEntriesTable
+                  entries={data.talismanEntries}
+                  keyword={searchKeyword}
+                  categories={selectedTalismanCategories}
+                  sort={sortedInfo}
+                  onSortChange={setSortedInfo}
+                  contextKey={paginationContext}
+                  pageSize={pageSize}
+                  onPageSizeChange={setPageSize}
+                  loading={data.loading}
+                  renderEntryName={renderEntryName}
+                />
               </div>
             ),
           },
