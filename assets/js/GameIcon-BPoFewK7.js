@@ -1,0 +1,1 @@
+import{t}from"./react-vendor-Bjh50RZr.js";var s=t(),a=({src:t,size:a=18,className:e,alt:r=""})=>t?(0,s.jsx)("img",{src:t,alt:r,width:a,height:a,className:e,style:{objectFit:"contain",flexShrink:0}}):null;export{a as t};

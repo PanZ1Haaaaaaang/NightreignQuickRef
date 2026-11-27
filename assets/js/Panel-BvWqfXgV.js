@@ -1,0 +1,1 @@
+import{t as e}from"./react-vendor-Bjh50RZr.js";var s={shell:"_shell_1tsq6_1",panel:"_panel_1tsq6_11"},a=e(),l=({children:e,id:l,className:n})=>(0,a.jsx)("section",{id:l,className:n?`${s.panel} ${n}`:s.panel,children:e});export{s as n,l as t};

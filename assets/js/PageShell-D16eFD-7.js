@@ -1,0 +1,1 @@
+import{n as s}from"./Panel-BvWqfXgV.js";import{t as a}from"./react-vendor-Bjh50RZr.js";var e=a(),r=({children:a,className:r})=>(0,e.jsx)("div",{className:r?`${s.shell} ${r}`:s.shell,children:a});export{r as t};

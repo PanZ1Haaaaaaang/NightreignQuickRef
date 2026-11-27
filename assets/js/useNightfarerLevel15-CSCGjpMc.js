@@ -1,0 +1,1 @@
+import{r}from"./rolldown-runtime-DcNxTHDL.js";import{Rt as t}from"./antd-vendor-D9ovAK3D.js";import{a as e}from"./index-DvcrM-Zb.js";var o=r(t(),1),n=(r=!0)=>{const[t,n]=(0,o.useState)();return(0,o.useEffect)(()=>{if(!r)return;let t=!1;return e().then(({level15:r})=>{t||n(r)}),()=>{t=!0}},[r]),t};export{n as t};

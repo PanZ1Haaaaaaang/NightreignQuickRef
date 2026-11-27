@@ -1,0 +1,1 @@
+import{t as r}from"./EntryDetailView-BE3PC-uK.js";import{t}from"./react-vendor-Bjh50RZr.js";var a=t(),e=t=>(0,a.jsx)(r,{...t,scope:"局外"});export{e as default};
