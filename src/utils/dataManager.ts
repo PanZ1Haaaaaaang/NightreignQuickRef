@@ -112,7 +112,7 @@ const GROUP_FILES: Record<DataGroup, GroupFile[]> = {
     { key: 'weaponEffect', load: () => import('../data/zh-CN/weapon_effect.json') },
   ],
   // 夜王Boss数据页
-  boss: [{ key: 'inGameSpecialBuff', load: () => import('../data/zh-CN/in-game_special_buff.json') }],
+  boss: [{ key: 'inGameSpecialBuff', load: () => import('../data/zh-CN/in-game-special-buffs.json') }],
 };
 
 // 全局数据存储

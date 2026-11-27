@@ -11,7 +11,7 @@ import {
   getResistanceClass,
 } from '../../../components/common/combatTablePresentation';
 import tableStyles from '../../../components/common/combatTable.module.css';
-import wildBossData from '../../../data/zh-CN/wild_boss_data.json';
+import wildBossData from '../../../data/zh-CN/wild-bosses.json';
 import type { WildBossData } from '../../../types';
 
 const wildBossColumns: ColumnsType<WildBossData> = [

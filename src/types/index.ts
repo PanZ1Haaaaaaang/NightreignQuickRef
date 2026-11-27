@@ -416,7 +416,7 @@ export interface BlackFlameData {
   maxHp: { intro: string; rows: BlackFlameMaxHpRow[] };
   bossEffects: { intro: string; rows: BossHpEffectRow[] };
 }
-// ===== 永夜利普拉技能（src/data/zh-CN/night_lord_lipula_skills.json） =====
+// ===== 永夜利普拉技能（src/data/zh-CN/everdark-lipula-skills.json） =====
 
 export interface LipulaSkill {
   key: string;

@@ -1,7 +1,7 @@
 import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import CharacterAvatar from '../../../components/common/CharacterAvatar';
-import sinnerList from '../../../data/zh-CN/sinner_list.json';
+import sinnerList from '../../../data/zh-CN/sinner-presets.json';
 
 interface SinnerData {
   key: string;

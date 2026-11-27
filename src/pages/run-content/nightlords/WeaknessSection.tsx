@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Image, Input, Segmented, Select, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import weaknessJson from '../../../data/zh-CN/boss_weakness_data.json';
+import weaknessJson from '../../../data/zh-CN/boss-weaknesses.json';
 import { damageTypeOf } from '../../../assets/icons/damage';
 import { statusTypeIn } from '../../../assets/icons/status';
 import PagedTable from '../../../components/common/PagedTable';

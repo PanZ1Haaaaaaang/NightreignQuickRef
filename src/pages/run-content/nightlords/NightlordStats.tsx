@@ -5,7 +5,7 @@ import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
 import StatusIcon from '../../../components/common/StatusIcon';
 import { getAbsorptionClass, getResistanceClass } from '../../../components/common/combatTablePresentation';
 import tableStyles from '../../../components/common/combatTable.module.css';
-import bossData from '../../../data/zh-CN/night_king_data.json';
+import bossData from '../../../data/zh-CN/nightlords.json';
 import type { BossData } from '../../../types';
 import styles from './nightlordStats.module.css';
 import nightOfTheBeast from '../../../assets/BossRelics/night-of-the-beast.avif';

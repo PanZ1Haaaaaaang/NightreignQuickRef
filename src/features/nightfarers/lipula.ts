@@ -1,4 +1,4 @@
-import lipulaStatsJson from '../../data/zh-CN/lipula_trade_stats.json';
+import lipulaStatsJson from '../../data/zh-CN/lipula-trade-stats.json';
 import type { TeardropLipulaOption } from '../../types';
 
 export const LIPULA_OPTIONS: TeardropLipulaOption[] = lipulaStatsJson.options;

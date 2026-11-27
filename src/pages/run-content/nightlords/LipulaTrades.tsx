@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Segmented, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import lipulaTradesJson from '../../../data/zh-CN/lipula_trades.json';
+import lipulaTradesJson from '../../../data/zh-CN/lipula-trades.json';
 import { getLipulaOption } from '../../../features/nightfarers/lipula';
 import type { NightfarerStats } from '../../../types';
 import styles from './lipula.module.css';
