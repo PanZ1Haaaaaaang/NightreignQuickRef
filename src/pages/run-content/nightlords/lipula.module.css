@@ -1,7 +1,7 @@
 /* 利普拉的交易 */
 .lipulaStats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 84px), 1fr));
   gap: 4px 8px;
   font-size: 12px;
 }

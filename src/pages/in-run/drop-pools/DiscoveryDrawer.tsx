@@ -11,6 +11,7 @@ import {
   WEAPON_SLOT_LIMIT,
 } from './discoveryConfig';
 import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import CharacterStatLabel from '../../../components/common/CharacterStatLabel';
 import AbilityIcon from '../../../components/common/AbilityIcon';
 import { useNightfarerLevel15 } from '../../../features/nightfarers/useNightfarerLevel15';
 import type { NightfarerName } from '../../../types';
@@ -81,7 +82,7 @@ const DiscoveryDrawer: React.FC<DiscoveryDrawerProps> = ({ open, onClose, setup,
         <div className={styles.discRow}>
           <div className={styles.discInfo}>
             <label className={styles.discLabel} htmlFor="discovery-arcane">
-              感应
+              <CharacterStatLabel stat="感应" />
             </label>
             <span className={styles.discNote} id="discovery-arcane-note">
               每点 +1 观察力 · 0～{DISCOVERY_ARCANE_MAX}

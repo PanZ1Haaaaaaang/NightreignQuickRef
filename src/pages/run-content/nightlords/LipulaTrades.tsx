@@ -1,22 +1,13 @@
 import { useMemo, useState } from 'react';
 import { Segmented, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import CharacterStatLabel from '../../../components/common/CharacterStatLabel';
 import lipulaTradesJson from '../../../data/zh-CN/lipula-trades.json';
 import { getLipulaOption } from '../../../features/nightfarers/lipula';
 import type { NightfarerStats } from '../../../types';
 import styles from './lipula.module.css';
 
-interface LipulaStats {
-  level: number; // 等级
-  hp: number; // 血
-  fp: number; // 蓝
-  stamina: number; // 绿
-  str: number; // 力
-  dex: number; // 敏
-  intl: number; // 智
-  fth: number; // 信
-  arc: number; // 感
-}
+const ABILITY_ORDER = ['生命', '集中', '耐力', '力气', '灵巧', '智力', '信仰', '感应'] as const;
 
 interface LipulaBuff {
   name: string;
@@ -27,7 +18,7 @@ interface LipulaTrade {
   key: string;
   desire: string;
   effect: string;
-  stats?: LipulaStats;
+  stats?: NightfarerStats;
   buff?: LipulaBuff;
 }
 
@@ -62,21 +53,12 @@ const lipulaColumns: ColumnsType<LipulaTrade> = [
         <div>{text}</div>
         {record.stats ? (
           <div className={styles.lipulaStatsBlock}>
-            <div className={styles.lipulaStatsLabel}>15 级属性示例</div>
+            <div className={styles.lipulaStatsLabel}>15 级能力点示例</div>
             <div className={styles.lipulaStats}>
-              {[
-                ['血量', record.stats.hp],
-                ['专注', record.stats.fp],
-                ['耐力', record.stats.stamina],
-                ['力气', record.stats.str],
-                ['敏捷', record.stats.dex],
-                ['智力', record.stats.intl],
-                ['信仰', record.stats.fth],
-                ['感应', record.stats.arc],
-              ].map(([label, value]) => (
-                <span className={styles.lipulaStat} key={label}>
-                  <span>{label}</span>
-                  <strong>{value}</strong>
+              {ABILITY_ORDER.map((stat) => (
+                <span className={styles.lipulaStat} key={stat}>
+                  <CharacterStatLabel stat={stat} />
+                  <strong>{record.stats?.[stat] ?? 0}</strong>
                 </span>
               ))}
             </div>
@@ -107,17 +89,6 @@ const lipulaColumns: ColumnsType<LipulaTrade> = [
 ];
 
 const tradeByKey = new Map(lipulaTradesData.map((trade) => [trade.key, trade]));
-const toStats = (stats: NightfarerStats): LipulaStats => ({
-  level: 15,
-  hp: stats['生命'] ?? 0,
-  fp: stats['集中'] ?? 0,
-  stamina: stats['耐力'] ?? 0,
-  str: stats['力气'] ?? 0,
-  dex: stats['灵巧'] ?? 0,
-  intl: stats['智力'] ?? 0,
-  fth: stats['信仰'] ?? 0,
-  arc: stats['感应'] ?? 0,
-});
 
 const LipulaTrades: React.FC = () => {
   const [scenarioKey, setScenarioKey] = useState(lipulaScenarios[2]?.key ?? 'boss');
@@ -129,7 +100,7 @@ const LipulaTrades: React.FC = () => {
         .filter((trade): trade is LipulaTrade => Boolean(trade))
         .map((trade) => {
           const stats = getLipulaOption(trade.key)?.stats;
-          return stats ? { ...trade, stats: toStats(stats) } : trade;
+          return stats ? { ...trade, stats } : trade;
         }),
     [scenario],
   );

@@ -12,6 +12,8 @@ import DataSourceTooltip from '../../../components/DataSourceTooltip';
 import DodgeFramesComparison from './DodgeFramesComparison';
 import TeardropConversion from './TeardropConversion';
 import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import CharacterStatLabel from '../../../components/common/CharacterStatLabel';
+import { abilityPointOf, CHARACTER_STATS } from '../../../assets/icons/attributes';
 import { findCharacterLevel } from '../../../features/nightfarers/levels';
 import AbilityIcon from '../../../components/common/AbilityIcon';
 import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
@@ -22,6 +24,11 @@ import NightfarerSkills from './NightfarerSkills';
 import ExecutorParry from './ExecutorParry';
 
 const { Title, Text } = Typography;
+
+const abilityPointTitle = (name: string) => {
+  const stat = abilityPointOf(name);
+  return stat ? <CharacterStatLabel stat={stat} /> : name;
+};
 
 // 数据接口
 interface DataState {
@@ -176,7 +183,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
   const [stData, setStData] = useState<CharacterDetailRow[]>([]);
 
   // 顶部与底部表格页脚
-  const topTablesFooter = () => <div className="footer-text">血量、专注、耐力具体数值/局内等级成长</div>;
+  const topTablesFooter = () => <div className="footer-text">血量、专注值、精力与局内等级成长</div>;
   const bottomTablesFooter = () => <div className="footer-text">局内等级/艾尔登法环本体等级</div>;
   const characterAttributesFooter = () => <div className="footer-text">提示：可勾选多个角色进行对比</div>;
 
@@ -234,8 +241,10 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
               title:
                 attrKey === '增加点数' ? (
                   <span>{`Lv${lv - 1} → Lv${lv}`} 增加点数</span>
-                ) : ['生命力', '集中力', '耐力', '力气', '敏捷', '智力', '信仰', '感应'].includes(attrKey) ? (
-                  <span style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}>{attrKey}</span>
+                ) : abilityPointOf(attrKey) ? (
+                  <span style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}>
+                    {abilityPointTitle(attrKey)}
+                  </span>
                 ) : (
                   attrKey
                 ),
@@ -428,7 +437,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
     ...getAttributeNames()
       .filter((attribute) => attribute !== '擅长武器')
       .map((attribute) => ({
-        title: attribute,
+        title: abilityPointTitle(attribute),
         dataIndex: attribute,
         key: attribute,
         width: 46,
@@ -493,9 +502,10 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
     const attributes = firstCharacter ? Object.keys(firstCharacter) : [];
 
     // 过滤掉"擅长武器"属性，只保留需要在雷达图上展示的属性
-    const radarAttributes = attributes.filter(
-      (attr) => attr !== '擅长武器' && ['生命', '专注', '耐力', '力量', '灵巧', '智力', '信仰', '感应'].includes(attr),
-    );
+    const radarAttributes = attributes.flatMap((attr) => {
+      const stat = abilityPointOf(attr);
+      return stat ? [{ attr, label: CHARACTER_STATS[stat].label }] : [];
+    });
 
     // 只显示选中的角色
     const charactersToShow = selectedRowKeys.map((key) => key.toString());
@@ -503,10 +513,10 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
     // 为每个角色的每个属性创建雷达图数据点
     charactersToShow.forEach((character) => {
       if (characterData[character]) {
-        radarAttributes.forEach((attr) => {
+        radarAttributes.forEach(({ attr, label }) => {
           const level = characterData[character][attr];
           result.push({
-            item: attr,
+            item: label,
             type: character,
             score: gradeToPosition(level), // 使用数值绘制图形
             level: level, // 保存等级标签用于显示
@@ -522,9 +532,10 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
   // 获取雷达图属性列表（用于空状态显示）
   const radarAttributes = useMemo(() => {
     const attributes = getAttributeNames();
-    return attributes.filter(
-      (attr) => attr !== '擅长武器' && ['生命', '专注', '耐力', '力量', '灵巧', '智力', '信仰', '感应'].includes(attr),
-    );
+    return attributes.flatMap((attr) => {
+      const stat = abilityPointOf(attr);
+      return stat ? [CHARACTER_STATS[stat].label] : [];
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [characterData]);
 
@@ -863,7 +874,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
                       {jsonTabs.length > 0 && (
                         <>
                           <Title level={5} style={{ marginBottom: 8, color: 'var(--color-text-1)' }}>
-                            血量、专注、耐力具体数值
+                            血量、专注值、精力具体数值
                           </Title>
                           {/* HP/FP/ST 数据表格（通过 Tabs 切换） */}
                           <Tabs
@@ -871,7 +882,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
                             items={[
                               {
                                 key: 'hp',
-                                label: '❤️ 血量值成长',
+                                label: <CharacterStatLabel stat="HP" suffix="成长" />,
                                 children: (
                                   <Table
                                     dataSource={hpData}
@@ -933,7 +944,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
                               },
                               {
                                 key: 'fp',
-                                label: '💙 专注值成长',
+                                label: <CharacterStatLabel stat="FP" suffix="成长" />,
                                 children: (
                                   <Table
                                     dataSource={fpData}
@@ -995,7 +1006,7 @@ const CharacterDataView: React.FC<PageTabProps> = ({ activeSubTab: activeCharTab
                               },
                               {
                                 key: 'st',
-                                label: '💚 耐力值成长',
+                                label: <CharacterStatLabel stat="ST" suffix="成长" />,
                                 children: (
                                   <Table
                                     dataSource={stData}

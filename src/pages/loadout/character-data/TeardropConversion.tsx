@@ -5,6 +5,8 @@ import { ThunderboltTwoTone } from '@ant-design/icons';
 import styles from './characterDataView.module.css';
 import DataSourceTooltip from '../../../components/DataSourceTooltip';
 import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import CharacterStatLabel from '../../../components/common/CharacterStatLabel';
+import { CHARACTER_STATS } from '../../../assets/icons/attributes';
 import {
   convertNightfarerStats,
   findTeardropAffixes,
@@ -13,7 +15,7 @@ import {
 } from '../../../features/nightfarers/conversion';
 import { getLipulaOption, LIPULA_OPTIONS } from '../../../features/nightfarers/lipula';
 import { useNightfarerLevel15 } from '../../../features/nightfarers/useNightfarerLevel15';
-import type { NightfarerStats, TeardropAffix } from '../../../types';
+import type { NightfarerStat, NightfarerStats, TeardropAffix } from '../../../types';
 
 const { Title, Text } = Typography;
 
@@ -23,7 +25,7 @@ const NEGATIVE_COLOR = '#ff4d4f';
 /** 修正后的一行属性 */
 interface StatRow {
   key: string;
-  attr: string;
+  attr: NightfarerStat | '合计';
   base: number;
   value: number;
   diff: number;
@@ -36,10 +38,10 @@ const formatDiff = (diff: number) => (diff > 0 ? `+${diff}` : `${diff}`);
 /** 词条满值文字，如「Lv12 满值：智力+15、信仰+15，力气-7、灵巧-5」 */
 const affixSummary = (affix: TeardropAffix): string => {
   const plus = Object.entries(affix.boost)
-    .map(([attr, value]) => `${attr}+${value}`)
+    .map(([attr, value]) => `${CHARACTER_STATS[attr as NightfarerStat].label}+${value}`)
     .join('、');
   const minus = Object.entries(affix.reduce)
-    .map(([attr, value]) => `${attr}-${value}`)
+    .map(([attr, value]) => `${CHARACTER_STATS[attr as NightfarerStat].label}-${value}`)
     .join('、');
   const body = [plus, minus].filter(Boolean).join('，');
   return `Lv12 满值：${body}`;
@@ -91,13 +93,15 @@ const TeardropConversion: React.FC = () => {
 
   const columns: ColumnsType<StatRow> = [
     {
-      title: '属性',
+      title: '能力点',
       dataIndex: 'attr',
       key: 'attr',
       width: 100,
       align: 'center',
-      render: (attr: string, row) => (
-        <span style={{ fontWeight: row.isTotal ? 600 : 500, color: 'var(--color-text-1)' }}>{attr}</span>
+      render: (attr: StatRow['attr'], row) => (
+        <span style={{ fontWeight: row.isTotal ? 600 : 500, color: 'var(--color-text-1)' }}>
+          {attr === '合计' ? attr : <CharacterStatLabel stat={attr} />}
+        </span>
       ),
     },
     {
@@ -198,10 +202,10 @@ const TeardropConversion: React.FC = () => {
       render: (value: string) => <span style={{ fontWeight: value === '双词条叠加' ? 600 : 400 }}>{value}</span>,
     },
     ...attrs.map((attr) => ({
-      title: attr,
+      title: <CharacterStatLabel stat={attr} />,
       dataIndex: attr,
       key: attr,
-      width: 64,
+      width: 86,
       align: 'center' as const,
     })),
     {

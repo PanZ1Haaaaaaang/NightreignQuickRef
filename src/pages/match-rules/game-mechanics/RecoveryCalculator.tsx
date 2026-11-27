@@ -69,7 +69,7 @@ const RecoveryCalculator: React.FC = () => {
 
   const characterOptions = characters?.map(({ name, health, focus }) => ({
     value: name,
-    label: <CharacterAvatar name={name} size={18} label={`${name}（血量 ${health}，蓝量 ${focus}）`} />,
+    label: <CharacterAvatar name={name} size={18} label={`${name}（血量 ${health}，专注值 ${focus}）`} />,
   }));
   const self = characters?.find(({ name }) => name === selectedCharacter);
   const ally = characters?.find(({ name }) => name === selectedAllyCharacter);
@@ -84,7 +84,7 @@ const RecoveryCalculator: React.FC = () => {
     let baseHealthRecovery = 0.6; // 60%生命值
     let baseFocusRecovery = 0; // 基础专注值恢复
     let baseHealthRecoveryAlly = 0; // 队友回血量
-    let baseFocusRecoveryAlly = 0; // 队友回蓝量
+    let baseFocusRecoveryAlly = 0; // 队友恢复专注值
 
     // 定义计算优先级
     const priorityOrder = [1, 2, 3, 4, 5, 6];
@@ -100,10 +100,10 @@ const RecoveryCalculator: React.FC = () => {
     // 记录计算步骤
     const calculationSteps = [];
     calculationSteps.push(`-------------基础信息-------------`);
-    calculationSteps.push(`【${self.name}-自己】基础血量: ${characterHealth} 点 | 基础蓝量: ${characterFocus} 点`);
+    calculationSteps.push(`【${self.name}-自己】基础血量: ${characterHealth} 点 | 基础专注值: ${characterFocus} 点`);
 
     calculationSteps.push(
-      `【${ally.name}-队友】基础血量: ${allyCharacterHealth} 点 | 基础蓝量: ${allyCharacterFocus} 点`,
+      `【${ally.name}-队友】基础血量: ${allyCharacterHealth} 点 | 基础专注值: ${allyCharacterFocus} 点`,
     );
 
     if (hasSlowRecovery) {
@@ -235,9 +235,9 @@ const RecoveryCalculator: React.FC = () => {
     // 计算最终结果 向下取整
     const result = {
       selfHealth: Math.floor(characterHealth * baseHealthRecovery), // 自己回血量（具体数值）
-      selfFocus: Math.floor(characterFocus * baseFocusRecovery), // 自己回蓝量（基于角色实际蓝量）
+      selfFocus: Math.floor(characterFocus * baseFocusRecovery), // 自己恢复专注值（基于角色实际专注值）
       allyHealth: Math.floor(allyCharacterHealth * baseHealthRecoveryAlly), // 队友回血量
-      allyFocus: Math.floor(allyCharacterFocus * baseFocusRecoveryAlly), // 队友回蓝量（基于角色实际蓝量）
+      allyFocus: Math.floor(allyCharacterFocus * baseFocusRecoveryAlly), // 队友恢复专注值（基于角色实际专注值）
       // 添加百分比数据
       selfHealthPercent: (baseHealthRecovery * 100).toFixed(0),
       selfFocusPercent: (baseFocusRecovery * 100).toFixed(0),
@@ -251,7 +251,7 @@ const RecoveryCalculator: React.FC = () => {
     );
     if (baseFocusRecovery > 0) {
       calculationSteps.push(
-        `【${self.name}-自己】回蓝量: ${characterFocus} × ${result.selfFocusPercent}% = ${result.selfFocus} 点`,
+        `【${self.name}-自己】恢复专注值: ${characterFocus} × ${result.selfFocusPercent}% = ${result.selfFocus} 点`,
       );
     }
     if (baseHealthRecoveryAlly > 0) {
@@ -261,7 +261,7 @@ const RecoveryCalculator: React.FC = () => {
     }
     if (baseFocusRecoveryAlly > 0) {
       calculationSteps.push(
-        `【${ally.name}-队友】回蓝量: ${allyCharacterFocus} × ${result.allyFocusPercent}% = ${result.allyFocus} 点`,
+        `【${ally.name}-队友】恢复专注值: ${allyCharacterFocus} × ${result.allyFocusPercent}% = ${result.allyFocus} 点`,
       );
     }
 
@@ -345,7 +345,7 @@ const RecoveryCalculator: React.FC = () => {
         <div className={styles.notesSection}>
           <div className={styles.notesContainer}>
             <ol className={styles.notesList}>
-              <li> 角色血量和蓝量均为「15 级」时的数据；初始「红露滴圣杯瓶」回血量为60%。</li>
+              <li> 角色血量和专注值均为「15 级」时的数据；初始「红露滴圣杯瓶」回血量为60%。</li>
               <li>
                 「缓慢恢复」情况下「队友」恢复量的计算说明：立即回血(5%) +
                 持续回血(每0.1s恢复1%)；持续恢复4s，共计恢复41次。
@@ -410,7 +410,7 @@ const RecoveryCalculator: React.FC = () => {
                     </div>
                     {calculationResult.selfFocus > 0 && (
                       <div className={styles.recoveryItem}>
-                        <Text>回蓝量: {calculationResult.selfFocus} 点</Text>
+                        <Text>恢复专注值: {calculationResult.selfFocus} 点</Text>
                         <Text className={styles.recoveryPercentage}> ({calculationResult.selfFocusPercent}%)</Text>
                       </div>
                     )}
@@ -438,7 +438,7 @@ const RecoveryCalculator: React.FC = () => {
                     </div>
                     {calculationResult.allyFocus > 0 && (
                       <div className={styles.recoveryItem}>
-                        <Text>回蓝量: {calculationResult.allyFocus} 点</Text>
+                        <Text>恢复专注值: {calculationResult.allyFocus} 点</Text>
                         <Text className={styles.recoveryPercentage}> ({calculationResult.allyFocusPercent}%)</Text>
                       </div>
                     )}

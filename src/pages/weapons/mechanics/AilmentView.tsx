@@ -8,6 +8,7 @@ import { getCurrentTheme } from '../../../utils/themeUtils';
 import styles from './ailmentView.module.css';
 import { statusTypeIn } from '../../../assets/icons/status';
 import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import CharacterStatLabel from '../../../components/common/CharacterStatLabel';
 import StatusIcon from '../../../components/common/StatusIcon';
 import { useNightfarerLevel15 } from '../../../features/nightfarers/useNightfarerLevel15';
 import ScalingCurveChart from './ScalingCurveChart';
@@ -49,7 +50,13 @@ const bonusColumns: TableColumnsType<CharacterBonus> = [
     key: 'name',
     render: (name: string) => <CharacterAvatar name={name} />,
   },
-  { title: '感应（15 级）', dataIndex: 'sense', key: 'sense', width: 130, align: 'center' },
+  {
+    title: <CharacterStatLabel stat="感应" suffix="（15 级）" />,
+    dataIndex: 'sense',
+    key: 'sense',
+    width: 130,
+    align: 'center',
+  },
   {
     title: '异常值加成',
     dataIndex: 'bonus',

@@ -3,6 +3,8 @@ import { Button, Checkbox, Drawer, Modal, Segmented, Select, Statistic, Table, T
 import type { TableColumnsType } from 'antd';
 import { ExperimentOutlined, LineChartOutlined } from '@ant-design/icons';
 import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import CharacterStatLabel from '../../../components/common/CharacterStatLabel';
+import { CHARACTER_STATS } from '../../../assets/icons/attributes';
 import scalingJson from '../../../data/zh-CN/weapon-scaling.json';
 import uniqueWeaponArts from '../../../data/zh-CN/unique-weapon-arts.json';
 import weaponArtCategoryHints from '../../../data/zh-CN/weapon-art-category-hints.json';
@@ -24,7 +26,7 @@ const DATA = scalingJson as unknown as WeaponScalingData;
 const SCALING_CURVES = [DATA.curves.physical, DATA.curves.elemental];
 
 const STAT_KEYS = ['力气', '灵巧', '智力', '信仰', '感应'] as const;
-const STAT_LABELS = ['力量', '灵巧', '智力', '信仰', '感应'] as const;
+const STAT_LABELS = STAT_KEYS.map((stat) => CHARACTER_STATS[stat].label);
 const SCALING_STATS = ['str', 'dex', 'int', 'faith', 'arc'] as const;
 const CURVE_LABELS: Record<WeaponScalingCurve, string> = { physical: '0 号曲线', elemental: '4 号曲线' };
 const STATUS_AFFINITY_BASE_SCALE = 0.8;
@@ -519,9 +521,9 @@ const WeaponScalingView: React.FC = () => {
         </span>
       ),
     },
-    ...STAT_LABELS.map((label, index) => ({
-      title: label,
-      key: `stat-${label}`,
+    ...STAT_KEYS.map((stat, index) => ({
+      title: <CharacterStatLabel stat={stat} />,
+      key: `stat-${stat}`,
       width: 76,
       align: 'center' as const,
       render: (_: unknown, record: (typeof rankings)[number]) => record.stats[index],

@@ -3,8 +3,8 @@ import { Image, Input, Segmented, Select, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import weaknessJson from '../../../data/zh-CN/boss-weaknesses.json';
-import { damageTypeOf } from '../../../assets/icons/damage';
-import { statusTypeIn } from '../../../assets/icons/status';
+import { DAMAGE_LABELS, damageTypeOf } from '../../../assets/icons/damage';
+import { STATUS_LABELS, statusTypeOf } from '../../../assets/icons/status';
 import PagedTable from '../../../components/common/PagedTable';
 import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
 import StatusIcon from '../../../components/common/StatusIcon';
@@ -55,7 +55,7 @@ interface WeaknessData {
 
 const DATA = weaknessJson as unknown as WeaknessData;
 
-/** 表里的「火（可变）」「圣（可变）」之类，按主属性上色 */
+/** 带「可变」等后缀的属性按主名上色。 */
 const ATTR_COLOR: Record<string, string> = {
   火焰: 'volcano',
   神圣: 'gold',
@@ -66,18 +66,22 @@ const ATTR_COLOR: Record<string, string> = {
   无属性: 'default',
 };
 
-const baseAttr = (attr: string) => attr.replace(/（.*$/, '').trim();
+const attributeParts = (attr: string) => {
+  const base = attr.replace(/[（(].*$/, '').trim();
+  const status = statusTypeOf(base);
+  const damage = base === '无属性' ? 'standard' : damageTypeOf(base);
+  const name = status ? STATUS_LABELS[status] : damage && base !== '无属性' ? DAMAGE_LABELS[damage] : base;
+  return { base, damage, name, status };
+};
 
 const attrTag = (attr: string) => {
-  const key = Object.keys(ATTR_COLOR).find((k) => attr.startsWith(k)) ?? '无属性';
-  const type = damageTypeOf(baseAttr(attr));
-  const status = statusTypeIn(baseAttr(attr));
+  const { base, damage, name, status } = attributeParts(attr);
   return (
-    <Tag color={ATTR_COLOR[key]}>
+    <Tag color={ATTR_COLOR[name] ?? ATTR_COLOR.无属性}>
       <span className="damage-type-option">
-        {type && <DamageTypeIcon type={type} size={14} />}
+        {damage && <DamageTypeIcon type={damage} size={14} />}
         {status && <StatusIcon status={status} size={14} />}
-        <span>{attr}</span>
+        <span>{attr.replace(base, name)}</span>
       </span>
     </Tag>
   );
@@ -97,24 +101,16 @@ const damageOption = (value: string, icon: React.ReactNode) => ({
 const DAMAGE_FILTER_OPTIONS = [
   {
     label: '异常类别',
-    options: [
-      damageOption('中毒', <StatusIcon status="poison" size={16} className="damage-type-icon" />),
-      damageOption('冻伤', <StatusIcon status="frostbite" size={16} className="damage-type-icon" />),
-      damageOption('腐败', <StatusIcon status="scarletRot" size={16} className="damage-type-icon" />),
-      damageOption('骤死', <StatusIcon status="deathBlight" size={16} className="damage-type-icon" />),
-      damageOption('出血', <StatusIcon status="bleed" size={16} className="damage-type-icon" />),
-      damageOption('催眠', <StatusIcon status="sleep" size={16} className="damage-type-icon" />),
-      damageOption('发狂', <StatusIcon status="madness" size={16} className="damage-type-icon" />),
-    ],
+    options: (['poison', 'frostbite', 'scarletRot', 'deathBlight', 'bleed', 'sleep', 'madness'] as const).map(
+      (status) =>
+        damageOption(STATUS_LABELS[status], <StatusIcon status={status} size={16} className="damage-type-icon" />),
+    ),
   },
   {
     label: '属性类别',
-    options: [
-      damageOption('魔力', <DamageTypeIcon type="magic" size={16} className="damage-type-icon" />),
-      damageOption('火焰', <DamageTypeIcon type="fire" size={16} className="damage-type-icon" />),
-      damageOption('雷电', <DamageTypeIcon type="lightning" size={16} className="damage-type-icon" />),
-      damageOption('神圣', <DamageTypeIcon type="holy" size={16} className="damage-type-icon" />),
-    ],
+    options: (['magic', 'fire', 'lightning', 'holy'] as const).map((type) =>
+      damageOption(DAMAGE_LABELS[type], <DamageTypeIcon type={type} size={16} className="damage-type-icon" />),
+    ),
   },
   {
     label: '其他',
@@ -150,9 +146,10 @@ const BuildupTable: React.FC<{
   const filtered = useMemo(() => {
     const selected = damageTypes.length > 0 ? new Set(damageTypes) : null;
     return rows.filter((row) => {
-      if (selected && !selected.has(baseAttr(row.attr))) return false;
+      const { name } = attributeParts(row.attr);
+      if (selected && !selected.has(name)) return false;
       if (!search) return true;
-      return row.name.includes(search) || row.attr.includes(search) || row.value.includes(search);
+      return [row.name, row.attr, name, row.value].some((value) => value.includes(search));
     });
   }, [rows, search, damageTypes]);
 
