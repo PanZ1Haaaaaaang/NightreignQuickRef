@@ -2,7 +2,7 @@
 
 本文件约定 NightreignQuickRef 的开发方式。站点面向《艾尔登法环：黑夜君临》玩家，文案使用简体中文，游戏术语沿用官方中文译名。
 
-本文件适用于贡献者和编码代理。若本地存在仓库根目录下的 `.codex/AGENTS.local.md`，开始前读取它，补充本机工具和核验材料。公共约定适用于每个检出环境。 [Codex 工作入口](.codex/README.md)
+本文件适用于贡献者和编码代理。若本地存在仓库根目录下的 `.codex/AGENTS.local.md`，开始前读取它，补充本机工具和核验材料。公共约定适用于每个检出环境。按任务查阅仓库共享的技能入口。 [Codex 工作入口](.codex/README.md) · [共享技能](.codex/README.md#共享技能)
 
 ## 项目约束
 
@@ -10,7 +10,7 @@
 - 上游原作者为 Cecilia（xxiixi）。必须保留 `SITE_CONFIG.original` 的署名与链接。 [原仓库](https://github.com/xxiixi/NightreignQuickRef) · [站点配置](src/config/siteConfig.ts)
 - `main` 用于同步上游并关联上游 PR，禁止对它执行 checkout、commit、merge、rebase、push 等操作。`self-deploy` 是主开发分支，常规贡献以此为基线并向它提交 PR。特性分支沿用 `<type>/<scope>`。 [上游 PR](https://github.com/xxiixi/NightreignQuickRef/pull/11)
 - Agent 的分支与提交操作限于本地，交付时汇报分支及提交摘要。远程推送和 `pnpm run deploy`（包含发布分支推送）由用户执行。
-- 根 `AGENTS.md` 与 `.codex/README.md` 随仓库共享。`docs/` 当前跟踪提交规范和部署指南。本机补充与核验材料按忽略规则管理。 [忽略规则](.gitignore)
+- 根 `AGENTS.md`、`.codex/README.md` 和 `.codex/skills/` 随仓库共享。`docs/` 跟踪提交规范、部署指南和术语对照。本机补充与核验材料按忽略规则管理。 [忽略规则](.gitignore)
 
 ## 技术栈与命令
 
@@ -41,15 +41,18 @@ pnpm run preview
 ## 公共 UI 与 Ant Design
 
 - 渡夜者头像以「角色数据 → 基础属性与等级成长」的圆形头像为基线，复用 `CharacterAvatar` 与十名渡夜者的资源映射。共用伤害、异常、技能图标的语义映射，并保留相邻的文字标签。冲击力徽章按场景含义展示。 [头像组件](src/components/common/CharacterAvatar.tsx) · [资源映射](src/assets/icons/characters.ts)
+- 能力点与能力值的表头和标签复用 `CharacterStatLabel`。图标旁保留标准中文名称。 [能力标签组件](src/components/common/CharacterStatLabel.tsx)
 - 冲击力数值统一用 `ImpulseBadge` / `renderImpulseText`。新增文案只使用当前规则可识别的写法：`冲击力7`、`7号冲击力`、`4/7/10 号冲击力`、`7号微硬直`、`7 冲`；不要写 `冲击力：7`、`冲击力为7`、`冲击力 7/10` 等未覆盖形式。4/7/10 的高亮徽章只用于冲击力表，其他页面按普通徽章展示。
 - 表格复用 `CustomPagination` 的分页条样式。对全量筛选结果排序后再切页，筛选和页长变化时回到第一页。宽表把横向滚动留在表格容器内。
+- 同类页面复用 `PageShell`、`Panel` 和 `FilterBar` 的布局。页面负责数据筛选、结果数、操作按钮与分页上下文。 [页面壳层](src/components/common/PageShell.tsx) · [内层面板](src/components/common/Panel.tsx) · [筛选条](src/components/common/FilterBar.tsx)
 - 主题用 `App.tsx` 的 `ConfigProvider` 和现有 token。全局 antd 覆写放 `src/styles/antd-overrides.css`，局部样式用 CSS Module。反馈消息使用 `src/utils/feedback.ts` 提供的实例，由 `MessageBridge` 注入。
-- 编写 antd 组件前，按 `package.json` 的版本查询 API。当前为 6.7.2，例如 `antd info Table --version 6.7.2 --format json`。可用 antd 技能、CLI 或官方文档，也可用 `pnpm dlx @ant-design/cli` 临时运行 CLI。`Alert` 的标题用 `title`，说明用 `description`。 [antd 官方文档索引](https://ant.design/llms.txt)
+- 编写 antd 组件前，读取仓库的 antd 技能，并按 `package.json` 的版本查询 API。当前为 6.7.2，例如 `antd info Table --version 6.7.2 --format json`。`Alert` 的标题用 `title`，说明用 `description`。 [antd 技能](.codex/skills/antd/SKILL.md)
 - 修改 antd 代码后运行 `antd lint ./src --version 6.7.2 --format json`，确认 deprecated 项为 0。
 
 ## 数据命名与来源
 
 - `src/data/zh-CN/` 的新文件采用小写连字符命名。`src/data/character-info/` 用渡夜者英文名的小写形式，公告保留 `src/data/news/` 的公告 ID。改名或移动时同步更新导入、Vite glob 和仍使用该路径的脚本，保持原 JSON 内容一致。
+- 站内表头、筛选和说明使用术语对照表中的标准名。原始 JSON 键、官方词条和资料引用保留原文。 [站内术语对照](docs/name_correspondence.md)
 - 社区实测用于词条效果和机制说明。数值与参数优先用相同版本的 Smithbox 导出核对。手头只有公开资料或实测时，在 PR 中注明版本、取值来源和待核实的差异。修改数据时保留对应的 `DATA_SOURCE_CONFIG` 来源链接。 [站内数据来源](src/config/dataSourceConfig.ts)
 - 已录入数据以 App Ver. 1.03.4 / Reg Ver. 1.03.5（2026.09.18）为基线，版本字段由 `versionConfig.ts` 统一维护。官方站点用于核对维护公告。 [站内版本配置](src/config/versionConfig.ts) · [游戏维护公告](https://nightreign.eldenring.jp/news.html)
 
