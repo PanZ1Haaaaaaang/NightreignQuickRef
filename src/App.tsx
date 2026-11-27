@@ -24,8 +24,8 @@ const CharacterDataView = lazy(() => import('./pages/loadout/character-data/Char
 const NightlordsView = lazy(() => import('./pages/run-content/nightlords/NightlordsView'));
 const EnemiesEventsView = lazy(() => import('./pages/run-content/enemies-events/EnemiesEventsView'));
 const WeaponSkillMagicView = lazy(() => import('./pages/WeaponSkillMagicView'));
-const MerchantView = lazy(() => import('./pages/MerchantView'));
-const DropPoolView = lazy(() => import('./pages/DropPoolView'));
+const MerchantView = lazy(() => import('./pages/in-run/merchants/MerchantView'));
+const DropPoolView = lazy(() => import('./pages/in-run/drop-pools/DropPoolView'));
 
 // 懒加载占位：只占内容区，不遮挡顶部导航，避免布局跳动
 const viewLoadingStyle: React.CSSProperties = {

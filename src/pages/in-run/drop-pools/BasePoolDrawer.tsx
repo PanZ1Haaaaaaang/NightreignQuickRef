@@ -1,8 +1,8 @@
 import { Drawer, Grid, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
-import type { DropBasePool, DropKind } from '../../types';
+import type { DropBasePool, DropKind } from '../../../types';
 import { KIND_CLASS } from './poolKinds';
-import styles from '../../styles/dropPoolView.module.css';
+import styles from './dropPoolView.module.css';
 
 /** 元素 / 异常码：取池 ID 末四位的前两位，如 2000952 = 冻伤版窄蓝 */
 const ELEMENT_CODES: Array<[code: string, name: string]> = [
@@ -38,7 +38,7 @@ const BasePoolDrawer: React.FC<BasePoolDrawerProps> = ({ open, onClose, basePool
   /** 抽屉动画结束后把目标行滚到视口中间（12 行在手机上放不下） */
   const scrollToFocus = () => {
     if (!focusKind) return;
-    const row = document.querySelector(`.base-pool-table tr[data-row-key="${focusKind}"]`);
+    const row = document.querySelector(`.${styles.basePoolTable} tr[data-row-key="${focusKind}"]`);
     row?.scrollIntoView({ block: 'center' });
   };
 
@@ -115,7 +115,7 @@ const BasePoolDrawer: React.FC<BasePoolDrawerProps> = ({ open, onClose, basePool
       }}
     >
       <Table<DropBasePool>
-        className="base-pool-table"
+        className={styles.basePoolTable}
         columns={columns}
         dataSource={basePools}
         rowKey="kind"
@@ -123,7 +123,7 @@ const BasePoolDrawer: React.FC<BasePoolDrawerProps> = ({ open, onClose, basePool
         bordered
         pagination={false}
         tableLayout="fixed"
-        rowClassName={(pool) => (pool.kind === focusKind ? 'base-pool-row-active' : '')}
+        rowClassName={(pool) => (pool.kind === focusKind ? styles.basePoolActiveRow : '')}
       />
 
       <div className={styles.basePoolNotes}>

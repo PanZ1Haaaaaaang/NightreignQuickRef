@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Alert, Button, Empty, Grid, Input, Segmented, Select, Space, Switch, Tag, Tooltip, Typography } from 'antd';
 import { EyeOutlined, InfoCircleOutlined, TableOutlined } from '@ant-design/icons';
-import CharacterAvatar from '../components/common/CharacterAvatar';
-import CustomPagination from '../components/CustomPagination';
-import { usePagination } from '../hooks/usePagination';
-import dropPoolsJson from '../data/zh-CN/drop_pools.json';
-import invaderAffixJson from '../data/zh-CN/invader_affix_data.json';
+import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import CustomPagination from '../../../components/CustomPagination';
+import { usePagination } from '../../../hooks/usePagination';
+import dropPoolsJson from '../../../data/zh-CN/drop_pools.json';
+import invaderAffixJson from '../../../data/zh-CN/invader_affix_data.json';
 import type {
   DropGroup,
   DropOption,
@@ -13,21 +13,21 @@ import type {
   DropSegment,
   InvaderWeaponAffix,
   InvaderWeaponAffixData,
-} from '../types';
-import { POTENTIAL_POOL_LABEL } from '../config/potentialPoolConfig';
-import { TERRAIN_OPTIONS, terrainOf, type TerrainKey } from '../config/terrainConfig';
+} from '../../../types';
+import { POTENTIAL_POOL_LABEL } from '../../../config/potentialPoolConfig';
+import { TERRAIN_OPTIONS, terrainOf, type TerrainKey } from './terrainConfig';
 import {
   adjustSegmentPercents,
   calcDiscovery,
   DEFAULT_DISCOVERY_SETUP,
   normalizeDiscoveryArcane,
   type DiscoverySetup,
-} from '../config/discoveryConfig';
-import { BASE_POOL_KINDS, KIND_CLASS } from './dropPoolView/poolKinds';
-import BasePoolDrawer from './dropPoolView/BasePoolDrawer';
-import PotentialPoolDrawer from './dropPoolView/PotentialPoolDrawer';
-import DiscoveryDrawer from './dropPoolView/DiscoveryDrawer';
-import styles from '../styles/dropPoolView.module.css';
+} from './discoveryConfig';
+import { BASE_POOL_KINDS, KIND_CLASS } from './poolKinds';
+import BasePoolDrawer from './BasePoolDrawer';
+import PotentialPoolDrawer from './PotentialPoolDrawer';
+import DiscoveryDrawer from './DiscoveryDrawer';
+import styles from './dropPoolView.module.css';
 
 const { Title, Text } = Typography;
 

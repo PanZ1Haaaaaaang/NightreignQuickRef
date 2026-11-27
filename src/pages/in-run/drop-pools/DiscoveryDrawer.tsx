@@ -1,5 +1,5 @@
 import { Button, Drawer, InputNumber, Segmented, Switch } from 'antd';
-import type { DiscoverySetup } from '../../config/discoveryConfig';
+import type { DiscoverySetup } from './discoveryConfig';
 import {
   calcDiscovery,
   DEFAULT_DISCOVERY_SETUP,
@@ -9,12 +9,12 @@ import {
   normalizeDiscoveryArcane,
   weaponCount,
   WEAPON_SLOT_LIMIT,
-} from '../../config/discoveryConfig';
-import CharacterAvatar from '../../components/common/CharacterAvatar';
-import AbilityIcon from '../../components/common/AbilityIcon';
-import { useNightfarerLevel15 } from '../../features/nightfarers/useNightfarerLevel15';
-import type { NightfarerName } from '../../types';
-import styles from '../../styles/dropPoolView.module.css';
+} from './discoveryConfig';
+import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import AbilityIcon from '../../../components/common/AbilityIcon';
+import { useNightfarerLevel15 } from '../../../features/nightfarers/useNightfarerLevel15';
+import type { NightfarerName } from '../../../types';
+import styles from './dropPoolView.module.css';
 
 interface DiscoveryDrawerProps {
   open: boolean;

@@ -533,6 +533,33 @@ body[tomato-theme='dark'] .percentDown {
 }
 
 /* ===== 基池对照表（抽屉） ===== */
+.basePoolTable :global(.ant-table) {
+  min-width: 0;
+}
+
+.basePoolTable :global(.ant-table-cell) {
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.basePoolTable :global(.ant-table-thead) > tr > th {
+  white-space: nowrap;
+}
+
+/* 从卡片槽位点进来时高亮的那一行 */
+.basePoolTable tr.basePoolActiveRow > td {
+  background: rgba(22, 119, 255, 0.12);
+}
+
+.basePoolTable tr.basePoolActiveRow > td:first-child {
+  box-shadow: inset 3px 0 0 #1677ff;
+}
+
+body[tomato-theme='dark'] .basePoolTable tr.basePoolActiveRow > td,
+[data-theme='dark'] .basePoolTable tr.basePoolActiveRow > td {
+  background: rgba(64, 150, 255, 0.24);
+}
+
 .basePoolTitle {
   display: flex;
   flex-direction: column;

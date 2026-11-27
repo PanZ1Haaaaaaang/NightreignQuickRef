@@ -1,4 +1,4 @@
-import type { DropGroup } from '../types';
+import type { DropGroup } from '../../../types';
 
 /** 特殊地形：游戏内英文名 / 中文名 / 页面下拉用的常见叫法 */
 export type TerrainKey = 'mountaintop' | 'crater' | 'rottedWoods' | 'shroudedCity' | 'greatHollow';

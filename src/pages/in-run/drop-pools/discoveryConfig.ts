@@ -1,4 +1,4 @@
-import type { DropSegment } from '../types';
+import type { DropSegment } from '../../../types';
 
 /** 感应为 0 时的观察力，也是原始权重对应的基准值 */
 export const DISCOVERY_BASE = 100;

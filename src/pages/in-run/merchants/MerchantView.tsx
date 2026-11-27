@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from 'react';
-import type { PageTabProps } from '../config/navigationConfig';
+import type { PageTabProps } from '../../../config/navigationConfig';
 import { Alert, Button, Checkbox, Input, Popover, Segmented, Select, Switch, Table, Tabs, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
-import PagedTable from '../components/common/PagedTable';
-import type { PageLocalColumns } from '../components/common/PagedTable';
-import { renderImpulseText } from '../components/common/renderImpulseText';
-import merchantJson from '../data/zh-CN/merchant_data.json';
+import PagedTable from '../../../components/common/PagedTable';
+import type { PageLocalColumns } from '../../../components/common/PagedTable';
+import { renderImpulseText } from '../../../components/common/renderImpulseText';
+import merchantJson from '../../../data/zh-CN/merchant_data.json';
+import styles from './merchantView.module.css';
 
 // ---- 数据类型（对应 src/data/zh-CN/merchant_data.json 结构）----
 interface ConsumableRow {
@@ -412,7 +413,7 @@ const WeaponSection: React.FC<{
         <Button onClick={handleReset}>清除所有</Button>
       </div>
       <PagedTable<WeaponRow>
-        className="merchant-weapon-table"
+        className={styles.weaponTable}
         columns={(pageRows) => buildColumns(merchantPageSpans(pageRows))}
         dataSource={filtered}
         contextKey={JSON.stringify([

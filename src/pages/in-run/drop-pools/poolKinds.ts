@@ -1,4 +1,4 @@
-import styles from '../../styles/dropPoolView.module.css';
+import styles from './dropPoolView.module.css';
 
 /** 12 个基池的 kind：这些槽位可以点开「基池对照表」并定位到对应行 */
 export const BASE_POOL_KINDS = new Set([

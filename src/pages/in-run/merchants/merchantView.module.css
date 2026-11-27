@@ -1,0 +1,5 @@
+@media (max-width: 999px) {
+  .weaponTable :global(.ant-table) {
+    min-width: 0;
+  }
+}
