@@ -10,7 +10,7 @@ import weaponArts from '../../../data/zh-CN/weapon-arts.json';
 import uniqueWeaponArts from '../../../data/zh-CN/unique-weapon-arts.json';
 import supportSpells from '../../../data/zh-CN/support-spells.json';
 import weaponArtCategoryHints from '../../../data/zh-CN/weapon-art-category-hints.json';
-import { renderHintOption } from '../../../components/HintOption';
+import { HintOption } from '../../../components/HintOption';
 import { DAMAGE_LABELS, damageTypeOf } from '../../../assets/icons/damage';
 import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
 import { renderImpulseText } from '../../../components/common/renderImpulseText';
@@ -374,7 +374,7 @@ const DataTable: React.FC<DataTableProps> = ({
             styles={{ popup: { root: { minWidth: 340 } } }}
             placeholder="按分类筛选"
             options={categoryOptions}
-            optionRender={skillFilterKind === 'weaponArt' ? renderHintOption : undefined}
+            optionRender={skillFilterKind === 'weaponArt' ? (option) => <HintOption data={option.data} /> : undefined}
             value={selectedCategories}
             onChange={setSelectedCategories}
             maxTagCount="responsive"

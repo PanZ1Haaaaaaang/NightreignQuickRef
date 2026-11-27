@@ -16,7 +16,7 @@ import { renderImpulseText } from '../../components/common/renderImpulseText';
 import { DEEP_NIGHT_IN_GAME_TYPE_ORDER } from '../../config/entryTypeConfig';
 import { POTENTIAL_POOL_TAGS } from '../../config/potentialPoolConfig';
 import { DEFAULT_TABLE_PAGE_SIZE } from '../../config/tablePagination';
-import { renderHintOption } from '../../components/HintOption';
+import { HintOption } from '../../components/HintOption';
 import { TALISMAN_CATEGORIES, TALISMAN_CATEGORY_ORDER } from '../../config/talismanCategoryConfig';
 import TalismanEntriesTable from './TalismanEntriesTable';
 import { compareEntryIds, compareEntryNames, entrySearchFields, entrySearchTerms } from './entryTableData';
@@ -1228,7 +1228,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
                   label: TALISMAN_CATEGORIES[value].label,
                   hint: TALISMAN_CATEGORIES[value].hint,
                 }))}
-                optionRender={renderHintOption}
+                optionRender={(option) => <HintOption data={option.data} />}
                 maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
               />
               <Button onClick={clearAll} type="default" size="medium">
@@ -1412,7 +1412,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab: activeE
                     label: meta.label,
                     hint: meta.tip,
                   }))}
-                  optionRender={renderHintOption}
+                  optionRender={(option) => <HintOption data={option.data} />}
                   maxTagPlaceholder={(omittedValues) => `+${omittedValues.length}...`}
                 />
               )}
