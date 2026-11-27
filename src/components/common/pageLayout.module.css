@@ -1,0 +1,16 @@
+.shell {
+  width: min(1400px, 92%);
+  min-width: 0;
+  margin: 0 auto var(--spacing-xl);
+  padding: 20px 24px 24px;
+  background: var(--content-bg);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px var(--content-shadow);
+}
+
+.panel {
+  min-width: 0;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+}

@@ -1,0 +1,122 @@
+/* ===== 异常值 ===== */
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  margin: 18px 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-1);
+}
+
+.heading:first-child {
+  margin-top: 0;
+}
+
+.paragraph {
+  margin: 0 0 6px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--color-text-2);
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.sensingBox {
+  padding: 12px 14px;
+  border-left: 3px solid rgba(120, 160, 255, 0.55);
+  border-radius: 6px;
+  background: rgba(120, 160, 255, 0.08);
+}
+
+.hint {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--color-text-2);
+}
+
+.list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--color-text-2);
+}
+
+.list li + li {
+  margin-top: 4px;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.twoCol .heading {
+  margin-top: 12px;
+}
+
+.source {
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.sectionHeader .heading {
+  margin: 0;
+}
+
+.drawerNote {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}
+
+.drawerLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 0;
+  color: var(--theme-text-secondary);
+}
+
+.iconLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-align: left;
+}
+
+.cellIcon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  object-fit: contain;
+}
+
+.cellIcon {
+  border-radius: 50%;
+}
+
+.sectionActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

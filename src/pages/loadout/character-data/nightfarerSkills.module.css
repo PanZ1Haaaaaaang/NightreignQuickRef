@@ -1,0 +1,49 @@
+/* ===== 渡夜者能力 / 技艺 / 绝招 ===== */
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--color-text-2);
+}
+
+.character {
+  font-weight: 600;
+}
+
+.skill {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.source {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--color-text-2);
+}
+
+.skillNoIcon {
+  padding-left: 28px;
+}
+
+.patchNote {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-left: 3px solid rgba(120, 160, 255, 0.55);
+  border-radius: 4px;
+  background: rgba(120, 160, 255, 0.08);
+  line-height: 1.7;
+}

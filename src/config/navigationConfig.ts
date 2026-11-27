@@ -22,6 +22,8 @@ export interface NavSection {
 
 export interface NavPage {
   key: string;
+  // 公开链接使用 slug 和 anchorId，文案调整时保留已有标识。
+  slug: string;
   label: string;
   icon: string;
   // 一句话定位：目录卡 tooltip、页面头副标题共用
@@ -29,6 +31,11 @@ export interface NavPage {
   badges: NavBadge[];
   group: string;
   sections: NavSection[];
+}
+
+export interface PageTabProps {
+  activeSubTab: string;
+  onSubTabChange: (tabKey: string) => void;
 }
 
 export interface NavGroup {
@@ -57,6 +64,7 @@ export const NAV_GROUPS: NavGroup[] = [
 export const NAV_PAGES: NavPage[] = [
   {
     key: '游戏机制',
+    slug: 'game-mechanics',
     label: '游戏机制',
     icon: '⚙️',
     desc: '时间轴、缩圈、卢恩、深夜评分、血量计算器、冲击力与仇恨机制',
@@ -85,6 +93,7 @@ export const NAV_PAGES: NavPage[] = [
   },
   {
     key: '角色数据',
+    slug: 'characters',
     label: '角色数据',
     icon: '👤',
     // 角色在出击前就确定，属于局外；页内仍包含按局内需求查的成长与帧数数据
@@ -125,6 +134,7 @@ export const NAV_PAGES: NavPage[] = [
   },
   {
     key: '遗物词条',
+    slug: 'relic-entries',
     label: '遗物词条',
     icon: '🌕',
     desc: '遗物随机词条、强化类别适用范围与深夜模式局外词条',
@@ -148,6 +158,7 @@ export const NAV_PAGES: NavPage[] = [
   },
   {
     key: '机制',
+    slug: 'weapon-mechanics',
     label: '机制',
     icon: '🛠️',
     desc: '武器补正适配度、异常值、大盾数值与防御强度、黑焰烧血、即死与骤死',
@@ -194,6 +205,7 @@ export const NAV_PAGES: NavPage[] = [
   },
   {
     key: '传说武器详情',
+    slug: 'legendary-weapons',
     label: '传说武器',
     icon: '⚔️',
     desc: '26 把传说武器的十角色面板与庇佑效果',
@@ -211,6 +223,7 @@ export const NAV_PAGES: NavPage[] = [
   },
   {
     key: '武器战技与魔法祷告',
+    slug: 'skills-and-spells',
     label: '战技与魔法祷告',
     icon: '✨',
     desc: '战技、专用战技、魔法、祷告与辅助类词条',
@@ -226,6 +239,7 @@ export const NAV_PAGES: NavPage[] = [
   },
   {
     key: '局内词条',
+    slug: 'in-game-entries',
     label: '局内词条',
     icon: '🌖',
     desc: '局内词条、潜在能力、护符、道具采集与深夜模式局内词条',
@@ -251,6 +265,7 @@ export const NAV_PAGES: NavPage[] = [
   },
   {
     key: '掉落池',
+    slug: 'drop-pools',
     label: '掉落池',
     icon: '🎁',
     desc: '133 组掉球的选项分布、概率与观察力模拟',
@@ -260,6 +275,7 @@ export const NAV_PAGES: NavPage[] = [
   },
   {
     key: '商人数据',
+    slug: 'merchants',
     label: '商人数据',
     icon: '🏪',
     desc: '四类商人的货架、价格与不可购买的灵药露滴',
@@ -285,6 +301,7 @@ export const NAV_PAGES: NavPage[] = [
   },
   {
     key: '夜王数据',
+    slug: 'nightlords',
     label: '夜王数据',
     icon: '🌙',
     desc: '每局开局即确定：血量抗性、永夜山羊召唤、利普拉交易',
@@ -310,10 +327,12 @@ export const NAV_PAGES: NavPage[] = [
         anchorId: 'lipula-trades',
         tabKey: 'lipula-trades',
       },
+      { key: '永夜利普拉技能', label: '💀 永夜利普拉技能', anchorId: 'lipula-skills', tabKey: 'lipula-skills' },
     ],
   },
   {
     key: '强敌与事件',
+    slug: 'enemies-events',
     label: '强敌与事件',
     icon: '🗺️',
     desc: '由地图种子决定：野生Boss、种族克制、特殊地形与事件',

@@ -1,22 +1,28 @@
 import React from 'react';
 import { Button, Select } from 'antd';
+import { TABLE_PAGE_SIZES } from '../config/tablePagination';
+
+const pageSizeOptions = TABLE_PAGE_SIZES.map((size) => ({ value: size, label: `${size} 条` }));
 
 export interface CustomPaginationProps {
   currentPage: number;
   pageSize: number;
   totalItems: number;
   onPageChange: (page: number) => void;
-  onPageSizeChange: (pageSize: number) => void;
+  onPageSizeChange?: (pageSize: number) => void;
+  itemUnit?: string;
+  ariaLabel?: string;
   loading?: boolean;
 }
 
-// 词条详情页 / 武器战技页共用的分页条
 const CustomPagination: React.FC<CustomPaginationProps> = ({
   currentPage,
   pageSize,
   totalItems,
   onPageChange,
   onPageSizeChange,
+  itemUnit = '条记录',
+  ariaLabel = '表格分页',
   loading = false,
 }) => {
   const totalPages = Math.ceil(totalItems / pageSize);
@@ -26,46 +32,51 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
   }
 
   return (
-    <div
+    <nav
+      aria-label={ariaLabel}
       className="custom-pagination-row"
       style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         marginTop: '15px',
-        padding: '0 16px',
       }}
     >
       <div className="page-size-controls" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <span style={{ color: 'var(--theme-text-secondary)', fontSize: '14px' }}>每页显示</span>
-        <Select
-          value={pageSize.toString()}
-          onChange={(value) => {
-            onPageSizeChange(Number(value));
-            onPageChange(1);
-          }}
-          options={[
-            { value: '15', label: '15 条' },
-            { value: '20', label: '20 条' },
-            { value: '30', label: '30 条' },
-            { value: '50', label: '50 条' },
-            { value: '80', label: '80 条' },
-            { value: '100', label: '100 条' },
-          ]}
-          size="small"
-          style={{ width: '100px' }}
-        />
-        <span style={{ color: 'var(--theme-text-secondary)', fontSize: '14px' }}>共 {totalItems} 条记录</span>
+        {onPageSizeChange ? (
+          <>
+            <span className="pagination-label">每页显示</span>
+            <Select
+              aria-label="每页显示条数"
+              value={pageSize}
+              onChange={(value) => {
+                onPageSizeChange(value);
+                onPageChange(1);
+              }}
+              options={pageSizeOptions}
+              size="small"
+              style={{ width: '100px' }}
+            />
+          </>
+        ) : (
+          <span className="pagination-label">
+            每页 {pageSize} {itemUnit}
+          </span>
+        )}
+        <span className="pagination-label">
+          共 {totalItems} {itemUnit}
+        </span>
       </div>
 
-      <div className="page-nav-controls" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <div className="page-nav-controls" style={{ display: 'flex', alignItems: 'center' }}>
         <Button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage <= 1} size="medium">
           上一页
         </Button>
 
         <span
+          role="status"
+          className="page-position"
           style={{
-            margin: '0 15px',
             color: 'var(--theme-text-secondary)',
             fontSize: '14px',
           }}
@@ -77,7 +88,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
           下一页
         </Button>
       </div>
-    </div>
+    </nav>
   );
 };
 

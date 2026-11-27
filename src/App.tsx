@@ -1,4 +1,4 @@
-import { lazy, Suspense, use, useState, useEffect } from 'react';
+import { lazy, Suspense, use, useEffect, useRef, useState } from 'react';
 import { App as AntdApp, ConfigProvider, Spin, theme } from 'antd';
 import { geekblue } from '@ant-design/colors';
 // import zhCN from 'antd/locale/zh_CN';
@@ -11,18 +11,21 @@ import FunctionMenu from './components/FunctionMenu';
 import { initializeTheme, setupThemeListener, toggleTheme } from './utils/themeUtils';
 import DataManager, { type DataGroup } from './utils/dataManager';
 import { setMessageApi } from './utils/feedback';
-import { getDefaultPage } from './config/navigationConfig';
+import { getPageByKey, type PageTabProps } from './config/navigationConfig';
+import { navigationUrl, readNavigationTarget, type NavigationTarget } from './utils/navigationUrl';
 
 // 视图级懒加载：每个页面独立成 chunk，首屏只下载当前 tab
-const EntryDetailView = lazy(() => import('./pages/EntryDetailView'));
-const GameMechanicsView = lazy(() => import('./pages/GameMechanicsView'));
-const LegendaryWeaponView = lazy(() => import('./pages/LegendaryWeaponView'));
-const WeaponMechanicsView = lazy(() => import('./pages/WeaponMechanicsView'));
-const CharacterDataView = lazy(() => import('./pages/CharacterDataView'));
-const BossDataView = lazy(() => import('./pages/BossDataView'));
-const WeaponSkillMagicView = lazy(() => import('./pages/WeaponSkillMagicView'));
-const MerchantView = lazy(() => import('./pages/MerchantView'));
-const DropPoolView = lazy(() => import('./pages/DropPoolView'));
+const RelicEntriesView = lazy(() => import('./pages/loadout/relic-entries/RelicEntriesView'));
+const InGameEntriesView = lazy(() => import('./pages/in-run/in-game-entries/InGameEntriesView'));
+const GameMechanicsView = lazy(() => import('./pages/match-rules/game-mechanics/GameMechanicsView'));
+const LegendaryWeaponView = lazy(() => import('./pages/weapons/legendary-weapons/LegendaryWeaponView'));
+const WeaponMechanicsView = lazy(() => import('./pages/weapons/mechanics/WeaponMechanicsView'));
+const CharacterDataView = lazy(() => import('./pages/loadout/character-data/CharacterDataView'));
+const NightlordsView = lazy(() => import('./pages/run-content/nightlords/NightlordsView'));
+const EnemiesEventsView = lazy(() => import('./pages/run-content/enemies-events/EnemiesEventsView'));
+const WeaponSkillMagicView = lazy(() => import('./pages/weapons/skills-and-spells/WeaponSkillMagicView'));
+const MerchantView = lazy(() => import('./pages/in-run/merchants/MerchantView'));
+const DropPoolView = lazy(() => import('./pages/in-run/drop-pools/DropPoolView'));
 
 // 懒加载占位：只占内容区，不遮挡顶部导航，避免布局跳动
 const viewLoadingStyle: React.CSSProperties = {
@@ -86,13 +89,84 @@ const MessageBridge = () => {
 };
 
 function App() {
-  const [activeTab, setActiveTab] = useState(getDefaultPage());
+  const [navigation, setNavigation] = useState(() => ({
+    target: readNavigationTarget(window.location.search),
+    scrollToSection: true,
+  }));
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const pageContent = useRef<HTMLDivElement>(null);
   // const [isEnglish, setIsEnglish] = useState(false);
 
-  // 子Tab和Step状态管理
-  const [activeSubTab, setActiveSubTab] = useState<string>('');
-  const [activeStep, setActiveStep] = useState<number>(0);
+  const { page, section } = navigation.target;
+  const activeTab = page.key;
+  const activeStep = section?.stepIndex ?? 0;
+
+  const navigate = (target: NavigationTarget, scrollToSection = false) => {
+    const url = navigationUrl(window.location.href, target);
+    if (url.href !== window.location.href) {
+      window.history.pushState(null, '', url);
+    }
+    setNavigation({ target, scrollToSection });
+  };
+
+  const handlePageChange = (key: string) => {
+    const nextPage = getPageByKey(key);
+    if (nextPage && nextPage !== page) navigate({ page: nextPage });
+  };
+
+  const pageTabs: PageTabProps = {
+    activeSubTab: section?.tabKey ?? page.sections.find(({ tabKey }) => tabKey)?.tabKey ?? '',
+    onSubTabChange: (tabKey) => {
+      const nextSection = page.sections.find((item) => item.tabKey === tabKey);
+      if (nextSection) navigate({ page, section: nextSection });
+    },
+  };
+
+  const handleStepChange = (stepIndex: number) => {
+    const nextSection = page.sections.find((item) => item.stepIndex === stepIndex);
+    if (nextSection) navigate({ page, section: nextSection });
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setNavigation({ target: readNavigationTarget(window.location.search), scrollToSection: true });
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
+    const anchorId = navigation.target.section?.anchorId;
+    const container = pageContent.current;
+    if (!navigation.scrollToSection || !anchorId || !container) return;
+
+    let frame = 0;
+    const scrollWhenVisible = () => {
+      const anchor = document.getElementById(anchorId);
+      if (!anchor || !container.contains(anchor) || !anchor.getClientRects().length) return;
+
+      observer.disconnect();
+      frame = window.requestAnimationFrame(() => {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        anchor.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'start' });
+      });
+    };
+
+    // 目标所在的页面和子页签可能在 Suspense 之后才挂载。
+    const observer = new MutationObserver(scrollWhenVisible);
+    observer.observe(container, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['class', 'style', 'hidden'],
+    });
+    scrollWhenVisible();
+
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(frame);
+    };
+  }, [navigation]);
 
   // 主题切换函数
   const handleToggleTheme = () => {
@@ -104,16 +178,6 @@ function App() {
   //   setIsEnglish(!isEnglish);
   // };
 
-  // 子Tab切换处理
-  const handleSubTabChange = (tabKey: string) => {
-    setActiveSubTab(tabKey);
-  };
-
-  // Step切换处理
-  const handleStepChange = (stepIndex: number) => {
-    setActiveStep(stepIndex);
-  };
-
   // 初始化主题
   useEffect(() => {
     initializeTheme(setIsDarkMode);
@@ -124,47 +188,33 @@ function App() {
     return setupThemeListener(setIsDarkMode);
   }, []);
 
-  // 主Tab切换时重置子Tab和Step状态
-  useEffect(() => {
-    setActiveSubTab('');
-    setActiveStep(0);
-  }, [activeTab]);
-
-  // 子Tab为一次性指令：生效后立即清空，避免持续控制子组件，阻止手动切换
-  useEffect(() => {
-    if (activeSubTab) {
-      const timer = setTimeout(() => setActiveSubTab(''), 0);
-      return () => clearTimeout(timer);
-    }
-  }, [activeSubTab]);
-
   // 渲染内容（视图组件已懒加载，需由 Suspense 包裹）
   const renderView = () => {
     switch (activeTab) {
       case '遗物词条':
-        return <EntryDetailView key="entries-outer" scope="局外" activeSubTab={activeSubTab} />;
+        return <RelicEntriesView {...pageTabs} />;
       case '局内词条':
-        return <EntryDetailView key="entries-inner" scope="局内" activeSubTab={activeSubTab} />;
+        return <InGameEntriesView {...pageTabs} />;
       case '机制':
-        return <WeaponMechanicsView activeSubTab={activeSubTab} />;
+        return <WeaponMechanicsView {...pageTabs} />;
       case '传说武器详情':
-        return <LegendaryWeaponView activeStep={activeStep} />;
+        return <LegendaryWeaponView activeStep={activeStep} onStepChange={handleStepChange} />;
       case '角色数据':
-        return <CharacterDataView activeSubTab={activeSubTab} />;
+        return <CharacterDataView {...pageTabs} />;
       case '游戏机制':
-        return <GameMechanicsView functionName="游戏机制" activeSubTab={activeSubTab} />;
+        return <GameMechanicsView functionName="游戏机制" {...pageTabs} />;
       case '夜王数据':
-        return <BossDataView key="boss-nightlord" scope="夜王" activeSubTab={activeSubTab} />;
+        return <NightlordsView {...pageTabs} />;
       case '强敌与事件':
-        return <BossDataView key="boss-map" scope="地图" activeSubTab={activeSubTab} />;
+        return <EnemiesEventsView {...pageTabs} />;
       case '武器战技与魔法祷告':
-        return <WeaponSkillMagicView activeSubTab={activeSubTab} />;
+        return <WeaponSkillMagicView {...pageTabs} />;
       case '商人数据':
-        return <MerchantView activeSubTab={activeSubTab} />;
+        return <MerchantView {...pageTabs} />;
       case '掉落池':
         return <DropPoolView />;
       default:
-        return <EntryDetailView key="entries-outer" scope="局外" activeSubTab={activeSubTab} />;
+        return null;
     }
   };
 
@@ -193,11 +243,7 @@ function App() {
       <AntdApp component={false}>
         <MessageBridge />
         <div className="app-container">
-          <FunctionMenu
-            onTabChange={setActiveTab}
-            onSubTabChange={handleSubTabChange}
-            onStepChange={handleStepChange}
-          />
+          <FunctionMenu onNavigate={(target) => navigate(target, true)} />
 
           <Header
             isDarkMode={isDarkMode}
@@ -205,12 +251,12 @@ function App() {
             // onToggleLanguage={handleToggleLanguage}
           />
 
-          <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+          <Navigation activeTab={activeTab} onTabChange={handlePageChange} />
 
           <PageHeader pageKey={activeTab} />
 
           {/* key 绑定当前 tab：切页时整块内容重新入场，统一动效见 styles/motion.css */}
-          <div className="page-enter" key={activeTab}>
+          <div className="page-enter" key={activeTab} ref={pageContent}>
             {renderContent()}
           </div>
 

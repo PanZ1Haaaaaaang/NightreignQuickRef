@@ -18,6 +18,7 @@
   --bg-color: #fff;
   --color-text-1: #415394;
   --color-text-2: #637fbb;
+  --color-text-3: var(--theme-text-tertiary);
   --bg-gradient: linear-gradient(135deg, var(--geekblue-1) 0%, var(--geekblue-2) 100%);
   --content-bg: white;
   --content-shadow: rgba(0, 0, 0, 0.08);
@@ -37,6 +38,7 @@ body[tomato-theme='dark'] {
   --bg-color: #141414;
   --color-text-1: rgba(255, 255, 255, 0.85);
   --color-text-2: rgba(255, 255, 255, 0.45);
+  --color-text-3: var(--theme-text-tertiary);
   --bg-gradient: linear-gradient(135deg, #1f1f1f 0%, #0a0a0a 100%);
   --content-bg: #1f1f1f;
   --content-shadow: rgba(0, 0, 0, 0.3);
@@ -105,33 +107,76 @@ body[tomato-theme='dark'] .app-container {
   justify-content: flex-end;
   align-items: center;
 }
-/* Logo图片样式 */
-.fixed-logo img {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  object-fit: cover;
-  transition: all 0.3s ease;
+/* 功能导航 */
+.fixed-logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1050;
+}
+
+.function-menu-trigger {
+  position: relative;
+  z-index: 1031;
+  display: block;
+  width: clamp(30px, 5vw, 50px);
+  height: clamp(30px, 5vw, 50px);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
   cursor: pointer;
+}
+
+.function-menu-trigger:focus-visible {
+  outline: 2px solid var(--theme-primary);
+  outline-offset: 3px;
+}
+
+.function-menu-trigger img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
   filter: drop-shadow(0 0 0 rgba(85, 165, 255, 0));
 }
 
-.fixed-logo img:hover {
+.function-menu-trigger:hover img {
   transform: scale(1.1);
   filter: drop-shadow(0 0 6px rgba(179, 164, 253, 0.4)) drop-shadow(0 0 12px rgba(179, 164, 253, 0.6))
     drop-shadow(0 0 20px rgba(179, 164, 253, 0.8)) drop-shadow(0 0 30px rgba(179, 164, 253, 1));
 }
 
 /* 暗色模式下的发光效果 */
-[data-theme='dark'] .fixed-logo img:hover,
-body[tomato-theme='dark'] .fixed-logo img:hover {
+[data-theme='dark'] .function-menu-trigger:hover img,
+body[tomato-theme='dark'] .function-menu-trigger:hover img {
   filter: drop-shadow(0 0 6px rgba(102, 73, 251, 0.4)) drop-shadow(0 0 12px rgba(102, 73, 251, 0.6))
     drop-shadow(0 0 20px rgba(102, 73, 251, 0.8)) drop-shadow(0 0 30px rgba(102, 73, 251, 1));
 }
 
 /* 功能导航菜单样式 */
 .function-menu-overlay {
+  position: fixed;
+  top: clamp(60px, 8vh, 80px);
+  left: clamp(60px, 3vw, 80px);
+  z-index: 1040;
+  min-width: clamp(200px, 25vw, 280px);
+  max-width: clamp(250px, 30vw, 350px);
+  max-height: calc(100vh - clamp(120px, 15vh, 180px));
+  overflow: hidden auto;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: clamp(6px, 1vw, 12px);
+  background: var(--content-bg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   animation: menuSlideIn 0.2s ease-out;
+}
+
+.function-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1030;
 }
 
 @keyframes menuSlideIn {
@@ -989,12 +1034,21 @@ body[tomato-theme='dark'] .todo-page-tag {
 /* 自定义分页行：移动端换行显示 */
 .custom-pagination-row {
   width: 100%;
+  padding-inline: 16px;
+}
+.custom-pagination-row .page-nav-controls {
+  gap: 10px;
+}
+.custom-pagination-row .page-position {
+  margin-inline: 15px;
+  white-space: nowrap;
 }
 @media (max-width: 999px) {
   .custom-pagination-row {
     flex-direction: column !important;
     align-items: stretch !important;
     gap: var(--spacing-sm);
+    padding-inline: 8px;
   }
 
   .custom-pagination-row .page-size-controls {
@@ -1003,6 +1057,12 @@ body[tomato-theme='dark'] .todo-page-tag {
 
   .custom-pagination-row .page-nav-controls {
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .custom-pagination-row .page-position {
+    margin-inline: 0;
   }
 }
 
@@ -1037,33 +1097,6 @@ body[tomato-theme='dark'] .todo-page-tag {
 [data-theme='dark'] .heatmap-cell,
 [tomato-theme='dark'] .heatmap-cell {
   color: var(--ant-color-text) !important;
-}
-
-/* ===== 传说武器视图组件 ===== */
-.legendary-weapon-content {
-  margin-top: 20px;
-  transition: all var(--transition-normal);
-}
-
-.legendary-weapon-table-container {
-  padding: 6px;
-}
-
-.legendary-weapon-text-center {
-  text-align: center;
-}
-
-.legendary-weapon-heatmap-cell {
-  color: var(--ant-color-text);
-  width: 90%;
-  height: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  padding: 6px 4px;
-  font-size: 13px;
-  margin: 0 auto;
 }
 
 /* 隔行变色样式 */
@@ -1156,14 +1189,6 @@ body[tomato-theme='dark'] .custom-card:hover {
     max-width: none !important;
     margin: 0 !important;
   }
-}
-
-/* 固定在左上角的logo按钮 */
-.fixed-logo {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1050;
 }
 
 /* 加载动画样式 */
@@ -1296,6 +1321,7 @@ body[tomato-theme='dark'] .development-notice p {
 .weapon-skill-magic-notes {
   margin-top: 12px;
   padding: 12px 16px;
+  overflow-wrap: anywhere;
   border-radius: 6px;
   background: rgba(0, 0, 0, 0.03);
   color: var(--color-text-2);
@@ -1317,40 +1343,6 @@ body[tomato-theme='dark'] .weapon-skill-magic-notes {
 
 .weapon-skill-magic-note + .weapon-skill-magic-note {
   margin-top: 6px;
-}
-
-/* 行内展开的详细说明（如彗星亚兹勒弹道） */
-.weapon-skill-detail-trigger {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.weapon-skill-detail-panel {
-  padding: 12px 16px;
-  border-radius: 6px;
-  background: rgba(0, 0, 0, 0.03);
-  color: var(--color-text-2);
-  font-size: 12px;
-  line-height: 1.8;
-}
-
-.weapon-skill-detail-title {
-  margin-bottom: 6px;
-  color: var(--color-text-1);
-  font-weight: 600;
-}
-
-.weapon-skill-detail-text {
-  max-height: 60vh;
-  overflow-y: auto;
-  white-space: pre-line;
-}
-
-[data-theme='dark'] .weapon-skill-detail-panel,
-body[tomato-theme='dark'] .weapon-skill-detail-panel {
-  background: rgba(255, 255, 255, 0.05);
 }
 
 /* 伤害类型筛选 */

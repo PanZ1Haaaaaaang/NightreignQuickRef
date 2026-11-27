@@ -1,0 +1,76 @@
+/* 卡片样式 - 使用百分比宽度，与传说武器详情页面保持一致 */
+.bossCard {
+  width: min(1400px, 92%);
+  max-width: 1400px;
+  min-width: 1000px;
+  margin: 0 auto;
+  border-radius: 15px;
+  background-color: var(--content-bg);
+  box-shadow: 0 4px 20px var(--content-shadow);
+  padding: 0px 10px;
+}
+@media (max-width: 999px) {
+  .bossCard {
+    min-width: auto;
+    width: 95% !important;
+    margin: 0 auto;
+    padding: 10px 20px 20px 20px;
+    box-sizing: border-box;
+  }
+
+  /* 提升特异性，覆盖全局 :global(.ant-card) { width: 100% !important; } */
+  .bossCard:global(.ant-card) {
+    width: 95% !important;
+  }
+}
+
+.bossDataViewContainer {
+  padding-bottom: 40px;
+  width: 100%;
+}
+
+/* 夜王boss数据表格样式优化 */
+.bossCard :global(.ant-table) {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.bossCard :global(.ant-table-thead) > tr > th {
+  background: var(--table-header-bg, #fafafa);
+  font-weight: 500;
+  border-bottom: 2px solid var(--color-text-2, #637fbb);
+}
+
+.bossCard :global(.ant-table-tbody) > tr:hover > td {
+  background-color: var(--table-hover-bg, #f0f5ff);
+}
+
+@media (max-width: 999px) {
+  /* 夜王boss数据表格移动端优化 */
+  .bossCard :global(.ant-table-wrapper) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .bossCard :global(.ant-table) {
+    min-width: 800px; /* 确保表格内容完整显示 */
+  }
+
+  /* 移动端触摸优化 */
+  .bossCard :global(.ant-table) {
+    touch-action: pan-x;
+  }
+
+  /* 移动端表格内容优化 */
+  .bossCard :global(.ant-table-cell) {
+    padding: 8px 6px !important;
+    font-size: 13px;
+  }
+
+  /* 移动端表格标题优化 */
+  .bossCard :global(.ant-table-thead) > tr > th {
+    padding: 10px 6px !important;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+}

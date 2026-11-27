@@ -325,34 +325,6 @@ body[tomato-theme='dark'] .custom-card .ant-card-body {
 
 /* 已合并到999px的媒体查询中 */
 
-/* ===== 掉落池 · 基池对照表（抽屉内的窄表，不套用移动端 800px 最小宽度） ===== */
-.base-pool-table .ant-table {
-  min-width: 0;
-}
-
-.base-pool-table .ant-table-cell {
-  font-size: 12px;
-  vertical-align: top;
-}
-
-.base-pool-table .ant-table-thead > tr > th {
-  white-space: nowrap;
-}
-
-/* 从卡片槽位点进来时高亮的那一行 */
-.base-pool-table tr.base-pool-row-active > td {
-  background: rgba(22, 119, 255, 0.12);
-}
-
-.base-pool-table tr.base-pool-row-active > td:first-child {
-  box-shadow: inset 3px 0 0 #1677ff;
-}
-
-body[tomato-theme='dark'] .base-pool-table tr.base-pool-row-active > td,
-[data-theme='dark'] .base-pool-table tr.base-pool-row-active > td {
-  background: rgba(64, 150, 255, 0.24);
-}
-
 /* ===== 自定义搜索组件样式 ===== */
 .custom-search-wrapper .ant-input {
   border-radius: 8px;
@@ -429,41 +401,6 @@ body[tomato-theme='dark'] .custom-search-wrapper .ant-input {
   .ant-card-head {
     padding: var(--spacing-sm) var(--spacing-md) !important;
   }
-}
-
-/* 武器战技与魔法祷告表格 */
-.weapon-skill-magic-table .ant-table-cell {
-  white-space: pre-line;
-  vertical-align: top;
-  word-break: break-word;
-}
-
-.weapon-skill-magic-table .ant-table-thead > tr > th {
-  white-space: nowrap;
-  vertical-align: middle;
-}
-
-.weapon-skill-magic-table .ant-table-tbody > tr > td {
-  font-size: 12px;
-}
-
-/* 战技/专用战技分类标签缩小 */
-.weapon-skill-category-tags .ant-tag {
-  margin-inline-end: 0;
-  padding: 0 6px;
-  font-size: 11px;
-  line-height: 18px;
-}
-
-.weapon-skill-detail-toggle.ant-btn {
-  height: auto;
-  padding: 0;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.weapon-skill-magic-table .ant-table-expanded-row > td {
-  padding: 0 8px 8px;
 }
 
 .damage-type-select .ant-select-selection-item {

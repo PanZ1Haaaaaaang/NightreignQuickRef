@@ -1,0 +1,781 @@
+.title {
+  margin-bottom: 12px !important;
+}
+
+.intro {
+  margin-bottom: 16px;
+}
+
+.introDesc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+}
+
+.introAction {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: flex-start;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* Alert 右上角：基池对照表 / 观察力 两个按钮竖排 */
+.alertActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.filterBar {
+  padding: 12px;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-lg);
+  background: var(--theme-bg-secondary);
+  margin-bottom: 8px;
+}
+
+.filterLabel {
+  color: var(--color-text-2);
+  font-size: 13px;
+}
+
+.kindDot {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.resultInfo {
+  margin-bottom: 12px;
+  color: var(--color-text-3);
+  font-size: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  padding: 12px 14px;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--radius-lg);
+  background: var(--theme-bg-primary);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.cardHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.primary {
+  color: var(--color-text-1);
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.id {
+  color: var(--color-text-3);
+  font-family: 'Consolas', 'SFMono-Regular', monospace;
+  font-size: 12px;
+}
+
+.tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.sourceTag {
+  margin: 0;
+}
+
+.names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.nameTag {
+  margin: 0;
+  padding: 0 6px;
+  font-size: 11px;
+  color: var(--color-text-2);
+  background: var(--theme-bg-tertiary);
+  border-color: transparent;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--theme-border);
+}
+
+.option:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.optionLabel {
+  flex: none;
+  min-width: 44px;
+  padding-top: 2px;
+  color: var(--color-text-3);
+  font-size: 12px;
+  cursor: help;
+}
+
+.segments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.segment {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border: 1px solid var(--theme-border);
+  border-radius: 999px;
+  background: var(--theme-bg-secondary);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.percent {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 「受观察力影响」小标记 */
+.luckIcon {
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+/* 入侵者武器：悬停看词条概率 */
+.affixIcon {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.affixList {
+  margin: 4px 0 0;
+  padding-left: 14px;
+  max-height: 240px;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.affixList li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  white-space: nowrap;
+}
+
+.affixList b {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* 词条概率 tooltip 放宽，避免长词条名折行（antd v6 容器类名是 .ant-tooltip-container） */
+.affixTip :global(.ant-tooltip-container) {
+  max-width: 460px;
+  width: max-content;
+}
+
+/* 观察力模拟：换算后的权重（升 / 降） */
+.percentUp {
+  color: #389e0d;
+  font-weight: 600;
+}
+
+.percentDown {
+  color: #8c8c8c;
+}
+
+[data-theme='dark'] .percentUp,
+body[tomato-theme='dark'] .percentUp {
+  color: #73d13d;
+}
+
+[data-theme='dark'] .percentDown,
+body[tomato-theme='dark'] .percentDown {
+  color: #bfbfbf;
+}
+
+/* 观察力模拟抽屉 */
+.discList {
+  display: flex;
+  flex-direction: column;
+}
+
+.discRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.discRow:first-child {
+  padding-top: 4px;
+}
+
+.discInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.discLabel {
+  color: var(--color-text-1);
+  font-size: 13px;
+}
+
+.discNote {
+  color: var(--color-text-3);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.discWeapons {
+  display: flex;
+  flex-wrap: wrap;
+  flex: none;
+  gap: 8px;
+}
+
+.discWeaponField {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-2);
+  font-size: 11px;
+}
+
+.discTotal {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius-lg);
+  background: var(--theme-bg-secondary);
+  color: var(--color-text-2);
+  font-size: 13px;
+}
+
+.discTotal b {
+  color: var(--color-text-1);
+  font-size: 22px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.discTotalRate {
+  color: var(--color-text-3);
+  font-size: 12px;
+}
+
+.discFoot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 12px;
+  color: var(--color-text-3);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.detail {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px 6px;
+  color: var(--color-text-2);
+  font-size: 11px;
+}
+
+.detailItem::after {
+  content: '·';
+  margin-left: 6px;
+  color: var(--color-text-3);
+}
+
+.detailItem:last-child::after {
+  content: '';
+  margin-left: 0;
+}
+
+.nightBadge {
+  padding: 0 6px;
+  border-radius: 8px;
+  background: rgba(207, 19, 34, 0.12);
+  color: #cf1322;
+  font-size: 11px;
+}
+
+/* ===== 掉落类型配色（按解包物品表判定） ===== */
+.kindWeapon {
+  border-color: #91caff;
+  background: #e6f4ff;
+  color: #0958d9;
+}
+
+.kindCursed {
+  border-color: #ffa39e;
+  background: #fff1f0;
+  color: #cf1322;
+}
+
+.kindBuff {
+  border-color: #91caff;
+  background: #e6f4ff;
+  color: #0958d9;
+}
+
+.kindBuffPurple {
+  border-color: #d3adf7;
+  background: #f9f0ff;
+  color: #722ed1;
+}
+
+.kindWending {
+  border-color: #ffe58f;
+  background: #fffbe6;
+  color: #ad6800;
+}
+
+.kindAntique {
+  border-color: #ffe58f;
+  background: #fffbe6;
+  color: #ad6800;
+}
+
+.kindAccessory {
+  border-color: #87e8de;
+  background: #e6fffb;
+  color: #08979c;
+}
+
+.kindGoods,
+.kindOther {
+  border-color: var(--theme-border);
+  color: var(--color-text-2);
+}
+
+/* DLC 湖沼等据点：把「武器池」细分出角色池 / 紫武器池 / 角色池（诅咒） */
+.kindChar {
+  border-color: #b7eb8f;
+  background: #f6ffed;
+  color: #237804;
+}
+
+.kindWeaponPurple {
+  border-color: #ffadd2;
+  background: #fff0f6;
+  color: #c41d7f;
+}
+
+.kindCharCursed {
+  border-color: #ffbb96;
+  background: #fff2e8;
+  color: #d4380d;
+}
+
+.kindFlameWeapon {
+  border-color: #ffd591;
+  background: #fff7e6;
+  color: #d46b08;
+}
+
+/* 有悬停说明的槽位（如癫火武器） */
+.noteHover {
+  display: inline-flex;
+}
+
+.noteHover > span {
+  border-bottom: 1px dashed currentColor;
+}
+
+/* 可点击的基池槽位：点开「基池对照表」并定位到对应行 */
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.clickable:active {
+  transform: translateY(1px);
+}
+
+.tipBox {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tipHint {
+  font-size: 11px;
+  opacity: 0.65;
+}
+
+[data-theme='dark'] .kindWeapon {
+  border-color: rgba(105, 177, 255, 0.45);
+  background: rgba(22, 119, 255, 0.18);
+  color: #69b1ff;
+}
+
+[data-theme='dark'] .kindCursed {
+  border-color: rgba(255, 120, 117, 0.5);
+  background: rgba(255, 77, 79, 0.18);
+  color: #ff7875;
+}
+
+[data-theme='dark'] .kindBuff {
+  border-color: rgba(105, 177, 255, 0.45);
+  background: rgba(22, 119, 255, 0.18);
+  color: #69b1ff;
+}
+
+[data-theme='dark'] .kindBuffPurple {
+  border-color: rgba(179, 127, 235, 0.45);
+  background: rgba(114, 46, 209, 0.22);
+  color: #b37feb;
+}
+
+[data-theme='dark'] .kindWending {
+  border-color: rgba(255, 197, 61, 0.45);
+  background: rgba(250, 173, 20, 0.18);
+  color: #ffc53d;
+}
+
+[data-theme='dark'] .kindAntique {
+  border-color: rgba(255, 197, 61, 0.45);
+  background: rgba(250, 173, 20, 0.18);
+  color: #ffc53d;
+}
+
+[data-theme='dark'] .kindAccessory {
+  border-color: rgba(94, 219, 199, 0.45);
+  background: rgba(19, 194, 194, 0.18);
+  color: #5cdbd3;
+}
+
+[data-theme='dark'] .kindChar {
+  border-color: rgba(149, 222, 100, 0.45);
+  background: rgba(82, 196, 26, 0.18);
+  color: #95de64;
+}
+
+[data-theme='dark'] .kindWeaponPurple {
+  border-color: rgba(255, 133, 192, 0.45);
+  background: rgba(235, 47, 150, 0.18);
+  color: #ff85c0;
+}
+
+[data-theme='dark'] .kindCharCursed {
+  border-color: rgba(255, 169, 64, 0.45);
+  background: rgba(212, 56, 13, 0.2);
+  color: #ffa940;
+}
+
+[data-theme='dark'] .kindFlameWeapon {
+  border-color: rgba(255, 197, 61, 0.45);
+  background: rgba(212, 107, 8, 0.22);
+  color: #ffc53d;
+}
+
+[data-theme='dark'] .nightBadge {
+  background: rgba(255, 77, 79, 0.2);
+  color: #ff7875;
+}
+
+.footnote {
+  margin-top: 16px;
+}
+
+/* ===== 基池对照表（抽屉） ===== */
+.basePoolTable :global(.ant-table) {
+  min-width: 0;
+}
+
+.basePoolTable :global(.ant-table-cell) {
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.basePoolTable :global(.ant-table-thead) > tr > th {
+  white-space: nowrap;
+}
+
+/* 从卡片槽位点进来时高亮的那一行 */
+.basePoolTable tr.basePoolActiveRow > td {
+  background: rgba(22, 119, 255, 0.12);
+}
+
+.basePoolTable tr.basePoolActiveRow > td:first-child {
+  box-shadow: inset 3px 0 0 #1677ff;
+}
+
+body[tomato-theme='dark'] .basePoolTable tr.basePoolActiveRow > td,
+[data-theme='dark'] .basePoolTable tr.basePoolActiveRow > td {
+  background: rgba(64, 150, 255, 0.24);
+}
+
+.basePoolTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.basePoolTitleMain {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.basePoolTitleSub {
+  color: var(--color-text-3);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.basePoolTag {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.basePoolId {
+  color: var(--color-text-2);
+  font-family: 'Consolas', 'SFMono-Regular', monospace;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.basePoolCount {
+  font-variant-numeric: tabular-nums;
+}
+
+.basePoolNote {
+  color: var(--color-text-2);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.basePoolCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.basePoolMeta {
+  color: var(--color-text-3);
+  font-size: 11px;
+}
+
+.basePoolNotes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+  color: var(--color-text-2);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.basePoolNotes b {
+  color: var(--color-text-1);
+  font-weight: 600;
+}
+
+.elementCodes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  font-size: 11px;
+}
+
+.elementCode {
+  white-space: nowrap;
+}
+
+/* ===== 潜在能力池明细（抽屉） ===== */
+.buffLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 48px 0;
+  color: var(--color-text-2);
+  font-size: 13px;
+}
+
+.buffList {
+  display: flex;
+  flex-direction: column;
+}
+
+.buffItem {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.buffItem:last-child {
+  border-bottom: none;
+}
+
+.buffHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.buffName {
+  color: var(--color-text-1);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.buffTag {
+  margin: 0;
+  padding: 0 6px;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.buffEffect {
+  margin-top: 4px;
+  color: var(--color-text-2);
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* 「普通 +10% / 深夜 +15%」：当前池的数值高亮，另一个淡显 */
+.buffValue {
+  color: var(--color-text-1);
+  font-weight: 600;
+}
+
+.buffValueMuted {
+  color: var(--color-text-3);
+}
+
+.buffFootnote {
+  margin-top: 12px;
+  color: var(--color-text-3);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.discArcaneQuick {
+  padding: 10px 0 12px;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.discArcaneQuickLabel {
+  margin-bottom: 8px;
+  color: var(--color-text-3);
+  font-size: 11px;
+}
+
+.discArcaneAvatars {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.discArcaneAvatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  padding: 7px 4px 6px;
+  border: 1px solid var(--theme-border);
+  border-radius: 8px;
+  background: var(--theme-bg-secondary);
+  color: var(--color-text-2);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.discArcaneAvatar:hover,
+.discArcaneAvatar:focus-visible {
+  border-color: var(--color-primary-500);
+  background: var(--theme-bg-tertiary);
+  outline: none;
+}
+
+.discArcaneAvatar .discArcaneAvatarStack {
+  gap: 2px;
+  max-width: 100%;
+}
+
+.discArcaneAvatarName {
+  overflow: hidden;
+  max-width: 100%;
+  color: var(--color-text-1);
+  font-size: 11px;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.discArcaneAvatarValue {
+  color: var(--color-text-3);
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.discLabelWithIcon {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}

@@ -1,0 +1,74 @@
+/* 行内展开的详细说明（如彗星亚兹勒弹道） */
+.detailTrigger {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.detailPanel {
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--color-text-2);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.detailTitle {
+  margin-bottom: 6px;
+  color: var(--color-text-1);
+  font-weight: 600;
+}
+
+.detailText {
+  max-height: 60vh;
+  overflow-y: auto;
+  white-space: pre-line;
+}
+
+:global([data-theme='dark']) .detailPanel,
+:global(body[tomato-theme='dark']) .detailPanel {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* 武器战技与魔法祷告表格 */
+.table :global(.ant-table-cell) {
+  white-space: pre-line;
+  vertical-align: top;
+  word-break: break-word;
+}
+
+.table :global(.ant-table-thead) > tr > th {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.table :global(.ant-table-tbody) > tr > td {
+  font-size: 12px;
+}
+
+/* 战技/专用战技分类标签缩小 */
+.categoryTags :global(.ant-tag) {
+  margin-inline-end: 0;
+  padding: 0 6px;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.detailToggle:global(.ant-btn) {
+  height: auto;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.table :global(.ant-table-expanded-row) > td {
+  padding: 0 8px 8px;
+}
+
+@media (max-width: 999px) {
+  .table :global(.ant-table) {
+    min-width: 0;
+  }
+}

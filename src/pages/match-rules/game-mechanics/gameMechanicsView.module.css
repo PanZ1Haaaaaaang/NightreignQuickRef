@@ -1,0 +1,618 @@
+/* GameMechanicsView 组件专用样式 */
+
+/* 单模块页签：不再套一层卡片，直接铺在壳里 */
+.mechanicPlain {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.mechanicsLayout {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* 板块网格布局 */
+.mechanicsGrid {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+/* 自定义列宽布局 */
+.mechanicsGrid.customColumns {
+  grid-template-columns: var(--mechanics-grid-columns, 1fr 1fr);
+  align-items: stretch; /* 确保所有子元素高度相等 */
+}
+@media (max-width: 999px) {
+  .mechanicsLayout {
+    width: 95%;
+    min-width: auto;
+    margin: 0 auto;
+    padding: 0;
+  }
+}
+
+.mechanicPanel {
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.discussion {
+  margin-top: 15px;
+}
+
+/* 新卡片内容布局 */
+.mechanicPanel .cardContent {
+  padding: 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 时间轴布局样式 */
+.timelineLayoutContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.timelineContentWrapper {
+  /* border: 1px solid #d9d9d9; */
+  overflow-y: auto;
+  /* margin-top: 15px; */
+}
+
+.timelineContent {
+  position: relative;
+  width: 100%;
+  /* padding: 16px; */
+  /* margin-top: 10px; */
+  transition: all 0.3s ease-in-out;
+  min-height: 100%;
+}
+
+.mechanicPanel .cardTitleSection {
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--color-primary-100);
+}
+
+.mechanicPanel .cardTitleSection::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--color-primary-500);
+  border-radius: 1px;
+}
+
+/* 卡片标题样式 */
+.mechanicCardTitle {
+  margin: 0 !important;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-md);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mechanicCardTitle .anticon {
+  font-size: 16px;
+  color: var(--color-primary-500);
+}
+
+/* 卡片内容区域 */
+.mechanicPanel .cardBody {
+  padding: 5px;
+  margin-top: 10px;
+  flex: 1; /* 让内容区域占据剩余空间 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 时间轴样式优化 */
+.mechanicTimeline {
+  margin-top: 16px;
+}
+
+.mechanicTimeline :global(.ant-timeline) {
+  width: 100%;
+  margin-left: -35px;
+  margin-bottom: -40px;
+}
+.mechanicTimeline :global(.ant-timeline-item-label) {
+  color: var(--color-text-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.mechanicTimeline :global(.ant-timeline-item-content) {
+  color: var(--color-text-1);
+  font-size: var(--font-size-sm);
+}
+
+/* 开发中占位符样式 */
+.mechanicsDevelopmentPlaceholder {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--color-text-2);
+}
+
+.mechanicsDevelopmentTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 12px;
+  color: var(--color-text-1);
+}
+
+.mechanicsDevelopmentText {
+  font-size: var(--font-size-md);
+  color: var(--color-text-2);
+}
+
+[data-theme='dark'] .mechanicPanel .cardTitleSection,
+body[tomato-theme='dark'] .mechanicPanel .cardTitleSection {
+  border-bottom-color: var(--color-primary-700);
+}
+
+/* 卢恩表格2栏布局样式 */
+.runesTableContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.runesColumn {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.runesColumn :global(.ant-table) {
+  width: 100%;
+}
+
+.runesColumn :global(.ant-table-thead) > tr > th {
+  padding: 6px 4px;
+  text-align: center;
+}
+
+.runesColumn :global(.ant-table-tbody) > tr > td {
+  padding: 4px 4px;
+  text-align: center;
+} /* 已合并到999px的媒体查询中 */
+
+/* 移动端卢恩表格2栏布局 - 简化版 */
+@media (max-width: 999px) {
+  .runesTableContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .runesColumn {
+    overflow-x: auto;
+  }
+}
+
+.gameMechanicsContainer :global(.ant-alert) {
+  border-radius: 8px !important;
+  transition: all var(--transition-normal) !important;
+}
+
+.gameMechanicsContainer :global(.ant-alert-description) {
+  color: var(--color-text-2);
+}
+
+/* ========================================
+   缩圈效果图 CSS 逻辑说明
+   ========================================
+
+   缩圈效果图由以下层级组成（从外到内）：
+   1. 外圈 (circle-outer) - 固定大小的参考边界
+   2. 上一个圈 (circle-pulse-ring) - 显示缩圈前的大小
+   3. 当前圈 (circle-inner) - 显示缩圈后的大小
+   4. 脉冲边框 (::before) - 缩圈开始时的动画效果
+   5. 中心点 (circle-center) - 最中心的点
+
+   动画触发条件：
+   - 第一次缩圈开始 (step 1) - 使用 innerPulse + borderPulse
+   - 第二次缩圈开始 (step 3) - 使用 innerPulseSecond + borderPulseSecond
+   ======================================== */
+
+/* 缩圈效果容器 */
+
+.circleShrinkContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.circleShrinkWrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 外圈 - 固定大小的参考边界，不参与动画 */
+.circleOuter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #1890ff;
+  border-radius: 50%;
+  background: transparent;
+}
+
+/* 第一次缩圈结束后的外圈 - 浅蓝色 */
+.circleOuter.circleOuterFaded {
+  border: 2px solid rgba(24, 144, 255, 0.4);
+}
+
+/* 第二次缩圈开始时的外圈 - 浅蓝色 */
+.circleOuter.circleOuterSecondShrink {
+  border: 2px solid rgba(24, 144, 255, 0.4);
+}
+
+/* 当前圈 - 根据时间点动态变化大小，无背景色 */
+.circleInner {
+  position: absolute;
+  border: 3px solid rgba(24, 144, 255, 0.3);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 20px rgba(24, 144, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 第一次缩圈阶段（60%圈） - 保持透明背景 */
+.circleInner.firstShrinkNoBg {
+  background: transparent;
+}
+
+/* 第一次缩圈结束阶段 - 深蓝色背景 */
+.circleInner.firstShrinkEndDark {
+  background: radial-gradient(circle, rgba(24, 144, 255, 0.3) 0%, rgba(24, 144, 255, 0.1) 70%);
+  border: 2px solid #1890ff;
+}
+
+/* 第二次缩圈开始阶段 - 内圈保持浅蓝色 */
+.circleInner.secondShrinkStartDark {
+  background: radial-gradient(circle, rgba(24, 144, 255, 0.1) 0%, transparent 70%);
+  border: 3px solid rgba(24, 144, 255, 0.3);
+}
+
+/* 第二次缩圈结束阶段 - 内圈变为深蓝色 */
+.circleInner.secondShrinkEndDark {
+  background: radial-gradient(circle, rgba(24, 144, 255, 0.3) 0%, rgba(24, 144, 255, 0.1) 70%);
+  border: 2px solid #1890ff;
+}
+
+/* 第一次缩圈脉冲效果 - 当前圈保持固定大小，只有阴影脉冲 */
+.circleInner.circlePulse {
+  animation: innerPulse 2s ease-in-out infinite;
+  transform: scale(1); /* 确保当前圈保持固定大小，不缩放 */
+}
+
+/* 脉冲边框 - 围绕当前圈进行缩放动画 */
+.circleInner.circlePulse::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border: 1px solid rgba(24, 144, 255, 0.3);
+  border-radius: 50%;
+  animation: borderPulse 4s ease-in-out infinite;
+}
+
+/* 第二次缩圈脉冲效果 - 使用不同的动画，scale值更大 */
+.circleInner.shrinkSecond.circlePulse {
+  animation: innerPulseSecond 4s ease-in-out infinite;
+}
+
+.circleInner.shrinkSecond.circlePulse::before {
+  animation: borderPulseSecond 4s ease-in-out infinite;
+}
+
+/* 上一个圈 - 显示缩圈前的大小，静态显示，无动画 */
+.circlePulseRing {
+  position: absolute;
+  border: 2px solid rgba(24, 144, 255, 0.2);
+  border-radius: 50%;
+  background: transparent;
+  z-index: 1;
+}
+
+/* 第二次缩圈开始时的脉冲圈 - 深蓝色 */
+.circlePulseRing.secondShrinkPulse {
+  border: 2px solid #1890ff;
+}
+
+@keyframes borderPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.75);
+  }
+}
+
+@keyframes borderPulseSecond {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(3.6);
+  }
+}
+
+.circleCenter {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #1890ff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(24, 144, 255, 0.8);
+  z-index: 2;
+} /* 移动端基础适配 - 简化版 */
+@media (max-width: 999px) {
+  .circleShrinkWrapper {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* 时间轴 + 两栏布局样式 */
+.timelineWithSteps {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.timelineStepsContainer {
+  min-width: 200px;
+  padding-left: 20px;
+  padding-top: 10px;
+  /* border: 1px solid #d9d9d9; */
+}
+
+/* 两栏布局样式 */
+.timelineTwoColumns {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: stretch;
+  min-height: 200px;
+  height: 100%;
+}
+/* Boss信息样式 */
+.bossInfo {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+/* 进度条样式 */
+.bossProgressContainer {
+  /* margin-top: 12px; */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 15px;
+  /* border: 1px solid #d9d9d9; */
+  background-color: #fafafa;
+  border-radius: 20px;
+}
+
+/* 深色模式下的进度条容器样式 */
+[data-theme='dark'] .bossProgressContainer,
+body[tomato-theme='dark'] .bossProgressContainer {
+  background-color: var(--theme-bg-tertiary);
+  border: 1px solid var(--theme-border);
+}
+
+.bossProgressItem {
+  margin-bottom: 8px;
+  /* width: 100%; */
+}
+
+.bossProgressItem:last-child {
+  margin-bottom: 0;
+}
+
+/* 进度条标签样式 */
+.progressLabel {
+  font-size: 12px;
+  /* margin-bottom: 4px; */
+  font-weight: 500;
+  /* white-space: nowrap; */
+}
+
+[data-theme='dark'] .progressLabel {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* 进度条数字样式 */
+.bossProgressItem :global(.ant-progress-text) {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .bossProgressItem :global(.ant-progress-text) {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 伤害信息样式 */
+.damageInfo {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  /* padding: 20px; */
+  /* border: 1px solid #d9d9d9; */
+  margin-top: 10px;
+}
+
+.damageStat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 6px; */
+  padding: 2px 0;
+}
+
+.damageStat:last-child {
+  margin-bottom: 0;
+}
+
+/* 深色模式下的伤害统计样式 */
+[data-theme='dark'] .damageStat,
+body[tomato-theme='dark'] .damageStat {
+  color: var(--theme-text-primary);
+}
+
+/* 时间轴列样式 */
+.timelineColumn {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* border: 1px solid #d9d9d9; */
+  /* border-radius: 8px; */
+  padding: 0 16px;
+  /* background: #fafafa; */
+}
+
+/* 缩圈效果图列样式 - 宽度自适应内容 */
+.timelineColumn:first-child {
+  width: fit-content;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+[data-theme='dark'] .timelineColumn {
+  background: #1f1f1f;
+  border-color: #434343;
+}
+
+.timelineColumnContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+/* 深色模式下的时间轴列内容样式 */
+[data-theme='dark'] .timelineColumnContent,
+body[tomato-theme='dark'] .timelineColumnContent {
+  color: var(--theme-text-primary);
+}
+
+/* Boss标题样式 */
+.bossSectionTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1890ff;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #87ceeb;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bossSectionTitle .anticon {
+  color: #1890ff;
+  font-size: 14px;
+}
+
+/* 深色模式下的Boss标题样式 */
+[data-theme='dark'] .bossSectionTitle,
+body[tomato-theme='dark'] .bossSectionTitle {
+  color: #40a9ff;
+  border-bottom-color: rgba(64, 169, 255, 0.3);
+}
+
+[data-theme='dark'] .bossSectionTitle .anticon,
+body[tomato-theme='dark'] .bossSectionTitle .anticon {
+  color: #40a9ff;
+} /* 移动端适配强化：时间机制与卢恩布局自动换行 */
+@media (max-width: 999px) {
+  /* 主网格在小屏下单列 */
+  .mechanicsGrid.customColumns {
+    grid-template-columns: 1fr;
+  }
+
+  /* 时间机制：两栏改为单栏 */
+  .timelineWithSteps,
+  .timelineTwoColumns {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .timelineStepsContainer {
+    min-width: 0;
+    padding-left: 0;
+    padding-top: 0;
+  }
+
+  .timelineColumn:first-child {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .mechanicTimeline :global(.ant-timeline) {
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  /* 升级所需卢恩：网格自动换行 */
+
+  .runesColumn {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .runesColumn :global(.ant-table) {
+    table-layout: fixed;
+    min-width: 520px;
+  }
+
+  .runesColumn :global(.ant-table-thead) > tr > th,
+  .runesColumn :global(.ant-table-tbody) > tr > td {
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
+.mechanicsTabs {
+  margin-bottom: 12px;
+}

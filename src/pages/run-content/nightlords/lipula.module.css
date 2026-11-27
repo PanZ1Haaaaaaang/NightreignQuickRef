@@ -1,0 +1,225 @@
+/* 利普拉的交易 */
+.lipulaStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 84px), 1fr));
+  gap: 4px 8px;
+  font-size: 12px;
+}
+
+.lipulaStat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--panel-bg);
+  color: var(--color-text-2);
+}
+
+.lipulaStat strong {
+  color: var(--color-text-1);
+}
+
+.emptyCell {
+  color: var(--color-text-3);
+}
+
+.lipulaHint {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-text-2);
+}
+
+.lipulaNotes {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  background: var(--panel-bg);
+}
+
+.lipulaNotesTitle {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-1);
+}
+
+.lipulaNoteItem {
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}
+
+.lipulaNoteItem + .lipulaNoteItem {
+  margin-top: 4px;
+}
+
+.lipulaBuff {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.lipulaBuffEffects {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--color-text-2);
+}
+
+/* 永夜利普拉技能 */
+.heading {
+  margin: 18px 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-1);
+}
+
+.skillHint {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-text-2);
+}
+
+.skillList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skillCard {
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  background: var(--panel-bg);
+}
+
+.skillIndex {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(120, 160, 255, 0.18);
+  color: var(--theme-primary);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+}
+
+.skillBody {
+  min-width: 0;
+}
+
+.skillTitle {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-1);
+}
+
+.skillDesc {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}
+
+.skillValues {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.skillValue {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(120, 160, 255, 0.1);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-text-2);
+}
+
+.skillLink {
+  margin-top: 4px;
+  padding-left: 0;
+}
+
+.skillNotes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+.skillNote {
+  padding: 10px 12px;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  background: var(--panel-bg);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--color-text-2);
+}
+
+.skillNoteTitle {
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: var(--color-text-1);
+}
+
+.skillTitleCell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.skillDescCell {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--color-text-2);
+}
+
+.skillValueList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.skillValueTag {
+  margin: 0;
+  font-size: 11px;
+}
+
+.lipulaScenarioBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.lipulaScenarioCount {
+  font-size: 12px;
+  color: var(--color-text-2);
+}
+
+.lipulaStatsBlock {
+  margin-top: 6px;
+}
+
+.lipulaStatsLabel {
+  margin-bottom: 4px;
+  font-size: 11px;
+  color: var(--color-text-3);
+}

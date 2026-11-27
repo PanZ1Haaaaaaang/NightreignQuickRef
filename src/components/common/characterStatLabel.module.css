@@ -1,0 +1,7 @@
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  vertical-align: middle;
+  white-space: nowrap;
+}

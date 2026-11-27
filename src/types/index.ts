@@ -258,7 +258,29 @@ export const typeColorMap: Record<string, string> = {
   弓弩专属: 'volcano',
 };
 
-// ===== 泪滴转职（src/data/zh-CN/teardrop_conversion.json） =====
+// ===== 渡夜者等级与属性 =====
+
+/** 角色成长数据；站内逐级文件使用「等级」，兼容旧数据的 level 键。 */
+export interface CharacterLevelData {
+  等级?: number;
+  level?: number;
+  HP: number;
+  FP: number;
+  ST: number;
+  [key: string]: string | number | undefined;
+}
+
+export type CharacterDetailData = Partial<Record<NightfarerName, CharacterLevelData[]>>;
+
+export type NightfarerStat = '生命' | '集中' | '耐力' | '力气' | '灵巧' | '智力' | '信仰' | '感应';
+export type NightfarerStats = Record<NightfarerStat, number>;
+
+export interface NightfarerLevel15 {
+  row: CharacterLevelData;
+  stats: NightfarerStats;
+}
+
+// ===== 泪滴转职与利普拉交易 =====
 
 /** 泪滴转职词条（局外词条 6640000~6647500）：boost/reduce 为 Lv12 满值的属性增减 */
 export interface TeardropAffix {
@@ -267,18 +289,18 @@ export interface TeardropAffix {
   /** 原文词条名，如「【追踪者】提升智力、信仰，但降低力气、灵巧」 */
   name: string;
   /** 提升的属性 → 数值 */
-  boost: Record<string, number>;
+  boost: Partial<NightfarerStats>;
   /** 降低的属性 → 数值（正数） */
-  reduce: Record<string, number>;
+  reduce: Partial<NightfarerStats>;
   /** 词条原文说明（等级 1 → 12 的变化） */
   explanation: string;
 }
 
 /** 单个渡夜者的泪滴转职数据 */
 export interface TeardropCharacter {
-  name: string;
+  name: NightfarerName;
   /** Lv15 基础属性，key 为属性名（生命/集中/耐力/力气/灵巧/智力/信仰/感应） */
-  base: Record<string, number>;
+  base: NightfarerStats;
   /** 该角色的两条泪滴转职词条 */
   affixes: TeardropAffix[];
 }
@@ -290,12 +312,12 @@ export interface TeardropLipulaOption {
   name: string;
   /** 游戏内交易选项文字 */
   desire: string;
-  stats: Record<string, number>;
+  stats: NightfarerStats;
 }
 
 export interface TeardropConversionData {
   /** 属性展示顺序 */
-  attributes: string[];
+  attributes: NightfarerStat[];
   meta: {
     /** 基础属性所在等级 */
     baseLevel: number;
@@ -306,7 +328,7 @@ export interface TeardropConversionData {
   characters: TeardropCharacter[];
 }
 
-// ===== 掉落池（src/data/zh-CN/drop_pools.json） =====
+// ===== 掉落池（src/data/zh-CN/drop-pools.json） =====
 
 /** 球选项里一个槽位的掉落类型（解包按物品表判定；12 个基池 + 特殊槽位） */
 export type DropKind =
@@ -357,7 +379,7 @@ export interface DropOption {
   segments: DropSegment[];
 }
 
-// ===== 黑焰烧血机制（src/data/zh-CN/black_flame_data.json） =====
+// ===== 黑焰烧血机制（src/data/zh-CN/black-flame.json） =====
 
 export interface BlackFlameRow {
   /** SpEffectParam 编号 */
@@ -394,7 +416,7 @@ export interface BlackFlameData {
   maxHp: { intro: string; rows: BlackFlameMaxHpRow[] };
   bossEffects: { intro: string; rows: BossHpEffectRow[] };
 }
-// ===== 永夜利普拉技能（src/data/zh-CN/night_lord_lipula_skills.json） =====
+// ===== 永夜利普拉技能（src/data/zh-CN/everdark-lipula-skills.json） =====
 
 export interface LipulaSkill {
   key: string;
@@ -414,7 +436,7 @@ export interface LipulaSkillsData {
   notes: LipulaSkillNote[];
 }
 
-// ===== 武器补正适配度（src/data/zh-CN/weapon_scaling_data.json） =====
+// ===== 武器补正适配度（src/data/zh-CN/weapon-scaling.json） =====
 
 export type WeaponScalingCurve = 'physical' | 'elemental';
 export type WeaponScalingDamageType = 'physical' | 'magic' | 'fire' | 'lightning' | 'holy';
@@ -456,7 +478,7 @@ export interface WeaponScalingData {
   affinityNotes: string[];
 }
 
-// ===== 异常值（src/data/zh-CN/ailment_data.json） =====
+// ===== 异常值（src/data/zh-CN/ailments.json） =====
 
 export interface AilmentEffect {
   name: string;
@@ -495,7 +517,7 @@ export interface AilmentData {
   curves: AilmentCurve[];
 }
 
-// ===== 即死与骤死（src/data/zh-CN/instant_death_data.json） =====
+// ===== 即死与骤死（src/data/zh-CN/instant-death.json） =====
 
 export interface InstantDeathProbabilityRow {
   hp: string;
@@ -520,7 +542,7 @@ export interface InstantDeathData {
   enemyRows: InstantDeathEnemyRow[];
 }
 
-// ===== 仇恨机制（src/data/zh-CN/aggro_data.json、aggro_spell_data.json） =====
+// ===== 仇恨机制（src/data/zh-CN/aggro.json、spell-aggro.json） =====
 
 /** [名称, 冲击力, 基础仇恨值, 次数, 总仇恨] */
 export type AggroRow = [string, number | null, number | null, number | null, number | null];
@@ -548,7 +570,7 @@ export interface AggroSpellData {
   incantations: AggroRow[];
 }
 
-// ===== 执行者弹刀 / 开刃（src/data/zh-CN/executor_parry_data.json） =====
+// ===== 执行者弹刀 / 开刃（src/data/zh-CN/executor-parry.json） =====
 
 export interface ExecutorParryFrameRow {
   action: string;
@@ -588,7 +610,25 @@ export interface ExecutorParryData {
   conclusions: string[];
 }
 
-// ===== 渡夜者能力 / 技艺 / 绝招（src/data/zh-CN/nightfarer_skill_data.json） =====
+// ===== 渡夜者能力 / 技艺 / 绝招（src/data/zh-CN/nightfarer-skills.json） =====
+
+export type DamageType = 'standard' | 'strike' | 'slash' | 'pierce' | 'magic' | 'fire' | 'lightning' | 'holy';
+
+export type StatusType = 'poison' | 'scarletRot' | 'bleed' | 'frostbite' | 'sleep' | 'madness' | 'deathBlight';
+
+export type AbilityKind = 'passive' | 'skill' | 'ultimate';
+
+export type NightfarerName =
+  | '追踪者'
+  | '守护者'
+  | '无赖'
+  | '女爵'
+  | '隐士'
+  | '铁之眼'
+  | '执行者'
+  | '复仇者'
+  | '学者'
+  | '送葬者';
 
 export interface NightfarerSkillRow {
   character: string;
@@ -606,7 +646,7 @@ export interface NightfarerSkillData {
   rows: NightfarerSkillRow[];
 }
 
-// ===== 学者携物知识（src/data/zh-CN/scholar_knowledge_data.json） =====
+// ===== 学者携物知识（src/data/zh-CN/scholar-item-knowledge.json） =====
 
 export interface ScholarItem {
   name: string;
@@ -633,7 +673,7 @@ export interface ScholarKnowledgeData {
   categories: ScholarCategory[];
 }
 
-// ===== 冲击力机制（src/data/zh-CN/impulse_data.json） =====
+// ===== 冲击力机制（src/data/zh-CN/impulse.json） =====
 
 export interface ImpulseRow {
   /** 冲击力编号（0~12，12 为废案） */
@@ -659,7 +699,7 @@ export interface ImpulseData {
   rows: ImpulseRow[];
 }
 
-// ===== 大盾页「防御强度机制」（src/data/zh-CN/guard_mechanic_data.json） =====
+// ===== 大盾页「防御强度机制」（src/data/zh-CN/guard-boost-mechanics.json） =====
 
 export interface GuardMechanicEntry {
   name: string;
@@ -678,7 +718,7 @@ export interface GuardMechanicData {
   notes: string[];
 }
 
-// ===== 黑夜入侵者武器词条（src/data/zh-CN/invader_affix_data.json） =====
+// ===== 黑夜入侵者武器词条（src/data/zh-CN/invader-affixes.json） =====
 
 export interface InvaderWeaponAffix {
   /** 词条 ID（与「局内词条」一致） */

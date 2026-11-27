@@ -1,0 +1,31 @@
+/* ===== 仇恨机制 ===== */
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.paragraph {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--color-text-2);
+}
+
+.note {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}
+
+.source {
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--color-text-2);
+}
+.tableArea {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

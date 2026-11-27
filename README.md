@@ -96,10 +96,10 @@
 
 ![React](https://img.shields.io/badge/React-19.3.1-61DAFB?logo=react&logoColor=white&style=flat-square)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-3178C6?logo=typescript&logoColor=white&style=flat-square)
-![Vite](https://img.shields.io/badge/Vite-8.3.5-646CFF?logo=vite&logoColor=white&style=flat-square)
-![Ant Design](https://img.shields.io/badge/Ant%20Design-6.6.7-0170FE?logo=ant-design&logoColor=white&style=flat-square)
-![Node.js](https://img.shields.io/badge/Node.js-20.19%2B-339933?logo=node.js&logoColor=white&style=flat-square)
-![oxlint](https://img.shields.io/badge/oxlint-1.89.0-8B5CF6?style=flat-square)
+![Vite](https://img.shields.io/badge/Vite-8.3.8-646CFF?logo=vite&logoColor=white&style=flat-square)
+![Ant Design](https://img.shields.io/badge/Ant%20Design-6.7.2-0170FE?logo=ant-design&logoColor=white&style=flat-square)
+![Node.js](https://img.shields.io/badge/Node.js-24-339933?logo=node.js&logoColor=white&style=flat-square)
+![oxlint](https://img.shields.io/badge/oxlint-1.95.0-8B5CF6?style=flat-square)
 
 纯前端 SPA：React 19 + TypeScript + Vite 8（Rolldown 打包），UI 基于 Ant Design 6，静态 JSON 数据按页面分组懒加载，部署于 GitHub Pages。页面内集成 [giscus](https://giscus.app) 评论（基于 GitHub Discussions）。
 
@@ -107,8 +107,8 @@
 
 ### 环境要求
 
-- Node.js `^20.19.0 || >=22.12.0`
-- npm
+- Node.js `24.x`，项目使用的版本见 [.nvmrc](.nvmrc)。nvm-windows 可执行 `nvm use 24.22.1`。
+- pnpm `11.28.5`，版本固定在 [package.json](package.json) 的 `packageManager` 字段。已有 Node.js 的环境可用 `npm install -g pnpm@11.28.5` 安装 pnpm。
 
 ### 快速开始
 
@@ -118,10 +118,10 @@ git clone https://github.com/PanZ1Haaaaaaang/NightreignQuickRef.git
 cd NightreignQuickRef
 
 # 2. 安装依赖
-npm install
+pnpm install --frozen-lockfile
 
 # 3. 启动开发服务器
-npm run dev
+pnpm run dev
 # 访问 http://localhost:5173/NightreignQuickRef/
 ```
 
@@ -129,15 +129,16 @@ npm run dev
 
 | 命令 | 说明 |
 | --- | --- |
-| `npm run dev` | 启动开发服务器（HMR） |
-| `npm run build` | 类型检查 + 构建产物到 `dist/` |
-| `npm run preview` | 预览生产构建 |
-| `npm run lint` / `lint:fix` | oxlint 检查 / 自动修复 |
-| `npm run fmt` / `fmt:check` | oxfmt 格式化 / 检查 |
-| `npm run deploy` | 构建并部署到 GitHub Pages（gh-pages 分支） |
+| `pnpm run dev` | 启动开发服务器（HMR） |
+| `pnpm run build` | 类型检查 + 构建产物到 `dist/` |
+| `pnpm run preview` | 预览生产构建 |
+| `pnpm run lint` / `lint:fix` | oxlint 检查 / 自动修复 |
+| `pnpm run fmt` / `fmt:check` | oxfmt 格式化 / 检查 |
+| `pnpm run deploy` | 构建并部署到 GitHub Pages（gh-pages 分支） |
 
 ### 代码规范
 
+- 提交 PR 或委托编码代理前，请先阅读项目的开发与验收约定。 [项目开发约定](AGENTS.md)
 - 提交信息遵循 [Conventional Commits](docs/commit_convention.md)：`<type>(<scope>): <subject>`，由 husky + commitlint 在提交时强制校验
 - pre-commit 钩子自动对暂存文件执行 `oxlint --fix` 和 `oxfmt`
 
