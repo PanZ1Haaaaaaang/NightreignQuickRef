@@ -14,17 +14,13 @@ import { Line } from '@ant-design/plots';
 import { getCurrentTheme } from '../utils/themeUtils';
 import { throttle } from 'lodash';
 import styles from '../styles/bossDataView.module.css';
+import tableStyles from '../components/common/combatTable.module.css';
 import EnemyRaceSection from './bossDataView/EnemyRaceSection';
 import WeaknessSection from './bossDataView/WeaknessSection';
 import LipulaSkills from './bossDataView/LipulaSkills';
 import LipulaTrades from './bossDataView/LipulaTrades';
-import {
-  curseData,
-  getAbsorptionClass,
-  getResistanceClass,
-  getLocationColor,
-  processSinnerData,
-} from './bossDataView/data';
+import { curseData, processSinnerData } from './bossDataView/data';
+import { getAbsorptionClass, getLocationColor, getResistanceClass } from '../components/common/combatTablePresentation';
 import { sinnerColumns, specialEventColumns, wildBossColumns } from './bossDataView/columns';
 
 // 导入boss图片
@@ -483,7 +479,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
       children: [
         {
           title: (
-            <div className={styles.damageTypeContainer}>
+            <div className={tableStyles.damageTypeContainer}>
               <DamageTypeIcon type="standard" />
               <span>普通</span>
             </div>
@@ -492,11 +488,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           key: 'normalAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => (
+            <span className={`${tableStyles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>
+          ),
         },
         {
           title: (
-            <div className={styles.damageTypeContainer}>
+            <div className={tableStyles.damageTypeContainer}>
               <DamageTypeIcon type="strike" />
               <span>打击</span>
             </div>
@@ -505,11 +503,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           key: 'strikeAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => (
+            <span className={`${tableStyles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>
+          ),
         },
         {
           title: (
-            <div className={styles.damageTypeContainer}>
+            <div className={tableStyles.damageTypeContainer}>
               <DamageTypeIcon type="slash" />
               <span>斩击</span>
             </div>
@@ -518,11 +518,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           key: 'slashAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => (
+            <span className={`${tableStyles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>
+          ),
         },
         {
           title: (
-            <div className={styles.damageTypeContainer}>
+            <div className={tableStyles.damageTypeContainer}>
               <DamageTypeIcon type="pierce" />
               <span>突刺</span>
             </div>
@@ -531,7 +533,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           key: 'pierceAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => (
+            <span className={`${tableStyles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>
+          ),
         },
       ],
     },
@@ -540,7 +544,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
       children: [
         {
           title: (
-            <div className={styles.damageTypeContainer}>
+            <div className={tableStyles.damageTypeContainer}>
               <DamageTypeIcon type="magic" />
               <span>魔力</span>
             </div>
@@ -549,11 +553,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           key: 'magicAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => (
+            <span className={`${tableStyles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>
+          ),
         },
         {
           title: (
-            <div className={styles.damageTypeContainer}>
+            <div className={tableStyles.damageTypeContainer}>
               <DamageTypeIcon type="fire" />
               <span>火焰</span>
             </div>
@@ -562,11 +568,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           key: 'fireAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => (
+            <span className={`${tableStyles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>
+          ),
         },
         {
           title: (
-            <div className={styles.damageTypeContainer}>
+            <div className={tableStyles.damageTypeContainer}>
               <DamageTypeIcon type="lightning" />
               <span>雷电</span>
             </div>
@@ -575,11 +583,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           key: 'lightningAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => (
+            <span className={`${tableStyles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>
+          ),
         },
         {
           title: (
-            <div className={styles.damageTypeContainer}>
+            <div className={tableStyles.damageTypeContainer}>
               <DamageTypeIcon type="holy" />
               <span>神圣</span>
             </div>
@@ -588,7 +598,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           key: 'holyAbsorption',
           width: 60,
           align: 'center',
-          render: (value) => <span className={`${styles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>,
+          render: (value) => (
+            <span className={`${tableStyles.resistanceValue} ${getAbsorptionClass(value)}`}>{value}</span>
+          ),
         },
       ],
     },
@@ -679,7 +691,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
       children: [
         {
           title: (
-            <div className={styles.resistanceTypeContainer}>
+            <div className={tableStyles.resistanceTypeContainer}>
               <StatusIcon status="poison" />
               <span>中毒</span>
             </div>
@@ -691,12 +703,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${tableStyles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className={styles.resistanceTypeContainer}>
+            <div className={tableStyles.resistanceTypeContainer}>
               <StatusIcon status="scarletRot" />
               <span>腐败</span>
             </div>
@@ -708,12 +720,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${tableStyles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className={styles.resistanceTypeContainer}>
+            <div className={tableStyles.resistanceTypeContainer}>
               <StatusIcon status="bleed" />
               <span>出血</span>
             </div>
@@ -725,12 +737,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${tableStyles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className={styles.resistanceTypeContainer}>
+            <div className={tableStyles.resistanceTypeContainer}>
               <StatusIcon status="frostbite" />
               <span>冻伤</span>
             </div>
@@ -742,12 +754,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${tableStyles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className={styles.resistanceTypeContainer}>
+            <div className={tableStyles.resistanceTypeContainer}>
               <StatusIcon status="sleep" />
               <span>睡眠</span>
             </div>
@@ -759,12 +771,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${tableStyles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
         {
           title: (
-            <div className={styles.resistanceTypeContainer}>
+            <div className={tableStyles.resistanceTypeContainer}>
               <StatusIcon status="madness" />
               <span>发狂</span>
             </div>
@@ -776,7 +788,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
           render: (value) => {
             const calculatedValue = calculateResistance(value);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
-            return <span className={`${styles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
+            return <span className={`${tableStyles.resistanceValue} ${originalClass}`}>{calculatedValue}</span>;
           },
         },
       ],
@@ -966,8 +978,8 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab: activeBossTab
               key: 'wild-boss-data',
               label: '☠️ 野生Boss数据',
               children: (
-                <div className={styles.wildBossFilterContainer} id="wild-boss-data">
-                  <div className={styles.filterInputs}>
+                <div className={tableStyles.filterableTable} id="wild-boss-data">
+                  <div className={tableStyles.filterInputs}>
                     <Input
                       placeholder="搜索Boss名称"
                       prefix={<SearchOutlined />}

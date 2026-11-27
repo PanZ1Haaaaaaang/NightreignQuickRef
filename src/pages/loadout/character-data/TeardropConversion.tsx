@@ -2,18 +2,18 @@ import { useMemo, useState } from 'react';
 import { Alert, Collapse, Select, Space, Table, Typography } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { ThunderboltTwoTone } from '@ant-design/icons';
-import styles from '../../styles/characterDataView.module.css';
-import DataSourceTooltip from '../../components/DataSourceTooltip';
-import CharacterAvatar from '../../components/common/CharacterAvatar';
+import styles from './characterDataView.module.css';
+import DataSourceTooltip from '../../../components/DataSourceTooltip';
+import CharacterAvatar from '../../../components/common/CharacterAvatar';
 import {
   convertNightfarerStats,
   findTeardropAffixes,
   shortAffixName,
   TEARDROP_DATA,
-} from '../../features/nightfarers/conversion';
-import { getLipulaOption, LIPULA_OPTIONS } from '../../features/nightfarers/lipula';
-import { useNightfarerLevel15 } from '../../features/nightfarers/useNightfarerLevel15';
-import type { NightfarerStats, TeardropAffix } from '../../types';
+} from '../../../features/nightfarers/conversion';
+import { getLipulaOption, LIPULA_OPTIONS } from '../../../features/nightfarers/lipula';
+import { useNightfarerLevel15 } from '../../../features/nightfarers/useNightfarerLevel15';
+import type { NightfarerStats, TeardropAffix } from '../../../types';
 
 const { Title, Text } = Typography;
 

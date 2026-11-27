@@ -2,10 +2,10 @@ import React, { useMemo, useState } from 'react';
 import { Input, Segmented, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { renderImpulseText } from '../../components/common/renderImpulseText';
-import scholarJson from '../../data/zh-CN/scholar_knowledge_data.json';
-import type { ScholarCategory, ScholarItem, ScholarKnowledgeData } from '../../types';
-import styles from '../../styles/scholarKnowledge.module.css';
+import { renderImpulseText } from '../../../components/common/renderImpulseText';
+import scholarJson from '../../../data/zh-CN/scholar_knowledge_data.json';
+import type { ScholarCategory, ScholarItem, ScholarKnowledgeData } from '../../../types';
+import styles from './scholarKnowledge.module.css';
 
 const DATA = scholarJson as unknown as ScholarKnowledgeData;
 

@@ -1,4 +1,4 @@
-import type { AbilityKind, NightfarerName } from '../types';
+import type { AbilityKind, NightfarerName } from '../../../types';
 
 export interface DodgeProfile {
   id: string;

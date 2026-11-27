@@ -1,16 +1,16 @@
 import React from 'react';
 import { Table } from 'antd';
 import type { TableColumnsType } from 'antd';
-import ImpulseBadge from '../../components/common/ImpulseBadge';
-import { renderImpulseText } from '../../components/common/renderImpulseText';
-import parryJson from '../../data/zh-CN/executor_parry_data.json';
+import ImpulseBadge from '../../../components/common/ImpulseBadge';
+import { renderImpulseText } from '../../../components/common/renderImpulseText';
+import parryJson from '../../../data/zh-CN/executor_parry_data.json';
 import type {
   ExecutorParryData,
   ExecutorParryFrameRow,
   ExecutorParryImpactRow,
   ExecutorParryOtherRow,
-} from '../../types';
-import styles from '../../styles/executorParry.module.css';
+} from '../../../types';
+import styles from './executorParry.module.css';
 
 const DATA = parryJson as unknown as ExecutorParryData;
 

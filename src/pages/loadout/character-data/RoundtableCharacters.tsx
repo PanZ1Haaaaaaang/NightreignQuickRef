@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { Table, Input, Select, Button, Tag } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import characterData from '../../data/character-info/character_data.json';
-import { getLocationColor } from '../bossDataView/data';
-import { characterColumns } from '../bossDataView/columns';
-import styles from '../../styles/bossDataView.module.css';
+import characterData from '../../../data/character-info/character_data.json';
+import { getLocationColor } from '../../../components/common/combatTablePresentation';
+import styles from '../../../components/common/combatTable.module.css';
+import { characterColumns } from './roundtableColumns';
 
 /**
  * 圆桌厅堂人物数据：渡夜者与友方 NPC 的吸收值 / 抗性（异常耐受上限）。
@@ -63,7 +63,7 @@ const RoundtableCharacters: React.FC = () => {
   };
 
   return (
-    <div className={styles.wildBossFilterContainer}>
+    <div className={styles.filterableTable}>
       <div className={styles.filterInputs}>
         <Input
           placeholder="搜索人物名称"

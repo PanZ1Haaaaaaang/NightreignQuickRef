@@ -15,11 +15,12 @@ import { getPageByKey, type PageTabProps } from './config/navigationConfig';
 import { navigationUrl, readNavigationTarget, type NavigationTarget } from './utils/navigationUrl';
 
 // 视图级懒加载：每个页面独立成 chunk，首屏只下载当前 tab
-const EntryDetailView = lazy(() => import('./pages/EntryDetailView'));
+const RelicEntriesView = lazy(() => import('./pages/loadout/relic-entries/RelicEntriesView'));
+const InGameEntriesView = lazy(() => import('./pages/in-run/in-game-entries/InGameEntriesView'));
 const GameMechanicsView = lazy(() => import('./pages/match-rules/game-mechanics/GameMechanicsView'));
 const LegendaryWeaponView = lazy(() => import('./pages/LegendaryWeaponView'));
 const WeaponMechanicsView = lazy(() => import('./pages/WeaponMechanicsView'));
-const CharacterDataView = lazy(() => import('./pages/CharacterDataView'));
+const CharacterDataView = lazy(() => import('./pages/loadout/character-data/CharacterDataView'));
 const BossDataView = lazy(() => import('./pages/BossDataView'));
 const WeaponSkillMagicView = lazy(() => import('./pages/WeaponSkillMagicView'));
 const MerchantView = lazy(() => import('./pages/MerchantView'));
@@ -190,9 +191,9 @@ function App() {
   const renderView = () => {
     switch (activeTab) {
       case '遗物词条':
-        return <EntryDetailView scope="局外" {...pageTabs} />;
+        return <RelicEntriesView {...pageTabs} />;
       case '局内词条':
-        return <EntryDetailView scope="局内" {...pageTabs} />;
+        return <InGameEntriesView {...pageTabs} />;
       case '机制':
         return <WeaponMechanicsView {...pageTabs} />;
       case '传说武器详情':

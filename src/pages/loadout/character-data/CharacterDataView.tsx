@@ -1,25 +1,25 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { Typography, Table, Tabs, Divider } from 'antd';
-import type { PageTabProps } from '../config/navigationConfig';
+import type { PageTabProps } from '../../../config/navigationConfig';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar } from '@ant-design/plots';
 import { LeftOutlined, RightOutlined, TeamOutlined } from '@ant-design/icons';
 import { throttle } from 'lodash';
-import { getCurrentTheme } from '../utils/themeUtils';
-import styles from '../styles/characterDataView.module.css';
-import DataManager from '../utils/dataManager';
-import DataSourceTooltip from '../components/DataSourceTooltip';
-import DodgeFramesComparison from './characterDataView/DodgeFramesComparison';
-import TeardropConversion from './characterDataView/TeardropConversion';
-import CharacterAvatar from '../components/common/CharacterAvatar';
-import { findCharacterLevel } from '../features/nightfarers/levels';
-import AbilityIcon from '../components/common/AbilityIcon';
-import DamageTypeIcon from '../components/common/DamageTypeIcon';
-import { damageTypeOf } from '../assets/icons/damage';
-import RoundtableCharacters from './characterDataView/RoundtableCharacters';
-import ScholarKnowledge from './characterDataView/ScholarKnowledge';
-import NightfarerSkills from './characterDataView/NightfarerSkills';
-import ExecutorParry from './characterDataView/ExecutorParry';
+import { getCurrentTheme } from '../../../utils/themeUtils';
+import styles from './characterDataView.module.css';
+import DataManager from '../../../utils/dataManager';
+import DataSourceTooltip from '../../../components/DataSourceTooltip';
+import DodgeFramesComparison from './DodgeFramesComparison';
+import TeardropConversion from './TeardropConversion';
+import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import { findCharacterLevel } from '../../../features/nightfarers/levels';
+import AbilityIcon from '../../../components/common/AbilityIcon';
+import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
+import { damageTypeOf } from '../../../assets/icons/damage';
+import RoundtableCharacters from './RoundtableCharacters';
+import ScholarKnowledge from './ScholarKnowledge';
+import NightfarerSkills from './NightfarerSkills';
+import ExecutorParry from './ExecutorParry';
 
 const { Title, Text } = Typography;
 
@@ -30,7 +30,7 @@ interface DataState {
 }
 
 // 导入 MagicMove 接口
-import type { MagicMove } from '../utils/dataManager';
+import type { MagicMove } from '../../../utils/dataManager';
 
 // 角色详细数据行类型
 interface CharacterDetailRow {
