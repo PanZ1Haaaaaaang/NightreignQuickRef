@@ -1,13 +1,15 @@
 import React, { useMemo, useState } from 'react';
-import { Input, Segmented, Table, Tag } from 'antd';
+import { Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import FilterBar from '../../../components/common/FilterBar';
+import Panel from '../../../components/common/Panel';
 import { renderImpulseText } from '../../../components/common/renderImpulseText';
 import scholarJson from '../../../data/zh-CN/scholar-item-knowledge.json';
 import type { ScholarCategory, ScholarItem, ScholarKnowledgeData } from '../../../types';
 import styles from './scholarKnowledge.module.css';
 
 const DATA = scholarJson as unknown as ScholarKnowledgeData;
+const CATEGORY_OPTIONS = DATA.categories.map(({ name, key }) => ({ label: name, value: key }));
 
 const GOODS_IMAGES = import.meta.glob('../../../assets/Goods/*.png', {
   eager: true,
@@ -90,45 +92,39 @@ const ScholarKnowledge: React.FC = () => {
 
   return (
     <div className={styles.wrap}>
-      <div className={styles.introBox}>
+      <Panel className={styles.introBox}>
         <p className={styles.introText}>能增加使用道具的携带数，并且会根据使用次数多寡，阶段性强化效果。</p>
         <p className={styles.introText}>道具会根据类别划分等级：等级 2 能强化效果；等级 3 会发动更出众的效果。</p>
-      </div>
+        <ul className={styles.notes}>
+          {DATA.intro.slice(2).map((note) => (
+            <li key={note}>{note}</li>
+          ))}
+        </ul>
+      </Panel>
 
-      <ul className={styles.notes}>
-        {DATA.intro.slice(2).map((note) => (
-          <li key={note}>{note}</li>
-        ))}
-      </ul>
-
-      <div className={styles.categoryBar}>
-        <Segmented
-          value={category}
-          onChange={(value) => setCategory(String(value))}
-          options={DATA.categories.map((item) => ({ label: item.name, value: item.key }))}
-        />
-        <Input
-          allowClear
-          placeholder="搜索道具名称"
-          prefix={<SearchOutlined />}
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-          style={{ width: 200 }}
-        />
-      </div>
-
-      {current ? (
-        <div className={styles.categoryMeta}>
-          <Tag color="blue">{current.name}</Tag>
-          <span>
-            使用点数：<b>{current.usePoints}</b>
-          </span>
-          <span>
-            升阶需求：<b>{current.upgrade}</b>
-          </span>
-          <span className={styles.count}>共 {current.items.length} 件</span>
-        </div>
-      ) : null}
+      <FilterBar
+        options={CATEGORY_OPTIONS}
+        value={category}
+        onChange={setCategory}
+        categoryLabel="道具分类"
+        searchPlaceholder="搜索道具名称"
+        searchValue={keyword}
+        onSearchChange={setKeyword}
+        meta={
+          current && (
+            <div className={styles.categoryMeta}>
+              <Tag color="blue">{current.name}</Tag>
+              <span>
+                使用点数：<b>{current.usePoints}</b>
+              </span>
+              <span>
+                升阶需求：<b>{current.upgrade}</b>
+              </span>
+              <span className={styles.count}>共 {items.length} 件</span>
+            </div>
+          )
+        }
+      />
 
       <Table
         columns={columns}

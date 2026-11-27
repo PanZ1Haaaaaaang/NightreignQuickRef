@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import { Button, Drawer, Input, Segmented } from 'antd';
+import { Button, Drawer } from 'antd';
 import type { TableColumnsType } from 'antd';
-import { SearchOutlined, TableOutlined } from '@ant-design/icons';
+import { TableOutlined } from '@ant-design/icons';
+import FilterBar from '../../../components/common/FilterBar';
 import aggroJson from '../../../data/zh-CN/aggro.json';
 import spellJson from '../../../data/zh-CN/spell-aggro.json';
 import type { AggroData, AggroRow, AggroSpellData } from '../../../types';
@@ -188,31 +189,31 @@ const AggroView: React.FC = () => {
         </p>
       ))}
 
-      <div className={styles.buttonRow}>
-        <Button size="small" icon={<TableOutlined />} onClick={() => setDrawer('impulse')}>
-          冲击力 → 仇恨值
-        </Button>
-        <Button size="small" icon={<TableOutlined />} onClick={() => setDrawer('weapon')}>
-          武器基础值
-        </Button>
-      </div>
-
       <div className={styles.tableArea}>
-        <div className={styles.toolbar}>
-          <Segmented options={CATEGORY_OPTIONS} value={category} onChange={(v) => setCategory(v as string)} />
-          <Input
-            allowClear
-            placeholder="搜索名称"
-            prefix={<SearchOutlined />}
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-            style={{ width: 220 }}
-          />
-        </div>
-
-        <div className={styles.meta}>
-          {CATEGORY_OPTIONS.find((o) => o.value === category)?.label} · 共 {total} 条
-        </div>
+        <FilterBar
+          options={CATEGORY_OPTIONS}
+          value={category}
+          onChange={setCategory}
+          categoryLabel="仇恨分类"
+          searchPlaceholder="搜索名称"
+          searchValue={keyword}
+          onSearchChange={setKeyword}
+          meta={
+            <>
+              {CATEGORY_OPTIONS.find((option) => option.value === category)?.label} · 共 {total} 条
+            </>
+          }
+          actions={
+            <>
+              <Button size="small" icon={<TableOutlined />} onClick={() => setDrawer('impulse')}>
+                冲击力 → 仇恨值
+              </Button>
+              <Button size="small" icon={<TableOutlined />} onClick={() => setDrawer('weapon')}>
+                武器基础值
+              </Button>
+            </>
+          }
+        />
 
         {category === 'skills' ? (
           <PagedTable

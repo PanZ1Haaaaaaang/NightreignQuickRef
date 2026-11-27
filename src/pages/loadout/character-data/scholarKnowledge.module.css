@@ -7,9 +7,6 @@
 
 .introBox {
   padding: 10px 14px;
-  border-left: 3px solid var(--theme-primary);
-  background: rgba(22, 119, 255, 0.05);
-  border-radius: 6px;
 }
 
 .introText {
@@ -20,18 +17,11 @@
 }
 
 .notes {
-  margin: 0;
+  margin: var(--spacing-xs) 0 0;
   padding-left: 18px;
   font-size: 12px;
   line-height: 1.75;
   color: var(--color-text-2);
-}
-
-.categoryBar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 12px;
 }
 
 .categoryMeta {
@@ -39,8 +29,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 14px;
-  font-size: 12px;
-  color: var(--color-text-2);
 }
 
 .categoryMeta b {
