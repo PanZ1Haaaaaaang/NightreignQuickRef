@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Table, Input, Select, Button, Tag } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import characterData from '../../../data/character-info/character_data.json';
+import characterData from '../../../data/zh-CN/roundtable-characters.json';
 import { getLocationColor } from '../../../components/common/combatTablePresentation';
 import styles from '../../../components/common/combatTable.module.css';
 import { characterColumns } from './roundtableColumns';

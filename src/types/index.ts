@@ -570,7 +570,7 @@ export interface AggroSpellData {
   incantations: AggroRow[];
 }
 
-// ===== 执行者弹刀 / 开刃（src/data/zh-CN/executor_parry_data.json） =====
+// ===== 执行者弹刀 / 开刃（src/data/zh-CN/executor-parry.json） =====
 
 export interface ExecutorParryFrameRow {
   action: string;
@@ -610,7 +610,7 @@ export interface ExecutorParryData {
   conclusions: string[];
 }
 
-// ===== 渡夜者能力 / 技艺 / 绝招（src/data/zh-CN/nightfarer_skill_data.json） =====
+// ===== 渡夜者能力 / 技艺 / 绝招（src/data/zh-CN/nightfarer-skills.json） =====
 
 export type DamageType = 'standard' | 'strike' | 'slash' | 'pierce' | 'magic' | 'fire' | 'lightning' | 'holy';
 
@@ -646,7 +646,7 @@ export interface NightfarerSkillData {
   rows: NightfarerSkillRow[];
 }
 
-// ===== 学者携物知识（src/data/zh-CN/scholar_knowledge_data.json） =====
+// ===== 学者携物知识（src/data/zh-CN/scholar-item-knowledge.json） =====
 
 export interface ScholarItem {
   name: string;

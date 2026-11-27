@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Input, Table, Tooltip } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import skillJson from '../../../data/zh-CN/nightfarer_skill_data.json';
+import skillJson from '../../../data/zh-CN/nightfarer-skills.json';
 import type { NightfarerSkillData, NightfarerSkillRow } from '../../../types';
 import { abilityKindOf } from '../../../assets/icons/abilities';
 import AbilityIcon from '../../../components/common/AbilityIcon';

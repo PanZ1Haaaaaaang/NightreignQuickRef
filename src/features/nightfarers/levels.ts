@@ -6,17 +6,17 @@ import type {
   NightfarerStats,
 } from '../../types';
 
-// 顺序与原来的角色文件 glob 一致，保留适配度与感应对照的同值排序。
+// 保留重命名前的加载顺序，适配度与感应对照的同值排序依赖它。
 const LEVEL_FILES = {
-  复仇者: () => import('../../data/character-info/avenger.json'),
+  复仇者: () => import('../../data/character-info/revenant.json'),
   女爵: () => import('../../data/character-info/duchess.json'),
   执行者: () => import('../../data/character-info/executor.json'),
   守护者: () => import('../../data/character-info/guardian.json'),
-  隐士: () => import('../../data/character-info/hermit.json'),
-  铁之眼: () => import('../../data/character-info/iron-eye.json'),
-  无赖: () => import('../../data/character-info/rogue.json'),
+  隐士: () => import('../../data/character-info/recluse.json'),
+  铁之眼: () => import('../../data/character-info/ironeye.json'),
+  无赖: () => import('../../data/character-info/raider.json'),
   学者: () => import('../../data/character-info/scholar.json'),
-  追踪者: () => import('../../data/character-info/tracker.json'),
+  追踪者: () => import('../../data/character-info/wylder.json'),
   送葬者: () => import('../../data/character-info/undertaker.json'),
 } satisfies Record<NightfarerName, () => Promise<{ default: Record<string, CharacterLevelData[]> }>>;
 

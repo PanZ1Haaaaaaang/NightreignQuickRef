@@ -3,18 +3,18 @@ import { Input, Segmented, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { renderImpulseText } from '../../../components/common/renderImpulseText';
-import scholarJson from '../../../data/zh-CN/scholar_knowledge_data.json';
+import scholarJson from '../../../data/zh-CN/scholar-item-knowledge.json';
 import type { ScholarCategory, ScholarItem, ScholarKnowledgeData } from '../../../types';
 import styles from './scholarKnowledge.module.css';
 
 const DATA = scholarJson as unknown as ScholarKnowledgeData;
 
-const GOODS_IMAGES = import.meta.glob('../../assets/Goods/*.png', {
+const GOODS_IMAGES = import.meta.glob('../../../assets/Goods/*.png', {
   eager: true,
   import: 'default',
 }) as Record<string, string>;
 
-const goodsImageOf = (name?: string) => (name ? GOODS_IMAGES[`../../assets/Goods/${name}.png`] : undefined);
+const goodsImageOf = (name?: string) => (name ? GOODS_IMAGES[`../../../assets/Goods/${name}.png`] : undefined);
 
 const ScholarKnowledge: React.FC = () => {
   const [category, setCategory] = useState<string>(DATA.categories[0]?.key ?? '');

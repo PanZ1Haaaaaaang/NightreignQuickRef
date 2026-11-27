@@ -12,7 +12,7 @@ import wylder from './char/Wylder.svg';
 
 /**
  * 渡夜者图标（src/assets/icons/char/*.svg）。
- * 键是站内数据里的中文名（character_states / character-info / 泪滴转职统一用「铁之眼」）。
+ * 键是站内数据里的中文名（能力评级、逐级属性和泪滴转职统一用「铁之眼」）。
  */
 const CHARACTERS: Record<NightfarerName, { assetName: string; avatar: string }> = {
   追踪者: { assetName: 'Wylder', avatar: wylder },

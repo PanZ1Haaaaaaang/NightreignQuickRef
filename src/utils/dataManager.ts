@@ -85,16 +85,16 @@ interface GroupFile {
 const GROUP_FILES: Record<DataGroup, GroupFile[]> = {
   // 词条详细数据页
   entries: [
-    { key: 'outsiderEntries', load: () => import('../data/zh-CN/outsider_entries_zh-CN.json') },
+    { key: 'outsiderEntries', load: () => import('../data/zh-CN/out-of-run-entries.json') },
     { key: 'talismanEntries', load: () => import('../data/zh-CN/talisman_entries_zh-CN.json') },
     { key: 'inGameEntries', load: () => import('../data/zh-CN/in-game_entries_zh-CN.json') },
     {
       key: 'inGamePotentialEntries',
       load: async () => ({ default: await loadPotentialEntries() }),
     },
-    { key: 'enhancementCategories', load: () => import('../data/zh-CN/enhancement_categories.json') },
+    { key: 'enhancementCategories', load: () => import('../data/zh-CN/enhancement-categories.json') },
     { key: 'itemEffects', load: () => import('../data/zh-CN/item_effect.json') },
-    { key: 'deepNightEntries', load: () => import('../data/zh-CN/deep_night_entries.json') },
+    { key: 'deepNightEntries', load: () => import('../data/zh-CN/deep-night-out-of-run-entries.json') },
     {
       key: 'inGameDeepNightEntries',
       load: () => import('../data/zh-CN/in-game_deep_night_entries.json') satisfies Promise<{ default: EntryData[] }>,
@@ -102,9 +102,9 @@ const GROUP_FILES: Record<DataGroup, GroupFile[]> = {
   ],
   // 角色数据页（也加载渡夜者逐级数据）
   character: [
-    { key: 'characterStates', load: () => import('../data/zh-CN/character_states.json') },
-    { key: 'dodgeFrames', load: () => import('../data/zh-CN/invincible_frames.json') },
-    { key: 'magicMoveList', load: () => import('../data/zh-CN/magic_move_list.json') },
+    { key: 'characterStates', load: () => import('../data/zh-CN/nightfarer-stat-grades.json') },
+    { key: 'dodgeFrames', load: () => import('../data/zh-CN/dodge-frames.json') },
+    { key: 'magicMoveList', load: () => import('../data/zh-CN/recluse-mixed-magic.json') },
   ],
   // 传说武器详情页
   weapon: [

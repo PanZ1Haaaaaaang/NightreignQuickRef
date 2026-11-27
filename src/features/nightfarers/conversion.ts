@@ -1,4 +1,4 @@
-import teardropJson from '../../data/zh-CN/teardrop_conversion.json';
+import teardropJson from '../../data/zh-CN/teardrop-conversion.json';
 import type {
   NightfarerName,
   NightfarerStat,
