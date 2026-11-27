@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Segmented } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
-import CharacterAvatar from '../components/common/CharacterAvatar';
-import { renderImpulseText } from '../components/common/renderImpulseText';
-import DataManager from '../utils/dataManager';
+import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import { renderImpulseText } from '../../../components/common/renderImpulseText';
+import DataManager from '../../../utils/dataManager';
+import styles from './legendaryWeaponView.module.css';
 
 type OnChange = NonNullable<TableProps<TransformedWeaponEffect>['onChange']>;
 type Filters = Parameters<OnChange>[1];
@@ -212,7 +213,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep: c
       key: 'weapon_name',
       width: 110,
       fixed: 'left',
-      render: (text) => <span className="legendary-weapon-text-center">{text}</span>,
+      render: (text) => <span className={styles.textCenter}>{text}</span>,
     },
     ...characterNames.map((characterName) => ({
       title: <CharacterAvatar name={characterName} size={18} stacked />,
@@ -224,7 +225,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep: c
         const rowValues = characterNames.map((name) => record[name] as number);
         return (
           <div
-            className="heatmap-cell legendary-weapon-heatmap-cell"
+            className={`heatmap-cell ${styles.heatmapCell}`}
             style={{
               backgroundColor: getBackgroundColor(value, rowValues),
               width: '90%',
@@ -252,7 +253,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep: c
       key: 'weapon_name',
       width: 120,
       align: 'center' as const,
-      render: (text) => <span className="legendary-weapon-text-center">{text}</span>,
+      render: (text) => <span className={styles.textCenter}>{text}</span>,
     },
     {
       title: '类型',
@@ -307,7 +308,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep: c
 
   // 第一个表格内容（包含颜色图例）
   const firstTable = (
-    <div className="legendary-weapon-table-container">
+    <div className={styles.tableContainer}>
       <ColorLegend />
       <Table
         className="heatmap-table"
@@ -322,7 +323,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep: c
 
   // 第二个表格内容
   const secondTable = (
-    <div className="legendary-weapon-table-container">
+    <div className={styles.tableContainer}>
       <Table
         columns={effectColumns}
         dataSource={weaponEffectData}
@@ -364,7 +365,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep: c
   return (
     <div className="content-wrapper">
       {scopeBar}
-      <div className="legendary-weapon-content motion-enter" key={currentStep}>
+      <div className={`${styles.content} motion-enter`} key={currentStep}>
         {currentStep === 0 && <div id="weapon-strength-panel">{firstTable}</div>}
         {currentStep === 1 && <div id="weapon-blessing-effects">{secondTable}</div>}
       </div>

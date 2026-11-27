@@ -1,20 +1,21 @@
 import React, { useMemo, useState } from 'react';
-import type { PageTabProps } from '../config/navigationConfig';
+import type { PageTabProps } from '../../../config/navigationConfig';
 import { Button, Checkbox, Input, Select, Table, Tabs, Tag, Tooltip } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import PagedTable from '../components/common/PagedTable';
-import type { PageLocalColumns } from '../components/common/PagedTable';
-import sorceries from '../data/zh-CN/sorceries.json';
-import incantations from '../data/zh-CN/incantations.json';
-import weaponArts from '../data/zh-CN/weapon_arts.json';
-import uniqueWeaponArts from '../data/zh-CN/unique_weapon_arts.json';
-import supportSpells from '../data/zh-CN/support_spells.json';
-import weaponArtCategoryHints from '../data/zh-CN/weapon_art_category_hints.json';
-import { renderHintOption } from '../components/HintOption';
-import { DAMAGE_LABELS, damageTypeOf } from '../assets/icons/damage';
-import DamageTypeIcon from '../components/common/DamageTypeIcon';
-import { renderImpulseText } from '../components/common/renderImpulseText';
-import type { DamageType } from '../types';
+import PagedTable from '../../../components/common/PagedTable';
+import type { PageLocalColumns } from '../../../components/common/PagedTable';
+import sorceries from '../../../data/zh-CN/sorceries.json';
+import incantations from '../../../data/zh-CN/incantations.json';
+import weaponArts from '../../../data/zh-CN/weapon_arts.json';
+import uniqueWeaponArts from '../../../data/zh-CN/unique_weapon_arts.json';
+import supportSpells from '../../../data/zh-CN/support_spells.json';
+import weaponArtCategoryHints from '../../../data/zh-CN/weapon_art_category_hints.json';
+import { renderHintOption } from '../../../components/HintOption';
+import { DAMAGE_LABELS, damageTypeOf } from '../../../assets/icons/damage';
+import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
+import { renderImpulseText } from '../../../components/common/renderImpulseText';
+import type { DamageType } from '../../../types';
+import styles from './weaponSkillMagicView.module.css';
 
 type Row = Record<string, string>;
 
@@ -255,12 +256,12 @@ const DataTable: React.FC<DataTableProps> = ({
 
           const expanded = expandedRowKeys.includes(getRowKey(record));
           return (
-            <div className="weapon-skill-detail-trigger">
+            <div className={styles.detailTrigger}>
               <span>{content}</span>
               <Button
                 type="link"
                 size="small"
-                className="weapon-skill-detail-toggle"
+                className={styles.detailToggle}
                 onClick={() => {
                   const key = getRowKey(record);
                   setExpandedRowKeys((prev) =>
@@ -320,20 +321,19 @@ const DataTable: React.FC<DataTableProps> = ({
   const expandable = detail
     ? {
         expandedRowRender: (record: Row) => (
-          <div className="weapon-skill-detail-panel">
-            <div className="weapon-skill-detail-title">{detail.title}</div>
-            <div className="weapon-skill-detail-text">{renderImpulseText(record[detail.field])}</div>
+          <div className={styles.detailPanel}>
+            <div className={styles.detailTitle}>{detail.title}</div>
+            <div className={styles.detailText}>{renderImpulseText(record[detail.field])}</div>
           </div>
         ),
         rowExpandable: (record: Row) => Boolean(record[detail.field]),
         expandedRowKeys,
         showExpandColumn: false,
-        expandedRowClassName: () => 'weapon-skill-detail-row',
       }
     : undefined;
 
   const tableProps = {
-    className: 'weapon-skill-magic-table',
+    className: styles.table,
     rowKey: getRowKey,
     size: 'small' as const,
     bordered: true,
@@ -557,10 +557,7 @@ const splitCategoryTags = (category: string, suffix: RegExp): string[] =>
     .filter(Boolean);
 
 const renderCategoryTags = (tags: string[], hints?: Record<string, string>) => (
-  <div
-    className="weapon-skill-category-tags"
-    style={{ display: 'flex', flexWrap: 'nowrap', gap: 4, whiteSpace: 'nowrap' }}
-  >
+  <div className={styles.categoryTags} style={{ display: 'flex', flexWrap: 'nowrap', gap: 4, whiteSpace: 'nowrap' }}>
     {tags.map((tag) => {
       const hint = hints?.[tag];
       const tagNode = (

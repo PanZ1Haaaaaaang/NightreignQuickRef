@@ -1,12 +1,12 @@
 import type React from 'react';
 import { Tabs } from 'antd';
-import type { PageTabProps } from '../config/navigationConfig';
+import type { PageTabProps } from '../../../config/navigationConfig';
 import GreatShieldView from './GreatShieldView';
 import AilmentView from './AilmentView';
 import WeaponScalingView from './WeaponScalingView';
 import BlackFlameView from './BlackFlameView';
 import InstantDeathView from './InstantDeathView';
-import styles from '../styles/weaponMechanicsView.module.css';
+import styles from './weaponMechanicsView.module.css';
 
 /**
  * 「武器 → 机制」页：大盾与防御强度、黑焰烧血、即死与骤死三个机制共用页签容器，

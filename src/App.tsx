@@ -18,12 +18,12 @@ import { navigationUrl, readNavigationTarget, type NavigationTarget } from './ut
 const RelicEntriesView = lazy(() => import('./pages/loadout/relic-entries/RelicEntriesView'));
 const InGameEntriesView = lazy(() => import('./pages/in-run/in-game-entries/InGameEntriesView'));
 const GameMechanicsView = lazy(() => import('./pages/match-rules/game-mechanics/GameMechanicsView'));
-const LegendaryWeaponView = lazy(() => import('./pages/LegendaryWeaponView'));
-const WeaponMechanicsView = lazy(() => import('./pages/WeaponMechanicsView'));
+const LegendaryWeaponView = lazy(() => import('./pages/weapons/legendary-weapons/LegendaryWeaponView'));
+const WeaponMechanicsView = lazy(() => import('./pages/weapons/mechanics/WeaponMechanicsView'));
 const CharacterDataView = lazy(() => import('./pages/loadout/character-data/CharacterDataView'));
 const NightlordsView = lazy(() => import('./pages/run-content/nightlords/NightlordsView'));
 const EnemiesEventsView = lazy(() => import('./pages/run-content/enemies-events/EnemiesEventsView'));
-const WeaponSkillMagicView = lazy(() => import('./pages/WeaponSkillMagicView'));
+const WeaponSkillMagicView = lazy(() => import('./pages/weapons/skills-and-spells/WeaponSkillMagicView'));
 const MerchantView = lazy(() => import('./pages/in-run/merchants/MerchantView'));
 const DropPoolView = lazy(() => import('./pages/in-run/drop-pools/DropPoolView'));
 

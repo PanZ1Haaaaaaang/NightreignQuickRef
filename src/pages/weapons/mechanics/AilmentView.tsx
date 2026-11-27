@@ -2,17 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Button, Drawer, Spin, Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { LineChartOutlined, TableOutlined } from '@ant-design/icons';
-import { Line } from '@ant-design/plots';
-import ailmentJson from '../data/zh-CN/ailment_data.json';
-import type { AilmentData, AilmentEffect, AilmentWeaponRow } from '../types';
-import { getCurrentTheme } from '../utils/themeUtils';
-import styles from '../styles/ailmentView.module.css';
-import { statusTypeIn } from '../assets/icons/status';
-import CharacterAvatar from '../components/common/CharacterAvatar';
-import StatusIcon from '../components/common/StatusIcon';
-import { useNightfarerLevel15 } from '../features/nightfarers/useNightfarerLevel15';
+import ailmentJson from '../../../data/zh-CN/ailment_data.json';
+import type { AilmentData, AilmentEffect, AilmentWeaponRow } from '../../../types';
+import { getCurrentTheme } from '../../../utils/themeUtils';
+import styles from './ailmentView.module.css';
+import { statusTypeIn } from '../../../assets/icons/status';
+import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import StatusIcon from '../../../components/common/StatusIcon';
+import { useNightfarerLevel15 } from '../../../features/nightfarers/useNightfarerLevel15';
+import ScalingCurveChart from './ScalingCurveChart';
 
 const DATA = ailmentJson as unknown as AilmentData;
+const AILMENT_CURVES = DATA.curves.filter(({ key }) => key === 'serpent' || key === 'anomaly');
 
 const renderStatusLabel = (text: string) => {
   const status = statusTypeIn(text);
@@ -134,39 +135,6 @@ const skillColumns: TableColumnsType<{ name: string; value: string }> = [
   },
 ];
 
-const CURVE_COLORS = ['#1677ff', '#fa8c16'];
-
-const CurveChart: React.FC<{ theme: 'light' | 'dark' }> = ({ theme }) => {
-  const data = DATA.curves
-    .filter((curve) => curve.key === 'serpent' || curve.key === 'anomaly')
-    .flatMap((curve) =>
-      curve.stages.map((stat, index) => ({
-        stat,
-        value: curve.growth[index],
-        curve: curve.name,
-      })),
-    );
-  const config = {
-    data,
-    xField: 'stat',
-    yField: 'value',
-    colorField: 'curve',
-    theme,
-    height: 360,
-    autoFit: true,
-    point: { sizeField: 4, shapeField: 'circle' },
-    scale: {
-      color: { range: CURVE_COLORS },
-    },
-    axis: {
-      x: { title: '属性值' },
-      y: { title: '成长值（%）' },
-    },
-    legend: { color: { position: 'bottom' as const } },
-  };
-  return <Line {...config} />;
-};
-
 const AilmentView: React.FC = () => {
   const [sensingOpen, setSensingOpen] = useState(false);
   const [curveOpen, setCurveOpen] = useState(false);
@@ -231,7 +199,7 @@ const AilmentView: React.FC = () => {
         <p className={styles.hint}>
           横轴为属性值，纵轴为成长值（%）；5 号曲线用于蛇弓异常补正，6 号曲线用于感应加成异常值。
         </p>
-        <CurveChart theme={theme} />
+        <ScalingCurveChart curves={AILMENT_CURVES} height={360} theme={theme} />
         <p className={styles.hint}>5 号：0→99 → 0→300；6 号：0/10/99 → 0/0/160。</p>
       </Drawer>
 

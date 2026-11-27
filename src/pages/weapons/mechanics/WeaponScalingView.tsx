@@ -2,25 +2,26 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Button, Checkbox, Drawer, Modal, Segmented, Select, Statistic, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { ExperimentOutlined, LineChartOutlined } from '@ant-design/icons';
-import { Line } from '@ant-design/plots';
-import CharacterAvatar from '../components/common/CharacterAvatar';
-import scalingJson from '../data/zh-CN/weapon_scaling_data.json';
-import uniqueWeaponArts from '../data/zh-CN/unique_weapon_arts.json';
-import weaponArtCategoryHints from '../data/zh-CN/weapon_art_category_hints.json';
+import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import scalingJson from '../../../data/zh-CN/weapon_scaling_data.json';
+import uniqueWeaponArts from '../../../data/zh-CN/unique_weapon_arts.json';
+import weaponArtCategoryHints from '../../../data/zh-CN/weapon_art_category_hints.json';
 import {
   convertNightfarerStats,
   findTeardropAffixes,
   getTeardropAffixes,
   shortAffixName,
-} from '../features/nightfarers/conversion';
-import { getLipulaOption, LIPULA_OPTIONS } from '../features/nightfarers/lipula';
-import { useNightfarerLevel15 } from '../features/nightfarers/useNightfarerLevel15';
-import type { NightfarerName } from '../types';
-import { getCurrentTheme } from '../utils/themeUtils';
-import type { WeaponScalingCurve, WeaponScalingDamageType, WeaponScalingData, WeaponScalingRow } from '../types';
-import styles from '../styles/weaponScalingView.module.css';
+} from '../../../features/nightfarers/conversion';
+import { getLipulaOption, LIPULA_OPTIONS } from '../../../features/nightfarers/lipula';
+import { useNightfarerLevel15 } from '../../../features/nightfarers/useNightfarerLevel15';
+import type { NightfarerName } from '../../../types';
+import { getCurrentTheme } from '../../../utils/themeUtils';
+import type { WeaponScalingCurve, WeaponScalingDamageType, WeaponScalingData, WeaponScalingRow } from '../../../types';
+import ScalingCurveChart from './ScalingCurveChart';
+import styles from './weaponScalingView.module.css';
 
 const DATA = scalingJson as unknown as WeaponScalingData;
+const SCALING_CURVES = [DATA.curves.physical, DATA.curves.elemental];
 
 const STAT_KEYS = ['力气', '灵巧', '智力', '信仰', '感应'] as const;
 const STAT_LABELS = ['力量', '灵巧', '智力', '信仰', '感应'] as const;
@@ -271,40 +272,6 @@ const UNIQUE_OPTIONS: ArtOption[] = (() => {
   }
   return [...map.values()];
 })();
-
-const CurveChart: React.FC<{ theme: 'light' | 'dark' }> = ({ theme }) => {
-  const data = [
-    ...DATA.curves.physical.stages.map((stat, index) => ({
-      stat,
-      value: DATA.curves.physical.growth[index],
-      curve: '0 号曲线（物理面板）',
-    })),
-    ...DATA.curves.elemental.stages.map((stat, index) => ({
-      stat,
-      value: DATA.curves.elemental.growth[index],
-      curve: '4 号曲线（魔火雷圣面板）',
-    })),
-  ];
-  const config = {
-    data,
-    xField: 'stat',
-    yField: 'value',
-    colorField: 'curve',
-    theme,
-    height: 340,
-    autoFit: true,
-    point: { sizeField: 4, shapeField: 'circle' },
-    scale: {
-      color: { range: ['#1677ff', '#fa8c16'] },
-    },
-    axis: {
-      x: { title: '属性值' },
-      y: { title: '成长值（%）' },
-    },
-    legend: { color: { position: 'bottom' as const } },
-  };
-  return <Line {...config} />;
-};
 
 const specialScalingGroups = (affinities: Record<string, number[]>) => {
   const groups = new Map<string, string[]>();
@@ -903,7 +870,7 @@ const WeaponScalingView: React.FC = () => {
           横轴为属性值，纵轴为成长值（%）；适配度系数 = 成长值 ÷ 100。两条曲线放在同一坐标系中对比： 0 号曲线按 5
           个节点分段，4 号曲线为 0 → 99 的单段直线。
         </p>
-        <CurveChart theme={theme} />
+        <ScalingCurveChart curves={SCALING_CURVES} height={340} theme={theme} />
         <p className={styles.hint}>
           0 号节点：属性 0 / 24 / 49 / 74 / 99 → 成长 0 / 96 / 168 / 216 / 240；4 号节点：属性 0 → 99， 成长 0 → 300。
         </p>

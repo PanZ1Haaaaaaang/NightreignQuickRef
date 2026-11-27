@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Table } from 'antd';
 import type { TableColumnsType } from 'antd';
-import CharacterAvatar from '../components/common/CharacterAvatar';
-import DamageTypeIcon from '../components/common/DamageTypeIcon';
-import shieldData from '../data/zh-CN/great_shield_data.json';
-import mechanicJson from '../data/zh-CN/guard_mechanic_data.json';
-import type { DamageType, GuardMechanicData } from '../types';
-import styles from '../styles/greatShieldView.module.css';
+import CharacterAvatar from '../../../components/common/CharacterAvatar';
+import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
+import shieldData from '../../../data/zh-CN/great_shield_data.json';
+import mechanicJson from '../../../data/zh-CN/guard_mechanic_data.json';
+import type { DamageType, GuardMechanicData } from '../../../types';
+import styles from './greatShieldView.module.css';
 
 // 守护者（渡夜者）的被动是「开启强防御」，所以这面盾对玩守护者的玩家最常用，单独做轻标注
 const GUARDIAN_SHIELD = '守护者的大盾';
@@ -28,12 +28,12 @@ type NumberKey = Exclude<keyof ShieldRow, 'name'>;
 const NUMBER_KEYS: NumberKey[] = ['guard', 'magic', 'fire', 'lightning', 'holy'];
 
 // 盾牌截图：目录里的文件名与盾名一一对应，用 glob 一次性拿到 URL（图片本体仍走懒加载）
-const SHIELD_IMAGES = import.meta.glob<string>('../assets/Shields/*.png', {
+const SHIELD_IMAGES = import.meta.glob<string>('../../../assets/Shields/*.png', {
   eager: true,
   import: 'default',
 }) as Record<string, string>;
 
-const shieldImageOf = (name: string): string | undefined => SHIELD_IMAGES[`../assets/Shields/${name}.png`];
+const shieldImageOf = (name: string): string | undefined => SHIELD_IMAGES[`../../../assets/Shields/${name}.png`];
 
 /**
  * 盾牌缩略图：进入视口（提前 200px）才真正设置 src，
