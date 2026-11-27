@@ -379,7 +379,7 @@ export interface DropOption {
   segments: DropSegment[];
 }
 
-// ===== 黑焰烧血机制（src/data/zh-CN/black_flame_data.json） =====
+// ===== 黑焰烧血机制（src/data/zh-CN/black-flame.json） =====
 
 export interface BlackFlameRow {
   /** SpEffectParam 编号 */
@@ -436,7 +436,7 @@ export interface LipulaSkillsData {
   notes: LipulaSkillNote[];
 }
 
-// ===== 武器补正适配度（src/data/zh-CN/weapon_scaling_data.json） =====
+// ===== 武器补正适配度（src/data/zh-CN/weapon-scaling.json） =====
 
 export type WeaponScalingCurve = 'physical' | 'elemental';
 export type WeaponScalingDamageType = 'physical' | 'magic' | 'fire' | 'lightning' | 'holy';
@@ -478,7 +478,7 @@ export interface WeaponScalingData {
   affinityNotes: string[];
 }
 
-// ===== 异常值（src/data/zh-CN/ailment_data.json） =====
+// ===== 异常值（src/data/zh-CN/ailments.json） =====
 
 export interface AilmentEffect {
   name: string;
@@ -517,7 +517,7 @@ export interface AilmentData {
   curves: AilmentCurve[];
 }
 
-// ===== 即死与骤死（src/data/zh-CN/instant_death_data.json） =====
+// ===== 即死与骤死（src/data/zh-CN/instant-death.json） =====
 
 export interface InstantDeathProbabilityRow {
   hp: string;
@@ -699,7 +699,7 @@ export interface ImpulseData {
   rows: ImpulseRow[];
 }
 
-// ===== 大盾页「防御强度机制」（src/data/zh-CN/guard_mechanic_data.json） =====
+// ===== 大盾页「防御强度机制」（src/data/zh-CN/guard-boost-mechanics.json） =====
 
 export interface GuardMechanicEntry {
   name: string;

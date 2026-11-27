@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Button, Checkbox, Input, Segmented, Table, Tag } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { FilterOutlined, SearchOutlined } from '@ant-design/icons';
-import deathJson from '../../../data/zh-CN/instant_death_data.json';
+import deathJson from '../../../data/zh-CN/instant-death.json';
 import type { InstantDeathData, InstantDeathEnemyRow, InstantDeathProbabilityRow } from '../../../types';
 import PagedTable from '../../../components/common/PagedTable';
 import type { PageLocalColumns } from '../../../components/common/PagedTable';

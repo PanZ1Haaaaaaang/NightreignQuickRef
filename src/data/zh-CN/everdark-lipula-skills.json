@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "永夜「黑夜之魔」利普拉技能",
-    "source": "Smithbox SpEffectParam / msg-text-menu / black_flame_data.json"
+    "source": "Smithbox SpEffectParam / msg-text-menu / black-flame.json"
   },
   "skills": [
     {

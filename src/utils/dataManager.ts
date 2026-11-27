@@ -108,8 +108,8 @@ const GROUP_FILES: Record<DataGroup, GroupFile[]> = {
   ],
   // 传说武器详情页
   weapon: [
-    { key: 'weaponCharacter', load: () => import('../data/zh-CN/weapon_character.json') },
-    { key: 'weaponEffect', load: () => import('../data/zh-CN/weapon_effect.json') },
+    { key: 'weaponCharacter', load: () => import('../data/zh-CN/legendary-weapon-attack-by-nightfarer.json') },
+    { key: 'weaponEffect', load: () => import('../data/zh-CN/legendary-weapon-effects.json') },
   ],
   // 夜王Boss数据页
   boss: [{ key: 'inGameSpecialBuff', load: () => import('../data/zh-CN/in-game-special-buffs.json') }],

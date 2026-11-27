@@ -3,9 +3,9 @@ import { Button, Checkbox, Drawer, Modal, Segmented, Select, Statistic, Table, T
 import type { TableColumnsType } from 'antd';
 import { ExperimentOutlined, LineChartOutlined } from '@ant-design/icons';
 import CharacterAvatar from '../../../components/common/CharacterAvatar';
-import scalingJson from '../../../data/zh-CN/weapon_scaling_data.json';
-import uniqueWeaponArts from '../../../data/zh-CN/unique_weapon_arts.json';
-import weaponArtCategoryHints from '../../../data/zh-CN/weapon_art_category_hints.json';
+import scalingJson from '../../../data/zh-CN/weapon-scaling.json';
+import uniqueWeaponArts from '../../../data/zh-CN/unique-weapon-arts.json';
+import weaponArtCategoryHints from '../../../data/zh-CN/weapon-art-category-hints.json';
 import {
   convertNightfarerStats,
   findTeardropAffixes,

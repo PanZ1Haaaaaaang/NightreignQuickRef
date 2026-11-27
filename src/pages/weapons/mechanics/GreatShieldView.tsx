@@ -3,15 +3,15 @@ import { Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import CharacterAvatar from '../../../components/common/CharacterAvatar';
 import DamageTypeIcon from '../../../components/common/DamageTypeIcon';
-import shieldData from '../../../data/zh-CN/great_shield_data.json';
-import mechanicJson from '../../../data/zh-CN/guard_mechanic_data.json';
+import shieldData from '../../../data/zh-CN/greatshields.json';
+import mechanicJson from '../../../data/zh-CN/guard-boost-mechanics.json';
 import type { DamageType, GuardMechanicData } from '../../../types';
 import styles from './greatShieldView.module.css';
 
 // 守护者（渡夜者）的被动是「开启强防御」，所以这面盾对玩守护者的玩家最常用，单独做轻标注
 const GUARDIAN_SHIELD = '守护者的大盾';
 
-// 防御强度机制（数据见 src/data/zh-CN/guard_mechanic_data.json）
+// 防御强度机制（数据见 src/data/zh-CN/guard-boost-mechanics.json）
 const MECHANIC = mechanicJson as unknown as GuardMechanicData;
 
 interface ShieldRow {

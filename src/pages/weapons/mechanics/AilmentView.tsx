@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Drawer, Spin, Table } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { LineChartOutlined, TableOutlined } from '@ant-design/icons';
-import ailmentJson from '../../../data/zh-CN/ailment_data.json';
+import ailmentJson from '../../../data/zh-CN/ailments.json';
 import type { AilmentData, AilmentEffect, AilmentWeaponRow } from '../../../types';
 import { getCurrentTheme } from '../../../utils/themeUtils';
 import styles from './ailmentView.module.css';
