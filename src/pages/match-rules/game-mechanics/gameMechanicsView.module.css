@@ -54,26 +54,6 @@
   height: 100%;
 }
 
-/* 时间轴容器过渡效果 */
-.timelineContainer {
-  position: relative;
-  overflow: hidden;
-}
-
-.timelineContent {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.timelineContent:global(.active) {
-  transform: translateY(0) !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-
-.timelineContent.inactive {
-  pointer-events: none !important;
-}
-
 /* 时间轴布局样式 */
 .timelineLayoutContainer {
   display: flex;
@@ -93,63 +73,6 @@
   /* margin-top: 10px; */
   transition: all 0.3s ease-in-out;
   min-height: 100%;
-}
-
-.timelineContent:global(.active) {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.timelineHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
-}
-
-.timelineTitleDay1 {
-  font-size: 16px;
-  color: #faad14;
-}
-
-.timelineTitleDay2 {
-  font-size: 16px;
-  color: #52c41a;
-}
-
-.timelineTime {
-  font-size: 14px;
-}
-
-.timelineBossCard {
-  text-align: right;
-}
-
-.timelineBossCardDay1 {
-  padding: 8px 12px;
-  background-color: #e6f7ff;
-  border-radius: 6px;
-  border: 1px solid #91d5ff;
-}
-
-.timelineBossCardDay2 {
-  padding: 8px 12px;
-  background-color: #f6ffed;
-  border-radius: 6px;
-  border: 1px solid #b7eb8f;
-}
-
-.timelineBossTitleDay1 {
-  color: #1890ff;
-}
-
-.timelineBossTitleDay2 {
-  color: #52c41a;
-}
-
-.timelineBossStats {
-  font-size: 12px;
-  color: #666;
 }
 
 .mechanicPanel .cardTitleSection {
@@ -181,19 +104,6 @@
 .mechanicCardTitle .anticon {
   font-size: 16px;
   color: var(--color-primary-500);
-}
-
-/* 武器等级注释样式 */
-.weaponLevelNote {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-2);
-  line-height: 1.4;
-}
-
-/* 深色模式武器等级注释适配 */
-[data-theme='dark'] .weaponLevelNote,
-body[tomato-theme='dark'] .weaponLevelNote {
-  color: var(--color-text-2);
 }
 
 /* 卡片内容区域 */
@@ -250,38 +160,6 @@ body[tomato-theme='dark'] .mechanicPanel .cardTitleSection {
   border-bottom-color: var(--color-primary-700);
 }
 
-/* 升级所需卢恩表格样式 */
-
-.runeGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-}
-
-.runeColumn {
-  background: var(--color-primary-50);
-  border-radius: var(--radius-md);
-  padding: 10px 16px;
-  border: 1px solid var(--color-primary-200);
-}
-
-.runeColumnHeader {
-  text-align: center;
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-title-primary);
-  padding-bottom: 8px;
-  border-bottom: 2px solid var(--color-primary-300);
-  font-size: var(--font-size-md);
-  margin-bottom: 8px;
-} /* 已合并到999px的媒体查询中 */
-
-/* 移动端卢恩表格 - 简化版 */
-@media (max-width: 999px) {
-  .runeGrid {
-    overflow-x: auto;
-  }
-}
-
 /* 卢恩表格2栏布局样式 */
 .runesTableContainer {
   display: grid;
@@ -331,16 +209,6 @@ body[tomato-theme='dark'] .mechanicPanel .cardTitleSection {
   color: var(--color-text-2);
 }
 
-/* 数据来源图标样式 */
-.dataSourceIcon {
-  transition: all 0.2s ease;
-}
-
-.dataSourceIcon:hover {
-  color: var(--color-primary-500) !important;
-  transform: scale(1.1);
-}
-
 /* ========================================
    缩圈效果图 CSS 逻辑说明
    ========================================
@@ -358,16 +226,6 @@ body[tomato-theme='dark'] .mechanicPanel .cardTitleSection {
    ======================================== */
 
 /* 缩圈效果容器 */
-.circleShrinkSection {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background: transparent;
-}
 
 .circleShrinkContainer {
   display: flex;
@@ -514,41 +372,12 @@ body[tomato-theme='dark'] .mechanicPanel .cardTitleSection {
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(24, 144, 255, 0.8);
   z-index: 2;
-}
-
-.circleTimeIndicator {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 4px 8px;
-  border-radius: 4px;
-  backdrop-filter: blur(4px);
-}
-
-.circleStatus {
-  text-align: center;
-  padding: 8px 16px;
-  background: rgba(24, 144, 255, 0.1);
-  border-radius: 6px;
-  border: 1px solid rgba(24, 144, 255, 0.2);
 } /* 移动端基础适配 - 简化版 */
 @media (max-width: 999px) {
   .circleShrinkWrapper {
     width: 150px;
     height: 150px;
   }
-}
-
-/* Day切换按钮样式 */
-.timelineDaySwitcher {
-  text-align: center;
-  max-width: 500px;
-  min-width: 200px;
-  width: 30%;
-  margin: 0 auto 0 auto;
 }
 
 /* 时间轴 + 两栏布局样式 */
@@ -689,17 +518,6 @@ body[tomato-theme='dark'] .damageStat {
   border-color: #434343;
 }
 
-.timelineColumnHeader {
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #d9d9d9;
-  flex-shrink: 0;
-}
-
-[data-theme='dark'] .timelineColumnHeader {
-  border-bottom-color: #434343;
-}
-
 .timelineColumnContent {
   flex: 1;
   display: flex;
@@ -714,15 +532,6 @@ body[tomato-theme='dark'] .damageStat {
 [data-theme='dark'] .timelineColumnContent,
 body[tomato-theme='dark'] .timelineColumnContent {
   color: var(--theme-text-primary);
-}
-
-/* 时间轴控制样式 */
-.timelineControls {
-  text-align: center;
-  padding: 16px;
-  background: rgba(24, 144, 255, 0.05);
-  border-radius: 8px;
-  /* border: 1px solid rgba(24, 144, 255, 0.1); */
 }
 
 /* Boss标题样式 */
@@ -780,21 +589,12 @@ body[tomato-theme='dark'] .bossSectionTitle .anticon {
     max-width: 100%;
   }
 
-  .timelineDaySwitcher {
-    width: 100%;
-    max-width: none;
-  }
-
   .mechanicTimeline :global(.ant-timeline) {
     margin-left: 0;
     margin-bottom: 0;
   }
 
   /* 升级所需卢恩：网格自动换行 */
-  .runeGrid {
-    overflow-x: visible;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  }
 
   .runesColumn {
     overflow-x: auto;

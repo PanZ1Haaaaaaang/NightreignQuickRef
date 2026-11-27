@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 import { Tooltip, Menu } from 'antd';
-import type { MenuProps } from 'antd';
+import type { MenuProps, MenuRef } from 'antd';
 import logoImage from '../assets/logo-circle.svg';
 import { getNavigationGroups } from '../config/navigationConfig';
 import type { NavigationTarget } from '../utils/navigationUrl';
@@ -14,11 +14,18 @@ type MenuItemType = NonNullable<MenuProps['items']>[number];
 const GROUP_KEY_PREFIX = 'group:';
 const SECTION_KEY_PREFIX = 'section:';
 
-// 左下角功能菜单：完整索引（分组 → 页面 → 页内子项），数据全部来自 navigationConfig，
+// 功能菜单的分组、页面和页内子项全部来自 navigationConfig，
 // 不再在这里单独维护一份菜单，避免与顶部导航的命名/顺序漂移。
 const FunctionMenu: React.FC<FunctionMenuProps> = ({ onNavigate }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
+  const menuId = useId();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<MenuRef>(null);
+
+  useEffect(() => {
+    if (menuVisible) menuRef.current?.focus({ preventScroll: true });
+  }, [menuVisible]);
 
   const targets = new Map<string, NavigationTarget>();
 
@@ -41,52 +48,59 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onNavigate }) => {
     }),
   }));
 
-  const handleMenuClick = ({ key }: { key: string }) => {
+  const closeMenu = () => {
+    setMenuVisible(false);
+    triggerRef.current?.focus({ preventScroll: true });
+  };
+
+  const handleMenuClick: NonNullable<MenuProps['onClick']> = ({ key, domEvent }) => {
     const target = targets.get(key);
     if (!target) return;
+    domEvent.preventDefault();
+    // 菜单选择后立即卸载，避免同一次按键继续传给已关闭的菜单。
+    domEvent.stopPropagation();
     onNavigate(target);
-    setMenuVisible(false);
+    closeMenu();
   };
 
   return (
-    <div className="fixed-logo">
-      <Tooltip title="功能导航" placement="right">
-        <img
-          src={logoImage}
-          alt="Nightreign Logo"
-          onClick={() => setMenuVisible(!menuVisible)}
-          style={{
-            cursor: 'pointer',
-            width: 'clamp(30px, 5vw, 50px)',
-            height: 'clamp(30px, 5vw, 50px)',
-            borderRadius: '50%',
-            objectFit: 'cover',
-            transition: 'transform 0.3s ease',
-          }}
-        />
+    <div
+      className="fixed-logo"
+      onBlur={(event) => {
+        if (menuVisible && event.relatedTarget && !event.currentTarget.contains(event.relatedTarget)) {
+          setMenuVisible(false);
+        }
+      }}
+      onKeyDownCapture={(event) => {
+        if (menuVisible && event.key === 'Escape') {
+          event.preventDefault();
+          event.stopPropagation();
+          closeMenu();
+        }
+      }}
+    >
+      <Tooltip title="功能导航" placement="right" trigger={['hover', 'focus']}>
+        <button
+          ref={triggerRef}
+          type="button"
+          className="function-menu-trigger"
+          aria-label="功能导航"
+          aria-haspopup="menu"
+          aria-expanded={menuVisible}
+          aria-controls={menuVisible ? menuId : undefined}
+          onClick={() => setMenuVisible((visible) => !visible)}
+        >
+          <img src={logoImage} alt="" />
+        </button>
       </Tooltip>
 
       {/* 功能导航菜单 */}
       {menuVisible && (
-        <div
-          className="function-menu-overlay"
-          style={{
-            position: 'fixed',
-            top: 'clamp(60px, 8vh, 80px)',
-            left: 'clamp(60px, 3vw, 80px)',
-            zIndex: 1040,
-            backgroundColor: 'var(--content-bg)',
-            borderRadius: 'clamp(6px, 1vw, 12px)',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-            border: '1px solid rgba(0, 0, 0, 0.06)',
-            minWidth: 'clamp(200px, 25vw, 280px)',
-            maxWidth: 'clamp(250px, 30vw, 350px)',
-            maxHeight: 'calc(100vh - clamp(120px, 15vh, 180px))',
-            overflowY: 'auto',
-            overflowX: 'hidden',
-          }}
-        >
+        <div className="function-menu-overlay">
           <Menu
+            ref={menuRef}
+            id={menuId}
+            aria-label="功能导航"
             mode="inline"
             items={menuItems}
             onClick={handleMenuClick}
@@ -103,19 +117,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onNavigate }) => {
       )}
 
       {/* 点击外部关闭菜单 */}
-      {menuVisible && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 1030,
-          }}
-          onClick={() => setMenuVisible(false)}
-        />
-      )}
+      {menuVisible && <div className="function-menu-backdrop" aria-hidden="true" onClick={closeMenu} />}
     </div>
   );
 };

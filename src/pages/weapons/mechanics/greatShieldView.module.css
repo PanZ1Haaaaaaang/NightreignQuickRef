@@ -86,23 +86,6 @@ body[tomato-theme='dark'] .valueMin {
   color: #ff7875;
 }
 
-.legend {
-  margin-left: 10px;
-}
-
-.placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 180px;
-  padding: 16px;
-  border: 1px dashed var(--color-text-2);
-  border-radius: 10px;
-  color: var(--color-text-2);
-  font-size: 13px;
-  text-align: center;
-}
-
 .note {
   margin-top: 10px;
   color: var(--color-text-2);
